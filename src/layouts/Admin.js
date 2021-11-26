@@ -75,6 +75,7 @@ function Admin(props) {
     setActiveColor(color);
   };
   const handleBgClick = (color) => {
+    console.log(color);
     setBackgroundColor(color);
   };
   const handleMiniClick = () => {

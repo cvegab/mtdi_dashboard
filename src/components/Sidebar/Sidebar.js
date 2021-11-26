@@ -166,7 +166,7 @@ function Sidebar(props) {
           href="https://www.creative-tim.com"
           className="simple-text logo-normal"
         >
-          Creative Tim
+          Instance 
         </a>
       </div>
 
@@ -212,6 +212,7 @@ function Sidebar(props) {
           </div>
         </div>
         <Nav>{createLinks(props.routes)}</Nav>
+       
       </div>
     </div>
   );
