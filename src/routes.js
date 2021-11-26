@@ -223,13 +223,13 @@ const routes = [
     icon: "nc-icon nc-single-copy-04",
     state: "tablesCollapse",
     views: [
-      {
-        path: "/order-tables",
-        name: "Order Tables",
-        mini: "RT",
-        component: ClientTable,
-        layout: "/admin",
-      },
+      // {
+      //   path: "/order-tables",
+      //   name: "Order Tables",
+      //   mini: "RT",
+      //   component: ClientTable,
+      //   layout: "/admin",
+      // },
       {
         path: "/mtdi-tables",
         name: "Mtdi Tables",
