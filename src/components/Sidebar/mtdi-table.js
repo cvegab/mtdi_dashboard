@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+
 import MaterialTable from 'material-table'
 
 const orderList = [
@@ -460,7 +460,7 @@ const orderList = [
 
 const MtdiTable = ()=> {
 
-  const [data, setData] = useState(empList)
+  const [data, setData] = useState(orderList)
   const columns = [
     { title: "OpsId", field: "order_id" },
     { title: "Fecha de Orden", field: "fecha_creacion" },

@@ -42,6 +42,7 @@ import Widgets from "views/Widgets.js";
 import Wizard from "views/forms/Wizard.js";
 import ClientTable from "components/client-table";
 import OrderTable from "components/order-table";
+import MtdiTable from "components/Sidebar/mtdi-table";
 
 const routes = [
   {
@@ -227,6 +228,13 @@ const routes = [
         name: "Order Tables",
         mini: "RT",
         component: ClientTable,
+        layout: "/admin",
+      },
+      {
+        path: "/mtdi-tables",
+        name: "Mtdi Tables",
+        mini: "RT",
+        component: MtdiTable,
         layout: "/admin",
       },
       // {
