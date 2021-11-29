@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import { forwardRef } from 'react';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import MaterialTable from "material-table";
+
+const tableIcons = {
+    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+}
 
 const orderList = [
   {
@@ -494,6 +499,7 @@ const MtdiTable = () => {
     <div className="App">
       <MaterialTable
         title="Instance Table"
+        icons={tableIcons}
         data={data}
         columns={columns}
         options={{ columnsButton: true,sorting:true }}
