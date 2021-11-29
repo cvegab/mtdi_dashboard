@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { forwardRef } from 'react';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+import Search from '@material-ui/icons/Search';
+import Clear from '@material-ui/icons/Clear';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
 import MaterialTable from "material-table";
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import RoomIcon from '@material-ui/icons/Room';
 
 const tableIcons = {
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <RoomIcon {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
 }
 
 const orderList = [
@@ -497,6 +513,8 @@ const MtdiTable = () => {
 
   return (
     <div className="App">
+        <h4>Instance Table </h4>
+
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
