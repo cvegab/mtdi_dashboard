@@ -1,27 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { forwardRef } from 'react';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import ViewColumn from '@material-ui/icons/ViewColumn';
-import Search from '@material-ui/icons/Search';
-import Clear from '@material-ui/icons/Clear';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
+import { forwardRef } from "react";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import ViewColumn from "@material-ui/icons/ViewColumn";
+import Search from "@material-ui/icons/Search";
+import Clear from "@material-ui/icons/Clear";
+import FirstPage from "@material-ui/icons/FirstPage";
+import LastPage from "@material-ui/icons/LastPage";
 import MaterialTable from "material-table";
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-import RoomIcon from '@material-ui/icons/Room';
+import ChevronLeft from "@material-ui/icons/ChevronLeft";
+import ChevronRight from "@material-ui/icons/ChevronRight";
+import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
+import RoomIcon from "@material-ui/icons/Room";
+import { MuiThemeProvider } from "@material-ui/core";
+//import FormControl from '@mui/material/FormControl';
+import { Select, MenuItem } from "@material-ui/core";
+import { isJSDocUnknownTag } from "typescript";
 
 const tableIcons = {
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <RoomIcon {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-}
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  Clear: forwardRef((props, ref) => <RoomIcon {...props} ref={ref} />),
+  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  PreviousPage: forwardRef((props, ref) => (
+    <ChevronLeft {...props} ref={ref} />
+  )),
+};
 
 const orderList = [
   {
@@ -482,6 +488,15 @@ const orderList = [
 
 const MtdiTable = () => {
   const [data, setData] = useState(orderList);
+  const [country, setcountry] = useState("select a country");
+  useEffect(() => {
+    console.log(country);
+    setData(
+      country === "select a country"
+        ? orderList
+        : orderList.filter((dt) => dt.pais === country)
+    );
+  }, [country]);
   const columns = [
     { title: "OpsId", field: "order_id" },
     { title: "Fecha de Orden", field: "fecha_creacion" },
@@ -511,17 +526,68 @@ const MtdiTable = () => {
     { title: "Reviews", field: "comprador" },
   ];
 
+  const handleCountryChange = (event) => {
+    setcountry(event.target.value);
+  };
+
   return (
     <div className="App">
-        <h4>Instance Table </h4>
-
+      <h1>Tu Tienda</h1>
+      <label htmlFor='select-country'>Pais</label>
+      <Select
+        labelId="select-country"
+        id="select-country"
+        style={{ width: 100 }}
+        value={country}
+        label="Country"
+        onChange={handleCountryChange}
+      >
+        {/* {data.map((e, key) => {
+          return (
+            <MenuItem key={key} value={e.value}>
+              {e.pais}
+            </MenuItem>
+          );
+        })} */}
+        <MenuItem value={"Select a country"}>
+          <em>Select a country</em>
+        </MenuItem>
+        <MenuItem value={"Chile"}>Chile</MenuItem>
+        <MenuItem value={"Mexico"}>Mexico</MenuItem>
+        <MenuItem value={"Peru"}>Peru</MenuItem>
+        <MenuItem value={"Colombia"}>Colombia</MenuItem>
+      </Select>
+      <Select
+        labelId="select-date"
+        id="select-date"
+        style={{ width: 100 }}
+        value={country}
+        label="Country"
+        onChange={handleCountryChange}
+      >
+        {/* {data.map((e, key) => {
+          return (
+            <MenuItem key={key} value={e.value}>
+              {e.pais}
+            </MenuItem>
+          );
+        })} */}
+        <MenuItem value={"Select a country"}>
+          <em>Select a country</em>
+        </MenuItem>
+        <MenuItem value={"Chile"}>Chile</MenuItem>
+        <MenuItem value={"Mexico"}>Mexico</MenuItem>
+        <MenuItem value={"Peru"}>Peru</MenuItem>
+        <MenuItem value={"Colombia"}>Colombia</MenuItem>
+      </Select>
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
         data={data}
         columns={columns}
-        options={{ columnsButton: true,sorting:true }}
+        options={{ columnsButton: true, sorting: true }}
       />
+
     </div>
   );
 };
