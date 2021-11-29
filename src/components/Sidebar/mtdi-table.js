@@ -496,7 +496,7 @@ const MtdiTable = () => {
         title="Instance Table"
         data={data}
         columns={columns}
-        options={{ columnsButton: true }}
+        options={{ columnsButton: true,sorting:true }}
       />
     </div>
   );
