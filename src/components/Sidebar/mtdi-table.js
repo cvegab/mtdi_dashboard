@@ -489,6 +489,7 @@ const orderList = [
 const MtdiTable = () => {
   const [data, setData] = useState(orderList);
   const [country, setcountry] = useState("select a country");
+  const [salesChannel, setsalesChannel] = useState('Seleccione Una');
   useEffect(() => {
     console.log(country);
     setData(
@@ -530,10 +531,14 @@ const MtdiTable = () => {
     setcountry(event.target.value);
   };
 
+  const handleSalesChannelChange = (event)=>{
+      setsalesChannel(event.target.value);
+  }
+
   return (
     <div className="App">
       <h1>Tu Tienda</h1>
-      <label htmlFor='select-country'>Pais</label>
+      <label htmlFor='select-country'><h5>Pais</h5></label>
       <Select
         labelId="select-country"
         id="select-country"
@@ -557,28 +562,29 @@ const MtdiTable = () => {
         <MenuItem value={"Peru"}>Peru</MenuItem>
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
+      <label htmlFor='select-canal'><h5>Canal De Venta</h5></label>
       <Select
-        labelId="select-date"
+        labelId="select-canal"
         id="select-date"
         style={{ width: 100 }}
-        value={country}
-        label="Country"
-        onChange={handleCountryChange}
+        value={salesChannel}
+        label="select-canal"
+        onChange={handleSalesChannelChange}
       >
-        {/* {data.map((e, key) => {
+        {data.map((e, key) => {
           return (
-            <MenuItem key={key} value={e.value}>
-              {e.pais}
+            <MenuItem key={key} value={e.canal_de_venta}>
+              {e.canal_de_venta}
             </MenuItem>
           );
-        })} */}
-        <MenuItem value={"Select a country"}>
+        })}
+        {/* <MenuItem value={"Select a country"}>
           <em>Select a country</em>
         </MenuItem>
         <MenuItem value={"Chile"}>Chile</MenuItem>
         <MenuItem value={"Mexico"}>Mexico</MenuItem>
         <MenuItem value={"Peru"}>Peru</MenuItem>
-        <MenuItem value={"Colombia"}>Colombia</MenuItem>
+        <MenuItem value={"Colombia"}>Colombia</MenuItem> */}
       </Select>
       <MaterialTable
         title="Instance Table"
