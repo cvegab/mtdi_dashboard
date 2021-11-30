@@ -492,12 +492,15 @@ const MtdiTable = () => {
   const [country, setcountry] = useState("select a country");
   const [salesChannel, setsalesChannel] = useState("Seleccione Una");
   const [store, setstore] = useState("Seleccione Una");
+ const [client, setclient] = useState('Seleccione Una');
+
 
   useEffect(() => {
     if (
       country === "select a country" ||
       salesChannel === "Seleccione Una" ||
-      store === "Seleccione Una"
+      store === "Seleccione Una"||
+      client === "Seleccione Una"
     ) {
       console.log("hello");
       setData(orderList);
@@ -506,7 +509,8 @@ const MtdiTable = () => {
       const x = data
         .filter((item) => item.pais === country)
         .filter((item) => item.canal_de_venta.includes(salesChannel))
-        .filter((item) => item.tienda.includes(store));
+        .filter((item) => item.tienda.includes(store))
+        .filter((item) => item.tienda.includes(client)) ;
       console.log(x);
       setData(x);
     }
@@ -517,7 +521,7 @@ const MtdiTable = () => {
     //   .filter(item => item.canal_de_venta.includes(salesChannel))
     //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
 
-    console.log(country, salesChannel, store);
+    console.log(country, salesChannel, store,client);
     // let filters = [];
     // filters = [country, salesChannel, store];
 
@@ -529,7 +533,7 @@ const MtdiTable = () => {
     //     ? orderList
     //     : orderList.filter((dt) => dt.pais === country )
     // );
-  }, [country, salesChannel,store]);
+  }, [country, salesChannel,store,client]);
   const columns = [
     { title: "OpsId", field: "order_id" },
     { title: "Fecha de Orden", field: "fecha_creacion" },
@@ -570,6 +574,9 @@ const MtdiTable = () => {
   const handleStoreChange = (event) => {
     setstore(event.target.value);
   };
+  const handleClientChange = (event)=>{
+      setclient(event.target.value);
+  }
 
   //   let newArray= [];
   //   newArray = data.filter(function(elem, pos) {
@@ -671,9 +678,9 @@ const MtdiTable = () => {
         labelId="select-client"
         id="select-client"
         style={{ width: 100 }}
-        value={store}
+        value={client}
         label="select-tienda-official"
-        onChange={handleStoreChange}
+        onChange={handleClientChange}
       >
         {data.map((e, key) => {
           return (
