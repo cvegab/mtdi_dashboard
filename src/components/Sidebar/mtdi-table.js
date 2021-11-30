@@ -645,6 +645,44 @@ const MtdiTable = () => {
           );
         })}
       </Select>
+      <label htmlFor="select-tienda-official">
+        <h5>Tienda Official</h5>
+      </label>
+      <Select
+        labelId="select-tienda-official"
+        id="select-tienda-official"
+        style={{ width: 100 }}
+        value={store}
+        label="select-tienda-official"
+        onChange={handleStoreChange}
+      >
+        {data.map((e, key) => {
+          return (
+            <MenuItem key={key} value={e.tienda}>
+              {e.tienda}
+            </MenuItem>
+          );
+        })}
+      </Select>
+      <label htmlFor="select-client">
+        <h5>Cliente</h5>
+      </label>
+      <Select
+        labelId="select-client"
+        id="select-client"
+        style={{ width: 100 }}
+        value={store}
+        label="select-tienda-official"
+        onChange={handleStoreChange}
+      >
+        {data.map((e, key) => {
+          return (
+            <MenuItem key={key} value={e.tienda}>
+              {e.tienda}
+            </MenuItem>
+          );
+        })}
+      </Select>
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
