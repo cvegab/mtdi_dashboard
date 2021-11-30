@@ -492,14 +492,15 @@ const MtdiTable = () => {
   const [country, setcountry] = useState("select a country");
   const [salesChannel, setsalesChannel] = useState("Seleccione Una");
   const [store, setstore] = useState("Seleccione Una");
- const [client, setclient] = useState('Seleccione Una');
-
+  const [client, setclient] = useState("Seleccione Una");
+  const [officialStore, setofficialStore] = useState("Seleccione Una");
 
   useEffect(() => {
     if (
       country === "select a country" ||
       salesChannel === "Seleccione Una" ||
-      store === "Seleccione Una"||
+      store === "Seleccione Una" ||
+      officialStore === "Seleccione Una" ||
       client === "Seleccione Una"
     ) {
       console.log("hello");
@@ -510,7 +511,8 @@ const MtdiTable = () => {
         .filter((item) => item.pais === country)
         .filter((item) => item.canal_de_venta.includes(salesChannel))
         .filter((item) => item.tienda.includes(store))
-        .filter((item) => item.tienda.includes(client)) ;
+        .filter((item) => item.tienda.includes(officialStore))
+        .filter((item) => item.tienda.includes(client));
       console.log(x);
       setData(x);
     }
@@ -521,7 +523,7 @@ const MtdiTable = () => {
     //   .filter(item => item.canal_de_venta.includes(salesChannel))
     //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
 
-    console.log(country, salesChannel, store,client);
+    console.log(country, salesChannel, store, client, officialStore);
     // let filters = [];
     // filters = [country, salesChannel, store];
 
@@ -533,7 +535,7 @@ const MtdiTable = () => {
     //     ? orderList
     //     : orderList.filter((dt) => dt.pais === country )
     // );
-  }, [country, salesChannel,store,client]);
+  }, [country, salesChannel, store, client]);
   const columns = [
     { title: "OpsId", field: "order_id" },
     { title: "Fecha de Orden", field: "fecha_creacion" },
@@ -574,16 +576,12 @@ const MtdiTable = () => {
   const handleStoreChange = (event) => {
     setstore(event.target.value);
   };
-  const handleClientChange = (event)=>{
-      setclient(event.target.value);
+  const handleClientChange = (event) => {
+    setclient(event.target.value);
+  };
+  const handleOfficialStoreChange = (event)=>{
+      setofficialStore(event.target.value);
   }
-
-  //   let newArray= [];
-  //   newArray = data.filter(function(elem, pos) {
-  //      return elem.canal_de_venta === data.canal_de_venta;
-  //  });
-
-  //  console.log(newArray);
 
   return (
     <div className="App">
@@ -614,6 +612,8 @@ const MtdiTable = () => {
         <MenuItem value={"Peru"}>Peru</MenuItem>
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
+      <label><h5>Fecha</h5></label>
+      
       <label htmlFor="select-canal">
         <h5>Canal De Venta</h5>
       </label>
@@ -659,9 +659,9 @@ const MtdiTable = () => {
         labelId="select-tienda-official"
         id="select-tienda-official"
         style={{ width: 100 }}
-        value={store}
+        value={officialStore}
         label="select-tienda-official"
-        onChange={handleStoreChange}
+        onChange={handleOfficialStoreChange}
       >
         {data.map((e, key) => {
           return (
