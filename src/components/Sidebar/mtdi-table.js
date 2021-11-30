@@ -15,6 +15,7 @@ import { MuiThemeProvider } from "@material-ui/core";
 //import FormControl from '@mui/material/FormControl';
 import { Select, MenuItem } from "@material-ui/core";
 import { isJSDocUnknownTag } from "typescript";
+import CustomFilter from "./custom-filter-row";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -489,15 +490,46 @@ const orderList = [
 const MtdiTable = () => {
   const [data, setData] = useState(orderList);
   const [country, setcountry] = useState("select a country");
-  const [salesChannel, setsalesChannel] = useState('Seleccione Una');
+  const [salesChannel, setsalesChannel] = useState("Seleccione Una");
+  const [store, setstore] = useState("Seleccione Una");
+
   useEffect(() => {
-    console.log(country);
-    setData(
-      country === "select a country"
-        ? orderList
-        : orderList.filter((dt) => dt.pais === country)
-    );
-  }, [country]);
+    if (
+      country === "select a country" ||
+      salesChannel === "Seleccione Una" ||
+      store === "Seleccione Una"
+    ) {
+      console.log("hello");
+      setData(orderList);
+    } else {
+      console.log("bye");
+      const x = data
+        .filter((item) => item.pais === country)
+        .filter((item) => item.canal_de_venta.includes(salesChannel))
+        .filter((item) => item.tienda.includes(store));
+      console.log(x);
+      setData(x);
+    }
+    //    const x =  data.filter(item => item.pais === country)
+    //    .filter(item => item.canal_de_venta.includes(salesChannel));
+    //    console.log(x);
+    //    setData(x);
+    //   .filter(item => item.canal_de_venta.includes(salesChannel))
+    //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
+
+    console.log(country, salesChannel, store);
+    // let filters = [];
+    // filters = [country, salesChannel, store];
+
+    //    const x = data.filter((element)=> element.pais === filters)
+    //    console.log(x);
+
+    // setData(
+    //   country === "select a country"
+    //     ? orderList
+    //     : orderList.filter((dt) => dt.pais === country )
+    // );
+  }, [country, salesChannel,store]);
   const columns = [
     { title: "OpsId", field: "order_id" },
     { title: "Fecha de Orden", field: "fecha_creacion" },
@@ -531,14 +563,27 @@ const MtdiTable = () => {
     setcountry(event.target.value);
   };
 
-  const handleSalesChannelChange = (event)=>{
-      setsalesChannel(event.target.value);
-  }
+  const handleSalesChannelChange = (event) => {
+    setsalesChannel(event.target.value);
+  };
+
+  const handleStoreChange = (event) => {
+    setstore(event.target.value);
+  };
+
+  //   let newArray= [];
+  //   newArray = data.filter(function(elem, pos) {
+  //      return elem.canal_de_venta === data.canal_de_venta;
+  //  });
+
+  //  console.log(newArray);
 
   return (
     <div className="App">
       <h1>Tu Tienda</h1>
-      <label htmlFor='select-country'><h5>Pais</h5></label>
+      <label htmlFor="select-country">
+        <h5>Pais</h5>
+      </label>
       <Select
         labelId="select-country"
         id="select-country"
@@ -562,10 +607,12 @@ const MtdiTable = () => {
         <MenuItem value={"Peru"}>Peru</MenuItem>
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
-      <label htmlFor='select-canal'><h5>Canal De Venta</h5></label>
+      <label htmlFor="select-canal">
+        <h5>Canal De Venta</h5>
+      </label>
       <Select
         labelId="select-canal"
-        id="select-date"
+        id="select-canal"
         style={{ width: 100 }}
         value={salesChannel}
         label="select-canal"
@@ -578,13 +625,25 @@ const MtdiTable = () => {
             </MenuItem>
           );
         })}
-        {/* <MenuItem value={"Select a country"}>
-          <em>Select a country</em>
-        </MenuItem>
-        <MenuItem value={"Chile"}>Chile</MenuItem>
-        <MenuItem value={"Mexico"}>Mexico</MenuItem>
-        <MenuItem value={"Peru"}>Peru</MenuItem>
-        <MenuItem value={"Colombia"}>Colombia</MenuItem> */}
+      </Select>
+      <label htmlFor="select-tienda">
+        <h5>Tienda</h5>
+      </label>
+      <Select
+        labelId="select-tienda"
+        id="select-tienda"
+        style={{ width: 100 }}
+        value={store}
+        label="select-canal"
+        onChange={handleStoreChange}
+      >
+        {data.map((e, key) => {
+          return (
+            <MenuItem key={key} value={e.tienda}>
+              {e.tienda}
+            </MenuItem>
+          );
+        })}
       </Select>
       <MaterialTable
         title="Instance Table"
@@ -592,8 +651,10 @@ const MtdiTable = () => {
         data={data}
         columns={columns}
         options={{ columnsButton: true, sorting: true }}
+        // components={{
+        //     FilterRow: () => <CustomFilter />
+        //   }}
       />
-
     </div>
   );
 };
