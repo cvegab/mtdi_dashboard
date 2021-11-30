@@ -16,7 +16,9 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { Select, MenuItem } from "@material-ui/core";
 import { isJSDocUnknownTag } from "typescript";
 import CustomFilter from "./custom-filter-row";
-
+import ReactDatePicker from "react-datepicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -494,6 +496,7 @@ const MtdiTable = () => {
   const [store, setstore] = useState("Seleccione Una");
   const [client, setclient] = useState("Seleccione Una");
   const [officialStore, setofficialStore] = useState("Seleccione Una");
+  const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
     if (
@@ -579,9 +582,9 @@ const MtdiTable = () => {
   const handleClientChange = (event) => {
     setclient(event.target.value);
   };
-  const handleOfficialStoreChange = (event)=>{
-      setofficialStore(event.target.value);
-  }
+  const handleOfficialStoreChange = (event) => {
+    setofficialStore(event.target.value);
+  };
 
   return (
     <div className="App">
@@ -612,8 +615,13 @@ const MtdiTable = () => {
         <MenuItem value={"Peru"}>Peru</MenuItem>
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
-      <label><h5>Fecha</h5></label>
-      
+      <label>
+        <h5>Fecha</h5>
+      </label>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+      />
       <label htmlFor="select-canal">
         <h5>Canal De Venta</h5>
       </label>
@@ -700,6 +708,12 @@ const MtdiTable = () => {
         //     FilterRow: () => <CustomFilter />
         //   }}
       />
+      <div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+      </div>
     </div>
   );
 };
