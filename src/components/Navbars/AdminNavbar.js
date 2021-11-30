@@ -113,7 +113,7 @@ function AdminNavbar(props) {
             </div>
             <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
               <span className="d-none d-md-block">
-                Paper Dashboard PRO React
+                {/* Paper Dashboard PRO React */}
               </span>
               <span className="d-block d-md-none">PD PRO React</span>
             </NavbarBrand>
@@ -137,18 +137,18 @@ function AdminNavbar(props) {
             navbar
             isOpen={collapseOpen}
           >
-            <Form>
+            {/* <Form>
               <InputGroup className="no-border">
-                <Input defaultValue="" placeholder="Search..." type="text" />
+                <Input defaultValue="" placeholder="Buscar..." type="text" />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <i className="nc-icon nc-zoom-split" />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
-            </Form>
+            </Form> */}
             <Nav navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
                   className="btn-magnify"
                   href="#pablo"
@@ -159,8 +159,8 @@ function AdminNavbar(props) {
                     <span className="d-lg-none d-md-block">Stats</span>
                   </p>
                 </NavLink>
-              </NavItem>
-              <UncontrolledDropdown className="btn-rotate" nav>
+              </NavItem> */}
+              {/* <UncontrolledDropdown className="btn-rotate" nav>
                 <DropdownToggle
                   aria-haspopup={true}
                   caret
@@ -198,8 +198,8 @@ function AdminNavbar(props) {
                     Something else here
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
-              <NavItem>
+              </UncontrolledDropdown> */}
+              {/* <NavItem>
                 <NavLink
                   className="btn-rotate"
                   href="#pablo"
@@ -210,7 +210,7 @@ function AdminNavbar(props) {
                     <span className="d-lg-none d-md-block">Account</span>
                   </p>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
             </Nav>
           </Collapse>
         </Container>

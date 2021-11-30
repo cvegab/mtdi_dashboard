@@ -91,8 +91,8 @@ function Admin(props) {
       <Sidebar
         {...props}
         routes={routes}
-        bgColor={backgroundColor}
-        activeColor={activeColor}
+        bgColor='white'
+        activeColor='white'
       />
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} handleMiniClick={handleMiniClick} />
@@ -104,14 +104,14 @@ function Admin(props) {
           )
         }
       </div>
-      <FixedPlugin
+      {/* <FixedPlugin
         bgColor={backgroundColor}
         activeColor={activeColor}
         sidebarMini={sidebarMini}
         handleActiveClick={handleActiveClick}
         handleBgClick={handleBgClick}
         handleMiniClick={handleMiniClick}
-      />
+      /> */}
     </div>
   );
 }

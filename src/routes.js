@@ -43,11 +43,21 @@ import Wizard from "views/forms/Wizard.js";
 import ClientTable from "components/client-table";
 import OrderTable from "components/order-table";
 import MtdiTable from "components/Sidebar/mtdi-table";
+import iconOrdenes from "assets/img/icons-ordenes.png";
+import iconReportes from "assets/img/icons-reportes.png"
 
 const routes = [
   {
+    path: "/mtdi-tables",
+    name: "Órdenes de compra",
+    // mini: "RT",
+    icon: "nc-icon nc-bank",
+    component: MtdiTable,
+    layout: "/admin",
+  },
+  {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Reportes",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin",
@@ -86,13 +96,13 @@ const routes = [
   //       component: LockScreen,
   //       layout: "/auth",
   //     },
-  //     {
-  //       path: "/user-profile",
-  //       name: "UserProfile",
-  //       mini: "UP",
-  //       component: UserProfile,
-  //       layout: "/admin",
-  //     },
+      // {
+      //   path: "/user-profile",
+      //   name: "UserProfile",
+      //   mini: "UP",
+      //   component: UserProfile,
+      //   layout: "/admin",
+      // },
   //   ],
   // },
   // {
@@ -217,12 +227,13 @@ const routes = [
   //     },
   //   ],
   // },
-  {
-    collapse: true,
-    name: "Tables",
-    icon: "nc-icon nc-single-copy-04",
-    state: "tablesCollapse",
-    views: [
+  
+  // {
+  //   collapse: true,
+  //   name: "Órdenes",
+  //   icon: "nc-icon nc-single-copy-04",
+  //   state: "tablesCollapse",
+  //   views: [
       // {
       //   path: "/order-tables",
       //   name: "Order Tables",
@@ -230,13 +241,13 @@ const routes = [
       //   component: ClientTable,
       //   layout: "/admin",
       // },
-      {
-        path: "/mtdi-tables",
-        name: "Mtdi Tables",
-        mini: "RT",
-        component: MtdiTable,
-        layout: "/admin",
-      },
+      // {
+      //   path: "/mtdi-tables",
+      //   name: "Órdenes de compra",
+      //   mini: "RT",
+      //   component: MtdiTable,
+      //   layout: "/admin",
+      // },
       // {
       //   path: "/extended-tables",
       //   name: "Extended Tables",
@@ -252,8 +263,8 @@ const routes = [
       //         layout: "/admin",
       //       },
      
-    ],
-  },
+  //   ],
+  // },
   // {
   //   collapse: true,
   //   name: "Maps",

@@ -462,32 +462,32 @@ const MtdiTable = ()=> {
 
   const [data, setData] = useState(orderList)
   const columns = [
-    { title: "OpsId", field: "order_id" },
-    { title: "Fecha de Orden", field: "fecha_creacion" },
-    { title: "Canal de Venta", field: "canal_de_venta" }, 
-    { title: "Tienda", field: 'tienda', },
-    { title: "Cliente", field: "cliente", },
-    { title: "Tiende Official", field: "official_store", },
-    { title: "Orden de Compra", field: "order_id", },
-    { title: "Pais", field: "pais", },
-    { title: "Estado De Pedido", field: "estado_delivery", },
-    { title: "DTE", field: "dte", },
-    { title: "Respuesta OMS", field: "role", },
-    { title: "Respuesta WMS", field: "role", },
-    { title: "Hub De pago", field: "estado_pago", },
-    { title: "Total", field: "role", },
-    { title: "Shipping", field: "valor_shipping", },
-    { title: "Estado Fulfilment", field: "estado_oc", },
-    { title: "Pickeador", field: "comprador", },
-    { title: "Jefe ops", field: "comprador", },
-    { title: "Hub Fulfilment", field: "comprador", },
-    { title: "Courier", field: "comprador", },
-    { title: "Shipping Id", field: "comprador", },
-    { title: "Butos/Etiquettas", field: "comprador", },
-    { title: "Estado Courier", field: "comprador", },
-    { title: "Cliente", field: "comprador", },
-    { title: "NPS", field: "comprador", },
-    { title: "Reviews", field: "comprador", },
+    { title: "OpsId", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Fecha de Orden", field: "fecha_creacion", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Canal de Venta", field: "canal_de_venta", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} }, 
+    { title: "Tienda", field: 'tienda', headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Cliente", field: "cliente", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Tienda Oficial", field: "official_store", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Orden de Compra", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Pais", field: "pais", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Estado De Pedido", field: "estado_delivery", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "DTE", field: "dte", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Respuesta OMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Respuesta WMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Hub De pago", field: "estado_pago", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Total", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Shipping", field: "valor_shipping",headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Estado Fulfilment", field: "estado_oc", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Pickeador", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Jefe ops", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Hub Fulfilment", field: "comprador",headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Shipping Id", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Butos/Etiquettas", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
+    { title: "Estado Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Cliente", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "NPS", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "Reviews", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
 
 
   ] 
@@ -495,10 +495,14 @@ const MtdiTable = ()=> {
 
   return (
     <div className="App">
-      <h1 align="center">React-App</h1>
-      <h4 align='center'>Material Table</h4>
+      {/* <h1 align="center">React-App</h1>
+      <h4 align='center'>Material Table</h4> */}
+      <br/>
+      <br/>
+      <br/>
       <MaterialTable
-        title="Instance Table"
+      
+        title=""
         data={data}
         columns={columns}
         options={{columnsButton:true}}

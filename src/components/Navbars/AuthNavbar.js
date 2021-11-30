@@ -50,7 +50,7 @@ function AuthNavbar(props) {
       <Container>
         <div className="navbar-wrapper">
           <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
-            Paper Dashboard PRO React
+            {/* Paper Dashboard PRO React */}
           </NavbarBrand>
         </div>
         <button

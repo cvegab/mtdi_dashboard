@@ -282,7 +282,7 @@
   overflow: hidden; }
 
 .fixed-table-footer {
-  border-top: 1px solid #dddddd; }
+  border-top: 1px solid #FFFFFF; }
 
 .fixed-table-body {
   overflow-x: auto;
@@ -296,7 +296,7 @@
   height: 0;
   padding: 0;
   margin: 0;
-  border-left: 1px solid #dddddd; }
+  border-left: 1px solid #FFFFFF; }
 
 .fixed-table-container thead th:focus {
   outline: 0 solid transparent; }
@@ -1890,7 +1890,7 @@ body.swal2-iosfix {
     -webkit-font-smoothing: subpixel-antialiased;
     top: 0px;
     left: 0px;
-    background-color: #66615B;
+    /* background-color: #66615B; */
     box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
     color: #FFFFFF !important;
     cursor: pointer;
@@ -3623,7 +3623,7 @@ NOTE: use percentage font sizes or else old IE chokes
   font-size: 12px;
   font-weight: 600;
   padding: 0.5rem 0.7rem;
-  background-color: #66615B;
+  /* background-color: #66615B; */
   color: #FFFFFF;
   -webkit-transition: all 150ms linear;
   -moz-transition: all 150ms linear;
@@ -4939,7 +4939,7 @@ License - nucleoapp.com/license/
   border-radius: 3px;
   padding: 11px 22px;
   cursor: pointer;
-  background-color: #66615B;
+  /* background-color: #66615B; */
   color: #FFFFFF;
   -webkit-transition: all 150ms linear;
   -moz-transition: all 150ms linear;
@@ -5007,7 +5007,7 @@ License - nucleoapp.com/license/
   .navbar .navbar-nav > a.btn:active,
   fieldset[disabled]
   .navbar .navbar-nav > a.btn.active {
-    background-color: #66615B;
+    /* background-color: #66615B; */
     border-color: #66615B; }
   .btn.btn-simple,
   .navbar .navbar-nav > a.btn.btn-simple {
