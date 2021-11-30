@@ -12,16 +12,16 @@ $none:                       0   !default;
 $border-thin:                1px !default;
 $border-thick:               2px !default;
 
-$white-color:                #FFFFFF !default;
-$white-bg:                   #FFFFFF !default;
+$white-color:                #1D308E !default;
+$white-bg:                   #1D308E !default;
 $orange-bg:                  #e95e38 !default;
 
 $smoke-bg:                   #F5F5F5 !default;
 $light-black:                #444    !default;
 
-$black-bg:                   rgba(30,30,30,.97) !default;
+$black-bg:                   #1D308E !default;
 
-$black-color:                #2c2c2c !default;
+$black-color:                #FFFF !default;
 $black-hr:                   #444444 !default;
 
 $hr-line:                    rgba(0,0,0, .1) !default;
@@ -128,7 +128,7 @@ $brand-danger:               $danger-color !default;
 $brand-inverse:              $black-color !default;
 
 $link-disabled-color:        #666666 !default;
-$dark-color:                 #212120 !default;
+$dark-color:                 #1D308E!default;
 //     light colors
 $light-blue:                 rgba($primary-color, .2);
 $light-azure:                rgba($info-color, .2);
@@ -158,7 +158,7 @@ $border-radius-x-large:         8px !default;
 $border-radius-extreme:         12px !default;
 
 //variables used in cards
-$card-black-color:          #252422 !default;
+$card-black-color:          black !default;
 $card-muted-color:          #ccc5b9 !default;
 
 $card-background-blue:      #b8d8d8 !default;

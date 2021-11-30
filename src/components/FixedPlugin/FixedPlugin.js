@@ -39,15 +39,26 @@ function FixedPlugin(props) {
           <li className="header-title">SIDEBAR BACKGROUND</li>
           <li className="adjustments-line">
             <div className="badge-colors text-center">
-              <span
+            <span
                 className={
-                  props.bgColor === "black"
+                  props.bgColor === "indigo"
                     ? "badge filter badge-dark active"
                     : "badge filter badge-dark"
                 }
-                data-color="black"
+                data-color="indigo"
                 onClick={() => {
-                  props.handleBgClick("black");
+                  props.handleBgClick("indigo");
+                }}
+              />
+              <span
+                className={
+                  props.bgColor === "black"
+                    ? "badge filter badge-light active"
+                    : "badge filter badge-light"
+                }
+                data-color="white"
+                onClick={() => {
+                  props.handleBgClick("white");
                 }}
               />
               <span
@@ -56,7 +67,7 @@ function FixedPlugin(props) {
                     ? "badge filter badge-default active"
                     : "badge filter badge-default"
                 }
-                data-color="black"
+                data-color="white"
                 onClick={() => {
                   props.handleBgClick("brown");
                 }}
