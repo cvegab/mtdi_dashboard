@@ -20,7 +20,7 @@ import { Nav, Collapse } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import avatar from "assets/img/faces/ayo-ogunseinde-2.jpg";
+import avatar from "assets/img/faces/CamiloVega.jpg";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
@@ -158,7 +158,7 @@ function Sidebar(props) {
     >
       <div className="logo">
         <a
-          href="https://www.creative-tim.com"
+          // href="https://www.creative-tim.com"
           className="simple-text logo-mini"
         >
           <div className="logo-img">
@@ -166,7 +166,7 @@ function Sidebar(props) {
           </div>
         </a>
         <a
-          href="https://www.creative-tim.com"
+          // href="https://www.creative-tim.com"
           className="textCompany logo-normal"
         >
            <img src={logo1} alt="Instance-logo" width="50%" />
