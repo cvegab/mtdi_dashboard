@@ -158,7 +158,7 @@ function Sidebar(props) {
     >
       <div className="logo">
         <a
-          href="https://www.creative-tim.com"
+          // href="https://www.creative-tim.com"
           className="simple-text logo-mini"
         >
           <div className="logo-img">
@@ -166,7 +166,7 @@ function Sidebar(props) {
           </div>
         </a>
         <a
-          href="https://www.creative-tim.com"
+          // href="https://www.creative-tim.com"
           className="textCompany logo-normal"
         >
            <img src={logo1} alt="Instance-logo" width="50%" />

@@ -462,32 +462,32 @@ const MtdiTable = ()=> {
 
   const [data, setData] = useState(orderList)
   const columns = [
-    { title: "OpsId", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Fecha de Orden", field: "fecha_creacion", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Canal de Venta", field: "canal_de_venta", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} }, 
-    { title: "Tienda", field: 'tienda', headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Cliente", field: "cliente", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Tienda Oficial", field: "official_store", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Orden de Compra", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Pais", field: "pais", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Estado De Pedido", field: "estado_delivery", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "DTE", field: "dte", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Respuesta OMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Respuesta WMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Hub De pago", field: "estado_pago", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Total", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Shipping", field: "valor_shipping",headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Estado Fulfilment", field: "estado_oc", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Pickeador", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Jefe ops", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Hub Fulfilment", field: "comprador",headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Shipping Id", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Butos/Etiquettas", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'} },
-    { title: "Estado Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Cliente", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "NPS", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
-    { title: "Reviews", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF'}},
+    { title: "OpsId", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px', borderRadius:'20px 0px 0px 20px'}},
+    { title: "Fecha de Orden", field: "fecha_creacion", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Canal de Venta", field: "canal_de_venta", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} }, 
+    { title: "Tienda", field: 'tienda', headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Cliente", field: "cliente", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Tienda Oficial", field: "official_store", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Orden de Compra", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Pais", field: "pais", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Estado De Pedido", field: "estado_delivery", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "DTE", field: "dte", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Respuesta OMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Respuesta WMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Hub De pago", field: "estado_pago", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Total", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Shipping", field: "valor_shipping",headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Estado Fulfilment", field: "estado_oc", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Pickeador", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Jefe ops", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Hub Fulfilment", field: "comprador",headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Shipping Id", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Butos/Etiquettas", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "Estado Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Cliente", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "NPS", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
+    { title: "Reviews", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', borderRadius: '0px 20px 20px 0px', fontSize: '12px'}},
 
 
   ] 
@@ -505,7 +505,7 @@ const MtdiTable = ()=> {
         title=""
         data={data}
         columns={columns}
-        options={{columnsButton:true}}
+        // options={{columnsButton:false}}
       />
     </div>
   );
