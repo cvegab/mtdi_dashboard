@@ -719,13 +719,8 @@ const MtdiTable = () => {
         <MenuItem value={"Peru"}>Peru</MenuItem>
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
-      <label>
-        <h5>Fecha</h5>
-      </label>
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-      />
+     
+     
       <label htmlFor="select-canal">
         <h5>Canal De Venta</h5>
       </label>
@@ -802,6 +797,13 @@ const MtdiTable = () => {
           );
         })}
       </Select>
+      <div>
+        <label><h5>Fecha</h5></label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+      </div>
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
@@ -820,12 +822,7 @@ const MtdiTable = () => {
         //     FilterRow: () => <CustomFilter />
         //   }}
       />
-      <div>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
-      </div>
+     
     </div>
   );
 };
