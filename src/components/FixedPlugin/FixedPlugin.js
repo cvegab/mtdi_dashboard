@@ -53,12 +53,12 @@ function FixedPlugin(props) {
               <span
                 className={
                   props.bgColor === "black"
-                    ? "badge filter badge-dark active"
-                    : "badge filter badge-dark"
+                    ? "badge filter badge-light active"
+                    : "badge filter badge-light"
                 }
-                data-color="black"
+                data-color="white"
                 onClick={() => {
-                  props.handleBgClick("black");
+                  props.handleBgClick("white");
                 }}
               />
               <span
@@ -67,7 +67,7 @@ function FixedPlugin(props) {
                     ? "badge filter badge-default active"
                     : "badge filter badge-default"
                 }
-                data-color="black"
+                data-color="white"
                 onClick={() => {
                   props.handleBgClick("brown");
                 }}
