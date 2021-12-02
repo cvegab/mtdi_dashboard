@@ -585,8 +585,10 @@ const MtdiTable = () => {
     setofficialStore(event.target.value);
   };
 
+ 
+
   return (
-    <div className="App">
+    <React.Fragment>
       <h1>Tu Tienda</h1>
       <label htmlFor="select-country">
         <h5>Pais</h5>
@@ -627,13 +629,16 @@ const MtdiTable = () => {
         label="select-canal"
         onChange={handleSalesChannelChange}
       >
-        {data.map((e, key) => {
+         {Array.from(new Set(data.map(obj => obj.canal_de_venta))).map(period => {
+    return <MenuItem value={period}>{period}</MenuItem>
+})}
+        {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.canal_de_venta}>
               {e.canal_de_venta}
             </MenuItem>
           );
-        })}
+        })} */}
       </Select>
       <label htmlFor="select-tienda">
         <h5>Tienda</h5>
@@ -702,12 +707,7 @@ const MtdiTable = () => {
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
-        //   {/* <h1 align="center">React-App</h1>
-        //   <h4 align='center'>Material Table</h4> */}
-        //   <br/>
-        //   <br/>
-        //   <br/>
-        //   <MaterialTable
+       
 
         title=""
         data={data}
@@ -717,8 +717,15 @@ const MtdiTable = () => {
         //     FilterRow: () => <CustomFilter />
         //   }}
       />
+       <div>
+        <label><h5>Fecha</h5></label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+      </div>
      
-    </div>
+      </React.Fragment>
   );
 };
 
