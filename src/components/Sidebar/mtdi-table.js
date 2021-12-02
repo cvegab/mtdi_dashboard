@@ -40,7 +40,7 @@ const orderList = [
     cliente: "Unilever",
     order_id: 5043399300,
     pais: "Chile",
-    fecha_creacion: "2021-11-24 14:45:24",
+    fecha_creacion: "2020-11-24 14:45:24",
     shipping_id: 40993109945,
     valor_shipping: 2443,
     estado_pago: "approved",
@@ -496,15 +496,25 @@ const MtdiTable = () => {
   const [store, setstore] = useState("Seleccione Una");
   const [client, setclient] = useState("Seleccione Una");
   const [officialStore, setofficialStore] = useState("Seleccione Una");
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  
 
   useEffect(() => {
+    // var da = startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate();
+    // console.log(da); 
+//    const res = data.map((it)=>{
+// return it.fecha_creacion.toISOString().slice(0,10);
+//    });
+//    console.log(res);
+  //  console.log(new Date(res.toDateString()));
+  //  var firstDateStr = res.toISOString().slice(0, 10);
     if (
       country === "select a country" ||
       salesChannel === "Seleccione Una" ||
       store === "Seleccione Una" ||
       officialStore === "Seleccione Una" ||
-      client === "Seleccione Una"
+      client === "Seleccione Una"||
+      startDate === null
     ) {
       console.log("hello");
       setData(orderList);
@@ -515,7 +525,7 @@ const MtdiTable = () => {
         .filter((item) => item.canal_de_venta.includes(salesChannel))
         .filter((item) => item.tienda.includes(store))
         .filter((item) => item.tienda.includes(officialStore))
-        .filter((item) => item.tienda.includes(client));
+        .filter((item) => item.fecha_creacion.includes(startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate()))
       console.log(x);
       setData(x);
     }
@@ -538,7 +548,7 @@ const MtdiTable = () => {
     //     ? orderList
     //     : orderList.filter((dt) => dt.pais === country )
     // );
-  }, [country, salesChannel, store, client]);
+  }, [country, salesChannel, store, client,startDate]);
   const columns = [
     {
       title: "OpsId",
@@ -814,13 +824,13 @@ const MtdiTable = () => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
 
-        <MenuItem value={"Select a country"}>
+        {/* <MenuItem value={"Select a country"}>
           <em>Select a country</em>
         </MenuItem>
         <MenuItem value={"Chile"}>Chile</MenuItem>
         <MenuItem value={"Mexico"}>Mexico</MenuItem>
         <MenuItem value={"Peru"}>Peru</MenuItem>
-        <MenuItem value={"Colombia"}>Colombia</MenuItem>
+        <MenuItem value={"Colombia"}>Colombia</MenuItem> */}
       </Select>
 
       <label htmlFor="select-canal">
@@ -889,7 +899,7 @@ const MtdiTable = () => {
             </MenuItem>
           );
         })} */}
-        {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+        {Array.from(new Set(data.map((obj) => obj.official_store))).map(
           (period) => {
             return <MenuItem value={period}>{period}</MenuItem>;
           }
@@ -917,6 +927,9 @@ const MtdiTable = () => {
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
+          // minDate = {new Date()}
+          // excludeTimes ={true}
+          format='yyyy-MM-dd'
         />
       </div>
       <MaterialTable
@@ -930,15 +943,16 @@ const MtdiTable = () => {
         //     FilterRow: () => <CustomFilter />
         //   }}
       />
-      <div>
+      {/* <div>
         <label>
           <h5>Fecha</h5>
         </label>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
+         dateFormat={YYYY}
         />
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };
