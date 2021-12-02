@@ -540,32 +540,243 @@ const MtdiTable = () => {
     // );
   }, [country, salesChannel, store, client]);
   const columns = [
-    { title: "OpsId", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px', borderRadius:'20px 0px 0px 20px'}},
-    { title: "Fecha de Orden", field: "fecha_creacion", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Canal de Venta", field: "canal_de_venta", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} }, 
-    { title: "Tienda", field: 'tienda', headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Cliente", field: "cliente", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Tienda Oficial", field: "official_store", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Orden de Compra", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Pais", field: "pais", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Estado De Pedido", field: "estado_delivery", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "DTE", field: "dte", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Respuesta OMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Respuesta WMS", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Hub De pago", field: "estado_pago", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Total", field: "role", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Shipping", field: "valor_shipping",headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Estado Fulfilment", field: "estado_oc", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Pickeador", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Jefe ops", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Hub Fulfilment", field: "comprador",headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Shipping Id", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Butos/Etiquettas", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
-    { title: "Estado Courier", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Cliente", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "NPS", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'}},
-    { title: "Reviews", field: "comprador", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', borderRadius: '0px 20px 20px 0px', fontSize: '12px'}}]
+    {
+      title: "OpsId",
+      field: "order_id",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+        borderRadius: "20px 0px 0px 20px",
+      },
+    },
+    {
+      title: "Fecha de Orden",
+      field: "fecha_creacion",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Canal de Venta",
+      field: "canal_de_venta",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Tienda",
+      field: "tienda",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Cliente",
+      field: "cliente",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Tienda Oficial",
+      field: "official_store",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Orden de Compra",
+      field: "order_id",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Pais",
+      field: "pais",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Estado De Pedido",
+      field: "estado_delivery",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "DTE",
+      field: "dte",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Respuesta OMS",
+      field: "role",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Respuesta WMS",
+      field: "role",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Hub De pago",
+      field: "estado_pago",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Total",
+      field: "role",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Shipping",
+      field: "valor_shipping",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Estado Fulfilment",
+      field: "estado_oc",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Pickeador",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Jefe ops",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Hub Fulfilment",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Courier",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Shipping Id",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Butos/Etiquettas",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Estado Courier",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Cliente",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "NPS",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Reviews",
+      field: "comprador",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        borderRadius: "0px 20px 20px 0px",
+        fontSize: "12px",
+      },
+    },
+  ];
 
   const handleCountryChange = (event) => {
     setcountry(event.target.value);
@@ -585,8 +796,6 @@ const MtdiTable = () => {
     setofficialStore(event.target.value);
   };
 
- 
-
   return (
     <React.Fragment>
       <h1>Tu Tienda</h1>
@@ -601,13 +810,10 @@ const MtdiTable = () => {
         label="Country"
         onChange={handleCountryChange}
       >
-        {/* {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.value}>
-              {e.pais}
-            </MenuItem>
-          );
-        })} */}
+        {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
+          return <MenuItem value={period}>{period}</MenuItem>;
+        })}
+
         <MenuItem value={"Select a country"}>
           <em>Select a country</em>
         </MenuItem>
@@ -616,8 +822,7 @@ const MtdiTable = () => {
         <MenuItem value={"Peru"}>Peru</MenuItem>
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
-     
-     
+
       <label htmlFor="select-canal">
         <h5>Canal De Venta</h5>
       </label>
@@ -629,9 +834,11 @@ const MtdiTable = () => {
         label="select-canal"
         onChange={handleSalesChannelChange}
       >
-         {Array.from(new Set(data.map(obj => obj.canal_de_venta))).map(period => {
-    return <MenuItem value={period}>{period}</MenuItem>
-})}
+        {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+          (period) => {
+            return <MenuItem value={period}>{period}</MenuItem>;
+          }
+        )}
         {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.canal_de_venta}>
@@ -651,13 +858,18 @@ const MtdiTable = () => {
         label="select-canal"
         onChange={handleStoreChange}
       >
-        {data.map((e, key) => {
+        {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.tienda}>
               {e.tienda}
             </MenuItem>
           );
-        })}
+        })} */}
+        {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+          (period) => {
+            return <MenuItem value={period}>{period}</MenuItem>;
+          }
+        )}
       </Select>
       <label htmlFor="select-tienda-official">
         <h5>Tienda Official</h5>
@@ -670,13 +882,18 @@ const MtdiTable = () => {
         label="select-tienda-official"
         onChange={handleOfficialStoreChange}
       >
-        {data.map((e, key) => {
+        {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.tienda}>
               {e.tienda}
             </MenuItem>
           );
-        })}
+        })} */}
+        {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+          (period) => {
+            return <MenuItem value={period}>{period}</MenuItem>;
+          }
+        )}
       </Select>
       <label htmlFor="select-client">
         <h5>Cliente</h5>
@@ -689,16 +906,14 @@ const MtdiTable = () => {
         label="select-tienda-official"
         onChange={handleClientChange}
       >
-        {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.tienda}>
-              {e.tienda}
-            </MenuItem>
-          );
+        {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
+          return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
       <div>
-        <label><h5>Fecha</h5></label>
+        <label>
+          <h5>Fecha</h5>
+        </label>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
@@ -707,8 +922,6 @@ const MtdiTable = () => {
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
-       
-
         title=""
         data={data}
         columns={columns}
@@ -717,15 +930,16 @@ const MtdiTable = () => {
         //     FilterRow: () => <CustomFilter />
         //   }}
       />
-       <div>
-        <label><h5>Fecha</h5></label>
+      <div>
+        <label>
+          <h5>Fecha</h5>
+        </label>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
       </div>
-     
-      </React.Fragment>
+    </React.Fragment>
   );
 };
 
