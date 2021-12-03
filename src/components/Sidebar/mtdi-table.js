@@ -512,8 +512,8 @@ const MtdiTable = () => {
       salesChannel === "Seleccione Una" ||
       store === "Seleccione Una" ||
       officialStore === "Seleccione Una" ||
-      client === "Seleccione Una" ||
-      startDate === null
+      client === "Seleccione Una" 
+    //  || startDate === null
     ) {
       console.log("hello");
       setData(orderList);
@@ -524,15 +524,15 @@ const MtdiTable = () => {
         .filter((item) => item.canal_de_venta.includes(salesChannel))
         .filter((item) => item.tienda.includes(store))
         .filter((item) => item.tienda.includes(officialStore))
-        .filter((item) =>
-          item.fecha_creacion.includes(
-            startDate.getFullYear() +
-              "-" +
-              (startDate.getMonth() + 1) +
-              "-" +
-              startDate.getDate()
-          )
-        );
+        // .filter((item) =>
+        //   item.fecha_creacion.includes(
+        //     startDate.getFullYear() +
+        //       "-" +
+        //       (startDate.getMonth() + 1) +
+        //       "-" +
+        //       startDate.getDate()
+        //   )
+        // );
       console.log(x);
       setData(x);
     }
