@@ -19,6 +19,10 @@ import CustomFilter from "./custom-filter-row";
 import ReactDatePicker from "react-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { zhCN } from "date-fns/locale";
+import zIndex from "@material-ui/core/styles/zIndex";
+import '../../assets/css/global.css'
+
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -540,8 +544,8 @@ const MtdiTable = () => {
     // );
   }, [country, salesChannel, store, client]);
   const columns = [
-    { title: "OpsId", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px', borderRadius:'20px 0px 0px 20px'}},
-    { title: "Fecha de Orden", field: "fecha_creacion", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
+    { title: "OpsId", field: "order_id", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', width: '10%', fontSize: '12px', borderRadius:'20px 0px 0px 20px'}},
+    { title: "Fecha de Orden", field: "fecha_creacion", headerStyle: {backgroundColor: '#1D308E', width: '9em', color: '#FFF', width: '200px', fontSize: '12px'} },
     { title: "Canal de Venta", field: "canal_de_venta", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} }, 
     { title: "Tienda", field: 'tienda', headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
     { title: "Cliente", field: "cliente", headerStyle: {backgroundColor: '#1D308E', color: '#FFF', fontSize: '12px'} },
@@ -586,15 +590,17 @@ const MtdiTable = () => {
   };
 
   return (
-    <div className="App">
-      <h1>Tu Tienda</h1>
+    <div id="mtdiTableBackground" className="App" style={{ background: '#E5E5E5'}}>
+      <h5 className="titleTable"  style={{ color: "#C4C4C4", width: "450px", fontSize:"14px", fontWeight:"800", marginTop: "6rem", marginLeft:"2em"}}>Transacciones digitales: Vista Administrador</h5>
+      <p classname="textNameTable" style={{ color: "black", width: "450px", fontSize:"30px", fontWeight:"800",  marginLeft:"1em"}}>Camilo Vega</p>
       <label htmlFor="select-country">
-        <h5>Pais</h5>
+        <h5 style={{ color: "black", width: "30px", fontSize:"14px", fontWeight:"800", marginLeft:"1em"}}>País</h5>
       </label>
+     
       <Select
         labelId="select-country"
         id="select-country"
-        style={{ width: 100 }}
+        style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
         value={country}
         label="Country"
         onChange={handleCountryChange}
@@ -617,12 +623,13 @@ const MtdiTable = () => {
      
      
       <label htmlFor="select-canal">
-        <h5>Canal De Venta</h5>
+        <h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Canal De Venta</h5>
       </label>
+      
       <Select
         labelId="select-canal"
         id="select-canal"
-        style={{ width: 100 }}
+        style={{ width: 100, marginLeft: "1em" }}
         value={salesChannel}
         label="select-canal"
         onChange={handleSalesChannelChange}
@@ -636,7 +643,7 @@ const MtdiTable = () => {
         })}
       </Select>
       <label htmlFor="select-tienda">
-        <h5>Tienda</h5>
+        <h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Tienda</h5>
       </label>
       <Select
         labelId="select-tienda"
@@ -655,7 +662,7 @@ const MtdiTable = () => {
         })}
       </Select>
       <label htmlFor="select-tienda-official">
-        <h5>Tienda Official</h5>
+        <h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Tienda Oficial</h5>
       </label>
       <Select
         labelId="select-tienda-official"
@@ -674,7 +681,7 @@ const MtdiTable = () => {
         })}
       </Select>
       <label htmlFor="select-client">
-        <h5>Cliente</h5>
+        <h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Cliente</h5>
       </label>
       <Select
         labelId="select-client"
@@ -692,13 +699,17 @@ const MtdiTable = () => {
           );
         })}
       </Select>
+
       <div>
-        <label><h5>Fecha</h5></label>
+        <label><h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Fecha</h5></label>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
+          
         />
       </div>
+
+
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
@@ -713,6 +724,7 @@ const MtdiTable = () => {
         data={data}
         columns={columns}
         options={{ columnsButton: true, sorting: true }}
+        style={{marginLeft:'1em', marginTop: '2em'}}
         // components={{
         //     FilterRow: () => <CustomFilter />
         //   }}

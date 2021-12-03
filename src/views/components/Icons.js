@@ -28,8 +28,8 @@ function Icons() {
             <CardHeader>
               <CardTitle>100 Awesome Nucleo Icons</CardTitle>
               <p className="card-category">
-                Handcrafted by our friends from{" "}
-                <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a>
+                {/* Handcrafted by our friends from{" "} */}
+                <a href="https://nucleoapp.com/?ref=1712">I</a>
               </p>
             </CardHeader>
             <CardBody className="all-icons">
