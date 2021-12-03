@@ -326,7 +326,7 @@ const orderList = [
     tienda: "ELITE PROFESSIONAL",
     cliente: "ELITE PROFESSIONAL",
     order_id: 5043343674,
-    pais: "Chile",
+    pais: "Mexico",
     fecha_creacion: "2021-11-24 14:27:19",
     shipping_id: 40993062785,
     valor_shipping: 0,
@@ -350,7 +350,7 @@ const orderList = [
     tienda: "Softys",
     cliente: "Softys",
     order_id: 5043328587,
-    pais: "Chile",
+    pais: "Colombia",
     fecha_creacion: "2021-11-24 14:22:58",
     shipping_id: 40993050395,
     valor_shipping: 0,
@@ -374,7 +374,7 @@ const orderList = [
     tienda: "Unilever",
     cliente: "Unilever",
     order_id: 5043322020,
-    pais: "Chile",
+    pais: "Peru",
     fecha_creacion: "2021-11-24 14:18:49",
     shipping_id: 40993039564,
     valor_shipping: 0,
@@ -497,23 +497,22 @@ const MtdiTable = () => {
   const [client, setclient] = useState("Seleccione Una");
   const [officialStore, setofficialStore] = useState("Seleccione Una");
   const [startDate, setStartDate] = useState(null);
-  
 
   useEffect(() => {
     // var da = startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate();
-    // console.log(da); 
-//    const res = data.map((it)=>{
-// return it.fecha_creacion.toISOString().slice(0,10);
-//    });
-//    console.log(res);
-  //  console.log(new Date(res.toDateString()));
-  //  var firstDateStr = res.toISOString().slice(0, 10);
+    // console.log(da);
+    //    const res = data.map((it)=>{
+    // return it.fecha_creacion.toISOString().slice(0,10);
+    //    });
+    //    console.log(res);
+    //  console.log(new Date(res.toDateString()));
+    //  var firstDateStr = res.toISOString().slice(0, 10);
     if (
       country === "select a country" ||
       salesChannel === "Seleccione Una" ||
       store === "Seleccione Una" ||
       officialStore === "Seleccione Una" ||
-      client === "Seleccione Una"||
+      client === "Seleccione Una" ||
       startDate === null
     ) {
       console.log("hello");
@@ -525,7 +524,15 @@ const MtdiTable = () => {
         .filter((item) => item.canal_de_venta.includes(salesChannel))
         .filter((item) => item.tienda.includes(store))
         .filter((item) => item.tienda.includes(officialStore))
-        .filter((item) => item.fecha_creacion.includes(startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate()))
+        .filter((item) =>
+          item.fecha_creacion.includes(
+            startDate.getFullYear() +
+              "-" +
+              (startDate.getMonth() + 1) +
+              "-" +
+              startDate.getDate()
+          )
+        );
       console.log(x);
       setData(x);
     }
@@ -548,7 +555,7 @@ const MtdiTable = () => {
     //     ? orderList
     //     : orderList.filter((dt) => dt.pais === country )
     // );
-  }, [country, salesChannel, store, client,startDate]);
+  }, [country, salesChannel, store, client, startDate]);
   const columns = [
     {
       title: "OpsId",
@@ -875,11 +882,9 @@ const MtdiTable = () => {
             </MenuItem>
           );
         })} */}
-        {Array.from(new Set(data.map((obj) => obj.tienda))).map(
-          (period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          }
-        )}
+        {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
+          return <MenuItem value={period}>{period}</MenuItem>;
+        })}
       </Select>
       <label htmlFor="select-tienda-official">
         <h5>Tienda Official</h5>
@@ -929,7 +934,7 @@ const MtdiTable = () => {
           onChange={(date) => setStartDate(date)}
           // minDate = {new Date()}
           // excludeTimes ={true}
-          format='yyyy-MM-dd'
+          format="yyyy-MM-dd"
         />
       </div>
       <MaterialTable
@@ -939,20 +944,7 @@ const MtdiTable = () => {
         data={data}
         columns={columns}
         options={{ columnsButton: true, sorting: true }}
-        // components={{
-        //     FilterRow: () => <CustomFilter />
-        //   }}
       />
-      {/* <div>
-        <label>
-          <h5>Fecha</h5>
-        </label>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-         dateFormat={YYYY}
-        />
-      </div> */}
     </React.Fragment>
   );
 };
