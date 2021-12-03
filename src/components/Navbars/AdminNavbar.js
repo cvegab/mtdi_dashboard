@@ -111,11 +111,11 @@ function AdminNavbar(props) {
                 <span className="navbar-toggler-bar bar3" />
               </button>
             </div>
-            <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
+            <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()} style={{background:"black"}}>
               <span className="d-none d-md-block">
                 {/* Paper Dashboard PRO React */}
               </span>
-              <span className="d-block d-md-none">PD PRO React</span>
+              <span className="d-block d-md-none"></span>
             </NavbarBrand>
           </div>
           <button

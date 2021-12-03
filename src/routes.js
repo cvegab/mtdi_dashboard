@@ -51,16 +51,19 @@ const routes = [
     path: "/mtdi-tables",
     name: "Órdenes de compra",
     // mini: "RT",
-    icon: "nc-icon nc-bank",
+    icon: iconOrdenes,
     component: MtdiTable,
+    mini: "OC",
     layout: "/admin",
   },
   {
     path: "/dashboard",
     name: "Reportes",
-    icon: "nc-icon nc-bank",
+    icon: iconReportes,
     component: Dashboard,
+    mini: "R",
     layout: "/admin",
+    
   },
   // {
   //   collapse: true,
