@@ -19,6 +19,10 @@ import CustomFilter from "./custom-filter-row";
 import ReactDatePicker from "react-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { zhCN } from "date-fns/locale";
+import zIndex from "@material-ui/core/styles/zIndex";
+import "../../assets/css/global.css";
+
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -512,8 +516,8 @@ const MtdiTable = () => {
       salesChannel === "Seleccione Una" ||
       store === "Seleccione Una" ||
       officialStore === "Seleccione Una" ||
-      client === "Seleccione Una" 
-    //  || startDate === null
+      client === "Seleccione Una" ||
+      startDate === null
     ) {
       console.log("hello");
       setData(orderList);
@@ -524,15 +528,15 @@ const MtdiTable = () => {
         .filter((item) => item.canal_de_venta.includes(salesChannel))
         .filter((item) => item.tienda.includes(store))
         .filter((item) => item.tienda.includes(officialStore))
-        // .filter((item) =>
-        //   item.fecha_creacion.includes(
-        //     startDate.getFullYear() +
-        //       "-" +
-        //       (startDate.getMonth() + 1) +
-        //       "-" +
-        //       startDate.getDate()
-        //   )
-        // );
+        .filter((item) =>
+          item.fecha_creacion.includes(
+            startDate.getFullYear() +
+              "-" +
+              (startDate.getMonth() + 1) +
+              "-" +
+              startDate.getDate()
+          )
+        );
       console.log(x);
       setData(x);
     }
@@ -812,17 +816,64 @@ const MtdiTable = () => {
   const handleOfficialStoreChange = (event) => {
     setofficialStore(event.target.value);
   };
-
+  const reloadTableHandler = () => {
+    setData(orderList);
+    setclient(null);
+    setcountry(null);
+    setofficialStore(null);
+    setsalesChannel(null);
+    setstore(null);
+    setStartDate(null);
+  };
   return (
-    <React.Fragment>
-      <h1>Tu Tienda</h1>
+    <div
+      id="mtdiTableBackground"
+      className="App"
+      style={{ background: "#E5E5E5" }}
+    >
+      <h5
+        className="titleTable"
+        style={{
+          color: "#C4C4C4",
+          width: "450px",
+          fontSize: "14px",
+          fontWeight: "800",
+          marginTop: "6rem",
+          marginLeft: "2em",
+        }}
+      >
+        Transacciones digitales: Vista Administrador
+      </h5>
+      <p
+        classname="textNameTable"
+        style={{
+          color: "black",
+          width: "450px",
+          fontSize: "30px",
+          fontWeight: "800",
+          marginLeft: "1em",
+        }}
+      >
+        Camilo Vega
+      </p>
       <label htmlFor="select-country">
-        <h5>Pais</h5>
+        <h5
+          style={{
+            color: "black",
+            width: "30px",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          País
+        </h5>
       </label>
+
       <Select
         labelId="select-country"
         id="select-country"
-        style={{ width: 100 }}
+        style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
         value={country}
         label="Country"
         onChange={handleCountryChange}
@@ -841,12 +892,22 @@ const MtdiTable = () => {
       </Select>
 
       <label htmlFor="select-canal">
-        <h5>Canal De Venta</h5>
+        <h5
+          style={{
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          Canal De Venta
+        </h5>
       </label>
+
       <Select
         labelId="select-canal"
         id="select-canal"
-        style={{ width: 100 }}
+        style={{ width: 100, marginLeft: "1em" }}
         value={salesChannel}
         label="select-canal"
         onChange={handleSalesChannelChange}
@@ -865,7 +926,16 @@ const MtdiTable = () => {
         })} */}
       </Select>
       <label htmlFor="select-tienda">
-        <h5>Tienda</h5>
+        <h5
+          style={{
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          Tienda
+        </h5>
       </label>
       <Select
         labelId="select-tienda"
@@ -886,8 +956,18 @@ const MtdiTable = () => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
+
       <label htmlFor="select-tienda-official">
-        <h5>Tienda Official</h5>
+        <h5
+          style={{
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          Tienda Oficial
+        </h5>
       </label>
       <Select
         labelId="select-tienda-official"
@@ -911,7 +991,16 @@ const MtdiTable = () => {
         )}
       </Select>
       <label htmlFor="select-client">
-        <h5>Cliente</h5>
+        <h5
+          style={{
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          Cliente
+        </h5>
       </label>
       <Select
         labelId="select-client"
@@ -925,18 +1014,26 @@ const MtdiTable = () => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
+      <button onClick={reloadTableHandler}>Hit me!!</button>
       <div>
         <label>
-          <h5>Fecha</h5>
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Fecha
+          </h5>
         </label>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
-          // minDate = {new Date()}
-          // excludeTimes ={true}
-          format="yyyy-MM-dd"
         />
       </div>
+
       <MaterialTable
         title="Instance Table"
         icons={tableIcons}
@@ -944,8 +1041,12 @@ const MtdiTable = () => {
         data={data}
         columns={columns}
         options={{ columnsButton: true, sorting: true }}
+        style={{ marginLeft: "1em", marginTop: "2em" }}
+        // components={{
+        //     FilterRow: () => <CustomFilter />
+        //   }}
       />
-    </React.Fragment>
+    </div>
   );
 };
 
