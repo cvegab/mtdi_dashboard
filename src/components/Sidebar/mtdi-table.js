@@ -508,52 +508,85 @@ const orderList = [
 
 const MtdiTable = () => {
   const [data, setData] = useState(orderList);
-  const [country, setcountry] = useState("select a country");
-  const [salesChannel, setsalesChannel] = useState("Seleccione Una");
-  const [store, setstore] = useState("Seleccione Una");
-  const [client, setclient] = useState("Seleccione Una");
-  const [officialStore, setofficialStore] = useState("Seleccione Una");
+  // const [country, setcountry] = useState("select a country");
+  const [country, setcountry] = useState(null);
+  // const [salesChannel, setsalesChannel] = useState("Seleccione Una");
+  const [salesChannel, setsalesChannel] = useState(null);
+  const [store, setstore] = useState(null);
+  const [client, setclient] = useState(null);
+  const [officialStore, setofficialStore] = useState(null);
   const [startDate, setStartDate] = useState(null);
 
   useEffect(() => {
-    if (
-      country === "select a country" ||
-      salesChannel === "Seleccione Una" ||
-      store === "Seleccione Una" ||
-      officialStore === "Seleccione Una" ||
-      client === "Seleccione Una" ||
-      startDate === null
-    ) {
-      console.log("hello");
-      setData(orderList);
-    } else {
-      console.log("bye");
-      const x = data
-        .filter((item) => item.pais === country)
-        .filter((item) => item.canal_de_venta.includes(salesChannel))
-        .filter((item) => item.tienda.includes(store))
-        .filter((item) => item.cliente.includes(client))
-        // .filter((item) => item.tienda_official.includes(officialStore))
-        .filter((item) =>
-          item.fecha_creacion.includes(
-            startDate.getFullYear() +
-              "-" +
-              (startDate.getMonth() + 1) +
-              "-" +
-              startDate.getDate()
-          )
-        );
-      console.log(x);
-      setData(x);
+    if(country!== null){
+   const x = data.filter((item) => item.pais === country);
+   setData(x);
     }
-    //    const x =  data.filter(item => item.pais === country)
-    //    .filter(item => item.canal_de_venta.includes(salesChannel));
-    //    console.log(x);
-    //    setData(x);
-    //   .filter(item => item.canal_de_venta.includes(salesChannel))
-    //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
+    if(salesChannel!== null ){
+      const x = data.filter((item)=>item.canal_de_venta.includes(salesChannel));
+      setData(x);
+       }
+       if(store!== null ){
+        const x = data.filter((item)=>item.tienda.includes(store));
+        setData(x);
+         }
+         if(client!== null ){
+          const x = data.filter((item)=>item.cliente.includes(client));
+          setData(x);
+           }
+           if(officialStore!== null ){
+            const x = data.filter((item)=>item.official_store.includes(officialStore));
+            setData(x);
+             }
+           if(startDate!== null ){
+            const x = data.filter((item) =>
+                  item.fecha_creacion.includes(
+                    startDate.getFullYear() +
+                      "-" +
+                      (startDate.getMonth() + 1) +
+                      "-" +
+                      startDate.getDate()
+                  ));
+            setData(x);
+             }
+    // if (
+    //   country === "select a country" ||
+    //   salesChannel === "Seleccione Una" ||
+    //   store === "Seleccione Una" ||
+    //   officialStore === "Seleccione Una" ||
+    //   client === "Seleccione Una" ||
+    //   startDate === null
+    // ) {
+    //   console.log("hello");
+    //   setData(orderList);
+    // } else {
+    //   console.log("bye");
+    //   const x = data
+    //     .filter((item) => item.pais === country)
+    //     .filter((item) => item.canal_de_venta.includes(salesChannel))
+    //     .filter((item) => item.tienda.includes(store))
+    //     .filter((item) => item.cliente.includes(client))
+    //     // .filter((item) => item.tienda_official.includes(officialStore))
+    //     .filter((item) =>
+    //       item.fecha_creacion.includes(
+    //         startDate.getFullYear() +
+    //           "-" +
+    //           (startDate.getMonth() + 1) +
+    //           "-" +
+    //           startDate.getDate()
+    //       )
+    //     );
+    //   console.log(x);
+    //   setData(x);
+    // }
+    // //    const x =  data.filter(item => item.pais === country)
+    // //    .filter(item => item.canal_de_venta.includes(salesChannel));
+    // //    console.log(x);
+    // //    setData(x);
+    // //   .filter(item => item.canal_de_venta.includes(salesChannel))
+    // //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
 
-    console.log(country, salesChannel, store, client, officialStore);
+    // console.log(country, salesChannel, store, client, officialStore);
   }, [country, salesChannel, store, client, startDate, officialStore]);
   const columns = [
     {
