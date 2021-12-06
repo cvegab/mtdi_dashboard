@@ -353,7 +353,7 @@ const icons = [
   },
   {
     name: "nc-icon nc-support-17",
-    content: "\\ea55",
+     content: "\\ea55",
   },
   {
     name: "nc-icon nc-tablet-2",

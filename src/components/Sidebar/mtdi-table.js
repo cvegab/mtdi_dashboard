@@ -60,6 +60,7 @@ const orderList = [
     tipo_envio: "cross_docking",
     id_mpago: 18378018289,
     status_detail: "accredited",
+    order_status: 'Cancelado'
   },
   {
     id_mtdi: "ml619e8aff4bcbf54da2960a96",
@@ -84,6 +85,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377774274,
     status_detail: "accredited",
+    order_status: 'Despachado',
   },
   {
     id_mtdi: "ml619e8aff5b8efcacad397d73",
@@ -108,6 +110,7 @@ const orderList = [
     tipo_envio: "cross_docking",
     id_mpago: 18377751629,
     status_detail: "accredited",
+    order_status: 'Cancelado'
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -180,6 +183,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377467510,
     status_detail: "accredited",
+    order_status: 'Cancelado'
   },
   {
     id_mtdi: "ml619e85251aa98aa1ae4d0c2c",
