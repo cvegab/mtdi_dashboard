@@ -503,14 +503,6 @@ const MtdiTable = () => {
   const [startDate, setStartDate] = useState(null);
 
   useEffect(() => {
-    // var da = startDate.getFullYear()+'-'+(startDate.getMonth()+1)+'-'+startDate.getDate();
-    // console.log(da);
-    //    const res = data.map((it)=>{
-    // return it.fecha_creacion.toISOString().slice(0,10);
-    //    });
-    //    console.log(res);
-    //  console.log(new Date(res.toDateString()));
-    //  var firstDateStr = res.toISOString().slice(0, 10);
     if (
       country === "select a country" ||
       salesChannel === "Seleccione Una" ||
@@ -527,7 +519,8 @@ const MtdiTable = () => {
         .filter((item) => item.pais === country)
         .filter((item) => item.canal_de_venta.includes(salesChannel))
         .filter((item) => item.tienda.includes(store))
-        .filter((item) => item.tienda.includes(officialStore))
+        .filter((item) => item.cliente.includes(client))
+        // .filter((item) => item.tienda_official.includes(officialStore))
         .filter((item) =>
           item.fecha_creacion.includes(
             startDate.getFullYear() +
@@ -548,18 +541,7 @@ const MtdiTable = () => {
     //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
 
     console.log(country, salesChannel, store, client, officialStore);
-    // let filters = [];
-    // filters = [country, salesChannel, store];
-
-    //    const x = data.filter((element)=> element.pais === filters)
-    //    console.log(x);
-
-    // setData(
-    //   country === "select a country"
-    //     ? orderList
-    //     : orderList.filter((dt) => dt.pais === country )
-    // );
-  }, [country, salesChannel, store, client, startDate]);
+  }, [country, salesChannel, store, client, startDate, officialStore]);
   const columns = [
     {
       title: "OpsId",
@@ -881,14 +863,6 @@ const MtdiTable = () => {
         {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
-
-        {/* <MenuItem value={"Select a country"}>
-          <em>Select a country</em>
-        </MenuItem>
-        <MenuItem value={"Chile"}>Chile</MenuItem>
-        <MenuItem value={"Mexico"}>Mexico</MenuItem>
-        <MenuItem value={"Peru"}>Peru</MenuItem>
-        <MenuItem value={"Colombia"}>Colombia</MenuItem> */}
       </Select>
 
       <label htmlFor="select-canal">
@@ -917,13 +891,6 @@ const MtdiTable = () => {
             return <MenuItem value={period}>{period}</MenuItem>;
           }
         )}
-        {/* {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.canal_de_venta}>
-              {e.canal_de_venta}
-            </MenuItem>
-          );
-        })} */}
       </Select>
       <label htmlFor="select-tienda">
         <h5
@@ -977,13 +944,6 @@ const MtdiTable = () => {
         label="select-tienda-official"
         onChange={handleOfficialStoreChange}
       >
-        {/* {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.tienda}>
-              {e.tienda}
-            </MenuItem>
-          );
-        })} */}
         {Array.from(new Set(data.map((obj) => obj.official_store))).map(
           (period) => {
             return <MenuItem value={period}>{period}</MenuItem>;
@@ -1042,9 +1002,6 @@ const MtdiTable = () => {
         columns={columns}
         options={{ columnsButton: true, sorting: true }}
         style={{ marginLeft: "1em", marginTop: "2em" }}
-        // components={{
-        //     FilterRow: () => <CustomFilter />
-        //   }}
       />
     </div>
   );
