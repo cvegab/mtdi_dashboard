@@ -60,7 +60,7 @@ const orderList = [
     tipo_envio: "cross_docking",
     id_mpago: 18378018289,
     status_detail: "accredited",
-    order_status: 'Cancelado'
+    order_status: "Cancelado",
   },
   {
     id_mtdi: "ml619e8aff4bcbf54da2960a96",
@@ -85,7 +85,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377774274,
     status_detail: "accredited",
-    order_status: 'Despachado',
+    order_status: "Despachado",
   },
   {
     id_mtdi: "ml619e8aff5b8efcacad397d73",
@@ -110,7 +110,7 @@ const orderList = [
     tipo_envio: "cross_docking",
     id_mpago: 18377751629,
     status_detail: "accredited",
-    order_status: 'Cancelado'
+    order_status: "Cancelado",
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -135,6 +135,7 @@ const orderList = [
     tipo_envio: "self_service",
     id_mpago: 18377638337,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8524ae50e1c50b6fcf1a",
@@ -159,6 +160,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: "",
     status_detail: "",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e88308e36b7c74eca91e6",
@@ -183,7 +185,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377467510,
     status_detail: "accredited",
-    order_status: 'Cancelado'
+    order_status: "Cancelado",
   },
   {
     id_mtdi: "ml619e85251aa98aa1ae4d0c2c",
@@ -208,6 +210,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377320339,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e852508fd29c7ea07b1d1",
@@ -232,6 +235,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377282832,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e88310dd92f36555d904d",
@@ -256,6 +260,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377205880,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "wo619e6fd7ceb34c0ebe9c2525",
@@ -279,6 +284,7 @@ const orderList = [
     tipo_envio: "",
     id_mpago: "",
     status_detail: "",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8aff4bcbf54da2960a96",
@@ -303,6 +309,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377774274,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8aff5b8efcacad397d73",
@@ -327,6 +334,7 @@ const orderList = [
     tipo_envio: "cross_docking",
     id_mpago: 18377751629,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -351,6 +359,7 @@ const orderList = [
     tipo_envio: "self_service",
     id_mpago: 18377638337,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8524ae50e1c50b6fcf1a",
@@ -622,7 +631,50 @@ const MtdiTable = () => {
     },
     {
       title: "Estado De Pedido",
-      field: "estado_delivery",
+      field: "order_status",
+
+      render: (rowData) => {
+        if (rowData.order_status === "Cancelado") {
+          return (
+            <div
+              style={{
+                background: "#f90000aa",
+                borderRadius: "8px",
+                textAlign: "center",
+              }}
+            >
+              Cancelado
+            </div>
+          );
+        }
+        if (rowData.order_status === "Despachado") {
+          return (
+            <div
+              style={{
+                background: "#c0c0c0",
+                borderRadius: "8px",
+                textAlign: "center",
+              }}
+            >
+              Despachado
+            </div>
+          );
+        }
+        if (rowData.order_status === "Confirmado") {
+          return (
+            <div
+              style={{
+                background: "#008000aa",
+                borderRadius: "8px",
+                textAlign: "center",
+              }}
+            >
+              Confirmado
+            </div>
+          );
+        }
+      },
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
