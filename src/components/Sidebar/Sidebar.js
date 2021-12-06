@@ -218,8 +218,9 @@ function Sidebar(props) {
         <Nav>{createLinks(props.routes)}</Nav>
        
       <button id="logoutButton" classname="logoutButton">
-      <img src={LogoutIcon} />
-      Cerrar sesión</button>
+        <img src={LogoutIcon} />
+        Cerrar sesión
+      </button>
       </div>
     </div>
   );
