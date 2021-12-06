@@ -51,17 +51,15 @@ const routes = [
     path: "/mtdi-tables",
     name: "Órdenes de compra",
     // mini: "RT",
-    icon: iconOrdenes,
+    icon: "nc-icon nc-single-copy-04",
     component: MtdiTable,
-    mini: "OC",
     layout: "/admin",
   },
   {
     path: "/dashboard",
     name: "Reportes",
-    icon: iconReportes,
+    icon: "nc-icon nc-chart-bar-32",
     component: Dashboard,
-    mini: "R",
     layout: "/admin",
     
   },
@@ -156,13 +154,13 @@ const routes = [
   //       component: Icons,
   //       layout: "/admin",
   //     },
-  //     {
-  //       path: "/typography",
-  //       name: "Typography",
-  //       mini: "T",
-  //       component: Typography,
-  //       layout: "/admin",
-  //     },
+      // {
+      //   path: "/typography",
+      //   name: "Typography",
+      //   mini: "T",
+      //   component: Typography,
+      //   layout: "/admin",
+      // },
   //   ],
   // },
   // {
@@ -297,20 +295,20 @@ const routes = [
   //     },
   //   ],
   // },
-  // {
-  //   path: "/widgets",
-  //   name: "Widgets",
-  //   icon: "nc-icon nc-box",
-  //   component: Widgets,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/charts",
-  //   name: "Charts",
-  //   icon: "nc-icon nc-chart-bar-32",
-  //   component: Charts,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/widgets",
+    name: "Estados de OC",
+    icon: "nc-icon nc-support-17",
+    component: Widgets,
+    layout: "/admin",
+  },
+  {
+    path: "/charts",
+    name: "Maestro de productos",
+    icon: "nc-icon nc-box",
+    component: Charts,
+    layout: "/admin",
+  },
   // {
   //   path: "/calendar",
   //   name: "Calendar",
@@ -318,6 +316,13 @@ const routes = [
   //   component: Calendar,
   //   layout: "/admin",
   // },
+  // {
+  //   path: "/logout",
+  //   icon: "nc-icon nc-calendar-60",
+  //   name: "Cerrar Sesión",
+  //   layout: "/logout"
+  // }
+  
 ];
 
 export default routes;

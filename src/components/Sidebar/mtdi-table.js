@@ -21,6 +21,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { zhCN } from "date-fns/locale";
 import zIndex from "@material-ui/core/styles/zIndex";
+// import CalendarIcon from '../../assets/img/calendar-icon.png'
 import '../../assets/css/global.css'
 
 const tableIcons = {
@@ -621,7 +622,16 @@ const MtdiTable = () => {
         <MenuItem value={"Colombia"}>Colombia</MenuItem>
       </Select>
      
-     
+      
+        <label><h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Fecha</h5>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+        {/* <img src={CalendarIcon} /> */}
+        </label>
+
+
       <label htmlFor="select-canal">
         <h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Canal De Venta</h5>
       </label>
@@ -700,14 +710,7 @@ const MtdiTable = () => {
         })}
       </Select>
 
-      <div>
-        <label><h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Fecha</h5></label>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          
-        />
-      </div>
+ 
 
 
       <MaterialTable

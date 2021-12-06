@@ -14,7 +14,19 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+
+import iconOrdenes from "../assets/img/icons-ordenes.png";
+// import iconReportes from "..assets/img/icons-reportes.png"
+
+
 const icons = [
+  {
+    name: "nc-icon nc-icon-order",
+    content: iconOrdenes,
+  },
+  
+  
   {
     name: "nc-icon nc-air-baloon",
     content: "\\ea01",
