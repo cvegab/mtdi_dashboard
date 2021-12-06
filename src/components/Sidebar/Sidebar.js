@@ -24,6 +24,7 @@ import avatar from "assets/img/faces/CamiloVega.jpg";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
+import LogoutIcon from "assets/img/logout-icon.png"
 import '../../assets/css/global.css'
 
 var ps;
@@ -216,6 +217,10 @@ function Sidebar(props) {
         </div>
         <Nav>{createLinks(props.routes)}</Nav>
        
+      <button id="logoutButton" classname="logoutButton">
+        <img src={LogoutIcon} />
+        Cerrar sesión
+      </button>
       </div>
     </div>
   );
