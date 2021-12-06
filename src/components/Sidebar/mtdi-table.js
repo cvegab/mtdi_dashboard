@@ -21,7 +21,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { zhCN } from "date-fns/locale";
 import zIndex from "@material-ui/core/styles/zIndex";
-import "../../assets/css/global.css";
+// import CalendarIcon from '../../assets/img/calendar-icon.png'
+import '../../assets/css/global.css'
+
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -869,6 +871,18 @@ const MtdiTable = () => {
         })}
       </Select>
 
+     
+      
+        <label><h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Fecha</h5>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+        {/* <img src={CalendarIcon} /> */}
+        </label>
+
+
+
       <label htmlFor="select-canal">
         <h5
           style={{
@@ -978,6 +992,10 @@ const MtdiTable = () => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
+
+
+ 
+
       <button onClick={reloadTableHandler}>Hit me!!</button>
       <div>
         <label>

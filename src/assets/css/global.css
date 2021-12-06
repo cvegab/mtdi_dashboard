@@ -1,14 +1,16 @@
 body {
-  background: white !important;
+  background: transparent !important;
 }
 
 .textProfile,
 .textCompany {
   color: white !important;
+  font-weight: 500;
 }
 
 .react-datepicker-popper {
   z-index: 9999 !important;
+  
 }
 
 .react-datepicker__input-container {
@@ -17,7 +19,7 @@ body {
 
 .MuiSelect-select.MuiSelect-select {
   padding-right: 24px;
-  border-radius: 17px;
+  border-radius: 14px;
   background-color: white;
   box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
   margin-top:1em;
@@ -25,11 +27,11 @@ body {
 }
 
 .MuiMenu-paper {
-  border-radius:17px !important;
+  border-radius:12px !important;
 }
 
 .input {
-  border-radius: 17px !important;
+  border-radius: 12px !important;
 }
 
 #minimizeSidebar {
@@ -55,6 +57,58 @@ body {
 }
 
 #mtdiTableBackground {
-  background-color: white !important;
+  background-color: transparent !important;
 
+}
+
+.MuiSelect-icon {
+  color: black !important;
+  margin-top:6px !important;
+}
+
+.MuiInput-underline:before {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
+}
+
+.sidebar .nav i {
+  color: white !important;
+}
+
+.button .input {
+  border-radius: 17px !important;
+}
+
+input[type=text]{
+  -webkit-border-radius: 17px;
+  -moz-border-radius: 17px;
+   border-radius: 17px;
+   border: 1px solid white;
+   color: #C4C4C4;
+   width: 100px;
+   height: 30px;
+   padding-left: 10px;
+  }
+  
+input[type=text]:focus {
+   outline: none;
+   border: 1px solid white;
+   color: black;
+}
+
+#logoutButton {
+ 
+  background: #06CBC1;
+  border-radius: 20px;
+  width: 230px;
+  height: 76px;
+  font-weight: 700;
+  color: white;
+  align-items: center;
+  margin-top: 15em;
+  margin-left: 1em;
+}
+
+.logo {
+  margin-top:1em;
+  margin-bottom:1em;
 }
