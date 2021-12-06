@@ -21,6 +21,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { zhCN } from "date-fns/locale";
 import zIndex from "@material-ui/core/styles/zIndex";
+//import SearchIcon from "material-ui/svg-icons/action/search";
 import "../../assets/css/global.css";
 
 const tableIcons = {
@@ -671,7 +672,8 @@ const MtdiTable = () => {
           return (
             <div
               style={{
-                background: "#f90000aa",
+                color: '#FF6059',
+                background:'rgba(255, 96, 89, 0.1)',
                 borderRadius: "8px",
                 textAlign: "center",
               }}
@@ -684,7 +686,8 @@ const MtdiTable = () => {
           return (
             <div
               style={{
-                background: "#c0c0c0",
+                background: 'rgba(67, 83, 161, 0.1)',
+                color: '#4353A1',
                 borderRadius: "8px",
                 textAlign: "center",
               }}
@@ -697,7 +700,8 @@ const MtdiTable = () => {
           return (
             <div
               style={{
-                background: "#008000aa",
+                color: '#20CAA4',
+                background: 'rgba(32, 202, 164, 0.1)',
                 borderRadius: "8px",
                 textAlign: "center",
               }}
