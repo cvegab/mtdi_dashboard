@@ -24,11 +24,11 @@ import zIndex from "@material-ui/core/styles/zIndex";
 //import SearchIcon from "material-ui/svg-icons/action/search";
 import "../../assets/css/global.css";
 // import CalendarIcon from '../../assets/img/calendar-icon.png'
-import '../../assets/css/global.css'
-import LogoutIcon from "../../assets/img/logout-icon.png"
-import SiIcon from '../../assets/img/si.png';
-import { SettingsInputComponent } from "@material-ui/icons";
-
+import "../../assets/css/global.css";
+import LogoutIcon from "../../assets/img/logout-icon.png";
+import SiIcon from "../../assets/img/si.png";
+import noIcon from "../../assets/img/no.png";
+import showPdf from "../../assets/img/showPdf.png";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -525,37 +525,42 @@ const MtdiTable = () => {
   const [startDate, setStartDate] = useState(null);
 
   useEffect(() => {
-    if(country!== null){
-   const x = data.filter((item) => item.pais === country);
-   setData(x);
-    }
-    if(salesChannel!== null ){
-      const x = data.filter((item)=>item.canal_de_venta.includes(salesChannel));
+    if (country !== null) {
+      const x = data.filter((item) => item.pais === country);
       setData(x);
-       }
-       if(store!== null ){
-        const x = data.filter((item)=>item.tienda.includes(store));
-        setData(x);
-         }
-         if(client!== null ){
-          const x = data.filter((item)=>item.cliente.includes(client));
-          setData(x);
-           }
-           if(officialStore!== null ){
-            const x = data.filter((item)=>item.official_store.includes(officialStore));
-            setData(x);
-             }
-           if(startDate!== null ){
-            const x = data.filter((item) =>
-                  item.fecha_creacion.includes(
-                    startDate.getFullYear() +
-                      "-" +
-                      (startDate.getMonth() + 1) +
-                      "-" +
-                      startDate.getDate()
-                  ));
-            setData(x);
-             }
+    }
+    if (salesChannel !== null) {
+      const x = data.filter((item) =>
+        item.canal_de_venta.includes(salesChannel)
+      );
+      setData(x);
+    }
+    if (store !== null) {
+      const x = data.filter((item) => item.tienda.includes(store));
+      setData(x);
+    }
+    if (client !== null) {
+      const x = data.filter((item) => item.cliente.includes(client));
+      setData(x);
+    }
+    if (officialStore !== null) {
+      const x = data.filter((item) =>
+        item.official_store.includes(officialStore)
+      );
+      setData(x);
+    }
+    if (startDate !== null) {
+      const x = data.filter((item) =>
+        item.fecha_creacion.includes(
+          startDate.getFullYear() +
+            "-" +
+            (startDate.getMonth() + 1) +
+            "-" +
+            startDate.getDate()
+        )
+      );
+      setData(x);
+    }
     // if (
     //   country === "select a country" ||
     //   salesChannel === "Seleccione Una" ||
@@ -595,6 +600,9 @@ const MtdiTable = () => {
 
     // console.log(country, salesChannel, store, client, officialStore);
   }, [country, salesChannel, store, client, startDate, officialStore]);
+  const showModalHandler = ()=>{
+    console.log('hi i was clicked');
+  }
   const columns = [
     {
       title: "OpsId",
@@ -678,8 +686,8 @@ const MtdiTable = () => {
           return (
             <div
               style={{
-                color: '#FF6059',
-                background:'rgba(255, 96, 89, 0.1)',
+                color: "#FF6059",
+                background: "rgba(255, 96, 89, 0.1)",
                 borderRadius: "8px",
                 textAlign: "center",
               }}
@@ -692,8 +700,8 @@ const MtdiTable = () => {
           return (
             <div
               style={{
-                background: 'rgba(67, 83, 161, 0.1)',
-                color: '#4353A1',
+                background: "rgba(67, 83, 161, 0.1)",
+                color: "#4353A1",
                 borderRadius: "8px",
                 textAlign: "center",
               }}
@@ -706,8 +714,8 @@ const MtdiTable = () => {
           return (
             <div
               style={{
-                color: '#20CAA4',
-                background: 'rgba(32, 202, 164, 0.1)',
+                color: "#20CAA4",
+                background: "rgba(32, 202, 164, 0.1)",
                 borderRadius: "8px",
                 textAlign: "center",
               }}
@@ -727,8 +735,22 @@ const MtdiTable = () => {
     {
       title: "DTE",
       field: "dte",
-     // icon: Search,
-      lookup: { Si: <div><img src={SiIcon}/> Si</div>, No: <div><icon/> Şanlıurfa</div> },
+      // icon: Search,
+      lookup: {
+        Si: (
+          <div>
+            Si
+            <img src={SiIcon} onClick={showModalHandler} />
+            <img src={showPdf} />
+          </div>
+        ),
+        No: (
+          <div>
+            No
+            <img src={noIcon} />
+          </div>
+        ),
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -908,6 +930,7 @@ const MtdiTable = () => {
     setstore(null);
     setStartDate(null);
   };
+ 
   return (
     <div
       id="mtdiTableBackground"
@@ -966,17 +989,23 @@ const MtdiTable = () => {
         })}
       </Select>
 
-     
-      
-        <label><h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Fecha</h5>
+      <label>
+        <h5
+          style={{
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          Fecha
+        </h5>
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
         {/* <img src={CalendarIcon} /> */}
-        </label>
-
-
+      </label>
 
       <label htmlFor="select-canal">
         <h5
@@ -1087,9 +1116,6 @@ const MtdiTable = () => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
-
-
- 
 
       <button onClick={reloadTableHandler}>Hit me!!</button>
       <div>
