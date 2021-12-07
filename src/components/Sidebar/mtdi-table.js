@@ -29,6 +29,7 @@ import LogoutIcon from "../../assets/img/logout-icon.png";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import Modal from '../UI/Modal'
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -523,6 +524,7 @@ const MtdiTable = () => {
   const [client, setclient] = useState(null);
   const [officialStore, setofficialStore] = useState(null);
   const [startDate, setStartDate] = useState(null);
+  const [showModal, setshowModal] = useState(false);
 
   useEffect(() => {
     if (country !== null) {
@@ -602,6 +604,7 @@ const MtdiTable = () => {
   }, [country, salesChannel, store, client, startDate, officialStore]);
   const showModalHandler = ()=>{
     console.log('hi i was clicked');
+    setshowModal(true);
   }
   const columns = [
     {
@@ -932,6 +935,10 @@ const MtdiTable = () => {
   };
  
   return (
+    <React.Fragment>
+     {showModal &&<Modal>
+      { <h1>It is a Modal</h1>}
+       </Modal>} 
     <div
       id="mtdiTableBackground"
       className="App"
@@ -1147,6 +1154,7 @@ const MtdiTable = () => {
         style={{ marginLeft: "1em", marginTop: "2em" }}
       />
     </div>
+    </React.Fragment>
   );
 };
 
