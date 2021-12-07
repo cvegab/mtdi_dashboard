@@ -25,6 +25,9 @@ import zIndex from "@material-ui/core/styles/zIndex";
 import "../../assets/css/global.css";
 // import CalendarIcon from '../../assets/img/calendar-icon.png'
 import '../../assets/css/global.css'
+import LogoutIcon from "../../assets/img/logout-icon.png"
+import SiIcon from '../../assets/img/si.png';
+import { SettingsInputComponent } from "@material-ui/icons";
 
 
 const tableIcons = {
@@ -58,7 +61,7 @@ const orderList = [
     comprador: "IVISPATIO",
     hub: "redcompra",
     rut: "",
-    dte: "",
+    dte: "Si",
     dte_exist: "disabled",
     official_store: "Unilever",
     tipo_envio: "cross_docking",
@@ -83,7 +86,7 @@ const orderList = [
     comprador: "SUPERFIL CHILE",
     hub: "account_money",
     rut: "",
-    dte: "",
+    dte: "No",
     dte_exist: "disabled",
     official_store: "Elite Professional",
     tipo_envio: "fulfillment",
@@ -108,7 +111,7 @@ const orderList = [
     comprador: "SUPERFIL CHILE",
     hub: "account_money",
     rut: "",
-    dte: "",
+    dte: "Si",
     dte_exist: "disabled",
     official_store: "Elite Professional",
     tipo_envio: "cross_docking",
@@ -133,7 +136,7 @@ const orderList = [
     comprador: "CRORTEGA1",
     hub: "master",
     rut: "",
-    dte: "",
+    dte: "No",
     dte_exist: "disabled",
     official_store: "Elite Professional",
     tipo_envio: "self_service",
@@ -724,6 +727,8 @@ const MtdiTable = () => {
     {
       title: "DTE",
       field: "dte",
+     // icon: Search,
+      lookup: { Si: <div><img src={SiIcon}/> Si</div>, No: <div><icon/> Şanlıurfa</div> },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
