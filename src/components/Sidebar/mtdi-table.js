@@ -29,6 +29,8 @@ import LogoutIcon from "../../assets/img/logout-icon.png";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+
+import greyIcon from "../../assets/img/greyIcon.png";
 import Modal from "../UI/Modal";
 import classes from "./mtdi-table.module.css";
 
@@ -713,35 +715,28 @@ const MtdiTable = () => {
       // icon: Search,
       lookup: {
         Si: (
+          // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
-            Si
-            <span
-              style={{
-                background: "rgba(67, 83, 161, 0.1)",
-                borderRadius: "4px",
-                width: "34px",
-                height: "34px",
-              }}
-            >
+            Si &nbsp;
+            <span className={classes.si}>
               <img src={SiIcon} onClick={showModalHandler} />
             </span>
-            <span
-              style={{
-                background: "rgba(32, 202, 164, 0.1)",
-                borderRadius: "4px",
-                width: "34px",
-                height: "34px",
-              }}
-            >
-              {" "}
+            &nbsp;
+            <span className={classes.showPdf}>
               <img src={showPdf} />
             </span>
           </div>
         ),
         No: (
           <div>
-            No
-            <img src={noIcon} />
+            No &nbsp;
+            <span className={classes.noIcon}>
+              <img src={noIcon} />
+            </span>
+            &nbsp;
+            <span className={classes.greyIcon}>
+              <img src={greyIcon} />
+            </span>
           </div>
         ),
       },
@@ -927,7 +922,11 @@ const MtdiTable = () => {
 
   return (
     <React.Fragment>
-      {showModal && <Modal>{<h1>It is a Modal</h1>}</Modal>}
+      {showModal && (
+        <Modal>
+          <h1>Hello</h1>
+        </Modal>
+      )}
       <div
         id="mtdiTableBackground"
         className="App"
