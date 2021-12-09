@@ -29,7 +29,8 @@ import LogoutIcon from "../../assets/img/logout-icon.png";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-import Modal from '../UI/Modal'
+import Modal from "../UI/Modal";
+import classes from "./mtdi-table.module.css";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -69,6 +70,7 @@ const orderList = [
     id_mpago: 18378018289,
     status_detail: "accredited",
     order_status: "Cancelado",
+    wms: "Integrado a wms",
   },
   {
     id_mtdi: "ml619e8aff4bcbf54da2960a96",
@@ -94,6 +96,7 @@ const orderList = [
     id_mpago: 18377774274,
     status_detail: "accredited",
     order_status: "Despachado",
+    wms: "Integrado a wms",
   },
   {
     id_mtdi: "ml619e8aff5b8efcacad397d73",
@@ -119,6 +122,7 @@ const orderList = [
     id_mpago: 18377751629,
     status_detail: "accredited",
     order_status: "Cancelado",
+    wms: "Orden Cancelada",
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -343,6 +347,7 @@ const orderList = [
     id_mpago: 18377751629,
     status_detail: "accredited",
     order_status: "Confirmado",
+    wms: "Integrada a wms",
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -602,10 +607,10 @@ const MtdiTable = () => {
 
     // console.log(country, salesChannel, store, client, officialStore);
   }, [country, salesChannel, store, client, startDate, officialStore]);
-  const showModalHandler = ()=>{
-    console.log('hi i was clicked');
+  const showModalHandler = () => {
+    console.log("hi i was clicked");
     setshowModal(true);
-  }
+  };
   const columns = [
     {
       title: "OpsId",
@@ -686,46 +691,13 @@ const MtdiTable = () => {
 
       render: (rowData) => {
         if (rowData.order_status === "Cancelado") {
-          return (
-            <div
-              style={{
-                color: "#FF6059",
-                background: "rgba(255, 96, 89, 0.1)",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-            >
-              Cancelado
-            </div>
-          );
+          return <div className={classes.cancelado}>Cancelado</div>;
         }
         if (rowData.order_status === "Despachado") {
-          return (
-            <div
-              style={{
-                background: "rgba(67, 83, 161, 0.1)",
-                color: "#4353A1",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-            >
-              Despachado
-            </div>
-          );
+          return <div className={classes.despachado}>Despachado</div>;
         }
         if (rowData.order_status === "Confirmado") {
-          return (
-            <div
-              style={{
-                color: "#20CAA4",
-                background: "rgba(32, 202, 164, 0.1)",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-            >
-              Confirmado
-            </div>
-          );
+          return <div className={classes.confirmado}>Confirmado</div>;
         }
       },
 
@@ -743,8 +715,27 @@ const MtdiTable = () => {
         Si: (
           <div>
             Si
-            <img src={SiIcon} onClick={showModalHandler} />
-            <img src={showPdf} />
+            <span
+              style={{
+                background: "rgba(67, 83, 161, 0.1)",
+                borderRadius: "4px",
+                width: "34px",
+                height: "34px",
+              }}
+            >
+              <img src={SiIcon} onClick={showModalHandler} />
+            </span>
+            <span
+              style={{
+                background: "rgba(32, 202, 164, 0.1)",
+                borderRadius: "4px",
+                width: "34px",
+                height: "34px",
+              }}
+            >
+              {" "}
+              <img src={showPdf} />
+            </span>
           </div>
         ),
         No: (
@@ -933,199 +924,67 @@ const MtdiTable = () => {
     setstore(null);
     setStartDate(null);
   };
- 
+
   return (
     <React.Fragment>
-     {showModal &&<Modal>
-      { <h1>It is a Modal</h1>}
-       </Modal>} 
-    <div
-      id="mtdiTableBackground"
-      className="App"
-      style={{ background: "#E5E5E5" }}
-    >
-      <h5
-        className="titleTable"
-        style={{
-          color: "#C4C4C4",
-          width: "450px",
-          fontSize: "14px",
-          fontWeight: "800",
-          marginTop: "6rem",
-          marginLeft: "2em",
-        }}
+      {showModal && <Modal>{<h1>It is a Modal</h1>}</Modal>}
+      <div
+        id="mtdiTableBackground"
+        className="App"
+        style={{ background: "#E5E5E5" }}
       >
-        Transacciones digitales: Vista Administrador
-      </h5>
-      <p
-        classname="textNameTable"
-        style={{
-          color: "black",
-          width: "450px",
-          fontSize: "30px",
-          fontWeight: "800",
-          marginLeft: "1em",
-        }}
-      >
-        Camilo Vega
-      </p>
-      <label htmlFor="select-country">
         <h5
+          className="titleTable"
+          style={{
+            color: "#C4C4C4",
+            width: "450px",
+            fontSize: "14px",
+            fontWeight: "800",
+            marginTop: "6rem",
+            marginLeft: "2em",
+          }}
+        >
+          Transacciones digitales: Vista Administrador
+        </h5>
+        <p
+          classname="textNameTable"
           style={{
             color: "black",
-            width: "30px",
-            fontSize: "14px",
+            width: "450px",
+            fontSize: "30px",
             fontWeight: "800",
             marginLeft: "1em",
           }}
         >
-          País
-        </h5>
-      </label>
+          Camilo Vega
+        </p>
+        <label htmlFor="select-country">
+          <h5
+            style={{
+              color: "black",
+              width: "30px",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            País
+          </h5>
+        </label>
 
-      <Select
-        labelId="select-country"
-        id="select-country"
-        style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
-        value={country}
-        label="Country"
-        onChange={handleCountryChange}
-      >
-        {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
-          return <MenuItem value={period}>{period}</MenuItem>;
-        })}
-      </Select>
-
-      <label>
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-          }}
+        <Select
+          labelId="select-country"
+          id="select-country"
+          style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
+          value={country}
+          label="Country"
+          onChange={handleCountryChange}
         >
-          Fecha
-        </h5>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
-        {/* <img src={CalendarIcon} /> */}
-      </label>
-
-      <label htmlFor="select-canal">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-          }}
-        >
-          Canal De Venta
-        </h5>
-      </label>
-
-      <Select
-        labelId="select-canal"
-        id="select-canal"
-        style={{ width: 100, marginLeft: "1em" }}
-        value={salesChannel}
-        label="select-canal"
-        onChange={handleSalesChannelChange}
-      >
-        {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-          (period) => {
+          {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
             return <MenuItem value={period}>{period}</MenuItem>;
-          }
-        )}
-      </Select>
-      <label htmlFor="select-tienda">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-          }}
-        >
-          Tienda
-        </h5>
-      </label>
-      <Select
-        labelId="select-tienda"
-        id="select-tienda"
-        style={{ width: 100 }}
-        value={store}
-        label="select-canal"
-        onChange={handleStoreChange}
-      >
-        {/* {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.tienda}>
-              {e.tienda}
-            </MenuItem>
-          );
-        })} */}
-        {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
-          return <MenuItem value={period}>{period}</MenuItem>;
-        })}
-      </Select>
+          })}
+        </Select>
 
-      <label htmlFor="select-tienda-official">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-          }}
-        >
-          Tienda Oficial
-        </h5>
-      </label>
-      <Select
-        labelId="select-tienda-official"
-        id="select-tienda-official"
-        style={{ width: 100 }}
-        value={officialStore}
-        label="select-tienda-official"
-        onChange={handleOfficialStoreChange}
-      >
-        {Array.from(new Set(data.map((obj) => obj.official_store))).map(
-          (period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          }
-        )}
-      </Select>
-      <label htmlFor="select-client">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-          }}
-        >
-          Cliente
-        </h5>
-      </label>
-      <Select
-        labelId="select-client"
-        id="select-client"
-        style={{ width: 100 }}
-        value={client}
-        label="select-tienda-official"
-        onChange={handleClientChange}
-      >
-        {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
-          return <MenuItem value={period}>{period}</MenuItem>;
-        })}
-      </Select>
-
-      <button onClick={reloadTableHandler}>Hit me!!</button>
-      <div>
         <label>
           <h5
             style={{
@@ -1137,23 +996,153 @@ const MtdiTable = () => {
           >
             Fecha
           </h5>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+          {/* <img src={CalendarIcon} /> */}
         </label>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+
+        <label htmlFor="select-canal">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Canal De Venta
+          </h5>
+        </label>
+
+        <Select
+          labelId="select-canal"
+          id="select-canal"
+          style={{ width: 100, marginLeft: "1em" }}
+          value={salesChannel}
+          label="select-canal"
+          onChange={handleSalesChannelChange}
+        >
+          {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+            (period) => {
+              return <MenuItem value={period}>{period}</MenuItem>;
+            }
+          )}
+        </Select>
+        <label htmlFor="select-tienda">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Tienda
+          </h5>
+        </label>
+        <Select
+          labelId="select-tienda"
+          id="select-tienda"
+          style={{ width: 100 }}
+          value={store}
+          label="select-canal"
+          onChange={handleStoreChange}
+        >
+          {/* {data.map((e, key) => {
+          return (
+            <MenuItem key={key} value={e.tienda}>
+              {e.tienda}
+            </MenuItem>
+          );
+        })} */}
+          {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
+            return <MenuItem value={period}>{period}</MenuItem>;
+          })}
+        </Select>
+
+        <label htmlFor="select-tienda-official">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Tienda Oficial
+          </h5>
+        </label>
+        <Select
+          labelId="select-tienda-official"
+          id="select-tienda-official"
+          style={{ width: 100 }}
+          value={officialStore}
+          label="select-tienda-official"
+          onChange={handleOfficialStoreChange}
+        >
+          {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+            (period) => {
+              return <MenuItem value={period}>{period}</MenuItem>;
+            }
+          )}
+        </Select>
+        <label htmlFor="select-client">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Cliente
+          </h5>
+        </label>
+        <Select
+          labelId="select-client"
+          id="select-client"
+          style={{ width: 100 }}
+          value={client}
+          label="select-tienda-official"
+          onChange={handleClientChange}
+        >
+          {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
+            return <MenuItem value={period}>{period}</MenuItem>;
+          })}
+        </Select>
+
+        <button onClick={reloadTableHandler}>Hit me!!</button>
+        <div>
+          <label>
+            <h5
+              style={{
+                color: "black",
+                fontSize: "14px",
+                fontWeight: "800",
+                marginLeft: "1em",
+              }}
+            >
+              Fecha
+            </h5>
+          </label>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+        </div>
+
+        <MaterialTable
+          title="Instance Table"
+          icons={tableIcons}
+          title=""
+          data={data}
+          columns={columns}
+          options={{ columnsButton: true, sorting: true }}
+          style={{ marginLeft: "1em", marginTop: "2em" }}
         />
       </div>
-
-      <MaterialTable
-        title="Instance Table"
-        icons={tableIcons}
-        title=""
-        data={data}
-        columns={columns}
-        options={{ columnsButton: true, sorting: true }}
-        style={{ marginLeft: "1em", marginTop: "2em" }}
-      />
-    </div>
     </React.Fragment>
   );
 };
