@@ -11,6 +11,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import RoomIcon from "@material-ui/icons/Room";
+import RefreshIcon from "../../assets/img/icon-refresh.png";
 import { MuiThemeProvider } from "@material-ui/core";
 //import FormControl from '@mui/material/FormControl';
 import { Select, MenuItem } from "@material-ui/core";
@@ -852,11 +853,11 @@ const MtdiTable = () => {
             fontSize: "14px",
             fontWeight: "800",
             marginLeft: "1em",
+            marginBottom:"0px"
           }}
         >
           País
         </h5>
-      </label>
 
       <Select
         labelId="select-country"
@@ -865,19 +866,31 @@ const MtdiTable = () => {
         value={country}
         label="Country"
         onChange={handleCountryChange}
-      >
+        >
         {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
+      </label>
 
      
       
-        <label><h5 style={{ color: "black", fontSize:"14px",  fontWeight:"800", marginLeft:"1em"}}>Fecha</h5>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-        />
+        <label>
+          <h5 style={{ 
+          color: "black", 
+          fontSize:"14px",  
+          fontWeight:"800", 
+          marginLeft:"1em",
+          marginBottom:"18px"
+          
+          }}
+          >
+            Fecha
+          </h5>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
         {/* <img src={CalendarIcon} /> */}
         </label>
 
@@ -890,26 +903,29 @@ const MtdiTable = () => {
             fontSize: "14px",
             fontWeight: "800",
             marginLeft: "1em",
+            marginBottom:"0px"
           }}
         >
           Canal De Venta
         </h5>
-      </label>
 
-      <Select
-        labelId="select-canal"
-        id="select-canal"
-        style={{ width: 100, marginLeft: "1em" }}
-        value={salesChannel}
-        label="select-canal"
-        onChange={handleSalesChannelChange}
-      >
-        {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+        <Select
+          labelId="select-canal"
+          id="select-canal"
+          style={{ width: 100, marginLeft: "1em" }}
+          value={salesChannel}
+          label="select-canal"
+          onChange={handleSalesChannelChange}
+          >
+          {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
           (period) => {
             return <MenuItem value={period}>{period}</MenuItem>;
           }
-        )}
-      </Select>
+          )}
+        </Select>
+      </label>
+
+
       <label htmlFor="select-tienda">
         <h5
           style={{
@@ -917,11 +933,11 @@ const MtdiTable = () => {
             fontSize: "14px",
             fontWeight: "800",
             marginLeft: "1em",
+            marginBottom:"0px"
           }}
         >
           Tienda
         </h5>
-      </label>
       <Select
         labelId="select-tienda"
         id="select-tienda"
@@ -929,18 +945,19 @@ const MtdiTable = () => {
         value={store}
         label="select-canal"
         onChange={handleStoreChange}
-      >
+        >
         {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.tienda}>
               {e.tienda}
-            </MenuItem>
+              </MenuItem>
           );
         })} */}
         {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
+    </label>
 
       <label htmlFor="select-tienda-official">
         <h5
@@ -948,12 +965,13 @@ const MtdiTable = () => {
             color: "black",
             fontSize: "14px",
             fontWeight: "800",
-            marginLeft: "1em",
+            marginLeft: "0em",
+            marginRight: "1em",
+            marginBottom:"0px"
           }}
         >
           Tienda Oficial
         </h5>
-      </label>
       <Select
         labelId="select-tienda-official"
         id="select-tienda-official"
@@ -961,13 +979,16 @@ const MtdiTable = () => {
         value={officialStore}
         label="select-tienda-official"
         onChange={handleOfficialStoreChange}
-      >
+        >
         {Array.from(new Set(data.map((obj) => obj.official_store))).map(
           (period) => {
             return <MenuItem value={period}>{period}</MenuItem>;
           }
-        )}
+          )}
       </Select>
+      </label>
+
+
       <label htmlFor="select-client">
         <h5
           style={{
@@ -975,11 +996,11 @@ const MtdiTable = () => {
             fontSize: "14px",
             fontWeight: "800",
             marginLeft: "1em",
+            marginBottom:"0px"
           }}
         >
           Cliente
         </h5>
-      </label>
       <Select
         labelId="select-client"
         id="select-client"
@@ -987,17 +1008,24 @@ const MtdiTable = () => {
         value={client}
         label="select-tienda-official"
         onChange={handleClientChange}
-      >
+        >
         {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
           return <MenuItem value={period}>{period}</MenuItem>;
         })}
       </Select>
+      </label>
 
 
  
 
-      <button onClick={reloadTableHandler}>Hit me!!</button>
-      <div>
+      <button 
+      className="refreshButton" 
+      onClick={reloadTableHandler}
+      >
+        <img src={RefreshIcon}/>
+      </button>
+      
+      {/* <div>
         <label>
           <h5
             style={{
@@ -1014,7 +1042,7 @@ const MtdiTable = () => {
           selected={startDate}
           onChange={(date) => setStartDate(date)}
         />
-      </div>
+      </div> */}
 
       <MaterialTable
         title="Instance Table"
