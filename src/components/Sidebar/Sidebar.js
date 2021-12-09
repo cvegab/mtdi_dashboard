@@ -215,14 +215,38 @@ function Sidebar(props) {
             </Collapse> */}
           </div>
         </div>
+
+  
+
         <Nav>{createLinks(props.routes)}</Nav>
-       
-      <button id="logoutButton" classname="logoutButton">
+
+
+
+          <div className="logo">
+        <a
+          // href="https://www.creative-tim.com"
+          className="logo-mini"
+        >
+          <button className="logoutButtonMini">
+            <img src={LogoutIcon} alt="logoutMini" />
+          </button>
+        </a>
+        <a
+          // href="https://www.creative-tim.com"
+          className="logo-normal"
+        >
+           <button id="logoutButton" className="logoutButton">
         <img src={LogoutIcon} />
         Cerrar sesión
       </button>
+        </a>
+      </div>
+
+
       </div>
     </div>
+
+    
   );
 }
 

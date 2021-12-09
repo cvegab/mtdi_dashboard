@@ -11,6 +11,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import RoomIcon from "@material-ui/icons/Room";
+import RefreshIcon from "../../assets/img/icon-refresh.png";
 import { MuiThemeProvider } from "@material-ui/core";
 //import FormControl from '@mui/material/FormControl';
 import { Select, MenuItem } from "@material-ui/core";
@@ -939,8 +940,8 @@ const MtdiTable = () => {
             width: "450px",
             fontSize: "14px",
             fontWeight: "800",
-            marginTop: "6rem",
-            marginLeft: "2em",
+            marginLeft: "1em",
+            marginBottom: "0px",
           }}
         >
           Transacciones digitales: Vista Administrador
@@ -965,24 +966,24 @@ const MtdiTable = () => {
               fontSize: "14px",
               fontWeight: "800",
               marginLeft: "1em",
+              marginBottom:"0px"
             }}
           >
-            País
+            Pais
           </h5>
+          <Select
+            labelId="select-country"
+            id="select-country"
+            style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
+            value={country}
+            label="Country"
+            onChange={handleCountryChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
+              return <MenuItem value={period}>{period}</MenuItem>;
+            })}
+          </Select>
         </label>
-
-        <Select
-          labelId="select-country"
-          id="select-country"
-          style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
-          value={country}
-          label="Country"
-          onChange={handleCountryChange}
-        >
-          {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          })}
-        </Select>
 
         <label>
           <h5
@@ -991,6 +992,7 @@ const MtdiTable = () => {
               fontSize: "14px",
               fontWeight: "800",
               marginLeft: "1em",
+              marginBottom: "18px",
             }}
           >
             Fecha
@@ -1005,30 +1007,32 @@ const MtdiTable = () => {
         <label htmlFor="select-canal">
           <h5
             style={{
-              color: "black",
-              fontSize: "14px",
-              fontWeight: "800",
-              marginLeft: "1em",
+              color: 'black',
+              fontSize: '14px',
+              fontWeight: '800',
+              marginLeft: '1em',
+              marginBottom:'0px'
             }}
           >
             Canal De Venta
           </h5>
+
+          <Select
+            labelId="select-canal"
+            id="select-canal"
+            style={{ width: 100, marginLeft: "1em" }}
+            value={salesChannel}
+            label="select-canal"
+            onChange={handleSalesChannelChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
         </label>
 
-        <Select
-          labelId="select-canal"
-          id="select-canal"
-          style={{ width: 100, marginLeft: "1em" }}
-          value={salesChannel}
-          label="select-canal"
-          onChange={handleSalesChannelChange}
-        >
-          {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-            (period) => {
-              return <MenuItem value={period}>{period}</MenuItem>;
-            }
-          )}
-        </Select>
         <label htmlFor="select-tienda">
           <h5
             style={{
@@ -1036,32 +1040,97 @@ const MtdiTable = () => {
               fontSize: "14px",
               fontWeight: "800",
               marginLeft: "1em",
+              marginBottom: "0px",
             }}
           >
             Tienda
           </h5>
-        </label>
-        <Select
-          labelId="select-tienda"
-          id="select-tienda"
-          style={{ width: 100 }}
-          value={store}
-          label="select-canal"
-          onChange={handleStoreChange}
-        >
-          {/* {data.map((e, key) => {
+          <Select
+            labelId="select-tienda"
+            id="select-tienda"
+            style={{ width: 100 }}
+            value={store}
+            label="select-canal"
+            onChange={handleStoreChange}
+          >
+            {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.tienda}>
               {e.tienda}
-            </MenuItem>
+              </MenuItem>
           );
         })} */}
-          {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          })}
-        </Select>
+            {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
 
         <label htmlFor="select-tienda-official">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "0em",
+              marginRight: "1em",
+              marginBottom: "0px",
+            }}
+          >
+            Tienda Oficial
+          </h5>
+          <Select
+            labelId="select-tienda-official"
+            id="select-tienda-official"
+            style={{ width: 100 }}
+            value={officialStore}
+            label="select-tienda-official"
+            onChange={handleOfficialStoreChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
+
+        <label htmlFor="select-client">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "0px",
+            }}
+          >
+            Cliente
+          </h5>
+          <Select
+            labelId="select-client"
+            id="select-client"
+            style={{ width: 100 }}
+            value={client}
+            label="select-tienda-official"
+            onChange={handleClientChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.cliente))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
+
+        <button className="refreshButton" onClick={reloadTableHandler}>
+          <img src={RefreshIcon} />
+        </button>
+
+        {/* <div>
+        <label>
           <h5
             style={{
               color: "black",
@@ -1131,6 +1200,19 @@ const MtdiTable = () => {
             onChange={(date) => setStartDate(date)}
           />
         </div>
+
+        <MaterialTable
+          title="Instance Table"
+          icons={tableIcons}
+          title=""
+          data={data}
+          columns={columns}
+          options={{ columnsButton: true, sorting: true }}
+          style={{ marginLeft: "1em", marginTop: "2em" }}
+        />
+      </div>
+    </React.Fragment>
+      </div> */}
 
         <MaterialTable
           title="Instance Table"

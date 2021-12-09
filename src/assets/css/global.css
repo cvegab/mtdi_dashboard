@@ -22,6 +22,7 @@ body {
   border-radius: 14px;
   background-color: white;
   box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
+  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   margin-top:1em;
   
 }
@@ -47,6 +48,17 @@ body {
   width:12em !important;
 }
 
+.MuiInput-root {
+  margin-right:1em !important;
+}
+
+.MuiInputAdornment-positionEnd {
+  display:none !important;
+}
+
+.MuiIconButton-colorInherit {
+  color: #06CBC1 !important;
+}
 .navbar-toggler-bar {
   background-color: #1D308E !important;
 }
@@ -83,16 +95,18 @@ input[type=text]{
   -moz-border-radius: 17px;
    border-radius: 17px;
    border: 1px solid white;
-   color: #C4C4C4;
+   color: black;
    width: 100px;
    height: 30px;
    padding-left: 10px;
+   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   }
   
 input[type=text]:focus {
    outline: none;
    border: 1px solid white;
    color: black;
+   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
 }
 
 #logoutButton {
@@ -104,11 +118,41 @@ input[type=text]:focus {
   font-weight: 700;
   color: white;
   align-items: center;
-  margin-top: 15em;
+  margin-top: 10em;
   margin-left: 1em;
 }
+
+.logoutButtonMini {
+  background: #06CBC1;
+  border-radius: 14px;
+  width: 50px;
+  height: 50px;
+  
+}
+
+/* #logoutButtonMini {
+  background: #06CBC1;
+  border-radius: 20px; */
+  /* width: 64px;
+  height: 64px; */
+
+/* } */
 
 .logo {
   margin-top:1em;
   margin-bottom:1em;
 }
+
+.refreshButton {
+  width: 52px;
+  height: 52px;
+  border-radius: 20px;
+  margin-left:1em;
+}
+
+.MuiSelect-select:focus {
+  border-radius: 14px !important;
+  background-color: white !important;
+
+}
+
