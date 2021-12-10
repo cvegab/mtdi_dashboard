@@ -22,9 +22,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { zhCN } from "date-fns/locale";
 import zIndex from "@material-ui/core/styles/zIndex";
+//import SearchIcon from "material-ui/svg-icons/action/search";
+import "../../assets/css/global.css";
 // import CalendarIcon from '../../assets/img/calendar-icon.png'
-import '../../assets/css/global.css'
+import "../../assets/css/global.css";
+import LogoutIcon from "../../assets/img/logout-icon.png";
+import SiIcon from "../../assets/img/si.png";
+import noIcon from "../../assets/img/no.png";
+import showPdf from "../../assets/img/showPdf.png";
 
+import greyIcon from "../../assets/img/greyIcon.png";
+import Modal from "../UI/Modal";
+import classes from "./mtdi-table.module.css";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -57,13 +66,14 @@ const orderList = [
     comprador: "IVISPATIO",
     hub: "redcompra",
     rut: "",
-    dte: "",
+    dte: "Si",
     dte_exist: "disabled",
     official_store: "Unilever",
     tipo_envio: "cross_docking",
     id_mpago: 18378018289,
     status_detail: "accredited",
-    order_status: 'Cancelado'
+    order_status: "Cancelado",
+    wms: "Integrado a wms",
   },
   {
     id_mtdi: "ml619e8aff4bcbf54da2960a96",
@@ -82,13 +92,14 @@ const orderList = [
     comprador: "SUPERFIL CHILE",
     hub: "account_money",
     rut: "",
-    dte: "",
+    dte: "No",
     dte_exist: "disabled",
     official_store: "Elite Professional",
     tipo_envio: "fulfillment",
     id_mpago: 18377774274,
     status_detail: "accredited",
-    order_status: 'Despachado',
+    order_status: "Despachado",
+    wms: "Integrado a wms",
   },
   {
     id_mtdi: "ml619e8aff5b8efcacad397d73",
@@ -107,13 +118,14 @@ const orderList = [
     comprador: "SUPERFIL CHILE",
     hub: "account_money",
     rut: "",
-    dte: "",
+    dte: "Si",
     dte_exist: "disabled",
     official_store: "Elite Professional",
     tipo_envio: "cross_docking",
     id_mpago: 18377751629,
     status_detail: "accredited",
-    order_status: 'Cancelado'
+    order_status: "Cancelado",
+    wms: "Orden Cancelada",
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -132,12 +144,13 @@ const orderList = [
     comprador: "CRORTEGA1",
     hub: "master",
     rut: "",
-    dte: "",
+    dte: "No",
     dte_exist: "disabled",
     official_store: "Elite Professional",
     tipo_envio: "self_service",
     id_mpago: 18377638337,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8524ae50e1c50b6fcf1a",
@@ -162,6 +175,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: "",
     status_detail: "",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e88308e36b7c74eca91e6",
@@ -186,7 +200,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377467510,
     status_detail: "accredited",
-    order_status: 'Cancelado'
+    order_status: "Cancelado",
   },
   {
     id_mtdi: "ml619e85251aa98aa1ae4d0c2c",
@@ -211,6 +225,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377320339,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e852508fd29c7ea07b1d1",
@@ -235,6 +250,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377282832,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e88310dd92f36555d904d",
@@ -259,6 +275,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377205880,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "wo619e6fd7ceb34c0ebe9c2525",
@@ -282,6 +299,7 @@ const orderList = [
     tipo_envio: "",
     id_mpago: "",
     status_detail: "",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8aff4bcbf54da2960a96",
@@ -306,6 +324,7 @@ const orderList = [
     tipo_envio: "fulfillment",
     id_mpago: 18377774274,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8aff5b8efcacad397d73",
@@ -330,6 +349,8 @@ const orderList = [
     tipo_envio: "cross_docking",
     id_mpago: 18377751629,
     status_detail: "accredited",
+    order_status: "Confirmado",
+    wms: "Integrada a wms",
   },
   {
     id_mtdi: "ml619e8b00e3823d3ad5f41c08",
@@ -354,6 +375,7 @@ const orderList = [
     tipo_envio: "self_service",
     id_mpago: 18377638337,
     status_detail: "accredited",
+    order_status: "Confirmado",
   },
   {
     id_mtdi: "ml619e8524ae50e1c50b6fcf1a",
@@ -500,55 +522,101 @@ const orderList = [
   },
 ];
 
-const MtdiTable = () => {
+const MtdiTable = (props) => {
   const [data, setData] = useState(orderList);
-  const [country, setcountry] = useState("select a country");
-  const [salesChannel, setsalesChannel] = useState("Seleccione Una");
-  const [store, setstore] = useState("Seleccione Una");
-  const [client, setclient] = useState("Seleccione Una");
-  const [officialStore, setofficialStore] = useState("Seleccione Una");
+  // const [country, setcountry] = useState("select a country");
+  const [country, setcountry] = useState(null);
+  // const [salesChannel, setsalesChannel] = useState("Seleccione Una");
+  const [salesChannel, setsalesChannel] = useState(null);
+  const [store, setstore] = useState(null);
+  const [client, setclient] = useState(null);
+  const [officialStore, setofficialStore] = useState(null);
   const [startDate, setStartDate] = useState(null);
+  const [showModal, setshowModal] = useState(false);
 
   useEffect(() => {
-    if (
-      country === "select a country" ||
-      salesChannel === "Seleccione Una" ||
-      store === "Seleccione Una" ||
-      officialStore === "Seleccione Una" ||
-      client === "Seleccione Una" ||
-      startDate === null
-    ) {
-      console.log("hello");
-      setData(orderList);
-    } else {
-      console.log("bye");
-      const x = data
-        .filter((item) => item.pais === country)
-        .filter((item) => item.canal_de_venta.includes(salesChannel))
-        .filter((item) => item.tienda.includes(store))
-        .filter((item) => item.cliente.includes(client))
-        // .filter((item) => item.tienda_official.includes(officialStore))
-        .filter((item) =>
-          item.fecha_creacion.includes(
-            startDate.getFullYear() +
-              "-" +
-              (startDate.getMonth() + 1) +
-              "-" +
-              startDate.getDate()
-          )
-        );
-      console.log(x);
+    if (country !== null) {
+      const x = data.filter((item) => item.pais === country);
       setData(x);
     }
-    //    const x =  data.filter(item => item.pais === country)
-    //    .filter(item => item.canal_de_venta.includes(salesChannel));
-    //    console.log(x);
-    //    setData(x);
-    //   .filter(item => item.canal_de_venta.includes(salesChannel))
-    //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
+    if (salesChannel !== null) {
+      const x = data.filter((item) =>
+        item.canal_de_venta.includes(salesChannel)
+      );
+      setData(x);
+    }
+    if (store !== null) {
+      const x = data.filter((item) => item.tienda.includes(store));
+      setData(x);
+    }
+    if (client !== null) {
+      const x = data.filter((item) => item.cliente.includes(client));
+      setData(x);
+    }
+    if (officialStore !== null) {
+      const x = data.filter((item) =>
+        item.official_store.includes(officialStore)
+      );
+      setData(x);
+    }
+    if (startDate !== null) {
+      const x = data.filter((item) =>
+        item.fecha_creacion.includes(
+          startDate.getFullYear() +
+            "-" +
+            (startDate.getMonth() + 1) +
+            "-" +
+            startDate.getDate()
+        )
+      );
+      setData(x);
+    }
+    // if (
+    //   country === "select a country" ||
+    //   salesChannel === "Seleccione Una" ||
+    //   store === "Seleccione Una" ||
+    //   officialStore === "Seleccione Una" ||
+    //   client === "Seleccione Una" ||
+    //   startDate === null
+    // ) {
+    //   console.log("hello");
+    //   setData(orderList);
+    // } else {
+    //   console.log("bye");
+    //   const x = data
+    //     .filter((item) => item.pais === country)
+    //     .filter((item) => item.canal_de_venta.includes(salesChannel))
+    //     .filter((item) => item.tienda.includes(store))
+    //     .filter((item) => item.cliente.includes(client))
+    //     // .filter((item) => item.tienda_official.includes(officialStore))
+    //     .filter((item) =>
+    //       item.fecha_creacion.includes(
+    //         startDate.getFullYear() +
+    //           "-" +
+    //           (startDate.getMonth() + 1) +
+    //           "-" +
+    //           startDate.getDate()
+    //       )
+    //     );
+    //   console.log(x);
+    //   setData(x);
+    // }
+    // //    const x =  data.filter(item => item.pais === country)
+    // //    .filter(item => item.canal_de_venta.includes(salesChannel));
+    // //    console.log(x);
+    // //    setData(x);
+    // //   .filter(item => item.canal_de_venta.includes(salesChannel))
+    // //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
 
-    console.log(country, salesChannel, store, client, officialStore);
+    // console.log(country, salesChannel, store, client, officialStore);
   }, [country, salesChannel, store, client, startDate, officialStore]);
+  const showModalHandler = () => {
+    console.log("hi i was clicked");
+    setshowModal(true);
+  };
+  const hideModalHandler = ()=>{
+    setshowModal(false);
+  }
   const columns = [
     {
       title: "OpsId",
@@ -625,7 +693,20 @@ const MtdiTable = () => {
     },
     {
       title: "Estado De Pedido",
-      field: "estado_delivery",
+      field: "order_status",
+
+      render: (rowData) => {
+        if (rowData.order_status === "Cancelado") {
+          return <div className={classes.cancelado}>Cancelado</div>;
+        }
+        if (rowData.order_status === "Despachado") {
+          return <div className={classes.despachado}>Despachado</div>;
+        }
+        if (rowData.order_status === "Confirmado") {
+          return <div className={classes.confirmado}>Confirmado</div>;
+        }
+      },
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -635,6 +716,34 @@ const MtdiTable = () => {
     {
       title: "DTE",
       field: "dte",
+      // icon: Search,
+      lookup: {
+        Si: (
+          // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
+          <div>
+            Si &nbsp;
+            <span className={classes.si}>
+              <img src={SiIcon} onClick={showModalHandler} />
+            </span>
+            &nbsp;
+            <span className={classes.showPdf}>
+              <img src={showPdf} />
+            </span>
+          </div>
+        ),
+        No: (
+          <div>
+            No &nbsp;
+            <span className={classes.noIcon}>
+              <img src={noIcon} />
+            </span>
+            &nbsp;
+            <span className={classes.greyIcon}>
+              <img src={greyIcon} />
+            </span>
+          </div>
+        ),
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -814,76 +923,80 @@ const MtdiTable = () => {
     setstore(null);
     setStartDate(null);
   };
+
   return (
-    <div
-      id="mtdiTableBackground"
-      className="App"
-      style={{ background: "#E5E5E5" }}
-    >
-      <h5
-        className="titleTable"
-        style={{
-          color: "#C4C4C4",
-          width: "450px",
-          fontSize: "14px",
-          fontWeight: "800",
-          marginTop: "6rem",
-          marginLeft: "2em",
-        }}
+    <React.Fragment>
+      {showModal && (
+        <Modal onhideModal={hideModalHandler}>
+          <h1>Hello</h1>
+        </Modal>
+      )}
+      <div
+        id="mtdiTableBackground"
+        className="App"
+        style={{ background: "#E5E5E5" }}
       >
-        Transacciones digitales: Vista Administrador
-      </h5>
-      <p
-        classname="textNameTable"
-        style={{
-          color: "black",
-          width: "450px",
-          fontSize: "30px",
-          fontWeight: "800",
-          marginLeft: "1em",
-        }}
-      >
-        Camilo Vega
-      </p>
-      <label htmlFor="select-country">
         <h5
+          className="titleTable"
           style={{
-            color: "black",
-            width: "30px",
+            color: "#C4C4C4",
+            width: "450px",
             fontSize: "14px",
             fontWeight: "800",
             marginLeft: "1em",
-            marginBottom:"0px"
+            marginBottom: "0px",
           }}
         >
-          País
+          Transacciones digitales: Vista Administrador
         </h5>
-
-      <Select
-        labelId="select-country"
-        id="select-country"
-        style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
-        value={country}
-        label="Country"
-        onChange={handleCountryChange}
-        >
-        {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
-          return <MenuItem value={period}>{period}</MenuItem>;
-        })}
-      </Select>
-      </label>
-
-     
-      
-        <label>
-          <h5 style={{ 
-          color: "black", 
-          fontSize:"14px",  
-          fontWeight:"800", 
-          marginLeft:"1em",
-          marginBottom:"18px"
-          
+        <p
+          classname="textNameTable"
+          style={{
+            color: "black",
+            width: "450px",
+            fontSize: "30px",
+            fontWeight: "800",
+            marginLeft: "1em",
           }}
+        >
+          Camilo Vega
+        </p>
+        <label htmlFor="select-country">
+          <h5
+            style={{
+              color: "black",
+              width: "30px",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom:"0px"
+            }}
+          >
+            Pais
+          </h5>
+          <Select
+            labelId="select-country"
+            id="select-country"
+            style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
+            value={country}
+            label="Country"
+            onChange={handleCountryChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
+              return <MenuItem value={period}>{period}</MenuItem>;
+            })}
+          </Select>
+        </label>
+
+        <label>
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "18px",
+            }}
           >
             Fecha
           </h5>
@@ -891,141 +1004,135 @@ const MtdiTable = () => {
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
-        {/* <img src={CalendarIcon} /> */}
+          {/* <img src={CalendarIcon} /> */}
         </label>
 
-
-
-      <label htmlFor="select-canal">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-            marginBottom:"0px"
-          }}
-        >
-          Canal De Venta
-        </h5>
-
-        <Select
-          labelId="select-canal"
-          id="select-canal"
-          style={{ width: 100, marginLeft: "1em" }}
-          value={salesChannel}
-          label="select-canal"
-          onChange={handleSalesChannelChange}
+        <label htmlFor="select-canal">
+          <h5
+            style={{
+              color: 'black',
+              fontSize: '14px',
+              fontWeight: '800',
+              marginLeft: '1em',
+              marginBottom:'0px'
+            }}
           >
-          {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-          (period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          }
-          )}
-        </Select>
-      </label>
+            Canal De Venta
+          </h5>
 
+          <Select
+            labelId="select-canal"
+            id="select-canal"
+            style={{ width: 100, marginLeft: "1em" }}
+            value={salesChannel}
+            label="select-canal"
+            onChange={handleSalesChannelChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
 
-      <label htmlFor="select-tienda">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-            marginBottom:"0px"
-          }}
-        >
-          Tienda
-        </h5>
-      <Select
-        labelId="select-tienda"
-        id="select-tienda"
-        style={{ width: 100 }}
-        value={store}
-        label="select-canal"
-        onChange={handleStoreChange}
-        >
-        {/* {data.map((e, key) => {
+        <label htmlFor="select-tienda">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "0px",
+            }}
+          >
+            Tienda
+          </h5>
+          <Select
+            labelId="select-tienda"
+            id="select-tienda"
+            style={{ width: 100 }}
+            value={store}
+            label="select-canal"
+            onChange={handleStoreChange}
+          >
+            {/* {data.map((e, key) => {
           return (
             <MenuItem key={key} value={e.tienda}>
               {e.tienda}
               </MenuItem>
           );
         })} */}
-        {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
-          return <MenuItem value={period}>{period}</MenuItem>;
-        })}
-      </Select>
-    </label>
+            {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
 
-      <label htmlFor="select-tienda-official">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "0em",
-            marginRight: "1em",
-            marginBottom:"0px"
-          }}
-        >
-          Tienda Oficial
-        </h5>
-      <Select
-        labelId="select-tienda-official"
-        id="select-tienda-official"
-        style={{ width: 100 }}
-        value={officialStore}
-        label="select-tienda-official"
-        onChange={handleOfficialStoreChange}
-        >
-        {Array.from(new Set(data.map((obj) => obj.official_store))).map(
-          (period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          }
-          )}
-      </Select>
-      </label>
+        <label htmlFor="select-tienda-official">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "0em",
+              marginRight: "1em",
+              marginBottom: "0px",
+            }}
+          >
+            Tienda Oficial
+          </h5>
+          <Select
+            labelId="select-tienda-official"
+            id="select-tienda-official"
+            style={{ width: 100 }}
+            value={officialStore}
+            label="select-tienda-official"
+            onChange={handleOfficialStoreChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
 
+        <label htmlFor="select-client">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "0px",
+            }}
+          >
+            Cliente
+          </h5>
+          <Select
+            labelId="select-client"
+            id="select-client"
+            style={{ width: 100 }}
+            value={client}
+            label="select-tienda-official"
+            onChange={handleClientChange}
+          >
+            {Array.from(new Set(data.map((obj) => obj.cliente))).map(
+              (period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              }
+            )}
+          </Select>
+        </label>
 
-      <label htmlFor="select-client">
-        <h5
-          style={{
-            color: "black",
-            fontSize: "14px",
-            fontWeight: "800",
-            marginLeft: "1em",
-            marginBottom:"0px"
-          }}
-        >
-          Cliente
-        </h5>
-      <Select
-        labelId="select-client"
-        id="select-client"
-        style={{ width: 100 }}
-        value={client}
-        label="select-tienda-official"
-        onChange={handleClientChange}
-        >
-        {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
-          return <MenuItem value={period}>{period}</MenuItem>;
-        })}
-      </Select>
-      </label>
+        <button className="refreshButton" onClick={reloadTableHandler}>
+          <img src={RefreshIcon} />
+        </button>
 
-
- 
-
-      <button 
-      className="refreshButton" 
-      onClick={reloadTableHandler}
-      >
-        <img src={RefreshIcon}/>
-      </button>
-      
-      {/* <div>
+        {/* <div>
         <label>
           <h5
             style={{
@@ -1035,25 +1142,92 @@ const MtdiTable = () => {
               marginLeft: "1em",
             }}
           >
-            Fecha
+            Tienda Oficial
           </h5>
         </label>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+        <Select
+          labelId="select-tienda-official"
+          id="select-tienda-official"
+          style={{ width: 100 }}
+          value={officialStore}
+          label="select-tienda-official"
+          onChange={handleOfficialStoreChange}
+        >
+          {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+            (period) => {
+              return <MenuItem value={period}>{period}</MenuItem>;
+            }
+          )}
+        </Select>
+        <label htmlFor="select-client">
+          <h5
+            style={{
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Cliente
+          </h5>
+        </label>
+        <Select
+          labelId="select-client"
+          id="select-client"
+          style={{ width: 100 }}
+          value={client}
+          label="select-tienda-official"
+          onChange={handleClientChange}
+        >
+          {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
+            return <MenuItem value={period}>{period}</MenuItem>;
+          })}
+        </Select>
+
+        <button onClick={reloadTableHandler}>Hit me!!</button>
+        <div>
+          <label>
+            <h5
+              style={{
+                color: "black",
+                fontSize: "14px",
+                fontWeight: "800",
+                marginLeft: "1em",
+              }}
+            >
+              Fecha
+            </h5>
+          </label>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+        </div>
+
+        <MaterialTable
+          title="Instance Table"
+          icons={tableIcons}
+          title=""
+          data={data}
+          columns={columns}
+          options={{ columnsButton: true, sorting: true }}
+          style={{ marginLeft: "1em", marginTop: "2em" }}
         />
+      </div>
+    </React.Fragment>
       </div> */}
 
-      <MaterialTable
-        title="Instance Table"
-        icons={tableIcons}
-        title=""
-        data={data}
-        columns={columns}
-        options={{ columnsButton: true, sorting: true }}
-        style={{ marginLeft: "1em", marginTop: "2em" }}
-      />
-    </div>
+        <MaterialTable
+          title="Instance Table"
+          icons={tableIcons}
+          title=""
+          data={data}
+          columns={columns}
+          options={{ columnsButton: true, sorting: true }}
+          style={{ marginLeft: "1em", marginTop: "2em" }}
+        />
+      </div>
+    </React.Fragment>
   );
 };
 
