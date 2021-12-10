@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
-import { Button } from 'react-bootstrap';
+
 import classes from "./Modal.module.css";
 import Card from './Card';
 
