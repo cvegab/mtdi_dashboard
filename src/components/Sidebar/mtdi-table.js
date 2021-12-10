@@ -522,7 +522,7 @@ const orderList = [
   },
 ];
 
-const MtdiTable = () => {
+const MtdiTable = (props) => {
   const [data, setData] = useState(orderList);
   // const [country, setcountry] = useState("select a country");
   const [country, setcountry] = useState(null);
@@ -614,6 +614,9 @@ const MtdiTable = () => {
     console.log("hi i was clicked");
     setshowModal(true);
   };
+  const hideModalHandler = ()=>{
+    setshowModal(false);
+  }
   const columns = [
     {
       title: "OpsId",
@@ -924,7 +927,7 @@ const MtdiTable = () => {
   return (
     <React.Fragment>
       {showModal && (
-        <Modal>
+        <Modal onhideModal={hideModalHandler}>
           <h1>Hello</h1>
         </Modal>
       )}
