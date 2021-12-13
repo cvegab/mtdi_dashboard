@@ -13,21 +13,25 @@ const ModalOverlay = (props) => {
   return (
     <div className={classes.modal}>
       <header>
-        <h1 style={{right:'42px' ,color:'black'}} onClick={props.close}>X</h1>
+        <h1 style={{ right: "42px", color: "black" }} onClick={props.close}>
+          X
+        </h1>
       </header>
-      <h1>My modal</h1>
+
       <div className={classes.hea}>
         <p>{props.children}</p>
       </div>
-      <Button color='primary'>Cancelar</Button>
-    </div> 
+      <footer>
+        <Button color="primary">Cancelar</Button>
+      </footer>
+    </div>
   );
 };
 
 const Modal = (props) => {
   return (
     <Fragment>
-      <Backdrop close={props.onhideModal}  />,
+      <Backdrop close={props.onhideModal} />,
       <ModalOverlay close={props.onhideModal}>{props.children}</ModalOverlay>,
     </Fragment>
   );

@@ -84,8 +84,9 @@
     padding: 1rem;
   }
   .hea{
-    background: pink;
+   /* background: pink; */
     padding: 1rem;
+    color: #23232E;
   }
   .hea h2{
     margin: 0;
