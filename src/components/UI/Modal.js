@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
-
+import { Button } from "react-bootstrap";
 import classes from "./Modal.module.css";
-import Card from './Card';
+import Card from "./Card";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.close} />;
@@ -13,8 +13,10 @@ const ModalOverlay = (props) => {
   return (
     <div className={classes.modal}>
       <h1>My modal</h1>
-      <div className={classes.hea}><h2>{props.children}</h2></div>
-      <button></button>
+      <div className={classes.hea}>
+        <h2>{props.children}</h2>
+      </div>
+      {/* <Button color='primary'>Cancelar</Button> */}
     </div>
   );
 };
