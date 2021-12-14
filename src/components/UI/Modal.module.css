@@ -74,6 +74,13 @@
     background: #4f005f;
     padding: 1rem;
   }
+  /* header{
+    background: #4f005f;
+    margin-right: 100%;
+  } */
+  img{
+    justify-content: center;
+  }
   
   .header h2 {
     margin: 0;

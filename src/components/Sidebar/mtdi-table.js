@@ -30,12 +30,12 @@ import LogoutIcon from "../../assets/img/logout-icon.png";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-
+import { Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import Modal from "../UI/Modal";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
-
+import { data } from "jquery";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -45,6 +45,7 @@ const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+
   PreviousPage: forwardRef((props, ref) => (
     <ChevronLeft {...props} ref={ref} />
   )),
@@ -106,113 +107,168 @@ const orderList = [
 ];
 
 const MtdiTable = (props) => {
-  const [data, setData] = useState(orderList);
+  const [data, setData] = useState([]);
   // const [country, setcountry] = useState("select a country");
-  const [country, setcountry] = useState(null);
+  const [country, setcountry] = useState('');
   // const [salesChannel, setsalesChannel] = useState("Seleccione Una");
-  const [salesChannel, setsalesChannel] = useState(null);
-  const [store, setstore] = useState(null);
-  const [client, setclient] = useState(null);
-  const [officialStore, setofficialStore] = useState(null);
-  const [startDate, setStartDate] = useState(null);
+  const [salesChannel, setsalesChannel] = useState('');
+  const [store, setstore] = useState('');
+  const [client, setclient] = useState('');
+  const [officialStore, setofficialStore] = useState('');
+  const [startDate, setStartDate] = useState('');
   const [showModal, setshowModal] = useState(false);
 
   useEffect(() => {
-    // fetchOrderData();
-    if (country !== null) {
+   fetchOrderData();
+  }, [])
+
+  useEffect(() => {
+    if (country !== '') {
       const x = data.filter((item) => item.pais === country);
       setData(x);
     }
-    if (salesChannel !== null) {
-      const x = data.filter((item) =>
-        item.canal_de_venta.includes(salesChannel)
-      );
-      setData(x);
-    }
-    if (store !== null) {
-      const x = data.filter((item) => item.tienda.includes(store));
-      setData(x);
-    }
-    if (client !== null) {
-      const x = data.filter((item) => item.cliente.includes(client));
-      setData(x);
-    }
-    if (officialStore !== null) {
-      const x = data.filter((item) =>
-        item.official_store.includes(officialStore)
-      );
-      setData(x);
-    }
-    if (startDate !== null) {
-      const x = data.filter((item) =>
-        item.fecha_creacion.includes(
-          startDate.getFullYear() +
-            "-" +
-            (startDate.getMonth() + 1) +
-            "-" +
-            startDate.getDate()
-        )
-      );
-      setData(x);
-    }
-    // if (
-    //   country === "select a country" ||
-    //   salesChannel === "Seleccione Una" ||
-    //   store === "Seleccione Una" ||
-    //   officialStore === "Seleccione Una" ||
-    //   client === "Seleccione Una" ||
-    //   startDate === null
-    // ) {
-    //   console.log("hello");
-    //   setData(orderList);
-    // } else {
-    //   console.log("bye");
-    //   const x = data
-    //     .filter((item) => item.pais === country)
-    //     .filter((item) => item.canal_de_venta.includes(salesChannel))
-    //     .filter((item) => item.tienda.includes(store))
-    //     .filter((item) => item.cliente.includes(client))
-    //     // .filter((item) => item.tienda_official.includes(officialStore))
-    //     .filter((item) =>
-    //       item.fecha_creacion.includes(
-    //         startDate.getFullYear() +
-    //           "-" +
-    //           (startDate.getMonth() + 1) +
-    //           "-" +
-    //           startDate.getDate()
-    //       )
-    //     );
-    //   console.log(x);
-    //   setData(x);
-    // }
-    // //    const x =  data.filter(item => item.pais === country)
-    // //    .filter(item => item.canal_de_venta.includes(salesChannel));
-    // //    console.log(x);
-    // //    setData(x);
-    // //   .filter(item => item.canal_de_venta.includes(salesChannel))
-    // //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
+  }, [country])
 
-    // console.log(country, salesChannel, store, client, officialStore);
-  }, [country, salesChannel, store, client, startDate, officialStore]);
+  useEffect(() => {
+    if (salesChannel !== '') {
+          const x = data.filter((item) =>
+            item.canal_de_venta.includes(salesChannel)
+          );
+          setData(x);
+        }
+  }, [salesChannel])
+
+  useEffect(() => {
+    if (store !== '') {
+          const x = data.filter((item) => item.tienda.includes(store));
+          setData(x);
+        }
+  }, [store])
+  useEffect(() => {
+    if (client !== '') {
+          const x = data.filter((item) => item.cliente.includes(client));
+          setData(x);
+        }
+  }, [client])
+useEffect(() => {
+  
+  if (officialStore !== '') {
+        const x = data.filter((item) =>
+          item.official_store.includes(officialStore)
+        );
+        setData(x);
+      }
+}, [officialStore])
+useEffect(() => {
+  if (startDate !== '') {
+        const x = data.filter((item) =>
+          item.fecha_creacion.includes(
+            startDate.getFullYear() +
+              "-" +
+              (startDate.getMonth() + 1) +
+              "-" +
+              startDate.getDate()
+          )
+        );
+        setData(x);
+      }
+}, [startDate])
+  // useEffect(() => {
+   
+  //   //  var requestOptions = {
+  //   //   method: 'GET',
+  //   //   redirect: 'follow'
+  //   // };
+  //   // fetch("https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=1&user=admin&tienda=2\n\n", requestOptions)
+  //   //   .then(response => response.text())
+  //   //   .then(result => console.log(result));
+  //   //   .catch(error => console.log('error', error));
+  //   // if (country !== "") {
+  //   //   const x = data.filter((item) => item.pais === country);
+  //   //   setData(x);
+  //   // }
+  //   if (salesChannel !== "") {
+  //     const x = data.filter((item) =>
+  //       item.canal_de_venta.includes(salesChannel)
+  //     );
+  //     setData(x);
+  //   }
+  //   if (store !== "") {
+  //     const x = data.filter((item) => item.tienda.includes(store));
+  //     setData(x);
+  //   }
+  //   if (client !== "") {
+  //     const x = data.filter((item) => item.cliente.includes(client));
+  //     setData(x);
+  //   }
+  //   if (officialStore !== "") {
+  //     const x = data.filter((item) =>
+  //       item.official_store.includes(officialStore)
+  //     );
+  //     setData(x);
+  //   }
+  //   if (startDate !== "") {
+  //     const x = data.filter((item) =>
+  //       item.fecha_creacion.includes(
+  //         startDate.getFullYear() +
+  //           "-" +
+  //           (startDate.getMonth() + 1) +
+  //           "-" +
+  //           startDate.getDate()
+  //       )
+  //     );
+  //     setData(x);
+  //   }
+  //   // if (
+  //   //   country === "select a country" ||
+  //   //   salesChannel === "Seleccione Una" ||
+  //   //   store === "Seleccione Una" ||
+  //   //   officialStore === "Seleccione Una" ||
+  //   //   client === "Seleccione Una" ||
+  //   //   startDate === null
+  //   // ) {
+  //   //   console.log("hello");
+  //   //   setData(orderList);
+  //   // } else {
+  //   //   console.log("bye");
+  //   //   const x = data
+  //   //     .filter((item) => item.pais === country)
+  //   //     .filter((item) => item.canal_de_venta.includes(salesChannel))
+  //   //     .filter((item) => item.tienda.includes(store))
+  //   //     .filter((item) => item.cliente.includes(client))
+  //   //     // .filter((item) => item.tienda_official.includes(officialStore))
+  //   //     .filter((item) =>
+  //   //       item.fecha_creacion.includes(
+  //   //         startDate.getFullYear() +
+  //   //           "-" +
+  //   //           (startDate.getMonth() + 1) +
+  //   //           "-" +
+  //   //           startDate.getDate()
+  //   //       )
+  //   //     );
+  //   //   console.log(x);
+  //   //   setData(x);
+  //   // }
+  //   // //    const x =  data.filter(item => item.pais === country)
+  //   // //    .filter(item => item.canal_de_venta.includes(salesChannel));
+  //   // //    console.log(x);
+  //   // //    setData(x);
+  //   // //   .filter(item => item.canal_de_venta.includes(salesChannel))
+  //   // //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
+
+  //   // console.log(country, salesChannel, store, client, officialStore);
+  // }, [country, salesChannel, store, client, startDate, officialStore]);
 
   const fetchOrderData = async () => {
     console.log("1 start");
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=1&user=admin&tienda=0",
-        {
-          method: "GET",
-          // headers: {
-          //   'Access-Control-Allow-Origin':'*'
-          // }
-          headers: new Headers({
-            "Content-type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          }),
-          // mode: "no-cors",
-          mode: "no-cors",
-          cache: "default",
-        }
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=20&user=admin&tienda=2\n\n",
+        requestOptions
       );
       console.log("2.run");
       if (!response.ok) {
@@ -222,14 +278,7 @@ const MtdiTable = (props) => {
       }
       const data = await response.json();
       console.log(data);
-
-      // const transformedData = data.results.map((item) => {
-      //   return {
-      //     name: item.name,
-      //     pic: item.url,
-      //   };
-      // });
-      // setpokemonData(transformedData);
+      setData(data);
     } catch (error) {
       console.log(error);
     }
@@ -540,7 +589,8 @@ const MtdiTable = (props) => {
     setofficialStore(event.target.value);
   };
   const reloadTableHandler = () => {
-    setData(orderList);
+    // setData(data);
+    fetchOrderData();
     setclient(null);
     setcountry(null);
     setofficialStore(null);
@@ -760,101 +810,70 @@ const MtdiTable = (props) => {
         <button className="refreshButton" onClick={reloadTableHandler}>
           <img src={RefreshIcon} />
         </button>
-
-        {/* <div>
-        <label>
-          <h5
-            style={{
-              color: "black",
-              fontSize: "14px",
-              fontWeight: "800",
-              marginLeft: "1em",
+        {data.length === 0 ? (
+          <MaterialTable
+            title=""
+            icons={tableIcons}
+            columns={columns}
+            data={[]}
+            components={{
+              Body: (props) => (
+                <div
+                  // style={{
+                  //   display: "flex",
+                  //   justifyContent: "center",
+                  //   alignItems: "center",
+                  //   height: "inherit",
+                  //   marginRight: "auto",
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+                  <Spinner
+                    animation="border"
+                    style={{ color: "#1D308E", alignItems: "center" }}
+                  ></Spinner>
+                  {/* <span><Spinner
+                    animation="border"
+                    style={{ color: "#1D308E" }}
+                  ></Spinner></span>
+                  <span><h3>Loading Data</h3></span> */}
+                </div>
+              ),
             }}
-          >
-            Tienda Oficial
-          </h5>
-        </label>
-        <Select
-          labelId="select-tienda-official"
-          id="select-tienda-official"
-          style={{ width: 100 }}
-          value={officialStore}
-          label="select-tienda-official"
-          onChange={handleOfficialStoreChange}
-        >
-          {Array.from(new Set(data.map((obj) => obj.official_store))).map(
-            (period) => {
-              return <MenuItem value={period}>{period}</MenuItem>;
-            }
-          )}
-        </Select>
-        <label htmlFor="select-client">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "14px",
-              fontWeight: "800",
-              marginLeft: "1em",
+          ></MaterialTable>
+        ) : (
+          <MaterialTable
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div>
+                    <span>No records match the value</span>
+                  <Spinner
+                    animation="border"
+                    style={{ color: "#1D308E", marginLeft: "1em" }}
+                  />
+                  </div>
+                ),
+              },
             }}
-          >
-            Cliente
-          </h5>
-        </label>
-        <Select
-          labelId="select-client"
-          id="select-client"
-          style={{ width: 100 }}
-          value={client}
-          label="select-tienda-official"
-          onChange={handleClientChange}
-        >
-          {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          })}
-        </Select>
-
-        <button onClick={reloadTableHandler}>Hit me!!</button>
-        <div>
-          <label>
-            <h5
-              style={{
-                color: "black",
-                fontSize: "14px",
-                fontWeight: "800",
-                marginLeft: "1em",
-              }}
-            >
-              Fecha
-            </h5>
-          </label>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            key={data.id_mtdi}
+            title="Instance Table"
+            icons={tableIcons}
+            title=""
+            data={data}
+            columns={columns}
+            options={{ columnsButton: true, sorting: true }}
+            style={{ marginLeft: "1em", marginTop: "2em" }}
           />
-        </div>
+        )}
 
-        <MaterialTable
-          title="Instance Table"
-          icons={tableIcons}
-          title=""
-          data={data}
-          columns={columns}
-          options={{ columnsButton: true, sorting: true }}
-          style={{ marginLeft: "1em", marginTop: "2em" }}
-        />
-      </div>
-    </React.Fragment>
-      </div> */}
-
-        <MaterialTable
-          title="Instance Table"
-          icons={tableIcons}
-          title=""
-          data={data}
-          columns={columns}
-          options={{ columnsButton: true, sorting: true }}
-          style={{ marginLeft: "1em", marginTop: "2em" }}
-        />
+        {/* <Spinner animation="border" style={{color: "#1D308E"}} /> */}
       </div>
     </React.Fragment>
   );
