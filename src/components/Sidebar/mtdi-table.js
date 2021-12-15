@@ -6,7 +6,7 @@ import Search from "@material-ui/icons/Search";
 import Clear from "@material-ui/icons/Clear";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
-import MaterialTable from "material-table";
+import MaterialTable, { MTableBody } from "material-table";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
@@ -36,7 +36,8 @@ import Modal from "../UI/Modal";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import { data } from "jquery";
-
+import CustomLoader from "./custom-filter-row";
+import { makeStyles } from "@material-ui/core";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -108,73 +109,82 @@ const orderList = [
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
-  // const [country, setcountry] = useState("select a country");
-  const [country, setcountry] = useState('');
-  // const [salesChannel, setsalesChannel] = useState("Seleccione Una");
-  const [salesChannel, setsalesChannel] = useState('');
-  const [store, setstore] = useState('');
-  const [client, setclient] = useState('');
-  const [officialStore, setofficialStore] = useState('');
-  const [startDate, setStartDate] = useState('');
+  const [shiny, setshiny] = useState([]);
+  const [country, setcountry] = useState("");
+
+  const [salesChannel, setsalesChannel] = useState("");
+  const [store, setstore] = useState("");
+  const [client, setclient] = useState("");
+  const [officialStore, setofficialStore] = useState("");
+  const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  useEffect(() => {
+    fetchOrderData();
+  }, []);
 
   useEffect(() => {
-   fetchOrderData();
-  }, [])
-
-  useEffect(() => {
-    if (country !== '') {
+    if (country !== "") {
       const x = data.filter((item) => item.pais === country);
       setData(x);
     }
-  }, [country])
+  }, [country]);
 
   useEffect(() => {
-    if (salesChannel !== '') {
-          const x = data.filter((item) =>
-            item.canal_de_venta.includes(salesChannel)
-          );
-          setData(x);
-        }
-  }, [salesChannel])
+    if (salesChannel !== "") {
+      const x = data.filter((item) =>
+        item.canal_de_venta.includes(salesChannel)
+      );
+      setData(x);
+    }
+  }, [salesChannel]);
 
   useEffect(() => {
-    if (store !== '') {
-          const x = data.filter((item) => item.tienda.includes(store));
-          setData(x);
-        }
-  }, [store])
+    if (store !== "") {
+      const x = data.filter((item) => item.tienda.includes(store));
+      setData(x);
+    }
+  }, [store]);
   useEffect(() => {
-    if (client !== '') {
-          const x = data.filter((item) => item.cliente.includes(client));
-          setData(x);
-        }
-  }, [client])
-useEffect(() => {
-  
-  if (officialStore !== '') {
-        const x = data.filter((item) =>
-          item.official_store.includes(officialStore)
-        );
+    if (client !== "") {
+      const x = data.filter((item) => item.cliente.includes(client));
+      setData(x);
+    }
+  }, [client]);
+  useEffect(() => {
+    if (officialStore !== "") {
+      const x = data.filter((item) =>
+        item.official_store.includes(officialStore)
+      );
+      setData(x);
+    }
+  }, [officialStore]);
+  useEffect(() => {
+    console.log(startDate);
+    if (startDate !== null) {
+      const x = data.filter((item) =>
+        item.fecha_creacion.includes(
+          startDate.getFullYear() +
+            "-" +
+            (startDate.getMonth() + 1) +
+            "-" +
+            startDate.getDate()
+        )
+      );
+      console.log(x);
+      if (x.length === 0) {
+        console.log("hello");
+        //setData(['hello']);
+        setshiny(x);
+        setData(x);
+      } else {
+        console.log("bye");
         setData(x);
       }
-}, [officialStore])
-useEffect(() => {
-  if (startDate !== '') {
-        const x = data.filter((item) =>
-          item.fecha_creacion.includes(
-            startDate.getFullYear() +
-              "-" +
-              (startDate.getMonth() + 1) +
-              "-" +
-              startDate.getDate()
-          )
-        );
-        setData(x);
-      }
-}, [startDate])
+    }
+  }, [startDate]);
   // useEffect(() => {
-   
+
   //   //  var requestOptions = {
   //   //   method: 'GET',
   //   //   redirect: 'follow'
@@ -261,6 +271,7 @@ useEffect(() => {
 
   const fetchOrderData = async () => {
     console.log("1 start");
+    setisLoading(true);
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -277,7 +288,15 @@ useEffect(() => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+      setData(data);
+      setisLoading(false);
+      const transformedData = data.map((poke) => {
+        return [poke.fecha_creacion];
+      });
+      console.log(transformedData);
+      setshiny(transformedData);
+
+      console.log("Date" + data);
       setData(data);
     } catch (error) {
       console.log(error);
@@ -601,6 +620,31 @@ useEffect(() => {
 
   return (
     <React.Fragment>
+     
+      {/* {shiny.length === 0 && data.length=== 0 &&   <MaterialTable
+            title=""
+            icons={tableIcons}
+            columns={columns}
+            data={[]}
+            components={{
+              Body: (props) => (
+                <div
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+                <h3>No records found</h3>
+                
+                </div>
+              ),
+              emptyDataSourceMessage: <h1>No data found</h1>,
+            }}
+          ></MaterialTable>}  */}
       {showModal && (
         // <Modal onhideModal={hideModalHandler}>
         //   <h1>Hello</h1>
@@ -735,13 +779,6 @@ useEffect(() => {
             label="select-canal"
             onChange={handleStoreChange}
           >
-            {/* {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.tienda}>
-              {e.tienda}
-              </MenuItem>
-          );
-        })} */}
             {Array.from(new Set(data.map((obj) => obj.tienda))).map(
               (period) => {
                 return <MenuItem value={period}>{period}</MenuItem>;
@@ -810,54 +847,92 @@ useEffect(() => {
         <button className="refreshButton" onClick={reloadTableHandler}>
           <img src={RefreshIcon} />
         </button>
-        {data.length === 0 ? (
+        {isLoading && <MaterialTable
+    title=""
+    icons={tableIcons}
+    columns={columns}
+    data={[]}
+    components={{
+      Body: (props) => (
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+          <Spinner
+            animation="border"
+            style={{ color: "#1D308E", alignItems: "center" }}
+          ></Spinner>
+          {/* <span><Spinner
+            animation="border"
+            style={{ color: "#1D308E" }}
+          ></Spinner></span>
+          <span><h3>Loading Data</h3></span> */}
+        </div>
+      ),
+      emptyDataSourceMessage: <h1>No data found</h1>,
+    }}
+  ></MaterialTable>}
+
+        {data.length === 0 && !isLoading && (
           <MaterialTable
             title=""
             icons={tableIcons}
             columns={columns}
             data={[]}
             components={{
-              Body: (props) => (
-                <div
-                  // style={{
-                  //   display: "flex",
-                  //   justifyContent: "center",
-                  //   alignItems: "center",
-                  //   height: "inherit",
-                  //   marginRight: "auto",
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
-                >
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                  <Spinner
-                    animation="border"
-                    style={{ color: "#1D308E", alignItems: "center" }}
-                  ></Spinner>
-                  {/* <span><Spinner
-                    animation="border"
-                    style={{ color: "#1D308E" }}
-                  ></Spinner></span>
-                  <span><h3>Loading Data</h3></span> */}
-                </div>
-              ),
+              // Body: (props) => (
+
+              //   <React.Fragment>
+              //     {shiny.length === 0 &&
+              //   <div
+              //     style={{
+              //       alignItems: "center",
+              //       display: "flex",
+              //       justifyContent: "center",
+              //       width: "100%",
+              //     }}
+              //   >
+              //     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+              //     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+              //     <Spinner
+              //       animation="border"
+              //       style={{ color: "#1D308E", alignItems: "center" }}
+              //     ></Spinner>
+              //     {/* <span><Spinner
+              //       animation="border"
+              //       style={{ color: "#1D308E" }}
+              //     ></Spinner></span>
+              //     <span><h3>Loading Data</h3></span> */}
+              //   </div>}
+              //   {shiny.length !== 0 &&
+              //   <div>
+              //   <h1>No data</h1>
+              //   </div>}
+              //   </React.Fragment>
+              // ),
+              // emptyDataSourceMessage: <h1>No data found</h1>,
+              Row: (props) => <CustomLoader {...props} />,
             }}
           ></MaterialTable>
-        ) : (
+        )}
+
+        {data.length !== 0 && (
           <MaterialTable
             localization={{
               body: {
                 emptyDataSourceMessage: (
                   <div>
                     <span>No records match the value</span>
-                  <Spinner
-                    animation="border"
-                    style={{ color: "#1D308E", marginLeft: "1em" }}
-                  />
+                    <Spinner
+                      animation="border"
+                      style={{ color: "#1D308E", marginLeft: "1em" }}
+                    />
                   </div>
                 ),
               },
@@ -872,8 +947,6 @@ useEffect(() => {
             style={{ marginLeft: "1em", marginTop: "2em" }}
           />
         )}
-
-        {/* <Spinner animation="border" style={{color: "#1D308E"}} /> */}
       </div>
     </React.Fragment>
   );
