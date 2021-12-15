@@ -38,6 +38,21 @@ import SendMail from "components/modalComponents/sendMail";
 import { data } from "jquery";
 import CustomLoader from "./custom-filter-row";
 import { makeStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTable-root": {
+      // borderRadius: "100px",
+      // boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75);"
+      display: "flex",
+      backgroundColor: "red",
+
+      alignItems: "center",
+      // display: "flex",
+      justifyContent: "center",
+    },
+  },
+}));
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -118,7 +133,7 @@ const MtdiTable = (props) => {
   const [officialStore, setofficialStore] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
   useEffect(() => {
     fetchOrderData();
   }, []);
@@ -183,92 +198,8 @@ const MtdiTable = (props) => {
       }
     }
   }, [startDate]);
-  // useEffect(() => {
 
-  //   //  var requestOptions = {
-  //   //   method: 'GET',
-  //   //   redirect: 'follow'
-  //   // };
-  //   // fetch("https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=1&user=admin&tienda=2\n\n", requestOptions)
-  //   //   .then(response => response.text())
-  //   //   .then(result => console.log(result));
-  //   //   .catch(error => console.log('error', error));
-  //   // if (country !== "") {
-  //   //   const x = data.filter((item) => item.pais === country);
-  //   //   setData(x);
-  //   // }
-  //   if (salesChannel !== "") {
-  //     const x = data.filter((item) =>
-  //       item.canal_de_venta.includes(salesChannel)
-  //     );
-  //     setData(x);
-  //   }
-  //   if (store !== "") {
-  //     const x = data.filter((item) => item.tienda.includes(store));
-  //     setData(x);
-  //   }
-  //   if (client !== "") {
-  //     const x = data.filter((item) => item.cliente.includes(client));
-  //     setData(x);
-  //   }
-  //   if (officialStore !== "") {
-  //     const x = data.filter((item) =>
-  //       item.official_store.includes(officialStore)
-  //     );
-  //     setData(x);
-  //   }
-  //   if (startDate !== "") {
-  //     const x = data.filter((item) =>
-  //       item.fecha_creacion.includes(
-  //         startDate.getFullYear() +
-  //           "-" +
-  //           (startDate.getMonth() + 1) +
-  //           "-" +
-  //           startDate.getDate()
-  //       )
-  //     );
-  //     setData(x);
-  //   }
-  //   // if (
-  //   //   country === "select a country" ||
-  //   //   salesChannel === "Seleccione Una" ||
-  //   //   store === "Seleccione Una" ||
-  //   //   officialStore === "Seleccione Una" ||
-  //   //   client === "Seleccione Una" ||
-  //   //   startDate === null
-  //   // ) {
-  //   //   console.log("hello");
-  //   //   setData(orderList);
-  //   // } else {
-  //   //   console.log("bye");
-  //   //   const x = data
-  //   //     .filter((item) => item.pais === country)
-  //   //     .filter((item) => item.canal_de_venta.includes(salesChannel))
-  //   //     .filter((item) => item.tienda.includes(store))
-  //   //     .filter((item) => item.cliente.includes(client))
-  //   //     // .filter((item) => item.tienda_official.includes(officialStore))
-  //   //     .filter((item) =>
-  //   //       item.fecha_creacion.includes(
-  //   //         startDate.getFullYear() +
-  //   //           "-" +
-  //   //           (startDate.getMonth() + 1) +
-  //   //           "-" +
-  //   //           startDate.getDate()
-  //   //       )
-  //   //     );
-  //   //   console.log(x);
-  //   //   setData(x);
-  //   // }
-  //   // //    const x =  data.filter(item => item.pais === country)
-  //   // //    .filter(item => item.canal_de_venta.includes(salesChannel));
-  //   // //    console.log(x);
-  //   // //    setData(x);
-  //   // //   .filter(item => item.canal_de_venta.includes(salesChannel))
-  //   // //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
-
-  //   // console.log(country, salesChannel, store, client, officialStore);
-  // }, [country, salesChannel, store, client, startDate, officialStore]);
-
+  const cla = useStyles();
   const fetchOrderData = async () => {
     console.log("1 start");
     setisLoading(true);
@@ -288,6 +219,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
+      console.log(data);
       setData(data);
       setisLoading(false);
       const transformedData = data.map((poke) => {
@@ -408,10 +340,10 @@ const MtdiTable = (props) => {
     },
     {
       title: "DTE",
-      field: "dte",
+      field: "dte_exist",
       // icon: Search,
       lookup: {
-        Si: (
+        'disabled': (
           // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
             Si &nbsp;
@@ -424,7 +356,7 @@ const MtdiTable = (props) => {
             </span>
           </div>
         ),
-        No: (
+        '': (
           <div>
             No &nbsp;
             <span className={classes.noIcon}>
@@ -620,7 +552,6 @@ const MtdiTable = (props) => {
 
   return (
     <React.Fragment>
-     
       {/* {shiny.length === 0 && data.length=== 0 &&   <MaterialTable
             title=""
             icons={tableIcons}
@@ -847,37 +778,35 @@ const MtdiTable = (props) => {
         <button className="refreshButton" onClick={reloadTableHandler}>
           <img src={RefreshIcon} />
         </button>
-        {isLoading && <MaterialTable
-    title=""
-    icons={tableIcons}
-    columns={columns}
-    data={[]}
-    components={{
-      Body: (props) => (
-        <div
-          style={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-          <Spinner
-            animation="border"
-            style={{ color: "#1D308E", alignItems: "center" }}
-          ></Spinner>
-          {/* <span><Spinner
+
+        {/* // add is Loading */}
+        { (
+          <MaterialTable
+            title=""
+            icons={tableIcons}
+            columns={columns}
+            data={[]}
+            components={{
+              Body: (props) => (
+                <div style={{ alignItems: "center" }}>
+                  {/* <h1 color="red">Hello ghwgdj kdlwkflkel hkhkwhflh hjfhfjeq</h1> */}
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+                  <Spinner
+                    animation="border"
+                    style={{ color: "#1D308E", alignItems: "center" }}
+                  ></Spinner>
+                  {/* <span><Spinner
             animation="border"
             style={{ color: "#1D308E" }}
           ></Spinner></span>
           <span><h3>Loading Data</h3></span> */}
-        </div>
-      ),
-      emptyDataSourceMessage: <h1>No data found</h1>,
-    }}
-  ></MaterialTable>}
+                </div>
+              ),
+              emptyDataSourceMessage: <h1>No data found</h1>,
+            }}
+          ></MaterialTable>
+        )}
 
         {data.length === 0 && !isLoading && (
           <MaterialTable
@@ -952,4 +881,5 @@ const MtdiTable = (props) => {
   );
 };
 
+// export default withStyles(useStyles)(MtdiTable);
 export default MtdiTable;
