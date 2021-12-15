@@ -156,3 +156,6 @@ input[type=text]:focus {
 
 }
 
+.MuiTable-root{
+  display: block !important;
+}
