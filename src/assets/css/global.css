@@ -152,3 +152,16 @@ input[type="text"]:focus {
 .MuiTable-root{
   display: block !important;
 }
+.form-control{
+  background-color: white !important;
+}
+/* .btn:hover {
+  color: #fff !important;
+  text-decoration: none;
+  } */
+ /* button.btn.btn-secondary {
+  text-align: center !important;
+  display:flex !important;
+  justify-content: center !important;
+ 
+} */
