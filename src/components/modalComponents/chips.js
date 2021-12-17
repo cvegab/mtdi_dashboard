@@ -37,26 +37,23 @@ export default class Chips extends React.Component {
     this.setState({
       emailState: evt.target.value,
     });
-    console.log(this.state.emailState);
   };
 
-  checkEmail = (evt)=>{
-    let error =null;
-console.log('SFDGHFJGKHLÑ');
-console.log(evt.target.value);
-if (!this.isEmail(evt.target.value)) {
-  error = `${evt.target.value} is not a valid email address.`;
-}
+  checkEmail = (evt) => {
+    let error = null;
 
-  if (error) {
-    this.setState({ emailError: error });
+    if (!this.isEmail(evt.target.value)) {
+      error = `${evt.target.value} is not a valid email address.`;
+    }
 
-    return false;
-  }
-else{
-  this.setState({ emailError: null});
-}
-  }
+    if (error) {
+      this.setState({ emailError: error });
+
+      return false;
+    } else {
+      this.setState({ emailError: null });
+    }
+  };
 
   handleDelete = (item) => {
     this.setState({
@@ -120,7 +117,6 @@ else{
         return false;
       }
     }
-    console.log("i must not reach here");
 
     const x = [...this.state.items];
     x.push(this.state.emailState);
