@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./chip.css";
-
+import SiIcon from "../../assets/img/si.png";
 export default class Chips extends React.Component {
   state = {
     items: [],
     value: "",
     error: null,
     emailState: [],
+    emailError: null,
   };
 
   handleKeyDown = (evt) => {
@@ -33,10 +34,10 @@ export default class Chips extends React.Component {
     });
   };
   handleEmailChange = (evt) => {
-    console.log(evt.target.value);
     this.setState({
       emailState: evt.target.value,
     });
+    console.log(this.state.emailState);
   };
 
   handleDelete = (item) => {
@@ -78,7 +79,6 @@ export default class Chips extends React.Component {
     }
 
     return true;
-    return true;
   }
 
   isInList(email) {
@@ -90,10 +90,22 @@ export default class Chips extends React.Component {
   }
 
   submitHandler = (event) => {
+    let error = null;
     event.preventDefault();
-    console.log(this.state.emailState);
-    console.log(this.state.items);
+    if (!this.isEmail(this.state.emailState)) {
+      error = `${this.state.emailState} is not a valid email address.`;
+    }
+    if (error) {
+      if (error) {
+        this.setState({ emailError: error });
+
+        return false;
+      }
+    }
+    console.log("i must not reach here");
+
     const x = [...this.state.items];
+    x.push(this.state.emailState);
     console.log(x);
   };
 
@@ -104,14 +116,18 @@ export default class Chips extends React.Component {
           <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
             Enviar a:
           </Label>
-          <Input
+          <input
+            className={"input " + (this.state.emailError && " has-error")}
             type="email"
             name="email"
             id="exampleEmail"
-            placeholder="with a placeholder"
+            placeholder="Enter a email"
             value={this.state.emailState}
             onChange={this.handleEmailChange}
           />
+          {this.state.emailError && (
+            <p className="error">{this.state.emailError}</p>
+          )}
         </FormGroup>
         <FormGroup>
           <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
@@ -141,18 +157,22 @@ export default class Chips extends React.Component {
 
           {this.state.error && <p className="error">{this.state.error}</p>}
         </FormGroup>
-     <div class='text-center'>
-       <Button
-          type="submit"
-          style={{ background: "#1D308E", textAlign: "center", color: "white" ,width: '296px',
-          height: '64px', padding: '22px 81px'
-        }}
-        >
-          Enviar Correo
-        </Button>
-       
+        <div class="text-center">
+          <Button
+            type="submit"
+            style={{
+              background: "#1D308E",
+              textAlign: "center",
+              color: "white",
+              width: "296px",
+              height: "64px",
+              padding: "22px 81px",
+            }}
+          >
+            Enviar Correo &nbsp;
+            <img src={SiIcon} />
+          </Button>
         </div>
-       
       </Form>
     );
   }
