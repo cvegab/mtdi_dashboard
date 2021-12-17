@@ -26,6 +26,11 @@
   font-size: 90%;
   color: tomato;
 }
+.emailError {
+  margin: 0;
+  font-size: 90%;
+  color: tomato;
+}
 
 .tag-item {
   background-color: #d4d5d6;
