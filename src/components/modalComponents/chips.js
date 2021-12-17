@@ -40,6 +40,24 @@ export default class Chips extends React.Component {
     console.log(this.state.emailState);
   };
 
+  checkEmail = (evt)=>{
+    let error =null;
+console.log('SFDGHFJGKHLÑ');
+console.log(evt.target.value);
+if (!this.isEmail(evt.target.value)) {
+  error = `${evt.target.value} is not a valid email address.`;
+}
+
+  if (error) {
+    this.setState({ emailError: error });
+
+    return false;
+  }
+else{
+  this.setState({ emailError: null});
+}
+  }
+
   handleDelete = (item) => {
     this.setState({
       items: this.state.items.filter((i) => i !== item),
@@ -124,6 +142,7 @@ export default class Chips extends React.Component {
             placeholder="Enter a email"
             value={this.state.emailState}
             onChange={this.handleEmailChange}
+            onBlur={this.checkEmail}
           />
           {this.state.emailError && (
             <p className="error">{this.state.emailError}</p>
