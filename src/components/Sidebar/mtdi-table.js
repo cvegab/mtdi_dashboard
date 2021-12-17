@@ -39,20 +39,7 @@ import { data } from "jquery";
 import CustomLoader from "./custom-filter-row";
 import { makeStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTable-root": {
-      // borderRadius: "100px",
-      // boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75);"
-      display: "flex",
-      backgroundColor: "red",
 
-      alignItems: "center",
-      // display: "flex",
-      justifyContent: "center",
-    },
-  },
-}));
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -199,7 +186,7 @@ const MtdiTable = (props) => {
     }
   }, [startDate]);
 
-  const cla = useStyles();
+ 
   const fetchOrderData = async () => {
     console.log("1 start");
     setisLoading(true);
@@ -343,7 +330,7 @@ const MtdiTable = (props) => {
       field: "dte_exist",
       // icon: Search,
       lookup: {
-        'disabled': (
+        "": (
           // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
             Si &nbsp;
@@ -356,7 +343,7 @@ const MtdiTable = (props) => {
             </span>
           </div>
         ),
-        '': (
+        disabled: (
           <div>
             No &nbsp;
             <span className={classes.noIcon}>
@@ -413,7 +400,7 @@ const MtdiTable = (props) => {
     },
     {
       title: "Shipping",
-      field: "valor_shipping",
+      field: "",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -466,8 +453,8 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Shipping Id",
-      field: "comprador",
+      title: "Shipping ID",
+      field: "shipping_id",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -552,30 +539,6 @@ const MtdiTable = (props) => {
 
   return (
     <React.Fragment>
-      {/* {shiny.length === 0 && data.length=== 0 &&   <MaterialTable
-            title=""
-            icons={tableIcons}
-            columns={columns}
-            data={[]}
-            components={{
-              Body: (props) => (
-                <div
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
-                >
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                <h3>No records found</h3>
-                
-                </div>
-              ),
-              emptyDataSourceMessage: <h1>No data found</h1>,
-            }}
-          ></MaterialTable>}  */}
       {showModal && (
         // <Modal onhideModal={hideModalHandler}>
         //   <h1>Hello</h1>
@@ -780,7 +743,7 @@ const MtdiTable = (props) => {
         </button>
 
         {/* // add is Loading */}
-        { (
+        {isLoading && (
           <MaterialTable
             title=""
             icons={tableIcons}
@@ -788,7 +751,14 @@ const MtdiTable = (props) => {
             data={[]}
             components={{
               Body: (props) => (
-                <div style={{ alignItems: "center" }}>
+                <div
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
                   {/* <h1 color="red">Hello ghwgdj kdlwkflkel hkhkwhflh hjfhfjeq</h1> */}
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
@@ -796,11 +766,6 @@ const MtdiTable = (props) => {
                     animation="border"
                     style={{ color: "#1D308E", alignItems: "center" }}
                   ></Spinner>
-                  {/* <span><Spinner
-            animation="border"
-            style={{ color: "#1D308E" }}
-          ></Spinner></span>
-          <span><h3>Loading Data</h3></span> */}
                 </div>
               ),
               emptyDataSourceMessage: <h1>No data found</h1>,
@@ -815,37 +780,6 @@ const MtdiTable = (props) => {
             columns={columns}
             data={[]}
             components={{
-              // Body: (props) => (
-
-              //   <React.Fragment>
-              //     {shiny.length === 0 &&
-              //   <div
-              //     style={{
-              //       alignItems: "center",
-              //       display: "flex",
-              //       justifyContent: "center",
-              //       width: "100%",
-              //     }}
-              //   >
-              //     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-              //     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-              //     <Spinner
-              //       animation="border"
-              //       style={{ color: "#1D308E", alignItems: "center" }}
-              //     ></Spinner>
-              //     {/* <span><Spinner
-              //       animation="border"
-              //       style={{ color: "#1D308E" }}
-              //     ></Spinner></span>
-              //     <span><h3>Loading Data</h3></span> */}
-              //   </div>}
-              //   {shiny.length !== 0 &&
-              //   <div>
-              //   <h1>No data</h1>
-              //   </div>}
-              //   </React.Fragment>
-              // ),
-              // emptyDataSourceMessage: <h1>No data found</h1>,
               Row: (props) => <CustomLoader {...props} />,
             }}
           ></MaterialTable>
@@ -881,5 +815,4 @@ const MtdiTable = (props) => {
   );
 };
 
-// export default withStyles(useStyles)(MtdiTable);
 export default MtdiTable;

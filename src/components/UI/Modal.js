@@ -45,7 +45,7 @@ const ModalOverlay = (props) => {
           X
         </h1>
     </header> */}
-    <ModalHeader>
+    <ModalHeader contentClassName={classes.customstyle}>
     {/* <img src={vector} alt='icon'  style={{textAlign:'right'}} /> */}
       <h2 style={{color: 'black'}} style={{textAlign: 'right', color:'black'}} onClick={props.close}>x</h2>
     </ModalHeader>

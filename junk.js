@@ -61,3 +61,41 @@ console.log(y);
     style={{ marginLeft: "1em", marginTop: "2em" }}
   />
 )}
+
+
+
+
+
+<Form onSubmit={submitHandler}>
+<FormGroup>
+  <Label for="exampleEmail">Email</Label>
+  <Input
+    type="email"
+    name="email"
+    id="exampleEmail"
+    placeholder="with a placeholder"
+    value={emailState}
+    onChange={inputChangeHandler}
+  />
+</FormGroup>
+<FormGroup>
+  <Label for="examplePassword">Password</Label>
+  {/* <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" > 
+  <Chip label={emailState} variant='outlined'></Chip>
+  </Input> */}
+  {/* <ReactChipInput
+classes="class1 class2"
+chips={chipState}
+onSubmit={value => addChip(value)} */}
+  {/* <input
+    className={classes.input}
+    value={chipState.value}
+    onKeyDown={handleKeyDown}
+    placeholder="Type or paste email addresses and press `Enter`..."
+  /> */}
+  <Chips  onSendState={props.onSendState}></Chips>
+</FormGroup>
+<Button variant="primary" type="submit">
+  Submit
+</Button>
+</Form>
