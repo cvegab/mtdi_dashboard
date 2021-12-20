@@ -70,6 +70,7 @@ body {
 
 #mtdiTableBackground {
   background-color: transparent !important;
+  margin-top:5em;
 
 }
 
@@ -119,7 +120,7 @@ input[type=text]:focus {
   color: white;
   align-items: center;
   margin-top: 10em;
-  margin-left: 1em;
+  margin-left: 0.5em;
 }
 
 .logoutButtonMini {

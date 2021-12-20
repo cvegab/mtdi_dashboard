@@ -56,10 +56,10 @@ const routes = [
     layout: "/admin",
   },
   {
-    path: "/dashboard",
+    path: "/charts",
     name: "Reportes",
     icon: "nc-icon nc-chart-bar-32",
-    component: Dashboard,
+    component: Charts,
     layout: "/admin",
     
   },
@@ -303,10 +303,10 @@ const routes = [
     layout: "/admin",
   },
   {
-    path: "/charts",
+    path: "/dashboard",
     name: "Maestro de productos",
     icon: "nc-icon nc-box",
-    component: Charts,
+    component: Dashboard,
     layout: "/admin",
   },
   // {
