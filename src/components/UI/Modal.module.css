@@ -69,10 +69,23 @@
     z-index: 30;
     animation: slide-down 300ms ease-out forwards;
   }
+
+  .customstyle {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    }
   
   .header {
     background: #4f005f;
     padding: 1rem;
+  }
+  /* header{
+    background: #4f005f;
+    margin-right: 100%;
+  } */
+  img{
+    justify-content: center;
   }
   
   .header h2 {
@@ -84,8 +97,9 @@
     padding: 1rem;
   }
   .hea{
-    background: pink;
+   /* background: pink; */
     padding: 1rem;
+    color: #23232E;
   }
   .hea h2{
     margin: 0;
