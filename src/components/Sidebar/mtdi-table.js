@@ -3,37 +3,29 @@ import { forwardRef } from "react";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Search from "@material-ui/icons/Search";
-import Clear from "@material-ui/icons/Clear";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import MaterialTable from "material-table";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
-import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import RoomIcon from "@material-ui/icons/Room";
 import RefreshIcon from "../../assets/img/icon-refresh.png";
-import { MuiThemeProvider } from "@material-ui/core";
 //import FormControl from '@mui/material/FormControl';
 import { Select, MenuItem } from "@material-ui/core";
-import { isJSDocUnknownTag } from "typescript";
-import CustomFilter from "./custom-filter-row";
-import ReactDatePicker from "react-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { zhCN } from "date-fns/locale";
-import zIndex from "@material-ui/core/styles/zIndex";
 //import SearchIcon from "material-ui/svg-icons/action/search";
 import "../../assets/css/global.css";
 // import CalendarIcon from '../../assets/img/calendar-icon.png'
 import "../../assets/css/global.css";
-import LogoutIcon from "../../assets/img/logout-icon.png";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-
+import { Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
-import Modal from "../UI/Modal";
 import classes from "./mtdi-table.module.css";
+import SendMail from "components/modalComponents/sendMail";
+import CustomLoader from "./custom-filter-row";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -43,6 +35,7 @@ const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+
   PreviousPage: forwardRef((props, ref) => (
     <ChevronLeft {...props} ref={ref} />
   )),
@@ -101,464 +94,62 @@ const orderList = [
     order_status: "Despachado",
     wms: "Integrado a wms",
   },
-  {
-    id_mtdi: "ml619e8aff5b8efcacad397d73",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043361057,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:32:41",
-    shipping_id: 40993074966,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 15490,
-    comprador: "SUPERFIL CHILE",
-    hub: "account_money",
-    rut: "",
-    dte: "Si",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "cross_docking",
-    id_mpago: 18377751629,
-    status_detail: "accredited",
-    order_status: "Cancelado",
-    wms: "Orden Cancelada",
-  },
-  {
-    id_mtdi: "ml619e8b00e3823d3ad5f41c08",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043343674,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:27:19",
-    shipping_id: 40993062785,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 26190,
-    comprador: "CRORTEGA1",
-    hub: "master",
-    rut: "",
-    dte: "No",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "self_service",
-    id_mpago: 18377638337,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e8524ae50e1c50b6fcf1a",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Softys",
-    cliente: "Softys",
-    order_id: 5043328587,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:22:58",
-    shipping_id: 40993050395,
-    valor_shipping: 0,
-    estado_pago: "",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 6590,
-    comprador: "DRAGERT",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Babysec",
-    tipo_envio: "fulfillment",
-    id_mpago: "",
-    status_detail: "",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e88308e36b7c74eca91e6",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043322020,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:18:49",
-    shipping_id: 40993039564,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 1890,
-    comprador: "ACRIVERAC",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377467510,
-    status_detail: "accredited",
-    order_status: "Cancelado",
-  },
-  {
-    id_mtdi: "ml619e85251aa98aa1ae4d0c2c",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Softys",
-    cliente: "Softys",
-    order_id: 5043290850,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:11:04",
-    shipping_id: 40993018959,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 9570,
-    comprador: "MARCELABERNARDAARAYAMERCADO",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Softys",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377320339,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e852508fd29c7ea07b1d1",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Softys",
-    cliente: "Softys",
-    order_id: 5043294001,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:09:30",
-    shipping_id: 40993015507,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 3600,
-    comprador: "LOPA7655100",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Elite",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377282832,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e88310dd92f36555d904d",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043284035,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:05:44",
-    shipping_id: 40993005636,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 2490,
-    comprador: "PALO265445",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377205880,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "wo619e6fd7ceb34c0ebe9c2525",
-    canal_de_venta: "Woocommerce",
-    tienda: "I Am Not Plastic",
-    cliente: "I Am Not Plastic",
-    order_id: "3578",
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 13:44:28",
-    valor_shipping: "0",
-    estado_pago: "",
-    estado_oc: "processing",
-    estado_delivery: "",
-    precio_sin_shipping: 17460,
-    comprador: "Silvana Laissle Casas del Valle",
-    hub: "Transbank Webpay Plus",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "",
-    tipo_envio: "",
-    id_mpago: "",
-    status_detail: "",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e8aff4bcbf54da2960a96",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043355576,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:33:10",
-    shipping_id: 40993074958,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 133980,
-    comprador: "SUPERFIL CHILE",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377774274,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e8aff5b8efcacad397d73",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043361057,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:32:41",
-    shipping_id: 40993074966,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 15490,
-    comprador: "SUPERFIL CHILE",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "cross_docking",
-    id_mpago: 18377751629,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-    wms: "Integrada a wms",
-  },
-  {
-    id_mtdi: "ml619e8b00e3823d3ad5f41c08",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043343674,
-    pais: "Mexico",
-    fecha_creacion: "2021-11-24 14:27:19",
-    shipping_id: 40993062785,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 26190,
-    comprador: "CRORTEGA1",
-    hub: "master",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "self_service",
-    id_mpago: 18377638337,
-    status_detail: "accredited",
-    order_status: "Confirmado",
-  },
-  {
-    id_mtdi: "ml619e8524ae50e1c50b6fcf1a",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Softys",
-    cliente: "Softys",
-    order_id: 5043328587,
-    pais: "Colombia",
-    fecha_creacion: "2021-11-24 14:22:58",
-    shipping_id: 40993050395,
-    valor_shipping: 0,
-    estado_pago: "",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 6590,
-    comprador: "DRAGERT",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Babysec",
-    tipo_envio: "fulfillment",
-    id_mpago: "",
-    status_detail: "",
-  },
-  {
-    id_mtdi: "ml619e88308e36b7c74eca91e6",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043322020,
-    pais: "Peru",
-    fecha_creacion: "2021-11-24 14:18:49",
-    shipping_id: 40993039564,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 1890,
-    comprador: "ACRIVERAC",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377467510,
-    status_detail: "accredited",
-  },
-  {
-    id_mtdi: "ml619e85251aa98aa1ae4d0c2c",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Softys",
-    cliente: "Softys",
-    order_id: 5043290850,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:11:04",
-    shipping_id: 40993018959,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 9570,
-    comprador: "MARCELABERNARDAARAYAMERCADO",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Softys",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377320339,
-    status_detail: "accredited",
-  },
-  {
-    id_mtdi: "ml619e852508fd29c7ea07b1d1",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Softys",
-    cliente: "Softys",
-    order_id: 5043294001,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:09:30",
-    shipping_id: 40993015507,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 3600,
-    comprador: "LOPA7655100",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Elite",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377282832,
-    status_detail: "accredited",
-  },
-  {
-    id_mtdi: "ml619e88310dd92f36555d904d",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043284035,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:05:44",
-    shipping_id: 40993005636,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 2490,
-    comprador: "PALO265445",
-    hub: "account_money",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377205880,
-    status_detail: "accredited",
-  },
-  {
-    id_mtdi: "wo619e6fd7ceb34c0ebe9c2525",
-    canal_de_venta: "Woocommerce",
-    tienda: "I Am Not Plastic",
-    cliente: "I Am Not Plastic",
-    order_id: "3578",
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 13:44:28",
-    valor_shipping: "0",
-    estado_pago: "",
-    estado_oc: "processing",
-    estado_delivery: "",
-    precio_sin_shipping: 17460,
-    comprador: "Silvana Laissle Casas del Valle",
-    hub: "Transbank Webpay Plus",
-    rut: "",
-    dte: "",
-    dte_exist: "disabled",
-    official_store: "",
-    tipo_envio: "",
-    id_mpago: "",
-    status_detail: "",
-  },
 ];
 
 const MtdiTable = (props) => {
-  const [data, setData] = useState(orderList);
-  // const [country, setcountry] = useState("select a country");
-  const [country, setcountry] = useState(null);
-  // const [salesChannel, setsalesChannel] = useState("Seleccione Una");
-  const [salesChannel, setsalesChannel] = useState(null);
-  const [store, setstore] = useState(null);
-  const [client, setclient] = useState(null);
-  const [officialStore, setofficialStore] = useState(null);
+  const [data, setData] = useState([]);
+  const [shiny, setshiny] = useState([]);
+  const [country, setcountry] = useState("");
+
+  const [salesChannel, setsalesChannel] = useState("");
+  const [store, setstore] = useState("");
+  const [client, setclient] = useState("");
+  const [officialStore, setofficialStore] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
+  useEffect(() => {
+    fetchOrderData();
+  }, []);
 
   useEffect(() => {
-    if (country !== null) {
+    if (country !== "") {
       const x = data.filter((item) => item.pais === country);
       setData(x);
     }
-    if (salesChannel !== null) {
+  }, [country]);
+
+  useEffect(() => {
+    if (salesChannel !== "") {
       const x = data.filter((item) =>
         item.canal_de_venta.includes(salesChannel)
       );
       setData(x);
     }
-    if (store !== null) {
+  }, [salesChannel]);
+
+  useEffect(() => {
+    if (store !== "") {
       const x = data.filter((item) => item.tienda.includes(store));
       setData(x);
     }
-    if (client !== null) {
+  }, [store]);
+  useEffect(() => {
+    if (client !== "") {
       const x = data.filter((item) => item.cliente.includes(client));
       setData(x);
     }
-    if (officialStore !== null) {
+  }, [client]);
+  useEffect(() => {
+    if (officialStore !== "") {
       const x = data.filter((item) =>
         item.official_store.includes(officialStore)
       );
       setData(x);
     }
+  }, [officialStore]);
+  useEffect(() => {
+    console.log(startDate);
     if (startDate !== null) {
       const x = data.filter((item) =>
         item.fecha_creacion.includes(
@@ -569,54 +160,62 @@ const MtdiTable = (props) => {
             startDate.getDate()
         )
       );
-      setData(x);
+      console.log(x);
+      if (x.length === 0) {
+        console.log("hello");
+        //setData(['hello']);
+        setshiny(x);
+        setData(x);
+      } else {
+        console.log("bye");
+        setData(x);
+      }
     }
-    // if (
-    //   country === "select a country" ||
-    //   salesChannel === "Seleccione Una" ||
-    //   store === "Seleccione Una" ||
-    //   officialStore === "Seleccione Una" ||
-    //   client === "Seleccione Una" ||
-    //   startDate === null
-    // ) {
-    //   console.log("hello");
-    //   setData(orderList);
-    // } else {
-    //   console.log("bye");
-    //   const x = data
-    //     .filter((item) => item.pais === country)
-    //     .filter((item) => item.canal_de_venta.includes(salesChannel))
-    //     .filter((item) => item.tienda.includes(store))
-    //     .filter((item) => item.cliente.includes(client))
-    //     // .filter((item) => item.tienda_official.includes(officialStore))
-    //     .filter((item) =>
-    //       item.fecha_creacion.includes(
-    //         startDate.getFullYear() +
-    //           "-" +
-    //           (startDate.getMonth() + 1) +
-    //           "-" +
-    //           startDate.getDate()
-    //       )
-    //     );
-    //   console.log(x);
-    //   setData(x);
-    // }
-    // //    const x =  data.filter(item => item.pais === country)
-    // //    .filter(item => item.canal_de_venta.includes(salesChannel));
-    // //    console.log(x);
-    // //    setData(x);
-    // //   .filter(item => item.canal_de_venta.includes(salesChannel))
-    // //   .filter((item) => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)
+  }, [startDate]);
 
-    // console.log(country, salesChannel, store, client, officialStore);
-  }, [country, salesChannel, store, client, startDate, officialStore]);
+ 
+  const fetchOrderData = async () => {
+    console.log("1 start");
+    setisLoading(true);
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    try {
+      const response = await fetch(
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=20&user=admin&tienda=2\n\n",
+        requestOptions
+      );
+      console.log("2.run");
+      if (!response.ok) {
+        console.log(response);
+        console.log("3.error");
+        throw new Error();
+      }
+      const data = await response.json();
+      console.log(data);
+      setData(data);
+      setisLoading(false);
+      const transformedData = data.map((poke) => {
+        return [poke.fecha_creacion];
+      });
+      console.log(transformedData);
+      setshiny(transformedData);
+
+      console.log("Date" + data);
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const showModalHandler = () => {
     console.log("hi i was clicked");
     setshowModal(true);
   };
-  const hideModalHandler = ()=>{
+  const hideModalHandler = () => {
     setshowModal(false);
-  }
+  };
   const columns = [
     {
       title: "OpsId",
@@ -715,10 +314,10 @@ const MtdiTable = (props) => {
     },
     {
       title: "DTE",
-      field: "dte",
+      field: "dte_exist",
       // icon: Search,
       lookup: {
-        Si: (
+        "": (
           // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
             Si &nbsp;
@@ -731,7 +330,7 @@ const MtdiTable = (props) => {
             </span>
           </div>
         ),
-        No: (
+        disabled: (
           <div>
             No &nbsp;
             <span className={classes.noIcon}>
@@ -788,7 +387,7 @@ const MtdiTable = (props) => {
     },
     {
       title: "Shipping",
-      field: "valor_shipping",
+      field: "",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -841,8 +440,8 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Shipping Id",
-      field: "comprador",
+      title: "Shipping ID",
+      field: "shipping_id",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -915,7 +514,8 @@ const MtdiTable = (props) => {
     setofficialStore(event.target.value);
   };
   const reloadTableHandler = () => {
-    setData(orderList);
+    // setData(data);
+    fetchOrderData();
     setclient(null);
     setcountry(null);
     setofficialStore(null);
@@ -927,9 +527,13 @@ const MtdiTable = (props) => {
   return (
     <React.Fragment>
       {showModal && (
-        <Modal onhideModal={hideModalHandler}>
-          <h1>Hello</h1>
-        </Modal>
+        // <Modal onhideModal={hideModalHandler}>
+        //   <h1>Hello</h1>
+        // </Modal>
+        // <SendMail onhideModal={hideModalHandler}></SendMail>
+
+        // <SendMail onhideModal={hideModalHandler}></SendMail>
+        <SendMail onhideModal={hideModalHandler}></SendMail>
       )}
       <div
         id="mtdiTableBackground"
@@ -969,7 +573,7 @@ const MtdiTable = (props) => {
               fontSize: "14px",
               fontWeight: "800",
               marginLeft: "1em",
-              marginBottom:"0px"
+              marginBottom: "0px",
             }}
           >
             Pais
@@ -1010,11 +614,11 @@ const MtdiTable = (props) => {
         <label htmlFor="select-canal">
           <h5
             style={{
-              color: 'black',
-              fontSize: '14px',
-              fontWeight: '800',
-              marginLeft: '1em',
-              marginBottom:'0px'
+              color: "black",
+              fontSize: "14px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "0px",
             }}
           >
             Canal De Venta
@@ -1056,13 +660,6 @@ const MtdiTable = (props) => {
             label="select-canal"
             onChange={handleStoreChange}
           >
-            {/* {data.map((e, key) => {
-          return (
-            <MenuItem key={key} value={e.tienda}>
-              {e.tienda}
-              </MenuItem>
-          );
-        })} */}
             {Array.from(new Set(data.map((obj) => obj.tienda))).map(
               (period) => {
                 return <MenuItem value={period}>{period}</MenuItem>;
@@ -1132,100 +729,74 @@ const MtdiTable = (props) => {
           <img src={RefreshIcon} />
         </button>
 
-        {/* <div>
-        <label>
-          <h5
-            style={{
-              color: "black",
-              fontSize: "14px",
-              fontWeight: "800",
-              marginLeft: "1em",
+        {/* // add is Loading */}
+        {isLoading && (
+          <MaterialTable
+            title=""
+            icons={tableIcons}
+            columns={columns}
+            data={[]}
+            components={{
+              Body: (props) => (
+                <div
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  {/* <h1 color="red">Hello ghwgdj kdlwkflkel hkhkwhflh hjfhfjeq</h1> */}
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+                  <Spinner
+                    animation="border"
+                    style={{ color: "#1D308E", alignItems: "center" }}
+                  ></Spinner>
+                </div>
+              ),
+              emptyDataSourceMessage: <h1>No data found</h1>,
             }}
-          >
-            Tienda Oficial
-          </h5>
-        </label>
-        <Select
-          labelId="select-tienda-official"
-          id="select-tienda-official"
-          style={{ width: 100 }}
-          value={officialStore}
-          label="select-tienda-official"
-          onChange={handleOfficialStoreChange}
-        >
-          {Array.from(new Set(data.map((obj) => obj.official_store))).map(
-            (period) => {
-              return <MenuItem value={period}>{period}</MenuItem>;
-            }
-          )}
-        </Select>
-        <label htmlFor="select-client">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "14px",
-              fontWeight: "800",
-              marginLeft: "1em",
-            }}
-          >
-            Cliente
-          </h5>
-        </label>
-        <Select
-          labelId="select-client"
-          id="select-client"
-          style={{ width: 100 }}
-          value={client}
-          label="select-tienda-official"
-          onChange={handleClientChange}
-        >
-          {Array.from(new Set(data.map((obj) => obj.cliente))).map((period) => {
-            return <MenuItem value={period}>{period}</MenuItem>;
-          })}
-        </Select>
+          ></MaterialTable>
+        )}
 
-        <button onClick={reloadTableHandler}>Hit me!!</button>
-        <div>
-          <label>
-            <h5
-              style={{
-                color: "black",
-                fontSize: "14px",
-                fontWeight: "800",
-                marginLeft: "1em",
-              }}
-            >
-              Fecha
-            </h5>
-          </label>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+        {data.length === 0 && !isLoading && (
+          <MaterialTable
+            title=""
+            icons={tableIcons}
+            columns={columns}
+            data={[]}
+            components={{
+              Row: (props) => <CustomLoader {...props} />,
+            }}
+          ></MaterialTable>
+        )}
+
+        {data.length !== 0 && (
+          <MaterialTable
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div>
+                    <span>No records match the value</span>
+                    <Spinner
+                      animation="border"
+                      style={{ color: "#1D308E", marginLeft: "1em" }}
+                    />
+                  </div>
+                ),
+              },
+            }}
+            key={data.id_mtdi}
+            title="Instance Table"
+            icons={tableIcons}
+            title=""
+            data={data}
+            columns={columns}
+            options={{ columnsButton: true, sorting: true }}
+            style={{ marginLeft: "1em", marginTop: "2em" }}
           />
-        </div>
-
-        <MaterialTable
-          title="Instance Table"
-          icons={tableIcons}
-          title=""
-          data={data}
-          columns={columns}
-          options={{ columnsButton: true, sorting: true }}
-          style={{ marginLeft: "1em", marginTop: "2em" }}
-        />
-      </div>
-    </React.Fragment>
-      </div> */}
-
-        <MaterialTable
-          title="Instance Table"
-          icons={tableIcons}
-          title=""
-          data={data}
-          columns={columns}
-          options={{ columnsButton: true, sorting: true }}
-          style={{ marginLeft: "1em", marginTop: "2em" }}
-        />
+        )}
       </div>
     </React.Fragment>
   );
