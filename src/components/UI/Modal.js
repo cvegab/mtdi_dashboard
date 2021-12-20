@@ -3,33 +3,9 @@ import ReactDOM from "react-dom";
 import { Button } from "react-bootstrap";
 import classes from "./Modal.module.css";
 import Card from "./Card";
-import vector from '../../assets/img/Vector.png';
+import vector from "../../assets/img/Vector.png";
 //import { Modal, ModalHeader, ModalBody, ModalFooter} from 'react-bootstrap';
-import ModalHeader from 'react-bootstrap/ModalHeader'
-// const Modal = (props)=>{
-// return(
-// <Modal  isOpen={modal} toggle={toggle}>
-//         <ModalHeader toggle={toggle}>
-//         <img src={Icon1} alt='icon' className='icon-modal' width='35' height='auto' />
-//         {/* ¡Hey! */}
-//         </ModalHeader>
-//         <ModalBody>
-//           {/* <p className=“texto-modal”><strong>{t(“modal.text-modal”)} </strong><br/><br/>{t(“modal.sub-text-modal1")} <br/><br/> {t(“modal.sub-text-modal2”)}</p> */}
-//         </ModalBody>
-//         <ModalFooter>
-//         <Button
-//           className='boton-modal'
-//           type='button'
-       
-//           >
-//             {t(“modal.boton-modal”)}
-//         </Button>
-//         {/* <Button color=“primary” onClick={toggle}>Cancelar</Button> */}
-//         </ModalFooter>
-//       </Modal>
-// )
-// }
-// export default Modal;
+import ModalHeader from "react-bootstrap/ModalHeader";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.close} />;
@@ -45,10 +21,16 @@ const ModalOverlay = (props) => {
           X
         </h1>
     </header> */}
-    <ModalHeader contentClassName={classes.customstyle}>
-    {/* <img src={vector} alt='icon'  style={{textAlign:'right'}} /> */}
-      <h2 style={{color: 'black'}} style={{textAlign: 'right', color:'black'}} onClick={props.close}>x</h2>
-    </ModalHeader>
+      <ModalHeader>
+        {/* <img src={vector} alt='icon'  style={{textAlign:'right'}} /> */}
+        <h2
+          style={{ color: "black" }}
+          style={{ textAlign: "right", color: "black" }}
+          onClick={props.close}
+        >
+          x
+        </h2>
+      </ModalHeader>
 
       <div className={classes.hea}>
         <p>{props.children}</p>
@@ -68,49 +50,6 @@ const Modal = (props) => {
     </Fragment>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const Modal = (props) => {
 //   return (
