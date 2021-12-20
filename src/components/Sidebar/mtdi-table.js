@@ -3,42 +3,29 @@ import { forwardRef } from "react";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Search from "@material-ui/icons/Search";
-import Clear from "@material-ui/icons/Clear";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
-import MaterialTable, { MTableBody } from "material-table";
+import MaterialTable from "material-table";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
-import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import RoomIcon from "@material-ui/icons/Room";
 import RefreshIcon from "../../assets/img/icon-refresh.png";
-import { MuiThemeProvider } from "@material-ui/core";
 //import FormControl from '@mui/material/FormControl';
 import { Select, MenuItem } from "@material-ui/core";
-import { isJSDocUnknownTag } from "typescript";
-import CustomFilter from "./custom-filter-row";
-import ReactDatePicker from "react-datepicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { zhCN } from "date-fns/locale";
-import zIndex from "@material-ui/core/styles/zIndex";
 //import SearchIcon from "material-ui/svg-icons/action/search";
 import "../../assets/css/global.css";
 // import CalendarIcon from '../../assets/img/calendar-icon.png'
 import "../../assets/css/global.css";
-import LogoutIcon from "../../assets/img/logout-icon.png";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
 import { Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
-import Modal from "../UI/Modal";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
-import { data } from "jquery";
 import CustomLoader from "./custom-filter-row";
-import { makeStyles } from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
