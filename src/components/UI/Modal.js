@@ -1,9 +1,5 @@
 import { Fragment } from "react";
-import ReactDOM from "react-dom";
-import { Button } from "react-bootstrap";
 import classes from "./Modal.module.css";
-import Card from "./Card";
-import vector from "../../assets/img/Vector.png";
 //import { Modal, ModalHeader, ModalBody, ModalFooter} from 'react-bootstrap';
 import ModalHeader from "react-bootstrap/ModalHeader";
 
@@ -12,7 +8,6 @@ const Backdrop = (props) => {
 };
 
 const ModalOverlay = (props) => {
-  console.log(props.children);
   return (
     <div className={classes.modal}>
       {/* <header>
@@ -35,9 +30,6 @@ const ModalOverlay = (props) => {
       <div className={classes.hea}>
         <p>{props.children}</p>
       </div>
-      {/* <footer>
-        <Button color="primary">Cancelar</Button>
-      </footer> */}
     </div>
   );
 };
@@ -50,24 +42,5 @@ const Modal = (props) => {
     </Fragment>
   );
 };
-
-// const Modal = (props) => {
-//   return (
-//     <div>
-//       <div className={classes.backdrop} />
-//       <Card className={classes.modal}>
-//         <header className={classes.header}>
-//           <h2>hello</h2>
-//         </header>
-//         <div className={classes.hea}>
-//           <p><h2>hello shiny</h2></p>
-//         </div>
-//         <footer className={classes.actions}>
-//          <button>okay</button>
-//         </footer>
-//       </Card>
-//     </div>
-//   );
-// };
 
 export default Modal;
