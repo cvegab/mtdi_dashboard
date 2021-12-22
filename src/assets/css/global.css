@@ -179,3 +179,7 @@ input[type="text"]:focus {
   height: 200px;
   background-color: blue;
 }
+
+.MuiPaper-rounded {
+  border-radius: 20px !important;
+}
