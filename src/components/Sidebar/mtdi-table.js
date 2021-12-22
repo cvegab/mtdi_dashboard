@@ -15,6 +15,7 @@ import { Select, MenuItem } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 //import SearchIcon from "material-ui/svg-icons/action/search";
+
 import "../../assets/css/global.css";
 // import CalendarIcon from '../../assets/img/calendar-icon.png'
 import "../../assets/css/global.css";
@@ -25,6 +26,7 @@ import { Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
+
 import CustomLoader from "./custom-filter-row";
 
 const tableIcons = {
@@ -115,6 +117,7 @@ const MtdiTable = (props) => {
   useEffect(() => {
     if (country !== "") {
       const x = data.filter((item) => item.pais === country);
+
       setData(x);
     }
   }, [country]);
@@ -208,6 +211,7 @@ const MtdiTable = (props) => {
       console.log(error);
     }
   };
+
 
   const showModalHandler = () => {
     console.log("hi i was clicked");
@@ -395,7 +399,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado Fulfilment",
+      title: "Estado Fulfillment",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -535,17 +539,21 @@ const MtdiTable = (props) => {
         // <SendMail onhideModal={hideModalHandler}></SendMail>
         <SendMail onhideModal={hideModalHandler}></SendMail>
       )}
-      <div
+
+      {/* <div
         id="mtdiTableBackground"
         className="App"
         style={{ background: "#E5E5E5" }}
-      >
+      > */}
+
+      <div className="content">
+
         <h5
           className="titleTable"
           style={{
             color: "#C4C4C4",
             width: "450px",
-            fontSize: "14px",
+            fontSize: "10px",
             fontWeight: "800",
             marginLeft: "1em",
             marginBottom: "0px",
@@ -558,34 +566,41 @@ const MtdiTable = (props) => {
           style={{
             color: "black",
             width: "450px",
-            fontSize: "30px",
+            fontSize: "20px",
             fontWeight: "800",
             marginLeft: "1em",
+            marginBottom: "2em"
+
           }}
         >
           Camilo Vega
         </p>
+
+
+        <Col md="12">
+
         <label htmlFor="select-country">
           <h5
             style={{
               color: "black",
               width: "30px",
-              fontSize: "14px",
+              fontSize: "12px",
               fontWeight: "800",
-              marginLeft: "1em",
+              marginLeft: "2em",
               marginBottom: "0px",
             }}
           >
-            Pais
+            País
           </h5>
           <Select
             labelId="select-country"
-            id="select-country"
-            style={{ width: 100, marginLeft: "1em", borderRadius: "17px" }}
+            id="select-country"     
+            style={{ width: 150, marginLeft: "1em", borderRadius: "17px" }}
             value={country}
-            label="Country"
+            label="Country"      
             onChange={handleCountryChange}
           >
+            
             {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
               return <MenuItem value={period}>{period}</MenuItem>;
             })}
@@ -596,18 +611,24 @@ const MtdiTable = (props) => {
           <h5
             style={{
               color: "black",
-              fontSize: "14px",
+              fontSize: "12px",
               fontWeight: "800",
               marginLeft: "1em",
               marginBottom: "18px",
             }}
-          >
+          >    
             Fecha
           </h5>
+          
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-          />
+
+            placeholderText="dd/mm/yy"
+          >
+            <i className="nc-icon nc-layout-11" style={{ color: "#232A38" }}/>
+          </DatePicker>          
+
           {/* <img src={CalendarIcon} /> */}
         </label>
 
@@ -615,19 +636,20 @@ const MtdiTable = (props) => {
           <h5
             style={{
               color: "black",
-              fontSize: "14px",
+              fontSize: "12px",
               fontWeight: "800",
-              marginLeft: "1em",
+              marginLeft: "2em",
               marginBottom: "0px",
             }}
           >
             Canal De Venta
           </h5>
 
+
           <Select
             labelId="select-canal"
             id="select-canal"
-            style={{ width: 100, marginLeft: "1em" }}
+            style={{ width: 130, marginLeft: "1em" }}
             value={salesChannel}
             label="select-canal"
             onChange={handleSalesChannelChange}
@@ -644,7 +666,7 @@ const MtdiTable = (props) => {
           <h5
             style={{
               color: "black",
-              fontSize: "14px",
+              fontSize: "12px",
               fontWeight: "800",
               marginLeft: "1em",
               marginBottom: "0px",
@@ -655,18 +677,20 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-tienda"
             id="select-tienda"
-            style={{ width: 100 }}
+            style={{ width: 150 }}
             value={store}
             label="select-canal"
             onChange={handleStoreChange}
           >
             {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+
               (period) => {
                 return <MenuItem value={period}>{period}</MenuItem>;
               }
             )}
           </Select>
         </label>
+
 
         <label htmlFor="select-tienda-official">
           <h5
@@ -697,13 +721,17 @@ const MtdiTable = (props) => {
           </Select>
         </label>
 
+        <Button className="btn-round btn-icon" color="primary" onClick={reloadTableHandler}>
+            <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
+         </Button>
+
         <label htmlFor="select-client">
           <h5
             style={{
               color: "black",
-              fontSize: "14px",
+              fontSize: "12px",
               fontWeight: "800",
-              marginLeft: "1em",
+              marginLeft: "2em",
               marginBottom: "0px",
             }}
           >
@@ -712,7 +740,7 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-client"
             id="select-client"
-            style={{ width: 100 }}
+            style={{ width: 150, marginLeft: '1em' }}
             value={client}
             label="select-tienda-official"
             onChange={handleClientChange}
@@ -725,9 +753,13 @@ const MtdiTable = (props) => {
           </Select>
         </label>
 
-        <button className="refreshButton" onClick={reloadTableHandler}>
+
+        {/* <button className="refreshButton" onClick={reloadTableHandler}>
           <img src={RefreshIcon} />
-        </button>
+        </button> */}
+      
+      </Col>
+
 
         {/* // add is Loading */}
         {isLoading && (
