@@ -1,75 +1,28 @@
-function CustomFilter() {
-    return (
-      <MaterialTable
-        icons={TABLE_ICONS}
-        data={[
-          {
-            name: "Mehmet",
-            surname: "Baran",
-            birthYear: 1987,
-            birthCity: 63,
-          },
-          {
-            name: "Zerya Betül",
-            surname: "Baran",
-            birthYear: 2017,
-            birthCity: 34,
-          },
-        ]}
-        columns={[
-          {
-            title: "Name",
-            field: "name",
-          },
-          {
-            title: "Surname",
-            field: "surname",
-          },
-          {
-            title: "Birth Year",
-            field: "birthYear",
-            type: "numeric",
-          },
-          {
-            title: "Birth Place",
-            field: "birthCity",
-            lookup: {
-              34: "İstanbul",
-              63: "Şanlıurfa",
-            },
-          },
-        ]}
-        options={{
-          filtering: true,
-        }}
-        components={{
-          FilterRow: (rowProps) => {
-            const { columns } = rowProps;
+import React, { useState } from 'react'
+import { Grid, IconButton } from '@material-ui/core'
+import { MTableBodyRow } from 'material-table'
+import GetAppIcon from '@material-ui/icons/GetApp';
+import DeleteIcon from '@material-ui/icons/Delete';
+const CustomLoader = ()=>{
+  const [show,setShow]=useState(false)
+  const overlayStyle = { width: "100%", position: "absolute" }
   
-            return (
-              <>
-                <tr>
-                  {columns.map((col) => {
-                    if (col.field) {
-                      return (
-                        <td>
-                          <input
-                            placeholder="custom filter"
-                            id={col.field}
-                            onChange={(e) =>
-                              console.log(e.target.id, e.target.value)
-                            }
-                          />
-                        </td>
-                      );
-                    }
-                  })}
-                </tr>
-              </>
-            );
-          },
-        }}
-      />
-    );
-  }
-  export default CustomFilter;
+  return <Grid style={{ display: "contents" }} 
+  onMouseOver={()=>setShow(true)}
+  onMouseLeave={()=>setShow(false)}
+  >
+      {show&&<Grid align="right" style={overlayStyle}>
+
+          <Grid sm={2} align="center" style={{ background: "#ffffff" }}>
+              <IconButton title="Download" onClick={()=>alert(props.data.name)}>
+                  <GetAppIcon />
+              </IconButton>
+              <IconButton title="Delete" onClick={()=>props.handleDelete(props.index)}>
+                  <DeleteIcon />
+              </IconButton>
+          </Grid>
+      </Grid>}
+      <MTableBodyRow {...props} />
+  </Grid>
+}
+export default CustomLoader

@@ -30,6 +30,7 @@ function Charts() {
   return (
     <>
       <div className="content">
+
      
         <h5
           className="titleTable"
@@ -99,7 +100,59 @@ function Charts() {
                  
               </CardBody>
         </Col>
+
         <Row>
+        <Col md="6">
+            <Card className="car-chart">
+              <CardHeader>
+                <CardTitle><strong>Resumen general de  venta y órdenes</strong></CardTitle>
+                {/* <p className="card-category"> </p> */}
+              </CardHeader>
+              <CardBody>
+                <Bar
+                  data={chartExample4.data}
+                  options={chartExample4.options}
+                />
+              </CardBody>
+        
+            </Card>
+          </Col>
+        <Col md="4">
+            <Card>
+              <CardHeader>
+                <CardTitle><strong>Participación canal de venta</strong></CardTitle>
+                {/* <p className="card-category">Last Campaign Performance</p> */}
+              </CardHeader>
+              <CardBody style={{ height: "342px" }}>
+                <Pie
+                  data={chartExample11.data}
+                  options={chartExample11.options}
+                  width={456}
+                  height={300}
+                />
+              </CardBody>
+              <CardFooter>
+                <div className="legend">
+                  <i className="fa fa-circle text-gray" />
+                  Mercadolibre
+                  <p className="card-category">$4.365.222</p>
+                  <i className="fa fa-circle text-info" />
+                  Woocommerce
+                  <p className="card-category">$2.689.210</p>
+                  <i className="fa fa-circle text-warning" />
+                  Shopify
+                  <p className="card-category">$1.000.933</p>
+                </div>
+                {/* <hr />
+                <div className="stats">
+                  <i className="fa fa-calendar" />
+                  Number of emails sent
+                </div> */}
+              </CardFooter>
+            </Card>
+          </Col>
+
+
           <Col md="6">
             <Card className="card-chart">
               <CardHeader>
@@ -144,49 +197,10 @@ function Charts() {
               </CardBody>
             </Card>
           </Col>
-          <Col md="6">
-            <Card className="car-chart">
-              <CardHeader>
-                <CardTitle>Activity</CardTitle>
-                <p className="card-category">Multiple Bars Chart</p>
-              </CardHeader>
-              <CardBody>
-                <Bar
-                  data={chartExample4.data}
-                  options={chartExample4.options}
-                />
-              </CardBody>
-            </Card>
-          </Col>
+   
         </Row>
         <Row>
-          <Col md="4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Email Statistics</CardTitle>
-                <p className="card-category">Last Campaign Performance</p>
-              </CardHeader>
-              <CardBody style={{ height: "342px" }}>
-                <Pie
-                  data={chartExample11.data}
-                  options={chartExample11.options}
-                  width={456}
-                  height={300}
-                />
-              </CardBody>
-              <CardFooter>
-                <div className="legend">
-                  <i className="fa fa-circle text-info" />
-                  Open
-                </div>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-calendar" />
-                  Number of emails sent
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
+  
           <Col md="8">
             <Card>
               <CardHeader>

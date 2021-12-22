@@ -225,7 +225,7 @@ function Sidebar(props) {
           <div className="logo">
         <a
           // href="https://www.creative-tim.com"
-          className="logo-mini"
+          className="logo-mini logoutButtonMini "
         >
           <button className="logoutButtonMini">
             <img src={LogoutIcon} alt="logoutMini" />

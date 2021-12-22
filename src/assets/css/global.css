@@ -10,7 +10,6 @@ body {
 
 .react-datepicker-popper {
   z-index: 9999 !important;
-  
 }
 
 .react-datepicker__input-container {
@@ -23,12 +22,11 @@ body {
   background-color: white;
   box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
-  margin-top:1em;
-  
+  margin-top: 1em;
 }
 
 .MuiMenu-paper {
-  border-radius:12px !important;
+  border-radius: 12px !important;
 }
 
 .input {
@@ -45,24 +43,23 @@ body {
 }
 
 .MuiTableSortLabel-root {
-  width:12em !important;
+  width: 12em !important;
 }
 
 .MuiInput-root {
-  margin-right:1em !important;
+  margin-right: 1em !important;
 }
 
 .MuiInputAdornment-positionEnd {
-  display:none !important;
+  display: none !important;
 }
 
 .MuiIconButton-colorInherit {
-  color: #06CBC1 !important;
+  color: #06cbc1 !important;
 }
 .navbar-toggler-bar {
-  background-color: #1D308E !important;
+  background-color: #1d308e !important;
 }
-
 
 .navbar-transparent {
   border-bottom: 0px !important;
@@ -70,12 +67,13 @@ body {
 
 #mtdiTableBackground {
   background-color: transparent !important;
+  margin-top:5em;
 
 }
 
 .MuiSelect-icon {
   color: black !important;
-  margin-top:6px !important;
+  margin-top: 6px !important;
 }
 
 .MuiInput-underline:before {
@@ -90,28 +88,27 @@ body {
   border-radius: 17px !important;
 }
 
-input[type=text]{
+input[type="text"] {
   -webkit-border-radius: 17px;
   -moz-border-radius: 17px;
-   border-radius: 17px;
-   border: 1px solid white;
-   color: black;
-   width: 100px;
-   height: 30px;
-   padding-left: 10px;
-   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
-  }
-  
-input[type=text]:focus {
-   outline: none;
-   border: 1px solid white;
-   color: black;
-   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  border-radius: 17px;
+  border: 1px solid white;
+  color: black;
+  width: 100px;
+  height: 30px;
+  padding-left: 10px;
+  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: 1px solid white;
+  color: black;
+  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
 }
 
 #logoutButton {
- 
-  background: #06CBC1;
+  background: #06cbc1;
   border-radius: 20px;
   width: 230px;
   height: 76px;
@@ -119,40 +116,66 @@ input[type=text]:focus {
   color: white;
   align-items: center;
   margin-top: 10em;
-  margin-left: 1em;
+  margin-left: 0.5em;
 }
 
 .logoutButtonMini {
-  background: #06CBC1;
+  background: #06cbc1;
   border-radius: 14px;
   width: 50px;
   height: 50px;
-  
 }
 
 /* #logoutButtonMini {
   background: #06CBC1;
   border-radius: 20px; */
-  /* width: 64px;
+/* width: 64px;
   height: 64px; */
 
 /* } */
 
 .logo {
-  margin-top:1em;
-  margin-bottom:1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .refreshButton {
   width: 52px;
   height: 52px;
   border-radius: 20px;
-  margin-left:1em;
+  margin-left: 1em;
 }
 
 .MuiSelect-select:focus {
   border-radius: 14px !important;
   background-color: white !important;
-
 }
 
+.MuiTable-root {
+  display: block !important;
+}
+.form-control {
+  background-color: white !important;
+}
+/* .btn:hover {
+  color: #fff !important;
+  text-decoration: none;
+  } */
+/* button.btn.btn-secondary {
+  text-align: center !important;
+  display:flex !important;
+  justify-content: center !important;
+ 
+} */
+
+.modal-header {
+  border-bottom: 0 none !important;
+
+  height: 50px;
+}
+
+.custom-modal-style {
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+}
