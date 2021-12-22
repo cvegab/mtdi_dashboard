@@ -172,7 +172,7 @@ readTextFile(file)
         },
 
         body: JSON.stringify({
-          to: "cv@chambas.cl",
+          to: "shiny.kavery@gmail.com",
           subject: "desdepostman 4.0",
           // body: this.readTextFile('file:///E:/pro-paper/src/Mail/mail.txt'),
           body: `<!DOCTYPE html>
@@ -277,7 +277,7 @@ readTextFile(file)
                     <img src="./img/icon1.png" alt="Icon" title="Icon" width="30">
                     <br/>
                     <a href="http://www.instancelatam.com">
-                      <img src= 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.revistagq.com%2Fphotos%2F5d5d383031110c000879872d%2Fmaster%2Fpass%2Flogo-starbucks.jpg&imgrefurl=https%3A%2F%2Fwww.revistagq.com%2Fnoticias%2Farticulo%2Flogo-starbucks-diseno-simetria&tbnid=ED9Uddx9dQfsMM&vet=12ahUKEwjXydnS5ff0AhXbEbkGHUYrAqEQMygVegUIARDzAQ..i&docid=Bo0rJf9sxdAWFM&w=1920&h=1080&itg=1&q=logos&ved=2ahUKEwjXydnS5ff0AhXbEbkGHUYrAqEQMygVegUIARDzAQ' alt="Logo-instance" title="Logo" width="120">
+                      <img src= "./pic/logo-azul.png" alt="Logo-instance" title="Logo" width="120">
                     </a>
                   </td>
                 </tr>
