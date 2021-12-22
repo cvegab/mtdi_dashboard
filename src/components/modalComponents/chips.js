@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./chip.css";
+import mailFile from '../../../src/Mail/mail.html';
 import SiIcon from "../../assets/img/si.png";
 export default class Chips extends React.Component {
   state = {
@@ -10,6 +11,7 @@ export default class Chips extends React.Component {
     error: null,
     emailState: [],
     emailError: null,
+    finalEmail : ''
   };
 
   handleKeyDown = (evt) => {
@@ -121,19 +123,21 @@ export default class Chips extends React.Component {
     const x = [...this.state.items];
     x.push(this.state.emailState);
     console.log(x);
+    const y = x.forEach((y)=>{return y});
+    console.log(y);
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "text/html",
         },
 
         body: JSON.stringify({
-          to: "shiny.kavery@gmail.com,kaverypandanda@instancelatam.com",
+          to: "shiny.kavery@gmail.com",
           subject: "desdepostman 4.0",
-          body: "hello react.testing if i can send a mail from my react app :).if you have recieved this email,all it means is that your react app can send mail",
+          body: mailFile,
           filename: "",
           file: "",
         }),
