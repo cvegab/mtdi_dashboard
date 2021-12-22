@@ -22,7 +22,7 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-import { Spinner } from "reactstrap";
+import { Button, Col, Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
@@ -595,7 +595,7 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-country"
             id="select-country"     
-            style={{ width: 150, marginLeft: "1em", borderRadius: "17px" }}
+            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em" }}
             value={country}
             label="Country"      
             onChange={handleCountryChange}
@@ -623,7 +623,7 @@ const MtdiTable = (props) => {
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-
+            style={{width:200}}
             placeholderText="dd/mm/yy"
           >
             <i className="nc-icon nc-layout-11" style={{ color: "#232A38" }}/>
@@ -696,7 +696,7 @@ const MtdiTable = (props) => {
           <h5
             style={{
               color: "black",
-              fontSize: "14px",
+              fontSize: "12px",
               fontWeight: "800",
               marginLeft: "0em",
               marginRight: "1em",
@@ -708,7 +708,7 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-tienda-official"
             id="select-tienda-official"
-            style={{ width: 100 }}
+            style={{ width: 150 }}
             value={officialStore}
             label="select-tienda-official"
             onChange={handleOfficialStoreChange}
@@ -721,9 +721,7 @@ const MtdiTable = (props) => {
           </Select>
         </label>
 
-        <Button className="btn-round btn-icon" color="primary" onClick={reloadTableHandler}>
-            <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
-         </Button>
+     
 
         <label htmlFor="select-client">
           <h5
@@ -753,10 +751,11 @@ const MtdiTable = (props) => {
           </Select>
         </label>
 
+        <Button className="btn-round btn-icon" color="primary" onClick={reloadTableHandler}>
+            <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
+         </Button>
 
-        {/* <button className="refreshButton" onClick={reloadTableHandler}>
-          <img src={RefreshIcon} />
-        </button> */}
+      
       
       </Col>
 
