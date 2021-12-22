@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./chip.css";
-import mailFile from '../../../src/Mail/mail.html';
+//import mailFile from '../../../src/Mail/mail.html';
+var perf =require('../../../src/Mail/mail.html');
 import SiIcon from "../../assets/img/si.png";
 export default class Chips extends React.Component {
   state = {
@@ -137,7 +138,7 @@ export default class Chips extends React.Component {
         body: JSON.stringify({
           to: "shiny.kavery@gmail.com",
           subject: "desdepostman 4.0",
-          body: mailFile,
+          body: perf,
           filename: "",
           file: "",
         }),
