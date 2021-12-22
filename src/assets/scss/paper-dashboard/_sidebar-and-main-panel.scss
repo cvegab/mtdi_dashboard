@@ -122,7 +122,7 @@
 
             > a{
                 margin: 10px 15px 0;
-                color: $white-color;
+                color: white;
                 display: block;
                 text-decoration: none;
                 position: relative;
@@ -186,6 +186,7 @@
             height: auto;
             white-space: nowrap;
             font-weight: 600;
+            color: white;
             @extend .animation-transition-general;
         }
 
@@ -435,7 +436,7 @@
     position: relative;
     float: right;
     width: $sidebar-width;
-    background-color: #f4f3ef;
+    background-color: #FFFFFF;
 
     @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
@@ -614,6 +615,8 @@
 
 .sidebar {
   &[data-color="white"] {
+    background-color: #1D308E !important;
     border-right: 1px solid #ddd;
-  }
+  
+}
 }

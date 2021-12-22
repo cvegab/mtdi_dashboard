@@ -71,4 +71,5 @@ gulp.task("default", async function () {
     )
     .pipe(gulp.dest("./", { overwrite: true }));
   return;
-});
+}
+);

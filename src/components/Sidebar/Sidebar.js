@@ -20,8 +20,12 @@ import { Nav, Collapse } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import avatar from "assets/img/faces/ayo-ogunseinde-2.jpg";
-import logo from "assets/img/react-logo.png";
+import avatar from "assets/img/faces/CamiloVega.jpg";
+import logo1 from "assets/img/logo-instance-white.png";
+import logo2 from "assets/img/favicon.png";
+import UserProfile from "views/pages/UserProfile.js";
+import LogoutIcon from "assets/img/logout-icon.png"
+import '../../assets/css/global.css'
 
 var ps;
 
@@ -155,18 +159,18 @@ function Sidebar(props) {
     >
       <div className="logo">
         <a
-          href="https://www.creative-tim.com"
+          // href="https://www.creative-tim.com"
           className="simple-text logo-mini"
         >
           <div className="logo-img">
-            <img src={logo} alt="react-logo" />
+            <img src={logo2} alt="Instance-logo" />
           </div>
         </a>
         <a
-          href="https://www.creative-tim.com"
-          className="simple-text logo-normal"
+          // href="https://www.creative-tim.com"
+          className="textCompany logo-normal"
         >
-          Creative Tim
+           <img src={logo1} alt="Instance-logo" width="50%" />
         </a>
       </div>
 
@@ -177,17 +181,17 @@ function Sidebar(props) {
           </div>
           <div className="info">
             <a
-              href="#pablo"
+              href="#profile"
               data-toggle="collapse"
               aria-expanded={openAvatar}
               onClick={() => setOpenAvatar(!openAvatar)}
             >
-              <span>
-                Chet Faker
-                <b className="caret" />
-              </span>
+              <a onClick={UserProfile} className="textProfile">
+                Camilo Vega
+                {/* <b className="caret" /> */}
+              </a>
             </a>
-            <Collapse isOpen={openAvatar}>
+            {/* <Collapse isOpen={openAvatar}>
               <ul className="nav">
                 <li>
                   <NavLink to="/admin/user-profile" activeClassName="">
@@ -198,22 +202,51 @@ function Sidebar(props) {
                 <li>
                   <NavLink to="/admin/user-profile" activeClassName="">
                     <span className="sidebar-mini-icon">EP</span>
-                    <span className="sidebar-normal">Edit Profile</span>
+                    <span className="sidebar-normal">Editar Perfil</span>
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/admin/user-profile" activeClassName="">
-                    <span className="sidebar-mini-icon">S</span>
-                    <span className="sidebar-normal">Settings</span>
+                    <span className="sidebar-mini-icon">O</span>
+                    <span className="sidebar-normal">Opciones</span>
                   </NavLink>
                 </li>
               </ul>
-            </Collapse>
+            </Collapse> */}
           </div>
         </div>
+
+  
+
         <Nav>{createLinks(props.routes)}</Nav>
+
+
+
+          <div className="logo">
+        <a
+          // href="https://www.creative-tim.com"
+          className="logo-mini logoutButtonMini "
+        >
+          <button className="logoutButtonMini">
+            <img src={LogoutIcon} alt="logoutMini" />
+          </button>
+        </a>
+        <a
+          // href="https://www.creative-tim.com"
+          className="logo-normal"
+        >
+           <button id="logoutButton" className="logoutButton">
+        <img src={LogoutIcon} />
+        Cerrar sesión
+      </button>
+        </a>
+      </div>
+
+
       </div>
     </div>
+
+    
   );
 }
 
