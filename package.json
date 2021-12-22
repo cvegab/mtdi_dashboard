@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && gulp licenses",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/ct-paper-dashboard-pro-react/issues"
   },
-  "homepage": "https://demos.creative-tim.com/paper-dashboard-pro-react/#/",
+  "homepage": "https://dev.dfsk43mtzisnz.amplifyapp.com",
   "dependencies": {
     "bootstrap": "4.6.0",
     "chart.js": "3.2.1",
