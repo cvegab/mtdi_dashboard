@@ -16,7 +16,7 @@
 */
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Nav, Collapse } from "reactstrap";
+import { Nav, Collapse, Button } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
@@ -235,10 +235,12 @@ function Sidebar(props) {
           // href="https://www.creative-tim.com"
           className="logo-normal"
         >
-           <button id="logoutButton" className="logoutButton">
-        <img src={LogoutIcon} />
-        Cerrar sesión
-      </button>
+        <Button color="primary" style={{borderRadius: "17px", color:"#FFFFFF"}} >
+                  <span className="btn-label">
+                    <i className="nc-icon nc-box-2" />
+                  </span>
+                 Cerrar Sesión       
+                </Button>
         </a>
       </div>
 
