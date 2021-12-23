@@ -221,7 +221,6 @@ function Sidebar(props) {
         <Nav>{createLinks(props.routes)}</Nav>
 
 
-
           <div className="logo">
         <a
           // href="https://www.creative-tim.com"
@@ -235,12 +234,22 @@ function Sidebar(props) {
           // href="https://www.creative-tim.com"
           className="logo-normal"
         >
+<<<<<<< Updated upstream
         <Button color="primary" style={{borderRadius: "17px", color:"#FFFFFF"}} >
                   <span className="btn-label">
                     <i className="nc-icon nc-box-2" />
                   </span>
                  Cerrar Sesión       
                 </Button>
+=======
+     
+        <Button color="primary" style={{borderRadius: "17px"}} size="lg">
+           <span className="btn-label">
+             <i className="nc-icon nc-settings-gear-65" />
+           </span>
+             Cerrar Sesión   
+        </Button>
+>>>>>>> Stashed changes
         </a>
       </div>
 
