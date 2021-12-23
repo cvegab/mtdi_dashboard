@@ -1,19 +1,5 @@
-/*!
 
-=========================================================
-* Paper Dashboard PRO React - v1.3.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 // react plugin used to create charts
 import { Line, Bar, Pie } from "react-chartjs-2";
@@ -27,6 +13,7 @@ import {
   CardTitle,
   Row,
   Col,
+  Button,
 } from "reactstrap";
 
 // core components
@@ -43,6 +30,76 @@ function Charts() {
   return (
     <>
       <div className="content">
+
+     
+        <h5
+          className="titleTable"
+          style={{
+            color: "#C4C4C4",
+            width: "450px",
+            fontSize: "10px",
+            fontWeight: "800",
+            marginLeft: "1em",
+            marginBottom: "0px",
+          }}
+        >
+          Dashboard: Vista Administrador
+        </h5>
+        <p
+          classname="textNameTable"
+          style={{
+            color: "black",
+            width: "450px",
+            fontSize: "20px",
+            fontWeight: "800",
+            marginLeft: "1em",
+          }}
+        >
+          Tu tienda
+        </p>
+        <Col md="12">
+              
+              <CardBody>
+                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                  <span className="btn-label">
+                    <i className="nc-icon nc-layout-11" />
+                  </span>
+                  General        
+                </Button>
+              
+
+                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                  <span className="btn-label">
+                    <i className="nc-icon nc-shop" />
+                  </span>
+                  Tiendas        
+                </Button>
+
+                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                  <span className="btn-label">
+                    <i className="nc-icon nc-settings-gear-65" />
+                  </span>
+                  Backoffice    
+                </Button>
+                 
+                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                  <span className="btn-label">
+                    <i className="nc-icon nc-box-2" />
+                  </span>
+                 Fulfillment        
+                </Button>
+                 
+
+                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                  <span className="btn-label">
+                    <i className="nc-icon nc-single-02" />
+                  </span>
+                 Cliente    
+                </Button>
+                 
+                 
+              </CardBody>
+        </Col>
 
         <Row>
         <Col md="6">
