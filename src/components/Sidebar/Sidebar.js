@@ -24,7 +24,7 @@ import avatar from "assets/img/faces/CamiloVega.jpg";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
-import LogoutIcon from "assets/img/logout-icon.png"
+// import LogoutIcon from "assets/img/logout-icon.png"
 import '../../assets/css/global.css'
 
 var ps;
@@ -224,19 +224,22 @@ function Sidebar(props) {
           <div className="logo">
         <a
           // href="https://www.creative-tim.com"
-          className="logo-mini logoutButtonMini "
+          className="logo-mini "
         >
-          <button className="logoutButtonMini">
+          {/* <button className="logoutButtonMini">
             <img src={LogoutIcon} alt="logoutMini" />
-          </button>
+          </button> */}
+           <Button className="btn-round btn-icon" color="primary" style={{ color: "#ffffff" }}>
+           <i className="nc-icon nc-user-run" />
+         </Button>
         </a>
         <a
           // href="https://www.creative-tim.com"
           className="logo-normal"
         >
-          <Button color="primary" style={{borderRadius: "17px", color:"#FFFFFF", marginLeft: "-1.5em"}} >
+          <Button color="primary" style={{borderRadius: "22px", color:"#FFFFFF", marginLeft: "1em", textTransform: "none", letterSpacing:"1px", width: "200px", height:"60px"}} >
             <span className="btn-label">
-              <i className="nc-icon nc-box-2" />
+              <i className="nc-icon nc-user-run" />
             </span>
              Cerrar Sesión       
           </Button>

@@ -595,9 +595,10 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-country"
             id="select-country"     
-            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em" }}
+            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "12px" }}
             value={country}
-            label="Country"      
+            label="Country"
+            placeholder="Seleccione un país"      
             onChange={handleCountryChange}
           >
             
@@ -614,7 +615,8 @@ const MtdiTable = (props) => {
               fontSize: "12px",
               fontWeight: "800",
               marginLeft: "1em",
-              marginBottom: "18px",
+              marginBottom: "11px",
+              marginTOp:"3px"
             }}
           >    
             Fecha
@@ -623,8 +625,9 @@ const MtdiTable = (props) => {
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            style={{width:200}}
+            style={{width:200, fontSize: "12px"}}
             placeholderText="dd/mm/yy"
+            
           >
             <i className="nc-icon nc-layout-11" style={{ color: "#232A38" }}/>
           </DatePicker>          
@@ -649,7 +652,8 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-canal"
             id="select-canal"
-            style={{ width: 130, marginLeft: "1em" }}
+            placeholder="Seleccione un canal"
+            style={{ width: 150, marginLeft: "1em", fontSize: "12px" }}
             value={salesChannel}
             label="select-canal"
             onChange={handleSalesChannelChange}
@@ -677,9 +681,10 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-tienda"
             id="select-tienda"
-            style={{ width: 150 }}
+            style={{ width: 160, fontSize: "12px" }}
             value={store}
             label="select-canal"
+            placeholder="Seleccione una tienda" 
             onChange={handleStoreChange}
           >
             {Array.from(new Set(data.map((obj) => obj.tienda))).map(
@@ -701,6 +706,7 @@ const MtdiTable = (props) => {
               marginLeft: "0em",
               marginRight: "1em",
               marginBottom: "0px",
+              
             }}
           >
             Tienda Oficial
@@ -708,7 +714,8 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-tienda-official"
             id="select-tienda-official"
-            style={{ width: 150 }}
+            placeholder="Seleccione una tienda oficial" 
+            style={{ width: 150, fontSize: '12px' }}
             value={officialStore}
             label="select-tienda-official"
             onChange={handleOfficialStoreChange}
@@ -738,9 +745,10 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-client"
             id="select-client"
-            style={{ width: 150, marginLeft: '1em' }}
+            style={{ width: 150, marginLeft: '1em', fontSize: '12px' }}
             value={client}
             label="select-tienda-official"
+            placeholder="Seleccione un cliente" 
             onChange={handleClientChange}
           >
             {Array.from(new Set(data.map((obj) => obj.cliente))).map(
