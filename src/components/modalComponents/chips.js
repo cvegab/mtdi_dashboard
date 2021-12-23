@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import React from "react";
+import { Form, FormGroup, Label } from "reactstrap";
+import { Button, Card, CardBody, CardText, Row, Col } from "reactstrap";
 import "./chip.css";
-import Test from "./test";
-import MailFile from "../../../src/Mail/mail.txt";
-
+import sentEmail from "../../assets/img/emailSent.png";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 import SiIcon from "../../assets/img/si.png";
+import Modal from "components/UI/Modal";
 export default class Chips extends React.Component {
   state = {
     items: [],
@@ -13,7 +13,7 @@ export default class Chips extends React.Component {
     error: null,
     emailState: [],
     emailError: null,
-    finalEmail: "",
+    emailSent: null,
   };
 
   handleKeyDown = (evt) => {
@@ -121,10 +121,37 @@ export default class Chips extends React.Component {
     };
     rawFile.send(null);
   }
-
+  warningWithConfirmAndCancelMessage = () => {
+    setAlert(
+      <ReactBSAlert
+        warning
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Are you sure?"
+        onConfirm={() => successDelete()}
+        onCancel={() => cancelDetele()}
+        confirmBtnBsStyle="info"
+        cancelBtnBsStyle="danger"
+        confirmBtnText="Yes, delete it!"
+        cancelBtnText="Cancel"
+        showCancel
+        btnSize=""
+      >
+        You will not be able to recover this imaginary file!
+      </ReactBSAlert>
+    );
+  };
   submitHandler = (event) => {
     let error = null;
+    
     event.preventDefault();
+   
+    console.log(this.state.emailSent);
+    //this.props.onhideModal();
+   
+  //  let sent = true;
+  //  if (sent){
+  //    return(<h1>hello</h1>);
+  //  }
     if (!this.isEmail(this.state.emailState)) {
       error = `${this.state.emailState} is not a valid email address.`;
     }
@@ -142,8 +169,8 @@ export default class Chips extends React.Component {
 
     let final = "" + x.toString() + "";
     console.log(final);
-    console.log('i am called');
-   
+    console.log("i am called");
+
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
@@ -156,7 +183,7 @@ export default class Chips extends React.Component {
         body: JSON.stringify({
           to: final,
           subject: "Envío de Documento Tributario Electrónico",
-          // body: this.readTextFile('file:///E:/pro-paper/src/Mail/mail.txt'),
+
           body: `<!DOCTYPE html>
           <html lang="es">
           <head>
@@ -536,75 +563,119 @@ export default class Chips extends React.Component {
       }
     ).then((response) => {
       console.log(response);
+      this.setState({emailSent: true})
     });
   };
 
   render() {
-    return (
-      <Form onSubmit={this.submitHandler}>
-        <FormGroup>
-          <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
-            Enviar a:
-          </Label>
-          <input
-            className={"input " + (this.state.emailError && " has-error")}
-            type="email"
-            name="email"
-            id="exampleEmail"
-            placeholder="Enter a email"
-            value={this.state.emailState}
-            onChange={this.handleEmailChange}
-            onBlur={this.checkEmail}
-          />
-          {this.state.emailError && (
-            <p className="error">{this.state.emailError}</p>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
-            Agregar otro correo:
-          </Label>
-          {this.state.items.map((item) => (
-            <div className="tag-item" key={item}>
-              {item}
-              <button
-                type="button"
-                className="button"
-                onClick={() => this.handleDelete(item)}
+    if (!this.state.emailSent) {
+      return (
+        <React.Fragment>
+          <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
+            Enviar documento tributario
+          </h3>
+          <Form onSubmit={this.submitHandler}>
+            <FormGroup>
+              <Label
+                for="exampleEmail"
+                style={{ fontWeight: "600", size: "14px" }}
               >
-                &times;
-              </button>
+                Enviar a:
+              </Label>
+              <input
+                className={"input " + (this.state.emailError && " has-error")}
+                type="email"
+                name="email"
+                id="exampleEmail"
+                placeholder="Enter a email"
+                value={this.state.emailState}
+                onChange={this.handleEmailChange}
+                onBlur={this.checkEmail}
+              />
+              {this.state.emailError && (
+                <p className="error">{this.state.emailError}</p>
+              )}
+            </FormGroup>
+            <FormGroup>
+              <Label
+                for="exampleEmail"
+                style={{ fontWeight: "600", size: "14px" }}
+              >
+                Agregar otro correo:
+              </Label>
+              {this.state.items.map((item) => (
+                <div className="tag-item" key={item}>
+                  {item}
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={() => this.handleDelete(item)}
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+
+              <input
+                className={"input " + (this.state.error && " has-error")}
+                value={this.state.value}
+                placeholder="Type or paste email addresses and press `Enter`..."
+                onKeyDown={this.handleKeyDown}
+                onChange={this.handleChange}
+                onPaste={this.handlePaste}
+              />
+
+              {this.state.error && <p className="error">{this.state.error}</p>}
+            </FormGroup>
+            <div class="text-center">
+              <Button
+                type="submit"
+                style={{
+                  background: "#1D308E",
+                  textAlign: "center",
+                  color: "white",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                }}
+              >
+                Enviar Correo &nbsp;
+                <img src={SiIcon} />
+              </Button>
             </div>
-          ))}
-
-          <input
-            className={"input " + (this.state.error && " has-error")}
-            value={this.state.value}
-            placeholder="Type or paste email addresses and press `Enter`..."
-            onKeyDown={this.handleKeyDown}
-            onChange={this.handleChange}
-            onPaste={this.handlePaste}
+          </Form>
+        </React.Fragment>
+      );
+    }
+    if (this.state.emailSent) {
+      return (
+        <React.Fragment>
+          <img
+            src={sentEmail}
+            style={{ display: "flex", justifyContent: "center" }}
           />
+          <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
+            Documento enviado con éxito
+          </h3>
 
-          {this.state.error && <p className="error">{this.state.error}</p>}
-        </FormGroup>
-        <div class="text-center">
-          <Button
-            type="submit"
-            style={{
-              background: "#1D308E",
-              textAlign: "center",
-              color: "white",
-              width: "296px",
-              height: "64px",
-              padding: "22px 81px",
-            }}
-          >
-            Enviar Correo &nbsp;
-            <img src={SiIcon} />
-          </Button>
-        </div>
-      </Form>
-    );
+          <div class="text-center">
+            <Button
+              type="button"
+              style={{
+                background: "#1D308E",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+              }}
+           
+            >
+              Entendido
+            </Button>
+          </div>
+          </React.Fragment>
+      );
+    }
   }
 }
