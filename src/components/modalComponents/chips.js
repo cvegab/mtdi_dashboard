@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "./chip.css";
-import Test from './test';
-import MailFile from '../../../src/Mail/mail.txt';
-// import {mailFile} from '../../../src/Mail/mail.html';
-// // var perf =require('../../../src/Mail/mail.html');
+import Test from "./test";
+import MailFile from "../../../src/Mail/mail.txt";
+
 import SiIcon from "../../assets/img/si.png";
 export default class Chips extends React.Component {
   state = {
@@ -14,7 +13,7 @@ export default class Chips extends React.Component {
     error: null,
     emailState: [],
     emailError: null,
-    finalEmail : ''
+    finalEmail: "",
   };
 
   handleKeyDown = (evt) => {
@@ -109,39 +108,19 @@ export default class Chips extends React.Component {
     return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
   }
 
-//    readHtmlFile(evt){
-//     var f = evt.target.files[0];
-// console.log(f);
-//     if (f) {
-//         var r = new FileReader();
-//         console.log(r);
-//         r.onload = function (e) {
-//             var contents = e.target.result;
-//             document.getElementById("ReadResult").innerHTML = contents;
-//         }
-//         r.readAsText(f);
-//     } else {
-//         alert("Failed to load file");
-//     }
-  
-//   }
-readTextFile(file)
-{
+  readTextFile(file) {
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                alert(allText);
-            }
+    rawFile.onreadystatechange = function () {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status === 200 || rawFile.status == 0) {
+          var allText = rawFile.responseText;
+          alert(allText);
         }
-    }
+      }
+    };
     rawFile.send(null);
-}
+  }
 
   submitHandler = (event) => {
     let error = null;
@@ -160,8 +139,11 @@ readTextFile(file)
     const x = [...this.state.items];
     x.push(this.state.emailState);
     console.log(x);
-    const y = x.forEach((y)=>{return y});
-    console.log(y);
+
+    let final = "" + x.toString() + "";
+    console.log(final);
+    console.log('i am called');
+   
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
@@ -172,8 +154,8 @@ readTextFile(file)
         },
 
         body: JSON.stringify({
-          to: "shiny.kavery@gmail.com",
-          subject: "desdepostman 4.0",
+          to: final,
+          subject: "Envío de Documento Tributario Electrónico",
           // body: this.readTextFile('file:///E:/pro-paper/src/Mail/mail.txt'),
           body: `<!DOCTYPE html>
           <html lang="es">
@@ -274,10 +256,10 @@ readTextFile(file)
               <table class="column">
                 <tr>
                   <td style="padding: 20px 60px; ">
-                    <img src="./img/icon1.png" alt="Icon" title="Icon" width="30">
+                    <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" title="Icon" width="30">
                     <br/>
                     <a href="http://www.instancelatam.com">
-                      <img src= "./pic/logo-azul.png" alt="Logo-instance" title="Logo" width="120">
+                      <img src= "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" title="Logo" width="120">
                     </a>
                   </td>
                 </tr>
@@ -331,7 +313,7 @@ readTextFile(file)
                         <table class="content">
                           <tr>
                             <td>
-                            <img src="./img/image-delivery.png" alt="ImagenDelivery" width="90%">
+                            <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/image-delivery.png" alt="ImagenDelivery" width="90%">
                               
                             </td>
                           </tr>
@@ -410,7 +392,7 @@ readTextFile(file)
                         <table class="content">
                           <tr>
                             <td>
-                              <a href="#"><img src="./img/logo-unilever.png" alt="Logo-Marca" title="Logo Marca" width="250px" style="max-width: 250px; margin-top:-4em"></a>
+                              <a href="#"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-unilever.png" alt="Logo-Marca" title="Logo Marca" width="250px" style="max-width: 250px; margin-top:-4em"></a>
                             </td>
                           </tr>
                         </table>
@@ -492,7 +474,7 @@ readTextFile(file)
           
                 <tr>
                   <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
-                    <img src="./img/icon-boleta.png" alt="IconoBoleta" title="IconoBoleta" width="30" style="padding:14px 0px 2px 35px;">
+                    <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-boleta.png" alt="IconoBoleta" title="IconoBoleta" width="30" style="padding:14px 0px 2px 35px;">
                     <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> Importante</p>
                     <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este comprobante no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
                   </td>
@@ -509,7 +491,7 @@ readTextFile(file)
           
               <tr>
                 <td style="text-align: center; padding: 30px 20px;">
-                  <img src="./img/icon-help.png" alt="iconHelp" title="iconHelp" width="30">
+                  <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-help.png" alt="iconHelp" title="iconHelp" width="30">
                   <p style="padding: 0px; font-size:14px; letter-spacing: 0.5px;" > ¿Necesitas ayuda?</p>
                   <p style="padding: 8px; font-size: 12px; line-height: 30px; letter-spacing: 0.5px;"> Comunícate directamente con tu vendedor zonal o al correo <a href="mailto:contacto@instancelatam.com" style="color:#ffffff">contacto@instancelatam.com</a></p>
           
@@ -518,13 +500,13 @@ readTextFile(file)
                 <!-- <tr> 
                 <td style="text-align: center; padding:0px 20px"> -->
                   <a href="http://www.instancelatam.com">
-                    <img src="./img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px;">
+                    <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px;">
                   </a>
                   <br/>
             
-                      <a href="https://www.linkedin.com/company/instancelatam/"><img src="./img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
-                      <a href="http://www.instagram.com/instance_latam"><img src="./img/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
-                      <a href="mailto:contacto@instancelatam.com"><img src="./img/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
+                      <a href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
+                      <a href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
+                      <a href="mailto:contacto@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
                     </td>
                   </tr> 
           
