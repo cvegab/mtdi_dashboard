@@ -48,7 +48,7 @@ import iconReportes from "assets/img/icons-reportes.png"
 
 const routes = [
   {
-    path: "/mtdi-tables",
+    path: "/dashboard",
     name: "Órdenes de compra",
     // mini: "RT",
     icon: "nc-icon nc-single-copy-04",
@@ -303,7 +303,7 @@ const routes = [
     layout: "/admin",
   },
   {
-    path: "/dashboard",
+    path: "/mtdi-table",
     name: "Maestro de productos",
     icon: "nc-icon nc-box",
     component: Dashboard,

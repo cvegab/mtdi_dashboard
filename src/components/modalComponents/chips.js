@@ -43,7 +43,7 @@ export default class Chips extends React.Component {
     let error = null;
 
     if (!this.isEmail(evt.target.value)) {
-      error = `${evt.target.value} is not a valid email address.`;
+      error = `${evt.target.value} No es un correo válido`;
     }
 
     if (error) {
@@ -80,11 +80,11 @@ export default class Chips extends React.Component {
     let error = null;
 
     if (this.isInList(email)) {
-      error = `${email} has already been added.`;
+      error = `${email} Fue agregado correctamente`;
     }
 
     if (!this.isEmail(email)) {
-      error = `${email} is not a valid email address.`;
+      error = `${email} No es un correo válido`;
     }
 
     if (error) {
@@ -108,7 +108,7 @@ export default class Chips extends React.Component {
     let error = null;
     event.preventDefault();
     if (!this.isEmail(this.state.emailState)) {
-      error = `${this.state.emailState} is not a valid email address.`;
+      error = `${this.state.emailState} Debes ingresar un correo válido`;
     }
     if (error) {
       if (error) {
@@ -135,7 +135,7 @@ export default class Chips extends React.Component {
             type="email"
             name="email"
             id="exampleEmail"
-            placeholder="Enter a email"
+            placeholder="Ingresa un correo"
             value={this.state.emailState}
             onChange={this.handleEmailChange}
             onBlur={this.checkEmail}
@@ -148,6 +148,21 @@ export default class Chips extends React.Component {
           <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
             Agregar otro correo:
           </Label>
+         
+
+          <input
+            className={"input " + (this.state.error && " has-error")}
+            value={this.state.value}
+            placeholder="Ingresa o pega un correo y presiona la tecla 'Enter'"
+            onKeyDown={this.handleKeyDown}
+            onChange={this.handleChange}
+            onPaste={this.handlePaste}
+          />
+
+          {this.state.error && <p className="error">{this.state.error}</p>}
+
+          
+
           {this.state.items.map((item) => (
             <div className="tag-item" key={item}>
               {item}
@@ -160,18 +175,10 @@ export default class Chips extends React.Component {
               </button>
             </div>
           ))}
-
-          <input
-            className={"input " + (this.state.error && " has-error")}
-            value={this.state.value}
-            placeholder="Type or paste email addresses and press `Enter`..."
-            onKeyDown={this.handleKeyDown}
-            onChange={this.handleChange}
-            onPaste={this.handlePaste}
-          />
-
-          {this.state.error && <p className="error">{this.state.error}</p>}
         </FormGroup>
+        
+        
+        
         <div class="text-center">
           <Button
             type="submit"
