@@ -140,18 +140,19 @@ export default class Chips extends React.Component {
       </ReactBSAlert>
     );
   };
+
   submitHandler = (event) => {
     let error = null;
-    
+
     event.preventDefault();
-   
+
     console.log(this.state.emailSent);
     //this.props.onhideModal();
-   
-  //  let sent = true;
-  //  if (sent){
-  //    return(<h1>hello</h1>);
-  //  }
+
+    //  let sent = true;
+    //  if (sent){
+    //    return(<h1>hello</h1>);
+    //  }
     if (!this.isEmail(this.state.emailState)) {
       error = `${this.state.emailState} is not a valid email address.`;
     }
@@ -563,10 +564,12 @@ export default class Chips extends React.Component {
       }
     ).then((response) => {
       console.log(response);
-      this.setState({emailSent: true})
+      this.setState({ emailSent: true });
     });
   };
-
+  entendidoButtonHandler = () => {
+    this.props.onhideModal();
+  };
   render() {
     if (!this.state.emailSent) {
       return (
@@ -650,16 +653,21 @@ export default class Chips extends React.Component {
     if (this.state.emailSent) {
       return (
         <React.Fragment>
-          <img
-            src={sentEmail}
-            style={{ display: "flex", justifyContent: "center" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={sentEmail} />
+          </div>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
             Documento enviado con éxito
           </h3>
 
           <div class="text-center">
-            <Button
+            <button
               type="button"
               style={{
                 background: "#1D308E",
@@ -668,13 +676,16 @@ export default class Chips extends React.Component {
                 width: "296px",
                 height: "64px",
                 padding: "22px 81px",
+                borderRadius: '17px',
+                border: 'none',
+                weight: '700px',
               }}
-           
+              onClick={this.entendidoButtonHandler}
             >
               Entendido
-            </Button>
+            </button>
           </div>
-          </React.Fragment>
+        </React.Fragment>
       );
     }
   }
