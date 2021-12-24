@@ -20,7 +20,7 @@ const ModalOverlay = (props) => {
         {/* <img src={vector} alt='icon'  style={{textAlign:'right'}} /> */}
         <h2
           style={{ color: "black" }}
-          style={{ textAlign: "right", color: "black" }}
+          style={{ textAlign: "right", color: "black", fontSize: "16px", cursor: "pointer" }}
           onClick={props.close}
         >
           x
