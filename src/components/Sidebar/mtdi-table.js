@@ -176,7 +176,6 @@ const MtdiTable = (props) => {
     }
   }, [startDate]);
 
- 
   const fetchOrderData = async () => {
     console.log("1 start");
     setisLoading(true);
@@ -212,9 +211,9 @@ const MtdiTable = (props) => {
     }
   };
 
-
-  const showModalHandler = () => {
+  const showModalHandler = (row) => {
     console.log("hi i was clicked");
+    console.log(row);
     setshowModal(true);
   };
   const hideModalHandler = () => {
@@ -320,13 +319,14 @@ const MtdiTable = (props) => {
       title: "DTE",
       field: "dte_exist",
       // icon: Search,
+      // render: row =>( <div onClick={() => console.log(row.client)}>{row.client}</div>),
       lookup: {
         "": (
           // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
             Si &nbsp;
             <span className={classes.si}>
-              <img src={SiIcon} onClick={showModalHandler} />
+              <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
             </span>
             &nbsp;
             <span className={classes.showPdf}>
@@ -531,13 +531,7 @@ const MtdiTable = (props) => {
   return (
     <React.Fragment>
       {showModal && (
-        // <Modal onhideModal={hideModalHandler}>
-        //   <h1>Hello</h1>
-        // </Modal>
-        // <SendMail onhideModal={hideModalHandler}></SendMail>
-
-        // <SendMail onhideModal={hideModalHandler}></SendMail>
-        <SendMail onhideModal={hideModalHandler}></SendMail>
+        <SendMail onhideModal={hideModalHandler} data={data}></SendMail>
       )}
 
       {/* <div
