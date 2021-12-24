@@ -136,6 +136,7 @@ export default class Chips extends React.Component {
             name="email"
             id="exampleEmail"
             placeholder="Ingresa un correo"
+            style={{fontSize: "12px"}}
             value={this.state.emailState}
             onChange={this.handleEmailChange}
             onBlur={this.checkEmail}
@@ -153,7 +154,8 @@ export default class Chips extends React.Component {
           <input
             className={"input " + (this.state.error && " has-error")}
             value={this.state.value}
-            placeholder="Ingresa o pega un correo y presiona la tecla 'Enter'"
+            placeholder="Ingresa un correo y presiona la tecla 'Enter'"
+            style={{fontSize: "12px"}}
             onKeyDown={this.handleKeyDown}
             onChange={this.handleChange}
             onPaste={this.handlePaste}
@@ -179,22 +181,28 @@ export default class Chips extends React.Component {
         
         
         
-        <div class="text-center">
-          <Button
-            type="submit"
-            style={{
-              background: "#1D308E",
-              textAlign: "center",
-              color: "white",
-              width: "296px",
-              height: "64px",
-              padding: "22px 81px",
-            }}
-          >
-            Enviar Correo &nbsp;
-            <img src={SiIcon} />
+        <div class="text-center">    
+          <Button 
+          type="submit"
+          size="lg"
+          color="primary"
+          style={{
+            borderRadius: "17px",
+            backgroundColor: "#1D308E",
+            color: "white",
+            width: "296px",
+            height: "64px",
+            fontSize: "14px",
+            
+            }} 
+            >
+             Enviar correo        
+            <span className="btn-label">
+              <i className="nc-icon nc-send" style={{marginLeft: "4px"}} />
+            </span>
           </Button>
         </div>
+
       </Form>
     );
   }
