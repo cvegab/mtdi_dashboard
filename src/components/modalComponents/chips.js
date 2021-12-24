@@ -1,11 +1,9 @@
 import React from "react";
 import { Form, FormGroup, Label } from "reactstrap";
-import { Button, Card, CardBody, CardText, Row, Col } from "reactstrap";
+import { Button } from "reactstrap";
 import "./chip.css";
 import sentEmail from "../../assets/img/emailSent.png";
-import ReactBSAlert from "react-bootstrap-sweetalert";
 import SiIcon from "../../assets/img/si.png";
-import Modal from "components/UI/Modal";
 export default class Chips extends React.Component {
   state = {
     items: [],
@@ -108,51 +106,11 @@ export default class Chips extends React.Component {
     return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
   }
 
-  readTextFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-      if (rawFile.readyState === 4) {
-        if (rawFile.status === 200 || rawFile.status == 0) {
-          var allText = rawFile.responseText;
-          alert(allText);
-        }
-      }
-    };
-    rawFile.send(null);
-  }
-  warningWithConfirmAndCancelMessage = () => {
-    setAlert(
-      <ReactBSAlert
-        warning
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Are you sure?"
-        onConfirm={() => successDelete()}
-        onCancel={() => cancelDetele()}
-        confirmBtnBsStyle="info"
-        cancelBtnBsStyle="danger"
-        confirmBtnText="Yes, delete it!"
-        cancelBtnText="Cancel"
-        showCancel
-        btnSize=""
-      >
-        You will not be able to recover this imaginary file!
-      </ReactBSAlert>
-    );
-  };
-
   submitHandler = (event) => {
     let error = null;
 
     event.preventDefault();
 
-    console.log(this.state.emailSent);
-    //this.props.onhideModal();
-
-    //  let sent = true;
-    //  if (sent){
-    //    return(<h1>hello</h1>);
-    //  }
     if (!this.isEmail(this.state.emailState)) {
       error = `${this.state.emailState} is not a valid email address.`;
     }
@@ -676,9 +634,9 @@ export default class Chips extends React.Component {
                 width: "296px",
                 height: "64px",
                 padding: "22px 81px",
-                borderRadius: '17px',
-                border: 'none',
-                weight: '700px',
+                borderRadius: "17px",
+                border: "none",
+                weight: "700px",
               }}
               onClick={this.entendidoButtonHandler}
             >
