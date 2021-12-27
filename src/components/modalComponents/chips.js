@@ -341,7 +341,7 @@ export default class Chips extends React.Component {
                   <table class="content">
                     <tr>
                       <td>
-                        <a href="#"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-unilever.png" alt="Logo-Marca" title="Logo Marca" width="250px" style="max-width: 250px; margin-top:-4em"></a>
+                        <a href="#"><img src="storeLogo" alt="Logo-Marca" title="Logo Marca" width="250px" style="max-width: 250px; margin-top:-4em"></a>
                       </td>
                     </tr>
                   </table>
@@ -479,9 +479,97 @@ export default class Chips extends React.Component {
       
     </body>
     </html>`;
-    let finalEmailText = text.replace("[nombre]", this.props.purchaser.comprador);
-    finalEmailText = text.replace("dteLink", this.props.purchaser.dte);
-    return finalEmailText;
+
+    if (this.props.purchaser.tienda === "Unilever") {
+      // let finalEmailText = text.replace(
+      //   "[nombre]",
+      //   this.props.purchaser.comprador
+      // );
+      // finalEmailText = text.replace("dteLink", this.props.purchaser.dte);
+      // finalEmailText = text.replace(
+      //   "storeLogo",
+      //   "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-unilever.png"
+      // );
+      // return finalEmailText;
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-unilever.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Softys") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-softys.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Softys") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-softys.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Afe") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-afe.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Alicorp") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-alicorp.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "CAROZZI FS") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "ELITE PROFESSIONAL") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-elite.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "ENEX") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-enex.png"
+        );
+      return finalEmailText;
+    }
   }
 
   submitHandler = (event) => {
