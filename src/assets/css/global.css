@@ -108,10 +108,19 @@ input[type="text"] {
   border: 1px solid white;
   color: black;
   width: 100px;
-  height: 30px;
+  height: 24px;
   padding-left: 10px;
-  font-size: 12px;
+  font-size: 10px;
+  cursor: pointer;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  
+}
+
+input[type="text"]::placeholder {
+  background-image: url(../img/DatePickerIcon.png);
+  background-size: 15px 15px !important;
+  background-repeat: no-repeat;
+  background-position: 4rem center;
 }
 
 input[type="text"]:focus {
@@ -119,7 +128,10 @@ input[type="text"]:focus {
   border: 1px solid white;
   color: black;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+ 
 }
+
+
 
 .MuiSelect-nativeInput {
   opacity: inherit !important;

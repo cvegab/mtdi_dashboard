@@ -12,7 +12,9 @@ import RoomIcon from "@material-ui/icons/Room";
 import RefreshIcon from "../../assets/img/icon-refresh.png";
 //import FormControl from '@mui/material/FormControl';
 import { Select, MenuItem } from "@material-ui/core";
-import DatePicker from "react-datepicker";
+import DatePicker, {registerLocale} from "react-datepicker";
+import calendarIcon from "../../assets/img/DatePickerIcon.png";
+import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 //import SearchIcon from "material-ui/svg-icons/action/search";
 
@@ -97,6 +99,8 @@ const orderList = [
     wms: "Integrado a wms",
   },
 ];
+
+registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
@@ -286,7 +290,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Pais",
+      title: "País",
       field: "pais",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -295,7 +299,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado De Pedido",
+      title: "Estado de Pedido",
       field: "order_status",
 
       render: (rowData) => {
@@ -323,13 +327,13 @@ const MtdiTable = (props) => {
       lookup: {
         "": (
           // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
-          <div>
-            Si &nbsp;
-            <span className={classes.si}>
+          <div style={{marginLeft:"4px"}}>
+            Sí &nbsp;
+            <span style={{marginLeft:"10px", cursor:"pointer"}} className={classes.si}>
               <img src={SiIcon} onClick={showModalHandler} />
             </span>
             &nbsp;
-            <span className={classes.showPdf}>
+            <span style={{cursor:"pointer"}} className={classes.showPdf}>
               <img src={showPdf} />
             </span>
           </div>
@@ -337,11 +341,11 @@ const MtdiTable = (props) => {
         disabled: (
           <div>
             No &nbsp;
-            <span className={classes.noIcon}>
+            <span style={{cursor:"pointer", marginLeft:"4px"}} className={classes.noIcon}>
               <img src={noIcon} />
             </span>
             &nbsp;
-            <span className={classes.greyIcon}>
+            <span style={{cursor:"pointer"}} className={classes.greyIcon}>
               <img src={greyIcon} />
             </span>
           </div>
@@ -372,7 +376,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Hub De pago",
+      title: "Hub de pago",
       field: "estado_pago",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -399,7 +403,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado Fulfillment",
+      title: "Estado fulfillment",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -417,7 +421,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Jefe ops",
+      title: "Jefe OPS",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -426,7 +430,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Hub Fulfilment",
+      title: "Hub fulfillment",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -453,7 +457,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Butos/Etiquettas",
+      title: "Bultos/Etiquetas",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -462,7 +466,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado Courier",
+      title: "Estado courier",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -595,10 +599,10 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-country"
             id="select-country"     
-            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "12px" }}
+            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "10px" }}
             value={country}
             label="Country"
-            placeholder="Seleccione un país"      
+            placeholder="&nbsp; Seleccione un país"      
             onChange={handleCountryChange}
           >
             
@@ -608,6 +612,7 @@ const MtdiTable = (props) => {
           </Select>
         </label>
 
+        
         <label>
           <h5
             style={{
@@ -616,23 +621,27 @@ const MtdiTable = (props) => {
               fontWeight: "800",
               marginLeft: "1em",
               marginBottom: "11px",
-              marginTOp:"3px"
+              marginTop:"4px"
             }}
           >    
             Fecha
           </h5>
           
+        
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            style={{width:200, fontSize: "12px"}}
+            style={{width:200}} 
+            class="inputIcon"          
             placeholderText="dd/mm/yy"
+            locale="es"
             
-          >
-            <i className="nc-icon nc-layout-11" style={{ color: "#232A38" }}/>
-          </DatePicker>          
+          />
+          
+        
 
-          {/* <img src={CalendarIcon} /> */}
+            
+              
         </label>
 
         <label htmlFor="select-canal">
@@ -652,8 +661,8 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-canal"
             id="select-canal"
-            placeholder="Seleccione un canal"
-            style={{ width: 150, marginLeft: "1em", fontSize: "12px" }}
+            placeholder="&nbsp; Seleccione un canal"
+            style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
             value={salesChannel}
             label="select-canal"
             onChange={handleSalesChannelChange}
@@ -681,10 +690,10 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-tienda"
             id="select-tienda"
-            style={{ width: 160, fontSize: "12px" }}
+            style={{ width: 160, fontSize: "10px" }}
             value={store}
             label="select-canal"
-            placeholder="Seleccione una tienda" 
+            placeholder="&nbsp; Seleccione una tienda" 
             onChange={handleStoreChange}
           >
             {Array.from(new Set(data.map((obj) => obj.tienda))).map(
@@ -714,8 +723,8 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-tienda-official"
             id="select-tienda-official"
-            placeholder="Seleccione una tienda oficial" 
-            style={{ width: 150, fontSize: '12px' }}
+            placeholder="&nbsp; Seleccione una tienda oficial" 
+            style={{ width: 150, fontSize: '10px' }}
             value={officialStore}
             label="select-tienda-official"
             onChange={handleOfficialStoreChange}
@@ -745,10 +754,10 @@ const MtdiTable = (props) => {
           <Select
             labelId="select-client"
             id="select-client"
-            style={{ width: 150, marginLeft: '1em', fontSize: '12px' }}
+            style={{ width: 150, marginLeft: '1em', fontSize: '10px' }}
             value={client}
             label="select-tienda-official"
-            placeholder="Seleccione un cliente" 
+            placeholder="&nbsp; Seleccione un cliente" 
             onChange={handleClientChange}
           >
             {Array.from(new Set(data.map((obj) => obj.cliente))).map(
@@ -794,7 +803,7 @@ const MtdiTable = (props) => {
                   ></Spinner>
                 </div>
               ),
-              emptyDataSourceMessage: <h1>No data found</h1>,
+              emptyDataSourceMessage: <h1>No se encuentra la información.</h1>,
             }}
           ></MaterialTable>
         )}
