@@ -21,7 +21,7 @@ import {
           <Col md="12">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Client Table</CardTitle>
+                <CardTitle tag="h4">Tabla Cliente</CardTitle>
               </CardHeader>
               <CardBody>
                 <Table responsive bordered>

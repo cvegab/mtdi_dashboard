@@ -117,11 +117,15 @@ input[type="text"] {
 }
 
 input[type="text"]::placeholder {
-  background-image: url(../img/DatePickerIcon.png);
+  background-image: url(../img/DatePickerIcon.png) !important;
   background-size: 15px 15px !important;
-  background-repeat: no-repeat;
-  background-position: 4rem center;
+  background-repeat: no-repeat !important;
+  background-position: 4rem center !important;
 }
+
+/* .MuiInputBase-input .MuiInput-input .MuiInputBase-inputAdornedStart .MuiInputBase-inputAdornedEnd {
+  display:none;
+} */
 
 input[type="text"]:focus {
   outline: none;

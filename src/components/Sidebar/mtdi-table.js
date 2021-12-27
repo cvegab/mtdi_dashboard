@@ -16,10 +16,7 @@ import DatePicker, {registerLocale} from "react-datepicker";
 import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-//import SearchIcon from "material-ui/svg-icons/action/search";
-
 import "../../assets/css/global.css";
-// import CalendarIcon from '../../assets/img/calendar-icon.png'
 import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
@@ -624,18 +621,14 @@ const MtdiTable = (props) => {
           
         
           <DatePicker
+            id="datepickerCalendar"
+            type="number"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            style={{width:200}} 
-            class="inputIcon"          
+            style={{width:200}}                
             placeholderText="dd/mm/yy"
-            locale="es"
-            
+            locale="es" 
           />
-          
-        
-
-            
               
         </label>
 
@@ -776,6 +769,9 @@ const MtdiTable = (props) => {
         {isLoading && (
           <MaterialTable
             title=""
+            options={{
+              search:false
+            }}
             icons={tableIcons}
             columns={columns}
             data={[]}
@@ -836,7 +832,7 @@ const MtdiTable = (props) => {
             title=""
             data={data}
             columns={columns}
-            options={{ columnsButton: true, sorting: true }}
+            options={{ columnsButton: true, sorting: true, search: false }}
             style={{ marginLeft: "1em", marginTop: "2em" }}
           />
         )}
