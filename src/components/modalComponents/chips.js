@@ -407,7 +407,7 @@ export default class Chips extends React.Component {
           <tr>
             <td style="text-align:center; padding: 15px">
             
-              <a href="#" type=button class="button"> Ver Boleta</a>
+              <a href="dteLink" type=button class="button"> Ver Boleta</a>
             
             </td>
         
@@ -479,8 +479,8 @@ export default class Chips extends React.Component {
       
     </body>
     </html>`;
-    const finalEmailText = text.replace("[nombre]", this.props.purchaser);
-
+    let finalEmailText = text.replace("[nombre]", this.props.purchaser.comprador);
+    finalEmailText = text.replace("dteLink", this.props.purchaser.dte);
     return finalEmailText;
   }
 

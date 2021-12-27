@@ -124,14 +124,14 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-
+console.log(data);
       setData(data);
       setisLoading(false);
-      const transformedData = data.map((poke) => {
-        return [poke.fecha_creacion];
-      });
+      // const transformedData = data.map((poke) => {
+      //   return [poke.fecha_creacion];
+      // });
 
-      setshiny(transformedData);
+     // setshiny(transformedData);
 
       setData(data);
     } catch (error) {
@@ -723,7 +723,7 @@ const MtdiTable = (props) => {
 
         {data.length !== 0 && (
           <MaterialTable
-            onRowClick={(evt, selectedRow) => setbuyer(selectedRow.comprador)}
+            onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
             localization={{
               body: {
                 emptyDataSourceMessage: (
