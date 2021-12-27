@@ -163,7 +163,7 @@ const MtdiTable = (props) => {
             startDate.getDate()
         )
       );
-      console.log(x);
+
       if (x.length === 0) {
         console.log("hello");
         //setData(['hello']);
@@ -201,10 +201,9 @@ const MtdiTable = (props) => {
       const transformedData = data.map((poke) => {
         return [poke.fecha_creacion];
       });
-      console.log(transformedData);
+
       setshiny(transformedData);
 
-      console.log("Date" + data);
       setData(data);
     } catch (error) {
       console.log(error);
@@ -278,6 +277,9 @@ const MtdiTable = (props) => {
     {
       title: "Orden de Compra",
       field: "order_id",
+      render: (row) => {
+        <div onClick={() => console.log("i was called")}>{row.order_id}</div>;
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -541,7 +543,6 @@ const MtdiTable = (props) => {
       > */}
 
       <div className="content">
-
         <h5
           className="titleTable"
           style={{
@@ -563,204 +564,204 @@ const MtdiTable = (props) => {
             fontSize: "20px",
             fontWeight: "800",
             marginLeft: "1em",
-            marginBottom: "2em"
-
+            marginBottom: "2em",
           }}
         >
           Camilo Vega
         </p>
 
-
         <Col md="12">
+          <label htmlFor="select-country">
+            <h5
+              style={{
+                color: "black",
+                width: "30px",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "2em",
+                marginBottom: "0px",
+              }}
+            >
+              País
+            </h5>
+            <Select
+              labelId="select-country"
+              id="select-country"
+              style={{
+                width: 150,
+                marginLeft: "1em",
+                borderRadius: "17px",
+                marginBottom: "1em",
+                fontSize: "12px",
+              }}
+              value={country}
+              label="Country"
+              placeholder="Seleccione un país"
+              onChange={handleCountryChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.pais))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
 
-        <label htmlFor="select-country">
-          <h5
-            style={{
-              color: "black",
-              width: "30px",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "2em",
-              marginBottom: "0px",
-            }}
+          <label>
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "11px",
+                marginTOp: "3px",
+              }}
+            >
+              Fecha
+            </h5>
+
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              style={{ width: 200, fontSize: "12px" }}
+              placeholderText="dd/mm/yy"
+            >
+              <i
+                className="nc-icon nc-layout-11"
+                style={{ color: "#232A38" }}
+              />
+            </DatePicker>
+
+            {/* <img src={CalendarIcon} /> */}
+          </label>
+
+          <label htmlFor="select-canal">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "2em",
+                marginBottom: "0px",
+              }}
+            >
+              Canal De Venta
+            </h5>
+
+            <Select
+              labelId="select-canal"
+              id="select-canal"
+              placeholder="Seleccione un canal"
+              style={{ width: 150, marginLeft: "1em", fontSize: "12px" }}
+              value={salesChannel}
+              label="select-canal"
+              onChange={handleSalesChannelChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <label htmlFor="select-tienda">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "0px",
+              }}
+            >
+              Tienda
+            </h5>
+            <Select
+              labelId="select-tienda"
+              id="select-tienda"
+              style={{ width: 160, fontSize: "12px" }}
+              value={store}
+              label="select-canal"
+              placeholder="Seleccione una tienda"
+              onChange={handleStoreChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <label htmlFor="select-tienda-official">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "0em",
+                marginRight: "1em",
+                marginBottom: "0px",
+              }}
+            >
+              Tienda Oficial
+            </h5>
+            <Select
+              labelId="select-tienda-official"
+              id="select-tienda-official"
+              placeholder="Seleccione una tienda oficial"
+              style={{ width: 150, fontSize: "12px" }}
+              value={officialStore}
+              label="select-tienda-official"
+              onChange={handleOfficialStoreChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <label htmlFor="select-client">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "2em",
+                marginBottom: "0px",
+              }}
+            >
+              Cliente
+            </h5>
+            <Select
+              labelId="select-client"
+              id="select-client"
+              style={{ width: 150, marginLeft: "1em", fontSize: "12px" }}
+              value={client}
+              label="select-tienda-official"
+              placeholder="Seleccione un cliente"
+              onChange={handleClientChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.cliente))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <Button
+            className="btn-round btn-icon"
+            color="primary"
+            onClick={reloadTableHandler}
           >
-            País
-          </h5>
-          <Select
-            labelId="select-country"
-            id="select-country"     
-            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "12px" }}
-            value={country}
-            label="Country"
-            placeholder="Seleccione un país"      
-            onChange={handleCountryChange}
-          >
-            
-            {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
-              return <MenuItem value={period}>{period}</MenuItem>;
-            })}
-          </Select>
-        </label>
-
-        <label>
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              marginBottom: "11px",
-              marginTOp:"3px"
-            }}
-          >    
-            Fecha
-          </h5>
-          
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            style={{width:200, fontSize: "12px"}}
-            placeholderText="dd/mm/yy"
-            
-          >
-            <i className="nc-icon nc-layout-11" style={{ color: "#232A38" }}/>
-          </DatePicker>          
-
-          {/* <img src={CalendarIcon} /> */}
-        </label>
-
-        <label htmlFor="select-canal">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "2em",
-              marginBottom: "0px",
-            }}
-          >
-            Canal De Venta
-          </h5>
-
-
-          <Select
-            labelId="select-canal"
-            id="select-canal"
-            placeholder="Seleccione un canal"
-            style={{ width: 150, marginLeft: "1em", fontSize: "12px" }}
-            value={salesChannel}
-            label="select-canal"
-            onChange={handleSalesChannelChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-        <label htmlFor="select-tienda">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              marginBottom: "0px",
-            }}
-          >
-            Tienda
-          </h5>
-          <Select
-            labelId="select-tienda"
-            id="select-tienda"
-            style={{ width: 160, fontSize: "12px" }}
-            value={store}
-            label="select-canal"
-            placeholder="Seleccione una tienda" 
-            onChange={handleStoreChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.tienda))).map(
-
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-
-        <label htmlFor="select-tienda-official">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "0em",
-              marginRight: "1em",
-              marginBottom: "0px",
-              
-            }}
-          >
-            Tienda Oficial
-          </h5>
-          <Select
-            labelId="select-tienda-official"
-            id="select-tienda-official"
-            placeholder="Seleccione una tienda oficial" 
-            style={{ width: 150, fontSize: '12px' }}
-            value={officialStore}
-            label="select-tienda-official"
-            onChange={handleOfficialStoreChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.official_store))).map(
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-     
-
-        <label htmlFor="select-client">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "2em",
-              marginBottom: "0px",
-            }}
-          >
-            Cliente
-          </h5>
-          <Select
-            labelId="select-client"
-            id="select-client"
-            style={{ width: 150, marginLeft: '1em', fontSize: '12px' }}
-            value={client}
-            label="select-tienda-official"
-            placeholder="Seleccione un cliente" 
-            onChange={handleClientChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.cliente))).map(
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-        <Button className="btn-round btn-icon" color="primary" onClick={reloadTableHandler}>
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
-         </Button>
-
-      
-      
-      </Col>
-
+          </Button>
+        </Col>
 
         {/* // add is Loading */}
         {isLoading && (
