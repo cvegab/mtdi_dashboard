@@ -102,7 +102,7 @@ const MtdiTable = (props) => {
   const [data, setData] = useState([]);
   const [shiny, setshiny] = useState([]);
   const [country, setcountry] = useState("");
-
+  const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
   const [client, setclient] = useState("");
@@ -320,6 +320,9 @@ const MtdiTable = (props) => {
     {
       title: "DTE",
       field: "dte_exist",
+      detailPanel: (rowData) => {
+        console.log("hello" + rowData.cliente);
+      },
       // icon: Search,
       // render: row =>( <div onClick={() => console.log(row.client)}>{row.client}</div>),
       lookup: {
@@ -808,6 +811,12 @@ const MtdiTable = (props) => {
 
         {data.length !== 0 && (
           <MaterialTable
+            // detailPanel={rowData => {
+            //  console.log('hello'+ rowData.cliente)
+            // }}
+            onRowClick={(evt, selectedRow) =>
+              console.log("hello row" + evt, selectedRow)
+            }
             localization={{
               body: {
                 emptyDataSourceMessage: (
