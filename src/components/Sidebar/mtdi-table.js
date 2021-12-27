@@ -536,7 +536,7 @@ const MtdiTable = (props) => {
   return (
     <React.Fragment>
       {showModal && (
-        <SendMail onhideModal={hideModalHandler} data={data}></SendMail>
+        <SendMail onhideModal={hideModalHandler} data={data} purchaser={buyer}></SendMail>
       )}
 
       {/* <div
@@ -814,9 +814,7 @@ const MtdiTable = (props) => {
             // detailPanel={rowData => {
             //  console.log('hello'+ rowData.cliente)
             // }}
-            onRowClick={(evt, selectedRow) =>
-              console.log("hello row" + evt, selectedRow)
-            }
+            onRowClick={(evt, selectedRow) => setbuyer(selectedRow.comprador)}
             localization={{
               body: {
                 emptyDataSourceMessage: (
