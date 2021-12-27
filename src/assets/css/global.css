@@ -14,6 +14,18 @@ body {
  
 }
 
+.Button:hover {
+  background-color:#06cbc1;
+}
+
+a.Button a:hover{
+  background: #06cbc1 !important;
+}
+
+
+#bttnSubmit:hover {
+  background-color: #06cbc1 !important;
+}
 
 .sidebar .nav p, .off-canvas-sidebar .nav p {
   text-transform: none;
