@@ -13,7 +13,7 @@ export default class Chips extends React.Component {
     emailError: null,
     emailSent: null,
   };
- 
+
   handleKeyDown = (evt) => {
     if (["Enter", "Tab", ","].includes(evt.key)) {
       evt.preventDefault();
@@ -105,8 +105,7 @@ export default class Chips extends React.Component {
   isEmail(email) {
     return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
   }
-  hello(){
-    console.log('i am called');
+  hello() {
     let text = `<!DOCTYPE html>
     <html lang="es">
     <head>
@@ -480,9 +479,9 @@ export default class Chips extends React.Component {
       
     </body>
     </html>`;
-   const y = text.replace('[nombre]', this.props.purchaser);
-    console.log('i am here'+ y);
-    return y;
+    const finalEmailText = text.replace("[nombre]", this.props.purchaser);
+
+    return finalEmailText;
   }
 
   submitHandler = (event) => {
@@ -503,13 +502,10 @@ export default class Chips extends React.Component {
 
     const x = [...this.state.items];
     x.push(this.state.emailState);
-    console.log(x);
 
     let final = "" + x.toString() + "";
-    console.log(final);
-    console.log("i am called");
-console.log(this.props.purchaser);
-const emailBody = this.hello();
+
+    const emailBody = this.hello();
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
@@ -520,11 +516,10 @@ const emailBody = this.hello();
         },
 
         body: JSON.stringify({
-         
           to: final,
           subject: "Envío de Documento Tributario Electrónico",
-        
-          body:emailBody,
+
+          body: emailBody,
           filename: "",
           file: "",
         }),
