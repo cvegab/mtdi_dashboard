@@ -105,7 +105,7 @@ export default class Chips extends React.Component {
   isEmail(email) {
     return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
   }
-  hello() {
+  parseEmail() {
     let text = `<!DOCTYPE html>
     <html lang="es">
     <head>
@@ -505,7 +505,7 @@ export default class Chips extends React.Component {
 
     let final = "" + x.toString() + "";
 
-    const emailBody = this.hello();
+    const emailBody = this.parseEmail();
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
