@@ -58,6 +58,10 @@ body {
   width: 12em !important;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
 .MuiInput-root {
   margin-right: 1em !important;
 }
