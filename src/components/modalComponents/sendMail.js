@@ -5,7 +5,10 @@ const SendMail = (props) => {
   console.log(props.purchaser);
   return (
     <Modal onhideModal={props.onhideModal}>
-      <Chips onhideModal={props.onhideModal} purchaser={props.purchaser}></Chips>
+      <Chips
+        onhideModal={props.onhideModal}
+        purchaser={props.purchaser}
+      ></Chips>
     </Modal>
   );
 };

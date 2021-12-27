@@ -11,10 +11,14 @@ const ModalOverlay = (props) => {
   return (
     <div className={classes.modal}>
       <ModalHeader>
-        {/* <img src={vector} alt='icon'  style={{textAlign:'right'}} /> */}
         <h2
           style={{ color: "black" }}
-          style={{ textAlign: "right", color: "black", fontSize: "16px", cursor: "pointer" }}
+          style={{
+            textAlign: "right",
+            color: "black",
+            fontSize: "16px",
+            cursor: "pointer",
+          }}
           onClick={props.close}
         >
           x
