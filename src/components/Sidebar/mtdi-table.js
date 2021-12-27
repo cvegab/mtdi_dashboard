@@ -41,61 +41,6 @@ const tableIcons = {
   )),
 };
 
-const orderList = [
-  {
-    id_mtdi: "ml619e8bb5f6d955dc7455468e",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043399300,
-    pais: "Chile",
-    fecha_creacion: "2020-11-24 14:45:24",
-    shipping_id: 40993109945,
-    valor_shipping: 2443,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 7662,
-    comprador: "IVISPATIO",
-    hub: "redcompra",
-    rut: "",
-    dte: "Si",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "cross_docking",
-    id_mpago: 18378018289,
-    status_detail: "accredited",
-    order_status: "Cancelado",
-    wms: "Integrado a wms",
-  },
-  {
-    id_mtdi: "ml619e8aff4bcbf54da2960a96",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043355576,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:33:10",
-    shipping_id: 40993074958,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 133980,
-    comprador: "SUPERFIL CHILE",
-    hub: "account_money",
-    rut: "",
-    dte: "No",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377774274,
-    status_detail: "accredited",
-    order_status: "Despachado",
-    wms: "Integrado a wms",
-  },
-];
-
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
 
@@ -259,9 +204,6 @@ const MtdiTable = (props) => {
     {
       title: "Orden de Compra",
       field: "order_id",
-      // render: (row) => {
-      //   <div onClick={() => console.log("i was called")}>{row.order_id}</div>;
-      // },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -302,11 +244,7 @@ const MtdiTable = (props) => {
     {
       title: "DTE",
       field: "dte_exist",
-      // detailPanel: (rowData) => {
-      //   console.log("hello" + rowData.cliente);
-      // },
-      // icon: Search,
-      // render: row =>( <div onClick={() => console.log(row.client)}>{row.client}</div>),
+
       lookup: {
         "": (
           <div>
@@ -504,7 +442,6 @@ const MtdiTable = (props) => {
     setofficialStore(event.target.value);
   };
   const reloadTableHandler = () => {
-    // setData(data);
     fetchOrderData();
     setclient(null);
     setcountry(null);
@@ -523,12 +460,6 @@ const MtdiTable = (props) => {
           purchaser={buyer}
         ></SendMail>
       )}
-
-      {/* <div
-        id="mtdiTableBackground"
-        className="App"
-        style={{ background: "#E5E5E5" }}
-      > */}
 
       <div className="content">
         <h5
@@ -620,8 +551,6 @@ const MtdiTable = (props) => {
                 style={{ color: "#232A38" }}
               />
             </DatePicker>
-
-            {/* <img src={CalendarIcon} /> */}
           </label>
 
           <label htmlFor="select-canal">
@@ -751,7 +680,6 @@ const MtdiTable = (props) => {
           </Button>
         </Col>
 
-        {/* // add is Loading */}
         {isLoading && (
           <MaterialTable
             title=""
@@ -768,7 +696,6 @@ const MtdiTable = (props) => {
                     width: "100%",
                   }}
                 >
-                  {/* <h1 color="red">Hello ghwgdj kdlwkflkel hkhkwhflh hjfhfjeq</h1> */}
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
                   <Spinner
