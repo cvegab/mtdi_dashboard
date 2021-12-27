@@ -304,7 +304,7 @@ export default class Chips extends React.Component {
                          font-weight: bold;
                          padding: 0px 40px;   
                        ">          
-                           Hola, [nombre]         
+                           Hola [nombre],        
                        </p>
                
                          <p

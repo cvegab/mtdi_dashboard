@@ -9,15 +9,13 @@ import MaterialTable from "material-table";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
-import RefreshIcon from "../../assets/img/icon-refresh.png";
-//import FormControl from '@mui/material/FormControl';
+
 import { Select, MenuItem } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//import SearchIcon from "material-ui/svg-icons/action/search";
 
 import "../../assets/css/global.css";
-// import CalendarIcon from '../../assets/img/calendar-icon.png'
+
 import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
@@ -100,7 +98,7 @@ const orderList = [
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
-  const [shiny, setshiny] = useState([]);
+
   const [country, setcountry] = useState("");
   const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
@@ -152,7 +150,6 @@ const MtdiTable = (props) => {
     }
   }, [officialStore]);
   useEffect(() => {
-    console.log(startDate);
     if (startDate !== null) {
       const x = data.filter((item) =>
         item.fecha_creacion.includes(
@@ -163,21 +160,10 @@ const MtdiTable = (props) => {
             startDate.getDate()
         )
       );
-
-      if (x.length === 0) {
-        console.log("hello");
-        //setData(['hello']);
-        setshiny(x);
-        setData(x);
-      } else {
-        console.log("bye");
-        setData(x);
-      }
     }
   }, [startDate]);
 
   const fetchOrderData = async () => {
-    console.log("1 start");
     setisLoading(true);
     var requestOptions = {
       method: "GET",
@@ -188,14 +174,12 @@ const MtdiTable = (props) => {
         "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=20&user=admin&tienda=2\n\n",
         requestOptions
       );
-      console.log("2.run");
+
       if (!response.ok) {
-        console.log(response);
-        console.log("3.error");
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+
       setData(data);
       setisLoading(false);
       const transformedData = data.map((poke) => {
@@ -211,8 +195,6 @@ const MtdiTable = (props) => {
   };
 
   const showModalHandler = (row) => {
-    console.log("hi i was clicked");
-    console.log(row);
     setshowModal(true);
   };
   const hideModalHandler = () => {
@@ -277,9 +259,9 @@ const MtdiTable = (props) => {
     {
       title: "Orden de Compra",
       field: "order_id",
-      render: (row) => {
-        <div onClick={() => console.log("i was called")}>{row.order_id}</div>;
-      },
+      // render: (row) => {
+      //   <div onClick={() => console.log("i was called")}>{row.order_id}</div>;
+      // },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -320,14 +302,13 @@ const MtdiTable = (props) => {
     {
       title: "DTE",
       field: "dte_exist",
-      detailPanel: (rowData) => {
-        console.log("hello" + rowData.cliente);
-      },
+      // detailPanel: (rowData) => {
+      //   console.log("hello" + rowData.cliente);
+      // },
       // icon: Search,
       // render: row =>( <div onClick={() => console.log(row.client)}>{row.client}</div>),
       lookup: {
         "": (
-          // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
             Si &nbsp;
             <span className={classes.si}>
@@ -536,7 +517,11 @@ const MtdiTable = (props) => {
   return (
     <React.Fragment>
       {showModal && (
-        <SendMail onhideModal={hideModalHandler} data={data} purchaser={buyer}></SendMail>
+        <SendMail
+          onhideModal={hideModalHandler}
+          data={data}
+          purchaser={buyer}
+        ></SendMail>
       )}
 
       {/* <div
@@ -811,9 +796,6 @@ const MtdiTable = (props) => {
 
         {data.length !== 0 && (
           <MaterialTable
-            // detailPanel={rowData => {
-            //  console.log('hello'+ rowData.cliente)
-            // }}
             onRowClick={(evt, selectedRow) => setbuyer(selectedRow.comprador)}
             localization={{
               body: {
