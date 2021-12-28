@@ -106,11 +106,12 @@ export default class Chips extends React.Component {
     return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
   }
   parseEmail() {
-    let text = `<!DOCTYPE html>
+    let text = `  <!DOCTYPE html>
     <html lang="es">
     <head>
       <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="Content-Type" content="text/html; charset-utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Instance - Pedido ingresado </title>
       <style type="text/css">
@@ -128,10 +129,14 @@ export default class Chips extends React.Component {
           border: 0;
         }
     
+        @media screen and (max-width: 600px) {
+    
+        }
+    
         .wrapper {
           width: 100%;
           table-layout: fixed;
-          background-color: #cccccc;
+          background-color: #f7f7f7;
           padding-bottom: 60px;
         }
     
@@ -159,20 +164,34 @@ export default class Chips extends React.Component {
           background-color: #1D308E;
           border-radius: 17px;
           text-decoration: none;
-          padding: 12px 20px;
+          padding: 12px 100px;
           font-weight: medium;
           color:white;
           font-size: 12px;
-          width: 313px;
-          height: 67px;
+          width: 700px !important;
+          height: 70px; 
+          text-decoration: none;
     
+        }
+    
+        .button:hover {
+          background-color: #06CBC1;
+        }
+        
+        a:link :visited :hover :active{
+          color: white;
+          text-decoration: none;
+        }
+    
+        a:-webkit-any-link {
+          text-decoration: none;
         }
     
         .two-columns.last {
-          padding: 20px 0;
+          padding: 10px 0;
         }
         .two-columns .padding {
-          padding:20px;
+          padding:º0px;
         }
     
         .two-columns .content {
@@ -202,17 +221,18 @@ export default class Chips extends React.Component {
     <tr>
       <td class="column">
     
-        <table class="column">
+        <!-- <table class="column"> -->
           <tr>
-            <td style="padding: 20px 60px; ">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" title="Icon" width="30">
+            <!-- <td style="padding: 20px 60px; "> -->
+              <td style="text-align: center; padding: 8px 0 4px;">
+              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" alt="Icon" title="Icon" width="20">
               <br/>
               <a href="http://www.instancelatam.com">
-                <img src= "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" title="Logo" width="120">
+                <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" alt="Logo-instance" title="Logo" width="100">
               </a>
             </td>
           </tr>
-        </table>
+        <!-- </table> -->
     
       </td>
     </tr>
@@ -238,13 +258,13 @@ export default class Chips extends React.Component {
                         <p 
                         style="
                          font-size: 26px;
-                         color:#232A38;
+                         color:#1D308E;
                          padding-left: 40px;
                          line-height: 43px;
                         
                         ">
                          <strong>
-                           ¡Tu pedido ha sido ingresado!
+                           Tu pedido ha sido ingresado
                          </strong>
                        </p>
                         
@@ -262,7 +282,7 @@ export default class Chips extends React.Component {
                   <table class="content">
                     <tr>
                       <td>
-                      <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/image-delivery.png" alt="ImagenDelivery" width="90%">
+                      <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/image-delivery.png" alt="ImagenDelivery" alt="ImagenDelivery" width="90%">
                         
                       </td>
                     </tr>
@@ -274,10 +294,10 @@ export default class Chips extends React.Component {
         </tr>
       </td> 
     </tr>
-            <!-- BLUE BORDER
-            <tr>
-              <td height="1" style="background-color: #06CBC1; margin-top:-5em; "></td>
-            </tr> -->
+            <!-- BLUE BORDER-->
+            <!-- <tr>
+              <td height="1" style="background-color: #1D308E"></td>
+            </tr>  -->
     
     
     <!--TWO COLUMN SECTION -->
@@ -294,39 +314,9 @@ export default class Chips extends React.Component {
                   <table class="content">
                     <tr>
                       <td>
-                       
+                        <a href="#"><img src="storeLogo" alt="Logo-Marca" title="Logo" width="100%" style="max-width: 100%"></a>
                         
-                       <p
-                       style="
-                         font-size:16px;
-                         
-                         color: #1D308E;
-                         font-weight: bold;
-                         padding: 0px 40px;   
-                       ">          
-                           Hola [nombre],        
-                       </p>
-               
-                         <p
-                         style="padding: 0px 40px;
-                         line-height: 23px;
-                          ">
-                           A continuación encontrarás un detalle con tu pedido e información relevante.
-                         </p>
-               
-                         <p
-                         style="padding: 0px 40px;
-                         line-height: 23px;
-                         color: #1D308E;
-                         font-weight: bold;
-                         font-size:18px;
-                         width:150%;
-                         
-                          ">
-                           Recuerda, tu pedido será despachado en máximo 48 horas hábiles.
-                         </p>
-               
-                                 
+                   
                       </td>
                     </tr>
                   </table>
@@ -341,7 +331,41 @@ export default class Chips extends React.Component {
                   <table class="content">
                     <tr>
                       <td>
-                        <a href="#"><img src="storeLogo" alt="Logo-Marca" title="Logo Marca" width="250px" style="max-width: 250px; margin-top:-4em"></a>
+    
+                        <p
+                        style="
+                          font-size:16px;
+                          margin-top:2em;
+                          color: #1D308E;
+                          font-weight: bold;
+                          padding: 0px 0px;   
+                        ">          
+                            ¡Hola, [nombre]!         
+                        </p>
+                
+                          <p
+                          style="padding: 0px 0px;
+                          line-height: 23px;
+                          font-size: 14px;
+                          
+                           ">
+                            A continuación encontrarás un detalle con tu pedido e información relevante.
+                          </p>
+                
+                          <p
+                          style="padding: 0px 0px;
+                          line-height: 23px;
+                          color: #1D308E;
+                          font-weight: bold;
+                          font-size:12px;
+                          width:100%;
+                          
+                           ">
+                            Recuerda, tu pedido será despachado en un máximo de 48 horas hábiles.
+                          </p>
+                
+                                  
+                       
                       </td>
                     </tr>
                   </table>
@@ -355,50 +379,7 @@ export default class Chips extends React.Component {
     
     
     
-    <!-- INFO DETAIL SECTION-->
-    <!-- <tr>
-      <td>
-        <table width="100%">
     
-          <tr>
-            <td>
-              <p
-              style="
-              font-size:14px;
-              font-weight: bold;
-              color: black;
-              text-align: left;
-              padding-left: 60px;"> Detalle pedido</p>
-    
-              <p>
-                <p
-                style="
-                font-size: 12px;
-                padding-left: 60px;">
-                  Comercio: <strong>[Tienda]</strong>
-                  <br/>
-                  <br/>
-                  Nombre: <strong>[Nombre]</strong>
-                  <br/>
-                  <br/>
-                  Medio de pago: <strong>[Pago]</strong>
-                  <br/>
-                  <br/>
-                  Monto bruto: <strong>[Bruto]</strong>
-                  <br/>
-                  <br/>
-                  IVA: <strong>[IVA]</strong>
-                  <br/>
-                  <br/>
-                  Monto total: <strong>[Total]</strong>
-                </p>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr> -->
-    <!-- BUTTON SECTION -->
     <tr>
       <td style="padding: 5px 0 58px;">
         <table width="100%">
@@ -407,7 +388,7 @@ export default class Chips extends React.Component {
           <tr>
             <td style="text-align:center; padding: 15px">
             
-              <a href="dteLink" type=button class="button"> Ver Boleta</a>
+              <a  style='color:white' href="dteLink" type=button class="button"> Ve los detalles de tu pedido aquí</a>
             
             </td>
         
@@ -423,9 +404,9 @@ export default class Chips extends React.Component {
     
           <tr>
             <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-boleta.png" alt="IconoBoleta" title="IconoBoleta" width="30" style="padding:14px 0px 2px 35px;">
-              <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> Importante</p>
-              <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este comprobante no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
+              
+              <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> IMPORTANTE</p>
+              <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este correo no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
             </td>
           </tr>
         </table>
@@ -453,9 +434,9 @@ export default class Chips extends React.Component {
             </a>
             <br/>
       
-                <a href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
-                <a href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
-                <a href="mailto:contacto@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
+                <a href="https://www.linkedin.com/company/instancelatam/"><img src="../assets/imgMail/icons/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
+                <a href="http://www.instagram.com/instance_latam"><img src="../assets/imgMail/icons/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
+                <a href="mailto:contacto@instancelatam.com"><img src="../assets/imgMail/icons/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
               </td>
             </tr> 
     
