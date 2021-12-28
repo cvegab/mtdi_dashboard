@@ -568,11 +568,31 @@ export default class Chips extends React.Component {
         .replace("dteLink", this.props.purchaser.dte)
         .replace(
           "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-imnotplastic.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Redlemon") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-redlemon.png"
         );
       return finalEmailText;
     }
     if (this.props.purchaser.tienda === "ELITE PROFESSIONAL") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-eliteprofessional.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "ELITE") {
       let finalEmailText = text
         .replace("[nombre]", this.props.purchaser.comprador)
         .replace("dteLink", this.props.purchaser.dte)
@@ -790,7 +810,7 @@ export default class Chips extends React.Component {
                 padding: "22px 81px",
                 borderRadius: "17px",
                 border: "none",
-                weight: "700px",
+                fontWeight: "700px",
               }}
               onClick={this.entendidoButtonHandler}
             >
