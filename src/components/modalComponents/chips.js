@@ -155,6 +155,12 @@ export default class Chips extends React.Component {
           #instanceLogo {
             width: 80px !important;
           }
+          #titleWarning {
+            margin-left:10px !important;
+          }
+          #textWarning {
+            margin-left: 8px !important;
+          }
         }
     
         .wrapper {
@@ -429,8 +435,8 @@ export default class Chips extends React.Component {
           <tr>
             <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
               
-              <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> IMPORTANTE</p>
-              <p style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este correo no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
+              <p id="titleWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> IMPORTANTE</p>
+              <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este correo no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
             </td>
           </tr>
         </table>
@@ -552,7 +558,7 @@ export default class Chips extends React.Component {
         .replace("dteLink", this.props.purchaser.dte)
         .replace(
           "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-babysec.png"
         );
       return finalEmailText;
     }
@@ -592,7 +598,7 @@ export default class Chips extends React.Component {
         .replace("dteLink", this.props.purchaser.dte)
         .replace(
           "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-enex.png"
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-cotidian.png"
         );
       return finalEmailText;
     }
@@ -613,6 +619,16 @@ export default class Chips extends React.Component {
         .replace(
           "storeLogo",
           "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-p&g.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "SC Johnson") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-scj.png"
         );
       return finalEmailText;
     }
