@@ -506,13 +506,13 @@ export default class Chips extends React.Component {
         );
       return finalEmailText;
     }
-    if (this.props.purchaser.tienda === "Softys") {
+    if (this.props.purchaser.tienda === "Schneider Electric") {
       let finalEmailText = text
         .replace("[nombre]", this.props.purchaser.comprador)
         .replace("dteLink", this.props.purchaser.dte)
         .replace(
           "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-softys.png"
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-schneider.png"
         );
       return finalEmailText;
     }
@@ -546,6 +546,26 @@ export default class Chips extends React.Component {
         );
       return finalEmailText;
     }
+    if (this.props.purchaser.tienda === "Babysec") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "I Am Not Plastic") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+        );
+      return finalEmailText;
+    }
     if (this.props.purchaser.tienda === "ELITE PROFESSIONAL") {
       let finalEmailText = text
         .replace("[nombre]", this.props.purchaser.comprador)
@@ -563,6 +583,36 @@ export default class Chips extends React.Component {
         .replace(
           "storeLogo",
           "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-enex.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Cotidian") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-enex.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "Chek") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-chek.png"
+        );
+      return finalEmailText;
+    }
+    if (this.props.purchaser.tienda === "p&g") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-p&g.png"
         );
       return finalEmailText;
     }
