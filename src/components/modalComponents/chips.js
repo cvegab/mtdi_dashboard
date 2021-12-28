@@ -129,8 +129,32 @@ export default class Chips extends React.Component {
           border: 0;
         }
     
-        @media screen and (max-width: 600px) {
-    
+        @media screen and (max-width: 425px) {
+          #textPedido {
+            text-align: left !important;
+            font-size: 17px !important;
+          }
+          #imageDelivery {
+            margin:auto;
+            display:block;
+            text-align: center !important;
+            width:70%;
+          }
+          #clientLogo {
+            margin-left:3.5em;
+            display:block !important;
+            text-align: center !important;
+            width:70%;
+          }
+          #bttnBoleta {
+            padding: 10px 38px;
+          }
+          #icon1 {
+            width:20px !important;
+          }
+          #instanceLogo {
+            width: 80px !important;
+          }
         }
     
         .wrapper {
@@ -225,10 +249,10 @@ export default class Chips extends React.Component {
           <tr>
             <!-- <td style="padding: 20px 60px; "> -->
               <td style="text-align: center; padding: 8px 0 4px;">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" alt="Icon" title="Icon" width="20">
+              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" alt="Icon" id='icon1' title="Icon" width="20">
               <br/>
               <a href="http://www.instancelatam.com">
-                <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" alt="Logo-instance" title="Logo" width="100">
+                <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" alt="Logo-instance"  id="instanceLogo" title="Logo" width="100">
               </a>
             </td>
           </tr>
@@ -255,18 +279,18 @@ export default class Chips extends React.Component {
                     <tr>
                       
                       <td>
-                        <p 
-                        style="
-                         font-size: 26px;
-                         color:#1D308E;
-                         padding-left: 40px;
-                         line-height: 43px;
-                        
-                        ">
-                         <strong>
-                           Tu pedido ha sido ingresado
-                         </strong>
-                       </p>
+                      <p
+                      id="textPedido"
+                      style="
+                       font-size: 26px;
+                       color:#1D308E;
+                       padding-left: 40px;
+                       line-height: 43px;
+                      ">
+                       <strong>
+                         ¡Tu pedido ha sido ingresado!
+                       </strong>
+                   </p>
                         
                       </td>
                     </tr>
@@ -282,7 +306,7 @@ export default class Chips extends React.Component {
                   <table class="content">
                     <tr>
                       <td>
-                      <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/image-delivery.png" alt="ImagenDelivery" alt="ImagenDelivery" width="90%">
+                      <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/image-delivery.png" alt="ImagenDelivery" alt="ImagenDelivery"  id="imageDelivery" width="90%">
                         
                       </td>
                     </tr>
@@ -314,7 +338,7 @@ export default class Chips extends React.Component {
                   <table class="content">
                     <tr>
                       <td>
-                        <a href="#"><img src="storeLogo" alt="Logo-Marca" title="Logo" width="100%" style="max-width: 100%"></a>
+                        <a href="#"><img src="storeLogo" alt="Logo-Marca" title="Logo" id="clientLogo" width="100%" style="max-width: 100%"></a>
                         
                    
                       </td>
@@ -388,7 +412,7 @@ export default class Chips extends React.Component {
           <tr>
             <td style="text-align:center; padding: 15px">
             
-              <a  style='color:white' href="dteLink" type=button class="button"> Ve los detalles de tu pedido aquí</a>
+              <a  style='color:white' href="dteLink" id="bttnBoleta" type=button class="button"> Ve los detalles de tu pedido aquí</a>
             
             </td>
         
@@ -434,9 +458,9 @@ export default class Chips extends React.Component {
             </a>
             <br/>
       
-                <a href="https://www.linkedin.com/company/instancelatam/"><img src="../assets/imgMail/icons/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
-                <a href="http://www.instagram.com/instance_latam"><img src="../assets/imgMail/icons/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
-                <a href="mailto:contacto@instancelatam.com"><img src="../assets/imgMail/icons/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
+                <a href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
+                <a href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
+                <a href="mailto:contacto@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
               </td>
             </tr> 
     
