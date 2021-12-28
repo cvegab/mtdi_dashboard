@@ -486,16 +486,7 @@ export default class Chips extends React.Component {
     </html>`;
 
     if (this.props.purchaser.tienda === "Unilever") {
-      // let finalEmailText = text.replace(
-      //   "[nombre]",
-      //   this.props.purchaser.comprador
-      // );
-      // finalEmailText = text.replace("dteLink", this.props.purchaser.dte);
-      // finalEmailText = text.replace(
-      //   "storeLogo",
-      //   "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-unilever.png"
-      // );
-      // return finalEmailText;
+   
       let finalEmailText = text
         .replace("[nombre]", this.props.purchaser.comprador)
         .replace("dteLink", this.props.purchaser.dte)
