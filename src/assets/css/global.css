@@ -27,6 +27,18 @@ a.Button a:hover{
   background-color: #06cbc1 !important;
 }
 
+.ii a[href] {
+  color: white !important;
+}
+
+a[href] {
+  color:white !important;
+}
+
+.button {
+color: white !important;
+}
+
 .sidebar .nav p, .off-canvas-sidebar .nav p {
   text-transform: none;
   font-weight: 500 !important;
@@ -117,7 +129,8 @@ a.Button a:hover{
   border-radius: 17px !important;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   -webkit-border-radius: 17px;
   -moz-border-radius: 17px;
   border-radius: 17px;
@@ -133,7 +146,7 @@ input[type="text"] {
 }
 
 input[type="text"]::placeholder {
-  background-image: url(../img/DatePickerIcon.png) !important;
+  /* background-image: url(../img/DatePickerIcon.png) !important; */
   background-size: 15px 15px !important;
   background-repeat: no-repeat !important;
   background-position: 4rem center !important;
@@ -236,4 +249,11 @@ input[type="text"]:focus {
 
 .MuiPaper-rounded {
   border-radius: 20px !important;
+}
+
+.sc-bkkeKt, .ezNeFY {
+  color:"black" !important;
+  font-size: "12px" !important;
+  font-weight: "800" !important;
+
 }
