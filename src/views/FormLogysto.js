@@ -2,15 +2,19 @@ import React, {Fragment, useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
 import { Button, Col} from "reactstrap";
 import { Select, MenuItem } from "@material-ui/core";
+import MaterialTable from "material-table";
+
+const categories = [
+    {
+        "name": "Canal de Ventas",
+        "channelStore": ["Sodimac", "Easy"]
+    }
+]
+console.log("categories",categories);
 
 const Form = () => {
-    const [store, setstore] = useState ("");
-    useEffect(() => {
-        if (store !== "") {
-          const x = data.filter((item) => item.tienda.includes(store));
-          setData(x);
-        }
-      }, [store]);
+
+    const [categories, setCategories] = useState(-1);
 
     const [data, setData] = useState({
         address: "",
@@ -95,8 +99,8 @@ const Form = () => {
     const addProduct = (e) => {
         e.preventDefault();
         if(!validateProduct()) {
-            setError('Por favor, complete todos los campos');
-            throw new Error('Por favor, complete todos los campos');
+            setError('Por favor complete todos los campos');
+            throw new Error('Por favor complete todos los campos');
         }
         setError('');
         product.qty = parseInt(product.qty);
@@ -190,15 +194,17 @@ const Form = () => {
             labelId="select-tienda"
             id="select-tienda"     
             style={{ width: "200px", height:"35px", marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "10px" }}
-            // value={store}
+            // value={categories}
             label="Canal de venta"
             placeholder="&nbsp; Seleccione un canal de venta"      
             // onChange={handleStoreChange}
           >
-{/*             
-            {Array.from(new Set(data.map((obj) => obj.tienda))).map((period) => {
-              return <MenuItem value={period}>{period}</MenuItem>;
-            })} */}
+              {/* {
+                  categories.map((item,i)=>(
+                        <MenuItem key={"categorie"+i} value={i}> {item.channelStore}</MenuItem>
+                  ))
+              }        */}
+           
           </Select>
         </label>
 
@@ -523,7 +529,7 @@ const Form = () => {
                     <br/>
                         <Button
                             className="btn btn-primary"
-                            style={{backgroundColor: "#51cbce", borderRadius:"20px", width:"200px", height:"60px", color:"white"}}
+                            style={{backgroundColor: "#51cbce", borderRadius:"20px", width:"200px", height:"50px", color:"white"}}
                             onClick={addProduct}
                             >
                                 Agregar producto
@@ -533,17 +539,21 @@ const Form = () => {
                 <div className="col-12">
                     <DataTable
                         title="Productos"
-                        style={{
-                            borderRadius: "17px"
-                        }}
                         columns={columns}
                         data={data.products}
                     />
+
+                    {/* <MaterialTable
+                        title="Productos"
+                        columns={columns}
+                        data={data.products}
+                    /> */}
+                    
                 </div>
                 <div className="col-md-6">
                 <Button
                     className="btn btn-primary"
-                    style={{backgroundColor: "#51cbce", borderRadius:"20px", width:"200px", height:"60px", color:"white"}}
+                    style={{backgroundColor: "#51cbce", borderRadius:"20px", width:"150px", height:"50px", color:"white"}}
                     type="submit">
                         Enviar
                 </Button>
