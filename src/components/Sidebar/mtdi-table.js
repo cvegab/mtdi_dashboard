@@ -183,7 +183,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+
       setData(data);
       setisLoading(false);
       // const transformedData = data.map((poke) => {
