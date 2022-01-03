@@ -256,3 +256,8 @@ input[type="text"]:focus {
   font-weight: "800" !important;
 
 }
+
+.spinner-border {
+  margin-top:2em;
+  margin-bottom:2em;
+}
