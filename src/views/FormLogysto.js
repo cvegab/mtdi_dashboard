@@ -1,5 +1,4 @@
 import React, {Fragment, useState, useEffect} from "react";
-import DataTable from "react-data-table-component";
 import { Button, Col} from "reactstrap";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
@@ -537,17 +536,13 @@ const Form = () => {
                         
                 </div>
                 <div className="col-12">
-                    <DataTable
+                 
+
+                    <MaterialTable
                         title="Productos"
                         columns={columns}
                         data={data.products}
                     />
-
-                    {/* <MaterialTable
-                        title="Productos"
-                        columns={columns}
-                        data={data.products}
-                    /> */}
                     
                 </div>
                 <div className="col-md-6">
