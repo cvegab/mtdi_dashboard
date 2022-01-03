@@ -16,6 +16,7 @@
 */
 import Buttons from "views/components/Buttons.js";
 import Calendar from "views/Calendar.js";
+import Logysto from "views/FormLogysto.js";
 import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
 import ExtendedForms from "views/forms/ExtendedForms.js";
@@ -309,13 +310,13 @@ const routes = [
     component: Dashboard,
     layout: "/admin",
   },
-  // {
-  //   path: "/calendar",
-  //   name: "Calendar",
-  //   icon: "nc-icon nc-calendar-60",
-  //   component: Calendar,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/logysto",
+    name: "Logysto",
+    icon: "nc-icon nc-laptop",
+    component: Logysto,
+    layout: "/admin",
+  },
   // {
   //   path: "/logout",
   //   icon: "nc-icon nc-calendar-60",
