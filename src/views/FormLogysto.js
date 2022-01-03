@@ -184,7 +184,7 @@ const Form = () => {
               width: "100px",
               fontSize: "12px",
               fontWeight: "800",
-              marginLeft: "2em",
+              marginLeft: "1em",
               marginBottom: "0px",
             }}
           >
@@ -226,7 +226,7 @@ const Form = () => {
                     >Dirección
                     </p>
                     <input
-                        placeholder="Dirección"
+                        placeholder="Ingrese una dirección"
                         className="form-control"
                         type="text"
                         style={{width:"300px", height:"35px", marginBottom:"2em"}}
@@ -245,7 +245,7 @@ const Form = () => {
                     >Instrucciones
                     </p>
                     <input
-                        placeholder="Instrucciones"
+                        placeholder="Ingrese instrucciones"
                         className="form-control"
                         type="text"
                         style={{width:"300px", height:"35px", marginBottom:"2em"}}
@@ -281,7 +281,7 @@ const Form = () => {
                     >Nombre
                     </p>
                     <input
-                        placeholder="Nombre"
+                        placeholder="Ingrese nombre"
                         className="form-control"
                         type="text"
                         style={{width:"300px", height:"35px", marginBottom:"2em"}}
@@ -300,7 +300,7 @@ const Form = () => {
                         Teléfono
                     </p>
                     <input
-                        placeholder="Teléfono"
+                        placeholder="Ingrese teléfono"
                         className="form-control"
                         type="text"
                         style={{width:"300px", height:"35px", marginBottom:"2em"}}
@@ -319,7 +319,7 @@ const Form = () => {
                         Email
                     </p>
                     <input
-                        placeholder="Email"
+                        placeholder="Ingrese un correo electrónico"
                         className="form-control"
                         type="text"
                         style={{width:"300px", height:"35px", marginBottom:"2em"}}
