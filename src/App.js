@@ -5,11 +5,31 @@ import OrderTable from "components/order-table";
 import ExtendedTables from "views/tables/ExtendedTables";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect, Link,} from "react-router-dom";
+
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 const App = () => {
-  const [isAuthenticated, setisAuthenticated] = useState(false);
+  const [isAuthenticated, setisAuthenticated] = useState(true);
+  // const query = new URLSearchParams(useLocation().search);
+  // console.log(query);
+  let search = window.location.search;
+  console.log(search);
+let params = new URLSearchParams(search);
+let Name = search.split('?')[1];
+console.log(Name);
+let password = search.split('&pass=')[1];
+console.log(password);
+var mySubString = search.substring(
+  search.indexOf("?") + 1, 
+  search.lastIndexOf("&")
+);
+
+let userName = mySubString.split('=')[1];
+console.log('userName is' + userName);
+
+console.log(params.name);
+
 
   // const [orderData, setorderData] = useState([]);
   // useEffect(() => {
