@@ -1,7 +1,31 @@
 import React, {Fragment, useState, useEffect} from "react";
-import { Button, Col} from "reactstrap";
+import { Button, Col, Spinner} from "reactstrap";
 import { Select, MenuItem } from "@material-ui/core";
-import MaterialTable from "material-table";
+// import MaterialTable from "material-table";
+import { forwardRef } from "react";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import ViewColumn from "@material-ui/icons/ViewColumn";
+import Search from "@material-ui/icons/Search";
+import FirstPage from "@material-ui/icons/FirstPage";
+import LastPage from "@material-ui/icons/LastPage";
+import ChevronLeft from "@material-ui/icons/ChevronLeft";
+import ChevronRight from "@material-ui/icons/ChevronRight";
+import RoomIcon from "@material-ui/icons/Room";
+import DataTable from "react-data-table-component";
+
+const tableIcons = {
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <RoomIcon {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  
+    PreviousPage: forwardRef((props, ref) => (
+      <ChevronLeft {...props} ref={ref} />
+    )),
+  };
 
 const categories = [
     {
@@ -13,7 +37,7 @@ console.log("categories",categories);
 
 const Form = () => {
 
-    const [categories, setCategories] = useState(-1);
+
 
     const [data, setData] = useState({
         address: "",
@@ -143,7 +167,7 @@ const Form = () => {
     return(
 
     
-        <Fragment>
+<Fragment>
 
     <div className="content">
 
@@ -537,14 +561,23 @@ const Form = () => {
                 </div>
                 <div className="col-12">
                  
-
+{/*                
                     <MaterialTable
                         title="Productos"
+                        options={{ columnsButton: true, sorting: true, search: false }}
+                        columns={columns}
+                        data={data.products}
+                        style={{ marginLeft: "1em", marginTop: "2em", color:"black" }}
+                        icons={tableIcons}
+                    /> */}
+                </div>
+                        
+                <DataTable            
                         columns={columns}
                         data={data.products}
                     />
                     
-                </div>
+                
                 <div className="col-md-6">
                 <Button
                     className="btn btn-primary"
