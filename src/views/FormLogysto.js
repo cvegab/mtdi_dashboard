@@ -68,34 +68,73 @@ const Form = () => {
 
     const columns = [
         {
-            name: "SKU",
-            selector: row => row.sku,
-            sortable: true,
+            title: "SKU",
+            field: "SKU",
+            headerStyle: {
+                backgroundColor: "#1D308E",
+                color: "#FFF",
+                fontSize: "12px",
+                borderRadius: "20px 0px 0px 20px",
+              },
+            render: row => row.sku,
+        },
+        
+        {
+            title: "Categoría",
+            field: "Categoria",
+            headerStyle: {
+                backgroundColor: "#1D308E",
+                color: "#FFF",
+                fontSize: "12px",
+              },
+            render: row => row.category,
+            
         },
         {
-            name: "Categoría",
-            selector: row => row.category,
-            sortable: true,
+            title: "Nombre Producto",
+            field: "Nombre Producto",
+            headerStyle: {
+                backgroundColor: "#1D308E",
+                color: "#FFF",
+                fontSize: "12px",
+              },
+            render: row => row.product_name,
+            
         },
         {
-            name: "Product Name",
-            selector: row => row.product_name,
-            sortable: true,
+            title: "Precio Producto",
+            field: "Precio Producto",
+            headerStyle: {
+                backgroundColor: "#1D308E",
+                color: "#FFF",
+                fontSize: "12px",
+              },
+            render: row => row.product_price,
+            
         },
         {
-            name: "Product Price",
-            selector: row => row.product_price,
-            sortable: true,
+            title: "Marca",
+            field: "Marca",
+            headerStyle: {
+                backgroundColor: "#1D308E",
+                color: "#FFF",
+                fontSize: "12px",
+              },
+            render: row => row.brand,
+            
         },
         {
-            name: "Brand",
-            selector: row => row.brand,
-            sortable: true,
-        },
-        {
-            name: "Qty",
-            selector: row => row.qty,
-            sortable: true,
+            
+            title: "Cantidad",
+            field: "Cantidad",
+            headerStyle: {
+                backgroundColor: "#1D308E",
+                color: "#FFF",
+                borderRadius: "0px 20px 20px 0px",
+                fontSize: "12px",
+              },
+            render: row => row.qty,
+            
         },
     ];
     const handleInputChange = (e) => {
