@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from "react";
 import { Button, Col, Spinner} from "reactstrap";
 import { Select, MenuItem } from "@material-ui/core";
-// import MaterialTable from "material-table";
+import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ViewColumn from "@material-ui/icons/ViewColumn";
@@ -11,7 +11,7 @@ import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
-import DataTable from "react-data-table-component";
+
 
 const tableIcons = {
     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -73,7 +73,7 @@ const Form = () => {
             sortable: true,
         },
         {
-            name: "Category",
+            name: "Categoría",
             selector: row => row.category,
             sortable: true,
         },
@@ -561,21 +561,18 @@ const Form = () => {
                 </div>
                 <div className="col-12">
                  
-{/*                
+               
                     <MaterialTable
-                        title="Productos"
+                        title=""
                         options={{ columnsButton: true, sorting: true, search: false }}
                         columns={columns}
                         data={data.products}
                         style={{ marginLeft: "1em", marginTop: "2em", color:"black" }}
                         icons={tableIcons}
-                    /> */}
+                    />
                 </div>
                         
-                <DataTable            
-                        columns={columns}
-                        data={data.products}
-                    />
+           
                     
                 
                 <div className="col-md-6">
