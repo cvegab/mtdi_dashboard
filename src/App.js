@@ -1,57 +1,61 @@
-import ClientTable from "components/client-table";
-import OrderTable from "components/order-table";
-
-// import React, { useEffect, useState } from "react";
-import ExtendedTables from "views/tables/ExtendedTables";
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect, Link,} from "react-router-dom";
-
-import AuthLayout from "layouts/Auth.js";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
-  // const query = new URLSearchParams(useLocation().search);
-  // console.log(query);
+
   let search = window.location.search;
   console.log(search);
-let params = new URLSearchParams(search);
-let Name = search.split('?')[1];
-console.log(Name);
-let password = search.split('&pass=')[1];
-console.log(password);
-var mySubString = search.substring(
-  search.indexOf("?") + 1, 
-  search.lastIndexOf("&")
-);
+  let params = new URLSearchParams(search);
+  let Name = search.split("?")[1];
+  console.log(Name);
+  let password = search.split("&pass=")[1];
+  console.log(password);
+  var mySubString = search.substring(
+    search.indexOf("?") + 1,
+    search.lastIndexOf("&")
+  );
 
-let userName = mySubString.split('=')[1];
-console.log('userName is' + userName);
+  let userName = mySubString.split("=")[1];
+  console.log("userName is" + userName);
 
-console.log(params.name);
+  console.log(params.name);
+  useEffect(() => {
+    console.log("hello");
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+      email: userName,
+      // password: "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=",
+      password: password,
+    });
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    fetch(
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/login",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        if (result === `"Autorizado"`) {
+          setisAuthenticated(true);
+        } else {
+          setisAuthenticated(false);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
 
-
-  // const [orderData, setorderData] = useState([]);
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-  // const fetchData = async () => {
-  //   try {
-  //     console.log("hello");
-  //     // const response = await fetch(
-  //     //   "https://api.instancelatam.com:3001/api/ordersmv?qty=10"
-  //     // );
-  //     // if (!response.ok) {
-  //     //   throw new Error("wrong");
-  //     // }
-  //     // const data = await response.json();
-  //     // console.log(data[0],data[1]);
-  //     setorderData(MOCKUP_DATA);
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log(error.message);
-  //   }
-  // };
   return (
     <BrowserRouter>
       <Switch>
