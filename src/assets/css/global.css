@@ -6,6 +6,42 @@ body {
 .textCompany {
   color: white !important;
   font-weight: 500;
+  font-size: 12px;
+}
+.btn {
+  border-radius: 20px !important;
+  text-transform: none !important;
+ 
+}
+
+.Button:hover {
+  background-color:#06cbc1;
+}
+
+a.Button a:hover{
+  background: #06cbc1 !important;
+}
+
+
+#bttnSubmit:hover {
+  background-color: #06cbc1 !important;
+}
+
+.ii a[href] {
+  color: white !important;
+}
+
+a[href] {
+  color:white !important;
+}
+
+.button {
+color: white !important;
+}
+
+.sidebar .nav p, .off-canvas-sidebar .nav p {
+  text-transform: none;
+  font-weight: 500 !important;
 }
 
 .react-datepicker-popper {
@@ -46,6 +82,10 @@ body {
   width: 12em !important;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
 .MuiInput-root {
   margin-right: 1em !important;
 }
@@ -82,29 +122,57 @@ body {
 
 .sidebar .nav i {
   color: white !important;
+  
 }
 
 .button .input {
   border-radius: 17px !important;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   -webkit-border-radius: 17px;
   -moz-border-radius: 17px;
   border-radius: 17px;
   border: 1px solid white;
   color: black;
   width: 100px;
-  height: 30px;
+  height: 24px;
   padding-left: 10px;
+  font-size: 10px;
+  cursor: pointer;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  
 }
+
+input[type="text"]::placeholder {
+  /* background-image: url(../img/DatePickerIcon.png) !important; */
+  background-size: 15px 15px !important;
+  background-repeat: no-repeat !important;
+  background-position: 4rem center !important;
+}
+
+/* .MuiInputBase-input .MuiInput-input .MuiInputBase-inputAdornedStart .MuiInputBase-inputAdornedEnd {
+  display:none;
+} */
 
 input[type="text"]:focus {
   outline: none;
   border: 1px solid white;
   color: black;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+ 
+}
+
+
+
+.MuiSelect-nativeInput {
+  opacity: inherit !important;
+  border: none !important;
+  width: 78% !important;
+  left: 0px !important;
+  border-radius: 8px !important;
+  bottom: 5px !important;
 }
 
 #logoutButton {
@@ -162,9 +230,8 @@ input[type="text"]:focus {
   text-decoration: none;
   } */
 /* button.btn.btn-secondary {
-  text-align: center !important;
-  display:flex !important;
-  justify-content: center !important;
+  background-color: #1d308e !important;
+  color: white !important;
  
 } */
 
@@ -193,6 +260,7 @@ input[type="text"]:focus {
 .spinner-border {
   margin-top:2em;
   margin-bottom:2em;
+
 }
 
 .table {

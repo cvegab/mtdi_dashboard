@@ -16,7 +16,7 @@
 */
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Nav, Collapse } from "reactstrap";
+import { Nav, Collapse, Button } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
@@ -24,7 +24,7 @@ import avatar from "assets/img/faces/CamiloVega.jpg";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
-import LogoutIcon from "assets/img/logout-icon.png"
+// import LogoutIcon from "assets/img/logout-icon.png"
 import '../../assets/css/global.css'
 
 var ps;
@@ -221,24 +221,28 @@ function Sidebar(props) {
         <Nav>{createLinks(props.routes)}</Nav>
 
 
-
           <div className="logo">
         <a
           // href="https://www.creative-tim.com"
-          className="logo-mini logoutButtonMini "
+          className="logo-mini "
         >
-          <button className="logoutButtonMini">
+          {/* <button className="logoutButtonMini">
             <img src={LogoutIcon} alt="logoutMini" />
-          </button>
+          </button> */}
+           <Button className="btn-round btn-icon" color="primary" style={{ color: "#ffffff" }}>
+           <i className="nc-icon nc-user-run" />
+         </Button>
         </a>
         <a
           // href="https://www.creative-tim.com"
           className="logo-normal"
         >
-           <button id="logoutButton" className="logoutButton">
-        <img src={LogoutIcon} />
-        Cerrar sesión
-      </button>
+          <Button color="primary" style={{borderRadius: "22px", color:"#FFFFFF", marginLeft: "1em", textTransform: "none", letterSpacing:"1px", width: "200px", height:"60px"}} >
+            <span className="btn-label">
+              <i className="nc-icon nc-user-run" />
+            </span>
+             Cerrar Sesión       
+          </Button>
         </a>
       </div>
 
