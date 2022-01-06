@@ -24,7 +24,7 @@ import avatar from "assets/img/faces/CamiloVega.jpg";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
-import LogoutIcon from "assets/img/logout-icon.png"
+// import LogoutIcon from "assets/img/logout-icon.png"
 import '../../assets/css/global.css'
 
 var ps;
@@ -221,8 +221,7 @@ function Sidebar(props) {
         <Nav>{createLinks(props.routes)}</Nav>
 
 
-
-        <div className="logo">
+          <div className="logo">
         <a
           // href="https://www.creative-tim.com"
           className="logo-mini "
