@@ -26,6 +26,7 @@ import { Button, Col, Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
+import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard"
 
 import CustomLoader from "./custom-filter-row";
 
@@ -746,6 +747,19 @@ const MtdiTable = (props) => {
           </Button>
         </Col>
 
+
+      {/* MOBILE VERSION */}
+      <div id="OrderMobileCard">
+      <OrderMobileCard />
+      
+      </div>
+
+
+      {/* DESKTOP VERSION */}
+
+      <div id="OrderDesktopTable">
+        {/* // add is Loading */}
+
         {isLoading && (
           <MaterialTable
             title=""
@@ -797,7 +811,7 @@ const MtdiTable = (props) => {
               body: {
                 emptyDataSourceMessage: (
                   <div>
-                    <span>No records match the value</span>
+                    <span>No hay información disponible</span>
                     <Spinner
                       animation="border"
                       style={{ color: "#1D308E", marginLeft: "1em" }}
@@ -816,6 +830,7 @@ const MtdiTable = (props) => {
             style={{ marginLeft: "1em", marginTop: "2em" }}
           />
         )}
+      </div>
       </div>
     </React.Fragment>
   );

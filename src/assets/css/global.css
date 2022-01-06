@@ -260,4 +260,39 @@ input[type="text"]:focus {
 .spinner-border {
   margin-top:2em;
   margin-bottom:2em;
+
+}
+
+.table {
+border-collapse: inherit !important;
+}
+
+/* Accordion Button  */
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  background-color: #1D308E;
+  color: white;
+  border-radius: 17px !important;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width:767px) {
+
+  /*MTDI-TABLE */
+
+  #OrderDesktopTable {
+    display:none;
+  }
+
+}
+
+@media screen and (min-width:768px) {
+
+  /*MTDI-TABLE */
+
+  #OrderMobileCard {
+    display:none;
+  }
+
 }
