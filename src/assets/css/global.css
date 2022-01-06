@@ -182,3 +182,49 @@ input[type="text"]:focus {
 .MuiPaper-rounded {
   border-radius: 20px !important;
 }
+
+.sc-bkkeKt, .ezNeFY {
+  color:"black" !important;
+  font-size: "12px" !important;
+  font-weight: "800" !important;
+
+}
+
+.spinner-border {
+  margin-top:2em;
+  margin-bottom:2em;
+}
+
+.table {
+border-collapse: inherit !important;
+}
+
+/* Accordion Button  */
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  background-color: #1D308E;
+  color: white;
+  border-radius: 17px !important;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width:767px) {
+
+  /*MTDI-TABLE */
+
+  #OrderDesktopTable {
+    display:none;
+  }
+
+}
+
+@media screen and (min-width:768px) {
+
+  /*MTDI-TABLE */
+
+  #OrderMobileCard {
+    display:none;
+  }
+
+}
