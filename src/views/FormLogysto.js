@@ -28,11 +28,15 @@ const tableIcons = {
   };
 
 const categories = [
-    {
-        "name": "Canal de Ventas",
-        "channelStore": ["Sodimac", "Easy"]
-    }
+    "Sodimac", "Test"
 ]
+
+const selectOptions = [
+    {value: "Sodimac", label: "Sodimac"},
+    {value: "Test", label: "Test"}
+]
+
+
 console.log("categories",categories);
 
 const Form = () => {
@@ -51,6 +55,7 @@ const Form = () => {
         maxLenght: "",
         maxWidth: "",
         cantidad_paquetes: 0,
+        from: "Sodimac",
         products: [],
     });
     const [product, setProduct] = useState({
@@ -156,6 +161,12 @@ const Form = () => {
         }
         return true;
     }
+    const handleSelectChange = (e, child) => {
+        setData({
+            ...data,
+            [e.target.name]: child.props.value
+        });
+    }
 
 
     const addProduct = (e) => {
@@ -255,17 +266,14 @@ const Form = () => {
             <Select
             labelId="select-tienda"
             id="select-tienda"     
+            name="from"
             style={{ width: "200px", height:"35px", marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "10px" }}
-            // value={categories}
-            label="Canal de venta"
-            placeholder="&nbsp; Seleccione un canal de venta"      
-            // onChange={handleStoreChange}
+            label="Canal de venta"  
+            onChange={handleSelectChange}  
+            defaultValue="Sodimac"         
           >
-              {/* {
-                  categories.map((item,i)=>(
-                        <MenuItem key={"categorie"+i} value={i}> {item.channelStore}</MenuItem>
-                  ))
-              }        */}
+                <option value="Sodimac">Sodimac</option>
+                <option value="Test">Test</option>
            
           </Select>
         </label>
