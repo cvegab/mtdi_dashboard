@@ -20,6 +20,9 @@ const App = () => {
   console.log("userName is" + userName);
 
   useEffect(() => {
+    if (localStorage.getItem("name") === null) {
+      window.location.href = "https://dev.instancelatam.com/login";
+    }
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
