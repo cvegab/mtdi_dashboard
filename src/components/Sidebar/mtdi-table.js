@@ -26,6 +26,7 @@ import { Button, Col, Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
+import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard"
 
 import CustomLoader from "./custom-filter-row";
 
@@ -281,28 +282,28 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    {
-      title: "Estado de Pedido",
-      field: "order_status",
+    // {
+    //   title: "Estado de Pedido",
+    //   field: "order_status",
 
-      render: (rowData) => {
-        if (rowData.order_status === "Cancelado") {
-          return <div className={classes.cancelado}>Cancelado</div>;
-        }
-        if (rowData.order_status === "Despachado") {
-          return <div className={classes.despachado}>Despachado</div>;
-        }
-        if (rowData.order_status === "Confirmado") {
-          return <div className={classes.confirmado}>Confirmado</div>;
-        }
-      },
+    //   render: (rowData) => {
+    //     if (rowData.order_status === "Cancelado") {
+    //       return <div className={classes.cancelado}>Cancelado</div>;
+    //     }
+    //     if (rowData.order_status === "Despachado") {
+    //       return <div className={classes.despachado}>Despachado</div>;
+    //     }
+    //     if (rowData.order_status === "Confirmado") {
+    //       return <div className={classes.confirmado}>Confirmado</div>;
+    //     }
+    //   },
 
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "DTE",
       field: "dte_exist",
@@ -345,51 +346,51 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    {
-      title: "Respuesta OMS",
-      field: "role",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Respuesta WMS",
-      field: "role",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Hub de pago",
-      field: "estado_pago",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Total",
-      field: "role",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Shipping",
-      field: "",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Respuesta OMS",
+    //   field: "role",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Respuesta WMS",
+    //   field: "role",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Hub de pago",
+    //   field: "estado_pago",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Total",
+    //   field: "role",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Shipping",
+    //   field: "",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "Estado fulfillment",
       field: "estado_oc",
@@ -399,42 +400,42 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    {
-      title: "Pickeador",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Jefe OPS",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Hub fulfillment",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Courier",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Pickeador",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Jefe OPS",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Hub fulfillment",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Courier",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "Shipping ID",
       field: "shipping_id",
@@ -444,8 +445,26 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
+    // {
+    //   title: "Bultos/Etiquetas",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Estado courier",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
-      title: "Bultos/Etiquetas",
+      title: "Comprador",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -453,43 +472,25 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    {
-      title: "Estado courier",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Cliente",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "NPS",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Reviews",
-      field: "comprador",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        borderRadius: "0px 20px 20px 0px",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "NPS",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Reviews",
+    //   field: "comprador",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     borderRadius: "0px 20px 20px 0px",
+    //     fontSize: "12px",
+    //   },
+    // },
   ];
 
   const handleCountryChange = (event) => {
@@ -746,6 +747,19 @@ const MtdiTable = (props) => {
           </Button>
         </Col>
 
+
+      {/* MOBILE VERSION */}
+      <div id="OrderMobileCard">
+        <br/>
+        <OrderMobileCard />     
+      </div>
+
+
+      {/* DESKTOP VERSION */}
+
+      <div id="OrderDesktopTable">
+        {/* // add is Loading */}
+
         {isLoading && (
           <MaterialTable
             title=""
@@ -797,7 +811,7 @@ const MtdiTable = (props) => {
               body: {
                 emptyDataSourceMessage: (
                   <div>
-                    <span>No records match the value</span>
+                    <span>No hay información disponible</span>
                     <Spinner
                       animation="border"
                       style={{ color: "#1D308E", marginLeft: "1em" }}
@@ -816,6 +830,7 @@ const MtdiTable = (props) => {
             style={{ marginLeft: "1em", marginTop: "2em" }}
           />
         )}
+      </div>
       </div>
     </React.Fragment>
   );
