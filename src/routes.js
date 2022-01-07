@@ -31,7 +31,7 @@ import OrderTable from "components/order-table";
 import MtdiTable from "components/Sidebar/mtdi-table";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png"
-import Logysto from "views/FormLogysto";
+
 
 const routes = [
   {
@@ -42,6 +42,8 @@ const routes = [
     component: MtdiTable,
     layout: "/admin",
   },
+  
+  
   // {
   //   path: "/panels",
   //   name: "Mobile Version",
@@ -58,6 +60,14 @@ const routes = [
     component: Charts,
     layout: "/admin",
     
+  },
+
+  {
+    path: "/logysto",
+    name: "Ingreso manual OC",
+    icon: "nc-icon nc-laptop",
+    component: Logysto,
+    layout: "/admin",
   },
 // {
 //   path: "/extended-tables",
@@ -313,13 +323,7 @@ const routes = [
     // component: Dashboard,
     // layout: "/admin",
   // },
-  {
-    path: "/logysto",
-    name: "Logysto",
-    icon: "nc-icon nc-laptop",
-    component: Logysto,
-    layout: "/admin",
-  },
+ 
   // {
   //   path: "/logout",
   //   icon: "nc-icon nc-calendar-60",

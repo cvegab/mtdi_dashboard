@@ -86,7 +86,7 @@ const Form = () => {
         
         {
             title: "Categoría",
-            field: "Categoria",
+            field: "category",
             headerStyle: {
                 backgroundColor: "#1D308E",
                 color: "#FFF",
@@ -361,6 +361,26 @@ const Form = () => {
                     />
                 </div>
                 <div className="col-md-6">
+                    <p
+                    style={{
+                        color:"black",
+                         fontSize: "12px",
+                         fontWeight: "800"
+                    }}
+                    >
+                        Código de ciudad
+                    </p>
+                    <input
+                        placeholder="Código de ciudad"
+                        className="form-control"
+                        type="number"
+                        style={{width:"300px", borderRadius: "17px", boxShadow:"0 6px 10px -4px rgb(0 0 0 / 15%)", height:"35px", marginBottom:"2em"}}
+                        name="city_code"
+                        required
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-md-6">
                     <p style={{
                         color:"black",
                          fontSize: "12px",
@@ -398,26 +418,7 @@ const Form = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-6">
-                    <p
-                    style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Código de ciudad
-                    </p>
-                    <input
-                        placeholder="Código de ciudad"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", borderRadius: "17px", boxShadow:"0 6px 10px -4px rgb(0 0 0 / 15%)", height:"35px", marginBottom:"2em"}}
-                        name="city_code"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
+          
                 <div className="col-md-6">
                     <p style={{
                         color:"black",
@@ -599,7 +600,7 @@ const Form = () => {
                     <br/>
                         <Button
                             className="btn btn-primary"
-                            style={{backgroundColor: "#51cbce", borderRadius:"20px", width:"200px", height:"50px", color:"white"}}
+                            style={{backgroundColor: "#1D308E", borderRadius:"20px", width:"200px", height:"50px", color:"white"}}
                             onClick={addProduct}
                             >
                                 Agregar producto
@@ -625,7 +626,7 @@ const Form = () => {
                 <div className="col-md-6">
                 <Button
                     className="btn btn-primary"
-                    style={{backgroundColor: "#51cbce", borderRadius:"20px", width:"150px", height:"50px", color:"white"}}
+                    style={{backgroundColor: "#1D308E", borderRadius:"20px", width:"150px", height:"50px", color:"white"}}
                     type="submit">
                         Enviar
                 </Button>
