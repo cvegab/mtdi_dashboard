@@ -18,7 +18,11 @@ const App = () => {
 
   let userName = nameSubString.split("=")[1];
   console.log("userName is" + userName);
-
+  useEffect(() => {
+    if (userName === undefined && localStorage.getItem("name") === null) {
+      window.location.href = "https://dev.instancelatam.com/login";
+    }
+  }, []);
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
@@ -66,6 +70,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
         {!isAuthenticated && localStorage.getItem("name") === null && (
           <Route
             component={() => {
