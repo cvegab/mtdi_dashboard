@@ -25,7 +25,7 @@ import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
 // import LogoutIcon from "assets/img/logout-icon.png"
-import '../../assets/css/global.css'
+import "../../assets/css/global.css";
 
 var ps;
 
@@ -151,14 +151,12 @@ function Sidebar(props) {
   React.useEffect(() => {
     setCollapseStates(getCollapseStates(props.routes));
   }, []);
- const logoutHandler =()=>{
-    console.log('i was clicked');
+  const logoutHandler = () => {
     localStorage.removeItem("name");
-    localStorage.removeItem('password');
-    window.location.replace('https://dev.instancelatam.com/login');
+    localStorage.removeItem("password");
+    window.location.replace("https://dev.instancelatam.com/login");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
-
-  }
+  };
   return (
     <div
       className="sidebar"
@@ -178,7 +176,7 @@ function Sidebar(props) {
           // href="https://www.creative-tim.com"
           className="textCompany logo-normal"
         >
-           <img src={logo1} alt="Instance-logo" width="50%" />
+          <img src={logo1} alt="Instance-logo" width="50%" />
         </a>
       </div>
 
@@ -224,41 +222,50 @@ function Sidebar(props) {
           </div>
         </div>
 
-  
-
         <Nav>{createLinks(props.routes)}</Nav>
 
-
-          <div className="logo">
-        <a
-          // href="https://www.creative-tim.com"
-          className="logo-mini "
-        >
-          {/* <button className="logoutButtonMini">
+        <div className="logo">
+          <a
+            // href="https://www.creative-tim.com"
+            className="logo-mini "
+          >
+            {/* <button className="logoutButtonMini">
             <img src={LogoutIcon} alt="logoutMini" />
           </button> */}
-           <Button className="btn-round btn-icon" color="primary" style={{ color: "#ffffff" }}>
-           <i className="nc-icon nc-user-run" />
-         </Button>
-        </a>
-        <a
-          // href="https://www.creative-tim.com"
-          className="logo-normal"
-        >
-          <Button onClick={logoutHandler} color="primary" style={{borderRadius: "22px", color:"#FFFFFF", marginLeft: "1em", textTransform: "none", letterSpacing:"1px", width: "200px", height:"60px"}} >
-            <span className="btn-label">
+            <Button
+              className="btn-round btn-icon"
+              color="primary"
+              style={{ color: "#ffffff" }}
+            >
               <i className="nc-icon nc-user-run" />
-            </span>
-             Cerrar Sesión       
-          </Button>
-        </a>
-      </div>
-
-
+            </Button>
+          </a>
+          <a
+            // href="https://www.creative-tim.com"
+            className="logo-normal"
+          >
+            <Button
+              onClick={logoutHandler}
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "60px",
+              }}
+            >
+              <span className="btn-label">
+                <i className="nc-icon nc-user-run" />
+              </span>
+              Cerrar Sesión
+            </Button>
+          </a>
+        </div>
       </div>
     </div>
-
-    
   );
 }
 
