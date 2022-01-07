@@ -151,6 +151,14 @@ function Sidebar(props) {
   React.useEffect(() => {
     setCollapseStates(getCollapseStates(props.routes));
   }, []);
+ const logoutHandler =()=>{
+    console.log('i was clicked');
+    localStorage.removeItem("name");
+    localStorage.removeItem('password');
+    window.location.replace('https://dev.instancelatam.com/login');
+    // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
+
+  }
   return (
     <div
       className="sidebar"
@@ -237,7 +245,7 @@ function Sidebar(props) {
           // href="https://www.creative-tim.com"
           className="logo-normal"
         >
-          <Button color="primary" style={{borderRadius: "22px", color:"#FFFFFF", marginLeft: "1em", textTransform: "none", letterSpacing:"1px", width: "200px", height:"60px"}} >
+          <Button onClick={logoutHandler} color="primary" style={{borderRadius: "22px", color:"#FFFFFF", marginLeft: "1em", textTransform: "none", letterSpacing:"1px", width: "200px", height:"60px"}} >
             <span className="btn-label">
               <i className="nc-icon nc-user-run" />
             </span>
