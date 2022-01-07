@@ -245,8 +245,7 @@ function Sidebar(props) {
           </Button>
         </a>
       </div>
-
-
+      
       </div>
     </div>
 

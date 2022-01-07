@@ -1,4 +1,3 @@
-
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -20,7 +19,7 @@ ReactDOM.render(
       <Redirect to="/admin/dashboard" />
     </Switch>
   </BrowserRouter>,
- 
- 
+  // <App />,
+
   document.getElementById("root")
 );
