@@ -3,14 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
-  
+
   let search = window.location.search;
 
   let params = new URLSearchParams(search);
-   let Name = search.split("?")[1];
+  let Name = search.split("?")[1];
 
-  let password = search.split("&pass=")[1];
-
+  let password = search.split("&zeek=")[1];
+  console.log(password);
   let nameSubString = search.substring(
     search.indexOf("?") + 1,
     search.lastIndexOf("&")
@@ -30,7 +30,7 @@ const App = () => {
     var raw = JSON.stringify({
       email: userName,
       // password: "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=",
-      password: "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=",
+      password: password,
     });
     var requestOptions = {
       method: "POST",
