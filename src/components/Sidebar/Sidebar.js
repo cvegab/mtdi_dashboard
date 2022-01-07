@@ -152,7 +152,6 @@ function Sidebar(props) {
     setCollapseStates(getCollapseStates(props.routes));
   }, []);
   const logoutHandler = () => {
-    console.log('hi');
     localStorage.removeItem("name");
     localStorage.removeItem("password");
     window.location.replace("https://dev.instancelatam.com/login");
