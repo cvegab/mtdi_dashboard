@@ -55,11 +55,11 @@ function OrderMobileCard() {
           <Col className="text-center" lg="6" md="12">
             <Card className="card-tasks">
               <CardHeader>
-                {/* <CardTitle tag="h4">Tasks</CardTitle>
-                <h5 className="card-category">Backend development</h5> */}
+                {/* <CardTitle tag="h4">Tabla Órdenes</CardTitle>
+                <h5 className="card-category">Pedidos</h5> */}
               </CardHeader>
               <CardBody>
-                <div className="table-full-width table-responsive">
+                {/* <div className="table-full-width table-responsive"> */}
                   <Table>
                     <tbody>
 
@@ -72,62 +72,24 @@ function OrderMobileCard() {
                             </Label>
                           </FormGroup> */}
                         </td>
+
+{/* OPS ID */}
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Ops ID: 
                         </td>
-                        {/* <td className="img-row"> */}
-                          {/* <div className="img-wrapper"> */}
-                            {/* <img
-                              alt="..."
-                              className="img-raised"
-                              src={
-                                require("assets/img/faces/ayo-ogunseinde-2.jpg")
-                                  .default
-                              }
-                            /> */}
-                          {/* </div> */}
-                        {/* </td> */}
+                      
                         <td className="text-left" style={{fontSize: "12px"}}>
                           5159308472
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                           Eliminar
-                          </UncontrolledTooltip>
+                          <br/>
                         
                         </td>               
                       </tr>
 
+{/* FECHA DE ORDEN */}
                     <tr>
-                      <td>
-                        </td>
+                      <td/>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Fecha orden: 
                         </td>               
@@ -135,224 +97,141 @@ function OrderMobileCard() {
                         2022-01-05 09:57:56
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                           Eliminar
-                          </UncontrolledTooltip>
-                        
+                        <br/>
+                        <br/>
                         </td>               
                       </tr>
    
-   
+ {/* CANAL DE VENTA   */}
                       <tr>
-                        <td>                       
-                        </td>
+                        <td/>                       
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Orden Compra: 
+                          Canal de Venta: 
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          5159308472
+                          Mercadolibre
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>
-                        
+                        <br/>
+                        <br/>
+                        </td>                      
+                      </tr>
+{/* TIENDA */}
 
+                      <tr>
+                        <td/>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                        Cliente:
+                        </td>
+                     
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        CAROZZI FS
+                        </td>
+                        <td className="td-actions text-right">
+                        <br/>
+                        <br/>   
+                        </td>                     
+                      </tr>
+
+{/* CLIENTE */}
+
+                      <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Cliente: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Mercadolibre
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>                      
+                      </tr>
+
+
+{/* TIENDA OFICIAL */}
+                      <tr>
+                        <td/>                                          
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                        Tienda Oficial:
+                        </td>                
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        Carozzi Food Service
+                        </td>
+                        <td className="td-actions text-right">
+                        <br/>
+                        <br/>     
+                        </td>                  
+                      </tr>
+
+{/* ORDEN DE COMPRA */}
+                      <tr>
+                        <td/>                                   
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                       Orden de Compra:
+                        </td>                       
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        5159308472
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>       
+                        </td>                      
+                      </tr>
+
+{/* PAÍS */}
+
+                      <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          País: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Chile
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
                         </td>
                        
                       </tr>
 
-                      <tr>
-                        <td>
+{/* ESTADO DE PEDIDO */}
+                      {/* <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Estado de Pedido: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
                           
                         </td>
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Canal Venta:
-                        </td>
-                     
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          Mercado Libre
-                        </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>               
-                        </td>                     
-                      </tr>
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
 
-   
+                  
+                    </tbody>
+                  </Table>
 
+                  <Accordion>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>Ver más</Accordion.Header>
+                      <Accordion.Body>
+
+                      {/* <div className="table-full-width table-responsive"> */}
+                  <Table>
+                    <tbody>
+{/* DTE */}
                       <tr>
-                        <td>                     
-                        </td>
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Cliente:
-                        </td>                
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          CAROZZI FS
-                        </td>
-                        <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-                        </td>                  
-                      </tr>
-
-                      <tr>
-                        <td>              
-                        </td>
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Tienda Oficial:
-                        </td>                       
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          Carozzi Food Service
-                        </td>
-                        <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-                        </td>                      
-                      </tr>
-
-                      <tr>
-                        <td>                      
-                        </td>
+                        <td/>                      
                         <td className="img-row">
                           <div className="img-wrapper">
                             <td className="text-left" style={{fontSize: "12px", fontWeight: "bold"}}>
@@ -364,82 +243,60 @@ function OrderMobileCard() {
                           Sí
                         </td>
                         <td className="td-actions text-right">                                         
+                        <br/>
+                        <br/>
                           <span
                             className={classes.si}
                             type="button"
                           >                         
                             <img src={SiIcon} />                       
                           </span>
-                        
+                          &nbsp; 
                           <span
                             className={classes.showPdf}
                             type="button"
                           >                         
                             <img src={showPdf} />                       
-                          </span>                        
+                          </span>                                                                         
                         </td>                        
                       </tr>
-                  
-                    </tbody>
-                  </Table>
-
-                  <Accordion>
-                    <Accordion.Item eventKey="0">
-                      <Accordion.Header>Ver más</Accordion.Header>
-                      <Accordion.Body>
-
-                      <div className="table-full-width table-responsive">
-                  <Table>
-                    <tbody>
-                      <tr>
-                        <td>
-                        
-                        </td>
+ 
+{/* RESPUESTA OMS */}
+                      {/* <tr>
+                        <td/>      
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          País: 
+                          Respuesta OMS: 
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Chile
+                          
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                           Eliminar
-                          </UncontrolledTooltip>
-                        
-
+                            <br/>
+                            <br/>
                         </td>
                        
-                      </tr>
+                      </tr> */}
 
-                      <tr>
+{/* RESPUESTA WMS */}
+                      {/* <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Respuesta WMS: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
+{/* HUB DE PAGO */}
+                          
+                      {/* <tr>
                         <td>
                          
                         </td>
@@ -451,43 +308,30 @@ function OrderMobileCard() {
                           Approved
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>
-                        
-
+                          <br/>
+                          <br/>
                         </td>
                        
-                      </tr>
+                      </tr> */}
 
-                      <tr>
+{/* TOTAL */}
+                      {/* <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                        Total: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
+{/* SHIPPING */}
+                      {/* <tr>
                         <td>
                         
                         </td>
@@ -499,45 +343,15 @@ function OrderMobileCard() {
                           $ 5000
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>
-                        
+                          <br/>
+                          <br/>
+                        </td>                     
+                      </tr> */}
 
-                        </td>
-                       
-                      </tr>
 
+{/* ESTADO FULFILLMENT */}
                       <tr>
-                        <td>
-                         
+                        <td>                        
                         </td>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Estado Fulfillment:
@@ -547,43 +361,14 @@ function OrderMobileCard() {
                           Paid
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>
-                        
-
+                          <br/>
+                          <br/>
                         </td>
-                       
+                        
                       </tr>
 
-                      <tr>
+{/* PICKEADOR */}
+                      {/* <tr>
                         <td>                   
                         </td>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
@@ -594,41 +379,13 @@ function OrderMobileCard() {
                           Rodrigo Letelier
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>
                         </td>                  
-                      </tr>
-
-                      <tr>
+                      </tr> */}
+{/* 
+JEFE OPS */}
+                      {/* <tr>
                         <td>                   
                         </td>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
@@ -639,87 +396,46 @@ function OrderMobileCard() {
                           Jorman Julio
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
+                          <br/>
+                          <br/>                  
                         </td>                  
-                      </tr>
+                      </tr> */}
 
-                      <tr>
-                        <td>                   
-                        </td>
+{/* HUB FULFILLMENT */}
+                      {/* <tr>
+                        <td/>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Courier:
-                        </td>
-                      
+                         Hub Fulfillment:
+                        </td>                   
                         <td className="text-left" style={{fontSize: "12px"}}>
                           Rodrigo Letelier
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>                
                         </td>                  
-                      </tr>
+                      </tr> */}
 
-                      <tr>
-                        <td>                   
+{/* COURIER */}
+                      {/* <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Courier: 
                         </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
+
+{/* SHIPPING ID */}
+                      <tr>
+                        <td/>                                         
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Shipping ID:
                         </td>
@@ -728,43 +444,15 @@ function OrderMobileCard() {
                           41093360616
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>        
                         </td>                  
                       </tr>
 
-                      <tr>
-                        <td>                   
-                        </td>
+{/* BULTOS / ETIQUETAS */}
+
+                      {/* <tr>
+                        <td/>                                       
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Bultos / Etiquetas:
                         </td>
@@ -773,43 +461,14 @@ function OrderMobileCard() {
                           Juan Pérez
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>
                         </td>                  
-                      </tr>
+                      </tr> */}
 
-                      <tr>
-                        <td>                   
-                        </td>
+{/* ESTADO DE COURIER */}
+                      {/* <tr>
+                        <td/>                                        
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Estado Courier:
                         </td>
@@ -818,88 +477,31 @@ function OrderMobileCard() {
                           Juan Pérez
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>
                         </td>                  
-                      </tr>
+                      </tr> */}
 
+{/* COMPRADOR */}
                       <tr>
                         <td>                   
                         </td>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Cliente:
+                          Comprador
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
                           Consuelo Miranda
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>                                  
                         </td>                  
                       </tr>
 
-                      <tr>
-                        <td>                   
-                        </td>
+{/* NPS */}
+                      {/* <tr>
+                        <td/>                                        
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           NPS:
                         </td>
@@ -908,43 +510,14 @@ function OrderMobileCard() {
                           Consuelo Miranda
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>
                         </td>                  
-                      </tr>
+                      </tr> */}
 
-                      <tr>
-                        <td>                   
-                        </td>
+{/* REVIEWS */}
+                      {/* <tr>
+                        <td/>                                       
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Reviews:
                         </td>
@@ -953,53 +526,24 @@ function OrderMobileCard() {
                           41093360616
                         </td>
                         <td className="td-actions text-right">
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip42906017"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-ruler-pencil" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip42906017"
-                          >
-                            Editar
-                          </UncontrolledTooltip>
-                          <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="danger"
-                            id="tooltip570363224"
-                            title=""
-                            type="button"
-                          >
-                            <i className="nc-icon nc-simple-remove" />
-                          </Button>
-                          <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip570363224"
-                          >
-                            Eliminar
-                          </UncontrolledTooltip>                      
-
+                          <br/>
+                          <br/>
                         </td>                  
-                      </tr>
+                      </tr> */}
 
 
                    
                     
                     </tbody>
                     </Table>
-                    </div>
+                    {/* </div> */}
  
 
                       
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>
-          </div>
+          {/* </div> */}
         </CardBody>
               {/* <CardFooter>
                 <hr />

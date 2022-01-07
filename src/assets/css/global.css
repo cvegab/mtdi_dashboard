@@ -120,6 +120,14 @@ color: white !important;
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 
+.navbar-toggler {
+  box-shadow:0 0 0 0 !important;
+  border: 0px !important;
+}
+.navbar-toggler:focus {
+  box-shadow:0 0 0 0.0rem !important;
+}
+
 .sidebar .nav i {
   color: white !important;
   
@@ -273,6 +281,11 @@ border-collapse: inherit !important;
   background-color: #1D308E;
   color: white;
   border-radius: 17px !important;
+  font-size: 12px;
+}
+
+.text-left {
+  width:120px;
 }
 
 /* MEDIA QUERIES */
