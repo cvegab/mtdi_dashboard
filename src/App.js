@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
-
+  const [name, setname] = useState("");
+  const [passwordurl, setpasswordurl] = useState("");
   let search = window.location.search;
   console.log(search);
   let params = new URLSearchParams(search);
@@ -21,7 +22,13 @@ const App = () => {
 
   console.log(params.name);
   useEffect(() => {
-    console.log("hello");
+    //   localStorage.setItem("name", userName);//usetName is the one in link (sofia)
+    //   localStorage.setItem("password", password);//is the encrypted one in link
+    //   const saved = localStorage.getItem("name");//here the local name is sofia(so it is stored)
+    //  const savedPass = localStorage.getItem("password");
+    //  setname(saved);
+    //  console.log(name);
+    
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -30,9 +37,9 @@ const App = () => {
     );
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-      email: userName,
+      email: userName, //but here it changes and becomes undefined when i go to admin/dashboard
       // password: "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=",
-      password: password,
+      password: "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=",
     });
     var requestOptions = {
       method: "POST",
@@ -49,17 +56,40 @@ const App = () => {
         console.log(result);
         if (result === `"Autorizado"`) {
           setisAuthenticated(true);
+          localStorage.setItem("name", userName);
+          localStorage.setItem(
+            "password",
+            "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ="
+          );
+          let localStoragepassword = localStorage.getItem("password");
+          let localStorageuserName = localStorage.getItem("na");
+         
+          setname(localStorageuserName);
         } else {
           setisAuthenticated(false);
         }
       })
       .catch((error) => console.log("error", error));
   }, []);
-
+  console.log(name);
+ 
+ 
   return (
     <BrowserRouter>
       <Switch>
-        {!isAuthenticated && (
+        {/* {!isAuthenticated && (
+          <Route
+            component={() => {
+              window.location.href = "https://dev.instancelatam.com/login";
+              return null;
+            }}
+          />
+        )} */}
+        {/* {name.length !== 0 && (
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        )} */}
+        {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} /> */}
+         {!isAuthenticated && localStorage.getItem('name') === null && (
           <Route
             component={() => {
               window.location.href = "https://dev.instancelatam.com/login";
@@ -67,8 +97,10 @@ const App = () => {
             }}
           />
         )}
-        {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} /> */}
-        {isAuthenticated && (
+        {!isAuthenticated && localStorage.getItem('name') !== null && (
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        )}
+          {isAuthenticated  && (
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         )}
       </Switch>
