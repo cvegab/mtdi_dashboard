@@ -3,24 +3,22 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
-  const [name, setname] = useState("");
-  const [passwordurl, setpasswordurl] = useState("");
+  
   let search = window.location.search;
-  console.log(search);
+
   let params = new URLSearchParams(search);
-  let Name = search.split("?")[1];
-  console.log(Name);
+   let Name = search.split("?")[1];
+
   let password = search.split("&pass=")[1];
-  console.log(password);
-  var mySubString = search.substring(
+
+  let nameSubString = search.substring(
     search.indexOf("?") + 1,
     search.lastIndexOf("&")
   );
 
-  let userName = mySubString.split("=")[1];
+  let userName = nameSubString.split("=")[1];
   console.log("userName is" + userName);
 
-  console.log(params.name);
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
@@ -54,10 +52,10 @@ const App = () => {
             "password",
             "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ="
           );
-          let localStoragepassword = localStorage.getItem("password");
-          let localStorageuserName = localStorage.getItem("na");
+          // let localStoragepassword = localStorage.getItem("password");
+          // let localStorageuserName = localStorage.getItem("name");
 
-          setname(localStorageuserName);
+          // setname(localStorageuserName);
         } else {
           setisAuthenticated(false);
         }
