@@ -50,6 +50,8 @@ color: white !important;
 
 .react-datepicker__input-container {
   border-radius: 10px !important;
+  margin-left: 1em;
+  
 }
 
 .MuiSelect-select.MuiSelect-select {
@@ -120,6 +122,14 @@ color: white !important;
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 
+.navbar-toggler {
+  box-shadow:0 0 0 0 !important;
+  border: 0px !important;
+}
+.navbar-toggler:focus {
+  box-shadow:0 0 0 0.0rem !important;
+}
+
 .sidebar .nav i {
   color: white !important;
   
@@ -141,6 +151,7 @@ input[type="number"] {
   padding-left: 10px;
   font-size: 10px;
   cursor: pointer;
+  margin-top:2px;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   
 }
@@ -160,6 +171,7 @@ input[type="text"]:focus {
   outline: none;
   border: 1px solid white;
   color: black;
+  margin-top:2px;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
  
 }
@@ -246,7 +258,6 @@ input[type="text"]:focus {
   height: 200px;
   background-color: blue;
 }
-
 .MuiPaper-rounded {
   border-radius: 20px !important;
 }
@@ -255,5 +266,54 @@ input[type="text"]:focus {
   color:"black" !important;
   font-size: "12px" !important;
   font-weight: "800" !important;
+
+}
+
+.spinner-border {
+  margin-top:2em;
+  margin-bottom:2em;
+
+}
+
+.table {
+border-collapse: inherit !important;
+}
+
+/* Accordion Button  */
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  background-color: #1D308E;
+  color: white;
+  border-radius: 17px !important;
+  font-size: 12px;
+}
+
+.text-left {
+  width:120px;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width:767px) {
+
+  /*MTDI-TABLE */
+
+  #OrderDesktopTable {
+    display:none;
+  }
+
+  .select-tienda-official {
+    margin-left:10px;
+
+}
+}
+
+@media screen and (min-width:768px) {
+
+  /*MTDI-TABLE */
+
+  #OrderMobileCard {
+    display:none;
+  }
 
 }
