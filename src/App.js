@@ -10,19 +10,13 @@ const App = () => {
   let Name = search.split("?")[1];
 
   let password = search.split("&zeek=")[1];
-  console.log(password);
+
   let nameSubString = search.substring(
     search.indexOf("?") + 1,
     search.lastIndexOf("&")
   );
 
   let userName = nameSubString.split("=")[1];
-  console.log("userName is" + userName);
-  useEffect(() => {
-    if (userName === undefined && localStorage.getItem("name") === null) {
-      window.location.href = "https://dev.instancelatam.com/login";
-    }
-  }, []);
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
@@ -56,17 +50,15 @@ const App = () => {
             "password",
             "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ="
           );
-          // let localStoragepassword = localStorage.getItem("password");
-          // let localStorageuserName = localStorage.getItem("name");
-
-          // setname(localStorageuserName);
         } else {
           setisAuthenticated(false);
         }
       })
       .catch((error) => console.log("error", error));
   }, []);
-
+  if (userName === undefined && localStorage.getItem("name") === null) {
+    return (window.location.href = "https://dev.instancelatam.com/login");
+  }
   return (
     <BrowserRouter>
       <Switch>
