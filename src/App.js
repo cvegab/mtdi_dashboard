@@ -10,7 +10,7 @@ const App = () => {
   let Name = search.split("?")[1];
 
   let password = search.split("&zeek=")[1];
-  console.log(password);
+
   let nameSubString = search.substring(
     search.indexOf("?") + 1,
     search.lastIndexOf("&")
@@ -52,10 +52,6 @@ const App = () => {
             "password",
             "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ="
           );
-          // let localStoragepassword = localStorage.getItem("password");
-          // let localStorageuserName = localStorage.getItem("name");
-
-          // setname(localStorageuserName);
         } else {
           setisAuthenticated(false);
         }
