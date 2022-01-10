@@ -206,7 +206,7 @@ const MtdiTable = (props) => {
       const data = await response.json();
       // console.log(data);
 
-      setData(data);
+      setData(data.message);
       
       setisLoading(false);
    
@@ -797,9 +797,7 @@ const MtdiTable = (props) => {
            />
            )
          }
-          {/* <OrderMobileCard 
-          opsId={order.order_id}
-          />      */}
+         
 
         
         </div> 
