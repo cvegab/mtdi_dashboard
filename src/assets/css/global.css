@@ -50,6 +50,8 @@ color: white !important;
 
 .react-datepicker__input-container {
   border-radius: 10px !important;
+  margin-left: 1em;
+  
 }
 
 .MuiSelect-select.MuiSelect-select {
@@ -149,6 +151,7 @@ input[type="number"] {
   padding-left: 10px;
   font-size: 10px;
   cursor: pointer;
+  margin-top:2px;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   
 }
@@ -168,6 +171,7 @@ input[type="text"]:focus {
   outline: none;
   border: 1px solid white;
   color: black;
+  margin-top:2px;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
  
 }
@@ -298,6 +302,10 @@ border-collapse: inherit !important;
     display:none;
   }
 
+  .select-tienda-official {
+    margin-left:10px;
+
+}
 }
 
 @media screen and (min-width:768px) {

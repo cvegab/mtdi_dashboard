@@ -30,7 +30,7 @@ import {
 } from "reactstrap";
 import Accordion from 'react-bootstrap/Accordion'
 
-function OrderMobileCard() {
+function OrderMobileCard(props) {
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
   const [verticalTabs, setVerticalTabs] = React.useState("info");
   const [pageTabs, setPageTabs] = React.useState("homePages");
@@ -79,7 +79,7 @@ function OrderMobileCard() {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          5159308472
+                         {props.opsId}
                         </td>
                         <td className="td-actions text-right">
                           <br/>
@@ -94,7 +94,7 @@ function OrderMobileCard() {
                           Fecha orden: 
                         </td>               
                         <td className="text-left" style={{fontSize: "12px"}}>
-                        2022-01-05 09:57:56
+                        {props.date}
                         </td>
                         <td className="td-actions text-right">
                         <br/>
@@ -110,7 +110,7 @@ function OrderMobileCard() {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Mercadolibre
+                        {props.channelStore}
                         </td>
                         <td className="td-actions text-right">
                         <br/>
@@ -122,11 +122,11 @@ function OrderMobileCard() {
                       <tr>
                         <td/>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                        Cliente:
+                        Tienda:
                         </td>
                      
                         <td className="text-left" style={{fontSize: "12px"}}>
-                        CAROZZI FS
+                        {props.store}
                         </td>
                         <td className="td-actions text-right">
                         <br/>
@@ -143,7 +143,7 @@ function OrderMobileCard() {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Mercadolibre
+                          {props.client}
                         </td>
                         <td className="td-actions text-right">
                             <br/>
@@ -159,7 +159,7 @@ function OrderMobileCard() {
                         Tienda Oficial:
                         </td>                
                         <td className="text-left" style={{fontSize: "12px"}}>
-                        Carozzi Food Service
+                        {props.officialStore}
                         </td>
                         <td className="td-actions text-right">
                         <br/>
@@ -174,7 +174,7 @@ function OrderMobileCard() {
                        Orden de Compra:
                         </td>                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                        5159308472
+                        {props.orderId}
                         </td>
                         <td className="td-actions text-right">
                           <br/>
@@ -191,7 +191,7 @@ function OrderMobileCard() {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Chile
+                         {props.country}
                         </td>
                         <td className="td-actions text-right">
                             <br/>
@@ -240,7 +240,7 @@ function OrderMobileCard() {
                           </div>
                         </td>
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Sí
+                          {props.dte}
                         </td>
                         <td className="td-actions text-right">                                         
                         <br/>
@@ -358,7 +358,7 @@ function OrderMobileCard() {
                         </td>
                     
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Paid
+                          {props.ocState}
                         </td>
                         <td className="td-actions text-right">
                           <br/>
@@ -441,7 +441,7 @@ JEFE OPS */}
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          41093360616
+                          {props.shippingId}
                         </td>
                         <td className="td-actions text-right">
                           <br/>
@@ -491,7 +491,7 @@ JEFE OPS */}
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Consuelo Miranda
+                          {props.consumer}
                         </td>
                         <td className="td-actions text-right">
                           <br/>
