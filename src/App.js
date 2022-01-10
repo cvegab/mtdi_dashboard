@@ -17,8 +17,6 @@ const App = () => {
   );
 
   let userName = nameSubString.split("=")[1];
-  console.log("userName is" + userName);
-
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
