@@ -168,15 +168,35 @@ const MtdiTable = (props) => {
     }
   }, [startDate]);
 
+    
+  //  let qty = 0;
+
+  //   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+  //      qty = "5"
+  //    } else {
+  //      qty = "20"
+  //    };
+
+  
+
   const fetchOrderData = async () => {
     setisLoading(true);
+    var myHeaders = new Headers();
+       myHeaders.append('x-api-key', 'mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj');
+       myHeaders.append(
+         'Authorization',
+         'Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6'
+      );
+      myHeaders.append('Content-Type', 'application/json');
+
     var requestOptions = {
       method: "GET",
       redirect: "follow",
+      headers: myHeaders
     };
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=20&user=admin&tienda=2\n\n",
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=10&user=admin&store=7&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
         requestOptions
       );
 
@@ -184,20 +204,18 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
+      // console.log(data);
 
-      setData(data);
+      setData(data.message);
+      
       setisLoading(false);
-      // const transformedData = data.map((poke) => {
-      //   return [poke.fecha_creacion];
-      // });
-
-      // setshiny(transformedData);
-
-      setData(data);
+   
     } catch (error) {
       console.log(error);
     }
   };
+
+ 
 
   const showModalHandler = (row) => {
     setshowModal(true);
@@ -531,6 +549,7 @@ const MtdiTable = (props) => {
       )}
 
       <div className="content">
+
         <h5
           className="titleTable"
           style={{
@@ -614,7 +633,7 @@ const MtdiTable = (props) => {
               type="number"
               selected={startDate}
               onChange={(date) => setStartDate(date)}
-              style={{ width: 200 }}
+              style={{ width: 200, marginLeft: "1em" }}
               placeholderText="dd/mm/yy"
               locale="es"
             />
@@ -626,8 +645,9 @@ const MtdiTable = (props) => {
                 color: "black",
                 fontSize: "12px",
                 fontWeight: "800",
-                marginLeft: "2em",
+                marginLeft: "1em",
                 marginBottom: "0px",
+                marginTop: "1em",
               }}
             >
               Canal De Venta
@@ -658,6 +678,7 @@ const MtdiTable = (props) => {
                 fontWeight: "800",
                 marginLeft: "1em",
                 marginBottom: "0px",
+                marginTop: "1em",
               }}
             >
               Tienda
@@ -665,7 +686,7 @@ const MtdiTable = (props) => {
             <Select
               labelId="select-tienda"
               id="select-tienda"
-              style={{ width: 160, fontSize: "10px" }}
+              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
               value={store}
               label="select-canal"
               placeholder="&nbsp; Seleccione una tienda"
@@ -681,13 +702,15 @@ const MtdiTable = (props) => {
 
           <label htmlFor="select-tienda-official">
             <h5
+              
               style={{
                 color: "black",
                 fontSize: "12px",
                 fontWeight: "800",
-                marginLeft: "0em",
+                marginLeft: "1em",
                 marginRight: "1em",
                 marginBottom: "0px",
+                marginTop: "1em",
               }}
             >
               Tienda Oficial
@@ -696,7 +719,7 @@ const MtdiTable = (props) => {
               labelId="select-tienda-official"
               id="select-tienda-official"
               placeholder="&nbsp; Seleccione una tienda oficial"
-              style={{ width: 150, fontSize: "10px" }}
+              style={{ width: 150, fontSize: "10px", marginLeft: "1em" }}
               value={officialStore}
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
@@ -715,7 +738,8 @@ const MtdiTable = (props) => {
                 color: "black",
                 fontSize: "12px",
                 fontWeight: "800",
-                marginLeft: "2em",
+                marginLeft: "1em",
+                marginTop: "1em",
                 marginBottom: "0px",
               }}
             >
@@ -745,20 +769,44 @@ const MtdiTable = (props) => {
           >
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
-        </Col>
+        </Col> 
 
 
       {/* MOBILE VERSION */}
       <div id="OrderMobileCard">
         <br/>
-        <OrderMobileCard />     
-      </div>
+        {/* <Spinner 
+        animation="border"
+        style={{ color: "#51cbce", marginLeft: "10em", alignItems: "center" }} 
+        /> */}
+         {
+           data.map(order => 
+           <OrderMobileCard 
+              opsId={order.order_id} 
+              date={order.fecha_creacion} 
+              channelStore={order.canal_de_venta}
+              store={order.tienda}
+              client={order.tienda}
+              officialStore={order.official_store}
+              orderId={order.order_id}
+              country={order.pais}
+              dte={order.dte_exist}
+              ocState={order.estado_oc}
+              shippingId={order.shipping_id}
+              consumer={order.comprador}
+           />
+           )
+         }
+         
+
+        
+        </div> 
 
 
       {/* DESKTOP VERSION */}
 
       <div id="OrderDesktopTable">
-        {/* // add is Loading */}
+       
 
         {isLoading && (
           <MaterialTable
@@ -830,10 +878,11 @@ const MtdiTable = (props) => {
             style={{ marginLeft: "1em", marginTop: "2em" }}
           />
         )}
-      </div>
+      </div> 
       </div>
     </React.Fragment>
   );
 };
 
 export default MtdiTable;
+

@@ -72,3 +72,20 @@
   width: 34px;
   height: 34px;
 }
+
+/* MOBILE VERSION */
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width:767px) {
+
+  /*MTDI-TABLE */
+
+.select-tienda-official,
+#selectTiendaOf {
+  margin-left:10px;
+}
+
+
+
+}
