@@ -294,7 +294,9 @@ export default class Chips extends React.Component {
                        line-height: 43px;
                       ">
                        <strong>
-                         ¡Tu pedido ha sido ingresado!
+
+                        ¡Tu boleta electrónica ha sido generada!
+
                        </strong>
                    </p>
                         
@@ -379,7 +381,9 @@ export default class Chips extends React.Component {
                           font-size: 14px;
                           
                            ">
-                            A continuación encontrarás un detalle con tu pedido e información relevante.
+
+                           Haz click en el botón “Descargar boleta” para visualizar tu documento tributario electrónico.
+
                           </p>
                 
                           <p
@@ -418,7 +422,9 @@ export default class Chips extends React.Component {
           <tr>
             <td style="text-align:center; padding: 15px">
             
-              <a  style='color:white' href="dteLink" id="bttnBoleta" type=button class="button"> Ve los detalles de tu pedido aquí</a>
+
+              <a  style='color:white' href="dteLink" id="bttnBoleta" type=button class="button"> Descargar boleta </a>
+
             
             </td>
         
@@ -436,7 +442,9 @@ export default class Chips extends React.Component {
             <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
               
               <p id="titleWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> IMPORTANTE</p>
-              <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este correo no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
+
+              <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este correo cumple solo un carácter informativo. Tu documentación tributaria oficial final será entregada junto con tu pedido.</p>
+
             </td>
           </tr>
         </table>
@@ -459,14 +467,16 @@ export default class Chips extends React.Component {
       
           <!-- <tr> 
           <td style="text-align: center; padding:0px 20px"> -->
-            <a href="http://www.instancelatam.com">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px;">
+
+            <a style="text-decoration:none" href="http://www.instancelatam.com">
+              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px; text-decoration:none;">
             </a>
             <br/>
       
-                <a href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
-                <a href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
-                <a href="mailto:contacto@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
+                <a style="text-decoration:none" href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30" style="text-decoration:none"> </a>
+                <a style="text-decoration:none" href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30" style="text-decoration:none"> </a>
+                <a style="text-decoration:none" href="mailto:contacto@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30" style="text-decoration:none"> </a>
+
               </td>
             </tr> 
     
