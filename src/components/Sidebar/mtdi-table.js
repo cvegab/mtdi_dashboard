@@ -511,9 +511,58 @@ const MtdiTable = (props) => {
     // },
   ];
 
-  const handleCountryChange = (event) => {
-    setcountry(event.target.value);
-  };
+ 
+    const handleCountryChange = (event) => {
+      setcountry(event.target.value);
+      var myHeaders = new Headers();
+      myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+      myHeaders.append(
+        "Authorization",
+        "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+      );
+  
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+  
+      fetch(
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          console.log(result);
+          var obj = JSON.parse(result);
+          console.log(obj);
+          let ordersArray = [];
+          // for (var i in result) {
+          //   ordersArray.push([i, result[i]]);
+          //   console.log(ordersArray);
+          // }
+          for (const key in obj) {
+          
+            ordersArray.push({
+              id: key,
+              countries: obj[key].countries,
+              tiendas: obj.tiendas
+            });
+           }
+          console.log(ordersArray);
+      //   Object.keys(result).forEach(function(key) {
+      //     var value = result[key];
+      //    ordersArray.push(value);
+      //     // ...
+      // });
+      // var score = result.get("countries");
+      //  console.log(score);
+      // console.log(ordersArray);
+         })
+        .catch((error) => console.log("error", error));
+    };
+  
+  
 
   const handleSalesChannelChange = (event) => {
     setsalesChannel(event.target.value);
