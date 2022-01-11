@@ -88,7 +88,8 @@ const MtdiTable = (props) => {
         var obj = JSON.parse(result);
         let countryArray = [];
         console.log(obj.stores);
-        let Y = obj.countries.map((a) => a.country);
+        let st = 'Faber Castel';
+        let Y = obj.stores.filter((a) => a.stores === st);
         console.log(Y);
         // setcountry(obj.countries);
         setfilteredCountryData(obj.countries);
@@ -132,6 +133,9 @@ const MtdiTable = (props) => {
     //   const x = data.filter((item) => item.tienda.includes(store));
     //   setData(x);
     // }
+    if(store){
+      console.log(store);
+    }
   }, [store]);
   useEffect(() => {
     if (client !== "") {
