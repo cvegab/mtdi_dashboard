@@ -26,7 +26,7 @@ import { Button, Col, Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
-import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard"
+import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 
 import CustomLoader from "./custom-filter-row";
 
@@ -44,60 +44,7 @@ const tableIcons = {
   )),
 };
 
-const orderList = [
-  {
-    id_mtdi: "ml619e8bb5f6d955dc7455468e",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043399300,
-    pais: "Chile",
-    fecha_creacion: "2020-11-24 14:45:24",
-    shipping_id: 40993109945,
-    valor_shipping: 2443,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 7662,
-    comprador: "IVISPATIO",
-    hub: "redcompra",
-    rut: "",
-    dte: "Si",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "cross_docking",
-    id_mpago: 18378018289,
-    status_detail: "accredited",
-    order_status: "Cancelado",
-    wms: "Integrado a wms",
-  },
-  {
-    id_mtdi: "ml619e8aff4bcbf54da2960a96",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043355576,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:33:10",
-    shipping_id: 40993074958,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 133980,
-    comprador: "SUPERFIL CHILE",
-    hub: "account_money",
-    rut: "",
-    dte: "No",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377774274,
-    status_detail: "accredited",
-    order_status: "Despachado",
-    wms: "Integrado a wms",
-  },
-];
+
 
 registerLocale("es", es);
 
@@ -168,7 +115,6 @@ const MtdiTable = (props) => {
     }
   }, [startDate]);
 
-    
   //  let qty = 0;
 
   //   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
@@ -177,26 +123,24 @@ const MtdiTable = (props) => {
   //      qty = "20"
   //    };
 
-  
-
   const fetchOrderData = async () => {
     setisLoading(true);
     var myHeaders = new Headers();
-       myHeaders.append('x-api-key', 'mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj');
-       myHeaders.append(
-         'Authorization',
-         'Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6'
-      );
-      myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+    myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
       method: "GET",
       redirect: "follow",
-      headers: myHeaders
+      headers: myHeaders,
     };
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=10&user=admin&store=7&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&store=7&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
         requestOptions
       );
 
@@ -207,15 +151,12 @@ const MtdiTable = (props) => {
       // console.log(data);
 
       setData(data.message);
-      
+
       setisLoading(false);
-   
     } catch (error) {
       console.log(error);
     }
   };
-
- 
 
   const showModalHandler = (row) => {
     setshowModal(true);
@@ -511,58 +452,47 @@ const MtdiTable = (props) => {
     // },
   ];
 
- 
-    const handleCountryChange = (event) => {
-      setcountry(event.target.value);
-      var myHeaders = new Headers();
-      myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
-      myHeaders.append(
-        "Authorization",
-        "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-      );
-  
-      var requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
-  
-      fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
-        requestOptions
-      )
-        .then((response) => response.text())
-        .then((result) => {
-          console.log(result);
-          var obj = JSON.parse(result);
-          console.log(obj);
-          let ordersArray = [];
-          // for (var i in result) {
-          //   ordersArray.push([i, result[i]]);
-          //   console.log(ordersArray);
-          // }
-          for (const key in obj) {
-          
-            ordersArray.push({
-              id: key,
-              countries: obj[key].countries,
-              tiendas: obj.tiendas
-            });
-           }
-          console.log(ordersArray);
-      //   Object.keys(result).forEach(function(key) {
-      //     var value = result[key];
-      //    ordersArray.push(value);
-      //     // ...
-      // });
-      // var score = result.get("countries");
-      //  console.log(score);
-      // console.log(ordersArray);
-         })
-        .catch((error) => console.log("error", error));
+  const handleCountryChange = (event) => {
+   // setcountry(event.target.value);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
     };
-  
-  
+
+    fetch(
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        var obj = JSON.parse(result);
+        let countryArray = [];
+        console.log(obj.countries);
+        let Y = obj.countries.map(a => a.country);
+        console.log(Y);
+        setcountry(obj.countries);
+      //   countryArray.push(obj.countries);
+      //   console.log(countryArray);
+        
+      // const X =  obj.countries.forEach((element,i) => {
+      //    return element[i].country
+      //   });
+      //   console.log(X);
+       // setcountry(countryArray);
+        // console.log(obj.countries);
+        // console.log(obj.tiendas);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   const handleSalesChannelChange = (event) => {
     setsalesChannel(event.target.value);
@@ -598,7 +528,6 @@ const MtdiTable = (props) => {
       )}
 
       <div className="content">
-
         <h5
           className="titleTable"
           style={{
@@ -655,7 +584,12 @@ const MtdiTable = (props) => {
               placeholder="&nbsp; Seleccione un país"
               onChange={handleCountryChange}
             >
-              {Array.from(new Set(data.map((obj) => obj.pais))).map(
+              {/* {Array.from(new Set(data.map((obj) => obj.pais))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )} */}
+               {Array.from(new Set(country.map((obj) => obj.country))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
@@ -751,7 +685,6 @@ const MtdiTable = (props) => {
 
           <label htmlFor="select-tienda-official">
             <h5
-              
               style={{
                 color: "black",
                 fontSize: "12px",
@@ -818,21 +751,19 @@ const MtdiTable = (props) => {
           >
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
-        </Col> 
+        </Col>
 
-
-      {/* MOBILE VERSION */}
-      <div id="OrderMobileCard">
-        <br/>
-        {/* <Spinner 
+        {/* MOBILE VERSION */}
+        <div id="OrderMobileCard">
+          <br />
+          {/* <Spinner 
         animation="border"
         style={{ color: "#51cbce", marginLeft: "10em", alignItems: "center" }} 
         /> */}
-         {
-           data.map(order => 
-           <OrderMobileCard 
-              opsId={order.order_id} 
-              date={order.fecha_creacion} 
+          {data.map((order) => (
+            <OrderMobileCard
+              opsId={order.order_id}
+              date={order.fecha_creacion}
               channelStore={order.canal_de_venta}
               store={order.tienda}
               client={order.tienda}
@@ -843,95 +774,89 @@ const MtdiTable = (props) => {
               ocState={order.estado_oc}
               shippingId={order.shipping_id}
               consumer={order.comprador}
-           />
-           )
-         }
-         
+            />
+          ))}
+        </div>
 
-        
-        </div> 
+        {/* DESKTOP VERSION */}
 
-
-      {/* DESKTOP VERSION */}
-
-      <div id="OrderDesktopTable">
-       
-
-        {isLoading && (
-          <MaterialTable
-            title=""
-            options={{
-              search: false,
-            }}
-            icons={tableIcons}
-            columns={columns}
-            data={[]}
-            components={{
-              Body: (props) => (
-                <div
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
-                >
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                  <Spinner
-                    animation="border"
-                    style={{ color: "#1D308E", alignItems: "center" }}
-                  ></Spinner>
-                </div>
-              ),
-              emptyDataSourceMessage: <h1>No se encuentra la información.</h1>,
-            }}
-          ></MaterialTable>
-        )}
-
-        {data.length === 0 && !isLoading && (
-          <MaterialTable
-            title=""
-            icons={tableIcons}
-            columns={columns}
-            data={[]}
-            components={{
-              Row: (props) => <CustomLoader {...props} />,
-            }}
-          ></MaterialTable>
-        )}
-
-        {data.length !== 0 && (
-          <MaterialTable
-            onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
-            localization={{
-              body: {
-                emptyDataSourceMessage: (
-                  <div>
-                    <span>No hay información disponible</span>
+        <div id="OrderDesktopTable">
+          {isLoading && (
+            <MaterialTable
+              title=""
+              options={{
+                search: false,
+              }}
+              icons={tableIcons}
+              columns={columns}
+              data={[]}
+              components={{
+                Body: (props) => (
+                  <div
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
                     <Spinner
                       animation="border"
-                      style={{ color: "#1D308E", marginLeft: "1em" }}
-                    />
+                      style={{ color: "#1D308E", alignItems: "center" }}
+                    ></Spinner>
                   </div>
                 ),
-              },
-            }}
-            key={data.id_mtdi}
-            title="Instance Table"
-            icons={tableIcons}
-            title=""
-            data={data}
-            columns={columns}
-            options={{ columnsButton: true, sorting: true, search: false }}
-            style={{ marginLeft: "1em", marginTop: "2em" }}
-          />
-        )}
-      </div> 
+                emptyDataSourceMessage: (
+                  <h1>No se encuentra la información.</h1>
+                ),
+              }}
+            ></MaterialTable>
+          )}
+
+          {data.length === 0 && !isLoading && (
+            <MaterialTable
+              title=""
+              icons={tableIcons}
+              columns={columns}
+              data={[]}
+              components={{
+                Row: (props) => <CustomLoader {...props} />,
+              }}
+            ></MaterialTable>
+          )}
+
+          {data.length !== 0 && (
+            <MaterialTable
+              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
+              localization={{
+                body: {
+                  emptyDataSourceMessage: (
+                    <div>
+                      <span>No hay información disponible</span>
+                      <Spinner
+                        animation="border"
+                        style={{ color: "#1D308E", marginLeft: "1em" }}
+                      />
+                    </div>
+                  ),
+                },
+              }}
+              key={data.id_mtdi}
+              title="Instance Table"
+              icons={tableIcons}
+              title=""
+              data={data}
+              columns={columns}
+              options={{ columnsButton: true, sorting: true, search: false }}
+              style={{ marginLeft: "1em", marginTop: "2em" }}
+            />
+          )}
+        </div>
       </div>
     </React.Fragment>
   );
 };
 
 export default MtdiTable;
-
