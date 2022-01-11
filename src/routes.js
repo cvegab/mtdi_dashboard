@@ -16,6 +16,7 @@
 */
 import Buttons from "views/components/Buttons.js";
 import Calendar from "views/Calendar.js";
+import Logysto from "views/FormLogysto.js";
 import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
 import ExtendedForms from "views/forms/ExtendedForms.js";
@@ -48,7 +49,7 @@ import iconReportes from "assets/img/icons-reportes.png"
 
 const routes = [
   {
-    path: "/mtdi-tables",
+    path: "/dashboard",
     name: "Órdenes de compra",
     // mini: "RT",
     icon: "nc-icon nc-single-copy-04",
@@ -303,19 +304,19 @@ const routes = [
     layout: "/admin",
   },
   {
-    path: "/dashboard",
+    path: "/mtdi-table",
     name: "Maestro de productos",
     icon: "nc-icon nc-box",
     component: Dashboard,
     layout: "/admin",
   },
-  // {
-  //   path: "/calendar",
-  //   name: "Calendar",
-  //   icon: "nc-icon nc-calendar-60",
-  //   component: Calendar,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/logysto",
+    name: "Logysto",
+    icon: "nc-icon nc-laptop",
+    component: Logysto,
+    layout: "/admin",
+  },
   // {
   //   path: "/logout",
   //   icon: "nc-icon nc-calendar-60",

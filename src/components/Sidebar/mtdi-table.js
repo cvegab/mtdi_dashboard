@@ -9,15 +9,15 @@ import MaterialTable from "material-table";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
-import RefreshIcon from "../../assets/img/icon-refresh.png";
-//import FormControl from '@mui/material/FormControl';
+
 import { Select, MenuItem } from "@material-ui/core";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
+import calendarIcon from "../../assets/img/DatePickerIcon.png";
+import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-//import SearchIcon from "material-ui/svg-icons/action/search";
 
 import "../../assets/css/global.css";
-// import CalendarIcon from '../../assets/img/calendar-icon.png'
+
 import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
@@ -98,11 +98,13 @@ const orderList = [
   },
 ];
 
+registerLocale("es", es);
+
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
-  const [shiny, setshiny] = useState([]);
-  const [country, setcountry] = useState("");
 
+  const [country, setcountry] = useState("");
+  const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
   const [client, setclient] = useState("");
@@ -152,7 +154,6 @@ const MtdiTable = (props) => {
     }
   }, [officialStore]);
   useEffect(() => {
-    console.log(startDate);
     if (startDate !== null) {
       const x = data.filter((item) =>
         item.fecha_creacion.includes(
@@ -163,22 +164,10 @@ const MtdiTable = (props) => {
             startDate.getDate()
         )
       );
-      console.log(x);
-      if (x.length === 0) {
-        console.log("hello");
-        //setData(['hello']);
-        setshiny(x);
-        setData(x);
-      } else {
-        console.log("bye");
-        setData(x);
-      }
     }
   }, [startDate]);
 
- 
   const fetchOrderData = async () => {
-    console.log("1 start");
     setisLoading(true);
     var requestOptions = {
       method: "GET",
@@ -189,36 +178,34 @@ const MtdiTable = (props) => {
         "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/orders?qty=20&user=admin&tienda=2\n\n",
         requestOptions
       );
-      console.log("2.run");
+
       if (!response.ok) {
-        console.log(response);
-        console.log("3.error");
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+
       setData(data);
       setisLoading(false);
-      const transformedData = data.map((poke) => {
-        return [poke.fecha_creacion];
-      });
-      console.log(transformedData);
-      setshiny(transformedData);
+      // const transformedData = data.map((poke) => {
+      //   return [poke.fecha_creacion];
+      // });
 
-      console.log("Date" + data);
+      // setshiny(transformedData);
+
       setData(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-
-  const showModalHandler = () => {
-    console.log("hi i was clicked");
+  const showModalHandler = (row) => {
     setshowModal(true);
   };
   const hideModalHandler = () => {
     setshowModal(false);
+  };
+  const showPdfHandler = () => {
+    window.open(buyer.dte);
   };
   const columns = [
     {
@@ -286,7 +273,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Pais",
+      title: "País",
       field: "pais",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -295,7 +282,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado De Pedido",
+      title: "Estado de Pedido",
       field: "order_status",
 
       render: (rowData) => {
@@ -319,29 +306,34 @@ const MtdiTable = (props) => {
     {
       title: "DTE",
       field: "dte_exist",
-      // icon: Search,
+
       lookup: {
         "": (
-          // style={{display: 'flex', flexDirection:'row',padding:'10px'}}
           <div>
             Si &nbsp;
-            <span className={classes.si}>
-              <img src={SiIcon} onClick={showModalHandler} />
+            <span
+              style={{ marginLeft: "10px", cursor: "pointer" }}
+              className={classes.si}
+            >
+              <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
             </span>
             &nbsp;
-            <span className={classes.showPdf}>
-              <img src={showPdf} />
+            <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+              <img src={showPdf} onClick={showPdfHandler} />
             </span>
           </div>
         ),
         disabled: (
           <div>
             No &nbsp;
-            <span className={classes.noIcon}>
+            <span
+              style={{ cursor: "pointer", marginLeft: "4px" }}
+              className={classes.noIcon}
+            >
               <img src={noIcon} />
             </span>
             &nbsp;
-            <span className={classes.greyIcon}>
+            <span style={{ cursor: "pointer" }} className={classes.greyIcon}>
               <img src={greyIcon} />
             </span>
           </div>
@@ -372,7 +364,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Hub De pago",
+      title: "Hub de pago",
       field: "estado_pago",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -399,7 +391,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado Fulfillment",
+      title: "Estado fulfillment",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -417,7 +409,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Jefe ops",
+      title: "Jefe OPS",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -426,7 +418,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Hub Fulfilment",
+      title: "Hub fulfillment",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -453,7 +445,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Butos/Etiquettas",
+      title: "Bultos/Etiquetas",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -462,7 +454,7 @@ const MtdiTable = (props) => {
       },
     },
     {
-      title: "Estado Courier",
+      title: "Estado courier",
       field: "comprador",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -518,7 +510,6 @@ const MtdiTable = (props) => {
     setofficialStore(event.target.value);
   };
   const reloadTableHandler = () => {
-    // setData(data);
     fetchOrderData();
     setclient(null);
     setcountry(null);
@@ -531,23 +522,14 @@ const MtdiTable = (props) => {
   return (
     <React.Fragment>
       {showModal && (
-        // <Modal onhideModal={hideModalHandler}>
-        //   <h1>Hello</h1>
-        // </Modal>
-        // <SendMail onhideModal={hideModalHandler}></SendMail>
-
-        // <SendMail onhideModal={hideModalHandler}></SendMail>
-        <SendMail onhideModal={hideModalHandler}></SendMail>
+        <SendMail
+          onhideModal={hideModalHandler}
+          data={data}
+          purchaser={buyer}
+        ></SendMail>
       )}
 
-      {/* <div
-        id="mtdiTableBackground"
-        className="App"
-        style={{ background: "#E5E5E5" }}
-      > */}
-
       <div className="content">
-
         <h5
           className="titleTable"
           style={{
@@ -569,201 +551,207 @@ const MtdiTable = (props) => {
             fontSize: "20px",
             fontWeight: "800",
             marginLeft: "1em",
-            marginBottom: "2em"
-
+            marginBottom: "2em",
           }}
         >
           Camilo Vega
         </p>
 
-
         <Col md="12">
+          <label htmlFor="select-country">
+            <h5
+              style={{
+                color: "black",
+                width: "30px",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "2em",
+                marginBottom: "0px",
+              }}
+            >
+              País
+            </h5>
+            <Select
+              labelId="select-country"
+              id="select-country"
+              style={{
+                width: 150,
+                marginLeft: "1em",
+                borderRadius: "17px",
+                marginBottom: "1em",
+                fontSize: "10px",
+              }}
+              value={country}
+              label="Country"
+              placeholder="&nbsp; Seleccione un país"
+              onChange={handleCountryChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.pais))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
 
-        <label htmlFor="select-country">
-          <h5
-            style={{
-              color: "black",
-              width: "30px",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "2em",
-              marginBottom: "0px",
-            }}
+          <label>
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "11px",
+                marginTop: "4px",
+              }}
+            >
+              Fecha
+            </h5>
+
+            <DatePicker
+              id="datepickerCalendar"
+              type="number"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              style={{ width: 200 }}
+              placeholderText="dd/mm/yy"
+              locale="es"
+            />
+          </label>
+
+          <label htmlFor="select-canal">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "2em",
+                marginBottom: "0px",
+              }}
+            >
+              Canal De Venta
+            </h5>
+
+            <Select
+              labelId="select-canal"
+              id="select-canal"
+              placeholder="&nbsp; Seleccione un canal"
+              style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
+              value={salesChannel}
+              label="select-canal"
+              onChange={handleSalesChannelChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <label htmlFor="select-tienda">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "0px",
+              }}
+            >
+              Tienda
+            </h5>
+            <Select
+              labelId="select-tienda"
+              id="select-tienda"
+              style={{ width: 160, fontSize: "10px" }}
+              value={store}
+              label="select-canal"
+              placeholder="&nbsp; Seleccione una tienda"
+              onChange={handleStoreChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.tienda))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <label htmlFor="select-tienda-official">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "0em",
+                marginRight: "1em",
+                marginBottom: "0px",
+              }}
+            >
+              Tienda Oficial
+            </h5>
+            <Select
+              labelId="select-tienda-official"
+              id="select-tienda-official"
+              placeholder="&nbsp; Seleccione una tienda oficial"
+              style={{ width: 150, fontSize: "10px" }}
+              value={officialStore}
+              label="select-tienda-official"
+              onChange={handleOfficialStoreChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <label htmlFor="select-client">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "2em",
+                marginBottom: "0px",
+              }}
+            >
+              Cliente
+            </h5>
+            <Select
+              labelId="select-client"
+              id="select-client"
+              style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
+              value={client}
+              label="select-tienda-official"
+              placeholder="&nbsp; Seleccione un cliente"
+              onChange={handleClientChange}
+            >
+              {Array.from(new Set(data.map((obj) => obj.cliente))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )}
+            </Select>
+          </label>
+
+          <Button
+            className="btn-round btn-icon"
+            color="primary"
+            onClick={reloadTableHandler}
           >
-            País
-          </h5>
-          <Select
-            labelId="select-country"
-            id="select-country"     
-            style={{ width: 150, marginLeft: "1em", borderRadius: "17px", marginBottom: "1em" }}
-            value={country}
-            label="Country"      
-            onChange={handleCountryChange}
-          >
-            
-            {Array.from(new Set(data.map((obj) => obj.pais))).map((period) => {
-              return <MenuItem value={period}>{period}</MenuItem>;
-            })}
-          </Select>
-        </label>
-
-        <label>
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              marginBottom: "18px",
-            }}
-          >    
-            Fecha
-          </h5>
-          
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            style={{width:200}}
-            placeholderText="dd/mm/yy"
-          >
-            <i className="nc-icon nc-layout-11" style={{ color: "#232A38" }}/>
-          </DatePicker>          
-
-          {/* <img src={CalendarIcon} /> */}
-        </label>
-
-        <label htmlFor="select-canal">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "2em",
-              marginBottom: "0px",
-            }}
-          >
-            Canal De Venta
-          </h5>
-
-
-          <Select
-            labelId="select-canal"
-            id="select-canal"
-            style={{ width: 130, marginLeft: "1em" }}
-            value={salesChannel}
-            label="select-canal"
-            onChange={handleSalesChannelChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-        <label htmlFor="select-tienda">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              marginBottom: "0px",
-            }}
-          >
-            Tienda
-          </h5>
-          <Select
-            labelId="select-tienda"
-            id="select-tienda"
-            style={{ width: 150 }}
-            value={store}
-            label="select-canal"
-            onChange={handleStoreChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.tienda))).map(
-
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-
-        <label htmlFor="select-tienda-official">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "0em",
-              marginRight: "1em",
-              marginBottom: "0px",
-            }}
-          >
-            Tienda Oficial
-          </h5>
-          <Select
-            labelId="select-tienda-official"
-            id="select-tienda-official"
-            style={{ width: 150 }}
-            value={officialStore}
-            label="select-tienda-official"
-            onChange={handleOfficialStoreChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.official_store))).map(
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-     
-
-        <label htmlFor="select-client">
-          <h5
-            style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "2em",
-              marginBottom: "0px",
-            }}
-          >
-            Cliente
-          </h5>
-          <Select
-            labelId="select-client"
-            id="select-client"
-            style={{ width: 150, marginLeft: '1em' }}
-            value={client}
-            label="select-tienda-official"
-            onChange={handleClientChange}
-          >
-            {Array.from(new Set(data.map((obj) => obj.cliente))).map(
-              (period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              }
-            )}
-          </Select>
-        </label>
-
-        <Button className="btn-round btn-icon" color="primary" onClick={reloadTableHandler}>
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
-         </Button>
+          </Button>
+        </Col>
 
-      
-      
-      </Col>
-
-
-        {/* // add is Loading */}
         {isLoading && (
           <MaterialTable
             title=""
+            options={{
+              search: false,
+            }}
             icons={tableIcons}
             columns={columns}
             data={[]}
@@ -777,7 +765,6 @@ const MtdiTable = (props) => {
                     width: "100%",
                   }}
                 >
-                  {/* <h1 color="red">Hello ghwgdj kdlwkflkel hkhkwhflh hjfhfjeq</h1> */}
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
                   <Spinner
@@ -786,7 +773,7 @@ const MtdiTable = (props) => {
                   ></Spinner>
                 </div>
               ),
-              emptyDataSourceMessage: <h1>No data found</h1>,
+              emptyDataSourceMessage: <h1>No se encuentra la información.</h1>,
             }}
           ></MaterialTable>
         )}
@@ -805,6 +792,7 @@ const MtdiTable = (props) => {
 
         {data.length !== 0 && (
           <MaterialTable
+            onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
             localization={{
               body: {
                 emptyDataSourceMessage: (
@@ -824,7 +812,7 @@ const MtdiTable = (props) => {
             title=""
             data={data}
             columns={columns}
-            options={{ columnsButton: true, sorting: true }}
+            options={{ columnsButton: true, sorting: true, search: false }}
             style={{ marginLeft: "1em", marginTop: "2em" }}
           />
         )}
