@@ -60,7 +60,7 @@ const MtdiTable = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
-  const [filterData, setfilterData] = useState([]);
+  const [filteredCountryData, setfilteredCountryData] = useState([]);
   useEffect(() => {
     fetchOrderData();
     fetchFilterData();
@@ -89,11 +89,11 @@ const MtdiTable = (props) => {
        console.log(result);
        var obj = JSON.parse(result);
        let countryArray = [];
-       console.log(obj.countries);
+       console.log(obj.stores);
        let Y = obj.countries.map(a => a.country);
        console.log(Y);
       // setcountry(obj.countries);
-      setfilterData(obj.countries);
+      setfilteredCountryData(obj.countries);
      //   countryArray.push(obj.countries);
      //   console.log(countryArray);
        
@@ -110,10 +110,13 @@ const MtdiTable = (props) => {
 
 
   useEffect(() => {
-    if (country !== "") {
-      const x = data.filter((item) => item.pais === country);
+    // if (country !== "") {
+    //   const x = data.filter((item) => item.pais === country);
 
-      setData(x);
+    //   setData(x);
+    // }
+    if(country==='Chile'){
+      console.log('i am called'+ country);
     }
   }, [country]);
 
@@ -169,6 +172,7 @@ const MtdiTable = (props) => {
   //    };
 
   const fetchOrderData = async () => {
+    let countryValue = 2;
     setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
@@ -185,7 +189,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&store=7&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&store=7&page=1&country=${countryValue}&dateFrom=2021-12-01&dateTo=2021-12-03`,
         requestOptions
       );
 
@@ -498,7 +502,12 @@ const MtdiTable = (props) => {
   ];
 
   const handleCountryChange = (event) => {
+    console.log(event.target.value);
+    // if(event.target.value === 'Chile'){
+    //   setcountry(1);
+    // }
     setcountry(event.target.value);
+   console.log(country);
     // var myHeaders = new Headers();
     // myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     // myHeaders.append(
@@ -634,9 +643,9 @@ const MtdiTable = (props) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-               {Array.from(new Set(filterData.map((obj) => obj.country))).map(
+               {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
                 (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
+                  return <MenuItem value={period.country}>{period.country}</MenuItem>;
                 }
               )}
             
