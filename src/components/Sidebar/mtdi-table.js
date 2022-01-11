@@ -51,7 +51,7 @@ registerLocale("es", es);
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
 
-  const [country, setcountry] = useState("");
+  const [country, setcountry] = useState('');
   const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
@@ -60,9 +60,54 @@ const MtdiTable = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
+  const [filterData, setfilterData] = useState([]);
   useEffect(() => {
     fetchOrderData();
+    fetchFilterData();
   }, []);
+  const fetchFilterData = async () => {
+   console.log('fetching filetr data');
+   var myHeaders = new Headers();
+   myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+   myHeaders.append(
+     "Authorization",
+     "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+   );
+
+   var requestOptions = {
+     method: "GET",
+     headers: myHeaders,
+     redirect: "follow",
+   };
+
+   fetch(
+     "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+     requestOptions
+   )
+     .then((response) => response.text())
+     .then((result) => {
+       console.log(result);
+       var obj = JSON.parse(result);
+       let countryArray = [];
+       console.log(obj.countries);
+       let Y = obj.countries.map(a => a.country);
+       console.log(Y);
+      // setcountry(obj.countries);
+      setfilterData(obj.countries);
+     //   countryArray.push(obj.countries);
+     //   console.log(countryArray);
+       
+     // const X =  obj.countries.forEach((element,i) => {
+     //    return element[i].country
+     //   });
+     //   console.log(X);
+      // setcountry(countryArray);
+       // console.log(obj.countries);
+       // console.log(obj.tiendas);
+     })
+     .catch((error) => console.log("error", error));
+  };
+
 
   useEffect(() => {
     if (country !== "") {
@@ -453,45 +498,45 @@ const MtdiTable = (props) => {
   ];
 
   const handleCountryChange = (event) => {
-   // setcountry(event.target.value);
-    var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-    );
+    setcountry(event.target.value);
+    // var myHeaders = new Headers();
+    // myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    // myHeaders.append(
+    //   "Authorization",
+    //   "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    // );
 
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
+    // var requestOptions = {
+    //   method: "GET",
+    //   headers: myHeaders,
+    //   redirect: "follow",
+    // };
 
-    fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-        var obj = JSON.parse(result);
-        let countryArray = [];
-        console.log(obj.countries);
-        let Y = obj.countries.map(a => a.country);
-        console.log(Y);
-        setcountry(obj.countries);
-      //   countryArray.push(obj.countries);
-      //   console.log(countryArray);
+    // fetch(
+    //   "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+    //   requestOptions
+    // )
+    //   .then((response) => response.text())
+    //   .then((result) => {
+    //     console.log(result);
+    //     var obj = JSON.parse(result);
+    //     let countryArray = [];
+    //     console.log(obj.countries);
+    //     let Y = obj.countries.map(a => a.country);
+    //     console.log(Y);
+    //     setcountry(obj.countries);
+    //   //   countryArray.push(obj.countries);
+    //   //   console.log(countryArray);
         
-      // const X =  obj.countries.forEach((element,i) => {
-      //    return element[i].country
-      //   });
-      //   console.log(X);
-       // setcountry(countryArray);
-        // console.log(obj.countries);
-        // console.log(obj.tiendas);
-      })
-      .catch((error) => console.log("error", error));
+    //   // const X =  obj.countries.forEach((element,i) => {
+    //   //    return element[i].country
+    //   //   });
+    //   //   console.log(X);
+    //    // setcountry(countryArray);
+    //     // console.log(obj.countries);
+    //     // console.log(obj.tiendas);
+    //   })
+    //   .catch((error) => console.log("error", error));
   };
 
   const handleSalesChannelChange = (event) => {
@@ -589,11 +634,12 @@ const MtdiTable = (props) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-               {Array.from(new Set(country.map((obj) => obj.country))).map(
+               {Array.from(new Set(filterData.map((obj) => obj.country))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )}
+            
             </Select>
           </label>
 
