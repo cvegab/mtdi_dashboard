@@ -88,7 +88,7 @@ const MtdiTable = (props) => {
         var obj = JSON.parse(result);
         let countryArray = [];
         console.log(obj.stores);
-        let st = 'Faber Castel';
+        let st = "Faber Castel";
         let Y = obj.stores.filter((a) => a.stores === st);
         console.log(Y);
         // setcountry(obj.countries);
@@ -119,22 +119,33 @@ const MtdiTable = (props) => {
     }
   }, [country]);
 
-  useEffect(() => {
-    if (salesChannel !== "") {
-      const x = data.filter((item) =>
-        item.canal_de_venta.includes(salesChannel)
-      );
-      setData(x);
-    }
-  }, [salesChannel]);
+  // useEffect(() => {
+  //   if (salesChannel !== "") {
+  //     const x = data.filter((item) =>
+  //       item.canal_de_venta.includes(salesChannel)
+  //     );
+  //     setData(x);
+  //   }
+  // }, [salesChannel]);
 
   useEffect(() => {
     // if (store !== "") {
     //   const x = data.filter((item) => item.tienda.includes(store));
     //   setData(x);
     // }
-    if(store){
+    let selectedChannelsArray;
+    let selectedChannels;
+    if (store === "Faber Castell") {
       console.log(store);
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      // console.log(selectedStoreData[0].channels);
+      selectedChannelsArray = selectedStoreData[0].channels;
+      //console.log(selectedChannels);
+      const selectedChannels = selectedChannelsArray.map((item)=>{return item.channel;});
+      console.log(selectedChannels);
+      setsalesChannel(selectedChannels);
     }
   }, [store]);
   useEffect(() => {
@@ -174,7 +185,7 @@ const MtdiTable = (props) => {
   //    };
 
   const fetchOrderData = async () => {
-    let countryValue = 2;
+    let countryValue = 3;
     setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
