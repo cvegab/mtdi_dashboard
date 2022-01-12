@@ -50,7 +50,7 @@ const MtdiTable = (props) => {
 
   const [country, setcountry] = useState("");
   const [buyer, setbuyer] = useState("");
-  const [salesChannel, setsalesChannel] = useState('');
+  const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
   const [client, setclient] = useState("");
   const [officialStore, setofficialStore] = useState("");
@@ -60,6 +60,7 @@ const MtdiTable = (props) => {
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
+  const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   useEffect(() => {
     fetchOrderData();
     fetchFilterData();
@@ -120,14 +121,35 @@ const MtdiTable = (props) => {
     }
   }, [country]);
 
-  // useEffect(() => {
-  //   if (salesChannel !== "") {
-  //     const x = data.filter((item) =>
-  //       item.canal_de_venta.includes(salesChannel)
-  //     );
-  //     setData(x);
-  //   }
-  // }, [salesChannel]);
+  useEffect(() => {
+    // if (salesChannel !== "") {
+    //   const x = data.filter((item) =>
+    //     item.canal_de_venta.includes(salesChannel)
+    //   );
+    //   setData(x);
+    // }
+    // const x =  filteredChannelArray.filter((item)=>{
+    //     if(item.channel === salesChannel) return item.officialStores;
+    //   })
+    //   console.log(x);
+    const filteredOfficialStoreArray = filteredChannelArray.map((item) => {
+      if (item.channel === salesChannel) return item.officialStores;
+    });
+    console.log(filteredOfficialStoreArray);
+    const x = filteredOfficialStoreArray.filter((item)=>{
+     return item !== undefined;
+    });
+    console.log( x);
+    let y = [];
+   
+    console.log(typeof y);
+  // let y = [...x];
+  // console.log(typeof y);
+  // console.log(y.0);
+
+   
+    setfilteredOfficialStore(x);
+  }, [salesChannel]);
 
   useEffect(() => {
     // if (store !== "") {
@@ -136,23 +158,86 @@ const MtdiTable = (props) => {
     // }
     let selectedChannelsArray;
     let selectedChannels;
+    let selectedOfficialStoresArray;
     if (store === "Faber Castell") {
-      console.log(store);
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
-      // console.log(selectedStoreData[0].channels);
       selectedChannelsArray = selectedStoreData[0].channels;
-      //console.log(selectedChannels);
       const selectedChannels = selectedChannelsArray.map((item) => {
-        return item.channel;
+        return item;
       });
-      console.log(selectedChannels);
-      // selectedChannels.map((item) => {
-      //   return setsalesChannel(item);
-      // });
-     // setsalesChannel(selectedChannels);
-     setfilteredChannelArray(selectedChannels);
+
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Linio Softys Colombia") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Softys") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      console.log(selectedChannelsArray);
+     
+      const x = selectedChannelsArray.map((item) => {
+        return item.officialStores; //this returns array of official stores
+      });
+      console.log(x);
+      // selectedOfficialStoresArray = selectedStoreData[0].channels.officialStores;
+      // console.log(selectedOfficialStoresArray);
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item; //this was item.channel first
+      });
+      console.log(selectedChannels); //this gives you only the name of array['Linio','Mercado Libre']
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "ELITE PROFESSIONAL") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "UNILEVER TOUCH") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Schneider Electric") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "ENEX CHILE") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
     }
   }, [store]);
   useEffect(() => {
@@ -529,7 +614,7 @@ const MtdiTable = (props) => {
   };
 
   const handleSalesChannelChange = (event) => {
-     setsalesChannel(event.target.value);
+    setsalesChannel(event.target.value);
     console.log(event.target.value);
   };
 
@@ -683,14 +768,14 @@ const MtdiTable = (props) => {
               label="select-canal"
               onChange={handleSalesChannelChange}
             >
-              {/* {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-                (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                }
-              )} */}
-              {filteredChannelArray.map((channelItem) => {
-                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              {Array.from(
+                new Set(filteredChannelArray.map((obj) => obj.channel))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
               })}
+              {/* {filteredChannelArray.map((channelItem) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })} */}
             </Select>
           </label>
 
@@ -747,15 +832,22 @@ const MtdiTable = (props) => {
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
             >
-              {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+              {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
-              )}
+              )} */}
+                {/* {filteredOfficialStore.map((channelItem) => {
+                return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
+              })} */}
+             {/* {filteredOfficialStore.forEach((channelItem,index) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })} */}
+            
             </Select>
           </label>
 
-          <label htmlFor="select-client">
+          {/* <label htmlFor="select-client">
             <h5
               style={{
                 color: "black",
@@ -783,7 +875,7 @@ const MtdiTable = (props) => {
                 }
               )}
             </Select>
-          </label>
+          </label> */}
 
           <Button
             className="btn-round btn-icon"
@@ -867,6 +959,48 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           {data.length !== 0 && (
             <MaterialTable
