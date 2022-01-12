@@ -384,7 +384,8 @@ export default class Chips extends React.Component {
                           
                            ">
 
-                           Haz click en el botón “Descargar boleta” para visualizar tu documento tributario electrónico.
+                           Gracias por tu compra. <br/>
+                           Haz click en el botón “Descargar boleta” a continuación para visualizar tu documento tributario electrónico.
 
                           </p>
                 
@@ -424,8 +425,24 @@ export default class Chips extends React.Component {
         </table>
       </td>
     </tr>
-    
-   
+
+    <!-- WARNING SECTION -->
+<!-- <tr>
+  <td style="padding: 0px 20px 10px 10px;">
+    <table width="100%">
+
+      <tr>
+        <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
+          
+          <p id="titleWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> RECUERDA </p>
+
+          <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Tu pedido será despachado en un máximo de 48 horas hábiles.</p>
+
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr> -->
     
     <!--FOOTER SECTION -->
     

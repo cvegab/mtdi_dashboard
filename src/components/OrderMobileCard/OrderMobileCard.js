@@ -81,14 +81,115 @@ function OrderMobileCard(props) {
                         <td className="text-left" style={{fontSize: "12px"}}>
                          {props.opsId}
                         </td>
-                        <td className="td-actions text-right">
+                        <td className="td-actions text-right" style={{marginTop: "15px"}}>
                           <br/>
                         
                         </td>               
                       </tr>
 
-{/* FECHA DE ORDEN */}
-                    <tr>
+
+
+ {/* CLIENTE   */}
+                      <tr>
+                        <td/>                       
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Cliente: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.client}
+                        </td>
+                        <td className="td-actions text-right">
+                        <br/>
+                        <br/>
+                        </td>                      
+                      </tr>
+
+{/* DTE */}
+                      <tr>
+                        <td/>                      
+                        
+                          <td className="text-left" style={{fontSize: "12px", fontWeight: "bold"}}>
+                            DTE:
+                          </td>                         
+                                           
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.dte}
+                        {/* {
+                            ?  <div> Si &nbsp;  <span
+                            className={classes.si}
+                            type="button"
+                          >                         
+                            <img src={SiIcon} />                       
+                          </span>
+                          
+                          &nbsp; 
+                          <span
+                            className={classes.showPdf}
+                            type="button"
+                          >                         
+                            <img src={showPdf} />                       
+                          </span>  
+                          </div>
+                            :
+                            <div>
+                            No &nbsp;
+                            <span
+                              style={{ marginLeft: "4px" }}
+                              className={classes.noIcon}
+                            >
+                              <img src={noIcon} />
+                            </span>
+                            &nbsp;
+                            <span className={classes.greyIcon}>
+                              <img src={greyIcon} />
+                            </span>
+                          </div>
+
+                          } */}
+                          
+                          
+                          
+                        </td>
+                        <td className="td-actions text-right">                                         
+                        <br/>
+                        <br/>
+                                                                                               
+                        </td>                        
+                      </tr>
+
+{/* RESPUESTA WMS */}
+                      <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Estado WMS: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          {props.wmsState}
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr>
+
+                </tbody>
+                    </Table>
+
+                    <Accordion>
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>Ver más </Accordion.Header>
+                        <Accordion.Body>
+
+                        {/* <div className="table-full-width table-responsive"> */}
+                    <Table>
+                      <tbody>
+
+                        {/* FECHA DE ORDEN */}
+
+<tr>
                       <td/>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Fecha orden: 
@@ -101,22 +202,8 @@ function OrderMobileCard(props) {
                         <br/>
                         </td>               
                       </tr>
-   
- {/* CANAL DE VENTA   */}
-                      <tr>
-                        <td/>                       
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Canal de Venta: 
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                        {props.channelStore}
-                        </td>
-                        <td className="td-actions text-right">
-                        <br/>
-                        <br/>
-                        </td>                      
-                      </tr>
+
+
 {/* TIENDA */}
 
                       <tr>
@@ -134,16 +221,16 @@ function OrderMobileCard(props) {
                         </td>                     
                       </tr>
 
-{/* CLIENTE */}
+{/* CANAL DE VENTA */}
 
                       <tr>
                         <td/>      
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Cliente: 
+                          Canal de venta: 
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          {props.client}
+                        {props.channelStore}
                         </td>
                         <td className="td-actions text-right">
                             <br/>
@@ -215,51 +302,9 @@ function OrderMobileCard(props) {
                             <br/>
                         </td>
                        
-                      </tr> */}
+                      </tr> */}  
 
-                  
-                    </tbody>
-                  </Table>
 
-                  <Accordion>
-                    <Accordion.Item eventKey="0">
-                      <Accordion.Header>Ver más</Accordion.Header>
-                      <Accordion.Body>
-
-                      {/* <div className="table-full-width table-responsive"> */}
-                  <Table>
-                    <tbody>
-{/* DTE */}
-                      <tr>
-                        <td/>                      
-                        <td className="img-row">
-                          <div className="img-wrapper">
-                            <td className="text-left" style={{fontSize: "12px", fontWeight: "bold"}}>
-                              DTE:
-                            </td>                         
-                          </div>
-                        </td>
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          {props.dte}
-                        </td>
-                        <td className="td-actions text-right">                                         
-                        <br/>
-                        <br/>
-                          <span
-                            className={classes.si}
-                            type="button"
-                          >                         
-                            <img src={SiIcon} />                       
-                          </span>
-                          &nbsp; 
-                          <span
-                            className={classes.showPdf}
-                            type="button"
-                          >                         
-                            <img src={showPdf} />                       
-                          </span>                                                                         
-                        </td>                        
-                      </tr>
  
 {/* RESPUESTA OMS */}
                       {/* <tr>
@@ -278,22 +323,7 @@ function OrderMobileCard(props) {
                        
                       </tr> */}
 
-{/* RESPUESTA WMS */}
-                      {/* <tr>
-                        <td/>      
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Respuesta WMS: 
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          
-                        </td>
-                        <td className="td-actions text-right">
-                            <br/>
-                            <br/>
-                        </td>
-                       
-                      </tr> */}
+
 {/* HUB DE PAGO */}
                           
                       {/* <tr>
