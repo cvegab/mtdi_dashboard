@@ -719,32 +719,35 @@ const MtdiTable = (props) => {
               )}
             </Select>
           </label>
-
-          <label>
+          <label htmlFor="select-tienda">
             <h5
               style={{
                 color: "black",
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginBottom: "11px",
-                marginTop: "4px",
+                marginBottom: "0px",
+                marginTop: "1em",
               }}
             >
-              Fecha
+              Tienda
             </h5>
-
-            <DatePicker
-              id="datepickerCalendar"
-              type="number"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              style={{ width: 200, marginLeft: "1em" }}
-              placeholderText="dd/mm/yy"
-              locale="es"
-            />
+            <Select
+              labelId="select-tienda"
+              id="select-tienda"
+              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
+              value={store}
+              label="select-canal"
+              placeholder="&nbsp; Seleccione una tienda"
+              onChange={handleStoreChange}
+            >
+              {Array.from(
+                new Set(filteredStoreData.map((obj) => obj.store))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              })}
+            </Select>
           </label>
-
           <label htmlFor="select-canal">
             <h5
               style={{
@@ -776,36 +779,6 @@ const MtdiTable = (props) => {
               {/* {filteredChannelArray.map((channelItem) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            </Select>
-          </label>
-
-          <label htmlFor="select-tienda">
-            <h5
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-                marginTop: "1em",
-              }}
-            >
-              Tienda
-            </h5>
-            <Select
-              labelId="select-tienda"
-              id="select-tienda"
-              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
-              value={store}
-              label="select-canal"
-              placeholder="&nbsp; Seleccione una tienda"
-              onChange={handleStoreChange}
-            >
-              {Array.from(
-                new Set(filteredStoreData.map((obj) => obj.store))
-              ).map((period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              })}
             </Select>
           </label>
 
@@ -847,6 +820,34 @@ const MtdiTable = (props) => {
             </Select>
           </label>
 
+          <label>
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "11px",
+                marginTop: "4px",
+              }}
+            >
+              Fecha
+            </h5>
+
+            <DatePicker
+              id="datepickerCalendar"
+              type="number"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              style={{ width: 200, marginLeft: "1em" }}
+              placeholderText="dd/mm/yy"
+              locale="es"
+            />
+          </label>
+
+         
+
+         
           {/* <label htmlFor="select-client">
             <h5
               style={{
