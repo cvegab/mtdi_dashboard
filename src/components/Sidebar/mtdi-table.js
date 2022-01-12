@@ -50,7 +50,7 @@ const MtdiTable = (props) => {
 
   const [country, setcountry] = useState("");
   const [buyer, setbuyer] = useState("");
-  const [salesChannel, setsalesChannel] = useState("");
+  const [salesChannel, setsalesChannel] = useState('');
   const [store, setstore] = useState("");
   const [client, setclient] = useState("");
   const [officialStore, setofficialStore] = useState("");
@@ -59,6 +59,7 @@ const MtdiTable = (props) => {
   const [isLoading, setisLoading] = useState(true);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [filteredStoreData, setfilteredStoreData] = useState([]);
+  const [filteredChannelArray, setfilteredChannelArray] = useState([]);
   useEffect(() => {
     fetchOrderData();
     fetchFilterData();
@@ -143,9 +144,15 @@ const MtdiTable = (props) => {
       // console.log(selectedStoreData[0].channels);
       selectedChannelsArray = selectedStoreData[0].channels;
       //console.log(selectedChannels);
-      const selectedChannels = selectedChannelsArray.map((item)=>{return item.channel;});
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item.channel;
+      });
       console.log(selectedChannels);
-      setsalesChannel(selectedChannels);
+      // selectedChannels.map((item) => {
+      //   return setsalesChannel(item);
+      // });
+     // setsalesChannel(selectedChannels);
+     setfilteredChannelArray(selectedChannels);
     }
   }, [store]);
   useEffect(() => {
@@ -522,7 +529,8 @@ const MtdiTable = (props) => {
   };
 
   const handleSalesChannelChange = (event) => {
-    setsalesChannel(event.target.value);
+     setsalesChannel(event.target.value);
+    console.log(event.target.value);
   };
 
   const handleStoreChange = (event) => {
@@ -675,11 +683,14 @@ const MtdiTable = (props) => {
               label="select-canal"
               onChange={handleSalesChannelChange}
             >
-              {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
+              {/* {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
-              )}
+              )} */}
+              {filteredChannelArray.map((channelItem) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })}
             </Select>
           </label>
 
