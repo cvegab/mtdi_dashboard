@@ -14,9 +14,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-
 import "../../assets/css/global.css";
-
 import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
@@ -26,7 +24,6 @@ import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
-
 import CustomLoader from "./custom-filter-row";
 
 const tableIcons = {
@@ -136,18 +133,17 @@ const MtdiTable = (props) => {
       if (item.channel === salesChannel) return item.officialStores;
     });
     console.log(filteredOfficialStoreArray);
-    const x = filteredOfficialStoreArray.filter((item)=>{
-     return item !== undefined;
+    const x = filteredOfficialStoreArray.filter((item) => {
+      return item !== undefined;
     });
-    console.log( x);
+    console.log(x);
     let y = [];
-   
-    console.log(typeof y);
-  // let y = [...x];
-  // console.log(typeof y);
-  // console.log(y.0);
 
-   
+    console.log(typeof y);
+    // let y = [...x];
+    // console.log(typeof y);
+    // console.log(y.0);
+
     setfilteredOfficialStore(x);
   }, [salesChannel]);
 
@@ -186,7 +182,7 @@ const MtdiTable = (props) => {
       });
       selectedChannelsArray = selectedStoreData[0].channels;
       console.log(selectedChannelsArray);
-     
+
       const x = selectedChannelsArray.map((item) => {
         return item.officialStores; //this returns array of official stores
       });
@@ -230,6 +226,176 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "ENEX CHILE") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Mercado Carozzi") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "I Am Not Plastic") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Smart Deal") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "CAROZZI FS") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Afe") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Paris") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Unilever") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Demaria") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "SOFTYSCOLOMBIA") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "RedLemon") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "INSTANCE SAS") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "EMEM5173547") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "SC Johnson") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Softys Televenta") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Tribu") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Softys Colombia") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Clorox") {
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -810,13 +976,12 @@ const MtdiTable = (props) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-                {/* {filteredOfficialStore.map((channelItem) => {
+              {/* {filteredOfficialStore.map((channelItem) => {
                 return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
               })} */}
-             {/* {filteredOfficialStore.forEach((channelItem,index) => {
+              {/* {filteredOfficialStore.forEach((channelItem,index) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            
             </Select>
           </label>
 
@@ -845,9 +1010,6 @@ const MtdiTable = (props) => {
             />
           </label>
 
-         
-
-         
           {/* <label htmlFor="select-client">
             <h5
               style={{
@@ -960,49 +1122,6 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           {data.length !== 0 && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
