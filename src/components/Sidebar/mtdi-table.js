@@ -807,15 +807,16 @@ const MtdiTable = (props) => {
     //     fontSize: "12px",
     //   },
     // },
-    // {
-    //   title: "Total",
-    //   field: "role",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Total",
+      field: "precio_sin_shipping",
+      
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     // {
     //   title: "Shipping",
     //   field: "",
@@ -826,7 +827,7 @@ const MtdiTable = (props) => {
     //   },
     // },
     {
-      title: "Estado fulfillment",
+      title: "Estado Fulfillment",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1101,7 +1102,7 @@ const MtdiTable = (props) => {
             </Select>
           </label>
 
-          <label htmlFor="select-tienda-official">
+        {/* <label htmlFor="select-tienda-official">
             <h5
               style={{
                 color: "black",
@@ -1113,7 +1114,7 @@ const MtdiTable = (props) => {
                 marginTop: "1em",
               }}
             >
-              Tienda Oficial
+              Tienda Oficial  
             </h5>
             <Select
               labelId="select-tienda-official"
@@ -1123,7 +1124,7 @@ const MtdiTable = (props) => {
               value={officialStore}
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
-            >
+            > */}
               {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
@@ -1135,8 +1136,8 @@ const MtdiTable = (props) => {
               {/* {filteredOfficialStore.forEach((channelItem,index) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            </Select>
-          </label>
+            {/* </Select>
+          </label> */}
 
           <label>
             <h5
@@ -1211,6 +1212,7 @@ const MtdiTable = (props) => {
               ocState={order.estado_oc}
               shippingId={order.shipping_id}
               consumer={order.comprador}
+              total={order.precio_sin_shipping}
             />
           ))}
         </div>

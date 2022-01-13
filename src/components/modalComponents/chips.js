@@ -807,7 +807,7 @@ export default class Chips extends React.Component {
               alignItems: "center",
             }}
           >
-            <img src={sentEmail} />
+            <img src={sentEmail} width="25%"/>
           </div>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
             Documento enviado con éxito
