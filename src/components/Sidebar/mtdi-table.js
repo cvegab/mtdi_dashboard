@@ -196,7 +196,8 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&store=7&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=20&user=admin&store=0&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
+
         requestOptions
       );
 
@@ -324,40 +325,103 @@ const MtdiTable = (props) => {
     // },
     {
       title: "DTE",
-      field: "dte_exist",
+      field: "dte",
 
-      lookup: {
-        "": (
-          <div>
-            Si &nbsp;
-            <span
-              style={{ marginLeft: "10px", cursor: "pointer" }}
-              className={classes.si}
-            >
-              <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
-            </span>
-            &nbsp;
-            <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-              <img src={showPdf} onClick={showPdfHandler} />
-            </span>
-          </div>
-        ),
-        disabled: (
-          <div>
-            No &nbsp;
-            <span
-              style={{ cursor: "pointer", marginLeft: "4px" }}
+      render: (rowData) => {
+        if (rowData.dte === "") {
+          return  <div> No &nbsp;  <span
+                  style={{ marginLeft: "4px" }}
+                  className={classes.noIcon}
+                >
+                  <img src={noIcon} />
+                </span>
+                &nbsp;
+                <span className={classes.greyIcon}>
+                  <img src={greyIcon} />
+                </span>
+              </div>;
+        }
+        if (rowData.dte === "-") {
+          return   <div>
+              No &nbsp;
+              <span
+              style={{ marginLeft: "4px" }}
               className={classes.noIcon}
             >
               <img src={noIcon} />
             </span>
             &nbsp;
-            <span style={{ cursor: "pointer" }} className={classes.greyIcon}>
+            <span className={classes.greyIcon}>
               <img src={greyIcon} />
             </span>
-          </div>
-        ),
+          </div>;
+        }
+        
+        if (rowData.dte.substring(0,4) === "http") {
+          return  <div>
+                 Si &nbsp;
+                 <span
+                  style={{ marginLeft: "14px", cursor: "pointer" }}
+                  className={classes.si}
+                >
+                  <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
+                </span>
+                &nbsp;
+                <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+                  <a href={rowData.dte} target="_blank" >
+                    <img src={showPdf}/>
+                  </a>
+                </span>
+              </div>;
+        }
       },
+      // lookup: {
+      //   "https://app2.bsale.cl/view/48940/f4064a57a40f.pdf?sfd=99": (
+      //     <div>
+      //       Si &nbsp;
+      //       <span
+      //         style={{ marginLeft: "10px", cursor: "pointer" }}
+      //         className={classes.si}
+      //       >
+      //         <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
+      //       </span>
+      //       &nbsp;
+      //       <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+      //         <img src={showPdf} onClick={showPdfHandler} />
+      //       </span>
+      //     </div>
+      //   ),
+      //  "-": (
+      //     <div>
+      //       No &nbsp;
+      //       <span
+      //         style={{ marginLeft: "4px" }}
+      //         className={classes.noIcon}
+      //       >
+      //         <img src={noIcon} />
+      //       </span>
+      //       &nbsp;
+      //       <span className={classes.greyIcon}>
+      //         <img src={greyIcon} />
+      //       </span>
+      //     </div>
+      //   ),
+      //   "": (
+      //     <div>
+      //       No &nbsp;
+      //       <span
+      //         style={{ marginLeft: "4px" }}
+      //         className={classes.noIcon}
+      //       >
+      //         <img src={noIcon} />
+      //       </span>
+      //       &nbsp;
+      //       <span className={classes.greyIcon}>
+      //         <img src={greyIcon} />
+      //       </span>
+      //     </div>
+      //   ),
+      // },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -373,15 +437,28 @@ const MtdiTable = (props) => {
     //     fontSize: "12px",
     //   },
     // },
-    // {
-    //   title: "Respuesta WMS",
-    //   field: "role",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Estado WMS",
+      field: "estado_wms",
+
+      render: (rowData) => {
+        if (rowData.estado_wms === "Enviado") {
+          return <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>;
+        }
+        if (rowData.estado_wms === "Pendiente") {
+          return <div className={classes.pendiente}>Pendiente</div>;
+        }
+        if (rowData.estado_wms === "No Aplica") {
+          return <div className={classes.cancelado}>No Aplica</div>;
+        }
+      },
+
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     // {
     //   title: "Hub de pago",
     //   field: "estado_pago",
@@ -790,7 +867,8 @@ const MtdiTable = (props) => {
               officialStore={order.official_store}
               orderId={order.order_id}
               country={order.pais}
-              dte={order.dte_exist}
+              dte={order.dte}
+              wmsState={order.estado_wms}
               ocState={order.estado_oc}
               shippingId={order.shipping_id}
               consumer={order.comprador}
