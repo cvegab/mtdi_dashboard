@@ -204,7 +204,8 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
-                {localStorage.getItem("first")} {localStorage.getItem("last")}
+                {/* {localStorage.getItem("first")} {localStorage.getItem("last")} */}
+                Sofía Avatar
                 {/* <b className="caret" /> */}
               </a>
             </a>
