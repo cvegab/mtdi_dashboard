@@ -464,7 +464,6 @@ const MtdiTable = (props) => {
 
         requestOptions
       );
-
       if (!response.ok) {
         throw new Error();
       }
@@ -590,50 +589,53 @@ const MtdiTable = (props) => {
 
       render: (rowData) => {
         if (rowData.dte === "") {
-          return  <div> No &nbsp;  <span
-                  style={{ marginLeft: "4px" }}
-                  className={classes.noIcon}
-                >
-                  <img src={noIcon} />
-                </span>
-                &nbsp;
-                <span className={classes.greyIcon}>
-                  <img src={greyIcon} />
-                </span>
-              </div>;
+          return (
+            <div>
+              {" "}
+              No &nbsp;{" "}
+              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
+                <img src={noIcon} />
+              </span>
+              &nbsp;
+              <span className={classes.greyIcon}>
+                <img src={greyIcon} />
+              </span>
+            </div>
+          );
         }
         if (rowData.dte === "-") {
-          return   <div>
+          return (
+            <div>
               No &nbsp;
-              <span
-              style={{ marginLeft: "4px" }}
-              className={classes.noIcon}
-            >
-              <img src={noIcon} />
-            </span>
-            &nbsp;
-            <span className={classes.greyIcon}>
-              <img src={greyIcon} />
-            </span>
-          </div>;
+              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
+                <img src={noIcon} />
+              </span>
+              &nbsp;
+              <span className={classes.greyIcon}>
+                <img src={greyIcon} />
+              </span>
+            </div>
+          );
         }
-        
-        if (rowData.dte.substring(0,4) === "http") {
-          return  <div>
-                 Si &nbsp;
-                 <span
-                  style={{ marginLeft: "14px", cursor: "pointer" }}
-                  className={classes.si}
-                >
-                  <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
-                </span>
-                &nbsp;
-                <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                  <a href={rowData.dte} target="_blank" >
-                    <img src={showPdf}/>
-                  </a>
-                </span>
-              </div>;
+
+        if (rowData.dte.substring(0, 4) === "http") {
+          return (
+            <div>
+              Si &nbsp;
+              <span
+                style={{ marginLeft: "14px", cursor: "pointer" }}
+                className={classes.si}
+              >
+                <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
+              </span>
+              &nbsp;
+              <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+                <a href={rowData.dte} target="_blank">
+                  <img src={showPdf} />
+                </a>
+              </span>
+            </div>
+          );
         }
       },
       // lookup: {
