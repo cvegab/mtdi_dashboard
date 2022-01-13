@@ -1,8 +1,9 @@
 
 import React from "react";
-import SiIcon from "../../assets/img/si.png"
-// import noIcon from "assets/css/img/no.png";
+import SiIcon from "../../assets/img/si.png";
+import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "../Sidebar/mtdi-table.module.css";
 
 
@@ -48,6 +49,57 @@ function OrderMobileCard(props) {
       setOpenedCollapses([...openedCollapses, collapse]);
     }
   };
+
+  const dteStatus = (props) => {
+    if (props.dte === "") {
+      return  <div> No &nbsp;  <span
+              style={{ marginLeft: "4px" }}
+              className={classes.noIcon}
+            >
+              <img src={noIcon} />
+            </span>
+            &nbsp;
+            <span className={classes.greyIcon}>
+              <img src={greyIcon} />
+            </span>
+          </div>;
+    }
+    if (props.dte === "-") {
+      return   <div>
+          No &nbsp;
+          <span
+          style={{ marginLeft: "4px" }}
+          className={classes.noIcon}
+        >
+          <img src={noIcon} />
+        </span>
+        &nbsp;
+        <span className={classes.greyIcon}>
+          <img src={greyIcon} />
+        </span>
+      </div>;
+    }
+    
+    if (props.dte.substring(0,4) === "http") {
+      return  <div>
+             Si &nbsp;
+             <span
+              style={{ marginLeft: "14px", cursor: "pointer" }}
+              className={classes.si}
+            >
+              <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
+            </span>
+            &nbsp;
+            <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+              <a href={rowData.dte} target="_blank" >
+                <img src={showPdf}/>
+              </a>
+            </span>
+          </div>;
+    }
+};
+
+
   return (
     <>
       <div className="content">
@@ -111,45 +163,12 @@ function OrderMobileCard(props) {
                         
                           <td className="text-left" style={{fontSize: "12px", fontWeight: "bold"}}>
                             DTE:
-                          </td>                         
-                                           
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                        {props.dte}
-                        {/* {
-                            ?  <div> Si &nbsp;  <span
-                            className={classes.si}
-                            type="button"
-                          >                         
-                            <img src={SiIcon} />                       
-                          </span>
-                          
-                          &nbsp; 
-                          <span
-                            className={classes.showPdf}
-                            type="button"
-                          >                         
-                            <img src={showPdf} />                       
-                          </span>  
-                          </div>
-                            :
-                            <div>
-                            No &nbsp;
-                            <span
-                              style={{ marginLeft: "4px" }}
-                              className={classes.noIcon}
-                            >
-                              <img src={noIcon} />
-                            </span>
-                            &nbsp;
-                            <span className={classes.greyIcon}>
-                              <img src={greyIcon} />
-                            </span>
-                          </div>
-
-                          } */}
-                          
-                          
-                          
+                          </td>
+                          {props.dte}               
+                                          
+                                        
+                        <td className="text-left" style={{fontSize: "12px"}}> 
+                                                
                         </td>
                         <td className="td-actions text-right">                                         
                         <br/>
@@ -166,7 +185,20 @@ function OrderMobileCard(props) {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          {props.wmsState}
+                          {props.estado_wms}
+                         
+                          {/* if (props.estado_wms === "Enviado") {
+                            <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>
+                          }
+                          if (props.estado_wms === "Pendiente") {
+                            <div className={classes.pendiente}>Pendiente</div>
+                          }
+                          if (props.estado_wms === "No Aplica") {
+                            <div className={classes.cancelado}>No Aplica</div>
+                          }
+                        
+                         */}
+                    
                         </td>
                         <td className="td-actions text-right">
                             <br/>
@@ -189,7 +221,7 @@ function OrderMobileCard(props) {
 
                         {/* FECHA DE ORDEN */}
 
-<tr>
+                       <tr>
                       <td/>
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Fecha orden: 
