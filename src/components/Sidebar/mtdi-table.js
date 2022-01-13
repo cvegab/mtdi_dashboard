@@ -1043,36 +1043,7 @@ const MtdiTable = (props) => {
             />
           </label>
 
-          {/* <label htmlFor="select-client">
-            <h5
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginTop: "1em",
-                marginBottom: "0px",
-              }}
-            >
-              Cliente
-            </h5>
-            <Select
-              labelId="select-client"
-              id="select-client"
-              style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
-              value={client}
-              label="select-tienda-official"
-              placeholder="&nbsp; Seleccione un cliente"
-              onChange={handleClientChange}
-            >
-              {Array.from(new Set(data.map((obj) => obj.cliente))).map(
-                (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                }
-              )}
-            </Select>
-
-          </label> 
+       
          
 
             <Button
@@ -1086,14 +1057,13 @@ const MtdiTable = (props) => {
                 letterSpacing: "1px",
                 width: "120px",
                 height: "38px",
+                fontWeight: "600"
               }}
             >
-              {/* <span className="btn-label">
-                <i className="nc-icon nc-user-run" />
-              </span> */}
+        
               Aplicar
             </Button>
-            &nbsp;
+           
 
 
           <Button
