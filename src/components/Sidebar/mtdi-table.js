@@ -58,7 +58,10 @@ const MtdiTable = (props) => {
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
+  const [firstName, setfirstName] = useState('')
   useEffect(() => {
+    // console.log('hello from mtdi');
+    // setfirstName(localStorage.getItem("first"));
     fetchOrderData();
     fetchFilterData();
   }, []);

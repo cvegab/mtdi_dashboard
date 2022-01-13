@@ -18,6 +18,7 @@ const App = () => {
 
   let userName = nameSubString.split("=")[1];
   useEffect(() => {
+    console.log('hello from app');
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -44,13 +45,11 @@ const App = () => {
       .then((result) => {
         console.log(result);
         const obj = JSON.parse(result);
-        console.log(obj.first_name);
-        console.log(obj.last_name);
-       
-        if(obj.first_name !== undefined){
+
+        if (obj.first_name !== undefined) {
           localStorage.setItem("first", obj.first_name);
         }
-        if(obj.last_name !== undefined){
+        if (obj.last_name !== undefined) {
           localStorage.setItem("last", obj.last_name);
         }
         if (
