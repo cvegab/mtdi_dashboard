@@ -42,8 +42,12 @@ const App = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
-        if (result === `"Autorizado"`) {
+        const obj = JSON.parse(result);
+        console.log(obj.message);
+        if (
+          obj.message === "Autorizado" ||
+          localStorage.getItem("name") !== null
+        ) {
           setisAuthenticated(true);
           localStorage.setItem("name", userName);
           localStorage.setItem(
