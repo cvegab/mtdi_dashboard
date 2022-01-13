@@ -876,7 +876,7 @@ const MtdiTable = (props) => {
             marginBottom: "2em",
           }}
         >
-          Sofía Avatar
+          
           <span>{localStorage.getItem("first")}</span>&nbsp;<span>{localStorage.getItem("last")}</span>
         </p>
 
