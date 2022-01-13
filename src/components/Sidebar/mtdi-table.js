@@ -44,8 +44,11 @@ registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
-
+  const [paisId, setpaisId] = useState(1);
+  const [tiendaId, settiendaId] = useState(0);
+  const [selectedDate, setselectedDate] = useState("");
   const [country, setcountry] = useState("");
+  const [channelId, setchannelId] = useState();
   const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
@@ -58,7 +61,8 @@ const MtdiTable = (props) => {
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
-  const [firstName, setfirstName] = useState('')
+  const [firstName, setfirstName] = useState("");
+  const [urlState, seturlState] = useState("");
   useEffect(() => {
     // console.log('hello from mtdi');
     // setfirstName(localStorage.getItem("first"));
@@ -66,7 +70,6 @@ const MtdiTable = (props) => {
     fetchFilterData();
   }, []);
   const fetchFilterData = async () => {
- 
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -86,10 +89,10 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         var obj = JSON.parse(result);
         let countryArray = [];
-        // console.log(obj.stores);
+        console.log(obj.stores);
         let st = "Faber Castel";
         let Y = obj.stores.filter((a) => a.stores === st);
         // // console.log(Y);
@@ -117,9 +120,23 @@ const MtdiTable = (props) => {
     //   setData(x);
     // }
     if (country === "Chile") {
-      // console.log("i am called" + country);
+      setApiValues(1);
+      setpaisId(1);
     }
-  }, [country]);
+    if (country === "Colombia") {
+      setApiValues(2);
+      setpaisId(2);
+    }
+    if (country === "Peru") {
+      setApiValues(3);
+      setpaisId(3);
+    }
+
+    if (country === "México") {
+      setApiValues(4);
+      setpaisId(4);
+    }
+  }, [country, paisId]);
 
   useEffect(() => {
     // if (salesChannel !== "") {
@@ -132,22 +149,39 @@ const MtdiTable = (props) => {
     //     if(item.channel === salesChannel) return item.officialStores;
     //   })
     //   console.log(x);
-    const filteredOfficialStoreArray = filteredChannelArray.map((item) => {
-      if (item.channel === salesChannel) return item.officialStores;
-    });
-    console.log(filteredOfficialStoreArray);
-    const x = filteredOfficialStoreArray.filter((item) => {
-      return item !== undefined;
-    });
+    console.log(salesChannel);
+    if (salesChannel === "Mercado Libre") {
+      setchannelId(2);
+    }
+    if (salesChannel === "Linio") {
+      setchannelId(5);
+    }
+    if (salesChannel === "Ripley") {
+      setchannelId(4);
+    }
+    if (salesChannel === "Shopify") {
+      setchannelId(6);
+    }
+    if (salesChannel === "Vtex") {
+      setchannelId(7);
+    }
+
+    // const filteredOfficialStoreArray = filteredChannelArray.map((item) => {
+    //   if (item.channel === salesChannel) return item.officialStores;
+    // });
+    // console.log(filteredOfficialStoreArray);
+    // const x = filteredOfficialStoreArray.filter((item) => {
+    //   return item !== undefined;
+    // });
     // console.log(x);
-    let y = [];
+    // let y = [];
 
     // console.log(typeof y);
     // let y = [...x];
     // console.log(typeof y);
     // console.log(y.0);
 
-    setfilteredOfficialStore(x);
+    // setfilteredOfficialStore(x);
   }, [salesChannel]);
 
   useEffect(() => {
@@ -159,6 +193,9 @@ const MtdiTable = (props) => {
     let selectedChannels;
     let selectedOfficialStoresArray;
     if (store === "Faber Castell") {
+      console.log("hi");
+      settiendaId("Faber Castell");
+      console.log(tiendaId);
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -170,6 +207,8 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Linio Softys Colombia") {
+      settiendaId("Linio Softys Colombia");
+      console.log(tiendaId);
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -180,6 +219,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Softys") {
+      settiendaId("Softys");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -199,6 +239,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "ELITE PROFESSIONAL") {
+      settiendaId("ELITE PROFESSIONAL");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -209,6 +250,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "UNILEVER TOUCH") {
+      settiendaId("UNILEVER TOUCH");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -219,6 +261,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Schneider Electric") {
+      settiendaId("Schneider Electric");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -229,6 +272,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "ENEX CHILE") {
+      settiendaId("ENEX CHILE");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -239,6 +283,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Mercado Carozzi") {
+      settiendaId("Mercado Carozzi");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -249,6 +294,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "I Am Not Plastic") {
+      settiendaId("I Am Not Plastic");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -259,6 +305,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Smart Deal") {
+      settiendaId("Smart Deal");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -269,6 +316,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "CAROZZI FS") {
+      settiendaId("CAROZZI FS");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -279,6 +327,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Afe") {
+      settiendaId("Afe");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -289,6 +338,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Paris") {
+      settiendaId("Paris");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -299,6 +349,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Unilever") {
+      settiendaId("Unilever");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -309,6 +360,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Demaria") {
+      settiendaId("Demaria");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -319,6 +371,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "SOFTYSCOLOMBIA") {
+      settiendaId("SOFTYSCOLOMBIA");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -329,6 +382,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "RedLemon") {
+      settiendaId("RedLemon");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -339,6 +393,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "INSTANCE SAS") {
+      settiendaId("INSTANCE SAS");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -349,6 +404,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "EMEM5173547") {
+      settiendaId("EMEM5173547");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -408,7 +464,7 @@ const MtdiTable = (props) => {
       });
       setfilteredChannelArray(selectedChannels);
     }
-  }, [store]);
+  }, [store, tiendaId]);
   useEffect(() => {
     if (client !== "") {
       const x = data.filter((item) => item.cliente.includes(client));
@@ -422,17 +478,26 @@ const MtdiTable = (props) => {
       );
       setData(x);
     }
-  }, [officialStore]);
+  }, [officialStore, tiendaId]);
   useEffect(() => {
+    // if (startDate !== null) {
+    //   const x = data.filter((item) =>
+    //     item.fecha_creacion.includes(
+    //       startDate.getFullYear() +
+    //         "-" +
+    //         (startDate.getMonth() + 1) +
+    //         "-" +
+    //         startDate.getDate()
+    //     )
+    //   );
+    // }
     if (startDate !== null) {
-      const x = data.filter((item) =>
-        item.fecha_creacion.includes(
-          startDate.getFullYear() +
-            "-" +
-            (startDate.getMonth() + 1) +
-            "-" +
-            startDate.getDate()
-        )
+      setselectedDate(
+        startDate.getFullYear() +
+          "-" +
+          startDate.getMonth() +
+          "-" +
+          startDate.getDate()
       );
     }
   }, [startDate]);
@@ -463,7 +528,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=20&user=admin&store=0&page=1&country=1&dateFrom=2021-12-01&dateTo=2021-12-03",
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=20&user=admin&store=0&page=1&country=${paisId}&dateFrom=2021-12-01&dateTo=2021-12-03`,
 
         requestOptions
       );
@@ -489,6 +554,47 @@ const MtdiTable = (props) => {
   };
   const showPdfHandler = () => {
     window.open(buyer.dte);
+  };
+
+  const setApiValues = (countryValue) => {
+    // // console.log(countryValue);
+    // // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&store=${tiendaId}&page=1&country=${paisId}&dateFrom=2021-12-01&dateTo=2021-12-03`;
+    // // seturlState(url);
+  };
+  const applyFiltersButtonhandler = async () => {
+    console.log("hi i was clicked");
+    console.log(urlState);
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+      .toISOString()
+      .slice(0, 10)}`;
+    console.log(url);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: myHeaders,
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      if (!response.ok) {
+        throw new Error();
+      }
+      const data = await response.json();
+      // console.log(data);
+
+      setData(data.message);
+
+      setisLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const columns = [
     {
@@ -591,57 +697,70 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
-        if (rowData.dte === "") {
-          return (
-            <div>
-              {" "}
-              No &nbsp;{" "}
-              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
-                <img src={noIcon} />
-              </span>
-              &nbsp;
-              <span className={classes.greyIcon}>
-                <img src={greyIcon} />
-              </span>
-            </div>
-          );
-        }
-        if (rowData.dte === "-") {
-          return (
-            <div>
-              No &nbsp;
-              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
-                <img src={noIcon} />
-              </span>
-              &nbsp;
-              <span className={classes.greyIcon}>
-                <img src={greyIcon} />
-              </span>
-            </div>
-          );
-        }
-
-        if (rowData.dte.substring(0, 4) === "http") {
-          return (
-            <div>
-              Si &nbsp;
-              <span
-                style={{ marginLeft: "14px", cursor: "pointer" }}
-                className={classes.si}
-              >
-                <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
-              </span>
-              &nbsp;
-              <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                <a href={rowData.dte} target="_blank">
-                  <img src={showPdf} />
-                </a>
-              </span>
-            </div>
-          );
+        if (rowData.dte != undefined) {
+          if (rowData.dte === "") {
+            return (
+              <div>
+                {" "}
+                No &nbsp;{" "}
+                <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
+                  <img src={noIcon} />
+                </span>
+                &nbsp;
+                <span className={classes.greyIcon}>
+                  <img src={greyIcon} />
+                </span>
+              </div>
+            );
+          }
+          if (rowData.dte === "-") {
+            return (
+              <div>
+                No &nbsp;
+                <span
+                  style={{ marginLeft: "4px" }}
+                  title="No existe DTE"
+                  className={classes.noIcon}
+                >
+                  <img title="No existe DTE" src={noIcon} />
+                </span>
+                &nbsp;
+                <span className={classes.greyIcon}>
+                  <img src={greyIcon} />
+                </span>
+              </div>
+            );
+          }
+          if (rowData.dte.substring(0, 4) === "http") {
+            return (
+              <div>
+                Si &nbsp;
+                <span
+                  style={{ marginLeft: "14px", cursor: "pointer" }}
+                  className={classes.si}
+                >
+                  <img
+                    src={SiIcon}
+                    title="Enviar DTE"
+                    onClick={showModalHandler.bind(this, data)}
+                  />
+                </span>
+                &nbsp;
+                <span
+                  style={{ cursor: "pointer" }}
+                  title="Mostrar DTE"
+                  className={classes.showPdf}
+                >
+                  <a href={rowData.dte} target="_blank">
+                    <img src={showPdf} />
+                  </a>
+                </span>
+              </div>
+            );
+          }
         }
       },
-    
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -832,12 +951,8 @@ const MtdiTable = (props) => {
   };
   const reloadTableHandler = () => {
     fetchOrderData();
-    setclient(null);
-    setcountry(null);
-    setofficialStore(null);
-    setsalesChannel(null);
-    setstore(null);
-    setStartDate(null);
+
+    location.reload();
   };
 
   return (
@@ -876,7 +991,8 @@ const MtdiTable = (props) => {
           }}
         >
           {/* Camilo Vega */}
-          <span>{localStorage.getItem("first")}</span>&nbsp;<span>{localStorage.getItem("last")}</span>
+          <span>{localStorage.getItem("first")}</span>&nbsp;
+          <span>{localStorage.getItem("last")}</span>
         </p>
 
         <Col md="12">
@@ -1047,28 +1163,22 @@ const MtdiTable = (props) => {
             />
           </label>
 
-       
-         
-
-            <Button
-              
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "120px",
-                height: "38px",
-                fontWeight: "600"
-              }}
-            >
-        
-              Aplicar
-            </Button>
-           
-
+          <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "120px",
+              height: "38px",
+              fontWeight: "600",
+            }}
+            onClick={applyFiltersButtonhandler}
+          >
+            Aplicar
+          </Button>
 
           <Button
             className="btn-round btn-icon"
@@ -1078,7 +1188,6 @@ const MtdiTable = (props) => {
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
         </Col>
-
 
         {/* MOBILE VERSION */}
         <div id="OrderMobileCard">
