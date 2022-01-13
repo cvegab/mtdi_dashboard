@@ -652,7 +652,7 @@ const MtdiTable = (props) => {
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginBottom: "11px",
+                marginBottom: "9px",
                 marginTop: "4px",
               }}
             >
@@ -805,6 +805,7 @@ const MtdiTable = (props) => {
                 letterSpacing: "1px",
                 width: "120px",
                 height: "38px",
+                fontWeight: "600"
               }}
             >
               {/* <span className="btn-label">
