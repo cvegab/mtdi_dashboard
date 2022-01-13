@@ -708,7 +708,7 @@ const MtdiTable = (props) => {
     //   },
     // },
     {
-      title: "Estado fulfillment",
+      title: "Estado Fulfillment",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
