@@ -760,6 +760,7 @@ const MtdiTable = (props) => {
           }
         }
       },
+    
 
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1287,7 +1288,7 @@ const MtdiTable = (props) => {
               title=""
               data={data}
               columns={columns}
-              options={{ columnsButton: true, sorting: true, search: false }}
+              options={{ columnsButton: true, sorting: true, search: true}}
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
