@@ -50,54 +50,27 @@ function OrderMobileCard(props) {
     }
   };
 
-  const dteStatus = (props) => {
-    if (props.dte === "") {
-      return  <div> No &nbsp;  <span
-              style={{ marginLeft: "4px" }}
-              className={classes.noIcon}
-            >
-              <img src={noIcon} />
-            </span>
-            &nbsp;
-            <span className={classes.greyIcon}>
-              <img src={greyIcon} />
-            </span>
-          </div>;
-    }
-    if (props.dte === "-") {
-      return   <div>
-          No &nbsp;
-          <span
-          style={{ marginLeft: "4px" }}
-          className={classes.noIcon}
-        >
-          <img src={noIcon} />
-        </span>
-        &nbsp;
-        <span className={classes.greyIcon}>
-          <img src={greyIcon} />
-        </span>
-      </div>;
-    }
-    
-    if (props.dte.substring(0,4) === "http") {
-      return  <div>
-             Si &nbsp;
-             <span
-              style={{ marginLeft: "14px", cursor: "pointer" }}
-              className={classes.si}
-            >
-              <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
-            </span>
-            &nbsp;
-            <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-              <a href={rowData.dte} target="_blank" >
-                <img src={showPdf}/>
-              </a>
-            </span>
-          </div>;
-    }
+  const dtesubString = () => {
+
+  if (props.dte.substring(0,4) === "http") {
+    return 'hola'
+  }
 };
+  
+
+  const showModalHandler = (row) => {
+    setshowModal(true);
+  };
+  const hideModalHandler = () => {
+    setshowModal(false);
+  };
+  const showPdfHandler = () => {
+    window.open(buyer.dte);
+  };
+
+    
+
+
 
 
   return (
@@ -164,10 +137,57 @@ function OrderMobileCard(props) {
                           <td className="text-left" style={{fontSize: "12px", fontWeight: "bold"}}>
                             DTE:
                           </td>
-                          {props.dte}               
+                          <td className="text-left" style={{fontSize: "12px"}}>
+
+                            {(() => {
+                                    switch(props.dte) {
+                                      case "": return <div> No &nbsp;  <span
+                                      style={{ marginLeft: "4px" }}
+                                      className={classes.noIcon}
+                                    >
+                                      <img src={noIcon} />
+                                    </span>
+                                    &nbsp;
+                                    <span className={classes.greyIcon}>
+                                      <img src={greyIcon} />
+                                    </span>
+                                  </div>
+                            
+                                    
+                                      case "-": return <div> No &nbsp;  <span
+                                        style={{ marginLeft: "4px" }}
+                                        className={classes.noIcon}
+                                      >
+                                        <img src={noIcon} />
+                                      </span>
+                                      &nbsp;
+                                      <span className={classes.greyIcon}>
+                                        <img src={greyIcon} />
+                                      </span>
+                                    </div>
+
+                                      default: return <div> Si &nbsp;
+                                      <span
+                                       style={{ marginLeft: "14px", cursor: "pointer" }}
+                                       className={classes.si}
+                                     >
+                                       {/* <img src={SiIcon} onClick={showModalHandler.bind(this, data)} /> */}
+                                       <img src={SiIcon} />
+                                     </span>
+                                     &nbsp;
+                                     <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+                                       <a href={props.dte} target="_blank" >
+                                         <img src={showPdf}/>
+                                       </a>
+                                     </span>
+                                   </div>;
+
+                                
+                                    }
+                                  })()}
+                                                          
                                           
-                                        
-                        <td className="text-left" style={{fontSize: "12px"}}> 
+                                       
                                                 
                         </td>
                         <td className="td-actions text-right">                                         
@@ -185,21 +205,19 @@ function OrderMobileCard(props) {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          {props.estado_wms}
-                         
-                          {/* if (props.estado_wms === "Enviado") {
-                            <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>
-                          }
-                          if (props.estado_wms === "Pendiente") {
-                            <div className={classes.pendiente}>Pendiente</div>
-                          }
-                          if (props.estado_wms === "No Aplica") {
-                            <div className={classes.cancelado}>No Aplica</div>
-                          }
-                        
-                         */}
                     
+
+                          {(() => {
+                                    switch(props.wmsState) {
+                                      case "Enviado": return <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>
+                                      case "Pendiente": return <div className={classes.pendiente}>&nbsp;Pendiente</div>
+                                      case "No Aplica": return <div className={classes.noAplica}>&nbsp;No Aplica</div>
+                                      default: return <div className={classes.noAplica}>&nbsp;No Aplica</div>
+                                    }
+                                  })()}
+                                              
                         </td>
+
                         <td className="td-actions text-right">
                             <br/>
                             <br/>
@@ -212,7 +230,11 @@ function OrderMobileCard(props) {
 
                     <Accordion>
                       <Accordion.Item eventKey="0">
-                        <Accordion.Header>Ver más </Accordion.Header>
+                        <Accordion.Header>
+                          <strong>                          
+                            Ver más
+                          </strong>
+                        </Accordion.Header>
                         <Accordion.Body>
 
                         {/* <div className="table-full-width table-responsive"> */}
