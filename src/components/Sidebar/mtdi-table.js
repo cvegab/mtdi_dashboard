@@ -610,8 +610,8 @@ const MtdiTable = (props) => {
           return (
             <div>
               No &nbsp;
-              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
-                <img src={noIcon} />
+              <span style={{ marginLeft: "4px" }} title="No existe DTE" className={classes.noIcon}>
+                <img title="No existe DTE"  src={noIcon} />
               </span>
               &nbsp;
               <span className={classes.greyIcon}>
@@ -629,10 +629,10 @@ const MtdiTable = (props) => {
                 style={{ marginLeft: "14px", cursor: "pointer" }}
                 className={classes.si}
               >
-                <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
+                <img src={SiIcon} title="Enviar DTE" onClick={showModalHandler.bind(this, data)} />
               </span>
               &nbsp;
-              <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+              <span style={{ cursor: "pointer" }} title="Mostrar DTE" className={classes.showPdf}>
                 <a href={rowData.dte} target="_blank">
                   <img src={showPdf} />
                 </a>
@@ -688,15 +688,16 @@ const MtdiTable = (props) => {
     //     fontSize: "12px",
     //   },
     // },
-    // {
-    //   title: "Total",
-    //   field: "role",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Total",
+      field: "precio_sin_shipping",
+      
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     // {
     //   title: "Shipping",
     //   field: "",
@@ -875,7 +876,7 @@ const MtdiTable = (props) => {
             marginBottom: "2em",
           }}
         >
-          {/* Camilo Vega */}
+          Sofía Avatar
           <span>{localStorage.getItem("first")}</span>&nbsp;<span>{localStorage.getItem("last")}</span>
         </p>
 
@@ -985,7 +986,7 @@ const MtdiTable = (props) => {
             </Select>
           </label>
 
-          <label htmlFor="select-tienda-official">
+        {/* <label htmlFor="select-tienda-official">
             <h5
               style={{
                 color: "black",
@@ -997,7 +998,7 @@ const MtdiTable = (props) => {
                 marginTop: "1em",
               }}
             >
-              Tienda Oficial
+              Tienda Oficial  
             </h5>
             <Select
               labelId="select-tienda-official"
@@ -1007,7 +1008,7 @@ const MtdiTable = (props) => {
               value={officialStore}
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
-            >
+            > */}
               {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
@@ -1019,8 +1020,8 @@ const MtdiTable = (props) => {
               {/* {filteredOfficialStore.forEach((channelItem,index) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            </Select>
-          </label>
+            {/* </Select>
+          </label> */}
 
           <label>
             <h5
@@ -1102,6 +1103,7 @@ const MtdiTable = (props) => {
               ocState={order.estado_oc}
               shippingId={order.shipping_id}
               consumer={order.comprador}
+              total={order.precio_sin_shipping}
             />
           ))}
         </div>
