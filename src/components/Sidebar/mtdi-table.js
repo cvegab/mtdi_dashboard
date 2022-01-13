@@ -638,53 +638,7 @@ const MtdiTable = (props) => {
           );
         }
       },
-      // lookup: {
-      //   "https://app2.bsale.cl/view/48940/f4064a57a40f.pdf?sfd=99": (
-      //     <div>
-      //       Si &nbsp;
-      //       <span
-      //         style={{ marginLeft: "10px", cursor: "pointer" }}
-      //         className={classes.si}
-      //       >
-      //         <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
-      //       </span>
-      //       &nbsp;
-      //       <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-      //         <img src={showPdf} onClick={showPdfHandler} />
-      //       </span>
-      //     </div>
-      //   ),
-      //  "-": (
-      //     <div>
-      //       No &nbsp;
-      //       <span
-      //         style={{ marginLeft: "4px" }}
-      //         className={classes.noIcon}
-      //       >
-      //         <img src={noIcon} />
-      //       </span>
-      //       &nbsp;
-      //       <span className={classes.greyIcon}>
-      //         <img src={greyIcon} />
-      //       </span>
-      //     </div>
-      //   ),
-      //   "": (
-      //     <div>
-      //       No &nbsp;
-      //       <span
-      //         style={{ marginLeft: "4px" }}
-      //         className={classes.noIcon}
-      //       >
-      //         <img src={noIcon} />
-      //       </span>
-      //       &nbsp;
-      //       <span className={classes.greyIcon}>
-      //         <img src={greyIcon} />
-      //       </span>
-      //     </div>
-      //   ),
-      // },
+    
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1117,7 +1071,30 @@ const MtdiTable = (props) => {
                 }
               )}
             </Select>
-          </label> */}
+
+          </label> 
+         
+
+            <Button
+              
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "38px",
+              }}
+            >
+              {/* <span className="btn-label">
+                <i className="nc-icon nc-user-run" />
+              </span> */}
+              Aplicar
+            </Button>
+            &nbsp;
+
 
           <Button
             className="btn-round btn-icon"
@@ -1127,6 +1104,7 @@ const MtdiTable = (props) => {
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
         </Col>
+
 
         {/* MOBILE VERSION */}
         <div id="OrderMobileCard">
