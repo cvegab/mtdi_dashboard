@@ -9,15 +9,12 @@ import MaterialTable from "material-table";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
-
 import { Select, MenuItem } from "@material-ui/core";
 import DatePicker, { registerLocale } from "react-datepicker";
 import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-
 import "../../assets/css/global.css";
-
 import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
@@ -26,8 +23,7 @@ import { Button, Col, Spinner } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
-import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard"
-
+import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
 
 const tableIcons = {
@@ -44,61 +40,6 @@ const tableIcons = {
   )),
 };
 
-const orderList = [
-  {
-    id_mtdi: "ml619e8bb5f6d955dc7455468e",
-    canal_de_venta: "Mercado Libre",
-    tienda: "Unilever",
-    cliente: "Unilever",
-    order_id: 5043399300,
-    pais: "Chile",
-    fecha_creacion: "2020-11-24 14:45:24",
-    shipping_id: 40993109945,
-    valor_shipping: 2443,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 7662,
-    comprador: "IVISPATIO",
-    hub: "redcompra",
-    rut: "",
-    dte: "Si",
-    dte_exist: "disabled",
-    official_store: "Unilever",
-    tipo_envio: "cross_docking",
-    id_mpago: 18378018289,
-    status_detail: "accredited",
-    order_status: "Cancelado",
-    wms: "Integrado a wms",
-  },
-  {
-    id_mtdi: "ml619e8aff4bcbf54da2960a96",
-    canal_de_venta: "Mercado Libre",
-    tienda: "ELITE PROFESSIONAL",
-    cliente: "ELITE PROFESSIONAL",
-    order_id: 5043355576,
-    pais: "Chile",
-    fecha_creacion: "2021-11-24 14:33:10",
-    shipping_id: 40993074958,
-    valor_shipping: 0,
-    estado_pago: "approved",
-    estado_oc: "paid",
-    estado_delivery: "",
-    precio_sin_shipping: 133980,
-    comprador: "SUPERFIL CHILE",
-    hub: "account_money",
-    rut: "",
-    dte: "No",
-    dte_exist: "disabled",
-    official_store: "Elite Professional",
-    tipo_envio: "fulfillment",
-    id_mpago: 18377774274,
-    status_detail: "accredited",
-    order_status: "Despachado",
-    wms: "Integrado a wms",
-  },
-];
-
 registerLocale("es", es);
 
 const MtdiTable = (props) => {
@@ -113,31 +54,356 @@ const MtdiTable = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
+  const [filteredCountryData, setfilteredCountryData] = useState([]);
+  const [filteredStoreData, setfilteredStoreData] = useState([]);
+  const [filteredChannelArray, setfilteredChannelArray] = useState([]);
+  const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   useEffect(() => {
     fetchOrderData();
+    fetchFilterData();
   }, []);
+  const fetchFilterData = async () => {
+    console.log("fetching filetr data");
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        var obj = JSON.parse(result);
+        let countryArray = [];
+        console.log(obj.stores);
+        let st = "Faber Castel";
+        let Y = obj.stores.filter((a) => a.stores === st);
+        console.log(Y);
+        // setcountry(obj.countries);
+        setfilteredCountryData(obj.countries);
+        setfilteredStoreData(obj.stores);
+        //   countryArray.push(obj.countries);
+        //   console.log(countryArray);
+
+        // const X =  obj.countries.forEach((element,i) => {
+        //    return element[i].country
+        //   });
+        //   console.log(X);
+        // setcountry(countryArray);
+        // console.log(obj.countries);
+        // console.log(obj.tiendas);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   useEffect(() => {
-    if (country !== "") {
-      const x = data.filter((item) => item.pais === country);
+    // if (country !== "") {
+    //   const x = data.filter((item) => item.pais === country);
 
-      setData(x);
+    //   setData(x);
+    // }
+    if (country === "Chile") {
+      console.log("i am called" + country);
     }
   }, [country]);
 
   useEffect(() => {
-    if (salesChannel !== "") {
-      const x = data.filter((item) =>
-        item.canal_de_venta.includes(salesChannel)
-      );
-      setData(x);
-    }
+    // if (salesChannel !== "") {
+    //   const x = data.filter((item) =>
+    //     item.canal_de_venta.includes(salesChannel)
+    //   );
+    //   setData(x);
+    // }
+    // const x =  filteredChannelArray.filter((item)=>{
+    //     if(item.channel === salesChannel) return item.officialStores;
+    //   })
+    //   console.log(x);
+    const filteredOfficialStoreArray = filteredChannelArray.map((item) => {
+      if (item.channel === salesChannel) return item.officialStores;
+    });
+    console.log(filteredOfficialStoreArray);
+    const x = filteredOfficialStoreArray.filter((item) => {
+      return item !== undefined;
+    });
+    console.log(x);
+    let y = [];
+
+    console.log(typeof y);
+    // let y = [...x];
+    // console.log(typeof y);
+    // console.log(y.0);
+
+    setfilteredOfficialStore(x);
   }, [salesChannel]);
 
   useEffect(() => {
-    if (store !== "") {
-      const x = data.filter((item) => item.tienda.includes(store));
-      setData(x);
+    // if (store !== "") {
+    //   const x = data.filter((item) => item.tienda.includes(store));
+    //   setData(x);
+    // }
+    let selectedChannelsArray;
+    let selectedChannels;
+    let selectedOfficialStoresArray;
+    if (store === "Faber Castell") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Linio Softys Colombia") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Softys") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      console.log(selectedChannelsArray);
+
+      const x = selectedChannelsArray.map((item) => {
+        return item.officialStores; //this returns array of official stores
+      });
+      console.log(x);
+      // selectedOfficialStoresArray = selectedStoreData[0].channels.officialStores;
+      // console.log(selectedOfficialStoresArray);
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item; //this was item.channel first
+      });
+      console.log(selectedChannels); //this gives you only the name of array['Linio','Mercado Libre']
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "ELITE PROFESSIONAL") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "UNILEVER TOUCH") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Schneider Electric") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "ENEX CHILE") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Mercado Carozzi") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "I Am Not Plastic") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Smart Deal") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "CAROZZI FS") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Afe") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Paris") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Unilever") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Demaria") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "SOFTYSCOLOMBIA") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "RedLemon") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "INSTANCE SAS") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "EMEM5173547") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "SC Johnson") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Softys Televenta") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Tribu") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Softys Colombia") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Clorox") {
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
     }
   }, [store]);
   useEffect(() => {
@@ -168,7 +434,6 @@ const MtdiTable = (props) => {
     }
   }, [startDate]);
 
-    
   //  let qty = 0;
 
   //   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
@@ -177,22 +442,21 @@ const MtdiTable = (props) => {
   //      qty = "20"
   //    };
 
-  
-
   const fetchOrderData = async () => {
+    let countryValue = 3;
     setisLoading(true);
     var myHeaders = new Headers();
-       myHeaders.append('x-api-key', 'mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj');
-       myHeaders.append(
-         'Authorization',
-         'Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6'
-      );
-      myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+    myHeaders.append("Content-Type", "application/json");
 
     var requestOptions = {
       method: "GET",
       redirect: "follow",
-      headers: myHeaders
+      headers: myHeaders,
     };
     try {
       const response = await fetch(
@@ -200,7 +464,6 @@ const MtdiTable = (props) => {
 
         requestOptions
       );
-
       if (!response.ok) {
         throw new Error();
       }
@@ -208,15 +471,12 @@ const MtdiTable = (props) => {
       // console.log(data);
 
       setData(data.message);
-      
+
       setisLoading(false);
-   
     } catch (error) {
       console.log(error);
     }
   };
-
- 
 
   const showModalHandler = (row) => {
     setshowModal(true);
@@ -329,50 +589,53 @@ const MtdiTable = (props) => {
 
       render: (rowData) => {
         if (rowData.dte === "") {
-          return  <div> No &nbsp;  <span
-                  style={{ marginLeft: "4px" }}
-                  className={classes.noIcon}
-                >
-                  <img src={noIcon} />
-                </span>
-                &nbsp;
-                <span className={classes.greyIcon}>
-                  <img src={greyIcon} />
-                </span>
-              </div>;
+          return (
+            <div>
+              {" "}
+              No &nbsp;{" "}
+              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
+                <img src={noIcon} />
+              </span>
+              &nbsp;
+              <span className={classes.greyIcon}>
+                <img src={greyIcon} />
+              </span>
+            </div>
+          );
         }
         if (rowData.dte === "-") {
-          return   <div>
+          return (
+            <div>
               No &nbsp;
-              <span
-              style={{ marginLeft: "4px" }}
-              className={classes.noIcon}
-            >
-              <img src={noIcon} />
-            </span>
-            &nbsp;
-            <span className={classes.greyIcon}>
-              <img src={greyIcon} />
-            </span>
-          </div>;
+              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
+                <img src={noIcon} />
+              </span>
+              &nbsp;
+              <span className={classes.greyIcon}>
+                <img src={greyIcon} />
+              </span>
+            </div>
+          );
         }
-        
-        if (rowData.dte.substring(0,4) === "http") {
-          return  <div>
-                 Si &nbsp;
-                 <span
-                  style={{ marginLeft: "14px", cursor: "pointer" }}
-                  className={classes.si}
-                >
-                  <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
-                </span>
-                &nbsp;
-                <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                  <a href={rowData.dte} target="_blank" >
-                    <img src={showPdf}/>
-                  </a>
-                </span>
-              </div>;
+
+        if (rowData.dte.substring(0, 4) === "http") {
+          return (
+            <div>
+              Si &nbsp;
+              <span
+                style={{ marginLeft: "14px", cursor: "pointer" }}
+                className={classes.si}
+              >
+                <img src={SiIcon} onClick={showModalHandler.bind(this, data)} />
+              </span>
+              &nbsp;
+              <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+                <a href={rowData.dte} target="_blank">
+                  <img src={showPdf} />
+                </a>
+              </span>
+            </div>
+          );
         }
       },
     
@@ -543,15 +806,20 @@ const MtdiTable = (props) => {
   ];
 
   const handleCountryChange = (event) => {
+    console.log(event.target.value);
+
     setcountry(event.target.value);
+    console.log(country);
   };
 
   const handleSalesChannelChange = (event) => {
     setsalesChannel(event.target.value);
+    console.log(event.target.value);
   };
 
   const handleStoreChange = (event) => {
     setstore(event.target.value);
+    console.log(store);
   };
   const handleClientChange = (event) => {
     setclient(event.target.value);
@@ -580,7 +848,6 @@ const MtdiTable = (props) => {
       )}
 
       <div className="content">
-
         <h5
           className="titleTable"
           style={{
@@ -637,39 +904,49 @@ const MtdiTable = (props) => {
               placeholder="&nbsp; Seleccione un país"
               onChange={handleCountryChange}
             >
-              {Array.from(new Set(data.map((obj) => obj.pais))).map(
+              {/* {Array.from(new Set(data.map((obj) => obj.pais))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )} */}
+              {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
+                (period) => {
+                  return (
+                    <MenuItem value={period.country}>{period.country}</MenuItem>
+                  );
                 }
               )}
             </Select>
           </label>
-
-          <label>
+          <label htmlFor="select-tienda">
             <h5
               style={{
                 color: "black",
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginBottom: "9px",
-                marginTop: "4px",
+                marginBottom: "0px",
+                marginTop: "1em",
               }}
             >
-              Fecha
+              Tienda
             </h5>
-
-            <DatePicker
-              id="datepickerCalendar"
-              type="number"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              style={{ width: 200, marginLeft: "1em" }}
-              placeholderText="dd/mm/yy"
-              locale="es"
-            />
+            <Select
+              labelId="select-tienda"
+              id="select-tienda"
+              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
+              value={store}
+              label="select-canal"
+              placeholder="&nbsp; Seleccione una tienda"
+              onChange={handleStoreChange}
+            >
+              {Array.from(
+                new Set(filteredStoreData.map((obj) => obj.store))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              })}
+            </Select>
           </label>
-
           <label htmlFor="select-canal">
             <h5
               style={{
@@ -693,47 +970,19 @@ const MtdiTable = (props) => {
               label="select-canal"
               onChange={handleSalesChannelChange}
             >
-              {Array.from(new Set(data.map((obj) => obj.canal_de_venta))).map(
-                (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                }
-              )}
-            </Select>
-          </label>
-
-          <label htmlFor="select-tienda">
-            <h5
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-                marginTop: "1em",
-              }}
-            >
-              Tienda
-            </h5>
-            <Select
-              labelId="select-tienda"
-              id="select-tienda"
-              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
-              value={store}
-              label="select-canal"
-              placeholder="&nbsp; Seleccione una tienda"
-              onChange={handleStoreChange}
-            >
-              {Array.from(new Set(data.map((obj) => obj.tienda))).map(
-                (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                }
-              )}
+              {Array.from(
+                new Set(filteredChannelArray.map((obj) => obj.channel))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              })}
+              {/* {filteredChannelArray.map((channelItem) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })} */}
             </Select>
           </label>
 
           <label htmlFor="select-tienda-official">
             <h5
-              
               style={{
                 color: "black",
                 fontSize: "12px",
@@ -755,43 +1004,46 @@ const MtdiTable = (props) => {
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
             >
-              {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+              {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
-              )}
+              )} */}
+              {/* {filteredOfficialStore.map((channelItem) => {
+                return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
+              })} */}
+              {/* {filteredOfficialStore.forEach((channelItem,index) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })} */}
             </Select>
           </label>
 
-          <label htmlFor="select-client">
+          <label>
             <h5
               style={{
                 color: "black",
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginTop: "1em",
-                marginBottom: "0px",
+                marginBottom: "11px",
+                marginTop: "4px",
               }}
             >
-              Cliente
+              Fecha
             </h5>
-            <Select
-              labelId="select-client"
-              id="select-client"
-              style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
-              value={client}
-              label="select-tienda-official"
-              placeholder="&nbsp; Seleccione un cliente"
-              onChange={handleClientChange}
-            >
-              {Array.from(new Set(data.map((obj) => obj.cliente))).map(
-                (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                }
-              )}
-            </Select>
-          </label> 
+
+            <DatePicker
+              id="datepickerCalendar"
+              type="number"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              style={{ width: 200, marginLeft: "1em" }}
+              placeholderText="dd/mm/yy"
+              locale="es"
+            />
+          </label>
+
+       
          
 
             <Button
@@ -808,12 +1060,11 @@ const MtdiTable = (props) => {
                 fontWeight: "600"
               }}
             >
-              {/* <span className="btn-label">
-                <i className="nc-icon nc-user-run" />
-              </span> */}
+        
               Aplicar
             </Button>
-            &nbsp;
+           
+
 
           <Button
             className="btn-round btn-icon"
@@ -822,8 +1073,7 @@ const MtdiTable = (props) => {
           >
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
-        </Col> 
-
+        </Col>
 
 
         {/* MOBILE VERSION */}
@@ -833,11 +1083,10 @@ const MtdiTable = (props) => {
         animation="border"
         style={{ color: "#51cbce", marginLeft: "10em", alignItems: "center" }} 
         /> */}
-         {
-           data.map(order => 
-           <OrderMobileCard 
-              opsId={order.order_id} 
-              date={order.fecha_creacion} 
+          {data.map((order) => (
+            <OrderMobileCard
+              opsId={order.order_id}
+              date={order.fecha_creacion}
               channelStore={order.canal_de_venta}
               store={order.tienda}
               client={order.tienda}
@@ -849,95 +1098,88 @@ const MtdiTable = (props) => {
               ocState={order.estado_oc}
               shippingId={order.shipping_id}
               consumer={order.comprador}
-           />
-           )
-         }
-         
+            />
+          ))}
+        </div>
 
-        
-        </div> 
+        {/* DESKTOP VERSION */}
 
-
-      {/* DESKTOP VERSION */}
-
-      <div id="OrderDesktopTable">
-       
-
-        {isLoading && (
-          <MaterialTable
-            title=""
-            options={{
-              search: false,
-            }}
-            icons={tableIcons}
-            columns={columns}
-            data={[]}
-            components={{
-              Body: (props) => (
-                <div
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
-                >
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                  <Spinner
-                    animation="border"
-                    style={{ color: "#1D308E", alignItems: "center" }}
-                  ></Spinner>
-                </div>
-              ),
-              emptyDataSourceMessage: <h1>No se encuentra la información.</h1>,
-            }}
-          ></MaterialTable>
-        )}
-
-        {data.length === 0 && !isLoading && (
-          <MaterialTable
-            title=""
-            icons={tableIcons}
-            columns={columns}
-            data={[]}
-            components={{
-              Row: (props) => <CustomLoader {...props} />,
-            }}
-          ></MaterialTable>
-        )}
-
-        {data.length !== 0 && (
-          <MaterialTable
-            onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
-            localization={{
-              body: {
-                emptyDataSourceMessage: (
-                  <div>
-                    <span>No hay información disponible</span>
+        <div id="OrderDesktopTable">
+          {isLoading && (
+            <MaterialTable
+              title=""
+              options={{
+                search: false,
+              }}
+              icons={tableIcons}
+              columns={columns}
+              data={[]}
+              components={{
+                Body: (props) => (
+                  <div
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
                     <Spinner
                       animation="border"
-                      style={{ color: "#1D308E", marginLeft: "1em" }}
-                    />
+                      style={{ color: "#1D308E", alignItems: "center" }}
+                    ></Spinner>
                   </div>
                 ),
-              },
-            }}
-            key={data.id_mtdi}
-            title="Instance Table"
-            icons={tableIcons}
-            title=""
-            data={data}
-            columns={columns}
-            options={{ columnsButton: true, sorting: true, search: false }}
-            style={{ marginLeft: "1em", marginTop: "2em" }}
-          />
-        )}
-      </div> 
+                emptyDataSourceMessage: (
+                  <h1>No se encuentra la información.</h1>
+                ),
+              }}
+            ></MaterialTable>
+          )}
+
+          {data.length === 0 && !isLoading && (
+            <MaterialTable
+              title=""
+              icons={tableIcons}
+              columns={columns}
+              data={[]}
+              components={{
+                Row: (props) => <CustomLoader {...props} />,
+              }}
+            ></MaterialTable>
+          )}
+          {data.length !== 0 && (
+            <MaterialTable
+              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
+              localization={{
+                body: {
+                  emptyDataSourceMessage: (
+                    <div>
+                      <span>No hay información disponible</span>
+                      <Spinner
+                        animation="border"
+                        style={{ color: "#1D308E", marginLeft: "1em" }}
+                      />
+                    </div>
+                  ),
+                },
+              }}
+              key={data.id_mtdi}
+              title="Instance Table"
+              icons={tableIcons}
+              title=""
+              data={data}
+              columns={columns}
+              options={{ columnsButton: true, sorting: true, search: false }}
+              style={{ marginLeft: "1em", marginTop: "2em" }}
+            />
+          )}
+        </div>
       </div>
     </React.Fragment>
   );
 };
 
 export default MtdiTable;
-
