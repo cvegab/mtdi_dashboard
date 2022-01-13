@@ -235,8 +235,7 @@ function OrderMobileCard(props) {
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>
                           <strong>Ver más</strong>
-                                                   
-                         
+                                                                       
                         </Accordion.Header>
                         <Accordion.Body>
 
@@ -380,7 +379,6 @@ function OrderMobileCard(props) {
                        
                       </tr> */}
 
-
 {/* HUB DE PAGO */}
                           
                       {/* <tr>
@@ -397,8 +395,7 @@ function OrderMobileCard(props) {
                         <td className="td-actions text-right">
                           <br/>
                           <br/>
-                        </td>
-                       
+                        </td>                    
                       </tr> */}
 
 {/* TOTAL */}
@@ -414,9 +411,9 @@ function OrderMobileCard(props) {
                         <td className="td-actions text-right">
                             <br/>
                             <br/>
-                        </td>
-                       
+                        </td>             
                       </tr>
+
 {/* SHIPPING */}
                       {/* <tr>
                         <td>
@@ -470,8 +467,8 @@ function OrderMobileCard(props) {
                           <br/>
                         </td>                  
                       </tr> */}
-{/* 
-JEFE OPS */}
+
+{/* JEFE OPS */}
                       {/* <tr>
                         <td>                   
                         </td>
