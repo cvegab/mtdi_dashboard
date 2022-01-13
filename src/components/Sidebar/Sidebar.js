@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Nav, Collapse, Button } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
@@ -32,6 +32,8 @@ var ps;
 function Sidebar(props) {
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
+  const [firstName, setfirstName] = useState("");
+
   const sidebar = React.useRef();
   // this creates the intial state of this component based on the collapse routes
   // that it gets through props.routes
@@ -133,6 +135,7 @@ function Sidebar(props) {
     return props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
   React.useEffect(() => {
+    console.log(localStorage.getItem("first"));
     // if you are using a Windows Machine, the scrollbars will have a Mac look
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(sidebar.current, {
@@ -150,10 +153,18 @@ function Sidebar(props) {
   });
   React.useEffect(() => {
     setCollapseStates(getCollapseStates(props.routes));
+    console.log("hello");
+    console.log(localStorage.getItem("first"));
+    // setTimeout(() => {
+    //   console.log(localStorage.getItem("first"));
+    //   setfirstName(localStorage.getItem("first"));
+    // }, 500);
   }, []);
   const logoutHandler = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("password");
+    localStorage.removeItem("first");
+    localStorage.removeItem("last");
     window.location.replace("https://dev.instancelatam.com/login");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
   };
@@ -193,6 +204,9 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
+
+                {/* {localStorage.getItem("first")} {localStorage.getItem("last")} */}
+
                 Sofía Avatar
                 {/* <b className="caret" /> */}
               </a>
