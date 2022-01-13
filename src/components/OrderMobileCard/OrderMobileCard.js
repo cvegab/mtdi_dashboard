@@ -5,6 +5,7 @@ import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "../Sidebar/mtdi-table.module.css";
+import SendMail from "components/modalComponents/sendMail";
 
 
 // reactstrap components
@@ -29,12 +30,14 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-import Accordion from 'react-bootstrap/Accordion'
+import Accordion from 'react-bootstrap/Accordion';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 function OrderMobileCard(props) {
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
   const [verticalTabs, setVerticalTabs] = React.useState("info");
   const [pageTabs, setPageTabs] = React.useState("homePages");
+  const [showModal, setshowModal] = React.useState(false);
   const [openedCollapses, setOpenedCollapses] = React.useState([
     "collapseOne",
     "collapse1",
@@ -58,7 +61,7 @@ function OrderMobileCard(props) {
 };
   
 
-  const showModalHandler = (row) => {
+  const showModalHandler = (props) => {
     setshowModal(true);
   };
   const hideModalHandler = () => {
@@ -68,7 +71,7 @@ function OrderMobileCard(props) {
     window.open(buyer.dte);
   };
 
-    
+  
 
 
 
@@ -167,16 +170,16 @@ function OrderMobileCard(props) {
                                     </div>
 
                                       default: return <div> Si &nbsp;
-                                      <span
+                                      {/* <span
                                        style={{ marginLeft: "14px", cursor: "pointer" }}
                                        className={classes.si}
-                                     >
-                                       {/* <img src={SiIcon} onClick={showModalHandler.bind(this, data)} /> */}
-                                       <img src={SiIcon} />
-                                     </span>
+                                     > */}
+                                       
+                                       {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
+                                     </span> */}
                                      &nbsp;
                                      <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                                       <a href={props.dte} target="_blank" >
+                                       <a href={props.dte} target="_blank" title="Mostrar DTE" >
                                          <img src={showPdf}/>
                                        </a>
                                      </span>
@@ -231,9 +234,9 @@ function OrderMobileCard(props) {
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>
-                          <strong>                          
-                            Ver más
-                          </strong>
+                          <strong>Ver más</strong>
+                                                   
+                         
                         </Accordion.Header>
                         <Accordion.Body>
 
@@ -399,21 +402,21 @@ function OrderMobileCard(props) {
                       </tr> */}
 
 {/* TOTAL */}
-                      {/* <tr>
+                      <tr>
                         <td/>      
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                         Total: 
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          
+                          $ {props.total}
                         </td>
                         <td className="td-actions text-right">
                             <br/>
                             <br/>
                         </td>
                        
-                      </tr> */}
+                      </tr>
 {/* SHIPPING */}
                       {/* <tr>
                         <td>

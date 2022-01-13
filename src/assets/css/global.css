@@ -130,6 +130,10 @@ color: white !important;
   box-shadow:0 0 0 0.0rem !important;
 }
 
+.navbar .navbar-toggler .navbar-toggler-bar.navbar-kebab {
+  display:none !important;
+}
+
 .sidebar .nav i {
   color: white !important;
   
@@ -294,6 +298,13 @@ border-collapse: inherit !important;
   width:120px;
 }
 
+.accordion-button:not(.collapsed) {
+  background-color: #06cbc1 !important;
+  border-radius: 17px !important;
+  color:#1D308E !important;
+  font-size: 12px !important;
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width:767px) {
@@ -307,7 +318,12 @@ border-collapse: inherit !important;
   .select-tienda-official {
     margin-left:10px;
 
-}
+
+  }
+
+  .navigation-index {
+    display: none !important;
+  }
 }
 
 @media screen and (min-width:768px) {
