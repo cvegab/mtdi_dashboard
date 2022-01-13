@@ -367,7 +367,9 @@ const MtdiTable = (props) => {
                 </span>
                 &nbsp;
                 <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                  <img src={showPdf} onClick={showPdfHandler} />
+                  <a href={rowData.dte} target="_blank" >
+                    <img src={showPdf}/>
+                  </a>
                 </span>
               </div>;
         }
@@ -445,7 +447,7 @@ const MtdiTable = (props) => {
         if (rowData.estado_wms === "Pendiente") {
           return <div className={classes.pendiente}>Pendiente</div>;
         }
-        if (rowData.estado_wms === "Cancelado") {
+        if (rowData.estado_wms === "No Aplica") {
           return <div className={classes.cancelado}>No Aplica</div>;
         }
       },
