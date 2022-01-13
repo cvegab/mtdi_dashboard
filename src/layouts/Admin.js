@@ -49,6 +49,7 @@ function Admin(props) {
     };
   });
   React.useEffect(() => {
+  
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainPanel.current.scrollTop = 0;

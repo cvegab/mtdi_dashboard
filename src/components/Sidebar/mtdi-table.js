@@ -58,12 +58,15 @@ const MtdiTable = (props) => {
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
+  const [firstName, setfirstName] = useState('')
   useEffect(() => {
+    // console.log('hello from mtdi');
+    // setfirstName(localStorage.getItem("first"));
     fetchOrderData();
     fetchFilterData();
   }, []);
   const fetchFilterData = async () => {
-    console.log("fetching filetr data");
+ 
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -83,13 +86,13 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         var obj = JSON.parse(result);
         let countryArray = [];
-        console.log(obj.stores);
+        // console.log(obj.stores);
         let st = "Faber Castel";
         let Y = obj.stores.filter((a) => a.stores === st);
-        console.log(Y);
+        // // console.log(Y);
         // setcountry(obj.countries);
         setfilteredCountryData(obj.countries);
         setfilteredStoreData(obj.stores);
@@ -114,7 +117,7 @@ const MtdiTable = (props) => {
     //   setData(x);
     // }
     if (country === "Chile") {
-      console.log("i am called" + country);
+      // console.log("i am called" + country);
     }
   }, [country]);
 
@@ -136,10 +139,10 @@ const MtdiTable = (props) => {
     const x = filteredOfficialStoreArray.filter((item) => {
       return item !== undefined;
     });
-    console.log(x);
+    // console.log(x);
     let y = [];
 
-    console.log(typeof y);
+    // console.log(typeof y);
     // let y = [...x];
     // console.log(typeof y);
     // console.log(y.0);
@@ -181,18 +184,18 @@ const MtdiTable = (props) => {
         return selectedStore.store === store;
       });
       selectedChannelsArray = selectedStoreData[0].channels;
-      console.log(selectedChannelsArray);
+      // console.log(selectedChannelsArray);
 
       const x = selectedChannelsArray.map((item) => {
         return item.officialStores; //this returns array of official stores
       });
-      console.log(x);
+      // console.log(x);
       // selectedOfficialStoresArray = selectedStoreData[0].channels.officialStores;
       // console.log(selectedOfficialStoresArray);
       const selectedChannels = selectedChannelsArray.map((item) => {
         return item; //this was item.channel first
       });
-      console.log(selectedChannels); //this gives you only the name of array['Linio','Mercado Libre']
+      // console.log(selectedChannels); //this gives you only the name of array['Linio','Mercado Libre']
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "ELITE PROFESSIONAL") {
@@ -872,7 +875,8 @@ const MtdiTable = (props) => {
             marginBottom: "2em",
           }}
         >
-          Camilo Vega
+          {/* Camilo Vega */}
+          <span>{localStorage.getItem("first")}</span>&nbsp;<span>{localStorage.getItem("last")}</span>
         </p>
 
         <Col md="12">
