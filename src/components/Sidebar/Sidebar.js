@@ -20,7 +20,7 @@ import { Nav, Collapse, Button } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import avatar from "assets/img/faces/CamiloVega.jpg";
+import avatar from "assets/img/faces/avatarProfile.png";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
@@ -183,7 +183,7 @@ function Sidebar(props) {
       <div className="sidebar-wrapper" ref={sidebar}>
         <div className="user">
           <div className="photo">
-            <img src={avatar} alt="Avatar" />
+            <img src={avatar} alt="Avatar" width="50%"/>
           </div>
           <div className="info">
             <a
@@ -193,7 +193,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
-                Camilo Vega
+                Sofía Avatar
                 {/* <b className="caret" /> */}
               </a>
             </a>
