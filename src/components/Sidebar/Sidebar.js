@@ -154,6 +154,8 @@ function Sidebar(props) {
   const logoutHandler = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("password");
+    localStorage.removeItem('first');
+    localStorage.removeItem('last');
     window.location.replace("https://dev.instancelatam.com/login");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
   };
@@ -193,7 +195,8 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
-                Camilo Vega
+              {localStorage.getItem("first")} {localStorage.getItem("last")}
+              {/* <span>{localStorage.getItem("first")}</span>&nbsp;<span>{localStorage.getItem("last")}</span> */}
                 {/* <b className="caret" /> */}
               </a>
             </a>
