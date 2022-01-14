@@ -89,8 +89,13 @@ const MtdiTable = (props) => {
         // console.log(result);
         var obj = JSON.parse(result);
         let countryArray = [];
+<<<<<<< Updated upstream
         // console.log(obj.stores);
         let st = "Faber Castel";
+=======
+        console.log(obj.stores);
+        let st = "Faber Castell";
+>>>>>>> Stashed changes
         let Y = obj.stores.filter((a) => a.stores === st);
         // // console.log(Y);
         // setcountry(obj.countries);
@@ -591,6 +596,7 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
+<<<<<<< Updated upstream
         if (rowData.dte === "") {
           return (
             <div>
@@ -639,6 +645,71 @@ const MtdiTable = (props) => {
               </span>
             </div>
           );
+=======
+        console.log(rowData);
+
+        if (rowData.dte != undefined) {
+          if (rowData.dte === "") {
+            return (
+              <div>
+                {" "}
+                No &nbsp;{" "}
+                <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
+                  <img src={noIcon} />
+                </span>
+                &nbsp;
+                <span className={classes.greyIcon}>
+                  <img src={greyIcon} />
+                </span>
+              </div>
+            );
+          }
+          if (rowData.dte === "-") {
+            return (
+              <div>
+                No &nbsp;
+                <span
+                  style={{ marginLeft: "4px" }}
+                  title="No existe DTE"
+                  className={classes.noIcon}
+                >
+                  <img title="No existe DTE" src={noIcon} />
+                </span>
+                &nbsp;
+                <span className={classes.greyIcon}>
+                  <img src={greyIcon} />
+                </span>
+              </div>
+            );
+          }
+          if (rowData.dte.substring(0, 4) === "http") {
+            return (
+              <div>
+                Si &nbsp;
+                <span
+                  style={{ marginLeft: "14px", cursor: "pointer" }}
+                  className={classes.si}
+                >
+                  <img
+                    src={SiIcon}
+                    title="Enviar DTE"
+                    onClick={showModalHandler.bind(this, data)}
+                  />
+                </span>
+                &nbsp;
+                <span
+                  style={{ cursor: "pointer" }}
+                  title="Mostrar DTE"
+                  className={classes.showPdf}
+                >
+                  <a href={rowData.dte} target="_blank">
+                    <img src={showPdf} />
+                  </a>
+                </span>
+              </div>
+            );
+          }
+>>>>>>> Stashed changes
         }
       },
     
@@ -708,7 +779,7 @@ const MtdiTable = (props) => {
     //   },
     // },
     {
-      title: "Estado Fulfillment",
+      title: "Estado OC",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1183,6 +1254,22 @@ const MtdiTable = (props) => {
             />
           )}
         </div>
+        <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "120px",
+              height: "38px",
+              fontWeight: "600",
+            }}
+            onClick={applyFiltersButtonhandler}
+          >
+            Aplicar
+          </Button>
       </div>
     </React.Fragment>
   );
