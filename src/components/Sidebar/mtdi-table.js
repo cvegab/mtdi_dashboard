@@ -150,6 +150,9 @@ const MtdiTable = (props) => {
     //   })
     //   console.log(x);
     console.log(salesChannel);
+    if(salesChannel === 'Paris'){
+      setchannelId(1);
+    }
     if (salesChannel === "Mercado Libre") {
       setchannelId(2);
     }
