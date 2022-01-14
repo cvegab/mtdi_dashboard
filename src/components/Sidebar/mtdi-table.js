@@ -597,6 +597,12 @@ const MtdiTable = (props) => {
       console.log(error);
     }
   };
+  const incrementPageHandler = ()=>{
+let pageCount = 1;
+let incrementedPage;
+incrementedPage = pageCount++;
+console.log(incrementedPage);
+  }
   const columns = [
     {
       title: "OpsId",
@@ -1308,7 +1314,7 @@ const MtdiTable = (props) => {
               height: "38px",
               fontWeight: "600",
             }}
-            // onClick={}
+             onClick={incrementPageHandler}
           >
             Ver más
           </Button>
