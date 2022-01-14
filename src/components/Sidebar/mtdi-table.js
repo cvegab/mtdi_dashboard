@@ -596,56 +596,6 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
-<<<<<<< Updated upstream
-        if (rowData.dte === "") {
-          return (
-            <div>
-              {" "}
-              No &nbsp;{" "}
-              <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
-                <img src={noIcon} />
-              </span>
-              &nbsp;
-              <span className={classes.greyIcon}>
-                <img src={greyIcon} />
-              </span>
-            </div>
-          );
-        }
-        if (rowData.dte === "-") {
-          return (
-            <div>
-              No &nbsp;
-              <span style={{ marginLeft: "4px" }} title="No existe DTE" className={classes.noIcon}>
-                <img title="No existe DTE"  src={noIcon} />
-              </span>
-              &nbsp;
-              <span className={classes.greyIcon}>
-                <img src={greyIcon} />
-              </span>
-            </div>
-          );
-        }
-
-        if (rowData.dte.substring(0, 4) === "http") {
-          return (
-            <div>
-              Si &nbsp;
-              <span
-                style={{ marginLeft: "14px", cursor: "pointer" }}
-                className={classes.si}
-              >
-                <img src={SiIcon} title="Enviar DTE" onClick={showModalHandler.bind(this, data)} />
-              </span>
-              &nbsp;
-              <span style={{ cursor: "pointer" }} title="Mostrar DTE" className={classes.showPdf}>
-                <a href={rowData.dte} target="_blank">
-                  <img src={showPdf} />
-                </a>
-              </span>
-            </div>
-          );
-=======
         console.log(rowData);
 
         if (rowData.dte != undefined) {
@@ -709,7 +659,6 @@ const MtdiTable = (props) => {
               </div>
             );
           }
->>>>>>> Stashed changes
         }
       },
     
