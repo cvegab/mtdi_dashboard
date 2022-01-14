@@ -48,7 +48,7 @@ const MtdiTable = (props) => {
   const [tiendaId, settiendaId] = useState(0);
   const [selectedDate, setselectedDate] = useState("");
   const [country, setcountry] = useState("");
-  const [channelId, setchannelId] = useState();
+  const [channelId, setchannelId] = useState(0);
   const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
