@@ -44,11 +44,12 @@ registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
+  const [pageCount, setpageCount] = useState(1);
   const [paisId, setpaisId] = useState(1);
   const [tiendaId, settiendaId] = useState(0);
   const [selectedDate, setselectedDate] = useState("");
   const [country, setcountry] = useState("");
-  const [channelId, setchannelId] = useState(0);
+  const [channelId, setchannelId] = useState();
   const [buyer, setbuyer] = useState("");
   const [salesChannel, setsalesChannel] = useState("");
   const [store, setstore] = useState("");
@@ -93,7 +94,7 @@ const MtdiTable = (props) => {
         var obj = JSON.parse(result);
         let countryArray = [];
         console.log(obj.stores);
-        let st = "Faber Castel";
+       
         let Y = obj.stores.filter((a) => a.stores === st);
         // // console.log(Y);
         // setcountry(obj.countries);
@@ -528,7 +529,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=20&user=admin&store=0&page=1&country=${paisId}&dateFrom=2021-12-01&dateTo=2021-12-03`,
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=20&user=admin&store=0&page=${countPage}country=${paisId}&dateFrom=2021-12-01&dateTo=2021-12-03`,
 
         requestOptions
       );
@@ -697,6 +698,8 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
+        console.log(rowData);
+
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
             return (
@@ -828,7 +831,7 @@ const MtdiTable = (props) => {
     //   },
     // },
     {
-      title: "Estado Fulfillment",
+      title: "Estado OC",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1292,7 +1295,26 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
+
+        <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "120px",
+              height: "38px",
+              fontWeight: "600",
+            }}
+            // onClick={}
+          >
+            Ver más
+          </Button>
+
         </div>
+     
       </div>
     </React.Fragment>
   );
