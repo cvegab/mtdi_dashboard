@@ -117,6 +117,13 @@
   height: 34px;
 }
 
+.bttnSeeMore {
+  display:flex !important;
+  justify-content: flex-end !important;
+
+}
+
+
 /* MOBILE VERSION */
 
 /* MEDIA QUERIES */

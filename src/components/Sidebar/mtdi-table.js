@@ -44,9 +44,14 @@ registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
+  const [pageCount, setpageCount] = useState(1);
   const [paisId, setpaisId] = useState(1);
   const [tiendaId, settiendaId] = useState(0);
-  const [selectedDate, setselectedDate] = useState("");
+  const d = new Date();
+  d.setMonth(d.getMonth() - 6);
+  const [selectedDate, setselectedDate] = useState(
+    d.toISOString().slice(0, 10)
+  );
   const [country, setcountry] = useState("");
   const [channelId, setchannelId] = useState(0);
   const [buyer, setbuyer] = useState("");
@@ -93,7 +98,7 @@ const MtdiTable = (props) => {
         var obj = JSON.parse(result);
         let countryArray = [];
         console.log(obj.stores);
-        let st = "Faber Castel";
+
         let Y = obj.stores.filter((a) => a.stores === st);
         // // console.log(Y);
         // setcountry(obj.countries);
@@ -531,8 +536,9 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=20&user=admin&store=0&page=1&country=${paisId}&dateFrom=2021-12-01&dateTo=2021-12-03`,
-
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&0&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+          .toISOString()
+          .slice(0, 10)}`,
         requestOptions
       );
       if (!response.ok) {
@@ -567,7 +573,7 @@ const MtdiTable = (props) => {
   const applyFiltersButtonhandler = async () => {
     console.log("hi i was clicked");
     console.log(urlState);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=10&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     console.log(url);
@@ -599,6 +605,39 @@ const MtdiTable = (props) => {
       console.log(error);
     }
   };
+
+  const incrementPageHandler = async () => {
+    setpageCount(pageCount + 1);
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+      .toISOString()
+      .slice(0, 10)}`;
+    console.log(url);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: myHeaders,
+    };
+    try {
+      const response = await fetch(url, requestOptions);
+      if (!response.ok) {
+        throw new Error();
+      }
+      const newData = await response.json();
+      setData([...data, ...newData.message]);
+
+      setisLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const columns = [
     {
       title: "OpsId",
@@ -700,6 +739,8 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
+        console.log(rowData);
+
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
             return (
@@ -763,7 +804,6 @@ const MtdiTable = (props) => {
           }
         }
       },
-    
 
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -814,7 +854,7 @@ const MtdiTable = (props) => {
     {
       title: "Total",
       field: "precio_sin_shipping",
-      
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -831,7 +871,7 @@ const MtdiTable = (props) => {
     //   },
     // },
     {
-      title: "Estado Fulfillment",
+      title: "Estado OC",
       field: "estado_oc",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1106,7 +1146,7 @@ const MtdiTable = (props) => {
             </Select>
           </label>
 
-        {/* <label htmlFor="select-tienda-official">
+          {/* <label htmlFor="select-tienda-official">
             <h5
               style={{
                 color: "black",
@@ -1129,18 +1169,18 @@ const MtdiTable = (props) => {
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
             > */}
-              {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+          {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-              {/* {filteredOfficialStore.map((channelItem) => {
+          {/* {filteredOfficialStore.map((channelItem) => {
                 return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
               })} */}
-              {/* {filteredOfficialStore.forEach((channelItem,index) => {
+          {/* {filteredOfficialStore.forEach((channelItem,index) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            {/* </Select>
+          {/* </Select>
           </label> */}
 
           <label>
@@ -1291,12 +1331,32 @@ const MtdiTable = (props) => {
               title=""
               data={data}
               columns={columns}
-              options={{ columnsButton: true, sorting: true, search: true}}
+              options={{ columnsButton: true, sorting: true, search: true }}
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-        </div>
-      </div>
+         </div>
+          <div className="bttnSeeMore">
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "38px",
+                fontWeight: "600",
+              }}
+              onClick={incrementPageHandler}
+            >
+              Ver más
+            </Button>
+          </div>  
+          
+      </div>   
+     
     </React.Fragment>
   );
 };
