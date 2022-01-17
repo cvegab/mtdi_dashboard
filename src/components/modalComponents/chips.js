@@ -381,6 +381,7 @@ export default class Chips extends React.Component {
                           line-height: 23px;
                           font-size: 14px;
                           margin-top: 1em;
+                          color: #1D308E;
                           
                            ">
 
