@@ -305,6 +305,12 @@ border-collapse: inherit !important;
   font-size: 12px !important;
 }
 
+.bttnSeeMore {
+  display:flex !important;
+  justify-content: flex-end !important;
+
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width:767px) {

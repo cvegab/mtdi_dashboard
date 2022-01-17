@@ -1334,27 +1334,28 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-
-        <Button
-            color="primary"
-            style={{
-              borderRadius: "22px",
-              color: "#FFFFFF",
-              marginLeft: "1em",
-              textTransform: "none",
-              letterSpacing: "1px",
-              width: "120px",
-              height: "38px",
-              fontWeight: "600",
-            }}
-             onClick={incrementPageHandler}
-          >
-            Ver más
-          </Button>
-
-        </div>
+         </div>
+          <div className="bttnSeeMore">
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "38px",
+                fontWeight: "600",
+              }}
+              onClick={incrementPageHandler}
+            >
+              Ver más
+            </Button>
+          </div>  
+          
+      </div>   
      
-      </div>
     </React.Fragment>
   );
 };
