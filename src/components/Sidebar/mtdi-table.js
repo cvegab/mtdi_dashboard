@@ -739,7 +739,7 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
-      
+    
 
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
