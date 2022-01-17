@@ -53,12 +53,7 @@ function OrderMobileCard(props) {
     }
   };
 
-  const dtesubString = () => {
 
-  if (props.dte.substring(0,4) === "http") {
-    return 'hola'
-  }
-};
   
 
   const showModalHandler = (props) => {
@@ -144,26 +139,26 @@ function OrderMobileCard(props) {
 
                             {(() => {
                                     switch(props.dte) {
-                                      case "": return <div> No &nbsp;  <span
-                                      style={{ marginLeft: "4px" }}
+                                      case "": return <div> No  <span
+                                      
                                       className={classes.noIcon}
                                     >
                                       <img src={noIcon} />
                                     </span>
-                                    &nbsp;
+                                   
                                     <span className={classes.greyIcon}>
                                       <img src={greyIcon} />
                                     </span>
                                   </div>
                             
                                     
-                                      case "-": return <div> No &nbsp;  <span
-                                        style={{ marginLeft: "4px" }}
+                                      case "-": return <div> No  <span
+                                        
                                         className={classes.noIcon}
                                       >
                                         <img src={noIcon} />
                                       </span>
-                                      &nbsp;
+                                     
                                       <span className={classes.greyIcon}>
                                         <img src={greyIcon} />
                                       </span>
