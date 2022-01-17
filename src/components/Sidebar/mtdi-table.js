@@ -99,7 +99,7 @@ const MtdiTable = (props) => {
         let countryArray = [];
         console.log(obj.stores);
 
-        let Y = obj.stores.filter((a) => a.stores === st);
+        // let Y = obj.stores.filter((a) => a.stores === st);
         // // console.log(Y);
         // setcountry(obj.countries);
         setfilteredCountryData(obj.countries);
@@ -739,7 +739,7 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
-        console.log(rowData);
+      
 
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
