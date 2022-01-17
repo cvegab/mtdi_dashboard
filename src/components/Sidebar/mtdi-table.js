@@ -131,6 +131,7 @@ const MtdiTable = (props) => {
     if (country === "Colombia") {
       setApiValues(2);
       setpaisId(2);
+
     }
     if (country === "Peru") {
       setApiValues(3);
@@ -141,6 +142,7 @@ const MtdiTable = (props) => {
       setApiValues(4);
       setpaisId(4);
     }
+
   }, [country, paisId]);
 
   useEffect(() => {
@@ -155,7 +157,9 @@ const MtdiTable = (props) => {
     //   })
     //   console.log(x);
     console.log(salesChannel);
-    if(salesChannel === 'Paris'){
+
+    if (salesChannel === "Paris") {
+
       setchannelId(1);
     }
     if (salesChannel === "Mercado Libre") {
@@ -571,8 +575,9 @@ const MtdiTable = (props) => {
     // // seturlState(url);
   };
   const applyFiltersButtonhandler = async () => {
-    console.log("hi i was clicked");
-    console.log(urlState);
+
+    setisLoading(true);
+
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
@@ -739,7 +744,6 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
-    
 
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
@@ -1335,28 +1339,28 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-         </div>
-          <div className="bttnSeeMore">
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "120px",
-                height: "38px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-            >
-              Ver más
-            </Button>
-          </div>  
-          
-      </div>   
-     
+
+        </div>
+        <div className="bttnSeeMore">
+          <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "120px",
+              height: "38px",
+              fontWeight: "600",
+            }}
+            onClick={incrementPageHandler}
+          >
+            Ver más
+          </Button>
+        </div>
+      </div>
+
     </React.Fragment>
   );
 };

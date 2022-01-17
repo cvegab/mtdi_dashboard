@@ -305,9 +305,11 @@ border-collapse: inherit !important;
   font-size: 12px !important;
 }
 
+
 .accordion-item {
   border: none !important;
 }
+
 
 .bttnSeeMore {
   display:flex !important;
