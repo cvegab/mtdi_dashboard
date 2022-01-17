@@ -571,8 +571,7 @@ const MtdiTable = (props) => {
     // // seturlState(url);
   };
   const applyFiltersButtonhandler = async () => {
-    console.log("hi i was clicked");
-    console.log(urlState);
+  setisLoading(true);
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
