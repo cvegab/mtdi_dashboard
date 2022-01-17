@@ -205,9 +205,9 @@ function Sidebar(props) {
             >
               <a onClick={UserProfile} className="textProfile">
 
-                {/* {localStorage.getItem("first")} {localStorage.getItem("last")} */}
+                {localStorage.getItem("first")} {localStorage.getItem("last")}
 
-                Sofía Avatar
+                {/* Sofía Avatar */}
                 {/* <b className="caret" /> */}
               </a>
             </a>
