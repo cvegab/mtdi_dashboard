@@ -305,7 +305,24 @@ border-collapse: inherit !important;
   font-size: 12px !important;
 }
 
+.accordion-item {
+  border: none !important;
+}
+
+.bttnSeeMore {
+  display:flex !important;
+  justify-content: flex-end !important;
+
+}
+
 /* MEDIA QUERIES */
+
+@media screen and (max-width:320px) {
+
+.mtdi-table_greyIcon__wYyBW {
+  padding: 0px !important;
+}
+}
 
 @media screen and (max-width:767px) {
 
