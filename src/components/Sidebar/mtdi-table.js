@@ -291,8 +291,19 @@ const MtdiTable = (props) => {
       });
       setfilteredChannelArray(selectedChannels);
     }
-    if (store === "ENEX CHILE") {
-      settiendaId("ENEX CHILE");
+    if (store === "Enex Chile") {
+      settiendaId("Enex  Chile");
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "Enex") {
+      settiendaId("Enex");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
