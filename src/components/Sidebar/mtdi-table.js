@@ -48,7 +48,7 @@ const MtdiTable = (props) => {
   const [paisId, setpaisId] = useState(1);
   const [tiendaId, settiendaId] = useState(0);
   const d = new Date();
-  d.setMonth(d.getMonth() - 6);
+  d.setMonth(d.getMonth() - 1);
   const [selectedDate, setselectedDate] = useState(
     d.toISOString().slice(0, 10)
   );
@@ -131,7 +131,6 @@ const MtdiTable = (props) => {
     if (country === "Colombia") {
       setApiValues(2);
       setpaisId(2);
-
     }
     if (country === "Peru") {
       setApiValues(3);
@@ -142,7 +141,6 @@ const MtdiTable = (props) => {
       setApiValues(4);
       setpaisId(4);
     }
-
   }, [country, paisId]);
 
   useEffect(() => {
@@ -157,9 +155,7 @@ const MtdiTable = (props) => {
     //   })
     //   console.log(x);
     console.log(salesChannel);
-
-    if (salesChannel === "Paris") {
-
+    if(salesChannel === 'Paris'){
       setchannelId(1);
     }
     if (salesChannel === "Mercado Libre") {
@@ -540,7 +536,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&0&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${tiendaId}&0&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
           .toISOString()
           .slice(0, 10)}`,
         requestOptions
@@ -575,10 +571,9 @@ const MtdiTable = (props) => {
     // // seturlState(url);
   };
   const applyFiltersButtonhandler = async () => {
-
-     setisLoading(true);
-
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+    console.log("hi i was clicked");
+    console.log(urlState);
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     console.log(url);
@@ -613,7 +608,7 @@ const MtdiTable = (props) => {
 
   const incrementPageHandler = async () => {
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${tiendaId}&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     console.log(url);
@@ -744,6 +739,7 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
+    
 
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
@@ -1313,7 +1309,7 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-          {data.length !== 0 && !isLoading && (
+          {data.length !== 0 && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
               localization={{
@@ -1339,28 +1335,28 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-
-        </div>
-        <div className="bttnSeeMore">
-          <Button
-            color="primary"
-            style={{
-              borderRadius: "22px",
-              color: "#FFFFFF",
-              marginLeft: "1em",
-              textTransform: "none",
-              letterSpacing: "1px",
-              width: "120px",
-              height: "38px",
-              fontWeight: "600",
-            }}
-            onClick={incrementPageHandler}
-          >
-            Ver más
-          </Button>
-        </div>
-      </div>
-
+         </div>
+          <div className="bttnSeeMore">
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "38px",
+                fontWeight: "600",
+              }}
+              onClick={incrementPageHandler}
+            >
+              Ver más
+            </Button>
+          </div>  
+          
+      </div>   
+     
     </React.Fragment>
   );
 };
