@@ -45,7 +45,7 @@ registerLocale("es", es);
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
   const [pageCount, setpageCount] = useState(1);
-  const [paisId, setpaisId] = useState(1);
+  const [paisId, setpaisId] = useState(0);
   const [tiendaId, settiendaId] = useState(0);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
