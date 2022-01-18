@@ -246,8 +246,8 @@ const MtdiTable = (props) => {
       // console.log(selectedChannels); //this gives you only the name of array['Linio','Mercado Libre']
       setfilteredChannelArray(selectedChannels);
     }
-    if (store === "ELITE PROFESSIONAL") {
-      settiendaId("ELITE PROFESSIONAL");
+    if (store === "Elite Professional") {
+      settiendaId("Elite Professional");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -378,8 +378,8 @@ const MtdiTable = (props) => {
       });
       setfilteredChannelArray(selectedChannels);
     }
-    if (store === "SOFTYSCOLOMBIA") {
-      settiendaId("SOFTYSCOLOMBIA");
+    if (store === "Softys Colombia") {
+      settiendaId("Softys Colombia");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -423,7 +423,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "SC Johnson") {
-      settiendaId('SC Johnson');
+      settiendaId("SC Johnson");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -456,6 +456,18 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Softys Colombia") {
+      settiendaId("Softys Colombia");
+      const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+        return selectedStore.store === store;
+      });
+      selectedChannelsArray = selectedStoreData[0].channels;
+      const selectedChannels = selectedChannelsArray.map((item) => {
+        return item;
+      });
+      setfilteredChannelArray(selectedChannels);
+    }
+    if (store === "La Barra Express") {
+      settiendaId("La Barra Express");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -466,6 +478,7 @@ const MtdiTable = (props) => {
       setfilteredChannelArray(selectedChannels);
     }
     if (store === "Clorox") {
+      settiendaId("Clorox");
       const selectedStoreData = filteredStoreData.filter((selectedStore) => {
         return selectedStore.store === store;
       });
@@ -551,6 +564,7 @@ const MtdiTable = (props) => {
       // console.log(data);
 
       setData(data.message);
+    
 
       setisLoading(false);
     } catch (error) {
