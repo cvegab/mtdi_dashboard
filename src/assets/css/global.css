@@ -9,7 +9,7 @@ body {
   font-size: 12px;
 }
 .btn {
-  border-radius: 20px !important;
+  border-radius: 33px !important;
   text-transform: none !important;
  
 }
@@ -72,7 +72,8 @@ color: white !important;
 }
 
 #minimizeSidebar {
-  background-color: white !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  backdrop-filter: blur(4px) !important;
 }
 
 .MuiTableSortLabel-root.MuiTableSortLabel-active,
@@ -284,11 +285,15 @@ border-collapse: inherit !important;
 }
 
 /* Accordion Button  */
+.accordion-button {
+  text-align: center !important;
+  display: block !important;
+}
 
 .accordion-item:last-of-type .accordion-button.collapsed {
   background-color: #1D308E;
   color: white;
-  border-radius: 17px !important;
+  border-radius: 22px !important;
   font-size: 12px;
 }
 .accordion-button::after {
@@ -300,7 +305,7 @@ border-collapse: inherit !important;
 
 .accordion-button:not(.collapsed) {
   background-color: #06cbc1 !important;
-  border-radius: 17px !important;
+  border-radius: 22px !important;
   color:#1D308E !important;
   font-size: 12px !important;
 }
@@ -321,9 +326,13 @@ border-collapse: inherit !important;
 
 @media screen and (max-width:320px) {
 
-.mtdi-table_greyIcon__wYyBW {
-  padding: 0px !important;
-}
+  .mtdi-table_greyIcon__wYyBW {
+    padding: 6px !important;
+  }
+  
+  .mtdi-table_noIcon__1AJ-3 {
+    padding: 6px !important;
+  }
 }
 
 @media screen and (max-width:767px) {

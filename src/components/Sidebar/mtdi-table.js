@@ -1089,7 +1089,7 @@ const MtdiTable = (props) => {
                 width: "30px",
                 fontSize: "12px",
                 fontWeight: "800",
-                marginLeft: "2em",
+                marginLeft: "1em",
                 marginBottom: "0px",
               }}
             >
