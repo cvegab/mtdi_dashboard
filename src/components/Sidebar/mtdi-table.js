@@ -536,7 +536,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${tiendaId}&0&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${store}&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
           .toISOString()
           .slice(0, 10)}`,
         requestOptions
@@ -573,7 +573,7 @@ const MtdiTable = (props) => {
   const applyFiltersButtonhandler = async () => {
     console.log("hi i was clicked");
     console.log(urlState);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${store}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     console.log(url);
