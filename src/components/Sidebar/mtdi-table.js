@@ -576,7 +576,7 @@ const MtdiTable = (props) => {
   };
   const applyFiltersButtonhandler = async () => {
 
-    setisLoading(true);
+     setisLoading(true);
 
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=1&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
@@ -1313,7 +1313,7 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-          {data.length !== 0 && (
+          {data.length !== 0 && !isLoading && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
               localization={{
