@@ -123,8 +123,8 @@ function OrderMobileCard(props) {
                   ))}
                 {data
                   .filter((post) => {
-                    if (query !== "") {
-                      return post.tienda.includes(query);
+                    if (query !== "" && post.tienda !== undefined) {
+                      return post.tienda.toLowerCase().includes(query.toLowerCase());
                       // return (
                       //   post.tienda === query ||
                       //   post.pais === query ||
@@ -132,7 +132,7 @@ function OrderMobileCard(props) {
                       //   post.fecha_creacion === query ||
                       //   post.canal_de_venta === query
                       // );
-                      return x;
+                      //return x;
                       //  return post.indexOf('Unile') !== -1
                       // return post.tienda.includes('Unile');
                     }
