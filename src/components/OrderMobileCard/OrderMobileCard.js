@@ -124,14 +124,16 @@ function OrderMobileCard(props) {
                 {data
                   .filter((post) => {
                     if (query !== "") {
-                      return post.tienda.includes(query);
-                      // return (
-                      //   post.tienda === query ||
-                      //   post.pais === query ||
-                      //   post.order_id === query ||
-                      //   post.fecha_creacion === query ||
-                      //   post.canal_de_venta === query
-                      // );
+                    console.log(query);
+                      console.log(post);
+                      // let x = post.tienda.includes(query);
+                      return (
+                        post.tienda === query ||
+                        post.pais === query ||
+                        post.order_id === query ||
+                        post.fecha_creacion === query ||
+                        post.canal_de_venta === query
+                      );
                       return x;
                       //  return post.indexOf('Unile') !== -1
                       // return post.tienda.includes('Unile');
