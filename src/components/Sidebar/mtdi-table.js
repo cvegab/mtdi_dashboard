@@ -1282,7 +1282,8 @@ const MtdiTable = (props) => {
         animation="border"
         style={{ color: "#51cbce", marginLeft: "10em", alignItems: "center" }} 
         /> */}
-          {data.map((order) => (
+        <OrderMobileCard data={data}></OrderMobileCard>
+          {/* {data.map((order) => (
             <OrderMobileCard
               opsId={order.order_id}
               date={order.fecha_creacion}
@@ -1299,7 +1300,7 @@ const MtdiTable = (props) => {
               consumer={order.comprador}
               total={order.precio_sin_shipping}
             />
-          ))}
+          ))} */}
         </div>
 
         {/* DESKTOP VERSION */}
