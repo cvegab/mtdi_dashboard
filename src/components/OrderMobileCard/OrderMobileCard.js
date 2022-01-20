@@ -78,7 +78,7 @@ function OrderMobileCard(props) {
     setQuery(event.target.value);
 
     console.log(query);
-    if (query === "") return data;
+    // if (query === "") return data;
 
     // const ui = props.data.filter(post => {
     //     if (query === '') {
@@ -90,7 +90,7 @@ function OrderMobileCard(props) {
     //   console.log(ui);
   };
   // console.log(cardData);
-  let ht = <h1>hello</h1>
+  let ht = <h1>hello</h1>;
   return (
     <>
       <div>
@@ -114,27 +114,47 @@ function OrderMobileCard(props) {
                     }
                   })
                   .map((post, index) => (
-                    
                     <div className="box" key={index}>
                       <p>{post.pais}</p>
                       <p>{post.tienda}</p>
                       <p>{post.order_id}</p>
+                      <p>{post.canal_de_venta}</p>
                     </div>
                   ))}
                 {data
                   .filter((post) => {
-                    if (query !== "") {
-                    console.log(query);
-                      console.log(post);
-                      // let x = post.tienda.includes(query);
+                    if (
+                      query !== "" &&
+                      post.tienda !== undefined &&
+                      post.pais !== undefined &&
+                      post.canal_de_venta !== undefined &&
+                      post.order_id !== undefined &&
+                      post.official_store !== undefined
+                    ) {
                       return (
-                        post.tienda === query ||
-                        post.pais === query ||
-                        post.order_id === query ||
-                        post.fecha_creacion === query ||
-                        post.canal_de_venta === query
+                        post.tienda
+                          .toLowerCase()
+                          .includes(query.toLowerCase()) ||
+                        post.pais.toLowerCase().includes(query.toLowerCase()) ||
+                        post.canal_de_venta
+                          .toLowerCase()
+                          .includes(query.toLowerCase()) ||
+                        post.official_store
+                          .toLowerCase()
+                          .includes(query.toLowerCase()) ||
+                        post.order_id
+                          .toString()
+
+                          .includes(query)
                       );
-                      return x;
+                      // return (
+                      //   post.tienda === query ||
+                      //   post.pais === query ||
+                      //   post.order_id === query ||
+                      //   post.fecha_creacion === query ||
+                      //   post.canal_de_venta === query
+                      // );
+                      //return x;
                       //  return post.indexOf('Unile') !== -1
                       // return post.tienda.includes('Unile');
                     }
@@ -144,6 +164,8 @@ function OrderMobileCard(props) {
                       <p>{post.pais}</p>
                       <p>{post.tienda}</p>
                       <p>{post.order_id}</p>
+                      <p>{post.canal_de_venta}</p>
+                      <p>{post.official_store}</p>
                     </div>
                   ))}
 
