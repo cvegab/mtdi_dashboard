@@ -793,9 +793,7 @@ function OrderMobileCard(props) {
                       post.official_store
                         .toLowerCase()
                         .includes(query.toLowerCase()) ||
-                      post.order_id.toString().includes(query) ||  post.dte
-                      .toLowerCase()
-                      .includes(query.toLowerCase()) 
+                      post.order_id.toString().includes(query) 
                     );
                     // return (
                     //   post.tienda === query ||
