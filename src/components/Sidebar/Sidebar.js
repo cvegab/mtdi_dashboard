@@ -33,6 +33,7 @@ function Sidebar(props) {
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
   const [firstName, setfirstName] = useState("");
+  const [isLoggingOut, setisLoggingOut] = useState(false);
 
   const sidebar = React.useRef();
   // this creates the intial state of this component based on the collapse routes
@@ -161,13 +162,17 @@ function Sidebar(props) {
     // }, 500);
   }, []);
   const logoutHandler = () => {
+    setisLoggingOut(true);
     localStorage.removeItem("name");
     localStorage.removeItem("password");
     localStorage.removeItem("first");
     localStorage.removeItem("last");
+    setisLoggingOut(false);
     window.location.replace("https://dev.instancelatam.com/login");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
+    
   };
+
   return (
     <div
       className="sidebar"
@@ -239,44 +244,62 @@ function Sidebar(props) {
         <Nav>{createLinks(props.routes)}</Nav>
 
         <div className="logo">
-          <a
-            // href="https://www.creative-tim.com"
-            className="logo-mini "
-          >
-            {/* <button className="logoutButtonMini">
-            <img src={LogoutIcon} alt="logoutMini" />
-          </button> */}
+        <a
+          // href="https://www.creative-tim.com"
+          className="logo-mini "
+        >
+        </a>
+        
+        <a
+          // href="https://www.creative-tim.com"
+          className="logo-normal"
+        >
+         {!isLoggingOut && (
             <Button
-              className="btn-round btn-icon"
-              color="primary"
-              style={{ color: "#ffffff" }}
+            onClick={logoutHandler}
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "200px",
+              height: "60px",
+            }}
             >
+            <span className="btn-label">
               <i className="nc-icon nc-user-run" />
+            </span>
+            Cerrar Sesión
             </Button>
-          </a>
-          <a
-            // href="https://www.creative-tim.com"
-            className="logo-normal"
-          >
+         )} 
+         </a>
+         
+         {isLoggingOut && (
             <Button
-              onClick={logoutHandler}
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "60px",
-              }}
-            >
-              <span className="btn-label">
-                <i className="nc-icon nc-user-run" />
-              </span>
-              Cerrar Sesión
-            </Button>
-          </a>
+            onClick={logoutHandler}
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "200px",
+              height: "60px",
+            }}
+          >
+             
+             <Spinner
+             style={{ width: "0.7rem", height: "0.7rem" }}
+             type="grow"
+             color="light"
+            /> 
+            &nbsp; Cargando...
+          </Button>
+         )}
+          
         </div>
       </div>
     </div>
