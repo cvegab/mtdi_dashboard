@@ -44,7 +44,7 @@ registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [data, setData] = useState([]);
-  const [pageCount, setpageCount] = useState(1);
+  const [pageCount, setpageCount] = useState(2);
   const [country, setcountry] = useState("");
   const [countryId, setcountryId] = useState(0);
   const [store, setstore] = useState("");
@@ -154,7 +154,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
         requestOptions
       );
       if (!response.ok) {
