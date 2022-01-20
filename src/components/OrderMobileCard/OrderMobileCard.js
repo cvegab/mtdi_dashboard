@@ -80,7 +80,7 @@ function OrderMobileCard(props) {
 
   return (
     <>
-      <div>
+      <div style={{textAlign: 'right'}}>
         <input placeholder="search" onChange={searchFilter} />
       </div>
       <div className="content">
@@ -210,57 +210,81 @@ function OrderMobileCard(props) {
                                      > */}
                                       {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
                                      </span> */}
-                                     &nbsp;
-                                     <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                                       <a href={props.dte} target="_blank" title="Mostrar DTE" >
-                                         <img src={showPdf}/>
-                                       </a>
-                                     </span>
-                                   </div>                               
-                              );
-                          }
-                        })()}
-                                                          
-                                          
-                                       
-                                                
-                        </td>
-                        <td className="td-actions text-right">                                         
-                        <br/>
-                        <br/>
-                                                                                               
-                        </td>                        
-                      </tr>
+                                      &nbsp;
+                                      <span
+                                        style={{ cursor: "pointer" }}
+                                        className={classes.showPdf}
+                                      >
+                                        <a
+                                          href={props.dte}
+                                          target="_blank"
+                                          title="Mostrar DTE"
+                                        >
+                                          <img src={showPdf} />
+                                        </a>
+                                      </span>
+                                    </div>
+                                  );
+                              }
+                            })()}
+                          </td>
+                          <td className="td-actions text-right">
+                            <br />
+                            <br />
+                          </td>
+                        </tr>
 
-{/* RESPUESTA WMS */}
-                      <tr>
-                        <td/>      
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Estado WMS: 
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                    
+                        {/* RESPUESTA WMS */}
+                        <tr>
+                          <td />
+                          <td
+                            className="text-left"
+                            style={{ fontSize: "12px", fontWeight: "bold" }}
+                          >
+                            Estado WMS:
+                          </td>
 
-                          {(() => {
-                                    switch(props.wmsState) {
-                                      case "Enviado": return <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>
-                                      case "Pendiente": return <div className={classes.pendiente}>&nbsp;Pendiente</div>
-                                      case "No Aplica": return <div className={classes.noAplica}>&nbsp;No Aplica</div>
-                                      default: return <div className={classes.noAplica}>&nbsp;No Aplica</div>
-                                    }
-                                  })()}
-                                              
-                        </td>
+                          <td
+                            className="text-left"
+                            style={{ fontSize: "12px" }}
+                          >
+                            {(() => {
+                              switch (props.wmsState) {
+                                case "Enviado":
+                                  return (
+                                    <div className={classes.enviado}>
+                                      {" "}
+                                      &nbsp;&nbsp;Enviado
+                                    </div>
+                                  );
+                                case "Pendiente":
+                                  return (
+                                    <div className={classes.pendiente}>
+                                      &nbsp;Pendiente
+                                    </div>
+                                  );
+                                case "No Aplica":
+                                  return (
+                                    <div className={classes.noAplica}>
+                                      &nbsp;No Aplica
+                                    </div>
+                                  );
+                                default:
+                                  return (
+                                    <div className={classes.noAplica}>
+                                      &nbsp;No Aplica
+                                    </div>
+                                  );
+                              }
+                            })()}
+                          </td>
 
-                        <td className="td-actions text-right">
-                            <br/>
-                            <br/>
-                        </td>
-                       
-                      </tr>
-
-                </tbody>
+                          <td className="td-actions text-right">
+                            <br />
+                            <br />
+                          </td>
+                        </tr>
+                      </tbody>
                     </Table>
 
                     <Accordion>
@@ -272,19 +296,28 @@ function OrderMobileCard(props) {
                           {/* <div className="table-full-width table-responsive"> */}
                           <Table>
                             <tbody>
-                            <tr>
-                        <td/>
-                          <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                            Bodega: 
-                          </td>               
-                          <td className="text-left" style={{fontSize: "12px"}}>
-                          {post.bodega}
-                          </td>
-                          <td className="td-actions text-right">
-                          <br/>
-                          <br/>
-                          </td>               
-                      </tr>
+                              <tr>
+                                <td />
+                                <td
+                                  className="text-left"
+                                  style={{
+                                    fontSize: "12px",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  Bodega:
+                                </td>
+                                <td
+                                  className="text-left"
+                                  style={{ fontSize: "12px" }}
+                                >
+                                  {post.bodega}
+                                </td>
+                                <td className="td-actions text-right">
+                                  <br />
+                                  <br />
+                                </td>
+                              </tr>
                               {/* FECHA DE ORDEN */}
 
                               <tr>
@@ -762,7 +795,8 @@ function OrderMobileCard(props) {
                     post.estado_wms !== undefined &&
                     post.estado_oc !== undefined &&
                     post.shipping_id !== undefined &&
-                    post.comprador !== undefined
+                    post.comprador !== undefined &&
+                    post.bodega !== undefined
                   ) {
                     return (
                       post.tienda.toLowerCase().includes(query.toLowerCase()) ||
@@ -782,28 +816,14 @@ function OrderMobileCard(props) {
                         .toLowerCase()
                         .includes(query.toLowerCase()) ||
                       post.shipping_id.toString().includes(query) ||
-                      post.comprador.toLowerCase().includes(query.toLowerCase())
+                      post.comprador
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.bodega.toLowerCase().includes(query.toLowerCase())
                     );
-                    // return (
-                    //   post.tienda === query ||
-                    //   post.pais === query ||
-                    //   post.order_id === query ||
-                    //   post.fecha_creacion === query ||
-                    //   post.canal_de_venta === query
-                    // );
-                    //return x;
-                    //  return post.indexOf('Unile') !== -1
-                    // return post.tienda.includes('Unile');
                   }
                 })
                 .map((post, index) => (
-                  // <div className="box" key={index}>
-                  //   <p>{post.pais}</p>
-                  //   <p>{post.tienda}</p>
-                  //   <p>{post.order_id}</p>
-                  //   <p>{post.canal_de_venta}</p>
-                  //   <p>{post.official_store}</p>
-                  // </div>
                   <CardBody>
                     <Table>
                       <tbody>
@@ -909,14 +929,7 @@ function OrderMobileCard(props) {
                                   return (
                                     <div>
                                       {" "}
-                                      Si &nbsp;
-                                      {/* <span
-                                                          style={{ marginLeft: "14px", cursor: "pointer" }}
-                                                          className={classes.si}
-                                                        > */}
-                                      {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
-                                                        </span> */}
-                                      &nbsp;
+                                      Si &nbsp; &nbsp;
                                       <span
                                         style={{ cursor: "pointer" }}
                                         className={classes.showPdf}
@@ -960,25 +973,25 @@ function OrderMobileCard(props) {
                                   return (
                                     <div className={classes.enviado}>
                                       {" "}
-                                      &nbsp;&nbsp;Enviado
+                                      &nbsp;&nbsp;&nbsp;&nbsp;Enviado
                                     </div>
                                   );
                                 case "Pendiente":
                                   return (
                                     <div className={classes.pendiente}>
-                                      &nbsp;Pendiente
+                                      &nbsp;&nbsp;Pendiente
                                     </div>
                                   );
                                 case "No Aplica":
                                   return (
                                     <div className={classes.noAplica}>
-                                      &nbsp;No Aplica
+                                      &nbsp;&nbsp;No Aplica
                                     </div>
                                   );
                                 default:
                                   return (
                                     <div className={classes.noAplica}>
-                                      &nbsp;No Aplica
+                                      &nbsp;&nbsp;No Aplica
                                     </div>
                                   );
                               }
@@ -1002,19 +1015,28 @@ function OrderMobileCard(props) {
                           {/* <div className="table-full-width table-responsive"> */}
                           <Table>
                             <tbody>
-                            <tr>
-                        <td/>
-                          <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                            Bodega: 
-                          </td>               
-                          <td className="text-left" style={{fontSize: "12px"}}>
-                          {post.bodega}
-                          </td>
-                          <td className="td-actions text-right">
-                          <br/>
-                          <br/>
-                          </td>               
-                      </tr>
+                              <tr>
+                                <td />
+                                <td
+                                  className="text-left"
+                                  style={{
+                                    fontSize: "12px",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  Bodega:
+                                </td>
+                                <td
+                                  className="text-left"
+                                  style={{ fontSize: "12px" }}
+                                >
+                                  {post.bodega}
+                                </td>
+                                <td className="td-actions text-right">
+                                  <br />
+                                  <br />
+                                </td>
+                              </tr>
                               {/* FECHA DE ORDEN */}
 
                               <tr>
