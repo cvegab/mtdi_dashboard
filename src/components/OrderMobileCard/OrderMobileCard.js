@@ -171,8 +171,9 @@ function OrderMobileCard(props) {
                                        </a>
                                      </span>
                                    </div>                               
-                                    }
-                                  })()}
+                              );
+                          }
+                        })()}
                                                           
                                           
                                        
