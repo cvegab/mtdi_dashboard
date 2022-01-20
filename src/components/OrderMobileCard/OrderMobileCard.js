@@ -22,10 +22,11 @@ import {
   UncontrolledDropdown,
   Label,
   FormGroup,
-  Input,
+ 
   Table,
   Row,
   Col,
+  Input,
   UncontrolledTooltip,
 } from "reactstrap";
 import Accordion from "react-bootstrap/Accordion";
@@ -77,13 +78,14 @@ function OrderMobileCard(props) {
   const searchFilter = (event) => {
     setQuery(event.target.value);
   };
-
+  // className="text-center text-md-right"
   return (
     <>
-      <div style={{textAlign: 'right'}}>
-        <input placeholder="search" onChange={searchFilter} />
-      </div>
+     
       <div className="content">
+      <div style={{display:'flex',justifyContent: 'right',borderRadius: '20px', marginBottom:'10px'}}>
+        <Input placeholder="Buscar" onChange={searchFilter} style={{width: '25%'}} />
+      </div>
         <Row>
           <Col className="text-center" lg="6" md="12">
             <Card className="card-tasks">
