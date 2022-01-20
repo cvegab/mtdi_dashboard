@@ -114,7 +114,11 @@ color: white !important;
 
 .MuiSelect-icon {
   color: black !important;
-  margin-top: 6px !important;
+  margin-top: 0px !important;
+}
+
+.MuiInput-underline:after {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 
 .MuiInput-underline:before {
@@ -180,10 +184,11 @@ input[type="text"]:focus {
 .MuiSelect-nativeInput {
   opacity: inherit !important;
   border: none !important;
-  width: 78% !important;
+  /* width: 78% !important; */
   left: 0px !important;
   border-radius: 8px !important;
   bottom: 5px !important;
+  padding: 2px 0px 1px 9px;
 }
 
 #logoutButton {
@@ -205,13 +210,9 @@ input[type="text"]:focus {
   height: 50px;
 }
 
-/* #logoutButtonMini {
-  background: #06CBC1;
-  border-radius: 20px; */
-/* width: 64px;
-  height: 64px; */
-
-/* } */
+.MuiPaper-root {
+  font-size:12px;
+}
 
 .logo {
   margin-top: 1em;
@@ -236,19 +237,10 @@ input[type="text"]:focus {
 .form-control {
   background-color: white !important;
 }
-/* .btn:hover {
-  color: #fff !important;
-  text-decoration: none;
-  } */
-/* button.btn.btn-secondary {
-  background-color: #1d308e !important;
-  color: white !important;
- 
-} */
+
 
 .modal-header {
   border-bottom: 0 none !important;
-
   height: 50px;
 }
 
