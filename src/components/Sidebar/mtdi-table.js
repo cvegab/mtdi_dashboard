@@ -62,6 +62,7 @@ const MtdiTable = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
+  const [isLoadingIncrementPage, setisLoadingIncrementPage] = useState(false);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
@@ -612,7 +613,11 @@ const MtdiTable = (props) => {
   };
 
   const incrementPageHandler = async () => {
+
+    setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
+    // setisLoading(true);
+
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${tiendaId}&page=${pageCount}&country=${paisId}&dateFrom=${selectedDate}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
@@ -637,11 +642,15 @@ const MtdiTable = (props) => {
       const newData = await response.json();
       setData([...data, ...newData.message]);
 
-      setisLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    //   setisLoading(false);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    setisLoadingIncrementPage(false);
+  } catch (error) {
+    console.log(error);
+  }
+  }
 
   const columns = [
     {
@@ -815,6 +824,15 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
+    {
+      title: "Bodega",
+      field: "bodega",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     // {
     //   title: "Respuesta OMS",
     //   field: "role",
@@ -928,6 +946,7 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
+
     // {
     //   title: "Bultos/Etiquetas",
     //   field: "comprador",
@@ -1067,6 +1086,7 @@ const MtdiTable = (props) => {
                 borderRadius: "17px",
                 marginBottom: "1em",
                 fontSize: "10px",
+                marginTop:"1em",
               }}
               value={country}
               label="Country"
@@ -1103,7 +1123,7 @@ const MtdiTable = (props) => {
             <Select
               labelId="select-tienda"
               id="select-tienda"
-              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
+              style={{ width: 160, fontSize: "10px", marginLeft: "1em", marginTop:"1em" }}
               value={store}
               label="select-canal"
               placeholder="&nbsp; Seleccione una tienda"
@@ -1134,7 +1154,7 @@ const MtdiTable = (props) => {
               labelId="select-canal"
               id="select-canal"
               placeholder="&nbsp; Seleccione un canal"
-              style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
+              style={{ width: 150, marginLeft: "1em", fontSize: "10px", marginTop:"1em" }}
               value={salesChannel}
               label="select-canal"
               onChange={handleSalesChannelChange}
@@ -1194,8 +1214,8 @@ const MtdiTable = (props) => {
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginBottom: "11px",
-                marginTop: "4px",
+                marginBottom: "6px",
+                marginTop: "0px",
               }}
             >
               Fecha
@@ -1239,30 +1259,78 @@ const MtdiTable = (props) => {
         </Col>
 
         {/* MOBILE VERSION */}
+
+
         <div id="OrderMobileCard">
           <br />
-          {/* <Spinner 
-        animation="border"
-        style={{ color: "#51cbce", marginLeft: "10em", alignItems: "center" }} 
-        /> */}
-          {data.map((order) => (
-            <OrderMobileCard
-              opsId={order.order_id}
-              date={order.fecha_creacion}
-              channelStore={order.canal_de_venta}
-              store={order.tienda}
-              client={order.tienda}
-              officialStore={order.official_store}
-              orderId={order.order_id}
-              country={order.pais}
-              dte={order.dte}
-              wmsState={order.estado_wms}
-              ocState={order.estado_oc}
-              shippingId={order.shipping_id}
-              consumer={order.comprador}
-              total={order.precio_sin_shipping}
-            />
-          ))}
+          {!isLoading && (
+                <div>
+         
+                {data.map((order) => (
+                  <OrderMobileCard
+                    opsId={order.order_id}
+                    date={order.fecha_creacion}
+                    channelStore={order.canal_de_venta}
+                    store={order.tienda}
+                    client={order.tienda}
+                    officialStore={order.official_store}
+                    orderId={order.order_id}
+                    country={order.pais}
+                    dte={order.dte}
+                    bodega={order.bodega}
+                    wmsState={order.estado_wms}
+                    ocState={order.estado_oc}
+                    shippingId={order.shipping_id}
+                    consumer={order.comprador}
+                    total={order.precio_sin_shipping}
+                    
+                  />
+                  
+                ))}
+                
+                </div>
+          )}
+              {isLoading && (
+                <div>
+         
+                {data.map((order) => (
+                  <OrderMobileCard
+                    opsId={order.order_id}
+                    date={order.fecha_creacion}
+                    channelStore={order.canal_de_venta}
+                    store={order.tienda}
+                    client={order.tienda}
+                    officialStore={order.official_store}
+                    orderId={order.order_id}
+                    country={order.pais}
+                    dte={order.dte}
+                    bodega={order.bodega}
+                    wmsState={order.estado_wms}
+                    ocState={order.estado_oc}
+                    shippingId={order.shipping_id}
+                    consumer={order.comprador}
+                    total={order.precio_sin_shipping}
+                    
+                  />
+                  
+                ))}
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp;  
+                     <Spinner
+                      style={{ width: "0.7rem", height: "0.7rem", marginTop: "4em", marginBottom: "3rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                    <Spinner
+                      style={{ width: "1rem", height: "1rem", marginTop: "2em", marginBottom: "2rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                </div>
+          )}
+        
         </div>
 
         {/* DESKTOP VERSION */}
@@ -1289,10 +1357,23 @@ const MtdiTable = (props) => {
                   >
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                    <Spinner
+                    {/* <Spinner
                       animation="border"
                       style={{ color: "#1D308E", alignItems: "center" }}
-                    ></Spinner>
+                    ></Spinner> */}
+                    <Spinner
+                      style={{ width: "0.7rem", height: "0.7rem", marginTop: "4em", marginBottom: "2rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                    <Spinner
+                      style={{ width: "1rem", height: "1rem", marginTop: "2em", marginBottom: "2rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                    <br/>
+                    <br/>
+
                   </div>
                 ),
                 emptyDataSourceMessage: (
@@ -1342,6 +1423,26 @@ const MtdiTable = (props) => {
 
         </div>
         <div className="bttnSeeMore">
+
+          {!isLoadingIncrementPage && (
+             <Button
+             color="primary"
+             style={{
+               borderRadius: "22px",
+               color: "#FFFFFF",
+               marginLeft: "1em",
+               textTransform: "none",
+               letterSpacing: "1px",
+               width: "200px",
+               height: "50px",
+               fontWeight: "600",
+             }}
+             onClick={incrementPageHandler}
+           >
+             Ver más
+           </Button>
+          )}
+          {isLoadingIncrementPage && (
           <Button
             color="primary"
             style={{
@@ -1350,14 +1451,23 @@ const MtdiTable = (props) => {
               marginLeft: "1em",
               textTransform: "none",
               letterSpacing: "1px",
-              width: "120px",
-              height: "38px",
+              width: "200px",
+              height: "50px",
               fontWeight: "600",
             }}
-            onClick={incrementPageHandler}
-          >
-            Ver más
+            onClick={incrementPageHandler}    
+            disabled 
+          >          
+           
+            <Spinner
+             style={{ width: "0.7rem", height: "0.7rem" }}
+             type="grow"
+             color="light"
+            /> 
+            &nbsp; Cargando...
           </Button>
+          )}
+         
         </div>
       </div>
 
