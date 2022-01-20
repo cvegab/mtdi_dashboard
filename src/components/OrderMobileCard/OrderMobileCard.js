@@ -774,15 +774,19 @@ function OrderMobileCard(props) {
 
               {data
                 .filter((post) => {
+                  console.log(post);
                   if (
                     query !== "" &&
                     post.tienda !== undefined &&
                     post.pais !== undefined &&
                     post.canal_de_venta !== undefined &&
                     post.order_id !== undefined &&
-                    post.official_store !== undefined &&
-                    post.dte !== undefined && 
-                    post.estado_wms !== undefined 
+                    post.official_store != null &&
+                    post.dte !== undefined &&
+                    post.estado_wms !== undefined &&
+                    post.estado_oc !== undefined &&
+                    post.shipping_id !== undefined &&
+                    post.comprador !== undefined
                   ) {
                     return (
                       post.tienda.toLowerCase().includes(query.toLowerCase()) ||
@@ -790,10 +794,20 @@ function OrderMobileCard(props) {
                       post.canal_de_venta
                         .toLowerCase()
                         .includes(query.toLowerCase()) ||
+                      post.order_id.toString().includes(query) ||
                       post.official_store
                         .toLowerCase()
                         .includes(query.toLowerCase()) ||
-                      post.order_id.toString().includes(query) 
+                      post.dte.toLowerCase().includes(query.toLowerCase()) ||
+                      post.estado_wms
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.estado_oc
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.shipping_id.toString().includes(query) ||post.comprador
+                      .toLowerCase()
+                      .includes(query.toLowerCase())
                     );
                     // return (
                     //   post.tienda === query ||
