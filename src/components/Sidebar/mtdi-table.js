@@ -665,7 +665,7 @@ const MtdiTable = (props) => {
             marginBottom: "2em",
           }}
         >
-          {/* Camilo Vega */}
+          
           <span>{localStorage.getItem("first")}</span>&nbsp;
           <span>{localStorage.getItem("last")}</span>
         </p>
@@ -990,28 +990,56 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-         </div>
-          <div className="bttnSeeMore">
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "120px",
-                height: "38px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-            >
-              Ver más
-            </Button>
-          </div>  
-          
-      </div>   
-     
+
+        </div>
+        <div className="bttnSeeMore">
+
+          {!isLoadingIncrementPage && (
+             <Button
+             color="primary"
+             style={{
+               borderRadius: "22px",
+               color: "#FFFFFF",
+               marginLeft: "1em",
+               textTransform: "none",
+               letterSpacing: "1px",
+               width: "200px",
+               height: "50px",
+               fontWeight: "600",
+             }}
+             onClick={incrementPageHandler}
+           >
+             Ver más
+           </Button>
+          )}
+          {isLoadingIncrementPage && (
+          <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "200px",
+              height: "50px",
+              fontWeight: "600",
+            }}
+            onClick={incrementPageHandler}    
+            disabled 
+          >               
+            <Spinner
+             style={{ width: "0.7rem", height: "0.7rem" }}
+             type="grow"
+             color="light"
+            /> 
+            &nbsp; Cargando...
+          </Button>
+          )}        
+        </div>
+      </div>
+
+
     </React.Fragment>
   );
 };

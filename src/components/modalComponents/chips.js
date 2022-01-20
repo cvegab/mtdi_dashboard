@@ -404,9 +404,7 @@ export default class Chips extends React.Component {
         </tr>
       </td>
     </tr>
-    
-    
-    
+       
     
     <tr>
       <td style="padding: 5px 0 58px;">
@@ -479,16 +477,9 @@ export default class Chips extends React.Component {
         </tr> -->
     
       </table>
-      
-      
-      
+            
       </td>
-    </tr>
-    
-    
-    
-    
-    
+    </tr>  
           </table>
         </center>
       

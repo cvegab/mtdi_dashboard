@@ -73,48 +73,37 @@ function OrderMobileCard(props) {
               </CardHeader>
               <CardBody>
                 {/* <div className="table-full-width table-responsive"> */}
-                <Table>
-                  <tbody>
-                    <tr>
-                      <td>
-                        {/* <FormGroup check>
-                            <Label check>
-                              <Input defaultChecked type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label>
-                          </FormGroup> */}
-                      </td>
+                  <Table>
+                    <tbody>
 
-                      {/* OPS ID */}
-                      <td
-                        className="text-left"
-                        style={{ fontSize: "12px", fontWeight: "bold" }}
-                      >
-                        Ops ID:
-                      </td>
+                      <tr>                     
+                        <td>                     
+                        </td>
 
-                      <td className="text-left" style={{ fontSize: "12px" }}>
-                        {props.opsId}
-                      </td>
-                      <td
-                        className="td-actions text-right"
-                        style={{ marginTop: "15px" }}
-                      >
-                        <br />
-                      </td>
-                    </tr>
+{/* OPS ID */}
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Ops ID: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                         {props.opsId}
+                        </td>
+                        <td className="td-actions text-right" style={{marginTop: "15px"}}>
+                          <br/>
+                        
+                        </td>               
+                      </tr>
 
-                    {/* CLIENTE   */}
-                    <tr>
-                      <td />
-                      <td
-                        className="text-left"
-                        style={{ fontSize: "12px", fontWeight: "bold" }}
-                      >
-                        Cliente:
-                      </td>
 
-                      <td className="text-left" style={{ fontSize: "12px" }}>
+
+ {/* CLIENTE   */}
+                      <tr>
+                        <td/>                       
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Cliente: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
                         {props.client}
                       </td>
                       <td className="td-actions text-right">
@@ -175,224 +164,187 @@ function OrderMobileCard(props) {
                                      > */}
                                   {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
                                      </span> */}
-                                  &nbsp;
-                                  <span
-                                    style={{ cursor: "pointer" }}
-                                    className={classes.showPdf}
-                                  >
-                                    <a
-                                      href={props.dte}
-                                      target="_blank"
-                                      title="Mostrar DTE"
-                                    >
-                                      <img src={showPdf} />
-                                    </a>
-                                  </span>
-                                </div>
-                              );
-                          }
-                        })()}
-                      </td>
-                      <td className="td-actions text-right">
-                        <br />
-                        <br />
-                      </td>
-                    </tr>
+                                     &nbsp;
+                                     <span style={{ cursor: "pointer" }} className={classes.showPdf}>
+                                       <a href={props.dte} target="_blank" title="Mostrar DTE" >
+                                         <img src={showPdf}/>
+                                       </a>
+                                     </span>
+                                   </div>;                               
+                                    }
+                                  })()}
+                                                          
+                                          
+                                       
+                                                
+                        </td>
+                        <td className="td-actions text-right">                                         
+                        <br/>
+                        <br/>
+                                                                                               
+                        </td>                        
+                      </tr>
 
-                    {/* RESPUESTA WMS */}
-                    <tr>
-                      <td />
-                      <td
-                        className="text-left"
-                        style={{ fontSize: "12px", fontWeight: "bold" }}
-                      >
-                        Estado WMS:
-                      </td>
+{/* RESPUESTA WMS */}
+                      <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Estado WMS: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                    
 
-                      <td className="text-left" style={{ fontSize: "12px" }}>
-                        {(() => {
-                          switch (props.wmsState) {
-                            case "Enviado":
-                              return (
-                                <div className={classes.enviado}>
-                                  {" "}
-                                  &nbsp;&nbsp;Enviado
-                                </div>
-                              );
-                            case "Pendiente":
-                              return (
-                                <div className={classes.pendiente}>
-                                  &nbsp;Pendiente
-                                </div>
-                              );
-                            case "No Aplica":
-                              return (
-                                <div className={classes.noAplica}>
-                                  &nbsp;No Aplica
-                                </div>
-                              );
-                            default:
-                              return (
-                                <div className={classes.noAplica}>
-                                  &nbsp;No Aplica
-                                </div>
-                              );
-                          }
-                        })()}
-                      </td>
+                          {(() => {
+                                    switch(props.wmsState) {
+                                      case "Enviado": return <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>
+                                      case "Pendiente": return <div className={classes.pendiente}>&nbsp;Pendiente</div>
+                                      case "No Aplica": return <div className={classes.noAplica}>&nbsp;No Aplica</div>
+                                      default: return <div className={classes.noAplica}>&nbsp;No Aplica</div>
+                                    }
+                                  })()}
+                                              
+                        </td>
 
-                      <td className="td-actions text-right">
-                        <br />
-                        <br />
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr>
 
-                <Accordion>
-                  <Accordion.Item eventKey="0">
-                    <Accordion.Header>
-                      <strong>Ver más</strong>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      {/* <div className="table-full-width table-responsive"> */}
-                      <Table>
-                        <tbody>
-                          {/* FECHA DE ORDEN */}
+                </tbody>
+                    </Table>
 
-                          <tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              Fecha orden:
-                            </td>
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {props.date}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+                    <Accordion>
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>
+                          <strong>Ver más</strong>
+                                                                       
+                        </Accordion.Header>
+                        <Accordion.Body>
 
-                          {/* TIENDA */}
+                        {/* <div className="table-full-width table-responsive"> */}
+                    <Table>
+                      <tbody>
 
-                          <tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              Tienda:
-                            </td>
+{/* BODEGA */}
+                      <tr>
+                        <td/>
+                          <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                            Bodega: 
+                          </td>               
+                          <td className="text-left" style={{fontSize: "12px"}}>
+                          {props.bodega}
+                          </td>
+                          <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                          </td>               
+                      </tr>
+{/* FECHA DE ORDEN */}
 
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {props.store}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+                       <tr>
+                      <td/>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Fecha orden: 
+                        </td>               
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.date}
+                        </td>
+                        <td className="td-actions text-right">
+                        <br/>
+                        <br/>
+                        </td>               
+                      </tr>
 
-                          {/* CANAL DE VENTA */}
 
-                          <tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              Canal de venta:
-                            </td>
+{/* TIENDA */}
 
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {props.channelStore}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+                      <tr>
+                        <td/>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                        Tienda:
+                        </td>
+                     
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.store}
+                        </td>
+                        <td className="td-actions text-right">
+                        <br/>
+                        <br/>   
+                        </td>                     
+                      </tr>
 
-                          {/* TIENDA OFICIAL */}
-                          <tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              Tienda Oficial:
-                            </td>
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {props.officialStore}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+{/* CANAL DE VENTA */}
 
-                          {/* ORDEN DE COMPRA */}
-                          <tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              Orden de Compra:
-                            </td>
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {props.orderId}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+                      <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Canal de venta: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.channelStore}
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>                      
+                      </tr>
 
-                          {/* PAÍS */}
 
-                          <tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              País:
-                            </td>
+{/* TIENDA OFICIAL */}
+                      <tr>
+                        <td/>                                          
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                        Tienda Oficial:
+                        </td>                
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.officialStore}
+                        </td>
+                        <td className="td-actions text-right">
+                        <br/>
+                        <br/>     
+                        </td>                  
+                      </tr>
 
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {props.country}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+{/* ORDEN DE COMPRA */}
+                      <tr>
+                        <td/>                                   
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                       Orden de Compra:
+                        </td>                       
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                        {props.orderId}
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>       
+                        </td>                      
+                      </tr>
 
-                          {/* ESTADO DE PEDIDO */}
-                          {/* <tr>
+{/* PAÍS */}
+
+                      <tr>
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          País: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                         {props.country}
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr>
+
+{/* ESTADO DE PEDIDO */}
+                      {/* <tr>
+
                         <td/>      
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Estado de Pedido: 
@@ -680,21 +632,22 @@ function OrderMobileCard(props) {
                           <br/>
                         </td>                  
                       </tr> */}
-                        </tbody>
-                      </Table>
-                      {/* </div> */}
-                    </Accordion.Body>
-                  </Accordion.Item>
-                </Accordion>
-                {/* </div> */}
-              </CardBody>
-              {/* <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-refresh spin" />
-                  Updated 3 minutes ago
-                </div>
-              </CardFooter> */}
+
+
+                   
+                    
+                    </tbody>
+                    </Table>
+                    {/* </div> */}
+ 
+
+                      
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+          {/* </div> */}
+        </CardBody>
+
             </Card>
           </Col>
         </Row>
