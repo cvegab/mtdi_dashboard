@@ -188,7 +188,7 @@ input[type="text"]:focus {
   left: 0px !important;
   border-radius: 8px !important;
   bottom: 5px !important;
-  padding: 0px 0px 1px 9px;
+  padding: 2px 0px 1px 9px;
 }
 
 #logoutButton {
@@ -241,7 +241,6 @@ input[type="text"]:focus {
 
 .modal-header {
   border-bottom: 0 none !important;
-
   height: 50px;
 }
 
