@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, FormGroup, Label } from "reactstrap";
 import { Button } from "reactstrap";
 import "./chip.css";
 import sentEmail from "../../assets/img/emailSent.png";
 import SiIcon from "../../assets/img/si.png";
+
+
+
 export default class Chips extends React.Component {
+  
   state = {
     items: [],
     value: "",
@@ -13,6 +17,7 @@ export default class Chips extends React.Component {
     emailError: null,
     emailSent: null,
   };
+  
 
   handleKeyDown = (evt) => {
     if (["Enter", "Tab", ","].includes(evt.key)) {
@@ -680,6 +685,8 @@ export default class Chips extends React.Component {
     let final = "" + x.toString() + "";
 
     const emailBody = this.parseEmail();
+   
+    
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
@@ -701,6 +708,7 @@ export default class Chips extends React.Component {
     ).then((response) => {
       console.log(response);
       this.setState({ emailSent: true });
+      
     });
   };
   entendidoButtonHandler = () => {
@@ -768,7 +776,10 @@ export default class Chips extends React.Component {
 
               {this.state.error && <p className="error">{this.state.error}</p>}
             </FormGroup>
+
             <div class="text-center">
+             
+        
               <button
                 id="bttnSubmit"
                 type="submit"
@@ -793,6 +804,12 @@ export default class Chips extends React.Component {
                   <i className="nc-icon nc-send" />
                 </span>
               </button>
+            
+
+      
+             
+             
+            
             </div>
           </Form>
         </React.Fragment>
