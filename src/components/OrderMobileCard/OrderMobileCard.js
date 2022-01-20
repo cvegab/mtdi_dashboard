@@ -780,7 +780,9 @@ function OrderMobileCard(props) {
                     post.pais !== undefined &&
                     post.canal_de_venta !== undefined &&
                     post.order_id !== undefined &&
-                    post.official_store !== undefined
+                    post.official_store !== undefined &&
+                    post.dte !== undefined && 
+                    post.estado_wms !== undefined 
                   ) {
                     return (
                       post.tienda.toLowerCase().includes(query.toLowerCase()) ||
@@ -791,10 +793,9 @@ function OrderMobileCard(props) {
                       post.official_store
                         .toLowerCase()
                         .includes(query.toLowerCase()) ||
-                      post.order_id
-                        .toString()
-
-                        .includes(query)
+                      post.order_id.toString().includes(query) ||  post.dte
+                      .toLowerCase()
+                      .includes(query.toLowerCase()) 
                     );
                     // return (
                     //   post.tienda === query ||
