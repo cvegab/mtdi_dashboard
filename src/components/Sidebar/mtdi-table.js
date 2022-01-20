@@ -113,7 +113,7 @@ const MtdiTable = (props) => {
       setData(x);
     }
   }, [client]);
-   
+
   useEffect(() => {
     if (officialStore !== "") {
       const x = data.filter((item) =>
@@ -134,7 +134,6 @@ const MtdiTable = (props) => {
       setselectedDateTo(endDate.toISOString().slice(0, 10));
     }
   }, [endDate]);
-
 
   const fetchOrderData = async () => {
     let countryValue = 3;
@@ -164,7 +163,6 @@ const MtdiTable = (props) => {
       // console.log(data);
 
       setData(data.message);
-    
 
       setisLoading(false);
     } catch (error) {
@@ -349,8 +347,6 @@ const MtdiTable = (props) => {
       field: "dte",
 
       render: (rowData) => {
-    
-
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
             return (
@@ -445,7 +441,12 @@ const MtdiTable = (props) => {
 
       render: (rowData) => {
         if (rowData.estado_wms === "Enviado") {
-          return <div className={classes.enviado}> &nbsp;&nbsp;&nbsp;&nbsp;Enviado</div>;
+          return (
+            <div className={classes.enviado}>
+              {" "}
+              &nbsp;&nbsp;&nbsp;&nbsp;Enviado
+            </div>
+          );
         }
         if (rowData.estado_wms === "Pendiente") {
           return <div className={classes.pendiente}>&nbsp;&nbsp;Pendiente</div>;
@@ -593,23 +594,23 @@ const MtdiTable = (props) => {
 
   const handleCountryChange = (event) => {
     setcountry(event.target.value);
-     //Get countryId from filteredCountryData
+    //Get countryId from filteredCountryData
     const val = filteredCountryData.filter(function (item) {
-      if(item.country === event.target.value) {
+      if (item.country === event.target.value) {
         return item;
       }
-    })
+    });
     setcountryId(val[0].value);
   };
-  
+
   const handleStoreChange = (event) => {
     setstore(event.target.value);
     //Get storeId from filteredStoreData
     const val = filteredStoreData.filter(function (item) {
-      if(item.store === event.target.value) {
+      if (item.store === event.target.value) {
         return item;
       }
-    })
+    });
     setstoreId(val[0].value);
     const selectedStoreData = filteredStoreData.filter((selectedStore) => {
       return selectedStore.store === event.target.value;
@@ -625,13 +626,13 @@ const MtdiTable = (props) => {
     setsalesChannel(event.target.value);
     //Get ChannelId from filteredChannelArray
     const val = filteredChannelArray.filter(function (item) {
-      if(item.channel === event.target.value) {
+      if (item.channel === event.target.value) {
         return item;
       }
-    })
+    });
     setchannelId(val[0].value);
   };
-  
+
   const handleOfficialStoreChange = (event) => {
     setofficialStore(event.target.value);
   };
@@ -676,7 +677,6 @@ const MtdiTable = (props) => {
             marginBottom: "2em",
           }}
         >
-          
           <span>{localStorage.getItem("first")}</span>&nbsp;
           <span>{localStorage.getItem("last")}</span>
         </p>
@@ -704,7 +704,7 @@ const MtdiTable = (props) => {
                 borderRadius: "17px",
                 marginBottom: "1em",
                 fontSize: "10px",
-                marginTop:"1em",
+                marginTop: "1em",
               }}
               value={country}
               label="Country"
@@ -741,7 +741,12 @@ const MtdiTable = (props) => {
             <Select
               labelId="select-tienda"
               id="select-tienda"
-              style={{ width: 160, fontSize: "10px", marginLeft: "1em", marginTop:"1em" }}
+              style={{
+                width: 160,
+                fontSize: "10px",
+                marginLeft: "1em",
+                marginTop: "1em",
+              }}
               value={store}
               label="select-canal"
               placeholder="&nbsp; Seleccione una tienda"
@@ -772,7 +777,12 @@ const MtdiTable = (props) => {
               labelId="select-canal"
               id="select-canal"
               placeholder="&nbsp; Seleccione un canal"
-              style={{ width: 150, marginLeft: "1em", fontSize: "10px", marginTop:"1em" }}
+              style={{
+                width: 150,
+                marginLeft: "1em",
+                fontSize: "10px",
+                marginTop: "1em",
+              }}
               value={salesChannel}
               label="select-canal"
               onChange={handleSalesChannelChange}
@@ -903,80 +913,48 @@ const MtdiTable = (props) => {
 
         {/* MOBILE VERSION */}
         <div id="OrderMobileCard">
-          <br />
+          <br/>
           {!isLoading && (
-                <div>
-         
-                {data.map((order) => (
-                  <OrderMobileCard
-                    opsId={order.order_id}
-                    date={order.fecha_creacion}
-                    channelStore={order.canal_de_venta}
-                    store={order.tienda}
-                    client={order.tienda}
-                    officialStore={order.official_store}
-                    orderId={order.order_id}
-                    country={order.pais}
-                    dte={order.dte}
-                    bodega={order.bodega}
-                    wmsState={order.estado_wms}
-                    ocState={order.estado_oc}
-                    shippingId={order.shipping_id}
-                    consumer={order.comprador}
-                    total={order.precio_sin_shipping}
-                    
-                  />
-                  
-                ))}
-                
-                </div>
+            <div>
+              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
+            </div>
           )}
-              {isLoading && (
-                <div>
-         
-                {data.map((order) => (
-                  <OrderMobileCard
-                    opsId={order.order_id}
-                    date={order.fecha_creacion}
-                    channelStore={order.canal_de_venta}
-                    store={order.tienda}
-                    client={order.tienda}
-                    officialStore={order.official_store}
-                    orderId={order.order_id}
-                    country={order.pais}
-                    dte={order.dte}
-                    bodega={order.bodega}
-                    wmsState={order.estado_wms}
-                    ocState={order.estado_oc}
-                    shippingId={order.shipping_id}
-                    consumer={order.comprador}
-                    total={order.precio_sin_shipping}
-                    
-                  />
-                  
-                ))}
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    &nbsp; &nbsp;  
-                     <Spinner
-                      style={{ width: "0.7rem", height: "0.7rem", marginTop: "4em", marginBottom: "3rem" }}
-                      type="grow"
-                      color="info"
-                    /> 
-                    <Spinner
-                      style={{ width: "1rem", height: "1rem", marginTop: "2em", marginBottom: "2rem" }}
-                      type="grow"
-                      color="info"
-                    /> 
-                </div>
+          {isLoading && (
+            <div>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+              <Spinner
+                style={{
+                  width: "0.7rem",
+                  height: "0.7rem",
+                  marginTop: "4em",
+                  marginBottom: "3rem",
+                }}
+                type="grow"
+                color="info"
+              />
+              <Spinner
+                style={{
+                  width: "1rem",
+                  height: "1rem",
+                  marginTop: "2em",
+                  marginBottom: "2rem",
+                }}
+                type="grow"
+                color="info"
+              />
+              
+              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
+             <br/>
+            </div>
           )}
-        
         </div>
 
         {/* DESKTOP VERSION */}
 
         <div id="OrderDesktopTable">
+       
           {isLoading && (
             <MaterialTable
               title=""
@@ -999,18 +977,27 @@ const MtdiTable = (props) => {
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
                     <Spinner
-                      style={{ width: "0.7rem", height: "0.7rem", marginTop: "4em", marginBottom: "2rem" }}
+                      style={{
+                        width: "0.7rem",
+                        height: "0.7rem",
+                        marginTop: "4em",
+                        marginBottom: "2rem",
+                      }}
                       type="grow"
                       color="info"
-                    /> 
+                    />
                     <Spinner
-                      style={{ width: "1rem", height: "1rem", marginTop: "2em", marginBottom: "2rem" }}
+                      style={{
+                        width: "1rem",
+                        height: "1rem",
+                        marginTop: "2em",
+                        marginBottom: "2rem",
+                      }}
                       type="grow"
                       color="info"
-                    /> 
-                    <br/>
-                    <br/>
-              
+                    />
+                    <br />
+                    <br />
                   </div>
                 ),
                 emptyDataSourceMessage: (
@@ -1057,56 +1044,52 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-
         </div>
         <div className="bttnSeeMore">
-
           {!isLoadingIncrementPage && (
-             <Button
-             color="primary"
-             style={{
-               borderRadius: "22px",
-               color: "#FFFFFF",
-               marginLeft: "1em",
-               textTransform: "none",
-               letterSpacing: "1px",
-               width: "200px",
-               height: "50px",
-               fontWeight: "600",
-             }}
-             onClick={incrementPageHandler}
-           >
-             Ver más
-           </Button>
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "50px",
+                fontWeight: "600",
+              }}
+              onClick={incrementPageHandler}
+            >
+              Ver más
+            </Button>
           )}
           {isLoadingIncrementPage && (
-          <Button
-            color="primary"
-            style={{
-              borderRadius: "22px",
-              color: "#FFFFFF",
-              marginLeft: "1em",
-              textTransform: "none",
-              letterSpacing: "1px",
-              width: "200px",
-              height: "50px",
-              fontWeight: "600",
-            }}
-            onClick={incrementPageHandler}    
-            disabled 
-          >               
-            <Spinner
-             style={{ width: "0.7rem", height: "0.7rem" }}
-             type="grow"
-             color="light"
-            /> 
-            &nbsp; Cargando...
-          </Button>
-          )}        
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "50px",
+                fontWeight: "600",
+              }}
+              onClick={incrementPageHandler}
+              disabled
+            >
+              <Spinner
+                style={{ width: "0.7rem", height: "0.7rem" }}
+                type="grow"
+                color="light"
+              />
+              &nbsp; Cargando...
+            </Button>
+          )}
         </div>
       </div>
-
-
     </React.Fragment>
   );
 };
