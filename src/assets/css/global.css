@@ -59,6 +59,7 @@ color: white !important;
   background-color: white;
   box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);  
+
 }
 
 .MuiMenu-paper {
@@ -91,10 +92,6 @@ color: white !important;
   margin-right: 1em !important;
 }
 
-.MuiPaper-root {
-  font-size:12px;
-}
-
 .MuiInputAdornment-positionEnd {
   display: none !important;
 }
@@ -117,14 +114,10 @@ color: white !important;
 
 .MuiSelect-icon {
   color: black !important;
-  margin-top: 0px !important;
+  margin-top: 6px !important;
 }
 
 .MuiInput-underline:before {
-  border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
-}
-
-.MuiInput-underline:after {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 
@@ -187,11 +180,10 @@ input[type="text"]:focus {
 .MuiSelect-nativeInput {
   opacity: inherit !important;
   border: none !important;
-  /* width: 78% !important; */
+  width: 78% !important;
   left: 0px !important;
   border-radius: 8px !important;
   bottom: 5px !important;
-  padding: 0px 0px 1px 9px;
 }
 
 #logoutButton {
