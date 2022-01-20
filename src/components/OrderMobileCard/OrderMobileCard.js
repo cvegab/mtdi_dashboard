@@ -87,13 +87,7 @@ function OrderMobileCard(props) {
                     <tbody>
 
                       <tr>                     
-                        <td>
-                          {/* <FormGroup check>
-                            <Label check>
-                              <Input defaultChecked type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label>
-                          </FormGroup> */}
+                        <td>                     
                         </td>
 
 {/* OPS ID */}
@@ -178,9 +172,7 @@ function OrderMobileCard(props) {
                                          <img src={showPdf}/>
                                        </a>
                                      </span>
-                                   </div>;
-
-                                
+                                   </div>;                               
                                     }
                                   })()}
                                                           
@@ -638,13 +630,6 @@ function OrderMobileCard(props) {
                   </Accordion>
           {/* </div> */}
         </CardBody>
-              {/* <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-refresh spin" />
-                  Updated 3 minutes ago
-                </div>
-              </CardFooter> */}
             </Card>
           </Col>
         </Row>                     

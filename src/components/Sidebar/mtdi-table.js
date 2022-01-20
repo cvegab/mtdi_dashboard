@@ -1058,7 +1058,7 @@ const MtdiTable = (props) => {
             marginBottom: "2em",
           }}
         >
-          {/* Camilo Vega */}
+          
           <span>{localStorage.getItem("first")}</span>&nbsp;
           <span>{localStorage.getItem("last")}</span>
         </p>
@@ -1457,8 +1457,7 @@ const MtdiTable = (props) => {
             }}
             onClick={incrementPageHandler}    
             disabled 
-          >          
-           
+          >               
             <Spinner
              style={{ width: "0.7rem", height: "0.7rem" }}
              type="grow"
@@ -1466,8 +1465,7 @@ const MtdiTable = (props) => {
             /> 
             &nbsp; Cargando...
           </Button>
-          )}
-         
+          )}        
         </div>
       </div>
 
