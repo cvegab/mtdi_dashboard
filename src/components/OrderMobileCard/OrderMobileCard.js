@@ -98,18 +98,19 @@ function OrderMobileCard(props) {
         </div> 
         <Row>
           <Col className="text-center" lg="6" md="12">
-            <Card className="card-tasks">
-              <CardHeader>
-                {/* <CardTitle tag="h4">Tabla Órdenes</CardTitle>
-                <h5 className="card-category">Pedidos</h5> */}
-              </CardHeader>
-              {data
+          {data
                 .filter((post) => {
                   if (query === "") {
                     return post;
                   }
                 })
                 .map((post, index) => (
+            <Card className="card-tasks">
+              <CardHeader>
+                {/* <CardTitle tag="h4">Tabla Órdenes</CardTitle>
+                <h5 className="card-category">Pedidos</h5> */}
+              </CardHeader>
+             
                   <CardBody>
                     <Table>
                       <tbody>
@@ -789,11 +790,11 @@ function OrderMobileCard(props) {
                       </Accordion.Item>
                     </Accordion>
                   </CardBody>
-                ))}
+               
 
               {/* <div className="table-full-width table-responsive"> */}
 
-              {data
+              {/* {data
                 .filter((post) => {
                   console.log(post);
                   if (
@@ -836,17 +837,82 @@ function OrderMobileCard(props) {
                   }
                 })
                 .map((post, index) => (
+                <div>
+
+                </div>
+                ))} */}
+
+              {/* </div> */}
+              {/* </CardBody> */}
+              {/* <CardFooter>
+                <hr />
+                <div className="stats">
+                  <i className="fa fa-refresh spin" />
+                  Updated 3 minutes ago
+                </div>
+              </CardFooter> */}
+            </Card>
+             ))}
+              {data
+                .filter((post) => {
+                  console.log(post);
+                  if (
+                    query !== "" &&
+                    post.tienda !== undefined &&
+                    post.pais !== undefined &&
+                    post.canal_de_venta !== undefined &&
+                    post.order_id !== undefined &&
+                    post.official_store != null &&
+                    post.dte !== undefined &&
+                    post.estado_wms !== undefined &&
+                    post.estado_oc !== undefined &&
+                    post.shipping_id !== undefined &&
+                    post.comprador !== undefined &&
+                    post.bodega !== undefined
+                  ) {
+                    return (
+                      post.tienda.toLowerCase().includes(query.toLowerCase()) ||
+                      post.pais.toLowerCase().includes(query.toLowerCase()) ||
+                      post.canal_de_venta
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.order_id.toString().includes(query) ||
+                      post.official_store
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.dte.toLowerCase().includes(query.toLowerCase()) ||
+                      post.estado_wms
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.estado_oc
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.shipping_id.toString().includes(query) ||
+                      post.comprador
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      post.bodega.toLowerCase().includes(query.toLowerCase())
+                    );
+                  }
+                })
+                .map((post, index) => ( 
+            <Card className="card-tasks">
+              <CardHeader>
+                {/* <CardTitle tag="h4">Tabla Órdenes</CardTitle>
+                <h5 className="card-category">Pedidos</h5> */}
+              </CardHeader>
+             
                   <CardBody>
                     <Table>
                       <tbody>
                         <tr>
                           <td>
                             {/* <FormGroup check>
-                                               <Label check>
-                                                 <Input defaultChecked type="checkbox" />
-                                                 <span className="form-check-sign" />
-                                               </Label>
-                                             </FormGroup> */}
+                            <Label check>
+                              <Input defaultChecked type="checkbox" />
+                              <span className="form-check-sign" />
+                            </Label>
+                          </FormGroup> */}
                           </td>
 
                           {/* OPS ID */}
@@ -941,7 +1007,14 @@ function OrderMobileCard(props) {
                                   return (
                                     <div>
                                       {" "}
-                                      Si &nbsp; &nbsp;
+                                      Si &nbsp;
+                                      {/* <span
+                                       style={{ marginLeft: "14px", cursor: "pointer" }}
+                                       className={classes.si}
+                                     > */}
+                                      {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
+                                     </span> */}
+                                      &nbsp;
                                       <span
                                         style={{ cursor: "pointer" }}
                                         className={classes.showPdf}
@@ -980,7 +1053,7 @@ function OrderMobileCard(props) {
                             style={{ fontSize: "12px" }}
                           >
                             {(() => {
-                              switch (post.wmsState) {
+                              switch (post.estado_wms) {
                                 case "Enviado":
                                   return (
                                     <div className={classes.enviado}>
@@ -1009,12 +1082,12 @@ function OrderMobileCard(props) {
                               }
                             })()}
                           </td>
-
                           <td className="td-actions text-right">
-                            <br />
-                            <br />
-                          </td>
+                            <br/>
+                            <br/>
+                        </td>
                         </tr>
+                       
                       </tbody>
                     </Table>
 
@@ -1202,56 +1275,56 @@ function OrderMobileCard(props) {
 
                               {/* ESTADO DE PEDIDO */}
                               {/* <tr>
-                                           <td/>      
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Estado de Pedido: 
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             
-                                           </td>
-                                           <td className="td-actions text-right">
-                                               <br/>
-                                               <br/>
-                                           </td>
-                                          
-                                         </tr> */}
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Estado de Pedido: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
 
                               {/* RESPUESTA OMS */}
                               {/* <tr>
-                                           <td/>      
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Respuesta OMS: 
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             
-                                           </td>
-                                           <td className="td-actions text-right">
-                                               <br/>
-                                               <br/>
-                                           </td>
-                                          
-                                         </tr> */}
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Respuesta OMS: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
 
                               {/* HUB DE PAGO */}
 
                               {/* <tr>
-                                           <td>
-                                            
-                                           </td>
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Hub de pago:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Approved
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                    
-                                         </tr> */}
+                        <td>
+                         
+                        </td>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Hub de pago:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Approved
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                    
+                      </tr> */}
 
                               {/* TOTAL */}
                               <tr>
@@ -1280,21 +1353,21 @@ function OrderMobileCard(props) {
 
                               {/* SHIPPING */}
                               {/* <tr>
-                                           <td>
-                                           
-                                           </td>
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Shipping:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             $ 5000
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                     
-                                         </tr> */}
+                        <td>
+                        
+                        </td>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Shipping:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          $ 5000
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                     
+                      </tr> */}
 
                               {/* ESTADO FULFILLMENT */}
                               <tr>
@@ -1323,69 +1396,69 @@ function OrderMobileCard(props) {
 
                               {/* PICKEADOR */}
                               {/* <tr>
-                                           <td>                   
-                                           </td>
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Pickeador:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Rodrigo Letelier
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                  
-                                         </tr> */}
+                        <td>                   
+                        </td>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Pickeador:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Rodrigo Letelier
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                  
+                      </tr> */}
 
                               {/* JEFE OPS */}
                               {/* <tr>
-                                           <td>                   
-                                           </td>
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Jefe OPS:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Jorman Julio
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>                  
-                                           </td>                  
-                                         </tr> */}
+                        <td>                   
+                        </td>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Jefe OPS:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Jorman Julio
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>                  
+                        </td>                  
+                      </tr> */}
 
                               {/* HUB FULFILLMENT */}
                               {/* <tr>
-                                           <td/>
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                            Hub Fulfillment:
-                                           </td>                   
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Rodrigo Letelier
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>                
-                                           </td>                  
-                                         </tr> */}
+                        <td/>
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                         Hub Fulfillment:
+                        </td>                   
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Rodrigo Letelier
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>                
+                        </td>                  
+                      </tr> */}
 
                               {/* COURIER */}
                               {/* <tr>
-                                           <td/>      
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Courier: 
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             
-                                           </td>
-                                           <td className="td-actions text-right">
-                                               <br/>
-                                               <br/>
-                                           </td>
-                                          
-                                         </tr> */}
+                        <td/>      
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Courier: 
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          
+                        </td>
+                        <td className="td-actions text-right">
+                            <br/>
+                            <br/>
+                        </td>
+                       
+                      </tr> */}
 
                               {/* SHIPPING ID */}
                               <tr>
@@ -1415,35 +1488,35 @@ function OrderMobileCard(props) {
                               {/* BULTOS / ETIQUETAS */}
 
                               {/* <tr>
-                                           <td/>                                       
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Bultos / Etiquetas:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Juan Pérez
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                  
-                                         </tr> */}
+                        <td/>                                       
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Bultos / Etiquetas:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Juan Pérez
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                  
+                      </tr> */}
 
                               {/* ESTADO DE COURIER */}
                               {/* <tr>
-                                           <td/>                                        
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Estado Courier:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Juan Pérez
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                  
-                                         </tr> */}
+                        <td/>                                        
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Estado Courier:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Juan Pérez
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                  
+                      </tr> */}
 
                               {/* COMPRADOR */}
                               <tr>
@@ -1472,35 +1545,35 @@ function OrderMobileCard(props) {
 
                               {/* NPS */}
                               {/* <tr>
-                                           <td/>                                        
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             NPS:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             Consuelo Miranda
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                  
-                                         </tr> */}
+                        <td/>                                        
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          NPS:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          Consuelo Miranda
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                  
+                      </tr> */}
 
                               {/* REVIEWS */}
                               {/* <tr>
-                                           <td/>                                       
-                                           <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                                             Reviews:
-                                           </td>
-                                         
-                                           <td className="text-left" style={{fontSize: "12px"}}>
-                                             41093360616
-                                           </td>
-                                           <td className="td-actions text-right">
-                                             <br/>
-                                             <br/>
-                                           </td>                  
-                                         </tr> */}
+                        <td/>                                       
+                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                          Reviews:
+                        </td>
+                      
+                        <td className="text-left" style={{fontSize: "12px"}}>
+                          41093360616
+                        </td>
+                        <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                        </td>                  
+                      </tr> */}
                             </tbody>
                           </Table>
                           {/* </div> */}
@@ -1508,7 +1581,11 @@ function OrderMobileCard(props) {
                       </Accordion.Item>
                     </Accordion>
                   </CardBody>
-                ))}
+               
+
+              {/* <div className="table-full-width table-responsive"> */}
+
+             
 
               {/* </div> */}
               {/* </CardBody> */}
@@ -1520,6 +1597,8 @@ function OrderMobileCard(props) {
                 </div>
               </CardFooter> */}
             </Card>
+             ))}
+             
           </Col>
         </Row>
       </div>}
