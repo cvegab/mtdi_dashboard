@@ -1,19 +1,4 @@
-/*!
 
-=========================================================
-* Paper Dashboard PRO React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import Buttons from "views/components/Buttons.js";
 import Calendar from "views/Calendar.js";
 import Logysto from "views/FormLogysto.js";
@@ -39,13 +24,14 @@ import Typography from "views/components/Typography.js";
 import UserProfile from "views/pages/UserProfile.js";
 import ValidationForms from "views/forms/ValidationForms.js";
 import VectorMap from "views/maps/VectorMap.js";
-import Widgets from "views/Widgets.js";
+import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
 import Wizard from "views/forms/Wizard.js";
 import ClientTable from "components/client-table";
 import OrderTable from "components/order-table";
 import MtdiTable from "components/Sidebar/mtdi-table";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png"
+
 
 const routes = [
   {
@@ -56,15 +42,40 @@ const routes = [
     component: MtdiTable,
     layout: "/admin",
   },
-  {
-    path: "/charts",
-    name: "Reportes",
-    icon: "nc-icon nc-chart-bar-32",
-    component: Charts,
-    layout: "/admin",
-    
-  },
+  
+  
   // {
+  //   path: "/panels",
+  //   name: "Mobile Version",
+  //   icon: "nc-icon nc-support-17",
+  //   component: OrderMobileCard,
+  //   layout: "/admin",
+    
+  // },
+  
+  // {
+  //   path: "/charts",
+  //   name: "Reportes",
+  //   icon: "nc-icon nc-chart-bar-32",
+  //   component: Charts,
+  //   layout: "/admin",
+    
+  // },
+
+  // {
+  //   path: "/logysto",
+  //   name: "Ingreso manual OC",
+  //   icon: "nc-icon nc-laptop",
+  //   component: Logysto,
+  //   layout: "/admin",
+  // },
+// {
+//   path: "/extended-tables",
+//   name: "Extended Tables",
+//   mini: "ET",
+//   component: ExtendedTables,
+//   layout: "/admin",
+// },
   //   collapse: true,
   //   name: "Pages",
   //   icon: "nc-icon nc-book-bookmark",
@@ -98,13 +109,13 @@ const routes = [
   //       component: LockScreen,
   //       layout: "/auth",
   //     },
-      // {
-      //   path: "/user-profile",
-      //   name: "UserProfile",
-      //   mini: "UP",
-      //   component: UserProfile,
-      //   layout: "/admin",
-      // },
+  //     {
+  //       path: "/user-profile",
+  //       name: "UserProfile",
+  //       mini: "UP",
+  //       component: UserProfile,
+  //       layout: "/admin",
+  //     },
   //   ],
   // },
   // {
@@ -155,16 +166,16 @@ const routes = [
   //       component: Icons,
   //       layout: "/admin",
   //     },
-      // {
-      //   path: "/typography",
-      //   name: "Typography",
-      //   mini: "T",
-      //   component: Typography,
-      //   layout: "/admin",
-      // },
+  //     {
+  //       path: "/typography",
+  //       name: "Typography",
+  //       mini: "T",
+  //       component: Typography,
+  //       layout: "/admin",
+  //     },
   //   ],
   // },
-  // {
+  // // {
   //   collapse: true,
   //   name: "Forms",
   //   icon: "nc-icon nc-ruler-pencil",
@@ -236,34 +247,34 @@ const routes = [
   //   icon: "nc-icon nc-single-copy-04",
   //   state: "tablesCollapse",
   //   views: [
-      // {
-      //   path: "/order-tables",
-      //   name: "Order Tables",
-      //   mini: "RT",
-      //   component: ClientTable,
-      //   layout: "/admin",
-      // },
-      // {
-      //   path: "/mtdi-tables",
-      //   name: "Órdenes de compra",
-      //   mini: "RT",
-      //   component: MtdiTable,
-      //   layout: "/admin",
-      // },
-      // {
-      //   path: "/extended-tables",
-      //   name: "Extended Tables",
-      //   mini: "ET",
-      //   component: ExtendedTables,
-      //   layout: "/admin",
-      // },
-      // {
-      //         path: "/react-tables",
-      //         name: "React Tables",
-      //         mini: "RT",
-      //         component: ReactTables,
-      //         layout: "/admin",
-      //       },
+  //     {
+  //       path: "/order-tables",
+  //       name: "Order Tables",
+  //       mini: "RT",
+  //       component: ClientTable,
+  //       layout: "/admin",
+  //     },
+  //     {
+  //       path: "/mtdi-tables",
+  //       name: "Órdenes de compra",
+  //       mini: "RT",
+  //       component: MtdiTable,
+  //       layout: "/admin",
+  //     },
+  //     {
+  //       path: "/extended-tables",
+  //       name: "Extended Tables",
+  //       mini: "ET",
+  //       component: ExtendedTables,
+  //       layout: "/admin",
+  //     },
+  //     {
+  //             path: "/react-tables",
+  //             name: "React Tables",
+  //             mini: "RT",
+  //             component: ReactTables,
+  //             layout: "/admin",
+  //           },
      
   //   ],
   // },
@@ -296,27 +307,23 @@ const routes = [
   //     },
   //   ],
   // },
-  {
-    path: "/widgets",
-    name: "Estados de OC",
-    icon: "nc-icon nc-support-17",
-    component: Widgets,
-    layout: "/admin",
-  },
-  {
-    path: "/mtdi-table",
-    name: "Maestro de productos",
-    icon: "nc-icon nc-box",
-    component: Dashboard,
-    layout: "/admin",
-  },
-  {
-    path: "/logysto",
-    name: "Logysto",
-    icon: "nc-icon nc-laptop",
-    component: Logysto,
-    layout: "/admin",
-  },
+
+  // {
+  //   path: "/widgets",
+  //   name: "Estados de OC",
+  //   icon: "nc-icon nc-support-17",
+  //   component: Widgets,
+  //   layout: "/admin",
+  // },
+
+  // {
+    // path: "/mtdi-table",
+    // name: "Maestro de productos",
+    // icon: "nc-icon nc-box",
+    // component: Dashboard,
+    // layout: "/admin",
+  // },
+ 
   // {
   //   path: "/logout",
   //   icon: "nc-icon nc-calendar-60",

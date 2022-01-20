@@ -14,24 +14,26 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Nav, Collapse, Button } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import avatar from "assets/img/faces/CamiloVega.jpg";
+import avatar from "assets/img/faces/avatarProfile.png";
 import logo1 from "assets/img/logo-instance-white.png";
 import logo2 from "assets/img/favicon.png";
 import UserProfile from "views/pages/UserProfile.js";
 // import LogoutIcon from "assets/img/logout-icon.png"
-import '../../assets/css/global.css'
+import "../../assets/css/global.css";
 
 var ps;
 
 function Sidebar(props) {
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
+  const [firstName, setfirstName] = useState("");
+
   const sidebar = React.useRef();
   // this creates the intial state of this component based on the collapse routes
   // that it gets through props.routes
@@ -133,6 +135,7 @@ function Sidebar(props) {
     return props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
   React.useEffect(() => {
+    console.log(localStorage.getItem("first"));
     // if you are using a Windows Machine, the scrollbars will have a Mac look
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(sidebar.current, {
@@ -150,7 +153,21 @@ function Sidebar(props) {
   });
   React.useEffect(() => {
     setCollapseStates(getCollapseStates(props.routes));
+    console.log("hello");
+    console.log(localStorage.getItem("first"));
+    // setTimeout(() => {
+    //   console.log(localStorage.getItem("first"));
+    //   setfirstName(localStorage.getItem("first"));
+    // }, 500);
   }, []);
+  const logoutHandler = () => {
+    localStorage.removeItem("name");
+    localStorage.removeItem("password");
+    localStorage.removeItem("first");
+    localStorage.removeItem("last");
+    window.location.replace("https://dev.instancelatam.com/login");
+    // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
+  };
   return (
     <div
       className="sidebar"
@@ -170,14 +187,14 @@ function Sidebar(props) {
           // href="https://www.creative-tim.com"
           className="textCompany logo-normal"
         >
-           <img src={logo1} alt="Instance-logo" width="50%" />
+          <img src={logo1} alt="Instance-logo" width="50%" />
         </a>
       </div>
 
       <div className="sidebar-wrapper" ref={sidebar}>
         <div className="user">
           <div className="photo">
-            <img src={avatar} alt="Avatar" />
+            <img src={avatar} alt="Avatar" width="50%"/>
           </div>
           <div className="info">
             <a
@@ -187,7 +204,10 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
-                Camilo Vega
+
+                {localStorage.getItem("first")} {localStorage.getItem("last")}
+
+                {/* Sofía Avatar */}
                 {/* <b className="caret" /> */}
               </a>
             </a>
@@ -216,41 +236,50 @@ function Sidebar(props) {
           </div>
         </div>
 
-  
-
         <Nav>{createLinks(props.routes)}</Nav>
 
-
-          <div className="logo">
-        <a
-          // href="https://www.creative-tim.com"
-          className="logo-mini "
-        >
-          {/* <button className="logoutButtonMini">
+        <div className="logo">
+          <a
+            // href="https://www.creative-tim.com"
+            className="logo-mini "
+          >
+            {/* <button className="logoutButtonMini">
             <img src={LogoutIcon} alt="logoutMini" />
           </button> */}
-           <Button className="btn-round btn-icon" color="primary" style={{ color: "#ffffff" }}>
-           <i className="nc-icon nc-user-run" />
-         </Button>
-        </a>
-        <a
-          // href="https://www.creative-tim.com"
-          className="logo-normal"
-        >
-          <Button color="primary" style={{borderRadius: "22px", color:"#FFFFFF", marginLeft: "1em", textTransform: "none", letterSpacing:"1px", width: "200px", height:"60px"}} >
-            <span className="btn-label">
+            <Button
+              className="btn-round btn-icon"
+              color="primary"
+              style={{ color: "#ffffff" }}
+            >
               <i className="nc-icon nc-user-run" />
-            </span>
-             Cerrar Sesión       
-          </Button>
-        </a>
-      </div>
-
-
+            </Button>
+          </a>
+          <a
+            // href="https://www.creative-tim.com"
+            className="logo-normal"
+          >
+            <Button
+              onClick={logoutHandler}
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "60px",
+              }}
+            >
+              <span className="btn-label">
+                <i className="nc-icon nc-user-run" />
+              </span>
+              Cerrar Sesión
+            </Button>
+          </a>
+        </div>
       </div>
     </div>
-
-    
   );
 }
 

@@ -5,23 +5,20 @@ const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
 
   let search = window.location.search;
-  console.log(search);
+
   let params = new URLSearchParams(search);
   let Name = search.split("?")[1];
-  console.log(Name);
-  let password = search.split("&pass=")[1];
-  console.log(password);
-  var mySubString = search.substring(
+
+  let password = search.split("&zeek=")[1];
+
+  let nameSubString = search.substring(
     search.indexOf("?") + 1,
     search.lastIndexOf("&")
   );
 
-  let userName = mySubString.split("=")[1];
-  console.log("userName is" + userName);
-
-  console.log(params.name);
+  let userName = nameSubString.split("=")[1];
   useEffect(() => {
-    console.log("hello");
+    console.log('hello from app');
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -47,27 +44,48 @@ const App = () => {
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
-        if (result === `"Autorizado"`) {
+        const obj = JSON.parse(result);
+
+        if (obj.first_name !== undefined) {
+          localStorage.setItem("first", obj.first_name);
+        }
+        if (obj.last_name !== undefined) {
+          localStorage.setItem("last", obj.last_name);
+        }
+        if (
+          obj.message === "Autorizado" ||
+          localStorage.getItem("name") !== null
+        ) {
           setisAuthenticated(true);
+          localStorage.setItem("name", userName);
+          localStorage.setItem(
+            "password",
+            "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ="
+          );
         } else {
           setisAuthenticated(false);
         }
       })
       .catch((error) => console.log("error", error));
   }, []);
-
+  if (userName === undefined && localStorage.getItem("name") === null) {
+    return (window.location.href = "https://www.instancelatam.com/login");
+  }
   return (
     <BrowserRouter>
       <Switch>
-        {!isAuthenticated && (
+        <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+        {!isAuthenticated && localStorage.getItem("name") === null && (
           <Route
             component={() => {
-              window.location.href = "https://dev.instancelatam.com/login";
+              window.location.href = "https://www.instancelatam.com/login";
               return null;
             }}
           />
         )}
-        {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} /> */}
+        {!isAuthenticated && localStorage.getItem("name") !== null && (
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        )}
         {isAuthenticated && (
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
         )}

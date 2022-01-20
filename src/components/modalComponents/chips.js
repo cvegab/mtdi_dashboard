@@ -133,6 +133,7 @@ export default class Chips extends React.Component {
           #textPedido {
             text-align: left !important;
             font-size: 17px !important;
+            text-align: center !important;
           }
           #imageDelivery {
             margin:auto;
@@ -294,7 +295,9 @@ export default class Chips extends React.Component {
                        line-height: 43px;
                       ">
                        <strong>
-                         ¡Tu pedido ha sido ingresado!
+
+                        ¡Tu boleta electrónica ha sido generada!
+
                        </strong>
                    </p>
                         
@@ -377,22 +380,17 @@ export default class Chips extends React.Component {
                           style="padding: 0px 0px;
                           line-height: 23px;
                           font-size: 14px;
+                          margin-top: 1em;
+                          color: #1D308E;
                           
                            ">
-                            A continuación encontrarás un detalle con tu pedido e información relevante.
+
+                           Gracias por tu compra. <br/>
+                           Haz click en el botón “Descargar boleta” a continuación para visualizar tu documento tributario electrónico.
+
                           </p>
                 
-                          <p
-                          style="padding: 0px 0px;
-                          line-height: 23px;
-                          color: #1D308E;
-                          font-weight: bold;
-                          font-size:12px;
-                          width:100%;
-                          
-                           ">
-                            Recuerda, tu pedido será despachado en un máximo de 48 horas hábiles.
-                          </p>
+                        
                 
                                   
                        
@@ -406,9 +404,7 @@ export default class Chips extends React.Component {
         </tr>
       </td>
     </tr>
-    
-    
-    
+       
     
     <tr>
       <td style="padding: 5px 0 58px;">
@@ -418,7 +414,9 @@ export default class Chips extends React.Component {
           <tr>
             <td style="text-align:center; padding: 15px">
             
-              <a  style='color:white' href="dteLink" id="bttnBoleta" type=button class="button"> Ve los detalles de tu pedido aquí</a>
+
+              <a  style='color:white' href="dteLink" id="bttnBoleta" type=button class="button"> Descargar boleta </a>
+
             
             </td>
         
@@ -426,22 +424,24 @@ export default class Chips extends React.Component {
         </table>
       </td>
     </tr>
-    
+
     <!-- WARNING SECTION -->
-    <tr>
-      <td style="padding: 0px 20px 10px 10px;">
-        <table width="100%">
-    
-          <tr>
-            <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
-              
-              <p id="titleWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> IMPORTANTE</p>
-              <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Este correo no es válido como boleta ni factura. Tu documentación tributaria será entregada junto con tu pedido.</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+<!-- <tr>
+  <td style="padding: 0px 20px 10px 10px;">
+    <table width="100%">
+
+      <tr>
+        <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
+          
+          <p id="titleWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> RECUERDA </p>
+
+          <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Tu pedido será despachado en un máximo de 48 horas hábiles.</p>
+
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr> -->
     
     <!--FOOTER SECTION -->
     
@@ -452,21 +452,23 @@ export default class Chips extends React.Component {
         <tr>
           <td style="text-align: center; padding: 30px 20px;">
             <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-help.png" alt="iconHelp" title="iconHelp" width="30">
-            <p style="padding: 0px; font-size:14px; letter-spacing: 0.5px;" > ¿Necesitas ayuda?</p>
-            <p style="padding: 8px; font-size: 12px; line-height: 30px; letter-spacing: 0.5px;"> Comunícate directamente con tu vendedor zonal o al correo <a href="mailto:contacto@instancelatam.com" style="color:#ffffff">contacto@instancelatam.com</a></p>
+            <p style="padding: 0px; font-size:14px; letter-spacing: 0.5px;" > ¿Tienes alguna duda?</p>
+            <p style="padding: 8px; font-size: 12px; line-height: 30px; letter-spacing: 0.5px;"> Comunícate con nosotros a <a href="mailto:sacchile@instancelatam.com" style="color:#ffffff">sacchile@instancelatam.com</a></p>
     
             
       
           <!-- <tr> 
           <td style="text-align: center; padding:0px 20px"> -->
-            <a href="http://www.instancelatam.com">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px;">
+
+            <a style="text-decoration:none" href="http://www.instancelatam.com">
+              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px; text-decoration:none;">
             </a>
             <br/>
       
-                <a href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30"> </a>
-                <a href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30"> </a>
-                <a href="mailto:contacto@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30"> </a>
+                <a style="text-decoration:none" href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30" style="text-decoration:none"> </a>
+                <a style="text-decoration:none" href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30" style="text-decoration:none"> </a>
+                <a style="text-decoration:none" href="mailto:sacchile@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30" style="text-decoration:none"> </a>
+
               </td>
             </tr> 
     
@@ -475,16 +477,9 @@ export default class Chips extends React.Component {
         </tr> -->
     
       </table>
-      
-      
-      
+            
       </td>
-    </tr>
-    
-    
-    
-    
-    
+    </tr>  
           </table>
         </center>
       
@@ -765,7 +760,7 @@ export default class Chips extends React.Component {
               {this.state.error && <p className="error">{this.state.error}</p>}
             </FormGroup>
             <div class="text-center">
-              <Button
+              <button
                 id="bttnSubmit"
                 type="submit"
                 style={{
@@ -775,13 +770,20 @@ export default class Chips extends React.Component {
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0"
+               
                 }}
               >
                 Enviar Correo &nbsp;
                 <span className="btn-label">
                   <i className="nc-icon nc-send" />
                 </span>
-              </Button>
+              </button>
             </div>
           </Form>
         </React.Fragment>
@@ -797,7 +799,7 @@ export default class Chips extends React.Component {
               alignItems: "center",
             }}
           >
-            <img src={sentEmail} />
+            <img src={sentEmail} width="25%"/>
           </div>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
             Documento enviado con éxito
@@ -807,15 +809,19 @@ export default class Chips extends React.Component {
             <button
               type="button"
               style={{
-                background: "#1D308E",
+                cursor: "pointer",
+                backgroundColor: "#1D308E",
                 textAlign: "center",
                 color: "white",
                 width: "296px",
                 height: "64px",
                 padding: "22px 81px",
-                borderRadius: "17px",
-                border: "none",
-                fontWeight: "700px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight:"bold",
+                border:"0"
               }}
               onClick={this.entendidoButtonHandler}
             >

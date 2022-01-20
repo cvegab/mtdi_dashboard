@@ -9,7 +9,7 @@ body {
   font-size: 12px;
 }
 .btn {
-  border-radius: 20px !important;
+  border-radius: 33px !important;
   text-transform: none !important;
  
 }
@@ -50,6 +50,7 @@ color: white !important;
 
 .react-datepicker__input-container {
   border-radius: 10px !important;
+  margin-left: 1em;
 }
 
 .MuiSelect-select.MuiSelect-select {
@@ -57,8 +58,8 @@ color: white !important;
   border-radius: 14px;
   background-color: white;
   box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
-  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
-  margin-top: 1em;
+  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);  
+
 }
 
 .MuiMenu-paper {
@@ -70,7 +71,8 @@ color: white !important;
 }
 
 #minimizeSidebar {
-  background-color: white !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  backdrop-filter: blur(4px) !important;
 }
 
 .MuiTableSortLabel-root.MuiTableSortLabel-active,
@@ -108,21 +110,35 @@ color: white !important;
 #mtdiTableBackground {
   background-color: transparent !important;
   margin-top:5em;
-
 }
 
 .MuiSelect-icon {
   color: black !important;
-  margin-top: 6px !important;
+  margin-top: 0px !important;
+}
+
+.MuiInput-underline:after {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 
 .MuiInput-underline:before {
   border-bottom: 0px solid rgba(0, 0, 0, 0.42) !important;
 }
 
+.navbar-toggler {
+  box-shadow:0 0 0 0 !important;
+  border: 0px !important;
+}
+.navbar-toggler:focus {
+  box-shadow:0 0 0 0.0rem !important;
+}
+
+.navbar .navbar-toggler .navbar-toggler-bar.navbar-kebab {
+  display:none !important;
+}
+
 .sidebar .nav i {
   color: white !important;
-  
 }
 
 .button .input {
@@ -141,6 +157,7 @@ input[type="number"] {
   padding-left: 10px;
   font-size: 10px;
   cursor: pointer;
+  margin-top:2px;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   
 }
@@ -152,14 +169,12 @@ input[type="text"]::placeholder {
   background-position: 4rem center !important;
 }
 
-/* .MuiInputBase-input .MuiInput-input .MuiInputBase-inputAdornedStart .MuiInputBase-inputAdornedEnd {
-  display:none;
-} */
 
 input[type="text"]:focus {
   outline: none;
   border: 1px solid white;
   color: black;
+  margin-top:2px;
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
  
 }
@@ -169,10 +184,11 @@ input[type="text"]:focus {
 .MuiSelect-nativeInput {
   opacity: inherit !important;
   border: none !important;
-  width: 78% !important;
+  /* width: 78% !important; */
   left: 0px !important;
   border-radius: 8px !important;
   bottom: 5px !important;
+  padding: 2px 0px 1px 9px;
 }
 
 #logoutButton {
@@ -194,13 +210,9 @@ input[type="text"]:focus {
   height: 50px;
 }
 
-/* #logoutButtonMini {
-  background: #06CBC1;
-  border-radius: 20px; */
-/* width: 64px;
-  height: 64px; */
-
-/* } */
+.MuiPaper-root {
+  font-size:12px;
+}
 
 .logo {
   margin-top: 1em;
@@ -225,19 +237,10 @@ input[type="text"]:focus {
 .form-control {
   background-color: white !important;
 }
-/* .btn:hover {
-  color: #fff !important;
-  text-decoration: none;
-  } */
-/* button.btn.btn-secondary {
-  background-color: #1d308e !important;
-  color: white !important;
- 
-} */
+
 
 .modal-header {
   border-bottom: 0 none !important;
-
   height: 50px;
 }
 
@@ -260,4 +263,119 @@ input[type="text"]:focus {
 .spinner-border {
   margin-top:2em;
   margin-bottom:2em;
+
+}
+
+.table {
+border-collapse: inherit !important;
+}
+
+/* Accordion Button  */
+.accordion-button {
+  text-align: center !important;
+  display: block !important;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  background-color: #1D308E;
+  color: white;
+  border-radius: 22px !important;
+  font-size: 12px;
+}
+.accordion-button::after {
+  background-image: none !important;
+}
+.text-left {
+  width:120px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #06cbc1 !important;
+  border-radius: 22px !important;
+  color:#1D308E !important;
+  font-size: 12px !important;
+}
+
+
+.accordion-item {
+  border: none !important;
+}
+
+
+.bttnSeeMore {
+  display:flex !important;
+  justify-content: flex-end !important;
+
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width:320px) {
+
+  .mtdi-table_greyIcon__wYyBW {
+    padding: 6px !important;
+  }
+  
+  .mtdi-table_noIcon__1AJ-3 {
+    padding: 6px !important;
+  }
+
+  #fechaDesde {
+    margin-top:1em !important;
+  }
+
+  #fechaHasta {
+    margin-top:1em !important;
+  }
+
+  #spinner {
+    margin-left:4em;
+  }
+}
+
+@media screen and (max-width:375px) {
+  #spinner {
+    margin-left:6em;
+  }
+ }
+
+ @media screen and (max-width:425px) {
+  #spinner {
+    margin-left:8em;
+  }
+ }
+
+
+@media screen and (max-width:767px) {
+
+  /*MTDI-TABLE */
+
+  #OrderDesktopTable {
+    display:none;
+  }
+
+  .select-tienda-official {
+    margin-left:10px;
+  }
+
+  .navigation-index {
+    display: none !important;
+  }
+  #fechaDesde {
+    margin-top:1em !important;
+  }
+
+  #fechaHasta {
+    margin-top:1em !important;
+  }
+}
+
+@media screen and (min-width:768px) {
+
+  /*MTDI-TABLE */
+
+  #OrderMobileCard {
+    display:none;
+  }
+
 }
