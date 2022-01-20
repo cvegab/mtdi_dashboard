@@ -22,7 +22,6 @@ import {
   UncontrolledDropdown,
   Label,
   FormGroup,
- 
   Table,
   Row,
   Col,
@@ -35,6 +34,7 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 function OrderMobileCard(props) {
   console.log(props.data);
   const { data } = props;
+  const { isLoading } = props;
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
   const [verticalTabs, setVerticalTabs] = React.useState("info");
   const [pageTabs, setPageTabs] = React.useState("homePages");
@@ -81,11 +81,21 @@ function OrderMobileCard(props) {
   // className="text-center text-md-right"
   return (
     <>
-     
-      <div className="content">
-      <div style={{display:'flex',justifyContent: 'right',borderRadius: '20px', marginBottom:'10px'}}>
-        <Input placeholder="Buscar" onChange={searchFilter} style={{width: '25%'}} />
-      </div>
+     { !isLoading && <div className="content">
+       <div
+          style={{
+            display: "flex",
+            justifyContent: "right",
+            borderRadius: "20px",
+            marginBottom: "10px",
+          }}
+        >
+          <Input
+            placeholder="Buscar"
+            onChange={searchFilter}
+            style={{ width: "25%" }}
+          />
+        </div> 
         <Row>
           <Col className="text-center" lg="6" md="12">
             <Card className="card-tasks">
@@ -212,49 +222,30 @@ function OrderMobileCard(props) {
                                      > */}
                                       {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
                                      </span> */}
-                                     &nbsp;
-                                     <span style={{ cursor: "pointer" }} className={classes.showPdf}>
-                                       <a href={post.dte} target="_blank" title="Mostrar DTE" >
-                                         <img src={showPdf}/>
-                                       </a>
-                                     </span>
-                                   </div>                               
-                              );
-                          }
-                        })()}
-                                                          
-                                          
-                                       
-                                                
-                        </td>
-                        <td className="td-actions text-right">                                         
-                        <br/>
-                        <br/>
-                                                                                               
-                        </td>                        
-                      </tr>
+                                      &nbsp;
+                                      <span
+                                        style={{ cursor: "pointer" }}
+                                        className={classes.showPdf}
+                                      >
+                                        <a
+                                          href={post.dte}
+                                          target="_blank"
+                                          title="Mostrar DTE"
+                                        >
+                                          <img src={showPdf} />
+                                        </a>
+                                      </span>
+                                    </div>
+                                  );
+                              }
+                            })()}
+                          </td>
+                          <td className="td-actions text-right">
+                            <br />
+                            <br />
+                          </td>
+                        </tr>
 
-{/* RESPUESTA WMS */}
-                      <tr>
-                        <td/>      
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Estado WMS: 
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                    
-
-                          {(() => {
-                                    switch(post.estado_wms) {
-                                      case "Enviado": return <div className={classes.enviado}> &nbsp;&nbsp;&nbsp;&nbsp;Enviado</div>
-                                      case "Pendiente": return <div className={classes.pendiente}>&nbsp;&nbsp;Pendiente</div>
-                                      case "No Aplica": return <div className={classes.noAplica}>&nbsp;&nbsp;No Aplica</div>
-                                      default: return <div className={classes.noAplica}>&nbsp;&nbsp;No Aplica</div>
-                                    }
-                                  })()}
-                                              
-                        </td>
-</tr>
                         {/* RESPUESTA WMS */}
                         <tr>
                           <td />
@@ -275,36 +266,36 @@ function OrderMobileCard(props) {
                                   return (
                                     <div className={classes.enviado}>
                                       {" "}
-                                      &nbsp;&nbsp;Enviado
+                                      &nbsp;&nbsp;&nbsp;&nbsp;Enviado
                                     </div>
                                   );
                                 case "Pendiente":
                                   return (
                                     <div className={classes.pendiente}>
-                                      &nbsp;Pendiente
+                                      &nbsp;&nbsp;Pendiente
                                     </div>
                                   );
                                 case "No Aplica":
                                   return (
                                     <div className={classes.noAplica}>
-                                      &nbsp;No Aplica
+                                      &nbsp;&nbsp;No Aplica
                                     </div>
                                   );
                                 default:
                                   return (
                                     <div className={classes.noAplica}>
-                                      &nbsp;No Aplica
+                                      &nbsp;&nbsp;No Aplica
                                     </div>
                                   );
                               }
                             })()}
                           </td>
-
                           <td className="td-actions text-right">
-                            <br />
-                            <br />
-                          </td>
+                            <br/>
+                            <br/>
+                        </td>
                         </tr>
+                       
                       </tbody>
                     </Table>
 
@@ -1531,7 +1522,7 @@ function OrderMobileCard(props) {
             </Card>
           </Col>
         </Row>
-      </div>
+      </div>}
     </>
   );
 }

@@ -913,10 +913,10 @@ const MtdiTable = (props) => {
 
         {/* MOBILE VERSION */}
         <div id="OrderMobileCard">
-          <br />
+          <br/>
           {!isLoading && (
             <div>
-              <OrderMobileCard data={data}></OrderMobileCard>
+              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
             </div>
           )}
           {isLoading && (
@@ -944,7 +944,9 @@ const MtdiTable = (props) => {
                 type="grow"
                 color="info"
               />
-              <OrderMobileCard data={data}></OrderMobileCard>
+              
+              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
+             <br/>
             </div>
           )}
         </div>
@@ -952,6 +954,7 @@ const MtdiTable = (props) => {
         {/* DESKTOP VERSION */}
 
         <div id="OrderDesktopTable">
+       
           {isLoading && (
             <MaterialTable
               title=""
