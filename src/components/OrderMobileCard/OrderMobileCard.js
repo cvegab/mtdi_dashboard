@@ -238,7 +238,21 @@ function OrderMobileCard(props) {
                     <Table>
                       <tbody>
 
-                        {/* FECHA DE ORDEN */}
+{/* BODEGA */}
+                      <tr>
+                        <td/>
+                          <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
+                            Bodega: 
+                          </td>               
+                          <td className="text-left" style={{fontSize: "12px"}}>
+                          {props.bodega}
+                          </td>
+                          <td className="td-actions text-right">
+                          <br/>
+                          <br/>
+                          </td>               
+                      </tr>
+{/* FECHA DE ORDEN */}
 
                        <tr>
                       <td/>
