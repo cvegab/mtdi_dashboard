@@ -198,10 +198,10 @@ function OrderMobileCard(props) {
 
                           {(() => {
                                     switch(props.wmsState) {
-                                      case "Enviado": return <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>
-                                      case "Pendiente": return <div className={classes.pendiente}>&nbsp;Pendiente</div>
-                                      case "No Aplica": return <div className={classes.noAplica}>&nbsp;No Aplica</div>
-                                      default: return <div className={classes.noAplica}>&nbsp;No Aplica</div>
+                                      case "Enviado": return <div className={classes.enviado}> &nbsp;&nbsp;&nbsp;&nbsp;Enviado</div>
+                                      case "Pendiente": return <div className={classes.pendiente}>&nbsp;&nbsp;Pendiente</div>
+                                      case "No Aplica": return <div className={classes.noAplica}>&nbsp;&nbsp;No Aplica</div>
+                                      default: return <div className={classes.noAplica}>&nbsp;&nbsp;No Aplica</div>
                                     }
                                   })()}
                                               

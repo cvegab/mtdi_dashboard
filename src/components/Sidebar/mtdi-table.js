@@ -242,7 +242,7 @@ const MtdiTable = (props) => {
       const newData = await response.json();
       setData([...data, ...newData.message]);
 
-      setisLoading(false);
+      setisLoadingIncrementPage(false);
     } catch (error) {
       console.log(error);
     }
@@ -445,13 +445,13 @@ const MtdiTable = (props) => {
 
       render: (rowData) => {
         if (rowData.estado_wms === "Enviado") {
-          return <div className={classes.enviado}> &nbsp;&nbsp;Enviado</div>;
+          return <div className={classes.enviado}> &nbsp;&nbsp;&nbsp;&nbsp;Enviado</div>;
         }
         if (rowData.estado_wms === "Pendiente") {
-          return <div className={classes.pendiente}>Pendiente</div>;
+          return <div className={classes.pendiente}>&nbsp;&nbsp;Pendiente</div>;
         }
         if (rowData.estado_wms === "No Aplica") {
-          return <div className={classes.cancelado}>No Aplica</div>;
+          return <div className={classes.cancelado}>&nbsp;&nbsp;No Aplica</div>;
         }
       },
 
