@@ -216,6 +216,7 @@ const MtdiTable = (props) => {
   };
 
   const incrementPageHandler = async () => {
+    setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
@@ -414,6 +415,15 @@ const MtdiTable = (props) => {
         }
       },
 
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Bodega",
+      field: "bodega",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -694,6 +704,7 @@ const MtdiTable = (props) => {
                 borderRadius: "17px",
                 marginBottom: "1em",
                 fontSize: "10px",
+                marginTop:"1em",
               }}
               value={country}
               label="Country"
@@ -730,7 +741,7 @@ const MtdiTable = (props) => {
             <Select
               labelId="select-tienda"
               id="select-tienda"
-              style={{ width: 160, fontSize: "10px", marginLeft: "1em" }}
+              style={{ width: 160, fontSize: "10px", marginLeft: "1em", marginTop:"1em" }}
               value={store}
               label="select-canal"
               placeholder="&nbsp; Seleccione una tienda"
@@ -761,7 +772,7 @@ const MtdiTable = (props) => {
               labelId="select-canal"
               id="select-canal"
               placeholder="&nbsp; Seleccione un canal"
-              style={{ width: 150, marginLeft: "1em", fontSize: "10px" }}
+              style={{ width: 150, marginLeft: "1em", fontSize: "10px", marginTop:"1em" }}
               value={salesChannel}
               label="select-canal"
               onChange={handleSalesChannelChange}
@@ -821,8 +832,8 @@ const MtdiTable = (props) => {
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginBottom: "11px",
-                marginTop: "4px",
+                marginBottom: "6px",
+                marginTop: "0px",
               }}
             >
               Fecha Desde
@@ -846,8 +857,8 @@ const MtdiTable = (props) => {
                 fontSize: "12px",
                 fontWeight: "800",
                 marginLeft: "1em",
-                marginBottom: "11px",
-                marginTop: "4px",
+                marginBottom: "6px",
+                marginTop: "0px",
               }}
             >
               Fecha Hasta
@@ -893,28 +904,74 @@ const MtdiTable = (props) => {
         {/* MOBILE VERSION */}
         <div id="OrderMobileCard">
           <br />
-          {/* <Spinner 
-        animation="border"
-        style={{ color: "#51cbce", marginLeft: "10em", alignItems: "center" }} 
-        /> */}
-          {data.map((order) => (
-            <OrderMobileCard
-              opsId={order.order_id}
-              date={order.fecha_creacion}
-              channelStore={order.canal_de_venta}
-              store={order.tienda}
-              client={order.tienda}
-              officialStore={order.official_store}
-              orderId={order.order_id}
-              country={order.pais}
-              dte={order.dte}
-              wmsState={order.estado_wms}
-              ocState={order.estado_oc}
-              shippingId={order.shipping_id}
-              consumer={order.comprador}
-              total={order.precio_sin_shipping}
-            />
-          ))}
+          {!isLoading && (
+                <div>
+         
+                {data.map((order) => (
+                  <OrderMobileCard
+                    opsId={order.order_id}
+                    date={order.fecha_creacion}
+                    channelStore={order.canal_de_venta}
+                    store={order.tienda}
+                    client={order.tienda}
+                    officialStore={order.official_store}
+                    orderId={order.order_id}
+                    country={order.pais}
+                    dte={order.dte}
+                    bodega={order.bodega}
+                    wmsState={order.estado_wms}
+                    ocState={order.estado_oc}
+                    shippingId={order.shipping_id}
+                    consumer={order.comprador}
+                    total={order.precio_sin_shipping}
+                    
+                  />
+                  
+                ))}
+                
+                </div>
+          )}
+              {isLoading && (
+                <div>
+         
+                {data.map((order) => (
+                  <OrderMobileCard
+                    opsId={order.order_id}
+                    date={order.fecha_creacion}
+                    channelStore={order.canal_de_venta}
+                    store={order.tienda}
+                    client={order.tienda}
+                    officialStore={order.official_store}
+                    orderId={order.order_id}
+                    country={order.pais}
+                    dte={order.dte}
+                    bodega={order.bodega}
+                    wmsState={order.estado_wms}
+                    ocState={order.estado_oc}
+                    shippingId={order.shipping_id}
+                    consumer={order.comprador}
+                    total={order.precio_sin_shipping}
+                    
+                  />
+                  
+                ))}
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                    &nbsp; &nbsp;  
+                     <Spinner
+                      style={{ width: "0.7rem", height: "0.7rem", marginTop: "4em", marginBottom: "3rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                    <Spinner
+                      style={{ width: "1rem", height: "1rem", marginTop: "2em", marginBottom: "2rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                </div>
+          )}
+        
         </div>
 
         {/* DESKTOP VERSION */}
@@ -942,9 +999,18 @@ const MtdiTable = (props) => {
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
                     <Spinner
-                      animation="border"
-                      style={{ color: "#1D308E", alignItems: "center" }}
-                    ></Spinner>
+                      style={{ width: "0.7rem", height: "0.7rem", marginTop: "4em", marginBottom: "2rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                    <Spinner
+                      style={{ width: "1rem", height: "1rem", marginTop: "2em", marginBottom: "2rem" }}
+                      type="grow"
+                      color="info"
+                    /> 
+                    <br/>
+                    <br/>
+              
                   </div>
                 ),
                 emptyDataSourceMessage: (
