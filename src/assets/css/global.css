@@ -319,7 +319,32 @@ border-collapse: inherit !important;
   .mtdi-table_noIcon__1AJ-3 {
     padding: 6px !important;
   }
+
+  #fechaDesde {
+    margin-top:1em !important;
+  }
+
+  #fechaHasta {
+    margin-top:1em !important;
+  }
+
+  #spinner {
+    margin-left:4em;
+  }
 }
+
+@media screen and (max-width:375px) {
+  #spinner {
+    margin-left:6em;
+  }
+ }
+
+ @media screen and (max-width:425px) {
+  #spinner {
+    margin-left:8em;
+  }
+ }
+
 
 @media screen and (max-width:767px) {
 
@@ -331,12 +356,17 @@ border-collapse: inherit !important;
 
   .select-tienda-official {
     margin-left:10px;
-
-
   }
 
   .navigation-index {
     display: none !important;
+  }
+  #fechaDesde {
+    margin-top:1em !important;
+  }
+
+  #fechaHasta {
+    margin-top:1em !important;
   }
 }
 

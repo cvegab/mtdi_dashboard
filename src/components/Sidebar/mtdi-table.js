@@ -837,6 +837,7 @@ const MtdiTable = (props) => {
 
           <label>
             <h5
+              id="fechaDesde"
               style={{
                 color: "black",
                 fontSize: "12px",
@@ -862,6 +863,7 @@ const MtdiTable = (props) => {
 
           <label>
             <h5
+              id="fechaHasta"
               style={{
                 color: "black",
                 fontSize: "12px",
@@ -920,10 +922,9 @@ const MtdiTable = (props) => {
             </div>
           )}
           {isLoading && (
-            <div>
+            <div id="spinner">
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+              
               <Spinner
                 style={{
                   width: "0.7rem",
