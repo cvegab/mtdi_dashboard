@@ -170,7 +170,7 @@ function OrderMobileCard(props) {
                                          <img src={showPdf}/>
                                        </a>
                                      </span>
-                                   </div>;                               
+                                   </div>                               
                                     }
                                   })()}
                                                           
