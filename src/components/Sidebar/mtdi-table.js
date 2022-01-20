@@ -66,6 +66,7 @@ const MtdiTable = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
+  const [isLoadingIncrementPage, setisLoadingIncrementPage] = useState(false);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
