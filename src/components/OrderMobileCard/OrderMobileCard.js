@@ -76,20 +76,7 @@ function OrderMobileCard(props) {
 
   const searchFilter = (event) => {
     setQuery(event.target.value);
-
-    console.log(query);
-    // if (query === "") return data;
-
-    // const ui = props.data.filter(post => {
-    //     if (query === '') {
-    //       return post;
-    //     }  else if (post.tienda === 'Unilever') {
-    //       return post
-    //     }
-    //   });
-    //   console.log(ui);
   };
-  // console.log(cardData);
 
   return (
     <>
@@ -805,9 +792,8 @@ function OrderMobileCard(props) {
                       post.estado_oc
                         .toLowerCase()
                         .includes(query.toLowerCase()) ||
-                      post.shipping_id.toString().includes(query) ||post.comprador
-                      .toLowerCase()
-                      .includes(query.toLowerCase())
+                      post.shipping_id.toString().includes(query) ||
+                      post.comprador.toLowerCase().includes(query.toLowerCase())
                     );
                     // return (
                     //   post.tienda === query ||
