@@ -32,7 +32,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 function OrderMobileCard(props) {
-  console.log(props.data);
+ 
   const { data } = props;
   const { isLoading } = props;
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
@@ -45,11 +45,7 @@ function OrderMobileCard(props) {
     "collapseOne",
     "collapse1",
   ]);
-  // //  React. useEffect(() => {
-  // //   //  console.log(props.data);
-  // //     setQuery(props.data);
-  // //    console.log(cardData);
-  // //   }, [props,cardData]);
+ 
   // with this function we create an array with the opened collapses
   // it is like a toggle function for all collapses from this page
   const collapsesToggle = (collapse) => {
@@ -60,7 +56,7 @@ function OrderMobileCard(props) {
       setOpenedCollapses([...openedCollapses, collapse]);
     }
   };
-  console.log(cardData);
+ 
   const showModalHandler = (props) => {
     setshowModal(true);
   };
@@ -73,7 +69,7 @@ function OrderMobileCard(props) {
   const X = props.data.filter((rt) => {
     return rt.tienda === "Unilever";
   });
-  console.log(X);
+  
 
   const searchFilter = (event) => {
     setQuery(event.target.value);
@@ -794,68 +790,12 @@ function OrderMobileCard(props) {
 
               {/* <div className="table-full-width table-responsive"> */}
 
-              {/* {data
-                .filter((post) => {
-                  console.log(post);
-                  if (
-                    query !== "" &&
-                    post.tienda !== undefined &&
-                    post.pais !== undefined &&
-                    post.canal_de_venta !== undefined &&
-                    post.order_id !== undefined &&
-                    post.official_store != null &&
-                    post.dte !== undefined &&
-                    post.estado_wms !== undefined &&
-                    post.estado_oc !== undefined &&
-                    post.shipping_id !== undefined &&
-                    post.comprador !== undefined &&
-                    post.bodega !== undefined
-                  ) {
-                    return (
-                      post.tienda.toLowerCase().includes(query.toLowerCase()) ||
-                      post.pais.toLowerCase().includes(query.toLowerCase()) ||
-                      post.canal_de_venta
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      post.order_id.toString().includes(query) ||
-                      post.official_store
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      post.dte.toLowerCase().includes(query.toLowerCase()) ||
-                      post.estado_wms
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      post.estado_oc
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      post.shipping_id.toString().includes(query) ||
-                      post.comprador
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      post.bodega.toLowerCase().includes(query.toLowerCase())
-                    );
-                  }
-                })
-                .map((post, index) => (
-                <div>
-
-                </div>
-                ))} */}
-
-              {/* </div> */}
-              {/* </CardBody> */}
-              {/* <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-refresh spin" />
-                  Updated 3 minutes ago
-                </div>
-              </CardFooter> */}
+             
             </Card>
              ))}
               {data
                 .filter((post) => {
-                  console.log(post);
+                
                   if (
                     query !== "" &&
                     post.tienda !== undefined &&
