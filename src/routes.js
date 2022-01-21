@@ -1,13 +1,9 @@
-
-import Buttons from "views/components/Buttons.js";
 import Calendar from "views/Calendar.js";
 import Logysto from "views/FormLogysto.js";
 import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
 
 
-
-import GridSystem from "views/components/GridSystem.js";
 import Icons from "views/components/Icons.js";
 import LockScreen from "views/pages/LockScreen.js";
 import Login from "views/pages/Login.js";
@@ -16,21 +12,16 @@ import Panels from "views/components/Panels.js";
 
 import Register from "views/pages/Register.js";
 
-
 import SweetAlert from "views/components/SweetAlert.js";
 import Timeline from "views/pages/Timeline.js";
 import Typography from "views/components/Typography.js";
 import UserProfile from "views/pages/UserProfile.js";
 
-
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
-
-
 
 import MtdiTable from "components/Sidebar/mtdi-table";
 import iconOrdenes from "assets/img/icons-ordenes.png";
-import iconReportes from "assets/img/icons-reportes.png"
-
+import iconReportes from "assets/img/icons-reportes.png";
 
 const routes = [
   {
@@ -41,24 +32,23 @@ const routes = [
     component: MtdiTable,
     layout: "/admin",
   },
-  
-  
+
   // {
   //   path: "/panels",
   //   name: "Mobile Version",
   //   icon: "nc-icon nc-support-17",
   //   component: OrderMobileCard,
   //   layout: "/admin",
-    
+
   // },
-  
+
   // {
   //   path: "/charts",
   //   name: "Reportes",
   //   icon: "nc-icon nc-chart-bar-32",
   //   component: Charts,
   //   layout: "/admin",
-    
+
   // },
 
   // {
@@ -68,13 +58,13 @@ const routes = [
   //   component: Logysto,
   //   layout: "/admin",
   // },
-// {
-//   path: "/extended-tables",
-//   name: "Extended Tables",
-//   mini: "ET",
-//   component: ExtendedTables,
-//   layout: "/admin",
-// },
+  // {
+  //   path: "/extended-tables",
+  //   name: "Extended Tables",
+  //   mini: "ET",
+  //   component: ExtendedTables,
+  //   layout: "/admin",
+  // },
   //   collapse: true,
   //   name: "Pages",
   //   icon: "nc-icon nc-book-bookmark",
@@ -239,7 +229,7 @@ const routes = [
   //     },
   //   ],
   // },
-  
+
   // {
   //   collapse: true,
   //   name: "Órdenes",
@@ -274,7 +264,7 @@ const routes = [
   //             component: ReactTables,
   //             layout: "/admin",
   //           },
-     
+
   //   ],
   // },
   // {
@@ -316,20 +306,19 @@ const routes = [
   // },
 
   // {
-    // path: "/mtdi-table",
-    // name: "Maestro de productos",
-    // icon: "nc-icon nc-box",
-    // component: Dashboard,
-    // layout: "/admin",
+  // path: "/mtdi-table",
+  // name: "Maestro de productos",
+  // icon: "nc-icon nc-box",
+  // component: Dashboard,
+  // layout: "/admin",
   // },
- 
+
   // {
   //   path: "/logout",
   //   icon: "nc-icon nc-calendar-60",
   //   name: "Cerrar Sesión",
   //   layout: "/logout"
   // }
-  
 ];
 
 export default routes;
