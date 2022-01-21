@@ -4,17 +4,17 @@ import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
 
 
-import Icons from "views/components/Icons.js";
+
 import LockScreen from "views/pages/LockScreen.js";
 import Login from "views/pages/Login.js";
-import Notifications from "views/components/Notifications.js";
-import Panels from "views/components/Panels.js";
+
+
 
 import Register from "views/pages/Register.js";
 
-import SweetAlert from "views/components/SweetAlert.js";
+
 import Timeline from "views/pages/Timeline.js";
-import Typography from "views/components/Typography.js";
+
 import UserProfile from "views/pages/UserProfile.js";
 
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
