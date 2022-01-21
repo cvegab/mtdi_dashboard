@@ -5,7 +5,7 @@ import Logysto from "views/FormLogysto.js";
 import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
 import ExtendedForms from "views/forms/ExtendedForms.js";
-import ExtendedTables from "views/tables/ExtendedTables.js";
+
 import FullScreenMap from "views/maps/FullScreenMap.js";
 import GoogleMaps from "views/maps/GoogleMaps.js";
 import GridSystem from "views/components/GridSystem.js";
@@ -14,10 +14,10 @@ import LockScreen from "views/pages/LockScreen.js";
 import Login from "views/pages/Login.js";
 import Notifications from "views/components/Notifications.js";
 import Panels from "views/components/Panels.js";
-import ReactTables from "views/tables/ReactTables.js";
+
 import Register from "views/pages/Register.js";
 import RegularForms from "views/forms/RegularForms.js";
-import RegularTables from "views/tables/RegularTables.js";
+
 import SweetAlert from "views/components/SweetAlert.js";
 import Timeline from "views/pages/Timeline.js";
 import Typography from "views/components/Typography.js";
