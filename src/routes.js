@@ -1,21 +1,12 @@
-import Calendar from "views/Calendar.js";
 import Logysto from "views/FormLogysto.js";
 import Charts from "views/Charts.js";
-import Dashboard from "views/Dashboard.js";
 
 
 
-import LockScreen from "views/pages/LockScreen.js";
-import Login from "views/pages/Login.js";
 
 
 
-import Register from "views/pages/Register.js";
 
-
-import Timeline from "views/pages/Timeline.js";
-
-import UserProfile from "views/pages/UserProfile.js";
 
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
 
