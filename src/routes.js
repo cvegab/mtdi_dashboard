@@ -25,8 +25,8 @@ import UserProfile from "views/pages/UserProfile.js";
 
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
 
-import ClientTable from "components/client-table";
-import OrderTable from "components/order-table";
+
+
 import MtdiTable from "components/Sidebar/mtdi-table";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png"
