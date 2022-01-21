@@ -4,7 +4,6 @@ import Calendar from "views/Calendar.js";
 import Logysto from "views/FormLogysto.js";
 import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
-import ExtendedForms from "views/forms/ExtendedForms.js";
 
 
 
@@ -16,16 +15,16 @@ import Notifications from "views/components/Notifications.js";
 import Panels from "views/components/Panels.js";
 
 import Register from "views/pages/Register.js";
-import RegularForms from "views/forms/RegularForms.js";
+
 
 import SweetAlert from "views/components/SweetAlert.js";
 import Timeline from "views/pages/Timeline.js";
 import Typography from "views/components/Typography.js";
 import UserProfile from "views/pages/UserProfile.js";
-import ValidationForms from "views/forms/ValidationForms.js";
+
 
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
-import Wizard from "views/forms/Wizard.js";
+
 import ClientTable from "components/client-table";
 import OrderTable from "components/order-table";
 import MtdiTable from "components/Sidebar/mtdi-table";
