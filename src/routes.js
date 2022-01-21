@@ -24,14 +24,7 @@ const routes = [
     layout: "/admin",
   },
 
-  // {
-  //   path: "/panels",
-  //   name: "Mobile Version",
-  //   icon: "nc-icon nc-support-17",
-  //   component: OrderMobileCard,
-  //   layout: "/admin",
-
-  // },
+ 
 
   // {
   //   path: "/charts",
