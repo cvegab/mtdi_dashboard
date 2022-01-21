@@ -6,8 +6,8 @@ import Charts from "views/Charts.js";
 import Dashboard from "views/Dashboard.js";
 import ExtendedForms from "views/forms/ExtendedForms.js";
 
-import FullScreenMap from "views/maps/FullScreenMap.js";
-import GoogleMaps from "views/maps/GoogleMaps.js";
+
+
 import GridSystem from "views/components/GridSystem.js";
 import Icons from "views/components/Icons.js";
 import LockScreen from "views/pages/LockScreen.js";
@@ -23,7 +23,7 @@ import Timeline from "views/pages/Timeline.js";
 import Typography from "views/components/Typography.js";
 import UserProfile from "views/pages/UserProfile.js";
 import ValidationForms from "views/forms/ValidationForms.js";
-import VectorMap from "views/maps/VectorMap.js";
+
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
 import Wizard from "views/forms/Wizard.js";
 import ClientTable from "components/client-table";
