@@ -18,7 +18,6 @@ const App = () => {
 
   let userName = nameSubString.split("=")[1];
   useEffect(() => {
-    console.log('hello from app');
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -43,7 +42,6 @@ const App = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         const obj = JSON.parse(result);
 
         if (obj.first_name !== undefined) {
