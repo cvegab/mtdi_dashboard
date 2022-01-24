@@ -1046,7 +1046,7 @@ const MtdiTable = (props) => {
             />
           )}
         </div>
-        <div className="bttnSeeMore">
+       {!isLoading && <div className="bttnSeeMore">
           {!isLoadingIncrementPage && (
             <Button
               color="primary"
@@ -1089,7 +1089,7 @@ const MtdiTable = (props) => {
               &nbsp; Cargando...
             </Button>
           )}
-        </div>
+        </div>}
       </div>
     </React.Fragment>
   );
