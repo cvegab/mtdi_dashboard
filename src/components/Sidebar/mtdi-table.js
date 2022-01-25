@@ -1019,7 +1019,7 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-          {data.length !== 0 && !isLoading && (
+          {data.message[0].total === 0 && !isLoading && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
               localization={{
