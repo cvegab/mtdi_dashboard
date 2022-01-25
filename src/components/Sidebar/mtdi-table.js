@@ -1020,9 +1020,22 @@ const MtdiTable = (props) => {
               localization={{
                 body: {
                   emptyDataSourceMessage: (
-                    <div>
-                      <p style={{fontWeight: "bold", color: "#1D308E"}}>No hay información disponible.</p>  
-                      <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" /> 
+                    <div
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      width: "100%",
+                    }}
+                  >
+                      <p 
+                      style={{
+                       
+                        color: "#1D308E"
+                      }}>
+                        No hay información disponible.
+                      </p>  
+                      {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
                     </div>
                   ),
                 },
