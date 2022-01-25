@@ -207,7 +207,7 @@ const MtdiTable = (props) => {
       const data = await response.json();
       console.log(data[0].total);
       if (data[0].total === 0) {
-        console.log("hi");
+       
         setData([]);
       } else {
         setData(data);
@@ -223,12 +223,12 @@ const MtdiTable = (props) => {
   const incrementPageHandler = async () => {
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     console.log(url);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -245,7 +245,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const newData = await response.json();
-      setData([...data, ...newData.message]);
+      setData([...data, ...newData]);
 
       setisLoadingIncrementPage(false);
     } catch (error) {
@@ -1024,10 +1024,7 @@ const MtdiTable = (props) => {
                 emptyDataSourceMessage: (
                   <div>
                     <span>No hay información disponible</span>
-                    {/* <Spinner
-                      animation="border"
-                      style={{ color: "#1D308E", marginLeft: "1em" }}
-                    /> */}
+                  
                   </div>
                 ),
              
@@ -1051,10 +1048,7 @@ const MtdiTable = (props) => {
                   emptyDataSourceMessage: (
                     <div>
                       <span>No hay información disponible</span>
-                      {/* <Spinner
-                        animation="border"
-                        style={{ color: "#1D308E", marginLeft: "1em" }}
-                      /> */}
+                     
                     </div>
                   ),
                
@@ -1070,32 +1064,7 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-          {/* {filtersApplied && data[0].total === 0  && !isLoading &&(
-            <MaterialTable
-              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
-              localization={{
-                body: {
-                  emptyDataSourceMessage: (
-                    <div>
-                      <span>No hay información disponible</span>
-                      {/* <Spinner
-                        animation="border"
-                        style={{ color: "#1D308E", marginLeft: "1em" }}
-                      /> */}
-          {/* </div>
-                  ),
-                },
-              }}
-              key={data.id_mtdi}
-              title="Instance Table"
-              icons={tableIcons}
-              title=""
-              data={data}
-              columns={columns}
-              options={{ columnsButton: true, sorting: true, search: true }}
-              style={{ marginLeft: "1em", marginTop: "2em" }}
-            /> */}
-          {/* )} */} */}
+       
         </div>
         {!isLoading && (
           <div className="bttnSeeMore">
