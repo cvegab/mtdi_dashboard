@@ -1025,7 +1025,7 @@ const MtdiTable = (props) => {
                   <div>
                     <span>No hay información disponible</span>
                   
-                  </div>
+                </div>
                 ),
              
               },
