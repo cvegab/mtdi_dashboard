@@ -35,13 +35,13 @@ const routes = [
 
   // },
 
-  // {
-  //   path: "/logysto",
-  //   name: "Ingreso manual OC",
-  //   icon: "nc-icon nc-laptop",
-  //   component: Logysto,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/logysto",
+    name: "Ingreso manual OC",
+    icon: "nc-icon nc-laptop",
+    component: Logysto,
+    layout: "/admin",
+  },
   // {
   //   path: "/extended-tables",
   //   name: "Extended Tables",
