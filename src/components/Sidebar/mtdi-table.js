@@ -25,6 +25,7 @@ import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
+import spinnerGif from '../../assets/img/spinnerLogos.gif';
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -369,14 +370,13 @@ const MtdiTable = (props) => {
                 No &nbsp;
                 <span
                   style={{ marginLeft: "4px" }}
-                  title="No existe DTE"
                   className={classes.noIcon}
                 >
                   <img title="No existe DTE" src={noIcon} />
                 </span>
                 &nbsp;
-                <span className={classes.greyIcon}>
-                  <img src={greyIcon} />
+                <span className={classes.greyIcon} style={{ cursor: "pointer" }}>
+                  <img src={greyIcon} title="No existe DTE"/>
                 </span>
               </div>
             );
@@ -923,28 +923,14 @@ const MtdiTable = (props) => {
           )}
           {isLoading && (
             <div id="spinner">
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-              
-              <Spinner
-                style={{
-                  width: "0.7rem",
-                  height: "0.7rem",
-                  marginTop: "4em",
-                  marginBottom: "3rem",
-                }}
-                type="grow"
-                color="info"
-              />
-              <Spinner
-                style={{
-                  width: "1rem",
-                  height: "1rem",
-                  marginTop: "2em",
-                  marginBottom: "2rem",
-                }}
-                type="grow"
-                color="info"
-              />
+
+              {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
+                  <div>
+                    <img src={spinnerGif} style={{marginTop:"2em"}} width="200" alt="Cargando..." /> 
+                    <br/>
+                    {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
+                    <br />
+                  </div>
               
               <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
              <br/>
@@ -976,8 +962,9 @@ const MtdiTable = (props) => {
                     }}
                   >
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                    <Spinner
+                    &nbsp; &nbsp;{" "}
+                    {/* <Spinner
+
                       style={{
                         width: "0.7rem",
                         height: "0.7rem",
@@ -996,8 +983,16 @@ const MtdiTable = (props) => {
                       }}
                       type="grow"
                       color="info"
-                    />
-                    <br />
+
+                    /> */}
+                    <br/>
+                    <div>
+                      <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" /> 
+                      
+                      {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
+                      <br />
+                    </div>
+
                     <br />
                   </div>
                 ),
@@ -1026,11 +1021,8 @@ const MtdiTable = (props) => {
                 body: {
                   emptyDataSourceMessage: (
                     <div>
-                      <span>No hay información disponible</span>
-                      <Spinner
-                        animation="border"
-                        style={{ color: "#1D308E", marginLeft: "1em" }}
-                      />
+                      <p style={{fontWeight: "bold", color: "#1D308E"}}>No hay información disponible.</p>  
+                      <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" /> 
                     </div>
                   ),
                 },
@@ -1046,7 +1038,9 @@ const MtdiTable = (props) => {
             />
           )}
         </div>
+
        {!isLoading && <div className="bttnSeeMore">
+
           {!isLoadingIncrementPage && (
             <Button
               color="primary"
@@ -1090,6 +1084,7 @@ const MtdiTable = (props) => {
             </Button>
           )}
         </div>}
+
       </div>
     </React.Fragment>
   );

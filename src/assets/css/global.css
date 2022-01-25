@@ -308,9 +308,13 @@ border-collapse: inherit !important;
 
 }
 
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #06cbc1 !important;
+}
+
 /* MEDIA QUERIES */
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:321px) {
 
   .mtdi-table_greyIcon__wYyBW {
     padding: 6px !important;
@@ -329,19 +333,25 @@ border-collapse: inherit !important;
   }
 
   #spinner {
-    margin-left:4em;
+
+    margin-left:0em;
+
   }
 }
 
 @media screen and (max-width:375px) {
   #spinner {
-    margin-left:6em;
+
+    margin-left:1em;
+
   }
  }
 
  @media screen and (max-width:425px) {
   #spinner {
-    margin-left:8em;
+    margin-left:2em;
+
+
   }
  }
 

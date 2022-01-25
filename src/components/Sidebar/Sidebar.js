@@ -240,13 +240,13 @@ function Sidebar(props) {
             {/* <button className="logoutButtonMini">
             <img src={LogoutIcon} alt="logoutMini" />
           </button> */}
-            <Button
+            {/* <Button
               className="btn-round btn-icon"
               color="primary"
               style={{ color: "#ffffff" }}
             >
               <i className="nc-icon nc-user-run" />
-            </Button>
+            </Button> */}
           </a>
           <a
             // href="https://www.creative-tim.com"
