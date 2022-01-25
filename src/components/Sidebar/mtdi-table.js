@@ -43,6 +43,7 @@ const tableIcons = {
 registerLocale("es", es);
 
 const MtdiTable = (props) => {
+  const [filtersApplied, setfiltersApplied] = useState(false);
   const [data, setData] = useState([]);
   const [pageCount, setpageCount] = useState(2);
   const [country, setcountry] = useState("");
@@ -139,7 +140,7 @@ const MtdiTable = (props) => {
     let countryValue = 3;
     setisLoading(true);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -153,16 +154,16 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
         requestOptions
       );
       if (!response.ok) {
         throw new Error();
       }
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
 
-      setData(data.message);
+      setData(data);
 
       setisLoading(false);
     } catch (error) {
@@ -182,10 +183,11 @@ const MtdiTable = (props) => {
 
   const applyFiltersButtonhandler = async () => {
     setisLoading(true);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    setfiltersApplied(true);
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     console.log(url);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -203,9 +205,14 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      // console.log(data);
-
-      setData(data.message);
+      console.log(data[0].total);
+      if (data[0].total === 0) {
+        console.log("hi");
+        setData([]);
+      } else {
+        setData(data);
+      }
+      console.log(data.length);
 
       setisLoading(false);
     } catch (error) {
@@ -915,16 +922,18 @@ const MtdiTable = (props) => {
 
         {/* MOBILE VERSION */}
         <div id="OrderMobileCard">
-          <br/>
+          <br />
           {!isLoading && (
             <div>
-              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
+              <OrderMobileCard
+                data={data}
+                isLoading={isLoading}
+              ></OrderMobileCard>
             </div>
           )}
           {isLoading && (
             <div id="spinner">
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-              
               <Spinner
                 style={{
                   width: "0.7rem",
@@ -945,9 +954,11 @@ const MtdiTable = (props) => {
                 type="grow"
                 color="info"
               />
-              
-              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
-             <br/>
+              <OrderMobileCard
+                data={data}
+                isLoading={isLoading}
+              ></OrderMobileCard>
+              <br />
             </div>
           )}
         </div>
@@ -955,7 +966,6 @@ const MtdiTable = (props) => {
         {/* DESKTOP VERSION */}
 
         <div id="OrderDesktopTable">
-       
           {isLoading && (
             <MaterialTable
               title=""
@@ -1007,9 +1017,22 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-
           {data.length === 0 && !isLoading && (
             <MaterialTable
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div>
+                    <span>No hay información disponible</span>
+                    {/* <Spinner
+                      animation="border"
+                      style={{ color: "#1D308E", marginLeft: "1em" }}
+                    /> */}
+                  </div>
+                ),
+             
+              },
+            }}
               title=""
               icons={tableIcons}
               columns={columns}
@@ -1019,20 +1042,22 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-          {data.message[0].total === 0 && !isLoading && (
+          {data.length !== 0 && !isLoading && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
+         
               localization={{
                 body: {
                   emptyDataSourceMessage: (
                     <div>
                       <span>No hay información disponible</span>
-                      <Spinner
+                      {/* <Spinner
                         animation="border"
                         style={{ color: "#1D308E", marginLeft: "1em" }}
-                      />
+                      /> */}
                     </div>
                   ),
+               
                 },
               }}
               key={data.id_mtdi}
@@ -1045,51 +1070,79 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
+          {/* {filtersApplied && data[0].total === 0  && !isLoading &&(
+            <MaterialTable
+              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
+              localization={{
+                body: {
+                  emptyDataSourceMessage: (
+                    <div>
+                      <span>No hay información disponible</span>
+                      {/* <Spinner
+                        animation="border"
+                        style={{ color: "#1D308E", marginLeft: "1em" }}
+                      /> */}
+          {/* </div>
+                  ),
+                },
+              }}
+              key={data.id_mtdi}
+              title="Instance Table"
+              icons={tableIcons}
+              title=""
+              data={data}
+              columns={columns}
+              options={{ columnsButton: true, sorting: true, search: true }}
+              style={{ marginLeft: "1em", marginTop: "2em" }}
+            /> */}
+          {/* )} */} */}
         </div>
-       {!isLoading && <div className="bttnSeeMore">
-          {!isLoadingIncrementPage && (
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "50px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-            >
-              Ver más
-            </Button>
-          )}
-          {isLoadingIncrementPage && (
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "50px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-              disabled
-            >
-              <Spinner
-                style={{ width: "0.7rem", height: "0.7rem" }}
-                type="grow"
-                color="light"
-              />
-              &nbsp; Cargando...
-            </Button>
-          )}
-        </div>}
+        {!isLoading && (
+          <div className="bttnSeeMore">
+            {!isLoadingIncrementPage && (
+              <Button
+                color="primary"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "200px",
+                  height: "50px",
+                  fontWeight: "600",
+                }}
+                onClick={incrementPageHandler}
+              >
+                Ver más
+              </Button>
+            )}
+            {isLoadingIncrementPage && (
+              <Button
+                color="primary"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "200px",
+                  height: "50px",
+                  fontWeight: "600",
+                }}
+                onClick={incrementPageHandler}
+                disabled
+              >
+                <Spinner
+                  style={{ width: "0.7rem", height: "0.7rem" }}
+                  type="grow"
+                  color="light"
+                />
+                &nbsp; Cargando...
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </React.Fragment>
   );
