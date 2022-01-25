@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Button, Col, Spinner } from "reactstrap";
+
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -11,7 +11,10 @@ import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
+// reactstrap components
+import { Button, Card, CardBody, CardText, Row, Col } from "reactstrap";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -34,6 +37,18 @@ const selectOptions = [
 ];
 
 const Form = () => {
+  const basicAlert = () => {
+    setAlert(
+      <ReactBSAlert
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Here's a message!"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        confirmBtnBsStyle="info"
+        btnSize=""
+      />
+    );
+  };
   const [data, setData] = useState({
     address: "",
     instructions: "",
@@ -58,6 +73,7 @@ const Form = () => {
     qty: "",
   });
   const [error, setError] = useState("");
+  const [alert, setAlert] = React.useState(null);
   useEffect(() => {}, [data.products]);
 
   const columns = [
@@ -208,8 +224,10 @@ const Form = () => {
 
       .catch((error) => console.log("error", error));
   };
+
   return (
     <Fragment>
+     
       <div className="content">
         <h5
           className="titleTable"
@@ -667,6 +685,16 @@ const Form = () => {
           </div>
         </form>
       </div>
+      setAlert(
+      <ReactBSAlert
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Here's a message!"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        confirmBtnBsStyle="info"
+        btnSize=""
+      />
+    );
     </Fragment>
   );
 };
