@@ -26,6 +26,7 @@ import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
 import spinnerGif from '../../assets/img/spinnerLogos.gif';
+import noDataImage from '../../assets/img/noDataImageBlue.png';
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -1025,17 +1026,18 @@ const MtdiTable = (props) => {
                       alignItems: "center",
                       display: "flex",
                       justifyContent: "flex-start",
+                      marginLeft:"30rem",
                       width: "100%",
                     }}
                   >
+                    <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
                       <p 
-                      style={{
-                       
+                      style={{                  
                         color: "#1D308E"
                       }}>
                         No hay información disponible.
                       </p>  
-                      {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
+                      
                     </div>
                   ),
                 },
