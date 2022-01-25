@@ -37,7 +37,7 @@ const selectOptions = [
 ]
 
 
-console.log("categories",categories);
+
 
 const Form = () => {
 
@@ -68,7 +68,7 @@ const Form = () => {
     });
     const [error, setError] = useState('');
     useEffect(() => {
-        console.log(data.products);
+     
     }, [data.products]);
 
     const columns = [

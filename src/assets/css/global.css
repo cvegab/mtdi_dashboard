@@ -333,19 +333,25 @@ border-collapse: inherit !important;
   }
 
   #spinner {
+
     margin-left:0em;
+
   }
 }
 
 @media screen and (max-width:375px) {
   #spinner {
+
     margin-left:1em;
+
   }
  }
 
  @media screen and (max-width:425px) {
   #spinner {
     margin-left:2em;
+
+
   }
  }
 
@@ -360,12 +366,17 @@ border-collapse: inherit !important;
 
   .select-tienda-official {
     margin-left:10px;
-
-
   }
 
   .navigation-index {
     display: none !important;
+  }
+  #fechaDesde {
+    margin-top:1em !important;
+  }
+
+  #fechaHasta {
+    margin-top:1em !important;
   }
 }
 

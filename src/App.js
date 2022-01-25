@@ -3,7 +3,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
-
+  const [fn, setfn] = useState(localStorage.getItem('first'));
+  const [ln, setln] = useState(localStorage.getItem('last'));
+  const [dark, setDark] = React.useState(
+    localStorage.getItem('first') !== null
+  );
   let search = window.location.search;
 
   let params = new URLSearchParams(search);
@@ -17,8 +21,18 @@ const App = () => {
   );
 
   let userName = nameSubString.split("=")[1];
+  // React.useEffect(() => {
+    
+  //   window.addEventListener('storage', () => {
+  //     const name = localStorage.getItem('first');
+  //     console.log(name);
+  //     setfn(name);
+  //   });
+    
+       
+  //   }, [])
+ console.log(fn);
   useEffect(() => {
-    console.log('hello from app');
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -43,14 +57,16 @@ const App = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         const obj = JSON.parse(result);
 
         if (obj.first_name !== undefined) {
           localStorage.setItem("first", obj.first_name);
+         setfn(localStorage.setItem("first", obj.first_name));
         }
         if (obj.last_name !== undefined) {
           localStorage.setItem("last", obj.last_name);
+          setln(localStorage.setItem("last", obj.last_name));
+         
         }
         if (
           obj.message === "Autorizado" ||
@@ -69,7 +85,7 @@ const App = () => {
       .catch((error) => console.log("error", error));
   }, []);
   if (userName === undefined && localStorage.getItem("name") === null) {
-    return (window.location.href = "https://dev.instancelatam.com/login");
+    return (window.location.href = "https://www.instancelatam.com/login");
   }
   return (
     <BrowserRouter>
@@ -78,16 +94,16 @@ const App = () => {
         {!isAuthenticated && localStorage.getItem("name") === null && (
           <Route
             component={() => {
-              window.location.href = "https://dev.instancelatam.com/login";
+              window.location.href = "https://www.instancelatam.com/login";
               return null;
             }}
           />
         )}
         {!isAuthenticated && localStorage.getItem("name") !== null && (
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route path="/admin" render={(props) => <AdminLayout {...props} name={fn} lastName={ln}/>} />
         )}
         {isAuthenticated && (
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Route path="/admin" render={(props) => <AdminLayout {...props} name={fn} lastName={ln}/>} />
         )}
       </Switch>
     </BrowserRouter>

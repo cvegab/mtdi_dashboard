@@ -923,6 +923,7 @@ const MtdiTable = (props) => {
           )}
           {isLoading && (
             <div id="spinner">
+
               {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
                   <div>
                     <img src={spinnerGif} style={{marginTop:"2em"}} width="200" alt="Cargando..." /> 
@@ -963,6 +964,7 @@ const MtdiTable = (props) => {
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                     &nbsp; &nbsp;{" "}
                     {/* <Spinner
+
                       style={{
                         width: "0.7rem",
                         height: "0.7rem",
@@ -981,6 +983,7 @@ const MtdiTable = (props) => {
                       }}
                       type="grow"
                       color="info"
+
                     /> */}
                     <br/>
                     <div>
@@ -989,6 +992,7 @@ const MtdiTable = (props) => {
                       {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
                       <br />
                     </div>
+
                     <br />
                   </div>
                 ),
@@ -1034,7 +1038,9 @@ const MtdiTable = (props) => {
             />
           )}
         </div>
-        <div className="bttnSeeMore">
+
+       {!isLoading && <div className="bttnSeeMore">
+
           {!isLoadingIncrementPage && (
             <Button
               color="primary"
@@ -1077,7 +1083,8 @@ const MtdiTable = (props) => {
               &nbsp; Cargando...
             </Button>
           )}
-        </div>
+        </div>}
+
       </div>
     </React.Fragment>
   );
