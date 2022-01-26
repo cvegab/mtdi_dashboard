@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-
+import sentEmail from "../assets/img/emailSent.png";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -12,9 +12,18 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-
+// import sentEmail from "../../assets/img/emailSent.png";
 // reactstrap components
-import { Button, Card, CardBody, CardText, Row, Col } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardText,
+  Row,
+  Col,
+  CardHeader,
+  ModalHeader,
+} from "reactstrap";
 import Modal from "components/UI/Modal";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -40,7 +49,7 @@ const basicAlert = () => {
   setAlert(
     <ReactBSAlert
       style={{ display: "block", marginTop: "-100px" }}
-      title="Here's a message!"
+      title={alertMessage}
       onConfirm={() => hideAlert()}
       onCancel={() => hideAlert()}
       confirmBtnBsStyle="info"
@@ -48,8 +57,9 @@ const basicAlert = () => {
     />
   );
 };
-const Form = () => {
- 
+const Form = (props) => {
+  const [alertMessage, setalertMessage] = useState("");
+  const [displaymodalheader, setdisplaymodalheader] = useState('');
   const [data, setData] = useState({
     address: "",
     instructions: "",
@@ -220,7 +230,25 @@ const Form = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        setAlert(true);
+        console.log(JSON.parse(result));
+        let x = JSON.parse(result);
+        console.log(x.services_created);
+        console.log(x.services_created.length);
+        if(x.services_created.length !== 0){
+          let successMessage = 'Pedido ingresado correctamente'
+          setalertMessage('');
+          setdisplaymodalheader('Pedido ingresado correctamente')
+        } else{
+          let z = x.services_not_create[0].razon;
+          let y = `no pudo hacer su pedido porque ${z}`;
+          setalertMessage(y);
+          setdisplaymodalheader('no pudo hacer su pedido');
+        }
+       
+
+        // let x =  Object.keys(result).map(key => result[key]);
+        // console.log(x);
       })
 
       .catch((error) => console.log("error", error));
@@ -230,7 +258,6 @@ const Form = () => {
   };
   return (
     <Fragment>
-     
       <div className="content">
         <h5
           className="titleTable"
@@ -688,17 +715,48 @@ const Form = () => {
           </div>
         </form>
       </div>
-      {alert &&<Modal></Modal>
-      // <ReactBSAlert
-      //   style={{ display: "block", marginTop: "-100px" }}
-      //   title="Here's a message!"
-      //   onConfirm={() => hideAlert()}
-      //   onCancel={() => hideAlert()}
-      //   confirmBtnBsStyle="info"
-      //   btnSize=""
-      // /> */}
-    } 
-   
+      {
+        alert && (
+          <Modal onhideModal={hideAlert}>
+            <h2 style={{ textAlign: "center" }}>
+             {displaymodalheader}
+            </h2>
+            {/* <img src = {sentEmail}/> */}
+            <p style={{ textAlign: "center" }}>{alertMessage}</p>
+            <div class="text-center">
+              <button
+                onClick={hideAlert}
+                id="bttnSubmit"
+                type="submit"
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  color: "white",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  border: "0",
+                }}
+              >
+                Entendido &nbsp;
+              </button>
+            </div>
+          </Modal>
+        )
+        // <ReactBSAlert
+        //   style={{ display: "block", marginTop: "-100px" }}
+        //   title={alertMessage}
+        //   onConfirm={() => hideAlert()}
+        //   onCancel={() => hideAlert()}
+        //   confirmBtnBsStyle="info"
+        //   btnSize=""
+        // />
+      }
     </Fragment>
   );
 };
