@@ -15,6 +15,7 @@ import ReactBSAlert from "react-bootstrap-sweetalert";
 
 // reactstrap components
 import { Button, Card, CardBody, CardText, Row, Col } from "reactstrap";
+import Modal from "components/UI/Modal";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -35,20 +36,20 @@ const selectOptions = [
   { value: "Sodimac", label: "Sodimac" },
   { value: "Test", label: "Test" },
 ];
-
+const basicAlert = () => {
+  setAlert(
+    <ReactBSAlert
+      style={{ display: "block", marginTop: "-100px" }}
+      title="Here's a message!"
+      onConfirm={() => hideAlert()}
+      onCancel={() => hideAlert()}
+      confirmBtnBsStyle="info"
+      btnSize=""
+    />
+  );
+};
 const Form = () => {
-  const basicAlert = () => {
-    setAlert(
-      <ReactBSAlert
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Here's a message!"
-        onConfirm={() => hideAlert()}
-        onCancel={() => hideAlert()}
-        confirmBtnBsStyle="info"
-        btnSize=""
-      />
-    );
-  };
+ 
   const [data, setData] = useState({
     address: "",
     instructions: "",
@@ -73,7 +74,7 @@ const Form = () => {
     qty: "",
   });
   const [error, setError] = useState("");
-  const [alert, setAlert] = React.useState(null);
+  const [alert, setAlert] = React.useState(true);
   useEffect(() => {}, [data.products]);
 
   const columns = [
@@ -224,7 +225,9 @@ const Form = () => {
 
       .catch((error) => console.log("error", error));
   };
-
+  const hideAlert = () => {
+    setAlert(false);
+  };
   return (
     <Fragment>
      
@@ -685,16 +688,17 @@ const Form = () => {
           </div>
         </form>
       </div>
-      setAlert(
-      <ReactBSAlert
-        style={{ display: "block", marginTop: "-100px" }}
-        title="Here's a message!"
-        onConfirm={() => hideAlert()}
-        onCancel={() => hideAlert()}
-        confirmBtnBsStyle="info"
-        btnSize=""
-      />
-    );
+      {alert &&<Modal></Modal>
+      // <ReactBSAlert
+      //   style={{ display: "block", marginTop: "-100px" }}
+      //   title="Here's a message!"
+      //   onConfirm={() => hideAlert()}
+      //   onCancel={() => hideAlert()}
+      //   confirmBtnBsStyle="info"
+      //   btnSize=""
+      // /> */}
+    } 
+   
     </Fragment>
   );
 };
