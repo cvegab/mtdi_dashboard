@@ -1022,18 +1022,20 @@ const MtdiTable = (props) => {
                     alignItems: "center",
                     display: "flex",
                     justifyContent: "flex-start",
+                    marginLeft:"20rem",
                     width: "100%",
                   }}
                 >
+                  <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
                     <p 
                     style={{
                      display: 'flex',
                      justifyContent: "center",
                       color: "#1D308E"
-                    }}> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    }}> &nbsp;
                     <span> No hay información disponible.</span> 
                     </p>  
-                    {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
+                    
                   </div>
                 ),
              
