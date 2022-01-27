@@ -1,5 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Button, Col, Spinner } from "reactstrap";
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import sentEmail from "../assets/img/emailSent.png";
+import addProductsFailed from "../assets/img/adding-products-failed.png";
+import ImageError from "../assets/img/error-image.png";
+import ImageOrderPlaced from "../assets/img/order-placed.png";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -11,7 +14,20 @@ import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
-
+import ReactBSAlert from "react-bootstrap-sweetalert";
+// import sentEmail from "../../assets/img/emailSent.png";
+// reactstrap components
+import {
+  Button,
+  Card,
+  CardBody,
+  CardText,
+  Row,
+  Col,
+  CardHeader,
+  ModalHeader,
+} from "reactstrap";
+import Modal from "components/UI/Modal";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -33,7 +49,20 @@ const selectOptions = [
   { value: "Test", label: "Test" },
 ];
 
-const Form = () => {
+const Form = (props) => {
+  const [alertMessage, setalertMessage] = useState("");
+  const [modalImage, setmodalImage] = useState("");
+  const [displaymodalheader, setdisplaymodalheader] = useState("");
+  const nameInput = useRef("");
+  const directionInput = useRef("");
+  const instructionInput = useRef("");
+  const codeInput = useRef("");
+  const dteInput = useRef("");
+  const phoneInput = useRef("");
+  const mailInput = useRef("");
+  const maxheightInput = useRef("");
+  const maxlengthInput = useRef("");
+  const maxwidthinput = useRef("");
   const [data, setData] = useState({
     address: "",
     instructions: "",
@@ -58,6 +87,7 @@ const Form = () => {
     qty: "",
   });
   const [error, setError] = useState("");
+  const [alert, setAlert] = React.useState(false);
   useEffect(() => {}, [data.products]);
 
   const columns = [
@@ -178,9 +208,20 @@ const Form = () => {
       brand: "",
       qty: "",
     });
+    nameInput.current.value = "";
+    directionInput.current.value = "";
+    instructionInput.current.value = "";
+    codeInput.current.value = "";
+    dteInput.current.value = "";
+    phoneInput.current.value = "";
+    mailInput.current.value = "";
+    maxheightInput.current.value = "";
+    maxlengthInput.current.value = "";
+    maxwidthinput.current.value = "";
   };
 
   const sendData = (e) => {
+    console.log(data);
     e.preventDefault();
 
     data.city_code = parseInt(data.city_code);
@@ -203,10 +244,28 @@ const Form = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        setAlert(true);
+
+        let parsedJSON = JSON.parse(result);
+        console.log(parsedJSON.services_created);
+        console.log(parsedJSON.services_created.length);
+        if (parsedJSON.services_created.length !== 0) {
+          setalertMessage("");
+          setmodalImage(ImageOrderPlaced);
+          setdisplaymodalheader("Pedido ingresado correctamente");
+        } else {
+          let z = parsedJSON.services_not_create[0].razon;
+          let y = `${z}`;
+          setmodalImage(ImageError);
+          setdisplaymodalheader("No se pudo ingresar la orden");
+          setalertMessage(y);
+        }
       })
 
       .catch((error) => console.log("error", error));
+  };
+  const hideAlert = () => {
+    setAlert(false);
   };
   return (
     <Fragment>
@@ -288,6 +347,7 @@ const Form = () => {
               Dirección
             </p>
             <input
+              ref={directionInput}
               placeholder="Ingrese una dirección"
               className="form-control"
               type="text"
@@ -308,6 +368,7 @@ const Form = () => {
               Instrucciones
             </p>
             <input
+              ref={instructionInput}
               placeholder="Ingrese instrucciones"
               className="form-control"
               type="text"
@@ -328,6 +389,7 @@ const Form = () => {
               DTE
             </p>
             <input
+              ref={dteInput}
               placeholder="DTE"
               className="form-control"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
@@ -350,6 +412,7 @@ const Form = () => {
             <input
               placeholder="Ingrese nombre"
               className="form-control"
+              ref={nameInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="name"
@@ -369,6 +432,7 @@ const Form = () => {
             </p>
             <input
               placeholder="Código de ciudad"
+              ref={codeInput}
               className="form-control"
               type="number"
               style={{
@@ -396,6 +460,7 @@ const Form = () => {
             <input
               placeholder="Ingrese teléfono"
               className="form-control"
+              ref={phoneInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="phone"
@@ -416,6 +481,7 @@ const Form = () => {
             <input
               placeholder="Ingrese un correo electrónico"
               className="form-control"
+              ref={mailInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="email"
@@ -437,6 +503,7 @@ const Form = () => {
             <input
               placeholder="Altura"
               className="form-control"
+              ref={maxheightInput}
               type="number"
               style={{
                 width: "300px",
@@ -462,6 +529,7 @@ const Form = () => {
             <input
               placeholder="Largo"
               className="form-control"
+              ref={maxlengthInput}
               type="number"
               style={{
                 width: "300px",
@@ -488,6 +556,7 @@ const Form = () => {
               placeholder="Ancho"
               className="form-control"
               type="number"
+              ref={maxwidthinput}
               style={{
                 width: "300px",
                 borderRadius: "17px",
@@ -639,33 +708,81 @@ const Form = () => {
               Agregar producto
             </Button>
           </div>
-          <div className="col-12">
-            <MaterialTable
-              title=""
-              options={{ columnsButton: true, sorting: true, search: false }}
-              columns={columns}
-              data={data.products}
-              style={{ marginLeft: "1em", marginTop: "2em", color: "black" }}
-              icons={tableIcons}
-            />
-          </div>
-
-          <div className="col-md-6">
-            <Button
-              className="btn btn-primary"
-              style={{
-                backgroundColor: "#1D308E",
-                borderRadius: "20px",
-                width: "150px",
-                height: "50px",
-                color: "white",
-              }}
-              type="submit"
-            >
-              Enviar
-            </Button>
-          </div>
         </form>
+        <div className="col-12">
+          <MaterialTable
+            title=""
+            options={{ columnsButton: true, sorting: true, search: false }}
+            columns={columns}
+            data={data.products}
+            style={{ marginLeft: "1em", marginTop: "2em", color: "black" }}
+            icons={tableIcons}
+          />
+        </div>
+        <div className="col-md-6">
+          <Button
+            onClick={sendData}
+            className="btn btn-primary"
+            style={{
+              backgroundColor: "#1D308E",
+              borderRadius: "20px",
+              width: "150px",
+              height: "50px",
+              color: "white",
+            }}
+            type="button"
+          >
+            Enviar
+          </Button>
+        </div>
+        {alert && (
+          <Modal onhideModal={hideAlert}>
+            <h3
+              style={{ fontWeight: "700", size: "24px", textAlign: "center" }}
+            >
+              {displaymodalheader}
+            </h3>
+            <p style={{ fontweight: "300", size: "13px", textAlign: "center" }}>
+              {alertMessage}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                style={{ height: "200px", width: "300px" }}
+                src={modalImage}
+              />
+            </div>
+
+            <div class="text-center">
+              <button
+                onClick={hideAlert}
+                id="bttnSubmit"
+                type="submit"
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  color: "white",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  border: "0",
+                }}
+              >
+                Entendido &nbsp;
+              </button>
+            </div>
+          </Modal>
+        )}
       </div>
     </Fragment>
   );
