@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import sentEmail from "../assets/img/emailSent.png";
-import addProductsFailed from '../assets/img/adding-products-failed.png'
+import addProductsFailed from "../assets/img/adding-products-failed.png";
+import ImageError from '../assets/img/error-image.png';
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -49,7 +50,7 @@ const selectOptions = [
 
 const Form = (props) => {
   const [alertMessage, setalertMessage] = useState("");
-  const [modalImage, setmodalImage] = useState('');
+  const [modalImage, setmodalImage] = useState("");
   const [displaymodalheader, setdisplaymodalheader] = useState("");
   const nameInput = useRef("");
   const directionInput = useRef("");
@@ -251,11 +252,10 @@ const Form = (props) => {
           let successMessage = "Pedido ingresado correctamente";
           setalertMessage("");
           setdisplaymodalheader("Pedido ingresado correctamente");
-
         } else {
           let z = x.services_not_create[0].razon;
           let y = `${z}`;
-          setmodalImage(addProductsFailed);
+          setmodalImage(ImageError);
           setdisplaymodalheader("No se pudo ingresar la orden");
           setalertMessage(y);
         }
@@ -271,10 +271,7 @@ const Form = (props) => {
   };
   return (
     <Fragment>
-
-    <div className="content">
-
-     
+      <div className="content">
         <h5
           className="titleTable"
           style={{
@@ -302,365 +299,418 @@ const Form = (props) => {
         </p>
 
         <Col md="12">
-
-        <label htmlFor="select-country">
-          <h5
-            style={{
-              color: "black",
-              width: "100px",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              marginBottom: "0px",
-            }}
-          >
-           Canal de venta
+          <label htmlFor="select-country">
+            <h5
+              style={{
+                color: "black",
+                width: "100px",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "0px",
+              }}
+            >
+              Canal de venta
             </h5>
             <Select
-            labelId="select-tienda"
-            id="select-tienda"     
-            name="from"
-            style={{ width: "200px", height:"35px", marginLeft: "1em", borderRadius: "17px", marginBottom: "1em", fontSize: "10px" }}
-            label="Canal de venta"  
-            onChange={handleSelectChange}  
-            defaultValue="Sodimac"         
-          >
-                <option value="Sodimac">Sodimac</option>
-                <option value="Test">Test</option>
-           
-          </Select>
-        </label>
-
+              labelId="select-tienda"
+              id="select-tienda"
+              name="from"
+              style={{
+                width: "200px",
+                height: "35px",
+                marginLeft: "1em",
+                borderRadius: "17px",
+                marginBottom: "1em",
+                fontSize: "10px",
+              }}
+              label="Canal de venta"
+              onChange={handleSelectChange}
+              defaultValue="Sodimac"
+            >
+              <option value="Sodimac">Sodimac</option>
+              <option value="Test">Test</option>
+            </Select>
+          </label>
         </Col>
-        <br/>
-        <br/>
-        
+        <br />
+        <br />
 
-            {/* <h1>Formulario</h1> */}
-            <form
-            className="row"
-            onSubmit={sendData}>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >Dirección
-                    </p>
-                    <input
-                        placeholder="Ingrese una dirección"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="address"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p
-                    style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >Instrucciones
-                    </p>
-                    <input
-                        placeholder="Ingrese instrucciones"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="instructions"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >DTE
-                    </p>
-                    <input
-                        placeholder="DTE"
-                        className="form-control"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        type="text"
-                        name="dte"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >Nombre
-                    </p>
-                    <input
-                        placeholder="Ingrese nombre"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="name"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p
-                    style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Código de ciudad
-                    </p>
-                    <input
-                        placeholder="Código de ciudad"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", borderRadius: "17px", boxShadow:"0 6px 10px -4px rgb(0 0 0 / 15%)", height:"35px", marginBottom:"2em"}}
-                        name="city_code"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Teléfono
-                    </p>
-                    <input
-                        placeholder="Ingrese teléfono"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="phone"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Email
-                    </p>
-                    <input
-                        placeholder="Ingrese un correo electrónico"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="email"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-          
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Altura máxima
-                    </p>
-                    <input
-                        placeholder="Altura"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", borderRadius: "17px", height:"35px", marginBottom:"2em"}}
-                        name="maxHeight"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Largo máximo
-                    </p>
-                    <input
-                        placeholder="Largo"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", borderRadius: "17px", height:"35px", marginBottom:"2em"}}
-                        name="maxLenght"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Ancho máximo
-                    </p>
-                    <input
-                        placeholder="Ancho"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", borderRadius: "17px", height:"35px", marginBottom:"2em"}}
-                        name="maxWidth"
-                        required
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-12">
-                    <hr />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        SKU
-                    </p>
-                    <input
-                        placeholder="SKU"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="sku"
-                        value={product.sku}
-                        onChange={handleProductInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Categoría
-                    </p>
-                    <input
-                        placeholder="Categoría"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="category"
-                        value={product.category}
-                        onChange={handleProductInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Nombre del producto
-                    </p>
-                    <input
-                        placeholder="Nombre del producto"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="product_name"
-                        value={product.product_name}
-                        onChange={handleProductInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Precio del producto
-                    </p>
-                    <input
-                        placeholder="Precio del producto"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="product_price"
-                        value={product.product_price}
-                        onChange={handleProductInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Marca
-                    </p>
-                    <input
-                        placeholder="Marca"
-                        className="form-control"
-                        type="text"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="brand"
-                        value={product.brand}
-                        onChange={handleProductInputChange}
-                    />
-                </div>
-                <div className="col-md-6">
-                    <p style={{
-                        color:"black",
-                         fontSize: "12px",
-                         fontWeight: "800"
-                    }}
-                    >
-                        Cantidad
-                    </p>
-                    <input
-                        placeholder="Cantidad"
-                        className="form-control"
-                        type="number"
-                        style={{width:"300px", height:"35px", marginBottom:"2em"}}
-                        name="qty"
-                        value={product.qty}
-                        onChange={handleProductInputChange}
-                    />
-                </div>
-                <div className="col-12">
-                    <span className="error">
-                        {error} 
-                    </span>
-                    <br/>
-                        <Button
-                            className="btn btn-primary"
-                            style={{backgroundColor: "#1D308E", borderRadius:"20px", width:"200px", height:"50px", color:"white"}}
-                            onClick={addProduct}
-                            >
-                                Agregar producto
-                        </Button>
-                        
-                </div>
-                <div className="col-12">
+        {/* <h1>Formulario</h1> */}
+        <form className="row" onSubmit={sendData}>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Dirección
+            </p>
+            <input
+              ref={directionInput}
+              placeholder="Ingrese una dirección"
+              className="form-control"
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="address"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Instrucciones
+            </p>
+            <input
+              ref={instructionInput}
+              placeholder="Ingrese instrucciones"
+              className="form-control"
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="instructions"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              DTE
+            </p>
+            <input
+              ref={dteInput}
+              placeholder="DTE"
+              className="form-control"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              type="text"
+              name="dte"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Nombre
+            </p>
+            <input
+              placeholder="Ingrese nombre"
+              className="form-control"
+              ref={nameInput}
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="name"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Código de ciudad
+            </p>
+            <input
+              placeholder="Código de ciudad"
+              ref={codeInput}
+              className="form-control"
+              type="number"
+              style={{
+                width: "300px",
+                borderRadius: "17px",
+                boxShadow: "0 6px 10px -4px rgb(0 0 0 / 15%)",
+                height: "35px",
+                marginBottom: "2em",
+              }}
+              name="city_code"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Teléfono
+            </p>
+            <input
+              placeholder="Ingrese teléfono"
+              className="form-control"
+              ref={phoneInput}
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="phone"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Email
+            </p>
+            <input
+              placeholder="Ingrese un correo electrónico"
+              className="form-control"
+              ref={mailInput}
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="email"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Altura máxima
+            </p>
+            <input
+              placeholder="Altura"
+              className="form-control"
+              ref={maxheightInput}
+              type="number"
+              style={{
+                width: "300px",
+                borderRadius: "17px",
+                height: "35px",
+                marginBottom: "2em",
+              }}
+              name="maxHeight"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Largo máximo
+            </p>
+            <input
+              placeholder="Largo"
+              className="form-control"
+              ref={maxlengthInput}
+              type="number"
+              style={{
+                width: "300px",
+                borderRadius: "17px",
+                height: "35px",
+                marginBottom: "2em",
+              }}
+              name="maxLenght"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Ancho máximo
+            </p>
+            <input
+              placeholder="Ancho"
+              className="form-control"
+              type="number"
+              ref={maxwidthinput}
+              style={{
+                width: "300px",
+                borderRadius: "17px",
+                height: "35px",
+                marginBottom: "2em",
+              }}
+              name="maxWidth"
+              required
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="col-12">
+            <hr />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              SKU
+            </p>
+            <input
+              placeholder="SKU"
+              className="form-control"
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="sku"
+              value={product.sku}
+              onChange={handleProductInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Categoría
+            </p>
+            <input
+              placeholder="Categoría"
+              className="form-control"
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="category"
+              value={product.category}
+              onChange={handleProductInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Nombre del producto
+            </p>
+            <input
+              placeholder="Nombre del producto"
+              className="form-control"
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="product_name"
+              value={product.product_name}
+              onChange={handleProductInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Precio del producto
+            </p>
+            <input
+              placeholder="Precio del producto"
+              className="form-control"
+              type="number"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="product_price"
+              value={product.product_price}
+              onChange={handleProductInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Marca
+            </p>
+            <input
+              placeholder="Marca"
+              className="form-control"
+              type="text"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="brand"
+              value={product.brand}
+              onChange={handleProductInputChange}
+            />
+          </div>
+          <div className="col-md-6">
+            <p
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+              }}
+            >
+              Cantidad
+            </p>
+            <input
+              placeholder="Cantidad"
+              className="form-control"
+              type="number"
+              style={{ width: "300px", height: "35px", marginBottom: "2em" }}
+              name="qty"
+              value={product.qty}
+              onChange={handleProductInputChange}
+            />
+          </div>
+          <div className="col-12">
+            <span className="error">{error}</span>
+            <br />
+            <Button
+              className="btn btn-primary"
+              style={{
+                backgroundColor: "#1D308E",
+                borderRadius: "20px",
+                width: "200px",
+                height: "50px",
+                color: "white",
+              }}
+              onClick={addProduct}
+            >
+              Agregar producto
+            </Button>
+          </div>
+          {/* <div className="col-12">
                  
                
                     <MaterialTable
@@ -673,19 +723,88 @@ const Form = (props) => {
                     />
                 </div>
                         
-           
-                    
-                
-                <div className="col-md-6">
+            */}
+
+          {/* <div className="col-md-6">
                 <Button
                     className="btn btn-primary"
                     style={{backgroundColor: "#1D308E", borderRadius:"20px", width:"150px", height:"50px", color:"white"}}
                     type="submit">
                         Enviar
                 </Button>
-                </div>
-            </form>
+                </div> */}
+        </form>
+        <div className="col-12">
+          <MaterialTable
+            title=""
+            options={{ columnsButton: true, sorting: true, search: false }}
+            columns={columns}
+            data={data.products}
+            style={{ marginLeft: "1em", marginTop: "2em", color: "black" }}
+            icons={tableIcons}
+          />
         </div>
+        <div className="col-md-6">
+          <Button
+            onClick={sendData}
+            className="btn btn-primary"
+            style={{
+              backgroundColor: "#1D308E",
+              borderRadius: "20px",
+              width: "150px",
+              height: "50px",
+              color: "white",
+            }}
+            type="button"
+          >
+            Enviar
+          </Button>
+        </div>
+        {alert && (
+          <Modal onhideModal={hideAlert}>
+            <h3
+              style={{ fontWeight: "700", size: "24px", textAlign: "center" }}
+            >
+              {displaymodalheader}
+            </h3>
+            <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+               <img style={{height:'200px',width:'200px'}}src={ImageError}/>
+            </div>
+            {/* <img src = {sentEmail}/> */}
+         
+            <p style={{ textAlign: "center" }}>{alertMessage}</p>
+            <div class="text-center">
+              <button
+                onClick={hideAlert}
+                id="bttnSubmit"
+                type="submit"
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  color: "white",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  border: "0",
+                }}
+              >
+                Entendido &nbsp;
+              </button>
+            </div>
+          </Modal>
+        )}
+      </div>
     </Fragment>
     // <Fragment>
     //   <div className="content">
@@ -753,7 +872,6 @@ const Form = (props) => {
     //     <br />
     //     <br />
 
-       
     //       <div className="col-md-6">
     //         <p
     //           style={{
@@ -1188,7 +1306,6 @@ const Form = (props) => {
     //     </Modal>
     //   )}
     // </Fragment>
-  
   );
 };
 export default Form;
