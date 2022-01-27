@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import sentEmail from "../assets/img/emailSent.png";
+import addProductsFailed from '../assets/img/adding-products-failed.png'
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -48,6 +49,7 @@ const selectOptions = [
 
 const Form = (props) => {
   const [alertMessage, setalertMessage] = useState("");
+  const [modalImage, setmodalImage] = useState('');
   const [displaymodalheader, setdisplaymodalheader] = useState("");
   const nameInput = useRef("");
   const directionInput = useRef("");
@@ -217,6 +219,7 @@ const Form = (props) => {
   };
 
   const sendData = (e) => {
+    console.log(data);
     e.preventDefault();
 
     data.city_code = parseInt(data.city_code);
@@ -248,10 +251,11 @@ const Form = (props) => {
           let successMessage = "Pedido ingresado correctamente";
           setalertMessage("");
           setdisplaymodalheader("Pedido ingresado correctamente");
+
         } else {
           let z = x.services_not_create[0].razon;
           let y = `${z}`;
-
+          setmodalImage(addProductsFailed);
           setdisplaymodalheader("No se pudo ingresar la orden");
           setalertMessage(y);
         }
@@ -333,7 +337,7 @@ const Form = (props) => {
         <br />
 
         {/* <h1>Formulario</h1> */}
-        <form className="row" onSubmit={sendData}>
+       
           <div className="col-md-6">
             <p
               style={{
