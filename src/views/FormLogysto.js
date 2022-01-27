@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect, useRef } from "react";
 import sentEmail from "../assets/img/emailSent.png";
 import addProductsFailed from "../assets/img/adding-products-failed.png";
 import ImageError from '../assets/img/error-image.png';
+import ImageOrderPlaced from '../assets/img/order-placed.png';
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -251,6 +252,7 @@ const Form = (props) => {
         if (x.services_created.length !== 0) {
           let successMessage = "Pedido ingresado correctamente";
           setalertMessage("");
+          setmodalImage(ImageOrderPlaced);
           setdisplaymodalheader("Pedido ingresado correctamente");
         } else {
           let z = x.services_not_create[0].razon;
@@ -260,8 +262,7 @@ const Form = (props) => {
           setalertMessage(y);
         }
 
-        // let x =  Object.keys(result).map(key => result[key]);
-        // console.log(x);
+     
       })
 
       .catch((error) => console.log("error", error));
@@ -767,6 +768,7 @@ const Form = (props) => {
             >
               {displaymodalheader}
             </h3>
+            <p style={{fontweight:'300', size: '13px', textAlign: "center" }}>{alertMessage}</p>
             <div
             style={{
               display: "flex",
@@ -774,11 +776,10 @@ const Form = (props) => {
               alignItems: "center",
             }}
           >
-               <img style={{height:'200px',width:'200px'}}src={ImageError}/>
+               <img style={{height:'200px',width:'200px'}}src={modalImage}/>
             </div>
-            {/* <img src = {sentEmail}/> */}
-         
-            <p style={{ textAlign: "center" }}>{alertMessage}</p>
+        
+          
             <div class="text-center">
               <button
                 onClick={hideAlert}
