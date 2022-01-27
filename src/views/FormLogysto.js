@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import sentEmail from "../assets/img/emailSent.png";
 import addProductsFailed from "../assets/img/adding-products-failed.png";
-import ImageError from '../assets/img/error-image.png';
-import ImageOrderPlaced from '../assets/img/order-placed.png';
+import ImageError from "../assets/img/error-image.png";
+import ImageOrderPlaced from "../assets/img/order-placed.png";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -245,24 +245,21 @@ const Form = (props) => {
       .then((response) => response.text())
       .then((result) => {
         setAlert(true);
-        console.log(JSON.parse(result));
-        let x = JSON.parse(result);
-        console.log(x.services_created);
-        console.log(x.services_created.length);
-        if (x.services_created.length !== 0) {
-          let successMessage = "Pedido ingresado correctamente";
+
+        let parsedJSON = JSON.parse(result);
+        console.log(parsedJSON.services_created);
+        console.log(parsedJSON.services_created.length);
+        if (parsedJSON.services_created.length !== 0) {
           setalertMessage("");
           setmodalImage(ImageOrderPlaced);
           setdisplaymodalheader("Pedido ingresado correctamente");
         } else {
-          let z = x.services_not_create[0].razon;
+          let z = parsedJSON.services_not_create[0].razon;
           let y = `${z}`;
           setmodalImage(ImageError);
           setdisplaymodalheader("No se pudo ingresar la orden");
           setalertMessage(y);
         }
-
-     
       })
 
       .catch((error) => console.log("error", error));
@@ -711,7 +708,6 @@ const Form = (props) => {
               Agregar producto
             </Button>
           </div>
-         
         </form>
         <div className="col-12">
           <MaterialTable
@@ -746,18 +742,22 @@ const Form = (props) => {
             >
               {displaymodalheader}
             </h3>
-            <p style={{fontweight:'300', size: '13px', textAlign: "center" }}>{alertMessage}</p>
+            <p style={{ fontweight: "300", size: "13px", textAlign: "center" }}>
+              {alertMessage}
+            </p>
             <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-               <img style={{height:'200px',width:'200px'}}src={modalImage}/>
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                style={{ height: "200px", width: "200px" }}
+                src={modalImage}
+              />
             </div>
-        
-          
+
             <div class="text-center">
               <button
                 onClick={hideAlert}
@@ -785,7 +785,6 @@ const Form = (props) => {
         )}
       </div>
     </Fragment>
-  
   );
 };
 export default Form;
