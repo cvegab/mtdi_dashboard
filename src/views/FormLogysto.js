@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import sentEmail from "../assets/img/emailSent.png";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
@@ -45,21 +45,20 @@ const selectOptions = [
   { value: "Sodimac", label: "Sodimac" },
   { value: "Test", label: "Test" },
 ];
-const basicAlert = () => {
-  setAlert(
-    <ReactBSAlert
-      style={{ display: "block", marginTop: "-100px" }}
-      title={alertMessage}
-      onConfirm={() => hideAlert()}
-      onCancel={() => hideAlert()}
-      confirmBtnBsStyle="info"
-      btnSize=""
-    />
-  );
-};
+
 const Form = (props) => {
   const [alertMessage, setalertMessage] = useState("");
-  const [displaymodalheader, setdisplaymodalheader] = useState('');
+  const [displaymodalheader, setdisplaymodalheader] = useState("");
+  const nameInput = useRef("");
+  const directionInput = useRef("");
+  const instructionInput = useRef("");
+  const codeInput = useRef("");
+  const dteInput = useRef("");
+  const phoneInput = useRef("");
+  const mailInput = useRef("");
+  const maxheightInput = useRef("");
+  const maxlengthInput = useRef("");
+  const maxwidthinput = useRef("");
   const [data, setData] = useState({
     address: "",
     instructions: "",
@@ -205,6 +204,16 @@ const Form = (props) => {
       brand: "",
       qty: "",
     });
+    nameInput.current.value = "";
+    directionInput.current.value = "";
+    instructionInput.current.value = "";
+    codeInput.current.value = "";
+    dteInput.current.value = "";
+    phoneInput.current.value = "";
+    mailInput.current.value = "";
+    maxheightInput.current.value = "";
+    maxlengthInput.current.value = "";
+    maxwidthinput.current.value = "";
   };
 
   const sendData = (e) => {
@@ -235,17 +244,17 @@ const Form = (props) => {
         let x = JSON.parse(result);
         console.log(x.services_created);
         console.log(x.services_created.length);
-        if(x.services_created.length !== 0){
-          let successMessage = 'Pedido ingresado correctamente'
-          setalertMessage('');
-          setdisplaymodalheader('Pedido ingresado correctamente')
-        } else{
+        if (x.services_created.length !== 0) {
+          let successMessage = "Pedido ingresado correctamente";
+          setalertMessage("");
+          setdisplaymodalheader("Pedido ingresado correctamente");
+        } else {
           let z = x.services_not_create[0].razon;
-          let y = `no pudo hacer su pedido porque ${z}`;
+          let y = `${z}`;
+
+          setdisplaymodalheader("No se pudo ingresar la orden");
           setalertMessage(y);
-          setdisplaymodalheader('no pudo hacer su pedido');
         }
-       
 
         // let x =  Object.keys(result).map(key => result[key]);
         // console.log(x);
@@ -338,6 +347,7 @@ const Form = (props) => {
             <input
               placeholder="Ingrese una dirección"
               className="form-control"
+              ref={directionInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="address"
@@ -358,6 +368,7 @@ const Form = (props) => {
             <input
               placeholder="Ingrese instrucciones"
               className="form-control"
+              ref={instructionInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="instructions"
@@ -380,6 +391,7 @@ const Form = (props) => {
               className="form-control"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               type="text"
+              ref={dteInput}
               name="dte"
               required
               onChange={handleInputChange}
@@ -398,6 +410,7 @@ const Form = (props) => {
             <input
               placeholder="Ingrese nombre"
               className="form-control"
+              ref={nameInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="name"
@@ -418,6 +431,7 @@ const Form = (props) => {
             <input
               placeholder="Código de ciudad"
               className="form-control"
+              ref={codeInput}
               type="number"
               style={{
                 width: "300px",
@@ -444,6 +458,7 @@ const Form = (props) => {
             <input
               placeholder="Ingrese teléfono"
               className="form-control"
+              ref={phoneInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="phone"
@@ -465,6 +480,7 @@ const Form = (props) => {
               placeholder="Ingrese un correo electrónico"
               className="form-control"
               type="text"
+              ref={mailInput}
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="email"
               required
@@ -485,6 +501,7 @@ const Form = (props) => {
             <input
               placeholder="Altura"
               className="form-control"
+              ref={maxheightInput}
               type="number"
               style={{
                 width: "300px",
@@ -511,6 +528,7 @@ const Form = (props) => {
               placeholder="Largo"
               className="form-control"
               type="number"
+              ref={maxlengthInput}
               style={{
                 width: "300px",
                 borderRadius: "17px",
@@ -536,6 +554,7 @@ const Form = (props) => {
               placeholder="Ancho"
               className="form-control"
               type="number"
+              ref={maxwidthinput}
               style={{
                 width: "300px",
                 borderRadius: "17px",
@@ -715,48 +734,39 @@ const Form = (props) => {
           </div>
         </form>
       </div>
-      {
-        alert && (
-          <Modal onhideModal={hideAlert}>
-            <h2 style={{ textAlign: "center" }}>
-             {displaymodalheader}
-            </h2>
-            {/* <img src = {sentEmail}/> */}
-            <p style={{ textAlign: "center" }}>{alertMessage}</p>
-            <div class="text-center">
-              <button
-                onClick={hideAlert}
-                id="bttnSubmit"
-                type="submit"
-                style={{
-                  backgroundColor: "#1D308E",
-                  textAlign: "center",
-                  color: "white",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
-                }}
-              >
-                Entendido &nbsp;
-              </button>
-            </div>
-          </Modal>
-        )
-        // <ReactBSAlert
-        //   style={{ display: "block", marginTop: "-100px" }}
-        //   title={alertMessage}
-        //   onConfirm={() => hideAlert()}
-        //   onCancel={() => hideAlert()}
-        //   confirmBtnBsStyle="info"
-        //   btnSize=""
-        // />
-      }
+      {alert && (
+        <Modal onhideModal={hideAlert}>
+          <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
+            {displaymodalheader}
+          </h3>
+
+          {/* <img src = {sentEmail}/> */}
+          <p style={{ textAlign: "center" }}>{alertMessage}</p>
+          <div class="text-center">
+            <button
+              onClick={hideAlert}
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#1D308E",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+              }}
+            >
+              Entendido &nbsp;
+            </button>
+          </div>
+        </Modal>
+      )}
     </Fragment>
   );
 };
