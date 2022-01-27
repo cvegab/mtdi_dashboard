@@ -87,7 +87,7 @@ const Form = (props) => {
     qty: "",
   });
   const [error, setError] = useState("");
-  const [alert, setAlert] = React.useState(true);
+  const [alert, setAlert] = React.useState(false);
   useEffect(() => {}, [data.products]);
 
   const columns = [
@@ -753,7 +753,7 @@ const Form = (props) => {
               }}
             >
               <img
-                style={{ height: "200px", width: "200px" }}
+                style={{ height: "200px", width: "300px" }}
                 src={modalImage}
               />
             </div>
