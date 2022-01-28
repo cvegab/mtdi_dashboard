@@ -739,6 +739,30 @@ const Form = (props) => {
               Enviar
             </Button>
           )}
+            {isSending && (
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "50px",
+                fontWeight: "600",
+              }}
+              onClick={sendData}
+              disabled
+            >
+              <Spinner
+                style={{ width: "0.7rem", height: "0.7rem" }}
+                type="grow"
+                color="light"
+              />
+              &nbsp; Cargando...
+            </Button>
+          )}
         </div>
         {alert && (
           <Modal onhideModal={hideAlert}>
