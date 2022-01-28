@@ -714,7 +714,34 @@ const Form = (props) => {
         </form>
         <div className="col-12">
           <MaterialTable
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    width: "100%",
+                  }}
+                >
+                    <p 
+                    style={{
+                     display: 'flex',
+                     justifyContent: "center",
+                      color: "#1D308E"
+                    }}> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    <span> No hay información disponible.</span> 
+                    </p>  
+                    {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
+                  </div>
+                ),
+             
+             
+              },
+            }}
             title=""
+            
             options={{ columnsButton: true, sorting: true, search: false }}
             columns={columns}
             data={data.products}
@@ -739,7 +766,7 @@ const Form = (props) => {
               Enviar
             </Button>
           )}
-            {isSending && (
+          {isSending && (
             <Button
               color="primary"
               style={{
