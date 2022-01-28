@@ -14,7 +14,7 @@ const SplashScreen = () => {
             width="200"
             alt="Cargando..."
           /> */}
-          {/* <h1 style={{color: 'black'}}>hello</h1> */}
+       
           <img
             src={spinnerGif}
             style={{ marginTop: "2em" }}
