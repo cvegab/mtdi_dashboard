@@ -654,7 +654,7 @@ const MtdiTable = (props) => {
 
   return (
     <React.Fragment>
-      {isLoading && <SplashScreen></SplashScreen>}
+       <SplashScreen/>
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
