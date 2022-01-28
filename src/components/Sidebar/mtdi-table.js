@@ -25,8 +25,9 @@ import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
-import spinnerGif from '../../assets/img/spinnerLogos.gif';
-import noDataImage from '../../assets/img/noDataImageBlue.png';
+import spinnerGif from "../../assets/img/spinnerLogos.gif";
+import noDataImage from "../../assets/img/noDataImageBlue.png";
+import SplashScreen from "components/UI/splash-screen";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -141,6 +142,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
+    setshowSplashScreen(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -168,6 +170,7 @@ const MtdiTable = (props) => {
       setData(data);
 
       setisLoading(false);
+      // setshowSplashScreen(false);
     } catch (error) {
       console.log(error);
     }
@@ -209,7 +212,6 @@ const MtdiTable = (props) => {
       const data = await response.json();
       console.log(data[0].total);
       if (data[0].total === 0) {
-       
         setData([]);
       } else {
         setData(data);
@@ -376,15 +378,15 @@ const MtdiTable = (props) => {
             return (
               <div>
                 No &nbsp;
-                <span
-                  style={{ marginLeft: "4px" }}
-                  className={classes.noIcon}
-                >
+                <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
                   <img title="No existe DTE" src={noIcon} />
                 </span>
                 &nbsp;
-                <span className={classes.greyIcon} style={{ cursor: "pointer" }}>
-                  <img src={greyIcon} title="No existe DTE"/>
+                <span
+                  className={classes.greyIcon}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={greyIcon} title="No existe DTE" />
                 </span>
               </div>
             );
@@ -652,6 +654,7 @@ const MtdiTable = (props) => {
 
   return (
     <React.Fragment>
+      {isLoading && <SplashScreen></SplashScreen>}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -934,17 +937,24 @@ const MtdiTable = (props) => {
           )}
           {isLoading && (
             <div id="spinner">
-
               {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
-                  <div>
-                    <img src={spinnerGif} style={{marginTop:"2em"}} width="200" alt="Cargando..." /> 
-                    <br/>
-                    {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
-                    <br />
-                  </div>
-              
-              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
-             <br/>
+              <div>
+                <img
+                  src={spinnerGif}
+                  style={{ marginTop: "2em" }}
+                  width="200"
+                  alt="Cargando..."
+                />
+                <br />
+                {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
+                <br />
+              </div>
+
+              <OrderMobileCard
+                data={data}
+                isLoading={isLoading}
+              ></OrderMobileCard>
+              <br />
             </div>
           )}
         </div>
@@ -995,14 +1005,13 @@ const MtdiTable = (props) => {
                       color="info"
 
                     /> */}
-                    <br/>
+                    <br />
                     <div>
-                      <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" /> 
-                      
+                      {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" />  */}
+
                       {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
                       <br />
                     </div>
-
                     <br />
                   </div>
                 ),
@@ -1014,34 +1023,45 @@ const MtdiTable = (props) => {
           )}
           {data.length === 0 && !isLoading && (
             <MaterialTable
-            localization={{
-              body: {
-                emptyDataSourceMessage: (
-                  <div
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    marginLeft:"20rem",
-                    width: "100%",
-                  }}
-                >
-                  <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
+              localization={{
+                body: {
+                  emptyDataSourceMessage: (
+                    <div
+                      style={{
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "20rem",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={noDataImage}
+                        style={{ marginTop: "2em" }}
+                        width="160"
+                        alt="noData"
+                      />
+                      <p
                     <p 
-                    style={{
-                     display: 'flex',
-                     justifyContent: "center",
-                      color: "#1D308E"
-                    }}> &nbsp;
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#1D308E",
+                        }}
+                      >
+                        {" "}
+                        &nbsp;
+                        <span> No hay información disponible.</span>
                     <span> No hay información disponible.</span> 
+                        <span> No hay información disponible.</span>
+                      </p>
                     </p>  
-                    
-                  </div>
-                ),
-             
-             
-              },
-            }}
+                      </p>
+                    </div>
+                  ),
+                },
+              }}
               title=""
               icons={tableIcons}
               columns={columns}
@@ -1054,32 +1074,39 @@ const MtdiTable = (props) => {
           {data.length !== 0 && !isLoading && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
-         
               localization={{
                 body: {
                   emptyDataSourceMessage: (
                     <div
-                    style={{
-                      alignItems: "center",
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      marginLeft:"20rem",
-                      width: "100%",
-                    }}
-                  >
-                    <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
-                      <p 
                       style={{
-                       display: 'flex',
-                       justifyContent: "center",
-                        color: "#1D308E"
-                      }}> &nbsp;
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "20rem",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={noDataImage}
+                        style={{ marginTop: "2em" }}
+                        width="160"
+                        alt="noData"
+                      />
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#1D308E",
+                        }}
+                      >
+                        {" "}
+                        &nbsp;
+                        <span> No hay información disponible.</span>
                       <span> No hay información disponible.</span> 
-                      </p>  
-                      
+                        <span> No hay información disponible.</span>
+                      </p>
                     </div>
                   ),
-               
                 },
               }}
               key={data.id_mtdi}
@@ -1092,55 +1119,54 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-       
         </div>
 
-       {!isLoading && <div className="bttnSeeMore">
-
-          {!isLoadingIncrementPage && (
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "50px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-            >
-              Ver más
-            </Button>
-          )}
-          {isLoadingIncrementPage && (
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "50px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-              disabled
-            >
-              <Spinner
-                style={{ width: "0.7rem", height: "0.7rem" }}
-                type="grow"
-                color="light"
-              />
-              &nbsp; Cargando...
-            </Button>
-          )}
-        </div>}
-
+        {!isLoading && (
+          <div className="bttnSeeMore">
+            {!isLoadingIncrementPage && (
+              <Button
+                color="primary"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "200px",
+                  height: "50px",
+                  fontWeight: "600",
+                }}
+                onClick={incrementPageHandler}
+              >
+                Ver más
+              </Button>
+            )}
+            {isLoadingIncrementPage && (
+              <Button
+                color="primary"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "200px",
+                  height: "50px",
+                  fontWeight: "600",
+                }}
+                onClick={incrementPageHandler}
+                disabled
+              >
+                <Spinner
+                  style={{ width: "0.7rem", height: "0.7rem" }}
+                  type="grow"
+                  color="light"
+                />
+                &nbsp; Cargando...
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </React.Fragment>
   );
