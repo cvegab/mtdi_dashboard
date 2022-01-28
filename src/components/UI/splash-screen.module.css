@@ -1,0 +1,44 @@
+.intro {
+    position: fixed;
+   
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    /* background-color:#161616; */
+    transition: 1s;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-10%, -60%);
+    z-index: 40;
+  
+  }
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 30;
+    /* background-color: rgba(0, 0, 0, 0.75); */
+    /* background-color: white; */
+    background-color: rgba(255,255,255,0.75);
+       /* background-color: rgba(1,1,1,0.5);  */
+     
+    opacity: 1;
+    backdrop-filter: blur(3px);
+   
+  }
+
+  .message{
+    transform: translate(+30%, -10%);
+   font-weight: bold;
+   font-size: 12px;
+   color: #1D308E;
+  
+  }

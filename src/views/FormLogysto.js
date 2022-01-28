@@ -1,5 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Button, Col, Spinner } from "reactstrap";
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import sentEmail from "../assets/img/emailSent.png";
+import addProductsFailed from "../assets/img/adding-products-failed.png";
+import ImageError from "../assets/img/error-image.png";
+import ImageOrderPlaced from "../assets/img/order-placed.png";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -10,8 +13,23 @@ import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
+import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
-
+import ReactBSAlert from "react-bootstrap-sweetalert";
+import noDataImage from "../assets/img/noDataImageBlue.png";
+// import sentEmail from "../../assets/img/emailSent.png";
+// reactstrap components
+import {
+  Button,
+  Card,
+  CardBody,
+  CardText,
+  Row,
+  Col,
+  CardHeader,
+  ModalHeader,
+} from "reactstrap";
+import Modal from "components/UI/Modal";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -33,7 +51,21 @@ const selectOptions = [
   { value: "Test", label: "Test" },
 ];
 
-const Form = () => {
+const Form = (props) => {
+  const [alertMessage, setalertMessage] = useState("");
+  const [modalImage, setmodalImage] = useState("");
+  const [displaymodalheader, setdisplaymodalheader] = useState("");
+  const [isSending, setisSending] = useState(false);
+  const nameInput = useRef("");
+  const directionInput = useRef("");
+  const instructionInput = useRef("");
+  const codeInput = useRef("");
+  const dteInput = useRef("");
+  const phoneInput = useRef("");
+  const mailInput = useRef("");
+  const maxheightInput = useRef("");
+  const maxlengthInput = useRef("");
+  const maxwidthinput = useRef("");
   const [data, setData] = useState({
     address: "",
     instructions: "",
@@ -58,6 +90,7 @@ const Form = () => {
     qty: "",
   });
   const [error, setError] = useState("");
+  const [alert, setAlert] = React.useState(false);
   useEffect(() => {}, [data.products]);
 
   const columns = [
@@ -153,7 +186,8 @@ const Form = () => {
   const handleSelectChange = (e, child) => {
     setData({
       ...data,
-      [e.target.name]: child.props.value,
+      // [e.target.name]: child.props.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -178,6 +212,16 @@ const Form = () => {
       brand: "",
       qty: "",
     });
+    nameInput.current.value = "";
+    directionInput.current.value = "";
+    instructionInput.current.value = "";
+    codeInput.current.value = "";
+    dteInput.current.value = "";
+    phoneInput.current.value = "";
+    mailInput.current.value = "";
+    maxheightInput.current.value = "";
+    maxlengthInput.current.value = "";
+    maxwidthinput.current.value = "";
   };
 
   const sendData = (e) => {
@@ -197,16 +241,36 @@ const Form = () => {
       body: JSON.stringify(raw),
       redirect: "follow",
     };
+    setisSending(true);
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/logysto/orders",
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        setAlert(true);
+
+        let parsedJSON = JSON.parse(result);
+        console.log(parsedJSON.services_created);
+        console.log(parsedJSON.services_created.length);
+        if (parsedJSON.services_created.length !== 0) {
+          setalertMessage("");
+          setmodalImage(ImageOrderPlaced);
+          setdisplaymodalheader("Pedido ingresado correctamente");
+        } else {
+          let z = parsedJSON.services_not_create[0].razon;
+          let y = `${z}`;
+          setmodalImage(ImageError);
+          setdisplaymodalheader("No se pudo ingresar la orden");
+          setalertMessage(y);
+        }
+        setisSending(false);
       })
 
       .catch((error) => console.log("error", error));
+  };
+  const hideAlert = () => {
+    setAlert(false);
   };
   return (
     <Fragment>
@@ -251,7 +315,7 @@ const Form = () => {
             >
               Canal de venta
             </h5>
-            <Select
+            {/* <Select
               labelId="select-tienda"
               id="select-tienda"
               name="from"
@@ -269,7 +333,31 @@ const Form = () => {
             >
               <option value="Sodimac">Sodimac</option>
               <option value="Test">Test</option>
-            </Select>
+            </Select> */}
+            <select
+             labelId="select-tienda"
+             id="select-tienda"
+             name="from"
+             style={{
+               width: "200px",
+               height: "35px",
+               marginLeft: "1em",
+               borderRadius: "17px",
+               marginBottom: "1em",
+               fontSize: "10px",
+             }}
+             label="Canal de venta"
+             onChange={handleSelectChange}
+             defaultValue="Sodimac"
+              class="form-select"
+              // aria-label="Default select example"
+              // style={{ borderRadius: "20px",}}
+              defaultValue='Sodimac'
+            >
+            
+              <option value="Sodimac">Sodimac</option>
+              <option value="Test">Test</option>
+            </select>
           </label>
         </Col>
         <br />
@@ -288,6 +376,7 @@ const Form = () => {
               Dirección
             </p>
             <input
+              ref={directionInput}
               placeholder="Ingrese una dirección"
               className="form-control"
               type="text"
@@ -308,6 +397,7 @@ const Form = () => {
               Instrucciones
             </p>
             <input
+              ref={instructionInput}
               placeholder="Ingrese instrucciones"
               className="form-control"
               type="text"
@@ -328,6 +418,7 @@ const Form = () => {
               DTE
             </p>
             <input
+              ref={dteInput}
               placeholder="DTE"
               className="form-control"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
@@ -350,6 +441,7 @@ const Form = () => {
             <input
               placeholder="Ingrese nombre"
               className="form-control"
+              ref={nameInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="name"
@@ -369,6 +461,7 @@ const Form = () => {
             </p>
             <input
               placeholder="Código de ciudad"
+              ref={codeInput}
               className="form-control"
               type="number"
               style={{
@@ -396,6 +489,7 @@ const Form = () => {
             <input
               placeholder="Ingrese teléfono"
               className="form-control"
+              ref={phoneInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="phone"
@@ -416,6 +510,7 @@ const Form = () => {
             <input
               placeholder="Ingrese un correo electrónico"
               className="form-control"
+              ref={mailInput}
               type="text"
               style={{ width: "300px", height: "35px", marginBottom: "2em" }}
               name="email"
@@ -437,6 +532,7 @@ const Form = () => {
             <input
               placeholder="Altura"
               className="form-control"
+              ref={maxheightInput}
               type="number"
               style={{
                 width: "300px",
@@ -462,6 +558,7 @@ const Form = () => {
             <input
               placeholder="Largo"
               className="form-control"
+              ref={maxlengthInput}
               type="number"
               style={{
                 width: "300px",
@@ -488,6 +585,7 @@ const Form = () => {
               placeholder="Ancho"
               className="form-control"
               type="number"
+              ref={maxwidthinput}
               style={{
                 width: "300px",
                 borderRadius: "17px",
@@ -639,19 +737,55 @@ const Form = () => {
               Agregar producto
             </Button>
           </div>
-          <div className="col-12">
-            <MaterialTable
-              title=""
-              options={{ columnsButton: true, sorting: true, search: false }}
-              columns={columns}
-              data={data.products}
-              style={{ marginLeft: "1em", marginTop: "2em", color: "black" }}
-              icons={tableIcons}
-            />
-          </div>
-
-          <div className="col-md-6">
+        </form>
+        <div className="col-12">
+          <MaterialTable
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div
+                  // style={{
+                  //   alignItems: "center",
+                  //   display: "flex",
+                  //   justifyContent: "flex-start",
+                  //   width: "100%",
+                  // }}
+                  >
+                    <img
+                      src={noDataImage}
+                      style={{ marginTop: "2em" }}
+                      width="160"
+                      alt="noData"
+                    />
+                    <p
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "#1D308E",
+                      }}
+                    >
+                      {" "}
+                      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                      <span> No hay información disponible.</span>
+                    </p>
+                    {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
+                  </div>
+                ),
+              },
+            }}
+            title=""
+            options={{ columnsButton: true, sorting: true, search: false }}
+            columns={columns}
+            data={data.products}
+            style={{ marginLeft: "1em", marginTop: "2em", color: "black" }}
+            icons={tableIcons}
+          />
+        </div>
+        <div className="col-md-6">
+          {!isSending && (
             <Button
+              onClick={sendData}
               className="btn btn-primary"
               style={{
                 backgroundColor: "#1D308E",
@@ -660,12 +794,84 @@ const Form = () => {
                 height: "50px",
                 color: "white",
               }}
-              type="submit"
+              type="button"
             >
               Enviar
             </Button>
-          </div>
-        </form>
+          )}
+          {isSending && (
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "50px",
+                fontWeight: "600",
+              }}
+              onClick={sendData}
+              disabled
+            >
+              <Spinner
+                style={{ width: "0.7rem", height: "0.7rem" }}
+                type="grow"
+                color="light"
+              />
+              &nbsp; Cargando...
+            </Button>
+          )}
+        </div>
+        {alert && (
+          <Modal onhideModal={hideAlert}>
+            <h3
+              style={{ fontWeight: "700", size: "24px", textAlign: "center" }}
+            >
+              {displaymodalheader}
+            </h3>
+            <p style={{ fontweight: "300", size: "13px", textAlign: "center" }}>
+              {alertMessage}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                style={{ height: "200px", width: "300px" }}
+                src={modalImage}
+              />
+            </div>
+
+            <div class="text-center">
+              <button
+                onClick={hideAlert}
+                id="bttnSubmit"
+                type="submit"
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  color: "white",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  border: "0",
+                }}
+              >
+                Entendido &nbsp;
+              </button>
+            </div>
+          </Modal>
+        )}
       </div>
     </Fragment>
   );

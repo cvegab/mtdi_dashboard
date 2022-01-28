@@ -31,8 +31,9 @@ import endTour from '../../assets/img/endTour.png';
 import startTour from '../../assets/img/startTour.png';
 import Tour from 'reactour';
 import {disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-
-
+import spinnerGif from "../../assets/img/spinnerLogos.gif";
+import noDataImage from "../../assets/img/noDataImageBlue.png";
+import SplashScreen from "components/UI/splash-screen";
 
 
 const tableIcons = {
@@ -464,6 +465,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
+ 
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -491,6 +493,7 @@ const MtdiTable = (props) => {
       setData(data);
 
       setisLoading(false);
+    
     } catch (error) {
       console.log(error);
     }
@@ -532,7 +535,6 @@ const MtdiTable = (props) => {
       const data = await response.json();
       console.log(data[0].total);
       if (data[0].total === 0) {
-       
         setData([]);
       } else {
         setData(data);
@@ -699,15 +701,15 @@ const MtdiTable = (props) => {
             return (
               <div>
                 No &nbsp;
-                <span
-                  style={{ marginLeft: "4px" }}
-                  className={classes.noIcon}
-                >
+                <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
                   <img title="No existe DTE" src={noIcon} />
                 </span>
                 &nbsp;
-                <span className={classes.greyIcon} style={{ cursor: "pointer" }}>
-                  <img src={greyIcon} title="No existe DTE"/>
+                <span
+                  className={classes.greyIcon}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={greyIcon} title="No existe DTE" />
                 </span>
               </div>
             );
@@ -977,6 +979,7 @@ const MtdiTable = (props) => {
 
   return (
     <React.Fragment>
+       {isLoading && <SplashScreen/>}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -1283,17 +1286,24 @@ const MtdiTable = (props) => {
           )}
           {isLoading && (
             <div id="spinner">
-
               {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
-                  <div>
-                    <img src={spinnerGif} style={{marginTop:"2em"}} width="200" alt="Cargando..." /> 
-                    <br/>
-                    {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
-                    <br />
-                  </div>
-              
-              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
-             <br/>
+              <div>
+                <img
+                  src={spinnerGif}
+                  style={{ marginTop: "2em" }}
+                  width="200"
+                  alt="Cargando..."
+                />
+                <br />
+                {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
+                <br />
+              </div>
+
+              <OrderMobileCard
+                data={data}
+                isLoading={isLoading}
+              ></OrderMobileCard>
+              <br />
             </div>
           )}
         </div>
@@ -1344,14 +1354,13 @@ const MtdiTable = (props) => {
                       color="info"
 
                     /> */}
-                    <br/>
+                    <br />
                     <div>
-                      <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" /> 
-                      
+                      {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" />  */}
+
                       {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
                       <br />
                     </div>
-
                     <br />
                   </div>
                 ),
@@ -1363,32 +1372,43 @@ const MtdiTable = (props) => {
           )}
           {data.length === 0 && !isLoading && (
             <MaterialTable
-            localization={{
-              body: {
-                emptyDataSourceMessage: (
-                  <div
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    width: "100%",
-                  }}
-                >
-                    <p 
-                    style={{
-                     display: 'flex',
-                     justifyContent: "center",
-                      color: "#1D308E"
-                    }}> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+              localization={{
+                body: {
+                  emptyDataSourceMessage: (
+                    <div
+                      style={{
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "20rem",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={noDataImage}
+                        style={{ marginTop: "2em" }}
+                        width="160"
+                        alt="noData"
+                      />
+                      <p
+                   
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#1D308E",
+                        }}
+                      >
+                        {" "}
+                        &nbsp;
+                        <span> No hay información disponible.</span>
                     <span> No hay información disponible.</span> 
-                    </p>  
-                    {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
-                  </div>
-                ),
-             
-             
-              },
-            }}
+                        <span> No hay información disponible.</span>
+                      </p>
+                   
+                    </div>
+                  ),
+                },
+              }}
               title=""
               icons={tableIcons}
               columns={columns}
@@ -1401,32 +1421,39 @@ const MtdiTable = (props) => {
           {data.length !== 0 && !isLoading && (
             <MaterialTable
               onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
-         
               localization={{
                 body: {
                   emptyDataSourceMessage: (
                     <div
-                    style={{
-                      alignItems: "center",
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      marginLeft:"20rem",
-                      width: "100%",
-                    }}
-                  >
-                    <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
-                      <p 
                       style={{
-                       display: 'flex',
-                       justifyContent: "center",
-                        color: "#1D308E"
-                      }}> &nbsp;
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "20rem",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={noDataImage}
+                        style={{ marginTop: "2em" }}
+                        width="160"
+                        alt="noData"
+                      />
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#1D308E",
+                        }}
+                      >
+                        {" "}
+                        &nbsp;
+                        <span> No hay información disponible.</span>
                       <span> No hay información disponible.</span> 
-                      </p>  
-                      
+                        <span> No hay información disponible.</span>
+                      </p>
                     </div>
                   ),
-               
                 },
               }}
               key={data.id_mtdi}
@@ -1439,7 +1466,6 @@ const MtdiTable = (props) => {
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
           )}
-       
         </div>
 
        {!isLoading && <div className="bttnSeeMore">
@@ -1492,93 +1518,7 @@ const MtdiTable = (props) => {
         </div>
 
 
-      {/* INSTRUCTIONS MODAL 1 */}
-
-        {/* <Modal  className="contenedor-modal" isOpen={modalInstructions1} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Bienvenido al MTD de Instance </ModalHeader>
-        <ModalBody>
-          <p className="modalText">
-          
-              Revisa este pequeño tutorial para entender cómo utilizar tu panel
-              
-          </p>
-        
-          <br/>
-          <br/>
-        <button
-                id="bttnSubmit"
-                type="submit"
-                style={{
-                  backgroundColor: "#1D308E",
-                  textAlign: "center",
-                  color: "white",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0" 
-                }}
-                onClick={toggle2}
-              >
-                Iniciar tutorial
-          </button>
-          <br/>
-          <Button color="primary" onClick={toggle}> Saltar </Button>
-        </ModalBody>
-      </Modal> */}
-
-
-    
-    
-
-         {/* INSTRUCTIONS MODAL 2 */}
-
-         {/* <Modal className="modalContainer" isOpen={modalInstructions2} toggle={toggle}>
-        <ModalHeader toggle={toggle}>
-   
-          <p className="modalText">
-            <strong> 
-             Bienvenido al MTD de Instance
-            </strong>
-          </p>   
-        </ModalHeader>
-        <ModalBody>
-          <p className="modalText">
-          
-              Instrucciones
-              
-          </p>
-        </ModalBody>
-        <ModalFooter>
-        <button
-                id="bttnSubmit"
-                type="submit"
-                style={{
-                  backgroundColor: "#1D308E",
-                  textAlign: "center",
-                  color: "white",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0"
-               
-                }}
-                // onClick={modalInstructions2}
-              >
-                Siguiente
-          </button>
-          <Button color="primary" onClick={toggle}> Atrás </Button>
-        </ModalFooter>
-      </Modal> */}
+     
       <Tour
         steps={stepsDesk}
         isOpen={isTourOpen}
@@ -1591,6 +1531,8 @@ const MtdiTable = (props) => {
       />
 
      
+
+
       </div>
     </React.Fragment>
   );
