@@ -13,8 +13,10 @@ import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
+import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import noDataImage from '../assets/img/noDataImageBlue.png';
 // import sentEmail from "../../assets/img/emailSent.png";
 // reactstrap components
 import {
@@ -53,6 +55,7 @@ const Form = (props) => {
   const [alertMessage, setalertMessage] = useState("");
   const [modalImage, setmodalImage] = useState("");
   const [displaymodalheader, setdisplaymodalheader] = useState("");
+  const [isSending, setisSending] = useState(false);
   const nameInput = useRef("");
   const directionInput = useRef("");
   const instructionInput = useRef("");
@@ -221,7 +224,7 @@ const Form = (props) => {
   };
 
   const sendData = (e) => {
-    console.log(data);
+   
     e.preventDefault();
 
     data.city_code = parseInt(data.city_code);
@@ -238,6 +241,7 @@ const Form = (props) => {
       body: JSON.stringify(raw),
       redirect: "follow",
     };
+    setisSending(true);
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/logysto/orders",
       requestOptions
@@ -260,6 +264,7 @@ const Form = (props) => {
           setdisplaymodalheader("No se pudo ingresar la orden");
           setalertMessage(y);
         }
+        setisSending(false);
       })
 
       .catch((error) => console.log("error", error));
@@ -711,7 +716,35 @@ const Form = (props) => {
         </form>
         <div className="col-12">
           <MaterialTable
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div
+                  // style={{
+                  //   alignItems: "center",
+                  //   display: "flex",
+                  //   justifyContent: "flex-start",
+                  //   width: "100%",
+                  // }}
+                >
+                    <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
+                    <p 
+                    style={{
+                     display: 'flex',
+                     justifyContent: "center",
+                      color: "#1D308E"
+                    }}> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                    <span> No hay información disponible.</span> 
+                    </p>  
+                    {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
+                  </div>
+                ),
+             
+             
+              },
+            }}
             title=""
+            
             options={{ columnsButton: true, sorting: true, search: false }}
             columns={columns}
             data={data.products}
@@ -720,20 +753,46 @@ const Form = (props) => {
           />
         </div>
         <div className="col-md-6">
-          <Button
-            onClick={sendData}
-            className="btn btn-primary"
-            style={{
-              backgroundColor: "#1D308E",
-              borderRadius: "20px",
-              width: "150px",
-              height: "50px",
-              color: "white",
-            }}
-            type="button"
-          >
-            Enviar
-          </Button>
+          {!isSending && (
+            <Button
+              onClick={sendData}
+              className="btn btn-primary"
+              style={{
+                backgroundColor: "#1D308E",
+                borderRadius: "20px",
+                width: "150px",
+                height: "50px",
+                color: "white",
+              }}
+              type="button"
+            >
+              Enviar
+            </Button>
+          )}
+          {isSending && (
+            <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "200px",
+                height: "50px",
+                fontWeight: "600",
+              }}
+              onClick={sendData}
+              disabled
+            >
+              <Spinner
+                style={{ width: "0.7rem", height: "0.7rem" }}
+                type="grow"
+                color="light"
+              />
+              &nbsp; Cargando...
+            </Button>
+          )}
         </div>
         {alert && (
           <Modal onhideModal={hideAlert}>
