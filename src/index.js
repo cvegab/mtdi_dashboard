@@ -11,6 +11,9 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import App from "App";
 
+
+
+
 ReactDOM.render(
   // <BrowserRouter>
   //   <Switch>
@@ -19,7 +22,8 @@ ReactDOM.render(
   //     <Redirect to="/admin/dashboard" />
   //   </Switch>
   // </BrowserRouter>,
-  <App />,
+    <App />,
+
 
   document.getElementById("root")
 );
