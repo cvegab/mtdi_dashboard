@@ -62,7 +62,6 @@ const MtdiTable = (props) => {
   const [salesChannel, setsalesChannel] = useState("");
   const [channelId, setchannelId] = useState(0);
   const [isTourOpen, setIsTourOpen] = useState(true);
-  const [steps, setSteps] = useState([]); 
   const accentColor = "#5cb7b7";
   // const [modalInstructions1, setModalInstructions1] = useState(false);
   // const [modalInstructions2, setModalInstructions2] = useState(false);
@@ -95,292 +94,11 @@ const MtdiTable = (props) => {
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
 
-  const stepsDesk = [
-    {
-      selector: '.tenthStepTour',
-      content: 
-      <div>
-        <br/>
-      <p
-      style={{
-        fontSize: "16px",
-        fontWeight: "800",
-        marginBottom: "2em"
-      }}>
-        
-          ¡Bienvenido al MTD de Instance!
-        
-      </p>
-      <img src={startTour} alt="startTour" />
-      <p
-      style={{
-        display: "flex",
-        justifyContent: "center",   
-        marginBottom: "2em",   
-        fontWeight: "600" 
-      }}>
-        
-        Te invitamos a hacer el tour inicial
-        
-      </p>
-      
-      </div>,  
-    },
-    {
-      selector: '.firstStepTour',
-      content: 
-      <div>
-        Ésta es tu <strong>tabla de órdenes.</strong>
-        <br/> 
-        <p>
-          Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
-        </p> 
-      </div>,
-    },
-    {
-      selector: '.secondStepTour',
-      content: 
-        <div> 
-          Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
-        </div>
-    },
-    {
-      selector: '.thirdStepTour',
-      content: 
-      <div>
-        Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
-      </div>
-    },
-    {
-      selector: '.fourthStepTour',
-      content: 
-      <div> 
-        Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
-      </div>
-    },
-    {
-      selector: '.MuiTableSortLabel-iconDirectionAsc',
-      content: 
-        <div>
-          Cada título tiene una <strong>flecha</strong> que al presionarla te permitirá clasificar la información de menor a mayor ó de la A a la Z y visceversa.
-        </div>
-    },
-    {
-      selector: '.MuiIconButton-colorInherit',
-      content: 
-       <div>
-        Y con esta opción tendrás la posibilidad de personalizar tu espacio y decidir <strong> qué columnas quieres ver o quitar de tu tablero. </strong>
-       </div> 
-    },
-    {
-      selector: '.seventhStepTour',
-      content: 
-       <div> 
-         ¡Ojo!
-         <br/>
-         Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
-
-       </div>
-    },
-    {
-      selector: '.eighthStepTour',
-      content: 
-      <div>
-        Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
-      </div>
-    },
-    {
-      selector: '.MuiTablePagination-select',
-      content: 
-      <div>
-        En esta parte tienes la posibilidad de desplegar un mayor <strong>número de vistas</strong> de tus órdenes.
-      </div>
-    },
-    {
-      selector: '.MTablePaginationInner-root-14',
-      content: 
-      <div>
-        Y de llegar hasta el <strong>final de la lista</strong>.
-      </div>
-    },
-    {
-      selector: '.ninthStepTour',
-      content: 
-        <div>
-          Finalmente, si hay algo que no te queda claro, presionando acá con gusto volveremos a <strong> comenzar este tutorial. </strong>
-        </div>
-    },
-    {
-      selector: '.tenthStepTour',
-      content: 
-
-      <div>
-      <br/>
-    <p
-    style={{
-      fontSize: "14px",
-      fontWeight: "800",
-      marginBottom: "2em",
-      marginTop:"1em"
-    }}>
-      
-        ¡Que tengas una grata experiencia!  
-    </p>
-
-    <img src={endTour} alt="endTour" />
-      <div style={{display:"flex", justifyContent:"center"}}>
-        <Button
-                color="primary"
-                className="ninthStepTour"
-                style={{
-                  borderRadius: "22px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  letterSpacing: "1px",
-                  width: "150px",
-                  height: "38px",
-                  fontWeight: "600",
-                  
-                }}            
-                onClick={toggle}
-              >
-                ir al MTD
-        </Button>
-      </div>
-    </div>,  
-     
-        
-    },
-  ]
-
-  const stepsMobile = [
-    {
-      selector: '.tenthStepTour',
-      content: 
-      <div>
-        <br/>
-      <p
-      style={{
-        fontSize: "16px",
-        fontWeight: "800",
-        marginBottom: "2em"
-      }}>
-        
-          ¡Bienvenido al MTD de Instance!
-        
-      </p>
-      <img src={startTour} alt="startTour" />
-      <p
-      style={{
-        display: "flex",
-        justifyContent: "center",   
-        marginBottom: "2em",   
-        fontWeight: "600" 
-      }}>
-        
-        Te invitamos a hacer el tour inicial
-        
-      </p>
-      
-      </div>,  
-    },
-    {
-      selector: '.firstStepTour',
-      content: 
-      <div>
-        Ésta es tu <strong>tabla de órdenes.</strong>
-        <br/> 
-        <p>
-          Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
-        </p> 
-      </div>,
-    },
-    {
-      selector: '.secondStepTour',
-      content: 
-        <div> 
-          Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
-        </div>
-    },
-    {
-      selector: '.thirdStepTour',
-      content: 
-      <div>
-        Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
-      </div>
-    },
-    {
-      selector: '.fourthStepTour',
-      content: 
-      <div> 
-        Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
-      </div>
-    },
- 
-    {
-      selector: '.seventhStepTour',
-      content: 
-       <div> 
-         ¡Ojo!
-         <br/>
-         Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
-
-       </div>
-    },
-    {
-      selector: '.eighthStepTour',
-      content: 
-      <div>
-        Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
-      </div>
-    },
   
-    {
-      selector: '.tenthStepTour',
-      content: 
-
-      <div>
-      <br/>
-    <p
-    style={{
-      fontSize: "14px",
-      fontWeight: "800",
-      marginBottom: "2em",
-      marginTop:"1em"
-    }}>
-      
-        ¡Que tengas una grata experiencia!  
-    </p>
-
-    <img src={endTour} alt="endTour" />
-      <div style={{display:"flex", justifyContent:"center"}}>
-        <Button
-                color="primary"
-                className="ninthStepTour"
-                style={{
-                  borderRadius: "22px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  letterSpacing: "1px",
-                  width: "150px",
-                  height: "38px",
-                  fontWeight: "600",
-                  
-                }}            
-                onClick={toggle}
-              >
-                ir al MTD
-        </Button>
-      </div>
-    </div>,  
-     
-        
-    },
-  ]
 
 
+
+  var stepsDesk = [];
   var a = navigator.userAgent;
   var agents = new Array("iPhone","iPad","Android","SymbianOS", "Windows Phone","iPod");
   var flag = true;
@@ -394,13 +112,292 @@ const MtdiTable = (props) => {
   }
   if(flag)
   {
-    setSteps(stepsDesk);
-
+    stepsDesk = [
+      {
+        selector: '.tenthStepTour',
+        content: 
+        <div>
+          <br/>
+        <p
+        style={{
+          fontSize: "16px",
+          fontWeight: "800",
+          marginBottom: "2em"
+        }}>
+          
+            ¡Bienvenido al MTD de Instance!
+          
+        </p>
+        <img src={startTour} alt="startTour" />
+        <p
+        style={{
+          display: "flex",
+          justifyContent: "center",   
+          marginBottom: "2em",   
+          fontWeight: "600" 
+        }}>
+          
+          Te invitamos a hacer el tour inicial
+          
+        </p>
+        
+        </div>,  
+      },
+      {
+        selector: '.firstStepTour',
+        content: 
+        <div>
+          Ésta es tu <strong>tabla de órdenes.</strong>
+          <br/> 
+          <p>
+            Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
+          </p> 
+        </div>,
+      },
+      {
+        selector: '.secondStepTour',
+        content: 
+          <div> 
+            Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
+          </div>
+      },
+      {
+        selector: '.thirdStepTour',
+        content: 
+        <div>
+          Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
+        </div>
+      },
+      {
+        selector: '.fourthStepTour',
+        content: 
+        <div> 
+          Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
+        </div>
+      },
+      {
+        selector: '.MuiTableSortLabel-iconDirectionAsc',
+        content: 
+          <div>
+            Cada título tiene una <strong>flecha</strong> que al presionarla te permitirá clasificar la información de menor a mayor ó de la A a la Z y visceversa.
+          </div>
+      },
+      {
+        selector: '.MuiIconButton-colorInherit',
+        content: 
+         <div>
+          Y con esta opción tendrás la posibilidad de personalizar tu espacio y decidir <strong> qué columnas quieres ver o quitar de tu tablero. </strong>
+         </div> 
+      },
+      {
+        selector: '.seventhStepTour',
+        content: 
+         <div> 
+           ¡Ojo!
+           <br/>
+           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
+  
+         </div>
+      },
+      {
+        selector: '.eighthStepTour',
+        content: 
+        <div>
+          Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
+        </div>
+      },
+      {
+        selector: '.MuiTablePagination-select',
+        content: 
+        <div>
+          En esta parte tienes la posibilidad de desplegar un mayor <strong>número de vistas</strong> de tus órdenes.
+        </div>
+      },
+      {
+        selector: '.MTablePaginationInner-root-14',
+        content: 
+        <div>
+          Y de llegar hasta el <strong>final de la lista</strong>.
+        </div>
+      },
+      {
+        selector: '.ninthStepTour',
+        content: 
+          <div>
+            Finalmente, si hay algo que no te queda claro, presionando acá con gusto volveremos a <strong> comenzar este tutorial. </strong>
+          </div>
+      },
+      {
+        selector: '.tenthStepTour',
+        content: 
+  
+        <div>
+        <br/>
+      <p
+      style={{
+        fontSize: "14px",
+        fontWeight: "800",
+        marginBottom: "2em",
+        marginTop:"1em"
+      }}>
+        
+          ¡Que tengas una grata experiencia!  
+      </p>
+  
+      <img src={endTour} alt="endTour" />
+        <div style={{display:"flex", justifyContent:"center"}}>
+          <Button
+                  color="primary"
+                  className="ninthStepTour"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "150px",
+                    height: "38px",
+                    fontWeight: "600",
+                    
+                  }}            
+                  onClick={toggle}
+                >
+                  ir al MTD
+          </Button>
+        </div>
+      </div>,  
+       
+          
+      },
+    ]
   }
   else {
-    setSteps(stepsMobile);
+     stepsDesk = [
+      {
+        selector: '.tenthStepTour',
+        content: 
+        <div>
+          <br/>
+        <p
+        style={{
+          fontSize: "16px",
+          fontWeight: "800",
+          marginBottom: "2em"
+        }}>
+          
+            ¡Bienvenido al MTD de Instance!
+          
+        </p>
+        <img src={startTour} alt="startTour" />
+        <p
+        style={{
+          display: "flex",
+          justifyContent: "center",   
+          marginBottom: "2em",   
+          fontWeight: "600" 
+        }}>
+          
+          Te invitamos a hacer el tour inicial
+          
+        </p>
+        
+        </div>,  
+      },
+      {
+        selector: '.firstStepTour',
+        content: 
+        <div>
+          Ésta es tu <strong>tabla de órdenes.</strong>
+          <br/> 
+          <p>
+            Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
+          </p> 
+        </div>,
+      },
+      {
+        selector: '.secondStepTour',
+        content: 
+          <div> 
+            Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
+          </div>
+      },
+      {
+        selector: '.thirdStepTour',
+        content: 
+        <div>
+          Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
+        </div>
+      },
+      {
+        selector: '.fourthStepTour',
+        content: 
+        <div> 
+          Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
+        </div>
+      },
+   
+      {
+        selector: '.seventhStepTour',
+        content: 
+         <div> 
+           ¡Ojo!
+           <br/>
+           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
+  
+         </div>
+      },
+      {
+        selector: '.eighthStepTour',
+        content: 
+        <div>
+          Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
+        </div>
+      },
+    
+      {
+        selector: '.tenthStepTour',
+        content: 
+  
+        <div>
+        <br/>
+      <p
+      style={{
+        fontSize: "14px",
+        fontWeight: "800",
+        marginBottom: "2em",
+        marginTop:"1em"
+      }}>
+        
+          ¡Que tengas una grata experiencia!  
+      </p>
+  
+      <img src={endTour} alt="endTour" />
+        <div style={{display:"flex", justifyContent:"center"}}>
+          <Button
+                  color="primary"
+                  className="ninthStepTour"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "150px",
+                    height: "38px",
+                    fontWeight: "600",
+                    
+                  }}            
+                  onClick={toggle}
+                >
+                  ir al MTD
+          </Button>
+        </div>
+      </div>,  
+       
+          
+      },
+    ]
   }
-
 
   useEffect(() => {
     // setfirstName(localStorage.getItem("first"));
@@ -1583,7 +1580,7 @@ const MtdiTable = (props) => {
         </ModalFooter>
       </Modal> */}
       <Tour
-        steps={steps}
+        steps={stepsDesk}
         isOpen={isTourOpen}
         onRequestClose={() => setIsTourOpen(false)}
         accentColor={accentColor}

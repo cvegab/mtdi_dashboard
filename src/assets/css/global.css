@@ -99,6 +99,11 @@ color: white !important;
 .MuiIconButton-colorInherit {
   color: #06cbc1 !important;
 }
+
+.MuiIconButton-label {
+  color: #5cb7b7 !important;
+}
+
 .navbar-toggler-bar {
   background-color: #1d308e !important;
 }
