@@ -16,7 +16,7 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import noDataImage from '../assets/img/noDataImageBlue.png';
+import noDataImage from "../assets/img/noDataImageBlue.png";
 // import sentEmail from "../../assets/img/emailSent.png";
 // reactstrap components
 import {
@@ -186,7 +186,8 @@ const Form = (props) => {
   const handleSelectChange = (e, child) => {
     setData({
       ...data,
-      [e.target.name]: child.props.value,
+      // [e.target.name]: child.props.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -224,7 +225,6 @@ const Form = (props) => {
   };
 
   const sendData = (e) => {
-   
     e.preventDefault();
 
     data.city_code = parseInt(data.city_code);
@@ -315,7 +315,7 @@ const Form = (props) => {
             >
               Canal de venta
             </h5>
-            <Select
+            {/* <Select
               labelId="select-tienda"
               id="select-tienda"
               name="from"
@@ -333,7 +333,31 @@ const Form = (props) => {
             >
               <option value="Sodimac">Sodimac</option>
               <option value="Test">Test</option>
-            </Select>
+            </Select> */}
+            <select
+             labelId="select-tienda"
+             id="select-tienda"
+             name="from"
+             style={{
+               width: "200px",
+               height: "35px",
+               marginLeft: "1em",
+               borderRadius: "17px",
+               marginBottom: "1em",
+               fontSize: "10px",
+             }}
+             label="Canal de venta"
+             onChange={handleSelectChange}
+             defaultValue="Sodimac"
+              class="form-select"
+              // aria-label="Default select example"
+              // style={{ borderRadius: "20px",}}
+              defaultValue='Sodimac'
+            >
+            
+              <option value="Sodimac">Sodimac</option>
+              <option value="Test">Test</option>
+            </select>
           </label>
         </Col>
         <br />
@@ -726,25 +750,31 @@ const Form = (props) => {
                   //   justifyContent: "flex-start",
                   //   width: "100%",
                   // }}
-                >
-                    <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
-                    <p 
-                    style={{
-                     display: 'flex',
-                     justifyContent: "center",
-                      color: "#1D308E"
-                    }}> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-                    <span> No hay información disponible.</span> 
-                    </p>  
+                  >
+                    <img
+                      src={noDataImage}
+                      style={{ marginTop: "2em" }}
+                      width="160"
+                      alt="noData"
+                    />
+                    <p
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        color: "#1D308E",
+                      }}
+                    >
+                      {" "}
+                      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                      <span> No hay información disponible.</span>
+                    </p>
                     {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="160" alt="Cargando" />  */}
                   </div>
                 ),
-             
-             
               },
             }}
             title=""
-            
             options={{ columnsButton: true, sorting: true, search: false }}
             columns={columns}
             data={data.products}
