@@ -36,9 +36,9 @@
   }
 
   .message{
-    transform: translate(+10%, -10%);
+    transform: translate(+30%, -10%);
    font-weight: bold;
-   font-size: 28px;
+   font-size: 12px;
    color: #1D308E;
   
   }
