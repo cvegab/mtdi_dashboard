@@ -725,6 +725,7 @@ const Form = (props) => {
                     width: "100%",
                   }}
                 >
+                    <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
                     <p 
                     style={{
                      display: 'flex',
