@@ -13,6 +13,7 @@ import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
+import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 // import sentEmail from "../../assets/img/emailSent.png";
@@ -53,6 +54,7 @@ const Form = (props) => {
   const [alertMessage, setalertMessage] = useState("");
   const [modalImage, setmodalImage] = useState("");
   const [displaymodalheader, setdisplaymodalheader] = useState("");
+  const [isSending, setisSending] = useState(false);
   const nameInput = useRef("");
   const directionInput = useRef("");
   const instructionInput = useRef("");
@@ -221,7 +223,7 @@ const Form = (props) => {
   };
 
   const sendData = (e) => {
-    console.log(data);
+    setisSending(true);
     e.preventDefault();
 
     data.city_code = parseInt(data.city_code);
@@ -260,6 +262,7 @@ const Form = (props) => {
           setdisplaymodalheader("No se pudo ingresar la orden");
           setalertMessage(y);
         }
+        setisSending(false);
       })
 
       .catch((error) => console.log("error", error));
@@ -720,20 +723,22 @@ const Form = (props) => {
           />
         </div>
         <div className="col-md-6">
-          <Button
-            onClick={sendData}
-            className="btn btn-primary"
-            style={{
-              backgroundColor: "#1D308E",
-              borderRadius: "20px",
-              width: "150px",
-              height: "50px",
-              color: "white",
-            }}
-            type="button"
-          >
-            Enviar
-          </Button>
+          {!isSending && (
+            <Button
+              onClick={sendData}
+              className="btn btn-primary"
+              style={{
+                backgroundColor: "#1D308E",
+                borderRadius: "20px",
+                width: "150px",
+                height: "50px",
+                color: "white",
+              }}
+              type="button"
+            >
+              Enviar
+            </Button>
+          )}
         </div>
         {alert && (
           <Modal onhideModal={hideAlert}>
