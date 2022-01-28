@@ -142,7 +142,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
-    setshowSplashScreen(true);
+ 
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -170,7 +170,7 @@ const MtdiTable = (props) => {
       setData(data);
 
       setisLoading(false);
-      // setshowSplashScreen(false);
+    
     } catch (error) {
       console.log(error);
     }
@@ -1042,8 +1042,7 @@ const MtdiTable = (props) => {
                         alt="noData"
                       />
                       <p
-                    <p 
-                      <p
+                   
                         style={{
                           display: "flex",
                           justifyContent: "center",
@@ -1056,8 +1055,7 @@ const MtdiTable = (props) => {
                     <span> No hay información disponible.</span> 
                         <span> No hay información disponible.</span>
                       </p>
-                    </p>  
-                      </p>
+                   
                     </div>
                   ),
                 },
