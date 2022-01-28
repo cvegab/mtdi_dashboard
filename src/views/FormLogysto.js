@@ -224,7 +224,7 @@ const Form = (props) => {
   };
 
   const sendData = (e) => {
-    setisSending(true);
+   
     e.preventDefault();
 
     data.city_code = parseInt(data.city_code);
@@ -241,6 +241,7 @@ const Form = (props) => {
       body: JSON.stringify(raw),
       redirect: "follow",
     };
+    setisSending(true);
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/logysto/orders",
       requestOptions
@@ -719,12 +720,12 @@ const Form = (props) => {
               body: {
                 emptyDataSourceMessage: (
                   <div
-                  style={{
-                    alignItems: "center",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    width: "100%",
-                  }}
+                  // style={{
+                  //   alignItems: "center",
+                  //   display: "flex",
+                  //   justifyContent: "flex-start",
+                  //   width: "100%",
+                  // }}
                 >
                     <img src={noDataImage} style={{marginTop:"2em"}} width="160" alt="noData" /> 
                     <p 
