@@ -16,6 +16,7 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
+import noDataImage from '../assets/img/noDataImageBlue.png';
 // import sentEmail from "../../assets/img/emailSent.png";
 // reactstrap components
 import {
