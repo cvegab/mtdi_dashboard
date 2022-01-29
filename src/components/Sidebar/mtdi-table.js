@@ -25,8 +25,6 @@ import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
-import spinnerGif from '../../assets/img/spinnerLogos.gif';
-import noDataImage from '../../assets/img/noDataImageBlue.png';
 import endTour from '../../assets/img/endTour.png';
 import startTour from '../../assets/img/startTour.png';
 import Tour from 'reactour';
@@ -465,7 +463,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
- 
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -493,7 +491,7 @@ const MtdiTable = (props) => {
       setData(data);
 
       setisLoading(false);
-    
+
     } catch (error) {
       console.log(error);
     }
@@ -534,7 +532,7 @@ const MtdiTable = (props) => {
       }
       const data = await response.json();
       console.log(data[0].total);
-      if (data[0].total === 0) {
+      if (data[0].total === 0) {    
         setData([]);
       } else {
         setData(data);
@@ -705,9 +703,9 @@ const MtdiTable = (props) => {
                   <img title="No existe DTE" src={noIcon} />
                 </span>
                 &nbsp;
-                <span
-                  className={classes.greyIcon}
-                  style={{ cursor: "pointer" }}
+                <span 
+                className={classes.greyIcon} 
+                style={{ cursor: "pointer" }}
                 >
                   <img src={greyIcon} title="No existe DTE" />
                 </span>
@@ -979,7 +977,7 @@ const MtdiTable = (props) => {
 
   return (
     <React.Fragment>
-       {isLoading && <SplashScreen/>}
+      {isLoading && <SplashScreen/>}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -1287,8 +1285,8 @@ const MtdiTable = (props) => {
           {isLoading && (
             <div id="spinner">
               {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
-              <div>
-                <img
+                  <div>
+                  <img
                   src={spinnerGif}
                   style={{ marginTop: "2em" }}
                   width="200"
@@ -1296,15 +1294,15 @@ const MtdiTable = (props) => {
                 />
                 <br />
                 {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
-                <br />
-              </div>
-
-              <OrderMobileCard
+                    <br />
+                  </div>
+              
+                  <OrderMobileCard
                 data={data}
                 isLoading={isLoading}
-              ></OrderMobileCard>
-              <br />
-            </div>
+                ></OrderMobileCard>
+               <br />
+             </div>
           )}
         </div>
 
@@ -1357,7 +1355,7 @@ const MtdiTable = (props) => {
                     <br />
                     <div>
                       {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" />  */}
-
+                      
                       {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
                       <br />
                     </div>
@@ -1372,19 +1370,19 @@ const MtdiTable = (props) => {
           )}
           {data.length === 0 && !isLoading && (
             <MaterialTable
-              localization={{
-                body: {
-                  emptyDataSourceMessage: (
-                    <div
-                      style={{
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        marginLeft: "20rem",
-                        width: "100%",
-                      }}
-                    >
-                      <img
+            localization={{
+              body: {
+                emptyDataSourceMessage: (
+                  <div
+                  style={{
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    marginLeft: "20rem",
+                    width: "100%",
+                  }}
+                >
+                           <img
                         src={noDataImage}
                         style={{ marginTop: "2em" }}
                         width="160"
@@ -1407,8 +1405,8 @@ const MtdiTable = (props) => {
                    
                     </div>
                   ),
-                },
-              }}
+              },
+            }}
               title=""
               icons={tableIcons}
               columns={columns}
@@ -1420,20 +1418,20 @@ const MtdiTable = (props) => {
           )}
           {data.length !== 0 && !isLoading && (
             <MaterialTable
-              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
+              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}         
               localization={{
                 body: {
                   emptyDataSourceMessage: (
                     <div
-                      style={{
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        marginLeft: "20rem",
-                        width: "100%",
-                      }}
-                    >
-                      <img
+                    style={{
+                      alignItems: "center",
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      marginLeft: "20rem",
+                      width: "100%",
+                    }}
+                  >
+             <img
                         src={noDataImage}
                         style={{ marginTop: "2em" }}
                         width="160"
@@ -1465,7 +1463,7 @@ const MtdiTable = (props) => {
               options={{ columnsButton: true, sorting: true, search: true }}
               style={{ marginLeft: "1em", marginTop: "2em" }}
             />
-          )}
+          )}      
         </div>
 
        {!isLoading && <div className="bttnSeeMore">
@@ -1518,7 +1516,7 @@ const MtdiTable = (props) => {
         </div>
 
 
-     
+    
       <Tour
         steps={stepsDesk}
         isOpen={isTourOpen}
@@ -1530,7 +1528,7 @@ const MtdiTable = (props) => {
         onBeforeClose={enableBody}
       />
 
-     
+
 
 
       </div>
