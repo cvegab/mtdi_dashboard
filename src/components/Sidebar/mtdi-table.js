@@ -11,7 +11,7 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
 import { Select, MenuItem } from "@material-ui/core";
 import DatePicker, { registerLocale } from "react-datepicker";
-import calendarIcon from "../../assets/img/DatePickerIcon.png";
+// import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../assets/css/global.css";
@@ -62,15 +62,10 @@ const MtdiTable = (props) => {
   const [channelId, setchannelId] = useState(0);
   const [isTourOpen, setIsTourOpen] = useState(true);
   const accentColor = "#5cb7b7";
-  // const [modalInstructions1, setModalInstructions1] = useState(false);
-  // const [modalInstructions2, setModalInstructions2] = useState(false);
   const toggle = () => setIsTourOpen(!isTourOpen);
-  // const toggle2 = () => setModalInstructions2(!modalInstructions2);
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
-
   const d = new Date();
- 
   d.setMonth(d.getMonth() - 1);
   const [selectedDateFrom, setselectedDateFrom] = useState(
     d.toISOString().slice(0, 10)
@@ -94,7 +89,6 @@ const MtdiTable = (props) => {
   const [urlState, seturlState] = useState("");
 
   
-
 
 
   var stepsDesk = [];
@@ -122,10 +116,8 @@ const MtdiTable = (props) => {
           fontSize: "16px",
           fontWeight: "800",
           marginBottom: "2em"
-        }}>
-          
-            ¡Bienvenido al MTD de Instance!
-          
+        }}>        
+            ¡Bienvenido al MTD de Instance!       
         </p>
         <img src={startTour} alt="startTour" />
         <p
@@ -134,12 +126,9 @@ const MtdiTable = (props) => {
           justifyContent: "center",   
           marginBottom: "2em",   
           fontWeight: "600" 
-        }}>
-          
-          Te invitamos a hacer el tour inicial
-          
-        </p>
-        
+        }}>      
+          Te invitamos a hacer el tour inicial       
+        </p>       
         </div>,  
       },
       {
@@ -194,8 +183,7 @@ const MtdiTable = (props) => {
          <div> 
            ¡Ojo!
            <br/>
-           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
-  
+           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión. 
          </div>
       },
       {
@@ -238,8 +226,7 @@ const MtdiTable = (props) => {
         fontWeight: "800",
         marginBottom: "2em",
         marginTop:"1em"
-      }}>
-        
+      }}>        
           ¡Que tengas una grata experiencia!  
       </p>
   
@@ -264,9 +251,7 @@ const MtdiTable = (props) => {
                   ir al MTD
           </Button>
         </div>
-      </div>,  
-       
-          
+      </div>,          
       },
     ]
   }
@@ -282,10 +267,8 @@ const MtdiTable = (props) => {
           fontSize: "16px",
           fontWeight: "800",
           marginBottom: "2em"
-        }}>
-          
-            ¡Bienvenido al MTD de Instance!
-          
+        }}>        
+            ¡Bienvenido al MTD de Instance!          
         </p>
         <img src={startTour} alt="startTour" />
         <p
@@ -296,10 +279,8 @@ const MtdiTable = (props) => {
           fontWeight: "600" 
         }}>
           
-          Te invitamos a hacer el tour inicial
-          
-        </p>
-        
+          Te invitamos a hacer el tour inicial     
+        </p>     
         </div>,  
       },
       {
@@ -365,8 +346,7 @@ const MtdiTable = (props) => {
         fontWeight: "800",
         marginBottom: "2em",
         marginTop:"1em"
-      }}>
-        
+      }}>     
           ¡Que tengas una grata experiencia!  
       </p>
   
@@ -383,8 +363,7 @@ const MtdiTable = (props) => {
                     letterSpacing: "1px",
                     width: "150px",
                     height: "38px",
-                    fontWeight: "600",
-                    
+                    fontWeight: "600",              
                   }}            
                   onClick={toggle}
                 >
