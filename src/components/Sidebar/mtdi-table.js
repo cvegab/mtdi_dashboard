@@ -31,8 +31,6 @@ import endTour from '../../assets/img/endTour.png';
 import startTour from '../../assets/img/startTour.png';
 import Tour from 'reactour';
 import {disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import spinnerGif from "../../assets/img/spinnerLogos.gif";
-import noDataImage from "../../assets/img/noDataImageBlue.png";
 import SplashScreen from "components/UI/splash-screen";
 
 
