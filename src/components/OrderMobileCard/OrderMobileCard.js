@@ -212,12 +212,12 @@ function OrderMobileCard(props) {
                                       <div>
                                         {" "}
                                         Si &nbsp;
-                                        {/* <span
+                                        <span
                                        style={{ marginLeft: "14px", cursor: "pointer" }}
                                        className={classes.si}
-                                     > */}
-                                        {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
-                                     </span> */}
+                                     >
+                                        <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
+                                     </span>
                                         &nbsp;
                                         <span
                                           style={{ cursor: "pointer" }}
