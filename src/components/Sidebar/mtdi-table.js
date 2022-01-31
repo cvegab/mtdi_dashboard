@@ -1378,8 +1378,7 @@ const MtdiTable = (props) => {
                         {" "}
                         &nbsp;
                         <span> No hay información disponible.</span>
-                    <span> No hay información disponible.</span> 
-                        <span> No hay información disponible.</span>
+                 
                       </p>
                    
                     </div>
