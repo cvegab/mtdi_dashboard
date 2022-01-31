@@ -356,7 +356,8 @@ const Form = (props) => {
             >
             
               <option value="Sodimac">Sodimac</option>
-              <option value="Test">Test</option>
+              <option value="Rappi">Rappi</option>
+              <option value="Cornershop">Cornershop</option>
             </select>
           </label>
         </Col>
