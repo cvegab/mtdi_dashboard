@@ -1261,10 +1261,10 @@ const MtdiTable = (props) => {
               ></OrderMobileCard>
             </div>
           )}
-          {isLoading && (
-            <div id="spinner">
-              {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
-              <div>
+         
+          
+            
+              {/* <div>
                 <img
                   src={spinnerGif}
                   style={{ marginTop: "2em" }}
@@ -1272,17 +1272,17 @@ const MtdiTable = (props) => {
                   alt="Cargando..."
                 />
                 <br />
-                {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
+              
                 <br />
-              </div>
-
+              </div> */}
+{/* 
               <OrderMobileCard
                 data={data}
                 isLoading={isLoading}
-              ></OrderMobileCard>
+              ></OrderMobileCard> */}
               <br />
-            </div>
-          )}
+          
+         
         </div>
 
         {/* DESKTOP VERSION */}
@@ -1378,8 +1378,7 @@ const MtdiTable = (props) => {
                         {" "}
                         &nbsp;
                         <span> No hay información disponible.</span>
-                    <span> No hay información disponible.</span> 
-                        <span> No hay información disponible.</span>
+                 
                       </p>
                    
                     </div>
