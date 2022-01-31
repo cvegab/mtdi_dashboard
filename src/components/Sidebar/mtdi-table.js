@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { forwardRef } from "react";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ViewColumn from "@material-ui/icons/ViewColumn";
@@ -11,7 +11,7 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
 import { Select, MenuItem } from "@material-ui/core";
 import DatePicker, { registerLocale } from "react-datepicker";
-import calendarIcon from "../../assets/img/DatePickerIcon.png";
+// import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../assets/css/global.css";
@@ -19,12 +19,20 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-import { Button, Col, Spinner } from "reactstrap";
+import { Button, Col, Spinner, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
+import spinnerGif from '../../assets/img/spinnerLogos.gif';
+import noDataImage from '../../assets/img/noDataImageBlue.png';
+import endTour from '../../assets/img/endTour.png';
+import startTour from '../../assets/img/startTour.png';
+import Tour from 'reactour';
+import {disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import SplashScreen from "components/UI/splash-screen";
+
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -43,6 +51,7 @@ const tableIcons = {
 registerLocale("es", es);
 
 const MtdiTable = (props) => {
+  const [filtersApplied, setfiltersApplied] = useState(false);
   const [data, setData] = useState([]);
   const [pageCount, setpageCount] = useState(2);
   const [country, setcountry] = useState("");
@@ -51,6 +60,11 @@ const MtdiTable = (props) => {
   const [storeId, setstoreId] = useState(0);
   const [salesChannel, setsalesChannel] = useState("");
   const [channelId, setchannelId] = useState(0);
+  const [isTourOpen, setIsTourOpen] = useState(true);
+  const accentColor = "#5cb7b7";
+  const toggle = () => setIsTourOpen(!isTourOpen);
+  const disableBody = (target) => disableBodyScroll(target);
+  const enableBody = (target) => enableBodyScroll(target);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
   const [selectedDateFrom, setselectedDateFrom] = useState(
@@ -73,6 +87,296 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
+
+  
+
+
+  var stepsDesk = [];
+  var a = navigator.userAgent;
+  var agents = new Array("iPhone","iPad","Android","SymbianOS", "Windows Phone","iPod");
+  var flag = true;
+  for(var i = 0; i < agents.length; i++)
+  {
+    if(a.indexOf(agents[i]) > 0)
+    {
+      flag = false;
+      break;
+    }
+  }
+  if(flag)
+  {
+    stepsDesk = [
+      {
+        selector: '.tenthStepTour',
+        content: 
+        <div>
+          <br/>
+        <p
+        style={{
+          fontSize: "16px",
+          fontWeight: "800",
+          marginBottom: "2em"
+        }}>        
+            ¡Bienvenido al MTD de Instance!       
+        </p>
+        <img src={startTour} alt="startTour" />
+        <p
+        style={{
+          display: "flex",
+          justifyContent: "center",   
+          marginBottom: "2em",   
+          fontWeight: "600" 
+        }}>      
+          Te invitamos a hacer el tour inicial       
+        </p>       
+        </div>,  
+      },
+      {
+        selector: '.firstStepTour',
+        content: 
+        <div>
+          Ésta es tu <strong>tabla de órdenes.</strong>
+          <br/> 
+          <p>
+            Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
+          </p> 
+        </div>,
+      },
+      {
+        selector: '.secondStepTour',
+        content: 
+          <div> 
+            Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
+          </div>
+      },
+      {
+        selector: '.thirdStepTour',
+        content: 
+        <div>
+          Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
+        </div>
+      },
+      {
+        selector: '.fourthStepTour',
+        content: 
+        <div> 
+          Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
+        </div>
+      },
+      {
+        selector: '.MuiTableSortLabel-iconDirectionAsc',
+        content: 
+          <div>
+            Cada título tiene una <strong>flecha</strong> que al presionarla te permitirá clasificar la información de menor a mayor ó de la A a la Z y visceversa.
+          </div>
+      },
+      {
+        selector: '.MuiIconButton-colorInherit',
+        content: 
+         <div>
+          Y con esta opción tendrás la posibilidad de personalizar tu espacio y decidir <strong> qué columnas quieres ver o quitar de tu tablero. </strong>
+         </div> 
+      },
+      {
+        selector: '.seventhStepTour',
+        content: 
+         <div> 
+           ¡Ojo!
+           <br/>
+           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión. 
+         </div>
+      },
+      {
+        selector: '.eighthStepTour',
+        content: 
+        <div>
+          Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
+        </div>
+      },
+      {
+        selector: '.MuiTablePagination-select',
+        content: 
+        <div>
+          En esta parte tienes la posibilidad de desplegar un mayor <strong>número de vistas</strong> de tus órdenes.
+        </div>
+      },
+      {
+        selector: '.MTablePaginationInner-root-14',
+        content: 
+        <div>
+          Y de llegar hasta el <strong>final de la lista</strong>.
+        </div>
+      },
+      {
+        selector: '.ninthStepTour',
+        content: 
+          <div>
+            Finalmente, si hay algo que no te queda claro, presionando acá con gusto volveremos a <strong> comenzar este tutorial. </strong>
+          </div>
+      },
+      {
+        selector: '.tenthStepTour',
+        content: 
+  
+        <div>
+        <br/>
+      <p
+      style={{
+        fontSize: "14px",
+        fontWeight: "800",
+        marginBottom: "2em",
+        marginTop:"1em"
+      }}>        
+          ¡Que tengas una grata experiencia!  
+      </p>
+  
+      <img src={endTour} alt="endTour" />
+        <div style={{display:"flex", justifyContent:"center"}}>
+          <Button
+                  color="primary"
+                  className="ninthStepTour"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "150px",
+                    height: "38px",
+                    fontWeight: "600",
+                    
+                  }}            
+                  onClick={toggle}
+                >
+                  ir al MTD
+          </Button>
+        </div>
+      </div>,          
+      },
+    ]
+  }
+  else {
+     stepsDesk = [
+      {
+        selector: '.tenthStepTour',
+        content: 
+        <div>
+          <br/>
+        <p
+        style={{
+          fontSize: "16px",
+          fontWeight: "800",
+          marginBottom: "2em"
+        }}>        
+            ¡Bienvenido al MTD de Instance!          
+        </p>
+        <img src={startTour} alt="startTour" />
+        <p
+        style={{
+          display: "flex",
+          justifyContent: "center",   
+          marginBottom: "2em",   
+          fontWeight: "600" 
+        }}>
+          
+          Te invitamos a hacer el tour inicial     
+        </p>     
+        </div>,  
+      },
+      {
+        selector: '.firstStepTour',
+        content: 
+        <div>
+          Ésta es tu <strong>tabla de órdenes.</strong>
+          <br/> 
+          <p>
+            Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
+          </p> 
+        </div>,
+      },
+      {
+        selector: '.secondStepTour',
+        content: 
+          <div> 
+            Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
+          </div>
+      },
+      {
+        selector: '.thirdStepTour',
+        content: 
+        <div>
+          Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
+        </div>
+      },
+      {
+        selector: '.fourthStepTour',
+        content: 
+        <div> 
+          Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
+        </div>
+      },
+   
+      {
+        selector: '.seventhStepTour',
+        content: 
+         <div> 
+           ¡Ojo!
+           <br/>
+           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
+  
+         </div>
+      },
+      {
+        selector: '.eighthStepTour',
+        content: 
+        <div>
+          Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
+        </div>
+      },
+    
+      {
+        selector: '.tenthStepTour',
+        content: 
+  
+        <div>
+        <br/>
+      <p
+      style={{
+        fontSize: "14px",
+        fontWeight: "800",
+        marginBottom: "2em",
+        marginTop:"1em"
+      }}>     
+          ¡Que tengas una grata experiencia!  
+      </p>
+  
+      <img src={endTour} alt="endTour" />
+        <div style={{display:"flex", justifyContent:"center"}}>
+          <Button
+                  color="primary"
+                  className="ninthStepTour"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "150px",
+                    height: "38px",
+                    fontWeight: "600",              
+                  }}            
+                  onClick={toggle}
+                >
+                  ir al MTD
+          </Button>
+        </div>
+      </div>,  
+       
+          
+      },
+    ]
+  }
+
   useEffect(() => {
     // setfirstName(localStorage.getItem("first"));
     fetchOrderData();
@@ -138,8 +442,9 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
+ 
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -153,18 +458,19 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
         requestOptions
       );
       if (!response.ok) {
         throw new Error();
       }
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
 
-      setData(data.message);
+      setData(data);
 
       setisLoading(false);
+    
     } catch (error) {
       console.log(error);
     }
@@ -182,10 +488,11 @@ const MtdiTable = (props) => {
 
   const applyFiltersButtonhandler = async () => {
     setisLoading(true);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    setfiltersApplied(true);
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     console.log(url);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -203,9 +510,13 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      // console.log(data);
-
-      setData(data.message);
+      console.log(data[0].total);
+      if (data[0].total === 0) {
+        setData([]);
+      } else {
+        setData(data);
+      }
+      console.log(data.length);
 
       setisLoading(false);
     } catch (error) {
@@ -216,12 +527,12 @@ const MtdiTable = (props) => {
   const incrementPageHandler = async () => {
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     console.log(url);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -238,7 +549,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const newData = await response.json();
-      setData([...data, ...newData.message]);
+      setData([...data, ...newData]);
 
       setisLoadingIncrementPage(false);
     } catch (error) {
@@ -367,16 +678,15 @@ const MtdiTable = (props) => {
             return (
               <div>
                 No &nbsp;
-                <span
-                  style={{ marginLeft: "4px" }}
-                  title="No existe DTE"
-                  className={classes.noIcon}
-                >
+                <span style={{ marginLeft: "4px" }} className={classes.noIcon}>
                   <img title="No existe DTE" src={noIcon} />
                 </span>
                 &nbsp;
-                <span className={classes.greyIcon}>
-                  <img src={greyIcon} />
+                <span
+                  className={classes.greyIcon}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img src={greyIcon} title="No existe DTE" />
                 </span>
               </div>
             );
@@ -481,15 +791,15 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    // {
-    //   title: "Shipping",
-    //   field: "",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Shipping",
+      field: "valor_shipping",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Estado OC",
       field: "estado_oc",
@@ -642,8 +952,11 @@ const MtdiTable = (props) => {
     location.reload();
   };
 
+
+
   return (
     <React.Fragment>
+       {isLoading && <SplashScreen/>}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -652,7 +965,21 @@ const MtdiTable = (props) => {
         ></SendMail>
       )}
 
-      <div className="content">
+   
+
+      <div className="content .tenthStepTour">
+
+      <div className="bttnTour">
+        <Button
+            color="primary"
+            className="btn-round btn-icon ninthStepTour"      
+            onClick={() => setIsTourOpen(true)}
+            // onClick={toggle}
+          >
+            <i className="nc-icon nc-alert-circle-i" style={{ color: "#ffffff" }} />
+        </Button>
+      </div>  
+
         <h5
           className="titleTable"
           style={{
@@ -682,6 +1009,7 @@ const MtdiTable = (props) => {
         </p>
 
         <Col md="12">
+         <div className="secondStepTour">
           <label htmlFor="select-country">
             <h5
               style={{
@@ -834,9 +1162,10 @@ const MtdiTable = (props) => {
               })} */}
           {/* </Select>
           </label> */}
-
-          <label>
-            <h5
+        
+          <label
+          className="seventhStepTour">
+            <h5           
               id="fechaDesde"
               style={{
                 color: "black",
@@ -861,7 +1190,8 @@ const MtdiTable = (props) => {
             />
           </label>
 
-          <label>
+          <label
+          className="seventhStepTour">
             <h5
               id="fechaHasta"
               style={{
@@ -899,55 +1229,58 @@ const MtdiTable = (props) => {
               height: "38px",
               fontWeight: "600",
             }}
+            className="thirdStepTour"
             onClick={applyFiltersButtonhandler}
-          >
+            >
             Aplicar
           </Button>
 
           <Button
-            className="btn-round btn-icon"
+            className="btn-round btn-icon fourthStepTour"
             color="primary"
             onClick={reloadTableHandler}
-          >
+            >
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
+
+        </div>  
+
+
         </Col>
 
+        <div className="firstStepTour">
+
         {/* MOBILE VERSION */}
-        <div id="OrderMobileCard">
-          <br/>
+        <div id="OrderMobileCard" className="first-step">
+          <br />
           {!isLoading && (
             <div>
-              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
+              <OrderMobileCard
+                data={data}
+                isLoading={isLoading}
+              ></OrderMobileCard>
             </div>
           )}
           {isLoading && (
             <div id="spinner">
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-              
-              <Spinner
-                style={{
-                  width: "0.7rem",
-                  height: "0.7rem",
-                  marginTop: "4em",
-                  marginBottom: "3rem",
-                }}
-                type="grow"
-                color="info"
-              />
-              <Spinner
-                style={{
-                  width: "1rem",
-                  height: "1rem",
-                  marginTop: "2em",
-                  marginBottom: "2rem",
-                }}
-                type="grow"
-                color="info"
-              />
-              
-              <OrderMobileCard data={data} isLoading={isLoading}></OrderMobileCard>
-             <br/>
+              {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
+              <div>
+                <img
+                  src={spinnerGif}
+                  style={{ marginTop: "2em" }}
+                  width="200"
+                  alt="Cargando..."
+                />
+                <br />
+                {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
+                <br />
+              </div>
+
+              <OrderMobileCard
+                data={data}
+                isLoading={isLoading}
+              ></OrderMobileCard>
+              <br />
             </div>
           )}
         </div>
@@ -955,9 +1288,8 @@ const MtdiTable = (props) => {
         {/* DESKTOP VERSION */}
 
         <div id="OrderDesktopTable">
-       
           {isLoading && (
-            <MaterialTable
+            <MaterialTable           
               title=""
               options={{
                 search: false,
@@ -976,8 +1308,9 @@ const MtdiTable = (props) => {
                     }}
                   >
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                    <Spinner
+                    &nbsp; &nbsp;{" "}
+                    {/* <Spinner
+
                       style={{
                         width: "0.7rem",
                         height: "0.7rem",
@@ -996,8 +1329,15 @@ const MtdiTable = (props) => {
                       }}
                       type="grow"
                       color="info"
-                    />
+
+                    /> */}
                     <br />
+                    <div>
+                      {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" />  */}
+
+                      {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
+                      <br />
+                    </div>
                     <br />
                   </div>
                 ),
@@ -1007,9 +1347,45 @@ const MtdiTable = (props) => {
               }}
             ></MaterialTable>
           )}
-
           {data.length === 0 && !isLoading && (
             <MaterialTable
+              localization={{
+                body: {
+                  emptyDataSourceMessage: (
+                    <div
+                      style={{
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "20rem",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={noDataImage}
+                        style={{ marginTop: "2em" }}
+                        width="160"
+                        alt="noData"
+                      />
+                      <p
+                   
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#1D308E",
+                        }}
+                      >
+                        {" "}
+                        &nbsp;
+                        <span> No hay información disponible.</span>
+                    <span> No hay información disponible.</span> 
+                        <span> No hay información disponible.</span>
+                      </p>
+                   
+                    </div>
+                  ),
+                },
+              }}
               title=""
               icons={tableIcons}
               columns={columns}
@@ -1025,12 +1401,34 @@ const MtdiTable = (props) => {
               localization={{
                 body: {
                   emptyDataSourceMessage: (
-                    <div>
-                      <span>No hay información disponible</span>
-                      <Spinner
-                        animation="border"
-                        style={{ color: "#1D308E", marginLeft: "1em" }}
+                    <div
+                      style={{
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "20rem",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={noDataImage}
+                        style={{ marginTop: "2em" }}
+                        width="160"
+                        alt="noData"
                       />
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          color: "#1D308E",
+                        }}
+                      >
+                        {" "}
+                        &nbsp;
+                        <span> No hay información disponible.</span>
+                      <span> No hay información disponible.</span> 
+                        <span> No hay información disponible.</span>
+                      </p>
                     </div>
                   ),
                 },
@@ -1046,9 +1444,12 @@ const MtdiTable = (props) => {
             />
           )}
         </div>
-        <div className="bttnSeeMore">
+
+       {!isLoading && <div className="bttnSeeMore">
+
           {!isLoadingIncrementPage && (
             <Button
+              className="eighthStepTour"
               color="primary"
               style={{
                 borderRadius: "22px",
@@ -1089,7 +1490,26 @@ const MtdiTable = (props) => {
               &nbsp; Cargando...
             </Button>
           )}
+        </div>}
+
         </div>
+
+
+     
+      <Tour
+        steps={stepsDesk}
+        isOpen={isTourOpen}
+        onRequestClose={() => setIsTourOpen(false)}
+        accentColor={accentColor}
+        className="helper"
+        rounded={20}
+        onAfterOpen={disableBody}
+        onBeforeClose={enableBody}
+      />
+
+     
+
+
       </div>
     </React.Fragment>
   );
