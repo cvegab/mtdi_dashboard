@@ -693,6 +693,11 @@ export default class Chips extends React.Component {
 
     const x = [...this.state.items];
     x.push(this.state.emailState);
+    if(this.isValid(this.state.value)){
+      x.push(this.state.value);
+    }
+
+    console.log("Valor!!!! " + this.state.value)
 
     let final = "" + x.toString() + "";
 
