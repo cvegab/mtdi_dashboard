@@ -1,4 +1,3 @@
-
 import { Select, MenuItem } from "@material-ui/core";
 import React from "react";
 // react plugin used to create charts
@@ -32,8 +31,6 @@ function Charts() {
   return (
     <>
       <div className="content">
-
-     
         <h5
           className="titleTable"
           style={{
@@ -60,24 +57,32 @@ function Charts() {
           Tu tienda
         </p>
         <Col md="12">
-              
-              <CardBody>
-                <Button  style={{borderRadius: "17px",  backgroundColor: "#1D308E",  color: "white",width: '234px',height:'72px',fontWeight:'700px'}} outline>
-                  <span className="btn-label">
-                    <i className="nc-icon nc-layout-11" />
-                  </span>
-                  General        
-                </Button>
-              
+          <CardBody>
+            <Button
+              style={{
+                borderRadius: "17px",
+                backgroundColor: "#1D308E",
+                color: "white",
+                width: "234px",
+                height: "72px",
+                fontWeight: "700px",
+              }}
+              outline
+            >
+              <span className="btn-label">
+                <i className="nc-icon nc-layout-11" />
+              </span>
+              General
+            </Button>
 
-                {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
+            {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-shop" />
                   </span>
                   Tiendas        
                 </Button> */}
 
-                {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
+            {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-settings-gear-65" />
                   </span>
@@ -99,11 +104,10 @@ function Charts() {
                  Cliente    
                 </Button>
                    */}
-                 
-              </CardBody>
+          </CardBody>
         </Col>
         <Col md="12">
-        <label htmlFor="select-tienda">
+          <label htmlFor="select-tienda">
             <h5
               style={{
                 color: "black",
@@ -125,13 +129,9 @@ function Charts() {
                 marginLeft: "1em",
                 marginTop: "1em",
               }}
-            
               label="select-canal"
               placeholder="&nbsp; Seleccione una tienda"
-              
-            >
-             
-            </Select>
+            ></Select>
           </label>
           <label htmlFor="select-country">
             <h5
@@ -157,18 +157,12 @@ function Charts() {
                 fontSize: "10px",
                 marginTop: "1em",
               }}
-            
               label="Country"
               placeholder="&nbsp; Seleccione un país"
-             
-            >
-             
-            
-            </Select>
+            ></Select>
           </label>
-          <label
-          className="seventhStepTour">
-            <h5           
+          <label className="seventhStepTour">
+            <h5
               id="fechaDesde"
               style={{
                 color: "black",
@@ -185,7 +179,6 @@ function Charts() {
             <DatePicker
               id="datepickerCalendar"
               type="number"
-            
               onChange={(date) => setStartDate(date)}
               style={{ width: 200, marginLeft: "1em" }}
               placeholderText="dd/mm/yy"
@@ -193,8 +186,7 @@ function Charts() {
             />
           </label>
 
-          <label
-          className="seventhStepTour">
+          <label className="seventhStepTour">
             <h5
               id="fechaHasta"
               style={{
@@ -212,7 +204,6 @@ function Charts() {
             <DatePicker
               id="datepickerCalendar"
               type="number"
-             
               onChange={(date) => setEndDate(date)}
               style={{ width: 200, marginLeft: "1em" }}
               placeholderText="dd/mm/yy"
@@ -220,43 +211,94 @@ function Charts() {
             />
           </label>
 
-          <Button
-            className="btn-round btn-icon fourthStepTour"
-            color="primary"
-           
-            >
+          <Button className="btn-round btn-icon fourthStepTour" color="primary">
             <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
           </Button>
-
-
         </Col>
-        <div>
 
-        </div>
         <Col md="12">
-        <h5           
-              id="fechaDesde"
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "6px",
-                marginTop: "0px",
-              }}
-            >
-             Canales De Venta
-            </h5>
-            <button style={{display: 'flex',flexDirection:'column',alignItems: 'flex-start',padding:'12px',
-width: '42px',height: '42px',left: '1006px',top: '405px',background: '#EDEEF6',borderRadius: '17px',border:'none'}}>
-              +
-            </button>
-          </Col>
+          <h5
+            id="fechaDesde"
+            style={{
+              color: "black",
+              fontSize: "12px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "6px",
+              marginTop: "0px",
+            }}
+          >
+            Canales De Venta
+          </h5>
+          <button
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              padding: "12px",
+              width: "42px",
+              height: "42px",
+              left: "1006px",
+              top: "405px",
+              background: "#EDEEF6",
+              borderRadius: "17px",
+              border: "none",
+            }}
+          >
+            +
+          </button>
+        </Col>
+        <br></br>
+        <Col
+          md="12"
+          style={{
+            backgroundColor: "white",
+            width: "1040px",
+            height: "156px",
+            left: "118px",
+            top: "669px",
+            borderRadius: "12px",
+          }}
+        >
+          <p
+            classname="textNameTable"
+            style={{
+              color: "black",
+              width: "450px",
+              fontSize: "20px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              paddingTop: '20px'
+            }}
+          >
+            Datos Generales
+          </p>
+       
+         <Row style={{padding:'10px',paddingLeft:'20px'}}>
+           <Col md='3'>
+             <h1>HI</h1>
+           </Col>
+           <Col md='3'>
+             <h1>HI</h1>
+           </Col>
+           <Col md='3'>
+             <h1>HI</h1>
+           </Col>
+           <Col md='3'>
+             <h1>HI</h1>
+           </Col>
+         </Row>
+        </Col>
+        <br></br>
+        <br></br>
+
         <Row>
-        <Col md="6">
+          <Col md="6">
             <Card className="car-chart">
               <CardHeader>
-                <CardTitle><strong>Resumen general de  venta y órdenes</strong></CardTitle>
+                <CardTitle>
+                  <strong>Resumen general de venta y órdenes</strong>
+                </CardTitle>
                 {/* <p className="card-category"> </p> */}
               </CardHeader>
               <CardBody>
@@ -265,13 +307,14 @@ width: '42px',height: '42px',left: '1006px',top: '405px',background: '#EDEEF6',b
                   options={chartExample4.options}
                 />
               </CardBody>
-        
             </Card>
           </Col>
-        <Col md="4">
+          <Col md="4">
             <Card>
               <CardHeader>
-                <CardTitle><strong>Participación canal de venta</strong></CardTitle>
+                <CardTitle>
+                  <strong>Participación canal de venta</strong>
+                </CardTitle>
                 {/* <p className="card-category">Last Campaign Performance</p> */}
               </CardHeader>
               <CardBody style={{ height: "342px" }}>
@@ -302,7 +345,6 @@ width: '42px',height: '42px',left: '1006px',top: '405px',background: '#EDEEF6',b
               </CardFooter>
             </Card>
           </Col>
-
 
           <Col md="6">
             <Card className="card-chart">
@@ -348,10 +390,8 @@ width: '42px',height: '42px',left: '1006px',top: '405px',background: '#EDEEF6',b
               </CardBody>
             </Card>
           </Col>
-   
         </Row>
         <Row>
-  
           <Col md="8">
             <Card>
               <CardHeader>
