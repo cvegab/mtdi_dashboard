@@ -60,22 +60,43 @@ function Charts() {
         <Col md="12">
               
               <CardBody>
-                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                <Button  style={{borderRadius: "17px",  backgroundColor: "#1D308E",  color: "white",width: '234px',height:'72px',fontWeight:'700px'}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-layout-11" />
                   </span>
                   General        
                 </Button>
-              
+                {/* <button
+                id="bttnSubmit"
+                type="submit"
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  color: "white",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0"
+               
+                }}
+              >
+                General
+               
+              </button> */}
 
-                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-shop" />
                   </span>
                   Tiendas        
-                </Button>
+                </Button> */}
 
-                <Button color="primary" style={{borderRadius: "17px"}} outline>
+                {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-settings-gear-65" />
                   </span>
@@ -96,11 +117,239 @@ function Charts() {
                   </span>
                  Cliente    
                 </Button>
-                 
+                   */}
                  
               </CardBody>
         </Col>
+        <Col md="12">
+         <div className="secondStepTour">
+          <label htmlFor="select-country">
+            <h5
+              style={{
+                color: "black",
+                width: "30px",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "0px",
+              }}
+            >
+              País
+            </h5>
+            <Select
+              labelId="select-country"
+              id="select-country"
+              style={{
+                width: 150,
+                marginLeft: "1em",
+                borderRadius: "17px",
+                marginBottom: "1em",
+                fontSize: "10px",
+                marginTop: "1em",
+              }}
+            
+              label="Country"
+              placeholder="&nbsp; Seleccione un país"
+              onChange={handleCountryChange}
+            >
+             
+            
+            </Select>
+          </label>
+          <label htmlFor="select-tienda">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "0px",
+                marginTop: "1em",
+              }}
+            >
+              Tienda
+            </h5>
+            <Select
+              labelId="select-tienda"
+              id="select-tienda"
+              style={{
+                width: 160,
+                fontSize: "10px",
+                marginLeft: "1em",
+                marginTop: "1em",
+              }}
+              value={store}
+              label="select-canal"
+              placeholder="&nbsp; Seleccione una tienda"
+              onChange={handleStoreChange}
+            >
+              {Array.from(
+                new Set(filteredStoreData.map((obj) => obj.store))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              })}
+            </Select>
+          </label>
+          <label htmlFor="select-canal">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "0px",
+                marginTop: "1em",
+              }}
+            >
+              Canal De Venta
+            </h5>
 
+            <Select
+              labelId="select-canal"
+              id="select-canal"
+              placeholder="&nbsp; Seleccione un canal"
+              style={{
+                width: 150,
+                marginLeft: "1em",
+                fontSize: "10px",
+                marginTop: "1em",
+              }}
+              value={salesChannel}
+              label="select-canal"
+              onChange={handleSalesChannelChange}
+            >
+              {Array.from(
+                new Set(filteredChannelArray.map((obj) => obj.channel))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              })}
+              {/* {filteredChannelArray.map((channelItem) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })} */}
+            </Select>
+          </label>
+
+          {/* <label htmlFor="select-tienda-official">
+            <h5
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginRight: "1em",
+                marginBottom: "0px",
+                marginTop: "1em",
+              }}
+            >
+              Tienda Oficial  
+            </h5>
+            <Select
+              labelId="select-tienda-official"
+              id="select-tienda-official"
+              placeholder="&nbsp; Seleccione una tienda oficial"
+              style={{ width: 150, fontSize: "10px", marginLeft: "1em" }}
+              value={officialStore}
+              label="select-tienda-official"
+              onChange={handleOfficialStoreChange}
+            > */}
+          {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+                (period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                }
+              )} */}
+          {/* {filteredOfficialStore.map((channelItem) => {
+                return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
+              })} */}
+          {/* {filteredOfficialStore.forEach((channelItem,index) => {
+                return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
+              })} */}
+          {/* </Select>
+          </label> */}
+        
+          <label
+          className="seventhStepTour">
+            <h5           
+              id="fechaDesde"
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "6px",
+                marginTop: "0px",
+              }}
+            >
+              Fecha Desde
+            </h5>
+
+            <DatePicker
+              id="datepickerCalendar"
+              type="number"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              style={{ width: 200, marginLeft: "1em" }}
+              placeholderText="dd/mm/yy"
+              locale="es"
+            />
+          </label>
+
+          <label
+          className="seventhStepTour">
+            <h5
+              id="fechaHasta"
+              style={{
+                color: "black",
+                fontSize: "12px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                marginBottom: "6px",
+                marginTop: "0px",
+              }}
+            >
+              Fecha Hasta
+            </h5>
+
+            <DatePicker
+              id="datepickerCalendar"
+              type="number"
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              style={{ width: 200, marginLeft: "1em" }}
+              placeholderText="dd/mm/yy"
+              locale="es"
+            />
+          </label>
+
+          <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "120px",
+              height: "38px",
+              fontWeight: "600",
+            }}
+            className="thirdStepTour"
+            onClick={applyFiltersButtonhandler}
+            >
+            Aplicar
+          </Button>
+
+          <Button
+            className="btn-round btn-icon fourthStepTour"
+            color="primary"
+            onClick={reloadTableHandler}
+            >
+            <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
+          </Button>
+
+        </div>  
+
+
+        </Col>
         <Row>
         <Col md="6">
             <Card className="car-chart">
