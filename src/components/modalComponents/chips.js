@@ -661,8 +661,8 @@ export default class Chips extends React.Component {
       });
     }
 
-    this.findRoutes;
-    console.log(this.state);
+   // this.findRoutes;
+   
     let error = null;
 
     event.preventDefault();
@@ -684,8 +684,7 @@ export default class Chips extends React.Component {
       x.push(this.state.value);
     }
 
-    console.log("Valor!!!! " + this.state.value);
-
+    
     let final = "" + x.toString() + "";
 
     const emailBody = this.parseEmail();
