@@ -15,7 +15,10 @@ export default class Chips extends React.Component {
   };
 
   handleKeyDown = (evt) => {
-    if (["Enter", "Tab", ","].includes(evt.key)) {
+    if (
+      ["Enter", "Tab", ","].includes(evt.key) ||
+      this.isValid(this.state.value)
+    ) {
       evt.preventDefault();
 
       var value = this.state.value.trim();
@@ -35,6 +38,7 @@ export default class Chips extends React.Component {
       error: null,
     });
   };
+
   handleEmailChange = (evt) => {
     this.setState({
       emailState: evt.target.value,
@@ -103,7 +107,8 @@ export default class Chips extends React.Component {
   }
 
   isEmail(email) {
-    return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+    // return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+    return /[\w\d\.-]+@[\w\d\.-]+\.(com|cl)+/.test(email);
   }
   parseEmail() {
     let text = `  <!DOCTYPE html>
@@ -487,7 +492,6 @@ export default class Chips extends React.Component {
     </html>`;
 
     if (this.props.purchaser.tienda === "Unilever") {
-   
       let finalEmailText = text
         .replace("[nombre]", this.props.purchaser.comprador)
         .replace("dteLink", this.props.purchaser.dte)
@@ -650,6 +654,15 @@ export default class Chips extends React.Component {
   }
 
   submitHandler = (event) => {
+    if (this.isValid(this.state.value)) {
+      this.setState({
+        items: [...this.state.items, this.state.value],
+        value: "",
+      });
+    }
+
+   // this.findRoutes;
+   
     let error = null;
 
     event.preventDefault();
@@ -667,7 +680,11 @@ export default class Chips extends React.Component {
 
     const x = [...this.state.items];
     x.push(this.state.emailState);
+    if (this.isValid(this.state.value)) {
+      x.push(this.state.value);
+    }
 
+    
     let final = "" + x.toString() + "";
 
     const emailBody = this.parseEmail();
@@ -717,7 +734,7 @@ export default class Chips extends React.Component {
                 type="email"
                 name="email"
                 id="exampleEmail"
-                style={{fontSize:"12px"}}
+                style={{ fontSize: "12px" }}
                 placeholder="Ingresa un correo"
                 value={this.state.emailState}
                 onChange={this.handleEmailChange}
@@ -751,7 +768,7 @@ export default class Chips extends React.Component {
                 className={"input " + (this.state.error && " has-error")}
                 value={this.state.value}
                 placeholder="Escribe aquí el correo y presiona la tecla 'Enter'"
-                style={{fontSize:"12px"}}
+                style={{ fontSize: "12px" }}
                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}
                 onPaste={this.handlePaste}
@@ -774,9 +791,8 @@ export default class Chips extends React.Component {
                   color: "#FFFFFF",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0"
-               
+                  fontWeight: "bold",
+                  border: "0",
                 }}
               >
                 Enviar Correo &nbsp;
@@ -799,7 +815,7 @@ export default class Chips extends React.Component {
               alignItems: "center",
             }}
           >
-            <img src={sentEmail} width="25%"/>
+            <img src={sentEmail} width="25%" />
           </div>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
             Documento enviado con éxito
@@ -820,8 +836,8 @@ export default class Chips extends React.Component {
                 color: "#FFFFFF",
                 marginLeft: "1em",
                 textTransform: "none",
-                fontWeight:"bold",
-                border:"0"
+                fontWeight: "bold",
+                border: "0",
               }}
               onClick={this.entendidoButtonHandler}
             >

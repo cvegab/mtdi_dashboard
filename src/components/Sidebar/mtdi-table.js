@@ -1258,6 +1258,7 @@ const MtdiTable = (props) => {
               <OrderMobileCard
                 data={data}
                 isLoading={isLoading}
+                purchaser={buyer}
               ></OrderMobileCard>
             </div>
           )}
