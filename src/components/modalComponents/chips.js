@@ -5,6 +5,7 @@ import "./chip.css";
 import sentEmail from "../../assets/img/emailSent.png";
 import SiIcon from "../../assets/img/si.png";
 export default class Chips extends React.Component {
+ 
   state = {
     items: [],
     value: "",
@@ -15,7 +16,8 @@ export default class Chips extends React.Component {
   };
 
   handleKeyDown = (evt) => {
-    if (["Enter", "Tab", ","].includes(evt.key)) {
+   
+    if (["Enter", "Tab", ",",].includes(evt.key) || this.isValid(this.state.value))  {
       evt.preventDefault();
 
       var value = this.state.value.trim();
@@ -29,12 +31,31 @@ export default class Chips extends React.Component {
     }
   };
 
+ 
   handleChange = (evt) => {
-    this.setState({
+   
+  // const x = this.isValid(evt.target.value);
+  // const y = evt.target.value;
+
+  // console.log(y);
+  // if (x){
+  //   this.setState({
+  //     items: [...this.state.items, evt.target.value],
+  //     value: "",
+    
+  //   });
+  
+  // }
+ 
+   this.setState({
       value: evt.target.value,
       error: null,
     });
+  
+  
   };
+ 
+  
   handleEmailChange = (evt) => {
     this.setState({
       emailState: evt.target.value,
@@ -103,7 +124,8 @@ export default class Chips extends React.Component {
   }
 
   isEmail(email) {
-    return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+    // return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+     return /[\w\d\.-]+@[\w\d\.-]+\.(com)+/.test(email);
   }
   parseEmail() {
     let text = `  <!DOCTYPE html>
@@ -752,7 +774,7 @@ export default class Chips extends React.Component {
                 value={this.state.value}
                 placeholder="Escribe aquí el correo y presiona la tecla 'Enter'"
                 style={{fontSize:"12px"}}
-                onKeyDown={this.handleKeyDown}
+                 onKeyDown={this.handleKeyDown}
                 onChange={this.handleChange}
                 onPaste={this.handlePaste}
               />
