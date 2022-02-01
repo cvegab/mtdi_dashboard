@@ -33,17 +33,6 @@ export default class Chips extends React.Component {
   };
 
   handleChange = (evt) => {
-    // const x = this.isValid(evt.target.value);
-    // const y = evt.target.value;
-
-    // console.log(y);
-    // if (x) {
-    //   this.setState({
-    //     items: [...this.state.items, evt.target.value],
-    //     value: "",
-    //   });
-    // }
-
     this.setState({
       value: evt.target.value,
       error: null,
@@ -668,13 +657,11 @@ export default class Chips extends React.Component {
     if (this.isValid(this.state.value)) {
       this.setState({
         items: [...this.state.items, this.state.value],
-        value: '',
+        value: "",
       });
     }
-    
-      
-   
-     this.findRoutes;
+
+    this.findRoutes;
     console.log(this.state);
     let error = null;
 
@@ -693,11 +680,11 @@ export default class Chips extends React.Component {
 
     const x = [...this.state.items];
     x.push(this.state.emailState);
-    if(this.isValid(this.state.value)){
+    if (this.isValid(this.state.value)) {
       x.push(this.state.value);
     }
 
-    console.log("Valor!!!! " + this.state.value)
+    console.log("Valor!!!! " + this.state.value);
 
     let final = "" + x.toString() + "";
 
@@ -724,7 +711,6 @@ export default class Chips extends React.Component {
       console.log(response);
       this.setState({ emailSent: true });
     });
- 
   };
   entendidoButtonHandler = () => {
     this.props.onhideModal();
