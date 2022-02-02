@@ -269,51 +269,398 @@ function Charts() {
               fontSize: "20px",
               fontWeight: "800",
               marginLeft: "1em",
-              paddingTop: '20px'
+              paddingTop: "20px",
             }}
           >
             Datos Generales
           </p>
-       
-         <Row style={{padding:'10px',paddingLeft:'20px'}}>
-           {/* TOTAL INCOME */}
-           <Col md='3'>
-           <div>
-            <p style={{color:'#C4C4C4'}}>Total Ingresos</p>
-            <h5 style={{fontSize: '22px',color:'#444B54'}}>$20.154.365 &nbsp;<span style={{color:'#33D69F',fontSize:'16px',textAlign:'right'}}>+4.5%</span></h5>
-               
-           </div>
-           {/* DISPATCH COST */}
-           </Col>
-           <Col md='3'>
-           <div>
-            <p style={{color:'#C4C4C4'}}>Costo Despacho</p>
-            <h5 style={{fontSize: '22px',color:'#444B54'}}>$1.253.369 &nbsp;<span style={{color:'red',fontSize:'16px',textAlign:'right'}}>-3%</span></h5>
-               
-           </div>
-         
-           </Col>
-             {/* GM */}
-           <Col md='3'>
-           <div>
-            <p style={{color:'#C4C4C4'}}>GM</p>
-            <h5 style={{fontSize: '22px',color:'#444B54'}}>$1.253.369 &nbsp;<span style={{color:'red',fontSize:'16px',textAlign:'right'}}>-6%</span></h5>
-               
-           </div>
-           </Col>
-           {/* CONVERSION */}
-           <Col md='3'>
-           <div>
-            <p style={{color:'#C4C4C4'}}>Conversion</p>
-            <h5 style={{fontSize: '22px',color:'#444B54'}}>$1.253.369 &nbsp;<span style={{color:'#33D69F',fontSize:'16px',textAlign:'right'}}>+4.5%</span></h5>
-               
-           </div>
-           </Col>
-         </Row>
+
+          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+            {/* TOTAL INCOME */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $20.154.365 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+              {/* DISPATCH COST */}
+            </Col>
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -3%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* GM */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>GM</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -6%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* CONVERSION */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Conversion</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+          </Row>
         </Col>
         <br></br>
         <br></br>
-{/* ORDER PROCESSING */}
+        {/* ORDER PROCESSING */}
+        <Col
+          md="12"
+          style={{
+            backgroundColor: "white",
+            width: "1040px",
+            height: "156px",
+            left: "118px",
+            top: "669px",
+            borderRadius: "12px",
+          }}
+        >
+          <p
+            classname="textNameTable"
+            style={{
+              color: "black",
+              width: "450px",
+              fontSize: "20px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              paddingTop: "20px",
+            }}
+          >
+            Procesamiento de pedidos
+          </p>
+
+          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+            {/* ORDERS */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Pedidos</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $20.154.365 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+              {/* ORDERS CANCELLED */}
+            </Col>
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Cancelados</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -3%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* DTE SENT */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -6%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* DELIVERED */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Entregados</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+        <br></br>
+        <br></br>
+        {/* ORDER FULFILMENT */}
+        <Col
+          md="12"
+          style={{
+            backgroundColor: "white",
+            width: "1040px",
+            height: "156px",
+            left: "118px",
+            top: "669px",
+            borderRadius: "12px",
+          }}
+        >
+          <p
+            classname="textNameTable"
+            style={{
+              color: "black",
+              width: "450px",
+              fontSize: "20px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              paddingTop: "20px",
+            }}
+          >
+          Cumplimiento de pedidos
+          </p>
+
+          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+            {/* IN PROCESS */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>En Proceso</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $20.154.365 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+              {/* PREPARATION */}
+            </Col>
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -3%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* READY TO DISPATCH */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -6%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* READY TO DELIVER */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+        <br></br>
+        <br></br>
+        {/* CLIENT EXPERIENCE */}
+        <Col
+          md="12"
+          style={{
+            backgroundColor: "white",
+            width: "1040px",
+            height: "156px",
+            left: "118px",
+            top: "669px",
+            borderRadius: "12px",
+          }}
+        >
+          <p
+            classname="textNameTable"
+            style={{
+              color: "black",
+              width: "450px",
+              fontSize: "20px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              paddingTop: "20px",
+            }}
+          >
+          Cumplimiento de pedidos
+          </p>
+
+          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+            {/* IN PROCESS */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>En Proceso</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $20.154.365 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+              {/* PREPARATION */}
+            </Col>
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -3%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* READY TO DISPATCH */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    -6%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+            {/* READY TO DELIVER */}
+            <Col md="3">
+              <div>
+                <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
+                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  $1.253.369 &nbsp;
+                  <span
+                    style={{
+                      color: "#33D69F",
+                      fontSize: "16px",
+                      textAlign: "right",
+                    }}
+                  >
+                    +4.5%
+                  </span>
+                </h5>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+        <br></br>
+        <br></br>
         <Row>
           <Col md="6">
             <Card className="car-chart">
