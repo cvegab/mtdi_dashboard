@@ -249,6 +249,7 @@ function Charts() {
           </button>
         </Col>
         <br></br>
+        {/* GENERAL DATA */}
         <Col
           md="12"
           style={{
@@ -275,23 +276,44 @@ function Charts() {
           </p>
        
          <Row style={{padding:'10px',paddingLeft:'20px'}}>
+           {/* TOTAL INCOME */}
            <Col md='3'>
-             <h1>HI</h1>
+           <div>
+            <p style={{color:'#C4C4C4'}}>Total Ingresos</p>
+            <h5 style={{fontSize: '22px',color:'#444B54'}}>$20.154.365 &nbsp;<span style={{color:'#33D69F',fontSize:'16px',textAlign:'right'}}>+4.5%</span></h5>
+               
+           </div>
+           {/* DISPATCH COST */}
            </Col>
            <Col md='3'>
-             <h1>HI</h1>
+           <div>
+            <p style={{color:'#C4C4C4'}}>Costo Despacho</p>
+            <h5 style={{fontSize: '22px',color:'#444B54'}}>$1.253.369 &nbsp;<span style={{color:'red',fontSize:'16px',textAlign:'right'}}>-3%</span></h5>
+               
+           </div>
+         
            </Col>
+             {/* GM */}
            <Col md='3'>
-             <h1>HI</h1>
+           <div>
+            <p style={{color:'#C4C4C4'}}>GM</p>
+            <h5 style={{fontSize: '22px',color:'#444B54'}}>$1.253.369 &nbsp;<span style={{color:'red',fontSize:'16px',textAlign:'right'}}>-6%</span></h5>
+               
+           </div>
            </Col>
+           {/* CONVERSION */}
            <Col md='3'>
-             <h1>HI</h1>
+           <div>
+            <p style={{color:'#C4C4C4'}}>Conversion</p>
+            <h5 style={{fontSize: '22px',color:'#444B54'}}>$1.253.369 &nbsp;<span style={{color:'#33D69F',fontSize:'16px',textAlign:'right'}}>+4.5%</span></h5>
+               
+           </div>
            </Col>
          </Row>
         </Col>
         <br></br>
         <br></br>
-
+{/* ORDER PROCESSING */}
         <Row>
           <Col md="6">
             <Card className="car-chart">
