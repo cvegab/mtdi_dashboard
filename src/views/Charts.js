@@ -581,16 +581,16 @@ function Charts() {
               paddingTop: "20px",
             }}
           >
-          Cumplimiento de pedidos
+        Experiencia del cliente
           </p>
 
           <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-            {/* IN PROCESS */}
+            {/* NPS */}
             <Col md="3">
               <div>
-                <p style={{ color: "#C4C4C4" }}>En Proceso</p>
+                <p style={{ color: "#C4C4C4" }}>NPS</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $20.154.365 &nbsp;
+                325 &nbsp;
                   <span
                     style={{
                       color: "#33D69F",
@@ -602,13 +602,13 @@ function Charts() {
                   </span>
                 </h5>
               </div>
-              {/* PREPARATION */}
+              {/* REVIEWS */}
             </Col>
             <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Preparacion</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
+                 4.5 &nbsp;
                   <span
                     style={{
                       color: "red",
@@ -621,12 +621,12 @@ function Charts() {
                 </h5>
               </div>
             </Col>
-            {/* READY TO DISPATCH */}
+            {/* claims */}
             <Col md="3">
               <div>
-                <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
+                <p style={{ color: "#C4C4C4" }}>Reclamos</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
+                500 &nbsp;
                   <span
                     style={{
                       color: "red",
@@ -640,7 +640,7 @@ function Charts() {
               </div>
             </Col>
             {/* READY TO DELIVER */}
-            <Col md="3">
+            {/* <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
@@ -656,7 +656,7 @@ function Charts() {
                   </span>
                 </h5>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </Col>
         <br></br>
@@ -696,7 +696,7 @@ function Charts() {
               </CardBody>
               <CardFooter>
                 <div className="legend">
-                  <i className="fa fa-circle text-gray" />
+                  <i className="fa fa-circle text-gray"/>
                   Mercadolibre
                   <p className="card-category">$4.365.222</p>
                   <i className="fa fa-circle text-info" />

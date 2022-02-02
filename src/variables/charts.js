@@ -833,13 +833,13 @@ const chartExample10 = {
 
 const chartExample11 = {
   data: {
-    labels: [1, 2, 3],
+    labels: [1, 2, 3,4],
     datasets: [
       {
         label: "Emails",
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468"],
+        backgroundColor: ["#344FD5", "#4acccd", "#fcc468"],
         borderWidth: 0,
         barPercentage: 1.6,
         data: [542, 480, 430],
