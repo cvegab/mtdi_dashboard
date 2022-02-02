@@ -384,7 +384,7 @@ const MtdiTable = (props) => {
   }, []);
   const fetchFilterData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -397,16 +397,32 @@ const MtdiTable = (props) => {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
+      
         var obj = JSON.parse(result);
+        console.log(obj);
+      // const zeek =  obj.forEach(function (arrayItem) {
+      //     var x = arrayItem;
+      //     return x;
+      // });
+     const zeek = obj.map(x=>{
+       return {value:x.value,country: x.country}
+     })
+      console.log(zeek);
+    const y = obj.filter((x)=>{
+        if(x.value === 2){
+          return x;
+        }
+      });
+      console.log(y[0].stores);
         let countryArray = [];
 
-        setfilteredCountryData(obj.countries);
-        setfilteredStoreData(obj.stores);
+        setfilteredCountryData(obj);
+        // setfilteredStoreData(y[0].stores);
       })
       .catch((error) => console.log("error", error));
   };
@@ -490,6 +506,7 @@ const MtdiTable = (props) => {
     setisLoading(true);
     setfiltersApplied(true);
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     console.log(url);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -510,6 +527,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
+      console.log(data);
       console.log(data[0].total);
       if (data[0].total === 0) {
         setData([]);
@@ -910,7 +928,9 @@ const MtdiTable = (props) => {
         return item;
       }
     });
+    console.log(val);
     setcountryId(val[0].value);
+    setfilteredStoreData(val[0].stores);
   };
 
   const handleStoreChange = (event) => {
