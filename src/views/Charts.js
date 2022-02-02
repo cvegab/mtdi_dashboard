@@ -696,7 +696,7 @@ function Charts() {
               </CardBody>
               <CardFooter>
                 <div className="legend">
-                  <i className="fa fa-circle text-gray"/>
+                  <i className="fa fa-circle"style={{color:'blue',backgroundColor:'blue',borderRadius:'10px'}}/>
                   Mercadolibre
                   <p className="card-category">$4.365.222</p>
                   <i className="fa fa-circle text-info" />
