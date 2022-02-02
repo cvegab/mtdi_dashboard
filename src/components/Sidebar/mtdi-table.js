@@ -19,20 +19,27 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-import { Button, Col, Spinner, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Button,
+  Col,
+  Spinner,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
 import CustomLoader from "./custom-filter-row";
-import spinnerGif from '../../assets/img/spinnerLogos.gif';
-import noDataImage from '../../assets/img/noDataImageBlue.png';
-import endTour from '../../assets/img/endTour.png';
-import startTour from '../../assets/img/startTour.png';
-import Tour from 'reactour';
-import {disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import spinnerGif from "../../assets/img/spinnerLogos.gif";
+import noDataImage from "../../assets/img/noDataImageBlue.png";
+import endTour from "../../assets/img/endTour.png";
+import startTour from "../../assets/img/startTour.png";
+import Tour from "reactour";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import SplashScreen from "components/UI/splash-screen";
-
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -88,293 +95,337 @@ const MtdiTable = (props) => {
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
 
-  
-
-
   var stepsDesk = [];
   var a = navigator.userAgent;
-  var agents = new Array("iPhone","iPad","Android","SymbianOS", "Windows Phone","iPod");
+  var agents = new Array(
+    "iPhone",
+    "iPad",
+    "Android",
+    "SymbianOS",
+    "Windows Phone",
+    "iPod"
+  );
   var flag = true;
-  for(var i = 0; i < agents.length; i++)
-  {
-    if(a.indexOf(agents[i]) > 0)
-    {
+  for (var i = 0; i < agents.length; i++) {
+    if (a.indexOf(agents[i]) > 0) {
       flag = false;
       break;
     }
   }
-  if(flag)
-  {
+  if (flag) {
     stepsDesk = [
       {
-        selector: '.tenthStepTour',
-        content: 
-        <div>
-          <br/>
-        <p
-        style={{
-          fontSize: "16px",
-          fontWeight: "800",
-          marginBottom: "2em"
-        }}>        
-            ¡Bienvenido al MTD de Instance!       
-        </p>
-        <img src={startTour} alt="startTour" />
-        <p
-        style={{
-          display: "flex",
-          justifyContent: "center",   
-          marginBottom: "2em",   
-          fontWeight: "600" 
-        }}>      
-          Te invitamos a hacer el tour inicial       
-        </p>       
-        </div>,  
-      },
-      {
-        selector: '.firstStepTour',
-        content: 
-        <div>
-          Ésta es tu <strong>tabla de órdenes.</strong>
-          <br/> 
-          <p>
-            Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
-          </p> 
-        </div>,
-      },
-      {
-        selector: '.secondStepTour',
-        content: 
-          <div> 
-            Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
-          </div>
-      },
-      {
-        selector: '.thirdStepTour',
-        content: 
-        <div>
-          Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
-        </div>
-      },
-      {
-        selector: '.fourthStepTour',
-        content: 
-        <div> 
-          Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
-        </div>
-      },
-      {
-        selector: '.MuiTableSortLabel-iconDirectionAsc',
-        content: 
+        selector: ".tenthStepTour",
+        content: (
           <div>
-            Cada título tiene una <strong>flecha</strong> que al presionarla te permitirá clasificar la información de menor a mayor ó de la A a la Z y visceversa.
+            <br />
+            <p
+              style={{
+                fontSize: "16px",
+                fontWeight: "800",
+                marginBottom: "2em",
+              }}
+            >
+              ¡Bienvenido al MTD de Instance!
+            </p>
+            <img src={startTour} alt="startTour" />
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "2em",
+                fontWeight: "600",
+              }}
+            >
+              Te invitamos a hacer el tour inicial
+            </p>
           </div>
+        ),
       },
       {
-        selector: '.MuiIconButton-colorInherit',
-        content: 
-         <div>
-          Y con esta opción tendrás la posibilidad de personalizar tu espacio y decidir <strong> qué columnas quieres ver o quitar de tu tablero. </strong>
-         </div> 
-      },
-      {
-        selector: '.seventhStepTour',
-        content: 
-         <div> 
-           ¡Ojo!
-           <br/>
-           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión. 
-         </div>
-      },
-      {
-        selector: '.eighthStepTour',
-        content: 
-        <div>
-          Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
-        </div>
-      },
-      {
-        selector: '.MuiTablePagination-select',
-        content: 
-        <div>
-          En esta parte tienes la posibilidad de desplegar un mayor <strong>número de vistas</strong> de tus órdenes.
-        </div>
-      },
-      {
-        selector: '.MTablePaginationInner-root-14',
-        content: 
-        <div>
-          Y de llegar hasta el <strong>final de la lista</strong>.
-        </div>
-      },
-      {
-        selector: '.ninthStepTour',
-        content: 
+        selector: ".firstStepTour",
+        content: (
           <div>
-            Finalmente, si hay algo que no te queda claro, presionando acá con gusto volveremos a <strong> comenzar este tutorial. </strong>
+            Ésta es tu <strong>tabla de órdenes.</strong>
+            <br />
+            <p>
+              Aquí encontrarás de manera automática la información detallada y
+              actualizada de las últimas órdenes emitidas en todos tus canales
+              de venta.
+            </p>
           </div>
+        ),
       },
       {
-        selector: '.tenthStepTour',
-        content: 
-  
-        <div>
-        <br/>
-      <p
-      style={{
-        fontSize: "14px",
-        fontWeight: "800",
-        marginBottom: "2em",
-        marginTop:"1em"
-      }}>        
-          ¡Que tengas una grata experiencia!  
-      </p>
-  
-      <img src={endTour} alt="endTour" />
-        <div style={{display:"flex", justifyContent:"center"}}>
-          <Button
-                  color="primary"
-                  className="ninthStepTour"
-                  style={{
-                    borderRadius: "22px",
-                    color: "#FFFFFF",
-                    marginLeft: "1em",
-                    textTransform: "none",
-                    letterSpacing: "1px",
-                    width: "150px",
-                    height: "38px",
-                    fontWeight: "600",
-                    
-                  }}            
-                  onClick={toggle}
-                >
-                  ir al MTD
-          </Button>
-        </div>
-      </div>,          
-      },
-    ]
-  }
-  else {
-     stepsDesk = [
-      {
-        selector: '.tenthStepTour',
-        content: 
-        <div>
-          <br/>
-        <p
-        style={{
-          fontSize: "16px",
-          fontWeight: "800",
-          marginBottom: "2em"
-        }}>        
-            ¡Bienvenido al MTD de Instance!          
-        </p>
-        <img src={startTour} alt="startTour" />
-        <p
-        style={{
-          display: "flex",
-          justifyContent: "center",   
-          marginBottom: "2em",   
-          fontWeight: "600" 
-        }}>
-          
-          Te invitamos a hacer el tour inicial     
-        </p>     
-        </div>,  
-      },
-      {
-        selector: '.firstStepTour',
-        content: 
-        <div>
-          Ésta es tu <strong>tabla de órdenes.</strong>
-          <br/> 
-          <p>
-            Aquí encontrarás de manera automática la información detallada y actualizada de las últimas órdenes emitidas en todos tus canales de venta.
-          </p> 
-        </div>,
-      },
-      {
-        selector: '.secondStepTour',
-        content: 
-          <div> 
-            Si necesitas ver órdenes específicas, puedes utilizar estos <strong>filtros</strong> para hacer más fácil la búsqueda.
+        selector: ".secondStepTour",
+        content: (
+          <div>
+            Si necesitas ver órdenes específicas, puedes utilizar estos{" "}
+            <strong>filtros</strong> para hacer más fácil la búsqueda.
           </div>
+        ),
       },
       {
-        selector: '.thirdStepTour',
-        content: 
-        <div>
-          Una vez que escojas el filtro que necesitas presiona este botón para poder <strong> iniciar tu búsqueda</strong>.
-        </div>
+        selector: ".thirdStepTour",
+        content: (
+          <div>
+            Una vez que escojas el filtro que necesitas presiona este botón para
+            poder <strong> iniciar tu búsqueda</strong>.
+          </div>
+        ),
       },
       {
-        selector: '.fourthStepTour',
-        content: 
-        <div> 
-          Si te equivocas con los filtros no te preocupes, siempre puedes presionar este botón que <strong>limpiará los filtros de tu búsqueda.</strong>
-        </div>
-      },
-   
-      {
-        selector: '.seventhStepTour',
-        content: 
-         <div> 
-           ¡Ojo!
-           <br/>
-           Si estás buscando órdenes con fechas específicas te recomendamos filtrar con este <strong> calendario </strong> para mejorar la precisión.
-  
-         </div>
+        selector: ".fourthStepTour",
+        content: (
+          <div>
+            Si te equivocas con los filtros no te preocupes, siempre puedes
+            presionar este botón que{" "}
+            <strong>limpiará los filtros de tu búsqueda.</strong>
+          </div>
+        ),
       },
       {
-        selector: '.eighthStepTour',
-        content: 
-        <div>
-          Si necesitas <strong>cargar más órdenes</strong> en tu tablero presiona este botón.
-        </div>
+        selector: ".MuiTableSortLabel-iconDirectionAsc",
+        content: (
+          <div>
+            Cada título tiene una <strong>flecha</strong> que al presionarla te
+            permitirá clasificar la información de menor a mayor ó de la A a la
+            Z y visceversa.
+          </div>
+        ),
       },
-    
       {
-        selector: '.tenthStepTour',
-        content: 
-  
-        <div>
-        <br/>
-      <p
-      style={{
-        fontSize: "14px",
-        fontWeight: "800",
-        marginBottom: "2em",
-        marginTop:"1em"
-      }}>     
-          ¡Que tengas una grata experiencia!  
-      </p>
-  
-      <img src={endTour} alt="endTour" />
-        <div style={{display:"flex", justifyContent:"center"}}>
-          <Button
-                  color="primary"
-                  className="ninthStepTour"
-                  style={{
-                    borderRadius: "22px",
-                    color: "#FFFFFF",
-                    marginLeft: "1em",
-                    textTransform: "none",
-                    letterSpacing: "1px",
-                    width: "150px",
-                    height: "38px",
-                    fontWeight: "600",              
-                  }}            
-                  onClick={toggle}
-                >
-                  ir al MTD
-          </Button>
-        </div>
-      </div>,  
-       
-          
+        selector: ".MuiIconButton-colorInherit",
+        content: (
+          <div>
+            Y con esta opción tendrás la posibilidad de personalizar tu espacio
+            y decidir{" "}
+            <strong> qué columnas quieres ver o quitar de tu tablero. </strong>
+          </div>
+        ),
       },
-    ]
+      {
+        selector: ".seventhStepTour",
+        content: (
+          <div>
+            ¡Ojo!
+            <br />
+            Si estás buscando órdenes con fechas específicas te recomendamos
+            filtrar con este <strong> calendario </strong> para mejorar la
+            precisión.
+          </div>
+        ),
+      },
+      {
+        selector: ".eighthStepTour",
+        content: (
+          <div>
+            Si necesitas <strong>cargar más órdenes</strong> en tu tablero
+            presiona este botón.
+          </div>
+        ),
+      },
+      {
+        selector: ".MuiTablePagination-select",
+        content: (
+          <div>
+            En esta parte tienes la posibilidad de desplegar un mayor{" "}
+            <strong>número de vistas</strong> de tus órdenes.
+          </div>
+        ),
+      },
+      {
+        selector: ".MTablePaginationInner-root-14",
+        content: (
+          <div>
+            Y de llegar hasta el <strong>final de la lista</strong>.
+          </div>
+        ),
+      },
+      {
+        selector: ".ninthStepTour",
+        content: (
+          <div>
+            Finalmente, si hay algo que no te queda claro, presionando acá con
+            gusto volveremos a <strong> comenzar este tutorial. </strong>
+          </div>
+        ),
+      },
+      {
+        selector: ".tenthStepTour",
+        content: (
+          <div>
+            <br />
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: "800",
+                marginBottom: "2em",
+                marginTop: "1em",
+              }}
+            >
+              ¡Que tengas una grata experiencia!
+            </p>
+
+            <img src={endTour} alt="endTour" />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                color="primary"
+                className="ninthStepTour"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "150px",
+                  height: "38px",
+                  fontWeight: "600",
+                }}
+                onClick={toggle}
+              >
+                ir al MTD
+              </Button>
+            </div>
+          </div>
+        ),
+      },
+    ];
+  } else {
+    stepsDesk = [
+      {
+        selector: ".tenthStepTour",
+        content: (
+          <div>
+            <br />
+            <p
+              style={{
+                fontSize: "16px",
+                fontWeight: "800",
+                marginBottom: "2em",
+              }}
+            >
+              ¡Bienvenido al MTD de Instance!
+            </p>
+            <img src={startTour} alt="startTour" />
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "2em",
+                fontWeight: "600",
+              }}
+            >
+              Te invitamos a hacer el tour inicial
+            </p>
+          </div>
+        ),
+      },
+      {
+        selector: ".firstStepTour",
+        content: (
+          <div>
+            Ésta es tu <strong>tabla de órdenes.</strong>
+            <br />
+            <p>
+              Aquí encontrarás de manera automática la información detallada y
+              actualizada de las últimas órdenes emitidas en todos tus canales
+              de venta.
+            </p>
+          </div>
+        ),
+      },
+      {
+        selector: ".secondStepTour",
+        content: (
+          <div>
+            Si necesitas ver órdenes específicas, puedes utilizar estos{" "}
+            <strong>filtros</strong> para hacer más fácil la búsqueda.
+          </div>
+        ),
+      },
+      {
+        selector: ".thirdStepTour",
+        content: (
+          <div>
+            Una vez que escojas el filtro que necesitas presiona este botón para
+            poder <strong> iniciar tu búsqueda</strong>.
+          </div>
+        ),
+      },
+      {
+        selector: ".fourthStepTour",
+        content: (
+          <div>
+            Si te equivocas con los filtros no te preocupes, siempre puedes
+            presionar este botón que{" "}
+            <strong>limpiará los filtros de tu búsqueda.</strong>
+          </div>
+        ),
+      },
+
+      {
+        selector: ".seventhStepTour",
+        content: (
+          <div>
+            ¡Ojo!
+            <br />
+            Si estás buscando órdenes con fechas específicas te recomendamos
+            filtrar con este <strong> calendario </strong> para mejorar la
+            precisión.
+          </div>
+        ),
+      },
+      {
+        selector: ".eighthStepTour",
+        content: (
+          <div>
+            Si necesitas <strong>cargar más órdenes</strong> en tu tablero
+            presiona este botón.
+          </div>
+        ),
+      },
+
+      {
+        selector: ".tenthStepTour",
+        content: (
+          <div>
+            <br />
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: "800",
+                marginBottom: "2em",
+                marginTop: "1em",
+              }}
+            >
+              ¡Que tengas una grata experiencia!
+            </p>
+
+            <img src={endTour} alt="endTour" />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                color="primary"
+                className="ninthStepTour"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "150px",
+                  height: "38px",
+                  fontWeight: "600",
+                }}
+                onClick={toggle}
+              >
+                ir al MTD
+              </Button>
+            </div>
+          </div>
+        ),
+      },
+    ];
   }
 
   useEffect(() => {
@@ -402,23 +453,8 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-      
         var obj = JSON.parse(result);
-        console.log(obj);
-      // const zeek =  obj.forEach(function (arrayItem) {
-      //     var x = arrayItem;
-      //     return x;
-      // });
-     const zeek = obj.map(x=>{
-       return {value:x.value,country: x.country}
-     })
-      console.log(zeek);
-    const y = obj.filter((x)=>{
-        if(x.value === 2){
-          return x;
-        }
-      });
-      console.log(y[0].stores);
+
         let countryArray = [];
 
         setfilteredCountryData(obj);
@@ -458,7 +494,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
- 
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -486,7 +522,6 @@ const MtdiTable = (props) => {
       setData(data);
 
       setisLoading(false);
-    
     } catch (error) {
       console.log(error);
     }
@@ -972,11 +1007,9 @@ const MtdiTable = (props) => {
     location.reload();
   };
 
-
-
   return (
     <React.Fragment>
-       {isLoading && <SplashScreen/>}
+      {isLoading && <SplashScreen />}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -985,20 +1018,20 @@ const MtdiTable = (props) => {
         ></SendMail>
       )}
 
-   
-
       <div className="content .tenthStepTour">
-
-      <div className="bttnTour">
-        <Button
+        <div className="bttnTour">
+          <Button
             color="primary"
-            className="btn-round btn-icon ninthStepTour"      
+            className="btn-round btn-icon ninthStepTour"
             onClick={() => setIsTourOpen(true)}
             // onClick={toggle}
           >
-            <i className="nc-icon nc-alert-circle-i" style={{ color: "#ffffff" }} />
-        </Button>
-      </div>  
+            <i
+              className="nc-icon nc-alert-circle-i"
+              style={{ color: "#ffffff" }}
+            />
+          </Button>
+        </div>
 
         <h5
           className="titleTable"
@@ -1029,124 +1062,126 @@ const MtdiTable = (props) => {
         </p>
 
         <Col md="12">
-         <div className="secondStepTour">
-          <label htmlFor="select-country">
-            <h5
-              style={{
-                color: "black",
-                width: "30px",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-              }}
-            >
-              País
-            </h5>
-            <Select
-              labelId="select-country"
-              id="select-country"
-              style={{
-                width: 150,
-                marginLeft: "1em",
-                borderRadius: "17px",
-                marginBottom: "1em",
-                fontSize: "10px",
-                marginTop: "1em",
-              }}
-              value={country}
-              label="Country"
-              placeholder="&nbsp; Seleccione un país"
-              onChange={handleCountryChange}
-            >
-              {/* {Array.from(new Set(data.map((obj) => obj.pais))).map(
+          <div className="secondStepTour">
+            <label htmlFor="select-country">
+              <h5
+                style={{
+                  color: "black",
+                  width: "30px",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                }}
+              >
+                País
+              </h5>
+              <Select
+                labelId="select-country"
+                id="select-country"
+                style={{
+                  width: 150,
+                  marginLeft: "1em",
+                  borderRadius: "17px",
+                  marginBottom: "1em",
+                  fontSize: "10px",
+                  marginTop: "1em",
+                }}
+                value={country}
+                label="Country"
+                placeholder="&nbsp; Seleccione un país"
+                onChange={handleCountryChange}
+              >
+                {/* {Array.from(new Set(data.map((obj) => obj.pais))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-              {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
-                (period) => {
-                  return (
-                    <MenuItem value={period.country}>{period.country}</MenuItem>
-                  );
-                }
-              )}
-            </Select>
-          </label>
-          <label htmlFor="select-tienda">
-            <h5
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-                marginTop: "1em",
-              }}
-            >
-              Tienda
-            </h5>
-            <Select
-              labelId="select-tienda"
-              id="select-tienda"
-              style={{
-                width: 160,
-                fontSize: "10px",
-                marginLeft: "1em",
-                marginTop: "1em",
-              }}
-              value={store}
-              label="select-canal"
-              placeholder="&nbsp; Seleccione una tienda"
-              onChange={handleStoreChange}
-            >
-              {Array.from(
-                new Set(filteredStoreData.map((obj) => obj.store))
-              ).map((period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              })}
-            </Select>
-          </label>
-          <label htmlFor="select-canal">
-            <h5
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-                marginTop: "1em",
-              }}
-            >
-              Canal De Venta
-            </h5>
+                {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
+                  (period) => {
+                    return (
+                      <MenuItem value={period.country}>
+                        {period.country}
+                      </MenuItem>
+                    );
+                  }
+                )}
+              </Select>
+            </label>
+            <label htmlFor="select-tienda">
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                  marginTop: "1em",
+                }}
+              >
+                Tienda
+              </h5>
+              <Select
+                labelId="select-tienda"
+                id="select-tienda"
+                style={{
+                  width: 160,
+                  fontSize: "10px",
+                  marginLeft: "1em",
+                  marginTop: "1em",
+                }}
+                value={store}
+                label="select-canal"
+                placeholder="&nbsp; Seleccione una tienda"
+                onChange={handleStoreChange}
+              >
+                {Array.from(
+                  new Set(filteredStoreData.map((obj) => obj.store))
+                ).map((period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                })}
+              </Select>
+            </label>
+            <label htmlFor="select-canal">
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                  marginTop: "1em",
+                }}
+              >
+                Canal De Venta
+              </h5>
 
-            <Select
-              labelId="select-canal"
-              id="select-canal"
-              placeholder="&nbsp; Seleccione un canal"
-              style={{
-                width: 150,
-                marginLeft: "1em",
-                fontSize: "10px",
-                marginTop: "1em",
-              }}
-              value={salesChannel}
-              label="select-canal"
-              onChange={handleSalesChannelChange}
-            >
-              {Array.from(
-                new Set(filteredChannelArray.map((obj) => obj.channel))
-              ).map((period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              })}
-              {/* {filteredChannelArray.map((channelItem) => {
+              <Select
+                labelId="select-canal"
+                id="select-canal"
+                placeholder="&nbsp; Seleccione un canal"
+                style={{
+                  width: 150,
+                  marginLeft: "1em",
+                  fontSize: "10px",
+                  marginTop: "1em",
+                }}
+                value={salesChannel}
+                label="select-canal"
+                onChange={handleSalesChannelChange}
+              >
+                {Array.from(
+                  new Set(filteredChannelArray.map((obj) => obj.channel))
+                ).map((period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                })}
+                {/* {filteredChannelArray.map((channelItem) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            </Select>
-          </label>
+              </Select>
+            </label>
 
-          {/* <label htmlFor="select-tienda-official">
+            {/* <label htmlFor="select-tienda-official">
             <h5
               style={{
                 color: "black",
@@ -1169,123 +1204,118 @@ const MtdiTable = (props) => {
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
             > */}
-          {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+            {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-          {/* {filteredOfficialStore.map((channelItem) => {
+            {/* {filteredOfficialStore.map((channelItem) => {
                 return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
               })} */}
-          {/* {filteredOfficialStore.forEach((channelItem,index) => {
+            {/* {filteredOfficialStore.forEach((channelItem,index) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-          {/* </Select>
+            {/* </Select>
           </label> */}
-        
-          <label
-          className="seventhStepTour">
-            <h5           
-              id="fechaDesde"
+
+            <label className="seventhStepTour">
+              <h5
+                id="fechaDesde"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Desde
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+
+            <label className="seventhStepTour">
+              <h5
+                id="fechaHasta"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Hasta
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+
+            <Button
+              color="primary"
               style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
+                borderRadius: "22px",
+                color: "#FFFFFF",
                 marginLeft: "1em",
-                marginBottom: "6px",
-                marginTop: "0px",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "38px",
+                fontWeight: "600",
               }}
+              className="thirdStepTour"
+              onClick={applyFiltersButtonhandler}
             >
-              Fecha Desde
-            </h5>
+              Aplicar
+            </Button>
 
-            <DatePicker
-              id="datepickerCalendar"
-              type="number"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              style={{ width: 200, marginLeft: "1em" }}
-              placeholderText="dd/mm/yy"
-              locale="es"
-            />
-          </label>
-
-          <label
-          className="seventhStepTour">
-            <h5
-              id="fechaHasta"
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "6px",
-                marginTop: "0px",
-              }}
+            <Button
+              className="btn-round btn-icon fourthStepTour"
+              color="primary"
+              onClick={reloadTableHandler}
             >
-              Fecha Hasta
-            </h5>
-
-            <DatePicker
-              id="datepickerCalendar"
-              type="number"
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              style={{ width: 200, marginLeft: "1em" }}
-              placeholderText="dd/mm/yy"
-              locale="es"
-            />
-          </label>
-
-          <Button
-            color="primary"
-            style={{
-              borderRadius: "22px",
-              color: "#FFFFFF",
-              marginLeft: "1em",
-              textTransform: "none",
-              letterSpacing: "1px",
-              width: "120px",
-              height: "38px",
-              fontWeight: "600",
-            }}
-            className="thirdStepTour"
-            onClick={applyFiltersButtonhandler}
-            >
-            Aplicar
-          </Button>
-
-          <Button
-            className="btn-round btn-icon fourthStepTour"
-            color="primary"
-            onClick={reloadTableHandler}
-            >
-            <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
-          </Button>
-
-        </div>  
-
-
+              <i
+                className="nc-icon nc-refresh-69"
+                style={{ color: "#ffffff" }}
+              />
+            </Button>
+          </div>
         </Col>
 
         <div className="firstStepTour">
+          {/* MOBILE VERSION */}
+          <div id="OrderMobileCard" className="first-step">
+            <br />
+            {!isLoading && (
+              <div>
+                <OrderMobileCard
+                  data={data}
+                  isLoading={isLoading}
+                  purchaser={buyer}
+                ></OrderMobileCard>
+              </div>
+            )}
 
-        {/* MOBILE VERSION */}
-        <div id="OrderMobileCard" className="first-step">
-          <br />
-          {!isLoading && (
-            <div>
-              <OrderMobileCard
-                data={data}
-                isLoading={isLoading}
-                purchaser={buyer}
-              ></OrderMobileCard>
-            </div>
-          )}
-         
-          
-            
-              {/* <div>
+            {/* <div>
                 <img
                   src={spinnerGif}
                   style={{ marginTop: "2em" }}
@@ -1296,41 +1326,39 @@ const MtdiTable = (props) => {
               
                 <br />
               </div> */}
-{/* 
+            {/* 
               <OrderMobileCard
                 data={data}
                 isLoading={isLoading}
               ></OrderMobileCard> */}
-              <br />
-          
-         
-        </div>
+            <br />
+          </div>
 
-        {/* DESKTOP VERSION */}
+          {/* DESKTOP VERSION */}
 
-        <div id="OrderDesktopTable">
-          {isLoading && (
-            <MaterialTable           
-              title=""
-              options={{
-                search: false,
-              }}
-              icons={tableIcons}
-              columns={columns}
-              data={[]}
-              components={{
-                Body: (props) => (
-                  <div
-                    style={{
-                      alignItems: "center",
-                      display: "flex",
-                      justifyContent: "center",
-                      width: "100%",
-                    }}
-                  >
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-                    &nbsp; &nbsp;{" "}
-                    {/* <Spinner
+          <div id="OrderDesktopTable">
+            {isLoading && (
+              <MaterialTable
+                title=""
+                options={{
+                  search: false,
+                }}
+                icons={tableIcons}
+                columns={columns}
+                data={[]}
+                components={{
+                  Body: (props) => (
+                    <div
+                      style={{
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                      }}
+                    >
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                      &nbsp; &nbsp;{" "}
+                      {/* <Spinner
 
                       style={{
                         width: "0.7rem",
@@ -1352,184 +1380,175 @@ const MtdiTable = (props) => {
                       color="info"
 
                     /> */}
-                    <br />
-                    <div>
-                      {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" />  */}
+                      <br />
+                      <div>
+                        {/* <img src={spinnerGif} style={{marginTop:"2em"}} width="220" alt="Cargando" />  */}
 
-                      {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
+                        {/* <p style={{fontWeight: "bold", color: "#1D308E", marginLeft:"4.5em"}}>Cargando...</p>                   */}
+                        <br />
+                      </div>
                       <br />
                     </div>
-                    <br />
-                  </div>
-                ),
-                emptyDataSourceMessage: (
-                  <h1>No se encuentra la información.</h1>
-                ),
-              }}
-            ></MaterialTable>
-          )}
-          {data.length === 0 && !isLoading && (
-            <MaterialTable
-              localization={{
-                body: {
+                  ),
                   emptyDataSourceMessage: (
-                    <div
-                      style={{
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        marginLeft: "20rem",
-                        width: "100%",
-                      }}
-                    >
-                      <img
-                        src={noDataImage}
-                        style={{ marginTop: "2em" }}
-                        width="160"
-                        alt="noData"
-                      />
-                      <p
-                   
+                    <h1>No se encuentra la información.</h1>
+                  ),
+                }}
+              ></MaterialTable>
+            )}
+            {data.length === 0 && !isLoading && (
+              <MaterialTable
+                localization={{
+                  body: {
+                    emptyDataSourceMessage: (
+                      <div
                         style={{
+                          alignItems: "center",
                           display: "flex",
-                          justifyContent: "center",
-                          color: "#1D308E",
+                          justifyContent: "flex-start",
+                          marginLeft: "20rem",
+                          width: "100%",
                         }}
                       >
-                        {" "}
-                        &nbsp;
-                        <span> No hay información disponible.</span>
-                 
-                      </p>
-                   
-                    </div>
-                  ),
-                },
-              }}
-              title=""
-              icons={tableIcons}
-              columns={columns}
-              data={[]}
-              components={{
-                Row: (props) => <CustomLoader {...props} />,
-              }}
-            ></MaterialTable>
-          )}
-          {data.length !== 0 && !isLoading && (
-            <MaterialTable
-              onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
-              localization={{
-                body: {
-                  emptyDataSourceMessage: (
-                    <div
-                      style={{
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        marginLeft: "20rem",
-                        width: "100%",
-                      }}
-                    >
-                      <img
-                        src={noDataImage}
-                        style={{ marginTop: "2em" }}
-                        width="160"
-                        alt="noData"
-                      />
-                      <p
+                        <img
+                          src={noDataImage}
+                          style={{ marginTop: "2em" }}
+                          width="160"
+                          alt="noData"
+                        />
+                        <p
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            color: "#1D308E",
+                          }}
+                        >
+                          {" "}
+                          &nbsp;
+                          <span> No hay información disponible.</span>
+                        </p>
+                      </div>
+                    ),
+                  },
+                }}
+                title=""
+                icons={tableIcons}
+                columns={columns}
+                data={[]}
+                components={{
+                  Row: (props) => <CustomLoader {...props} />,
+                }}
+              ></MaterialTable>
+            )}
+            {data.length !== 0 && !isLoading && (
+              <MaterialTable
+                onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
+                localization={{
+                  body: {
+                    emptyDataSourceMessage: (
+                      <div
                         style={{
+                          alignItems: "center",
                           display: "flex",
-                          justifyContent: "center",
-                          color: "#1D308E",
+                          justifyContent: "flex-start",
+                          marginLeft: "20rem",
+                          width: "100%",
                         }}
                       >
-                        {" "}
-                        &nbsp;
-                        <span> No hay información disponible.</span>
-                      <span> No hay información disponible.</span> 
-                        <span> No hay información disponible.</span>
-                      </p>
-                    </div>
-                  ),
-                },
-              }}
-              key={data.id_mtdi}
-              title="Instance Table"
-              icons={tableIcons}
-              title=""
-              data={data}
-              columns={columns}
-              options={{ columnsButton: true, sorting: true, search: true }}
-              style={{ marginLeft: "1em", marginTop: "2em" }}
-            />
-          )}
-        </div>
-
-       {!isLoading && <div className="bttnSeeMore">
-
-          {!isLoadingIncrementPage && (
-            <Button
-              className="eighthStepTour"
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "50px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-            >
-              Ver más
-            </Button>
-          )}
-          {isLoadingIncrementPage && (
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "200px",
-                height: "50px",
-                fontWeight: "600",
-              }}
-              onClick={incrementPageHandler}
-              disabled
-            >
-              <Spinner
-                style={{ width: "0.7rem", height: "0.7rem" }}
-                type="grow"
-                color="light"
+                        <img
+                          src={noDataImage}
+                          style={{ marginTop: "2em" }}
+                          width="160"
+                          alt="noData"
+                        />
+                        <p
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            color: "#1D308E",
+                          }}
+                        >
+                          {" "}
+                          &nbsp;
+                          <span> No hay información disponible.</span>
+                          <span> No hay información disponible.</span>
+                          <span> No hay información disponible.</span>
+                        </p>
+                      </div>
+                    ),
+                  },
+                }}
+                key={data.id_mtdi}
+                title="Instance Table"
+                icons={tableIcons}
+                title=""
+                data={data}
+                columns={columns}
+                options={{ columnsButton: true, sorting: true, search: true }}
+                style={{ marginLeft: "1em", marginTop: "2em" }}
               />
-              &nbsp; Cargando...
-            </Button>
-          )}
-        </div>}
+            )}
+          </div>
 
+          {!isLoading && (
+            <div className="bttnSeeMore">
+              {!isLoadingIncrementPage && (
+                <Button
+                  className="eighthStepTour"
+                  color="primary"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "200px",
+                    height: "50px",
+                    fontWeight: "600",
+                  }}
+                  onClick={incrementPageHandler}
+                >
+                  Ver más
+                </Button>
+              )}
+              {isLoadingIncrementPage && (
+                <Button
+                  color="primary"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "200px",
+                    height: "50px",
+                    fontWeight: "600",
+                  }}
+                  onClick={incrementPageHandler}
+                  disabled
+                >
+                  <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Cargando...
+                </Button>
+              )}
+            </div>
+          )}
         </div>
 
-
-     
-      <Tour
-        steps={stepsDesk}
-        isOpen={isTourOpen}
-        onRequestClose={() => setIsTourOpen(false)}
-        accentColor={accentColor}
-        className="helper"
-        rounded={20}
-        onAfterOpen={disableBody}
-        onBeforeClose={enableBody}
-      />
-
-     
-
-
+        <Tour
+          steps={stepsDesk}
+          isOpen={isTourOpen}
+          onRequestClose={() => setIsTourOpen(false)}
+          accentColor={accentColor}
+          className="helper"
+          rounded={20}
+          onAfterOpen={disableBody}
+          onBeforeClose={enableBody}
+        />
       </div>
     </React.Fragment>
   );
