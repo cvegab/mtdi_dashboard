@@ -29,41 +29,53 @@ import {
   data1,
 } from "variables/charts.js";
 registerLocale("es", es);
-const stackedData = {
-  
-    labels: ['1', '2', '3', '4', '5', '6'],
-    datasets: [
+const barChartData = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "Ripley",
+      backgroundColor: "#F10096",
+      stack: "2",
+      data: [30, 50, 20, 40, 50, 30, 20, 110],
+    },
+    {
+      label: "Shopify",
+      backgroundColor: "#00B6CB",
+      stack: "2",
+      data: [10, 0, 5, 15, 0, 4, 8, 8],
+    },
+    {
+      label: "Mercado Libre",
+      backgroundColor: "#344FD5",
+      stack: "2",
+      data: [30, 50, 20, 40, 50, 30, 20, 110],
+    },
+    {
+      label: "CornerShop",
+      backgroundColor: "#5E35B1",
+      stack: "2",
+      data: [80, 50, 10, 40, 60, 30, 20, 110],
+    },
+  ],
+};
+
+const barChartOptions = {
+  legend: {
+    display: false,
+  },
+  scales: {
+    xAxes: [
       {
-        label: '# of Red Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: 'rgb(255, 99, 132)',
-      },
-      {
-        label: '# of Blue Votes',
-        data: [2, 3, 20, 5, 1, 4],
-        backgroundColor: 'rgb(54, 162, 235)',
-      },
-      {
-        label: '# of Green Votes',
-        data: [3, 10, 13, 15, 22, 30],
-        backgroundColor: 'rgb(75, 192, 192)',
+        stacked: true,
       },
     ],
-  };
-  const options = {
-    scales: {
-        xAxes: [{
-          stacked: true
-        }],
-        yAxes: [{
-          stacked: true
-        }]
+    yAxes: [
+      {
+        stacked: true,
       },
-    legend: {
-        display: false,
-    },
-    maintainAspectRatio: false,
-}
+    ],
+  },
+};
 function Charts() {
   return (
     <>
@@ -719,7 +731,7 @@ function Charts() {
               <br></br>
             </Card>
           </Col>
-       
+
           <Col md="4">
             <Card>
               <CardHeader>
@@ -735,7 +747,6 @@ function Charts() {
                   width={456}
                   height={190}
                 />
-               
               </CardBody>
               <CardFooter>
                 <div className="legend">
@@ -783,34 +794,34 @@ function Charts() {
               </CardFooter>
             </Card>
           </Col>
-<Row>
-<Col md="6">
-            <Card className="card-chart">
-              <CardHeader>
-                <CardTitle>NASDAQ: AAPL</CardTitle>
-                <p className="card-category">Line Chart with Points</p>
-              </CardHeader>
-              <CardBody>
-              <Bar data={stackedData} options={options} />
-              </CardBody>
-            </Card>
-          </Col>
-          <Col md="6">
-            <Card className="card-chart">
-              <CardHeader>
-                <CardTitle>NASDAQ: AAPL</CardTitle>
-                <p className="card-category">Line Chart with Points</p>
-              </CardHeader>
-              <CardBody>
-                <Line
-                  data={chartExample9.data}
-                  options={chartExample9.options}
-                />
-              </CardBody>
-            </Card>
-          </Col>
-</Row>
-         
+          <Row>
+            <Col md="6">
+              <Card className="card-chart">
+                <CardHeader>
+                  <CardTitle>NASDAQ: AAPL</CardTitle>
+                  <p className="card-category">Line Chart with Points</p>
+                </CardHeader>
+                <CardBody>
+                  <Bar data={barChartData} options={barChartOptions} />
+                </CardBody>
+              </Card>
+            </Col>
+            <Col md="6">
+              <Card className="card-chart">
+                <CardHeader>
+                  <CardTitle>NASDAQ: AAPL</CardTitle>
+                  <p className="card-category">Line Chart with Points</p>
+                </CardHeader>
+                <CardBody>
+                  <Line
+                    data={chartExample9.data}
+                    options={chartExample9.options}
+                  />
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+
           {/* <Col md="6">
             <Card className="card-chart">
               <CardHeader>
