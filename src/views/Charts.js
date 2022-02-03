@@ -29,7 +29,41 @@ import {
   data1,
 } from "variables/charts.js";
 registerLocale("es", es);
-
+const stackedData = {
+  
+    labels: ['1', '2', '3', '4', '5', '6'],
+    datasets: [
+      {
+        label: '# of Red Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: 'rgb(255, 99, 132)',
+      },
+      {
+        label: '# of Blue Votes',
+        data: [2, 3, 20, 5, 1, 4],
+        backgroundColor: 'rgb(54, 162, 235)',
+      },
+      {
+        label: '# of Green Votes',
+        data: [3, 10, 13, 15, 22, 30],
+        backgroundColor: 'rgb(75, 192, 192)',
+      },
+    ],
+  };
+  const options = {
+    scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      },
+    legend: {
+        display: false,
+    },
+    maintainAspectRatio: false,
+}
 function Charts() {
   return (
     <>
@@ -757,7 +791,7 @@ function Charts() {
                 <p className="card-category">Line Chart with Points</p>
               </CardHeader>
               <CardBody>
-            
+              <Bar data={stackedData} options={options} />
               </CardBody>
             </Card>
           </Col>
