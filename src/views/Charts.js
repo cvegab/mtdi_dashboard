@@ -30,32 +30,50 @@ import {
 } from "variables/charts.js";
 registerLocale("es", es);
 const barChartData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"],
   datasets: [
     {
       label: "Ripley",
       backgroundColor: "#F10096",
       stack: "2",
-      data: [30, 50, 20, 40, 50, 30, 20, 110],
+      data: [30, 50, 20, 40, 50, 30, 20, 110,32,12,33,89],
     },
     {
       label: "Shopify",
       backgroundColor: "#00B6CB",
       stack: "2",
-      data: [10, 0, 5, 15, 0, 4, 8, 8],
+      data: [10, 0, 5, 15, 0, 4, 8, 8,32,11,33,66],
     },
     {
       label: "Mercado Libre",
       backgroundColor: "#344FD5",
       stack: "2",
-      data: [30, 50, 20, 40, 50, 30, 20, 110],
+      data: [30, 50, 20, 40, 50, 30, 20, 110,44,55,33,13],
     },
     {
       label: "CornerShop",
       backgroundColor: "#5E35B1",
       stack: "2",
-      data: [80, 50, 10, 40, 60, 30, 20, 110],
+      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
     },
+    {
+      label: "Linio",
+      backgroundColor: "#97D456",
+      stack: "2",
+      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
+    },
+    {
+      label: "Rappi",
+      backgroundColor: "#FFD88C",
+      stack: "2",
+      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
+    },
+    {
+      label: "WooCommerce",
+      backgroundColor: "#FF6059",
+      stack: "2",
+      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
+    }
   ],
 };
 
@@ -722,10 +740,10 @@ function Charts() {
               <CardBody>
                 <br></br>
                 <br></br>
-                {/* <Bar
+                <Bar
                   data={chartExample100.data}
                   options={chartExample100.options}
-                /> */}
+                />
               </CardBody>
               <br></br>
               <br></br>
@@ -795,28 +813,13 @@ function Charts() {
             </Card>
           </Col>
           <Row>
-            <Col md="6">
+            <Col md="12">
               <Card className="card-chart">
                 <CardHeader>
-                  <CardTitle>NASDAQ: AAPL</CardTitle>
-                  <p className="card-category">Line Chart with Points</p>
+                <strong>Resumen general de venta y órdenes</strong>
                 </CardHeader>
                 <CardBody>
                   <Bar data={barChartData} options={barChartOptions} />
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="6">
-              <Card className="card-chart">
-                <CardHeader>
-                  <CardTitle>NASDAQ: AAPL</CardTitle>
-                  <p className="card-category">Line Chart with Points</p>
-                </CardHeader>
-                <CardBody>
-                  <Line
-                    data={chartExample9.data}
-                    options={chartExample9.options}
-                  />
                 </CardBody>
               </Card>
             </Col>
