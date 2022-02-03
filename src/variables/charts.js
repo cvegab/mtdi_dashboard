@@ -714,13 +714,13 @@ const chartExample9 = {
 const chartExample10 = {
   data: {
     labels: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
+      'MercadoLibre',
+      'Shopify',
+      'Rappi',
+      'Ripley',
+      'Linio',
+      'CornerShop',
+      'Woo commerce',
       7,
       8,
       9,
@@ -739,10 +739,10 @@ const chartExample10 = {
     datasets: [
       {
         label: "Data",
-        borderColor: "#fcc468",
+        borderColor: "#344FD5",
         fill: true,
-        backgroundColor: "#fcc468",
-        hoverBorderColor: "#fcc468",
+        backgroundColor: "#344FD5",
+        hoverBorderColor: "#06CBC1",
         borderWidth: 5,
         barPercentage: 0.4,
         data: [
@@ -826,7 +826,107 @@ const chartExample10 = {
     },
   },
 };
+const chartExample100 = {
+  data: {
+    labels: [
+      'MercadoLibre',
+      'Shopify',
+      'Rappi',
+      'Ripley',
+      'Linio',
+      'CornerShop',
+      'Woo commerce',
+    ],
+    datasets: [
+      {
+        label: "Data",
+        borderColor: "#344FD5",
+        fill: true,
+        backgroundColor: "#344FD5",
+        hoverBorderColor: "#06CBC1",
+        borderWidth: 5,
+        barPercentage: 0.5,
+        data: [
+          100,
+          120,
+          80,
+          100,
+          90,
+          130,
+          110,
+          // 100,
+          // 80,
+          // 110,
+          // 130,
+          // 140,
+          // 130,
+          // 120,
+          // 130,
+          // 80,
+          // 100,
+          // 90,
+          // 120,
+          // 130,
+        ],
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: false,
+      },
 
+      tooltips: {
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 14,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10,
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          fontStyle: "bold",
+          beginAtZero: true,
+          maxTicksLimit: 5,
+          padding: 20,
+        },
+        grid: {
+          zeroLineColor: "transparent",
+          display: true,
+          drawBorder: false,
+          color: "#9f9f9f",
+        },
+      },
+      x: {
+        grid: {
+          zeroLineColor: "white",
+          display: false,
+          drawBorder: false,
+          color: "transparent",
+        },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f",
+          fontStyle: "bold",
+        },
+      },
+    },
+  },
+};
 // #########################################
 // // // used inside src/views/Charts.js
 // #########################################
@@ -966,7 +1066,17 @@ const chartExample12 = {
     },
   },
 };
-
+const data1 = {
+  labels: ["Organic", "Sponsored", "Organic", "Sponsored"],
+  previousDate: {
+    label: "08/10/2019 - 09/30/2019",
+    dataSet: [10000, 150000, 10000, 150000]
+  },
+  currentDate: {
+    label: "10/01/2019 - 11/20/2019",
+    dataSet: [10000, 225000, 10000, 225000]
+  }
+};
 module.exports = {
   // used for Charts and Dashboard views
   chartExample1,
@@ -992,4 +1102,6 @@ module.exports = {
   chartExample11,
   // used for Charts view
   chartExample12,
+  chartExample100,
+  data1
 };

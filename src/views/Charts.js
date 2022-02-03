@@ -23,10 +23,13 @@ import {
   chartExample4,
   chartExample9,
   chartExample10,
+  chartExample100,
   chartExample11,
   chartExample12,
+  data1,
 } from "variables/charts.js";
 registerLocale("es", es);
+
 function Charts() {
   return (
     <>
@@ -478,7 +481,7 @@ function Charts() {
               paddingTop: "20px",
             }}
           >
-          Cumplimiento de pedidos
+            Cumplimiento de pedidos
           </p>
 
           <Row style={{ padding: "10px", paddingLeft: "20px" }}>
@@ -581,7 +584,7 @@ function Charts() {
               paddingTop: "20px",
             }}
           >
-        Experiencia del cliente
+            Experiencia del cliente
           </p>
 
           <Row style={{ padding: "10px", paddingLeft: "20px" }}>
@@ -590,7 +593,7 @@ function Charts() {
               <div>
                 <p style={{ color: "#C4C4C4" }}>NPS</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                325 &nbsp;
+                  325 &nbsp;
                   <span
                     style={{
                       color: "#33D69F",
@@ -608,7 +611,7 @@ function Charts() {
               <div>
                 <p style={{ color: "#C4C4C4" }}>Preparacion</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                 4.5 &nbsp;
+                  4.5 &nbsp;
                   <span
                     style={{
                       color: "red",
@@ -626,7 +629,7 @@ function Charts() {
               <div>
                 <p style={{ color: "#C4C4C4" }}>Reclamos</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                500 &nbsp;
+                  500 &nbsp;
                   <span
                     style={{
                       color: "red",
@@ -662,7 +665,7 @@ function Charts() {
         <br></br>
         <br></br>
         <Row>
-          <Col md="6">
+          <Col md="8">
             <Card className="car-chart">
               <CardHeader>
                 <CardTitle>
@@ -671,13 +674,18 @@ function Charts() {
                 {/* <p className="card-category"> </p> */}
               </CardHeader>
               <CardBody>
-                <Bar
-                  data={chartExample4.data}
-                  options={chartExample4.options}
-                />
+                <br></br>
+                <br></br>
+                {/* <Bar
+                  data={chartExample100.data}
+                  options={chartExample100.options}
+                /> */}
               </CardBody>
+              <br></br>
+              <br></br>
             </Card>
           </Col>
+       
           <Col md="4">
             <Card>
               <CardHeader>
@@ -691,41 +699,65 @@ function Charts() {
                   data={chartExample11.data}
                   options={chartExample11.options}
                   width={456}
-                  height={300}
+                  height={190}
                 />
+               
               </CardBody>
               <CardFooter>
                 <div className="legend">
-                  <i className="fa fa-circle"style={{color:'blue',backgroundColor:'blue',borderRadius:'10px'}}/>
+                  <i
+                    className="fa fa-circle"
+                    style={{
+                      color: "blue",
+                      backgroundColor: "blue",
+                      borderRadius: "8px",
+                    }}
+                  />
                   Mercadolibre
                   <p className="card-category">$4.365.222</p>
-                  <i className="fa fa-circle text-info" />
+                  <i
+                    className="fa fa-circle"
+                    style={{
+                      color: "#06CBC1",
+                      backgroundColor: "#06CBC1",
+                      borderRadius: "8px",
+                    }}
+                  />
                   Woocommerce
                   <p className="card-category">$2.689.210</p>
-                  <i className="fa fa-circle text-warning" />
+                  <i
+                    className="fa fa-circle"
+                    style={{
+                      color: "#FFD88C",
+                      backgroundColor: "#FFD88C",
+                      borderRadius: "8px",
+                    }}
+                  />
                   Shopify
                   <p className="card-category">$1.000.933</p>
+                  <i
+                    className="fa fa-circle"
+                    style={{
+                      color: "#FF6059",
+                      backgroundColor: "#FF6059",
+                      borderRadius: "8px",
+                    }}
+                  />
+                  Otros
+                  <p className="card-category">$2.000.933</p>
                 </div>
-                {/* <hr />
-                <div className="stats">
-                  <i className="fa fa-calendar" />
-                  Number of emails sent
-                </div> */}
               </CardFooter>
             </Card>
           </Col>
-
-          <Col md="6">
+<Row>
+<Col md="6">
             <Card className="card-chart">
               <CardHeader>
-                <CardTitle>24 Hours Performance</CardTitle>
-                <p className="card-category">Line Chart</p>
+                <CardTitle>NASDAQ: AAPL</CardTitle>
+                <p className="card-category">Line Chart with Points</p>
               </CardHeader>
               <CardBody>
-                <Line
-                  data={chartExample1.data}
-                  options={chartExample1.options}
-                />
+            
               </CardBody>
             </Card>
           </Col>
@@ -743,9 +775,25 @@ function Charts() {
               </CardBody>
             </Card>
           </Col>
+</Row>
+         
+          {/* <Col md="6">
+            <Card className="card-chart">
+              <CardHeader>
+                <CardTitle>NASDAQ: AAPL</CardTitle>
+                <p className="card-category">Line Chart with Points</p>
+              </CardHeader>
+              <CardBody>
+                <Line
+                  data={chartExample9.data}
+                  options={chartExample9.options}
+                />
+              </CardBody>
+            </Card>
+          </Col> */}
         </Row>
         <Row>
-          <Col md="6">
+          {/* <Col md="6">
             <Card className="card-chart">
               <CardHeader>
                 <CardTitle>Views</CardTitle>
@@ -758,9 +806,9 @@ function Charts() {
                 />
               </CardBody>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
-        <Row>
+        {/* <Row>
           <Col md="8">
             <Card>
               <CardHeader>
@@ -784,7 +832,7 @@ function Charts() {
               </CardFooter>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
       </div>
     </>
   );
