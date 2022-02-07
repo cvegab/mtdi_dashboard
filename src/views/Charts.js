@@ -110,15 +110,14 @@ const barChartOptions = {
 function Charts() {
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
+  const [isLoading, setisLoading] = useState(false);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
-  const [selectedDateFrom, setselectedDateFrom] = useState(
-   ''
-  );
+  const [selectedDateFrom, setselectedDateFrom] = useState("");
   const today = d.toISOString().slice(0, 10);
   console.log(today);
 
-  const [fromDate, setfromDate] = useState(new Date);
+  const [fromDate, setfromDate] = useState(new Date());
   useEffect(() => {
     fetchGeneralData();
   }, []);
@@ -142,25 +141,28 @@ function Charts() {
     )
       .then((response) => response.text())
       .then((result) => {
-      
         var obj = JSON.parse(result);
         console.log(obj);
         console.log(fromDate.toISOString().slice(0, 10));
         const d = fromDate.toISOString().slice(0, 10);
-        var z = obj[0].filter(item=>{
+        var z = obj[0].filter((item) => {
           return item.date_created === d;
         });
         console.log(z);
-      
+        if (z === undefined) {
+          settotalIncome(0);
+          setdispatchCost(0);
+        }
         settotalIncome(z[0].total);
-       setdispatchCost(z[0].shipping_total);
+        setdispatchCost(z[0].shipping_total);
       })
       .catch((error) => console.log("error", error));
   };
   useEffect(() => {
-    if(selectedDateFrom){
+    if (selectedDateFrom) {
       console.log(selectedDateFrom);
     }
+    setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -180,83 +182,94 @@ function Charts() {
     )
       .then((response) => response.text())
       .then((result) => {
-      
         var obj = JSON.parse(result);
         console.log(obj);
-      
-        var z = obj[0].filter(item=>{
+
+        var z = obj[0].filter((item) => {
           return item.date_created === selectedDateFrom;
         });
         console.log(z);
-      
-        settotalIncome(z[0].total);
-       setdispatchCost(z[0].shipping_total);
+
+        if (z === undefined) {
+          settotalIncome(0);
+          setdispatchCost(0);
+        } else {
+          settotalIncome(z[0].total);
+          setdispatchCost(z[0].shipping_total);
+        }
+        setisLoading(false);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        console.log("error", error);
+        settotalIncome(0);
+        setdispatchCost(0);
+        setisLoading(false);
+      });
   }, [selectedDateFrom]);
-const changeDateHandler = (event)=>{
-  console.log('hi');
-  console.log(event);
-  const selectedDate = event.toISOString().slice(0, 10);
-  console.log(selectedDate);
-  setselectedDateFrom(selectedDate);
- 
-}
+  const changeDateHandler = (event) => {
+    console.log("hi");
+    console.log(event);
+    const selectedDate = event.toISOString().slice(0, 10);
+    console.log(selectedDate);
+    setselectedDateFrom(selectedDate);
+  };
   return (
     <>
-      <div className="content">
-        <h5
-          className="titleTable"
-          style={{
-            color: "#C4C4C4",
-            width: "450px",
-            fontSize: "10px",
-            fontWeight: "800",
-            marginLeft: "1em",
-            marginBottom: "0px",
-          }}
-        >
-          Dashboard: Vista Administrador
-        </h5>
-        <p
-          classname="textNameTable"
-          style={{
-            color: "black",
-            width: "450px",
-            fontSize: "20px",
-            fontWeight: "800",
-            marginLeft: "1em",
-          }}
-        >
-          Tu tienda
-        </p>
-        <Col md="12">
-          <CardBody>
-            <Button
-              style={{
-                borderRadius: "17px",
-                backgroundColor: "#1D308E",
-                color: "white",
-                width: "234px",
-                height: "72px",
-                fontWeight: "700px",
-              }}
-              outline
-            >
-              <span className="btn-label">
-                <i className="nc-icon nc-layout-11" />
-              </span>
-              General
-            </Button>
+      {isLoading && <h1>hello</h1>}
+      {!isLoading && (
+        <div className="content">
+          <h5
+            className="titleTable"
+            style={{
+              color: "#C4C4C4",
+              width: "450px",
+              fontSize: "10px",
+              fontWeight: "800",
+              marginLeft: "1em",
+              marginBottom: "0px",
+            }}
+          >
+            Dashboard: Vista Administrador
+          </h5>
+          <p
+            classname="textNameTable"
+            style={{
+              color: "black",
+              width: "450px",
+              fontSize: "20px",
+              fontWeight: "800",
+              marginLeft: "1em",
+            }}
+          >
+            Tu tienda
+          </p>
+          <Col md="12">
+            <CardBody>
+              <Button
+                style={{
+                  borderRadius: "17px",
+                  backgroundColor: "#1D308E",
+                  color: "white",
+                  width: "234px",
+                  height: "72px",
+                  fontWeight: "700px",
+                }}
+                outline
+              >
+                <span className="btn-label">
+                  <i className="nc-icon nc-layout-11" />
+                </span>
+                General
+              </Button>
 
-            {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
+              {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-shop" />
                   </span>
                   Tiendas        
                 </Button> */}
 
-            {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
+              {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-settings-gear-65" />
                   </span>
@@ -278,64 +291,128 @@ const changeDateHandler = (event)=>{
                  Cliente    
                 </Button>
                    */}
-          </CardBody>
-        </Col>
-        <Col md="12">
-          <label htmlFor="select-tienda">
-            <h5
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-                marginTop: "1em",
-              }}
+            </CardBody>
+          </Col>
+          <Col md="12">
+            <label htmlFor="select-tienda">
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                  marginTop: "1em",
+                }}
+              >
+                Tienda
+              </h5>
+              <Select
+                labelId="select-tienda"
+                id="select-tienda"
+                style={{
+                  width: 160,
+                  fontSize: "10px",
+                  marginLeft: "1em",
+                  marginTop: "1em",
+                }}
+                label="select-canal"
+                placeholder="&nbsp; Seleccione una tienda"
+              ></Select>
+            </label>
+            <label htmlFor="select-country">
+              <h5
+                style={{
+                  color: "black",
+                  width: "30px",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                }}
+              >
+                País
+              </h5>
+              <Select
+                labelId="select-country"
+                id="select-country"
+                style={{
+                  width: 150,
+                  marginLeft: "1em",
+                  borderRadius: "17px",
+                  marginBottom: "1em",
+                  fontSize: "10px",
+                  marginTop: "1em",
+                }}
+                label="Country"
+                placeholder="&nbsp; Seleccione un país"
+              ></Select>
+            </label>
+            <label>
+              <h5
+                id="fechaDesde"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Desde
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                // selected={fromDate}
+                // onChange={(date) => setfromDate(date)}
+                value={selectedDateFrom}
+                onChange={changeDateHandler}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+
+            <label className="seventhStepTour">
+              <h5
+                id="fechaHasta"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Hasta
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                onChange={(date) => setEndDate(date)}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+
+            <Button
+              className="btn-round btn-icon fourthStepTour"
+              color="primary"
             >
-              Tienda
-            </h5>
-            <Select
-              labelId="select-tienda"
-              id="select-tienda"
-              style={{
-                width: 160,
-                fontSize: "10px",
-                marginLeft: "1em",
-                marginTop: "1em",
-              }}
-              label="select-canal"
-              placeholder="&nbsp; Seleccione una tienda"
-            ></Select>
-          </label>
-          <label htmlFor="select-country">
-            <h5
-              style={{
-                color: "black",
-                width: "30px",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "0px",
-              }}
-            >
-              País
-            </h5>
-            <Select
-              labelId="select-country"
-              id="select-country"
-              style={{
-                width: 150,
-                marginLeft: "1em",
-                borderRadius: "17px",
-                marginBottom: "1em",
-                fontSize: "10px",
-                marginTop: "1em",
-              }}
-              label="Country"
-              placeholder="&nbsp; Seleccione un país"
-            ></Select>
-          </label>
-          <label>
+              <i
+                className="nc-icon nc-refresh-69"
+                style={{ color: "#ffffff" }}
+              />
+            </Button>
+          </Col>
+
+          <Col md="12">
             <h5
               id="fechaDesde"
               style={{
@@ -347,480 +424,421 @@ const changeDateHandler = (event)=>{
                 marginTop: "0px",
               }}
             >
-              Fecha Desde
+              Canales De Venta
             </h5>
-
-           
-              <DatePicker
-              id="datepickerCalendar"
-              type="number"
-              // selected={fromDate}
-              // onChange={(date) => setfromDate(date)}
-            value={selectedDateFrom}
-               onChange={changeDateHandler}
-              style={{ width: 200, marginLeft: "1em" }}
-              placeholderText="dd/mm/yy"
-              locale="es"
-            />
-          </label>
-
-          <label className="seventhStepTour">
-            <h5
-              id="fechaHasta"
+            <button
               style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "6px",
-                marginTop: "0px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                padding: "12px",
+                width: "42px",
+                height: "42px",
+                left: "1006px",
+                top: "405px",
+                background: "#EDEEF6",
+                borderRadius: "17px",
+                border: "none",
               }}
             >
-              Fecha Hasta
-            </h5>
-
-            <DatePicker
-              id="datepickerCalendar"
-              type="number"
-              onChange={(date) => setEndDate(date)}
-              style={{ width: 200, marginLeft: "1em" }}
-              placeholderText="dd/mm/yy"
-              locale="es"
-            />
-          </label>
-
-          <Button className="btn-round btn-icon fourthStepTour" color="primary">
-            <i className="nc-icon nc-refresh-69" style={{ color: "#ffffff" }} />
-          </Button>
-        </Col>
-
-        <Col md="12">
-          <h5
-            id="fechaDesde"
+              +
+            </button>
+          </Col>
+          <br></br>
+          {/* GENERAL DATA */}
+          <Col
+            md="12"
             style={{
-              color: "black",
-              fontSize: "12px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              marginBottom: "6px",
-              marginTop: "0px",
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
             }}
           >
-            Canales De Venta
-          </h5>
-          <button
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              padding: "12px",
-              width: "42px",
-              height: "42px",
-              left: "1006px",
-              top: "405px",
-              background: "#EDEEF6",
-              borderRadius: "17px",
-              border: "none",
-            }}
-          >
-            +
-          </button>
-        </Col>
-        <br></br>
-        {/* GENERAL DATA */}
-        <Col
-          md="12"
-          style={{
-            backgroundColor: "white",
-            width: "1040px",
-            height: "156px",
-            left: "118px",
-            top: "669px",
-            borderRadius: "12px",
-          }}
-        >
-          <p
-            classname="textNameTable"
-            style={{
-              color: "black",
-              width: "450px",
-              fontSize: "20px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              paddingTop: "20px",
-            }}
-          >
-            Datos Generales
-          </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Datos Generales
+            </p>
 
-          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-            {/* TOTAL INCOME */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  {/* $20.154.365 &nbsp; */}
-                  {totalIncome} &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-              {/* DISPATCH COST */}
-            </Col>
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  {/* $1.253.369 &nbsp; */}
-                  {dispatchCost} &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -3%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* GM */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>GM</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -6%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* CONVERSION */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Conversion</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-        <br></br>
-        <br></br>
-        {/* ORDER PROCESSING */}
-        <Col
-          md="12"
-          style={{
-            backgroundColor: "white",
-            width: "1040px",
-            height: "156px",
-            left: "118px",
-            top: "669px",
-            borderRadius: "12px",
-          }}
-        >
-          <p
-            classname="textNameTable"
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* TOTAL INCOME */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $20.154.365 &nbsp; */}
+                    {totalIncome} &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* DISPATCH COST */}
+              </Col>
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $1.253.369 &nbsp; */}
+                    {dispatchCost} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* GM */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>GM</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* CONVERSION */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Conversion</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* ORDER PROCESSING */}
+          <Col
+            md="12"
             style={{
-              color: "black",
-              width: "450px",
-              fontSize: "20px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              paddingTop: "20px",
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
             }}
           >
-            Procesamiento de pedidos
-          </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Procesamiento de pedidos
+            </p>
 
-          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-            {/* ORDERS */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Pedidos</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $20.154.365 &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-              {/* ORDERS CANCELLED */}
-            </Col>
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Cancelados</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -3%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* DTE SENT */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -6%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* DELIVERED */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Entregados</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-        <br></br>
-        <br></br>
-        {/* ORDER FULFILMENT */}
-        <Col
-          md="12"
-          style={{
-            backgroundColor: "white",
-            width: "1040px",
-            height: "156px",
-            left: "118px",
-            top: "669px",
-            borderRadius: "12px",
-          }}
-        >
-          <p
-            classname="textNameTable"
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* ORDERS */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Pedidos</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $20.154.365 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* ORDERS CANCELLED */}
+              </Col>
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Cancelados</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* DTE SENT */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* DELIVERED */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Entregados</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* ORDER FULFILMENT */}
+          <Col
+            md="12"
             style={{
-              color: "black",
-              width: "450px",
-              fontSize: "20px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              paddingTop: "20px",
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
             }}
           >
-            Cumplimiento de pedidos
-          </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Cumplimiento de pedidos
+            </p>
 
-          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-            {/* IN PROCESS */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>En Proceso</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $20.154.365 &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-              {/* PREPARATION */}
-            </Col>
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Preparacion</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -3%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* READY TO DISPATCH */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -6%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* READY TO DELIVER */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-        <br></br>
-        <br></br>
-        {/* CLIENT EXPERIENCE */}
-        <Col
-          md="12"
-          style={{
-            backgroundColor: "white",
-            width: "1040px",
-            height: "156px",
-            left: "118px",
-            top: "669px",
-            borderRadius: "12px",
-          }}
-        >
-          <p
-            classname="textNameTable"
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* IN PROCESS */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>En Proceso</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $20.154.365 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* PREPARATION */}
+              </Col>
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DISPATCH */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DELIVER */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    $1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* CLIENT EXPERIENCE */}
+          <Col
+            md="12"
             style={{
-              color: "black",
-              width: "450px",
-              fontSize: "20px",
-              fontWeight: "800",
-              marginLeft: "1em",
-              paddingTop: "20px",
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
             }}
           >
-            Experiencia del cliente
-          </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Experiencia del cliente
+            </p>
 
-          <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-            {/* NPS */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>NPS</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  325 &nbsp;
-                  <span
-                    style={{
-                      color: "#33D69F",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    +4.5%
-                  </span>
-                </h5>
-              </div>
-              {/* REVIEWS */}
-            </Col>
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Preparacion</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  4.5 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -3%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* claims */}
-            <Col md="3">
-              <div>
-                <p style={{ color: "#C4C4C4" }}>Reclamos</p>
-                <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  500 &nbsp;
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                      textAlign: "right",
-                    }}
-                  >
-                    -6%
-                  </span>
-                </h5>
-              </div>
-            </Col>
-            {/* READY TO DELIVER */}
-            {/* <Col md="3">
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* NPS */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>NPS</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    325 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* REVIEWS */}
+              </Col>
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    4.5 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* claims */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4" }}>Reclamos</p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    500 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DELIVER */}
+              {/* <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
@@ -837,124 +855,124 @@ const changeDateHandler = (event)=>{
                 </h5>
               </div>
             </Col> */}
-          </Row>
-        </Col>
-        <br></br>
-        <br></br>
-        <Row>
-          <Col md="8">
-            <Card className="car-chart">
-              <CardHeader>
-                <CardTitle>
-                  <strong>Resumen general de venta y órdenes</strong>
-                </CardTitle>
-                {/* <p className="card-category"> </p> */}
-              </CardHeader>
-              <CardBody>
-                <br></br>
-                <br></br>
-                <Bar
-                  data={chartExample100.data}
-                  options={chartExample100.options}
-                />
-              </CardBody>
-              <br></br>
-              <br></br>
-            </Card>
+            </Row>
           </Col>
-
-          <Col md="4">
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  <strong>Participación canal de venta</strong>
-                </CardTitle>
-                {/* <p className="card-category">Last Campaign Performance</p> */}
-              </CardHeader>
-              <CardBody style={{ height: "342px" }}>
-                <Pie
-                  data={chartExample11.data}
-                  options={chartExample11.options}
-                  width={456}
-                  height={190}
-                />
-              </CardBody>
-              <CardFooter>
-                <div className="legend">
-                  <i
-                    className="fa fa-circle"
-                    style={{
-                      color: "blue",
-                      backgroundColor: "blue",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  Mercadolibre
-                  <p className="card-category">$4.365.222</p>
-                  <i
-                    className="fa fa-circle"
-                    style={{
-                      color: "#06CBC1",
-                      backgroundColor: "#06CBC1",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  Woocommerce
-                  <p className="card-category">$2.689.210</p>
-                  <i
-                    className="fa fa-circle"
-                    style={{
-                      color: "#FFD88C",
-                      backgroundColor: "#FFD88C",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  Shopify
-                  <p className="card-category">$1.000.933</p>
-                  <i
-                    className="fa fa-circle"
-                    style={{
-                      color: "#FF6059",
-                      backgroundColor: "#FF6059",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  Otros
-                  <p className="card-category">$2.000.933</p>
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Row>
-            <Col md="12">
-              <Card className="card-chart">
-                <CardHeader>
-                  <strong>Órdenes por canal de venta</strong>
-                </CardHeader>
-                <br></br>
-                <CardBody>
-                  <Bar data={barChartData} options={barChartOptions} />
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
           <br></br>
           <br></br>
           <Row>
-            <Col md="12">
-              <Card className="card-chart">
+            <Col md="8">
+              <Card className="car-chart">
                 <CardHeader>
-                  <strong>Ingresos por canal de venta</strong>
+                  <CardTitle>
+                    <strong>Resumen general de venta y órdenes</strong>
+                  </CardTitle>
+                  {/* <p className="card-category"> </p> */}
                 </CardHeader>
-                <br></br>
                 <CardBody>
-                  <Bar data={barChartData} options={barChartOptions} />
+                  <br></br>
+                  <br></br>
+                  <Bar
+                    data={chartExample100.data}
+                    options={chartExample100.options}
+                  />
                 </CardBody>
+                <br></br>
+                <br></br>
               </Card>
             </Col>
-          </Row>
 
-          {/* <Col md="6">
+            <Col md="4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>
+                    <strong>Participación canal de venta</strong>
+                  </CardTitle>
+                  {/* <p className="card-category">Last Campaign Performance</p> */}
+                </CardHeader>
+                <CardBody style={{ height: "342px" }}>
+                  <Pie
+                    data={chartExample11.data}
+                    options={chartExample11.options}
+                    width={456}
+                    height={190}
+                  />
+                </CardBody>
+                <CardFooter>
+                  <div className="legend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "blue",
+                        backgroundColor: "blue",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Mercadolibre
+                    <p className="card-category">$4.365.222</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#06CBC1",
+                        backgroundColor: "#06CBC1",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Woocommerce
+                    <p className="card-category">$2.689.210</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FFD88C",
+                        backgroundColor: "#FFD88C",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Shopify
+                    <p className="card-category">$1.000.933</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Otros
+                    <p className="card-category">$2.000.933</p>
+                  </div>
+                </CardFooter>
+              </Card>
+            </Col>
+            <Row>
+              <Col md="12">
+                <Card className="card-chart">
+                  <CardHeader>
+                    <strong>Órdenes por canal de venta</strong>
+                  </CardHeader>
+                  <br></br>
+                  <CardBody>
+                    <Bar data={barChartData} options={barChartOptions} />
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <br></br>
+            <br></br>
+            <Row>
+              <Col md="12">
+                <Card className="card-chart">
+                  <CardHeader>
+                    <strong>Ingresos por canal de venta</strong>
+                  </CardHeader>
+                  <br></br>
+                  <CardBody>
+                    <Bar data={barChartData} options={barChartOptions} />
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+
+            {/* <Col md="6">
             <Card className="card-chart">
               <CardHeader>
                 <CardTitle>NASDAQ: AAPL</CardTitle>
@@ -968,9 +986,9 @@ const changeDateHandler = (event)=>{
               </CardBody>
             </Card>
           </Col> */}
-        </Row>
-        <Row>
-          {/* <Col md="6">
+          </Row>
+          <Row>
+            {/* <Col md="6">
             <Card className="card-chart">
               <CardHeader>
                 <CardTitle>Views</CardTitle>
@@ -984,8 +1002,8 @@ const changeDateHandler = (event)=>{
               </CardBody>
             </Card>
           </Col> */}
-        </Row>
-        {/* <Row>
+          </Row>
+          {/* <Row>
           <Col md="8">
             <Card>
               <CardHeader>
@@ -1010,7 +1028,8 @@ const changeDateHandler = (event)=>{
             </Card>
           </Col>
         </Row> */}
-      </div>
+        </div>
+      )}
     </>
   );
 }
