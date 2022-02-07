@@ -1,5 +1,5 @@
 import { Select, MenuItem } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // react plugin used to create charts
 import { Line, Bar, Pie } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -30,50 +30,63 @@ import {
 } from "variables/charts.js";
 registerLocale("es", es);
 const barChartData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"],
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
   datasets: [
     {
       label: "Ripley",
       backgroundColor: "#F10096",
       stack: "2",
-      data: [30, 50, 20, 40, 50, 30, 20, 110,32,12,33,89],
+      data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
     },
     {
       label: "Shopify",
       backgroundColor: "#00B6CB",
       stack: "2",
-      data: [10, 0, 5, 15, 0, 4, 8, 8,32,11,33,66],
+      data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
     },
     {
       label: "Mercado Libre",
       backgroundColor: "#344FD5",
       stack: "2",
-      data: [30, 50, 20, 40, 50, 30, 20, 110,44,55,33,13],
+      data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
     },
     {
       label: "CornerShop",
       backgroundColor: "#5E35B1",
       stack: "2",
-      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
+      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Linio",
       backgroundColor: "#97D456",
       stack: "2",
-      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
+      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Rappi",
       backgroundColor: "#FFD88C",
       stack: "2",
-      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
+      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "WooCommerce",
       backgroundColor: "#FF6059",
       stack: "2",
-      data: [80, 50, 10, 40, 60, 30, 20, 110,33,44,12,45],
-    }
+      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+    },
   ],
 };
 
@@ -95,6 +108,41 @@ const barChartOptions = {
   },
 };
 function Charts() {
+  const [totalIncome, settotalIncome] = useState(0);
+  useEffect(() => {
+    fetchGeneralData();
+  }, []);
+  const fetchGeneralData = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2&client=3&date_from=2021-11-31&date_to=2022-01-13&country=Chile",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        var obj = JSON.parse(result);
+        console.log(obj);
+        var z = obj.filter(item=>{
+          return item[0].date_created;
+        });
+        console.log(z);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <>
       <div className="content">
@@ -816,8 +864,24 @@ function Charts() {
             <Col md="12">
               <Card className="card-chart">
                 <CardHeader>
-                <strong>Resumen general de venta y órdenes</strong>
+                  <strong>Órdenes por canal de venta</strong>
                 </CardHeader>
+                <br></br>
+                <CardBody>
+                  <Bar data={barChartData} options={barChartOptions} />
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <br></br>
+          <br></br>
+          <Row>
+            <Col md="12">
+              <Card className="card-chart">
+                <CardHeader>
+                  <strong>Ingresos por canal de venta</strong>
+                </CardHeader>
+                <br></br>
                 <CardBody>
                   <Bar data={barChartData} options={barChartOptions} />
                 </CardBody>
