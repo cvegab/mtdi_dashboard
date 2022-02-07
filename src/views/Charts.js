@@ -110,6 +110,15 @@ const barChartOptions = {
 function Charts() {
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
+  const d = new Date();
+  d.setMonth(d.getMonth() - 1);
+  const [selectedDateFrom, setselectedDateFrom] = useState(
+   ''
+  );
+  const today = d.toISOString().slice(0, 10);
+  console.log(today);
+
+  const [fromDate, setfromDate] = useState(new Date);
   useEffect(() => {
     fetchGeneralData();
   }, []);
@@ -136,17 +145,63 @@ function Charts() {
       
         var obj = JSON.parse(result);
         console.log(obj);
+        console.log(fromDate.toISOString().slice(0, 10));
+        const d = fromDate.toISOString().slice(0, 10);
         var z = obj[0].filter(item=>{
-          return item.date_created == '2022-01-12';
+          return item.date_created === d;
         });
-        console.log(z[0].total);
+        console.log(z);
       
         settotalIncome(z[0].total);
        setdispatchCost(z[0].shipping_total);
       })
       .catch((error) => console.log("error", error));
   };
+  useEffect(() => {
+    if(selectedDateFrom){
+      console.log(selectedDateFrom);
+    }
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
 
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2&client=3&date_from=2021-11-31&date_to=2022-01-13&country=Chile",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+      
+        var obj = JSON.parse(result);
+        console.log(obj);
+      
+        var z = obj[0].filter(item=>{
+          return item.date_created === selectedDateFrom;
+        });
+        console.log(z);
+      
+        settotalIncome(z[0].total);
+       setdispatchCost(z[0].shipping_total);
+      })
+      .catch((error) => console.log("error", error));
+  }, [selectedDateFrom]);
+const changeDateHandler = (event)=>{
+  console.log('hi');
+  console.log(event);
+  const selectedDate = event.toISOString().slice(0, 10);
+  console.log(selectedDate);
+  setselectedDateFrom(selectedDate);
+ 
+}
   return (
     <>
       <div className="content">
@@ -280,7 +335,7 @@ function Charts() {
               placeholder="&nbsp; Seleccione un país"
             ></Select>
           </label>
-          <label className="seventhStepTour">
+          <label>
             <h5
               id="fechaDesde"
               style={{
@@ -295,10 +350,14 @@ function Charts() {
               Fecha Desde
             </h5>
 
-            <DatePicker
+           
+              <DatePicker
               id="datepickerCalendar"
               type="number"
-              onChange={(date) => setStartDate(date)}
+              // selected={fromDate}
+              // onChange={(date) => setfromDate(date)}
+            value={selectedDateFrom}
+               onChange={changeDateHandler}
               style={{ width: 200, marginLeft: "1em" }}
               placeholderText="dd/mm/yy"
               locale="es"
