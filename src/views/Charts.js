@@ -419,7 +419,8 @@ function Charts() {
               <div>
                 <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $1.253.369 &nbsp;
+                  {/* $1.253.369 &nbsp; */}
+                  {dispatchCost} &nbsp;
                   <span
                     style={{
                       color: "red",
