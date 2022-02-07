@@ -109,6 +109,7 @@ const barChartOptions = {
 };
 function Charts() {
   const [totalIncome, settotalIncome] = useState(0);
+  const [dispatchCost, setdispatchCost] = useState(0);
   useEffect(() => {
     fetchGeneralData();
   }, []);
@@ -132,13 +133,16 @@ function Charts() {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+      
         var obj = JSON.parse(result);
         console.log(obj);
-        var z = obj.filter(item=>{
-          return item[0].date_created;
+        var z = obj[0].filter(item=>{
+          return item.date_created == '2022-01-12';
         });
-        console.log(z);
+        console.log(z[0].total);
+      
+        settotalIncome(z[0].total);
+       setdispatchCost(z[0].shipping_total);
       })
       .catch((error) => console.log("error", error));
   };
@@ -396,7 +400,8 @@ function Charts() {
               <div>
                 <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  $20.154.365 &nbsp;
+                  {/* $20.154.365 &nbsp; */}
+                  {totalIncome} &nbsp;
                   <span
                     style={{
                       color: "#33D69F",
