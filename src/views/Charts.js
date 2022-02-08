@@ -28,6 +28,7 @@ import {
   chartExample12,
   data1,
 } from "variables/charts.js";
+import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
 const barChartData = {
   labels: [
@@ -110,6 +111,8 @@ const barChartOptions = {
 function Charts() {
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
+  const [gm, setgm] = useState(0);
+  const [conversion, setConversion] = useState(0);
   const [isLoading, setisLoading] = useState(false);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
@@ -215,7 +218,7 @@ function Charts() {
   };
   return (
     <>
-      {isLoading && <h1>hello</h1>}
+      {isLoading && <SplashScreen></SplashScreen>}
       {!isLoading && (
         <div className="content">
           <h5
@@ -515,7 +518,8 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>GM</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                    {/* $1.253.369 &nbsp; */}
+                    {gm} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -533,7 +537,8 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Conversion</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                    {/* $1.253.369 &nbsp; */}
+                    {conversion} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
