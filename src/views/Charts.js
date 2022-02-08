@@ -113,18 +113,29 @@ function Charts() {
   const [dispatchCost, setdispatchCost] = useState(0);
   const [gm, setgm] = useState(0);
   const [conversion, setConversion] = useState(0);
-  const [isLoading, setisLoading] = useState(false);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
-  const [selectedDateFrom, setselectedDateFrom] = useState("");
+  const [selectedDateFrom, setselectedDateFrom] = useState(
+    '2021-12-01'
+  );
+  const [isLoading, setisLoading] = useState(false);
+ 
+  // const [selectedDateFrom, setselectedDateFrom] = useState("");
   const today = d.toISOString().slice(0, 10);
   console.log(today);
 
   const [fromDate, setfromDate] = useState(new Date());
   useEffect(() => {
+  console.log('hi');
+  console.log(selectedDateFrom);
+  fetchGeneralData();
+  }, [selectedDateFrom]);
+  
+  useEffect(() => {
     fetchGeneralData();
   }, []);
   const fetchGeneralData = () => {
+    console.log('hi i am fetching');
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -137,84 +148,114 @@ function Charts() {
       headers: myHeaders,
       redirect: "follow",
     };
-
+    //2021-12-01
+let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=3&dateFrom=${selectedDateFrom}&dateTo=2022-01-13&country=1`
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2&client=3&date_from=2021-11-31&date_to=2022-01-13&country=Chile",
+      url,
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
-        console.log(fromDate.toISOString().slice(0, 10));
-        const d = fromDate.toISOString().slice(0, 10);
-        var z = obj[0].filter((item) => {
-          return item.date_created === d;
-        });
-        console.log(z);
-        if (z === undefined) {
-          settotalIncome(0);
-          setdispatchCost(0);
-        }
-        settotalIncome(z[0].total);
-        setdispatchCost(z[0].shipping_total);
+       var totalIncomeArray = obj.map((item)=>{
+         return item.total;
+       });
+       var totalDispatchCostArray = obj.map((item)=>{
+        return item.shipping_total;
+      });
+      var gmArray = obj.map((item)=>{
+        return item.gm;
+      });
+      let conversionArray = obj.map((item)=>{
+        return item.conversion;
+      });
+     
+       let sumOfTotalIncome = totalIncomeArray.reduce((partialSum, a) => partialSum + a, 0);
+       let sumOfTotalDispatch = totalDispatchCostArray.reduce((partialSum, a) => partialSum + a, 0);
+       let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
+       let TotalConversion = conversionArray.reduce((partialSum, a) => partialSum + a, 0);
+        settotalIncome(sumOfTotalIncome);
+        setdispatchCost(sumOfTotalDispatch);
+        setgm(Totalgm);
+        setConversion(TotalConversion);
+        // console.log(obj[0].total);
+        // //NEW API CODE
+        // settotalIncome(obj[0].total);
+        // setdispatchCost(obj[0].shipping_total);
+        // setgm(obj[0].gm);
+        // setConversion(obj[0].conversion);
+        //OLD API CODE
+        // console.log(fromDate.toISOString().slice(0, 10));
+        // const d = fromDate.toISOString().slice(0, 10);
+        // var z = obj[0].filter((item) => {
+        //   return item.date_created === "2022-01-03";
+        // });
+        // console.log(z);
+        // if (z === undefined) {
+        //   settotalIncome(0);
+        //   setdispatchCost(0);
+        // }
+        // settotalIncome(z[0].total);
+        // setdispatchCost(z[0].shipping_total);
       })
       .catch((error) => console.log("error", error));
   };
-  useEffect(() => {
-    if (selectedDateFrom) {
-      console.log(selectedDateFrom);
-    }
-    setisLoading(true);
-    var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-    );
+  // useEffect(() => {
+  //   if (selectedDateFrom) {
+  //     console.log(selectedDateFrom);
+  //   }
+  //   setisLoading(true);
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+  //   myHeaders.append(
+  //     "Authorization",
+  //     "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+  //   );
 
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
+  //   var requestOptions = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
 
-    fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2&client=3&date_from=2021-11-31&date_to=2022-01-13&country=Chile",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        var obj = JSON.parse(result);
-        console.log(obj);
+  //   fetch(
+  //     "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=3&dateFrom=2021-12-01&dateTo=2022-01-13&country=1",
+  //     requestOptions
+  //   )
+  //     .then((response) => response.text())
+  //     .then((result) => {
+  //       var obj = JSON.parse(result);
+  //       console.log(obj);
 
-        var z = obj[0].filter((item) => {
-          return item.date_created === selectedDateFrom;
-        });
-        console.log(z);
+  //       var z = obj[0].filter((item) => {
+  //         return item.date_created === selectedDateFrom;
+  //       });
+  //       console.log(z);
 
-        if (z === undefined) {
-          settotalIncome(0);
-          setdispatchCost(0);
-        } else {
-          settotalIncome(z[0].total);
-          setdispatchCost(z[0].shipping_total);
-        }
-        setisLoading(false);
-      })
-      .catch((error) => {
-        console.log("error", error);
-        settotalIncome(0);
-        setdispatchCost(0);
-        setisLoading(false);
-      });
-  }, [selectedDateFrom]);
+  //       if (z === undefined) {
+  //         settotalIncome(0);
+  //         setdispatchCost(0);
+  //       } else {
+  //         settotalIncome(z[0].total);
+  //         setdispatchCost(z[0].shipping_total);
+  //       }
+  //       setisLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log("error", error);
+  //       settotalIncome(0);
+  //       setdispatchCost(0);
+  //       setisLoading(false);
+  //     });
+  // }, [selectedDateFrom]);
   const changeDateHandler = (event) => {
     console.log("hi");
     console.log(event);
     const selectedDate = event.toISOString().slice(0, 10);
     console.log(selectedDate);
     setselectedDateFrom(selectedDate);
+    console.log(selectedDateFrom);
   };
   return (
     <>
