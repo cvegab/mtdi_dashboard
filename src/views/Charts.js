@@ -126,24 +126,12 @@ function Charts() {
     new Date().toISOString().slice(0, 10)
   );
   const [isLoading, setisLoading] = useState(false);
+  const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
  
-  const today = d.toISOString().slice(0, 10);
-  console.log(today);
 
   const [fromDate, setfromDate] = useState(new Date());
-  // useEffect(() => {
-  //   console.log("hi");
-  //   console.log(selectedDateFrom);
-
-  //   fetchGeneralData();
-  // }, [selectedDateFrom]);
-  // useEffect(() => {
-  //   console.log("hi");
-  //   console.log(selectedDateTo);
-
-  //   fetchGeneralData();
-  // }, [selectedDateTo]);
+  
 
   useEffect(() => {
     fetchGeneralData();
@@ -164,7 +152,7 @@ function Charts() {
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=4&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
@@ -183,7 +171,10 @@ function Charts() {
         let conversionArray = obj.map((item) => {
           return item.conversion;
         });
-
+        let ordersCancelledArray = obj.map((item) => {
+          return item.orders_canceled;
+        });
+        console.log(ordersCancelledArray);
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -192,15 +183,23 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
+        console.log(totalDispatchCostArray);
+        console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfCancelledOrders = ordersCancelledArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
         setConversion(TotalConversion);
+        settotalCancelledOrders(sumOfCancelledOrders);
         // console.log(obj[0].total);
         // //NEW API CODE
         // settotalIncome(obj[0].total);
@@ -225,7 +224,7 @@ function Charts() {
   };
   const fetchFilterData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -238,17 +237,17 @@ function Charts() {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
-        // let countryArray = [];
 
-         setfilteredCountryData(obj.countries);
-         setfilteredStoreData(obj.stores);
+        let countryArray = [];
+
+        setfilteredCountryData(obj);
+        // setfilteredStoreData(y[0].stores);
       })
       .catch((error) => console.log("error", error));
   };
@@ -277,6 +276,7 @@ function Charts() {
       }
     });
     setcountryId(val[0].value);
+    setfilteredStoreData(val[0].stores);
   };
   const handleStoreChange = (event) => {
     setstore(event.target.value);
@@ -294,10 +294,10 @@ function Charts() {
     // const selectedChannels = selectedChannelsArray.map((item) => {
     //   return item;
     // });
-  }
- const applyFiltersButtonhandler = ()=>{
-fetchGeneralData();
- }
+  };
+  const applyFiltersButtonhandler = () => {
+    fetchGeneralData();
+  };
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
@@ -406,11 +406,11 @@ fetchGeneralData();
                 label="select-canal"
                 placeholder="&nbsp; Seleccione una tienda"
               >
-                 {Array.from(
-                new Set(filteredStoreData.map((obj) => obj.store))
-              ).map((period) => {
-                return <MenuItem value={period}>{period}</MenuItem>;
-              })}
+                {Array.from(
+                  new Set(filteredStoreData.map((obj) => obj.store))
+                ).map((period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                })}
               </Select>
             </label>
             <label htmlFor="select-country">
@@ -442,13 +442,15 @@ fetchGeneralData();
                 label="Country"
                 placeholder="&nbsp; Seleccione un país"
               >
-                 {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
-                (period) => {
-                  return (
-                    <MenuItem value={period.country}>{period.country}</MenuItem>
-                  );
-                }
-              )}
+                {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
+                  (period) => {
+                    return (
+                      <MenuItem value={period.country}>
+                        {period.country}
+                      </MenuItem>
+                    );
+                  }
+                )}
               </Select>
             </label>
             <label>
@@ -505,22 +507,22 @@ fetchGeneralData();
               />
             </label>
             <Button
-            color="primary"
-            style={{
-              borderRadius: "22px",
-              color: "#FFFFFF",
-              marginLeft: "1em",
-              textTransform: "none",
-              letterSpacing: "1px",
-              width: "120px",
-              height: "38px",
-              fontWeight: "600",
-            }}
-            className="thirdStepTour"
-            onClick={applyFiltersButtonhandler}
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "38px",
+                fontWeight: "600",
+              }}
+              className="thirdStepTour"
+              onClick={applyFiltersButtonhandler}
             >
-            Aplicar
-          </Button>
+              Aplicar
+            </Button>
 
             <Button
               className="btn-round btn-icon fourthStepTour"
@@ -723,7 +725,7 @@ fetchGeneralData();
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Cancelados</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                  {totalCancelledOrders} &nbsp;
                     <span
                       style={{
                         color: "red",
