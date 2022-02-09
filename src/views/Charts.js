@@ -111,8 +111,11 @@ const barChartOptions = {
 function Charts() {
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
+  const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
   const [conversion, setConversion] = useState(0);
+  const [country, setcountry] = useState("");
+  const [countryId, setcountryId] = useState(0);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
   const [selectedDateFrom, setselectedDateFrom] = useState("2021-08-04");
@@ -241,7 +244,7 @@ function Charts() {
         console.log(obj);
         // let countryArray = [];
 
-        // setfilteredCountryData(obj.countries);
+         setfilteredCountryData(obj.countries);
         // setfilteredStoreData(obj.stores);
       })
       .catch((error) => console.log("error", error));
@@ -261,6 +264,16 @@ function Charts() {
     console.log(selectedDate);
     setselectedDateTo(selectedDate);
     console.log(selectedDateFrom);
+  };
+  const handleCountryChange = (event) => {
+    setcountry(event.target.value);
+    //Get countryId from filteredCountryData
+    const val = filteredCountryData.filter(function (item) {
+      if (item.country === event.target.value) {
+        return item;
+      }
+    });
+    setcountryId(val[0].value);
   };
  const applyFiltersButtonhandler = ()=>{
 fetchGeneralData();
@@ -396,9 +409,19 @@ fetchGeneralData();
                   fontSize: "10px",
                   marginTop: "1em",
                 }}
+                value={country}
+                onChange={handleCountryChange}
                 label="Country"
                 placeholder="&nbsp; Seleccione un país"
-              ></Select>
+              >
+                 {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
+                (period) => {
+                  return (
+                    <MenuItem value={period.country}>{period.country}</MenuItem>
+                  );
+                }
+              )}
+              </Select>
             </label>
             <label>
               <h5
