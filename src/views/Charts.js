@@ -117,11 +117,17 @@ function Charts() {
   const [totalDte, settotalDte] = useState(0);
   const [inProcess, setinProcess] = useState(0);
   const [inPreparation, setinPreparation] = useState(0);
+  const [readyToShip, setreadyToShip] = useState(0);
+  const [onTheWay, setonTheWay] = useState(0);
+  const [totalOrders, settotalOrders] = useState(0);
+  const [reviews, setreviews] = useState(0);
   const [country, setcountry] = useState("");
   const [countryId, setcountryId] = useState(0);
   const [store, setstore] = useState("");
+  const [channels, setchannels] = useState([]);
   const [storeId, setstoreId] = useState(0);
   const [filteredStoreData, setfilteredStoreData] = useState([]);
+  const [filteredChannelArray, setfilteredChannelArray] = useState([]);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
   const [selectedDateFrom, setselectedDateFrom] = useState("2021-08-04");
@@ -186,7 +192,20 @@ function Charts() {
         let inPreparationArray = obj.map((item) => {
           return item.in_preparation;
         });
-        console.log(inPreparationArray);
+        let readyToShipArray = obj.map((item) => {
+          return item.ready_to_ship;
+        });
+        let onThewayarray = obj.map((item) => {
+          return item.in_way;
+        });
+        let orderQuantityArray = obj.map((item) => {
+          return item.orders_qty;
+        });
+        let reviewArray =  obj.map((item) => {
+          return item.reviews;
+        });
+        console.log(orderQuantityArray);
+
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -200,7 +219,7 @@ function Charts() {
           0
         );
      
-        
+
        
         console.log(totalDispatchCostArray);
         console.log(sumOfTotalDispatch);
@@ -221,6 +240,22 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfreadyToShip = readyToShipArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let sumOfonTheway = onThewayarray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let sumOfOrderQuantity = orderQuantityArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let sumOfreview= reviewArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -229,6 +264,10 @@ function Charts() {
         settotalDte(sumOfDteSent);
         setinProcess(sumOfInProcess);
         setinPreparation(sumOfInPreparation);
+        setreadyToShip(sumOfreadyToShip);
+        setonTheWay(sumOfonTheway);
+        settotalOrders(sumOfOrderQuantity);
+        setreviews(sumOfreview);
         // console.log(obj[0].total);
         // //NEW API CODE
         // settotalIncome(obj[0].total);
@@ -271,8 +310,9 @@ function Charts() {
     )
       .then((response) => response.text())
       .then((result) => {
+        console.log(result);
         var obj = JSON.parse(result);
-
+       console.log(obj);
         let countryArray = [];
 
         setfilteredCountryData(obj);
@@ -319,6 +359,15 @@ function Charts() {
     const selectedStoreData = filteredStoreData.filter((selectedStore) => {
       return selectedStore.store === event.target.value;
     });
+    console.log(selectedStoreData);
+    const selectedChannelsArray = selectedStoreData[0].channels;
+    console.log(selectedChannelsArray);
+    const selectedChannels = selectedChannelsArray.map((item) => {
+      return item;
+    });
+    console.log(selectedChannels);
+     setfilteredChannelArray(selectedChannels);
+    // console.log(filteredChannelArray);
     // const selectedChannelsArray = selectedStoreData[0].channels;
     // const selectedChannels = selectedChannelsArray.map((item) => {
     //   return item;
@@ -327,6 +376,15 @@ function Charts() {
   const applyFiltersButtonhandler = () => {
     fetchGeneralData();
   };
+ const displaysalesChannelHandler = ()=>{
+   console.log('hello');
+   console.log(filteredChannelArray);
+  const channels = filteredChannelArray.map(item=>{
+return item.channel;
+   });
+   console.log(channels);
+   setchannels(channels);
+ }
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
@@ -592,9 +650,11 @@ function Charts() {
                 borderRadius: "17px",
                 border: "none",
               }}
+              onClick={displaysalesChannelHandler}
             >
               +
             </button>
+            {channels}
           </Col>
           <br></br>
           {/* GENERAL DATA */}
@@ -736,7 +796,7 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Pedidos</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $20.154.365 &nbsp;
+                   {totalOrders} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
@@ -875,7 +935,7 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                   {readyToShip} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -893,7 +953,7 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                  {onTheWay} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
@@ -958,9 +1018,9 @@ function Charts() {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                  <p style={{ color: "#C4C4C4" }}>Reviews</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    4.5 &nbsp;
+                   {reviews} &nbsp;
                     <span
                       style={{
                         color: "red",
