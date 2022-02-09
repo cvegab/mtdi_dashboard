@@ -115,27 +115,35 @@ function Charts() {
   const [conversion, setConversion] = useState(0);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
-  const [selectedDateFrom, setselectedDateFrom] = useState(
-    '2021-12-01'
+  const [selectedDateFrom, setselectedDateFrom] = useState("2021-08-04");
+  const [selectedDateTo, setselectedDateTo] = useState(
+    new Date().toISOString().slice(0, 10)
   );
   const [isLoading, setisLoading] = useState(false);
- 
+
   // const [selectedDateFrom, setselectedDateFrom] = useState("");
   const today = d.toISOString().slice(0, 10);
   console.log(today);
 
   const [fromDate, setfromDate] = useState(new Date());
   useEffect(() => {
-  console.log('hi');
-  console.log(selectedDateFrom);
-  fetchGeneralData();
+    console.log("hi");
+    console.log(selectedDateFrom);
+
+    fetchGeneralData();
   }, [selectedDateFrom]);
-  
+  useEffect(() => {
+    console.log("hi");
+    console.log(selectedDateTo);
+
+    fetchGeneralData();
+  }, [selectedDateTo]);
+
   useEffect(() => {
     fetchGeneralData();
   }, []);
   const fetchGeneralData = () => {
-    console.log('hi i am fetching');
+    console.log("hi i am fetching");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -149,32 +157,39 @@ function Charts() {
       redirect: "follow",
     };
     //2021-12-01
-let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=3&dateFrom=${selectedDateFrom}&dateTo=2022-01-13&country=1`
-    fetch(
-      url,
-      requestOptions
-    )
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=3&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=1`;
+    console.log(url);
+    fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
-       var totalIncomeArray = obj.map((item)=>{
-         return item.total;
-       });
-       var totalDispatchCostArray = obj.map((item)=>{
-        return item.shipping_total;
-      });
-      var gmArray = obj.map((item)=>{
-        return item.gm;
-      });
-      let conversionArray = obj.map((item)=>{
-        return item.conversion;
-      });
-     
-       let sumOfTotalIncome = totalIncomeArray.reduce((partialSum, a) => partialSum + a, 0);
-       let sumOfTotalDispatch = totalDispatchCostArray.reduce((partialSum, a) => partialSum + a, 0);
-       let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
-       let TotalConversion = conversionArray.reduce((partialSum, a) => partialSum + a, 0);
+        var totalIncomeArray = obj.map((item) => {
+          return item.total;
+        });
+        var totalDispatchCostArray = obj.map((item) => {
+          return item.shipping_total;
+        });
+        var gmArray = obj.map((item) => {
+          return item.gm;
+        });
+        let conversionArray = obj.map((item) => {
+          return item.conversion;
+        });
+
+        let sumOfTotalIncome = totalIncomeArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let sumOfTotalDispatch = totalDispatchCostArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
+        let TotalConversion = conversionArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -255,6 +270,14 @@ let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/
     const selectedDate = event.toISOString().slice(0, 10);
     console.log(selectedDate);
     setselectedDateFrom(selectedDate);
+    console.log(selectedDateFrom);
+  };
+  const changeDateToHandler = (event) => {
+    console.log("hi");
+    console.log(event);
+    const selectedDate = event.toISOString().slice(0, 10);
+    console.log(selectedDate);
+    setselectedDateTo(selectedDate);
     console.log(selectedDateFrom);
   };
   return (
@@ -420,7 +443,7 @@ let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/
               />
             </label>
 
-            <label className="seventhStepTour">
+            <label>
               <h5
                 id="fechaHasta"
                 style={{
@@ -438,7 +461,8 @@ let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/
               <DatePicker
                 id="datepickerCalendar"
                 type="number"
-                onChange={(date) => setEndDate(date)}
+                value={selectedDateTo}
+                onChange={changeDateToHandler}
                 style={{ width: 200, marginLeft: "1em" }}
                 placeholderText="dd/mm/yy"
                 locale="es"
