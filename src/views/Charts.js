@@ -183,7 +183,10 @@ function Charts() {
         let inProcessArray = obj.map((item) => {
           return item.in_process;
         });
-        console.log(inProcessArray);
+        let inPreparationArray = obj.map((item) => {
+          return item.in_preparation;
+        });
+        console.log(inPreparationArray);
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -196,6 +199,7 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
+     
         
        
         console.log(totalDispatchCostArray);
@@ -213,7 +217,10 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
-
+        let sumOfInPreparation = inPreparationArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -221,6 +228,7 @@ function Charts() {
         settotalCancelledOrders(sumOfCancelledOrders);
         settotalDte(sumOfDteSent);
         setinProcess(sumOfInProcess);
+        setinPreparation(sumOfInPreparation);
         // console.log(obj[0].total);
         // //NEW API CODE
         // settotalIncome(obj[0].total);
