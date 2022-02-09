@@ -116,6 +116,9 @@ function Charts() {
   const [conversion, setConversion] = useState(0);
   const [country, setcountry] = useState("");
   const [countryId, setcountryId] = useState(0);
+  const [store, setstore] = useState("");
+  const [storeId, setstoreId] = useState(0);
+  const [filteredStoreData, setfilteredStoreData] = useState([]);
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
   const [selectedDateFrom, setselectedDateFrom] = useState("2021-08-04");
@@ -161,7 +164,7 @@ function Charts() {
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=4&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=1`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=4&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
@@ -245,7 +248,7 @@ function Charts() {
         // let countryArray = [];
 
          setfilteredCountryData(obj.countries);
-        // setfilteredStoreData(obj.stores);
+         setfilteredStoreData(obj.stores);
       })
       .catch((error) => console.log("error", error));
   };
@@ -275,6 +278,23 @@ function Charts() {
     });
     setcountryId(val[0].value);
   };
+  const handleStoreChange = (event) => {
+    setstore(event.target.value);
+    //Get storeId from filteredStoreData
+    const val = filteredStoreData.filter(function (item) {
+      if (item.store === event.target.value) {
+        return item;
+      }
+    });
+    setstoreId(val[0].value);
+    const selectedStoreData = filteredStoreData.filter((selectedStore) => {
+      return selectedStore.store === event.target.value;
+    });
+    // const selectedChannelsArray = selectedStoreData[0].channels;
+    // const selectedChannels = selectedChannelsArray.map((item) => {
+    //   return item;
+    // });
+  }
  const applyFiltersButtonhandler = ()=>{
 fetchGeneralData();
  }
@@ -381,9 +401,17 @@ fetchGeneralData();
                   marginLeft: "1em",
                   marginTop: "1em",
                 }}
+                value={store}
+                onChange={handleStoreChange}
                 label="select-canal"
                 placeholder="&nbsp; Seleccione una tienda"
-              ></Select>
+              >
+                 {Array.from(
+                new Set(filteredStoreData.map((obj) => obj.store))
+              ).map((period) => {
+                return <MenuItem value={period}>{period}</MenuItem>;
+              })}
+              </Select>
             </label>
             <label htmlFor="select-country">
               <h5
