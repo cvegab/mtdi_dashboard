@@ -114,6 +114,9 @@ function Charts() {
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
   const [conversion, setConversion] = useState(0);
+  const [totalDte, settotalDte] = useState(0);
+  const [inProcess, setinProcess] = useState(0);
+  const [inPreparation, setinPreparation] = useState(0);
   const [country, setcountry] = useState("");
   const [countryId, setcountryId] = useState(0);
   const [store, setstore] = useState("");
@@ -174,7 +177,13 @@ function Charts() {
         let ordersCancelledArray = obj.map((item) => {
           return item.orders_canceled;
         });
-        console.log(ordersCancelledArray);
+        let dteSentArray = obj.map((item) => {
+          return item.send_dte_qty;
+        });
+        let inProcessArray = obj.map((item) => {
+          return item.in_process;
+        });
+        console.log(inProcessArray);
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -183,6 +192,12 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfDteSent = dteSentArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        
+       
         console.log(totalDispatchCostArray);
         console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
@@ -194,12 +209,18 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfInProcess = inProcessArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
 
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
         setConversion(TotalConversion);
         settotalCancelledOrders(sumOfCancelledOrders);
+        settotalDte(sumOfDteSent);
+        setinProcess(sumOfInProcess);
         // console.log(obj[0].total);
         // //NEW API CODE
         // settotalIncome(obj[0].total);
@@ -743,7 +764,7 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                   {totalDte} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -810,7 +831,7 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>En Proceso</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $20.154.365 &nbsp;
+                  {inProcess} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
@@ -828,7 +849,7 @@ function Charts() {
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Preparacion</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
+                   {inPreparation} &nbsp;
                     <span
                       style={{
                         color: "red",
