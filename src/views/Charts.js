@@ -121,23 +121,23 @@ function Charts() {
   );
   const [isLoading, setisLoading] = useState(false);
 
-  // const [selectedDateFrom, setselectedDateFrom] = useState("");
+ 
   const today = d.toISOString().slice(0, 10);
   console.log(today);
 
   const [fromDate, setfromDate] = useState(new Date());
-  useEffect(() => {
-    console.log("hi");
-    console.log(selectedDateFrom);
+  // useEffect(() => {
+  //   console.log("hi");
+  //   console.log(selectedDateFrom);
 
-    fetchGeneralData();
-  }, [selectedDateFrom]);
-  useEffect(() => {
-    console.log("hi");
-    console.log(selectedDateTo);
+  //   fetchGeneralData();
+  // }, [selectedDateFrom]);
+  // useEffect(() => {
+  //   console.log("hi");
+  //   console.log(selectedDateTo);
 
-    fetchGeneralData();
-  }, [selectedDateTo]);
+  //   fetchGeneralData();
+  // }, [selectedDateTo]);
 
   useEffect(() => {
     fetchGeneralData();
@@ -157,7 +157,7 @@ function Charts() {
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=3&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=1`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=4&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=1`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
@@ -280,6 +280,9 @@ function Charts() {
     setselectedDateTo(selectedDate);
     console.log(selectedDateFrom);
   };
+ const applyFiltersButtonhandler = ()=>{
+fetchGeneralData();
+ }
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
@@ -468,6 +471,23 @@ function Charts() {
                 locale="es"
               />
             </label>
+            <Button
+            color="primary"
+            style={{
+              borderRadius: "22px",
+              color: "#FFFFFF",
+              marginLeft: "1em",
+              textTransform: "none",
+              letterSpacing: "1px",
+              width: "120px",
+              height: "38px",
+              fontWeight: "600",
+            }}
+            className="thirdStepTour"
+            onClick={applyFiltersButtonhandler}
+            >
+            Aplicar
+          </Button>
 
             <Button
               className="btn-round btn-icon fourthStepTour"
