@@ -110,6 +110,22 @@ const barChartOptions = {
   },
 };
 function Charts() {
+  let PIE_CHART_DATA ={
+    labels: [1,2,3,4],
+    datasets: [
+      {
+        label: "Emails",
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059','#FFFFFF'],
+        borderWidth: 0,
+        barPercentage: 1.6,
+        data: [542, 480, 430,211],
+      },
+    ],
+  }
+  const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
+
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
@@ -342,6 +358,23 @@ function Charts() {
  });
  console.log(salesChannelList);
  setchannels(salesChannelList);
+console.log(channels);
+ let PIE ={
+  labels: salesChannelList,
+  datasets: [
+    {
+      label: "Emails",
+      pointRadius: 0,
+      pointHoverRadius: 0,
+      backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
+      borderWidth: 0,
+      barPercentage: 1.6,
+      data: [542, 480, 430,211],
+    },
+  ],
+}
+console.log(PIE.labels);
+setpieChartData(PIE);
         let countryArray = [];
 
         setfilteredCountryData(obj);
@@ -1159,7 +1192,7 @@ return item.channel;
                 </CardHeader>
                 <CardBody style={{ height: "342px" }}>
                   <Pie
-                    data={chartExample11.data}
+                    data={pieChartData}
                     options={chartExample11.options}
                     width={456}
                     height={190}
