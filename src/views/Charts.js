@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Line, Bar, Pie } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
+import './charts.css';
 import "react-datepicker/dist/react-datepicker.css";
 // reactstrap components
 import {
@@ -654,7 +655,18 @@ return item.channel;
             >
               +
             </button>
-            {channels}
+            {channels.map((item) => (
+                <div className="tag-item" key={item}>
+                  {item}
+                  <button
+                    type="button"
+                    className="button"
+                    // onClick={() => this.handleDelete(item)}
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
           </Col>
           <br></br>
           {/* GENERAL DATA */}
