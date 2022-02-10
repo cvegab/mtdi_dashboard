@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Line, Bar, Pie } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-import './charts.css';
+import "./charts.css";
 import "react-datepicker/dist/react-datepicker.css";
 // reactstrap components
 import {
@@ -110,20 +110,26 @@ const barChartOptions = {
   },
 };
 function Charts() {
-  let PIE_CHART_DATA ={
-    labels: [1,2,3,4],
+  let PIE_CHART_DATA = {
+    labels: [1, 2, 3, 4],
     datasets: [
       {
         label: "Emails",
         pointRadius: 0,
         pointHoverRadius: 0,
-        backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059','#FFFFFF'],
+        backgroundColor: [
+          "#344FD5",
+          "#06CBC1",
+          "#FFD88C",
+          "#FF6059",
+          "#FFFFFF",
+        ],
         borderWidth: 0,
         barPercentage: 1.6,
-        data: [542, 480, 430,211],
+        data: [542, 480, 430, 211],
       },
     ],
-  }
+  };
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
 
   const [totalIncome, settotalIncome] = useState(0);
@@ -155,15 +161,28 @@ function Charts() {
   const [isLoading, setisLoading] = useState(false);
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
- 
-
   const [fromDate, setfromDate] = useState(new Date());
-  
-
+//SALES CHANNEL TOTAL SALES STATES
+const [ripley, setripley] = useState(0);
+const [vtex, setvtex] = useState(0);
+const[linio,setlinio] = useState(0);
+const [mercadoLibre, setmercadoLibre] = useState(0);
+const [exito, setexito] = useState(0);
+const [shopify, setshopify] = useState(0);
+const [paris, setparis] = useState(0);
+const [magento, setmagento] = useState(0);
+const [wooCommerce, setwooCommerce] = useState(0);
+const [chambas, setchambas] = useState(0);
+const [listaTienda, setlistaTienda] = useState(0);
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
+    setpieChart();
   }, []);
+  useEffect(() => {
+    fetchGeneralData();
+  }, [channels,ripley,vtex,linio,mercadoLibre,exito,shopify,paris,magento,wooCommerce,chambas,listaTienda])
+  
   const fetchGeneralData = () => {
     console.log("hi i am fetching");
     var myHeaders = new Headers();
@@ -179,13 +198,152 @@ function Charts() {
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=2,7&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=0&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
+        let ripleySales =  obj.filter((item) => {
+          return item.channel == 4;
+        });
+        let ripleySalesArray =  ripleySales.map((item) => {
+          return item.total;
+        });
+        let totalRipleySales = ripleySalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let vtexSales =  obj.filter((item) => {
+          return item.channel == 7;
+        });
+        let vtexSalesArray =  vtexSales.map((item) => {
+          return item.total;
+        });
+        let totalVtexSales =vtexSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let linioSales =  obj.filter((item) => {
+          return item.channel == 5;
+        });
+        let linioSalesArray =  linioSales.map((item) => {
+          return item.total;
+        });
+        let totallinioSales =linioSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let mercadoSales =  obj.filter((item) => {
+          return item.channel == 2;
+        });
+        let mercadoSalesArray =  mercadoSales.map((item) => {
+          return item.total;
+        });
+        let totalmercadoSales =mercadoSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let exitoSales =  obj.filter((item) => {
+          return item.channel == '12';
+        });
+        let exitoSalesArray =  exitoSales.map((item) => {
+          return item.total;
+        });
+        let totalexitoSales =exitoSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let shopifySales =  obj.filter((item) => {
+          return item.channel == 6;
+        });
+        let shopifySalesArray =  shopifySales.map((item) => {
+          return item.total;
+        });
+        let totalshopifySales =shopifySalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let parisSales =  obj.filter((item) => {
+          return item.channel == 1;
+        });
+        let parisSalesArray =  parisSales.map((item) => {
+          return item.total;
+        });
+        let totalparisSales =parisSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let magentoSales =  obj.filter((item) => {
+          return item.channel == 9;
+        });
+        let magentoSalesArray =  magentoSales.map((item) => {
+          return item.total;
+        });
+        let totalmagentoSales =magentoSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let wooCommerceSales =  obj.filter((item) => {
+          return item.channel == 3;
+        });
+        let  wooCommerceArray =  wooCommerceSales.map((item) => {
+          return item.total;
+        });
+        let totalwooCommerceSales = wooCommerceArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let chambasSales =  obj.filter((item) => {
+          return item.channel == 11;
+        });
+        let  chambasArray =  chambasSales.map((item) => {
+          return item.total;
+        });
+        let totalchambasSales =chambasArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let ListaSales =  obj.filter((item) => {
+          return item.channel == 8;
+        });
+        let ListaArray = ListaSales.map((item) => {
+          return item.total;
+        });
+        let totalListaSales = ListaArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalListaSales);
+        setripley(totalRipleySales);
+        setvtex(totalVtexSales);
+        setlinio( totallinioSales);
+        setmercadoLibre(totalmercadoSales);
+        setexito(totalexitoSales);
+        setshopify(totalshopifySales);
+        setparis(totalparisSales);
+        setmagento(totalmagentoSales);
+        setwooCommerce( totalwooCommerceSales);
+        setchambas(totalchambasSales);
+        console.log(exitoSales);
+
+        console.log(ripley);
+        let PIE = {
+          labels: ['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','WooCommerce','chambas','ListaTienda'],
+          datasets: [
+            {
+              label: "Emails",
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              backgroundColor: ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'],
+              borderWidth: 0,
+              barPercentage: 1.6,
+              data: [vtex,linio, mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,chambas,listaTienda],
+            },
+          ],
+        };
+        setpieChartData(PIE);
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -219,7 +377,7 @@ function Charts() {
         let orderQuantityArray = obj.map((item) => {
           return item.orders_qty;
         });
-        let reviewArray =  obj.map((item) => {
+        let reviewArray = obj.map((item) => {
           return item.reviews;
         });
         console.log(orderQuantityArray);
@@ -236,9 +394,7 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
-     
 
-       
         console.log(totalDispatchCostArray);
         console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
@@ -270,7 +426,7 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
-        let sumOfreview= reviewArray.reduce(
+        let sumOfreview = reviewArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
@@ -309,6 +465,7 @@ function Charts() {
       .catch((error) => console.log("error", error));
   };
   const fetchFilterData = async () => {
+    console.log('2');
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -330,51 +487,44 @@ function Charts() {
       .then((result) => {
         console.log(result);
         var obj = JSON.parse(result);
-       console.log(obj[4].stores);
-       let allChannelsArray = obj[4].stores.map(item=>{
-         return item.channels;
-       });
-      
-     
-    //   for(let i=0;i<=c.length;i++){
-    //  console.log(c.length);
-    //     let a = [];
-    //   for(let k =0;k<=c[i].length;k++){
-    //     console.log(c[i][k]);
-    //    i++;
-    //   }
-    
-    //   return a;
-    //   }
-      var flattened = [].concat.apply([],allChannelsArray);
+        console.log(obj[4].stores);
+        let allChannelsArray = obj[4].stores.map((item) => {
+          return item.channels;
+        });
+        var flattened = [].concat.apply([], allChannelsArray);
 
-      console.log(flattened);
-      let allSalesChannels = flattened.map((item)=>{
-        return item.channel;
-      });
-      console.log(allSalesChannels);
-   let   salesChannelList = allSalesChannels.filter( function( item, index, inputArray ) {
-        return inputArray.indexOf(item) == index;
- });
- console.log(salesChannelList);
- setchannels(salesChannelList);
-console.log(channels);
- let PIE ={
-  labels: salesChannelList,
-  datasets: [
-    {
-      label: "Emails",
-      pointRadius: 0,
-      pointHoverRadius: 0,
-      backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
-      borderWidth: 0,
-      barPercentage: 1.6,
-      data: [542, 480, 430,211],
-    },
-  ],
-}
-console.log(PIE.labels);
-setpieChartData(PIE);
+        console.log(flattened);
+        let allSalesChannels = flattened.map((item) => {
+          return item.channel;
+        });
+        console.log(allSalesChannels);
+        let salesChannelList = allSalesChannels.filter(function (
+          item,
+          index,
+          inputArray
+        ) {
+          return inputArray.indexOf(item) == index;
+        });
+        console.log(salesChannelList);
+        setchannels(salesChannelList);
+        console.log(channels);
+        console.log(ripley);
+        let PIE = {
+          labels: salesChannelList,
+          datasets: [
+            {
+              label: "Emails",
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
+              borderWidth: 0,
+              barPercentage: 1.6,
+              data: [ripley, 480, 430, 211],
+            },
+          ],
+        };
+        console.log(PIE.labels);
+        setpieChartData(PIE);
         let countryArray = [];
 
         setfilteredCountryData(obj);
@@ -382,6 +532,22 @@ setpieChartData(PIE);
       })
       .catch((error) => console.log("error", error));
   };
+  const setpieChart = ()=>{
+    setpieChartData({
+      labels: channels,
+      datasets: [
+        {
+          label: "Emails",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
+          borderWidth: 0,
+          barPercentage: 1.6,
+          data: [ripley, 480, 430, 211],
+        },
+      ],
+    });
+  }
   const changeDateHandler = (event) => {
     console.log("hi");
     console.log(event);
@@ -428,7 +594,7 @@ setpieChartData(PIE);
       return item;
     });
     console.log(selectedChannels);
-     setfilteredChannelArray(selectedChannels);
+    setfilteredChannelArray(selectedChannels);
     // console.log(filteredChannelArray);
     // const selectedChannelsArray = selectedStoreData[0].channels;
     // const selectedChannels = selectedChannelsArray.map((item) => {
@@ -438,28 +604,28 @@ setpieChartData(PIE);
   const applyFiltersButtonhandler = () => {
     fetchGeneralData();
   };
- const displaysalesChannelHandler = ()=>{
-   console.log('hello');
-   console.log(filteredChannelArray);
-  const channels = filteredChannelArray.map(item=>{
-return item.channel;
-   });
-   const channelsId = filteredChannelArray.map(item=>{
-    return item.value;
-       });
-       console.log(channelsId);
-       let x = channelsId.join(',');
-       console.log(x);
-   console.log(channels);
-   setchannels(channels);
- }
- const handleDelete = (item) => {
-   let x = channels.filter((i) => i !== item);
-   setchannels(x);
-  // setchannels({
-  //   items: channels.filter((i) => i !== item),
-  // });
-};
+  const displaysalesChannelHandler = () => {
+    console.log("hello");
+    console.log(filteredChannelArray);
+    const channels = filteredChannelArray.map((item) => {
+      return item.channel;
+    });
+    const channelsId = filteredChannelArray.map((item) => {
+      return item.value;
+    });
+    console.log(channelsId);
+    let x = channelsId.join(",");
+    console.log(x);
+    console.log(channels);
+    setchannels(channels);
+  };
+  const handleDelete = (item) => {
+    let x = channels.filter((i) => i !== item);
+    setchannels(x);
+    // setchannels({
+    //   items: channels.filter((i) => i !== item),
+    // });
+  };
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
@@ -729,19 +895,19 @@ return item.channel;
             >
               +
             </button>
-         
+
             {channels.map((item) => (
-                <div className="tag-item" key={item}>
-                  {item}
-                  <button
-                    type="button"
-                    className="button"
-                     onClick={() => handleDelete(item)}
-                  >
-                    &times;
-                  </button>
-                </div>
-              ))}
+              <div className="tag-item" key={item}>
+                {item}
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => handleDelete(item)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
           </Col>
           <br></br>
           {/* GENERAL DATA */}
@@ -883,7 +1049,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Pedidos</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                   {totalOrders} &nbsp;
+                    {totalOrders} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
@@ -901,7 +1067,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Cancelados</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  {totalCancelledOrders} &nbsp;
+                    {totalCancelledOrders} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -919,7 +1085,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                   {totalDte} &nbsp;
+                    {totalDte} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -986,7 +1152,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>En Proceso</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  {inProcess} &nbsp;
+                    {inProcess} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
@@ -1004,7 +1170,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Preparacion</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                   {inPreparation} &nbsp;
+                    {inPreparation} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -1022,7 +1188,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                   {readyToShip} &nbsp;
+                    {readyToShip} &nbsp;
                     <span
                       style={{
                         color: "red",
@@ -1040,7 +1206,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  {onTheWay} &nbsp;
+                    {onTheWay} &nbsp;
                     <span
                       style={{
                         color: "#33D69F",
@@ -1107,7 +1273,7 @@ return item.channel;
                 <div>
                   <p style={{ color: "#C4C4C4" }}>Reviews</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                   {reviews} &nbsp;
+                    {reviews} &nbsp;
                     <span
                       style={{
                         color: "red",
