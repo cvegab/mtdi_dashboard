@@ -126,6 +126,7 @@ function Charts() {
   const [countryId, setcountryId] = useState(0);
   const [store, setstore] = useState("");
   const [channels, setchannels] = useState([]);
+  const [channelId, setchannelId] = useState(0);
   const [storeId, setstoreId] = useState(0);
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [filteredChannelArray, setfilteredChannelArray] = useState([]);
@@ -313,7 +314,34 @@ function Charts() {
       .then((result) => {
         console.log(result);
         var obj = JSON.parse(result);
-       console.log(obj);
+       console.log(obj[4].stores);
+       let allChannelsArray = obj[4].stores.map(item=>{
+         return item.channels;
+       });
+      
+     
+    //   for(let i=0;i<=c.length;i++){
+    //  console.log(c.length);
+    //     let a = [];
+    //   for(let k =0;k<=c[i].length;k++){
+    //     console.log(c[i][k]);
+    //    i++;
+    //   }
+    
+    //   return a;
+    //   }
+      var flattened = [].concat.apply([],allChannelsArray);
+
+      console.log(flattened);
+      let allSalesChannels = flattened.map((item)=>{
+        return item.channel;
+      });
+      console.log(allSalesChannels);
+   let   salesChannelList = allSalesChannels.filter( function( item, index, inputArray ) {
+        return inputArray.indexOf(item) == index;
+ });
+ console.log(salesChannelList);
+ setchannels(salesChannelList);
         let countryArray = [];
 
         setfilteredCountryData(obj);
@@ -383,6 +411,12 @@ function Charts() {
   const channels = filteredChannelArray.map(item=>{
 return item.channel;
    });
+   const channelsId = filteredChannelArray.map(item=>{
+    return item.value;
+       });
+       console.log(channelsId);
+       let x = channelsId.join(',');
+       console.log(x);
    console.log(channels);
    setchannels(channels);
  }
@@ -655,13 +689,14 @@ return item.channel;
             >
               +
             </button>
+         
             {channels.map((item) => (
                 <div className="tag-item" key={item}>
                   {item}
                   <button
                     type="button"
                     className="button"
-                    // onClick={() => this.handleDelete(item)}
+                     onClick={() => handleDelete(item)}
                   >
                     &times;
                   </button>
