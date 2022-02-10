@@ -420,6 +420,13 @@ return item.channel;
    console.log(channels);
    setchannels(channels);
  }
+ const handleDelete = (item) => {
+   let x = channels.filter((i) => i !== item);
+   setchannels(x);
+  // setchannels({
+  //   items: channels.filter((i) => i !== item),
+  // });
+};
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
