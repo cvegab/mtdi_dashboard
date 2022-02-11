@@ -179,20 +179,22 @@ function Charts() {
   const [wooCommerce, setwooCommerce] = useState(0);
   const [chambas, setchambas] = useState(0);
   const [listaTienda, setlistaTienda] = useState(0);
+  const [cR, setcR] = useState([{channels:'',channelId:0}]);
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
     setpieChart();
   }, []);
   useEffect(() => {
-   displaysalesChannelHandler();
-  }, [store])
-  
+    displaysalesChannelHandler();
+  }, [store]);
+
   useEffect(() => {
     fetchGeneralData();
   }, [
     channels,
     channelId,
+    cR,
     ripley,
     vtex,
     linio,
@@ -205,11 +207,17 @@ function Charts() {
     chambas,
     listaTienda,
   ]);
-useEffect(() => {
-
-}, [channels])
+  useEffect(() => {}, [channels]);
 
   const fetchGeneralData = () => {
+    console.log(cR);
+    const channelsId = cR.map((item) => {
+      return item.value;
+    });
+
+    let x = channelsId.join(",");
+    console.log(x);
+    setchannelId(x);
     console.log("hi i am fetching");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -230,7 +238,7 @@ useEffect(() => {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
+
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -442,7 +450,6 @@ useEffect(() => {
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-        console.log(orderQuantityArray);
 
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -457,7 +464,7 @@ useEffect(() => {
           0
         );
 
-        // console.log(totalDispatchCostArray);
+        //  console.log(totalDispatchCostArray);
         // console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
@@ -556,6 +563,18 @@ useEffect(() => {
         var flattened = [].concat.apply([], allChannelsArray);
 
         console.log(flattened);
+        var resArr = [];
+        flattened.filter(function (item) {
+          var i = resArr.findIndex(
+            (x) => x.channel == item.channel && x.value == item.value
+          );
+          if (i <= -1) {
+            resArr.push(item);
+          }
+          return null;
+        });
+        console.log(resArr);
+        setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
@@ -567,10 +586,9 @@ useEffect(() => {
         ) {
           return inputArray.indexOf(item) == index;
         });
-        console.log(salesChannelList);
+
         setchannels(salesChannelList);
-        console.log(channels);
-        console.log(ripley);
+
         let PIE = {
           labels: salesChannelList,
           datasets: [
@@ -585,7 +603,7 @@ useEffect(() => {
             },
           ],
         };
-        console.log(PIE.labels);
+
         setpieChartData(PIE);
         let countryArray = [];
 
@@ -611,20 +629,14 @@ useEffect(() => {
     });
   };
   const changeDateHandler = (event) => {
-    console.log("hi");
-    console.log(event);
     const selectedDate = event.toISOString().slice(0, 10);
-    console.log(selectedDate);
+
     setselectedDateFrom(selectedDate);
-    console.log(selectedDateFrom);
   };
   const changeDateToHandler = (event) => {
-    console.log("hi");
-    console.log(event);
     const selectedDate = event.toISOString().slice(0, 10);
-    console.log(selectedDate);
+
     setselectedDateTo(selectedDate);
-    console.log(selectedDateFrom);
   };
   const handleCountryChange = (event) => {
     setcountry(event.target.value);
@@ -649,9 +661,9 @@ useEffect(() => {
     const selectedStoreData = filteredStoreData.filter((selectedStore) => {
       return selectedStore.store === event.target.value;
     });
-    console.log(selectedStoreData);
+
     const selectedChannelsArray = selectedStoreData[0].channels;
-    console.log(selectedChannelsArray);
+
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
@@ -668,26 +680,44 @@ useEffect(() => {
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    console.log("hello");
     console.log(filteredChannelArray);
     const channels = filteredChannelArray.map((item) => {
-      return item.channel;
+      // return item.channel;
+      return item;
     });
     const channelsId = filteredChannelArray.map((item) => {
       return item.value;
     });
-    console.log(channelsId);
+
     let x = channelsId.join(",");
     setchannelId(x);
-    console.log(x);
-    console.log(channels);
-    setchannels(channels);
+   setcR(channels);
+    // setchannels(channels);
+    //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
-    let x = channels.filter((i) => i !== item);
-    setchannels(x);
-    console.log(channelId);
-    console.log(channels);
+    console.log(item);
+    // const channelsId = filteredChannelArray.map((item) => {
+    //   return item.value;
+    // });
+    // let y = [...channelsId];
+    // let z = [];
+    // if (item === "MercadoLibre") {
+    //   z = y.filter((i) => i !== 2);
+    // }
+    // if (item === "Vtex") {
+    //   z = y.filter((i) => i !== 7);
+    // }
+    // //  console.log(y.join(","));
+    // console.log(z);
+    // console.log(channelsId);
+    let x = cR.filter((i) => i !== item);
+    setcR(x);
+    console.log(x.value);
+    // setchannels(x.channel);
+    // setchannelId(x.value);
+    // console.log(channelId);
+    // console.log(channels);
   };
   return (
     <>
@@ -966,9 +996,9 @@ useEffect(() => {
               +
             </button>
 
-            {channels.map((item) => (
-              <div className="tag-item" key={item}>
-                {item}
+            {cR.map((item) => (
+              <div className="tag-item" key={item.value}>
+                {item.channel}
                 <button
                   type="button"
                   className="button"
