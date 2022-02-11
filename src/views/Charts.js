@@ -205,8 +205,14 @@ function Charts() {
   useEffect(() => {}, [channels]);
 
   const fetchGeneralData = () => {
-    console.log(cR.channelId);
+    console.log(cR);
+    const channelsId = cR.map((item) => {
+      return item.value;
+    });
 
+    let x = channelsId.join(",");
+    console.log(x);
+    setchannelId(x);
     console.log("hi i am fetching");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -221,7 +227,7 @@ function Charts() {
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=0&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
@@ -680,7 +686,7 @@ function Charts() {
 
     let x = channelsId.join(",");
     setchannelId(x);
-setcR(channels);
+   setcR(channels);
     // setchannels(channels);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
@@ -701,11 +707,12 @@ setcR(channels);
     // console.log(z);
     // console.log(channelsId);
     let x = cR.filter((i) => i !== item);
+    setcR(x);
     console.log(x.value);
-    setchannels(x.channel);
-    setchannelId(x.value);
-    console.log(channelId);
-    console.log(channels);
+    // setchannels(x.channel);
+    // setchannelId(x.value);
+    // console.log(channelId);
+    // console.log(channels);
   };
   return (
     <>
