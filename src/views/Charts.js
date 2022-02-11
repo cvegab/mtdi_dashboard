@@ -40,8 +40,7 @@ import {
 
 // core components
 import {
-  chartExample1,
-  chartExample4,
+ 
   chartExample9,
   chartExample10,
   chartExample100,
