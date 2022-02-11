@@ -4,8 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Line, Bar, Pie } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-import "./charts.css";
+import "../assets/css/Charts.css";
 import "react-datepicker/dist/react-datepicker.css";
+import iconShareReport from "../assets/img/iconEnviarReporte.png";
+import iconNextReport from "../assets/img/iconArrowNext.png";
+import FilterMobileButton from "components/ChartComponents/FilterMobileButton";
+import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+
 // reactstrap components
 import {
   Card,
@@ -747,6 +752,7 @@ function Charts() {
           <Col md="12">
             <CardBody>
               <Button
+                id="bttnGeneral"
                 style={{
                   borderRadius: "17px",
                   backgroundColor: "#1D308E",
@@ -784,7 +790,6 @@ function Charts() {
                  Fulfillment        
                 </Button>
                  
-
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-single-02" />
@@ -794,8 +799,65 @@ function Charts() {
                    */}
             </CardBody>
           </Col>
+
+          {/* FILTERS IN DESKTOP VERSION */}
+
+          <div id="FiltersInDesktop">
           <Col md="12">
-            <label htmlFor="select-country">
+          <label>
+              <h5
+                id="fechaDesde"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Inicio
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                // selected={fromDate}
+                // onChange={(date) => setfromDate(date)}
+                value={selectedDateFrom}
+                onChange={changeDateHandler}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+
+            <label>
+              <h5
+                id="fechaHasta"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Fin
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                value={selectedDateTo}
+                onChange={changeDateToHandler}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+          <label htmlFor="select-country">
               <h5
                 style={{
                   color: "black",
@@ -835,6 +897,7 @@ function Charts() {
                 )}
               </Select>
             </label>
+
             <label htmlFor="select-tienda">
               <h5
                 style={{
@@ -869,60 +932,8 @@ function Charts() {
                 })}
               </Select>
             </label>
-
-            <label>
-              <h5
-                id="fechaDesde"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Desde
-              </h5>
-
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                // selected={fromDate}
-                // onChange={(date) => setfromDate(date)}
-                value={selectedDateFrom}
-                onChange={changeDateHandler}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
-
-            <label>
-              <h5
-                id="fechaHasta"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Hasta
-              </h5>
-
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                value={selectedDateTo}
-                onChange={changeDateToHandler}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
+          
+            
             <Button
               color="primary"
               style={{
@@ -998,8 +1009,23 @@ function Charts() {
               </div>
             ))}
           </Col>
+          </div>
           <br></br>
+
+          {/* FILTERS IN MOBILE VERSION */}
+
+          <Col md="12">
+            <div id="FiltersInMobile">
+              <FilterMobileButton />
+              <br/>
+              <br/>
+            </div>         
+          </Col>
+
+
+          {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
           {/* GENERAL DATA */}
+          <div id="ReportInformationDesktop">
           <Col
             md="12"
             style={{
@@ -1413,8 +1439,17 @@ function Charts() {
             </Col> */}
             </Row>
           </Col>
+          </div>
+
+           {/* REPORTS INFORMATION MOBILE VERSION */}
+          <div id="ReportInformationMobile">
+            <InformationCardsMobile />         
+          </div>
+
           <br></br>
           <br></br>
+
+          {/* GRAPHS */}
           <Row>
             <Col md="8">
               <Card className="car-chart">
@@ -1655,6 +1690,63 @@ function Charts() {
             </Card>
           </Col>
         </Row> */}
+
+         <Row>
+           <div class="text-center" style={{marginTop: "3em"}}>
+              <button
+                id="bttnSubmit"
+                
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",                 
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0",
+                  fontSize: "11px"
+                  
+               
+                }}
+              >
+                
+                <span className="btn-label">
+                  <img src={iconShareReport} width="19px"/>
+                </span>
+                &nbsp;Compartir Reporte &nbsp;
+              </button>
+           
+              <button
+                id="bttnSubmit"
+                
+                style={{
+                  backgroundColor: "FFFFFF",
+                  textAlign: "center",
+                  color: "black",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  fontSize: "11px",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0"
+               
+                }}
+              >
+                Siguiente Reporte &nbsp;
+                <span className="btn-label">
+                   <img src={iconNextReport} width="19px"/>
+                </span>
+              </button>
+            </div>
+          </Row>
+
         </div>
       )}
     </>
