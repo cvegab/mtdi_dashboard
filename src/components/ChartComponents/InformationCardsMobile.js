@@ -54,7 +54,7 @@ function InformationCardsMobile() {
             <Col className="text-center" lg="6" md="12">
 
                       {/* <Accordion defaultActiveKey="0"> */}
-                      <Accordion>
+                      <Accordion defaultActiveKey="0">
                         <Accordion.Item eventKey="0">
                           <Accordion.Header>
                             <p
