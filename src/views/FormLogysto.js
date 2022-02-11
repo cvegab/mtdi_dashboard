@@ -114,6 +114,16 @@ const uploadFile = (e) => {
               >
                 Falabella
               </Button>
+              <Button
+                className="btn btn-primary"
+              >
+                Rappi
+              </Button>
+              <Button
+                className="btn btn-primary"
+              >
+                Cornershop
+              </Button>
               </div>
 
             </div>
