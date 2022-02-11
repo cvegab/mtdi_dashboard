@@ -5,6 +5,13 @@ import { Line, Bar, Pie } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
+import "../assets/css/Charts.css";
+import iconShareReport from "../assets/img/iconEnviarReporte.png";
+import iconNextReport from "../assets/img/iconArrowNext.png";
+import SplashScreen from "components/UI/splash-screen";
+import FilterMobileButton from "components/ChartComponents/FilterMobileButton";
+import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+
 // reactstrap components
 import {
   Card,
@@ -28,7 +35,8 @@ import {
   chartExample12,
   data1,
 } from "variables/charts.js";
-import SplashScreen from "components/UI/splash-screen";
+
+
 registerLocale("es", es);
 const barChartData = {
   labels: [
@@ -249,6 +257,7 @@ function Charts() {
           <Col md="12">
             <CardBody>
               <Button
+                id="bttnGeneral"
                 style={{
                   borderRadius: "17px",
                   backgroundColor: "#1D308E",
@@ -262,7 +271,9 @@ function Charts() {
                 <span className="btn-label">
                   <i className="nc-icon nc-layout-11" />
                 </span>
-                General
+                {/* <p className="textBttnGeneral">
+                </p> */}
+                  General
               </Button>
 
               {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
@@ -296,61 +307,11 @@ function Charts() {
                    */}
             </CardBody>
           </Col>
+
+          {/* FILTERS IN DESKTOP VERSION */}
+
+        <div id="FiltersInDesktop">
           <Col md="12">
-            <label htmlFor="select-tienda">
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                  marginTop: "1em",
-                }}
-              >
-                Tienda
-              </h5>
-              <Select
-                labelId="select-tienda"
-                id="select-tienda"
-                style={{
-                  width: 160,
-                  fontSize: "10px",
-                  marginLeft: "1em",
-                  marginTop: "1em",
-                }}
-                label="select-canal"
-                placeholder="&nbsp; Seleccione una tienda"
-              ></Select>
-            </label>
-            <label htmlFor="select-country">
-              <h5
-                style={{
-                  color: "black",
-                  width: "30px",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                }}
-              >
-                País
-              </h5>
-              <Select
-                labelId="select-country"
-                id="select-country"
-                style={{
-                  width: 150,
-                  marginLeft: "1em",
-                  borderRadius: "17px",
-                  marginBottom: "1em",
-                  fontSize: "10px",
-                  marginTop: "1em",
-                }}
-                label="Country"
-                placeholder="&nbsp; Seleccione un país"
-              ></Select>
-            </label>
             <label>
               <h5
                 id="fechaDesde"
@@ -363,7 +324,7 @@ function Charts() {
                   marginTop: "0px",
                 }}
               >
-                Fecha Desde
+                Fecha inicio
               </h5>
 
               <DatePicker
@@ -391,7 +352,7 @@ function Charts() {
                   marginTop: "0px",
                 }}
               >
-                Fecha Hasta
+                Fecha fin
               </h5>
 
               <DatePicker
@@ -403,6 +364,64 @@ function Charts() {
                 locale="es"
               />
             </label>
+
+                     <label htmlFor="select-country">
+              <h5
+                style={{
+                  color: "black",
+                  width: "30px",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                }}
+              >
+                País
+              </h5>
+              <Select
+                labelId="select-country"
+                id="select-country"
+                style={{
+                  width: 150,
+                  marginLeft: "1em",
+                  borderRadius: "17px",
+                  marginBottom: "1em",
+                  fontSize: "10px",
+                  marginTop: "1em",
+                }}
+                label="Country"
+                placeholder="&nbsp; Seleccione un país"
+              ></Select>
+            </label>
+
+            <label htmlFor="select-tienda">
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                  marginTop: "1em",
+                }}
+              >
+                Tienda
+              </h5>
+              <Select
+                labelId="select-tienda"
+                id="select-tienda"
+                style={{
+                  width: 160,
+                  fontSize: "10px",
+                  marginLeft: "1em",
+                  marginTop: "1em",
+                }}
+                label="select-canal"
+                placeholder="&nbsp; Seleccione una tienda"
+              ></Select>
+            </label>
+   
+
 
             <Button
               className="btn-round btn-icon fourthStepTour"
@@ -447,8 +466,23 @@ function Charts() {
               +
             </button>
           </Col>
+          </div>
           <br></br>
+
+          {/* FILTERS IN MOBILE VERSION */}
+
+          <Col md="12">
+            <div id="FiltersInMobile">
+              <FilterMobileButton />
+              <br/>
+              <br/>
+            </div>         
+          </Col>
+
+
+          {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
           {/* GENERAL DATA */}
+          <div id="ReportInformationDesktop">
           <Col
             md="12"
             style={{
@@ -535,7 +569,7 @@ function Charts() {
               {/* CONVERSION */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Conversion</p>
+                  <p style={{ color: "#C4C4C4" }}>Conversión</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
                     {conversion} &nbsp;
@@ -742,7 +776,7 @@ function Charts() {
               {/* READY TO DELIVER */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
+                  <p style={{ color: "#C4C4C4" }}>Próximo a llegar</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     $1.253.369 &nbsp;
                     <span
@@ -809,7 +843,7 @@ function Charts() {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                  <p style={{ color: "#C4C4C4" }}>Reviews</p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     4.5 &nbsp;
                     <span
@@ -862,8 +896,17 @@ function Charts() {
             </Col> */}
             </Row>
           </Col>
-          <br></br>
-          <br></br>
+          </div>
+
+          {/* REPORTS INFORMATION MOBILE VERSION */}
+          <div id="ReportInformationMobile">
+            <InformationCardsMobile />         
+          </div>
+
+            <br></br>
+            <br></br>
+
+          {/* GRAPHS */}
           <Row>
             <Col md="8">
               <Card className="car-chart">
@@ -976,6 +1019,63 @@ function Charts() {
                 </Card>
               </Col>
             </Row>
+            <br/>
+
+          <Row>
+           <div class="text-center" style={{marginTop: "3em"}}>
+              <button
+                id="bttnSubmit"
+                
+                style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",                 
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0",
+                  fontSize: "11px"
+                  
+               
+                }}
+              >
+                
+                <span className="btn-label">
+                  <img src={iconShareReport} width="19px"/>
+                </span>
+                &nbsp;Compartir Reporte &nbsp;
+              </button>
+           
+              <button
+                id="bttnSubmit"
+                
+                style={{
+                  backgroundColor: "FFFFFF",
+                  textAlign: "center",
+                  color: "black",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  fontSize: "11px",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0"
+               
+                }}
+              >
+                Siguiente Reporte &nbsp;
+                <span className="btn-label">
+                   <img src={iconNextReport} width="19px"/>
+                </span>
+              </button>
+            </div>
+          </Row>
 
             {/* <Col md="6">
             <Card className="card-chart">

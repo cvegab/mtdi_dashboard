@@ -349,7 +349,7 @@ const Form = (props) => {
              label="Canal de venta"
              onChange={handleSelectChange}
              defaultValue="Sodimac"
-              class="form-select"
+              // class="form-select"
               // aria-label="Default select example"
               // style={{ borderRadius: "20px",}}
               defaultValue='Sodimac'
