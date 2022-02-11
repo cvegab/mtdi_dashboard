@@ -162,18 +162,18 @@ function Charts() {
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
   const [fromDate, setfromDate] = useState(new Date());
-//SALES CHANNEL TOTAL SALES STATES
-const [ripley, setripley] = useState(0);
-const [vtex, setvtex] = useState(0);
-const[linio,setlinio] = useState(0);
-const [mercadoLibre, setmercadoLibre] = useState(0);
-const [exito, setexito] = useState(0);
-const [shopify, setshopify] = useState(0);
-const [paris, setparis] = useState(0);
-const [magento, setmagento] = useState(0);
-const [wooCommerce, setwooCommerce] = useState(0);
-const [chambas, setchambas] = useState(0);
-const [listaTienda, setlistaTienda] = useState(0);
+  //SALES CHANNEL TOTAL SALES STATES
+  const [ripley, setripley] = useState(0);
+  const [vtex, setvtex] = useState(0);
+  const [linio, setlinio] = useState(0);
+  const [mercadoLibre, setmercadoLibre] = useState(0);
+  const [exito, setexito] = useState(0);
+  const [shopify, setshopify] = useState(0);
+  const [paris, setparis] = useState(0);
+  const [magento, setmagento] = useState(0);
+  const [wooCommerce, setwooCommerce] = useState(0);
+  const [chambas, setchambas] = useState(0);
+  const [listaTienda, setlistaTienda] = useState(0);
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
@@ -181,8 +181,22 @@ const [listaTienda, setlistaTienda] = useState(0);
   }, []);
   useEffect(() => {
     fetchGeneralData();
-  }, [channels,ripley,vtex,linio,mercadoLibre,exito,shopify,paris,magento,wooCommerce,chambas,listaTienda])
-  
+  }, [
+    channels,
+    channelId,
+    ripley,
+    vtex,
+    linio,
+    mercadoLibre,
+    exito,
+    shopify,
+    paris,
+    magento,
+    wooCommerce,
+    chambas,
+    listaTienda,
+  ]);
+
   const fetchGeneralData = () => {
     console.log("hi i am fetching");
     var myHeaders = new Headers();
@@ -198,114 +212,114 @@ const [listaTienda, setlistaTienda] = useState(0);
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=0&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
-        let ripleySales =  obj.filter((item) => {
+        let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
-        let ripleySalesArray =  ripleySales.map((item) => {
+        let ripleySalesArray = ripleySales.map((item) => {
           return item.total;
         });
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let vtexSales =  obj.filter((item) => {
+        let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
-        let vtexSalesArray =  vtexSales.map((item) => {
+        let vtexSalesArray = vtexSales.map((item) => {
           return item.total;
         });
-        let totalVtexSales =vtexSalesArray.reduce(
+        let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let linioSales =  obj.filter((item) => {
+        let linioSales = obj.filter((item) => {
           return item.channel == 5;
         });
-        let linioSalesArray =  linioSales.map((item) => {
+        let linioSalesArray = linioSales.map((item) => {
           return item.total;
         });
-        let totallinioSales =linioSalesArray.reduce(
+        let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let mercadoSales =  obj.filter((item) => {
+        let mercadoSales = obj.filter((item) => {
           return item.channel == 2;
         });
-        let mercadoSalesArray =  mercadoSales.map((item) => {
+        let mercadoSalesArray = mercadoSales.map((item) => {
           return item.total;
         });
-        let totalmercadoSales =mercadoSalesArray.reduce(
+        let totalmercadoSales = mercadoSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let exitoSales =  obj.filter((item) => {
-          return item.channel == '12';
+        let exitoSales = obj.filter((item) => {
+          return item.channel == "12";
         });
-        let exitoSalesArray =  exitoSales.map((item) => {
+        let exitoSalesArray = exitoSales.map((item) => {
           return item.total;
         });
-        let totalexitoSales =exitoSalesArray.reduce(
+        let totalexitoSales = exitoSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let shopifySales =  obj.filter((item) => {
+        let shopifySales = obj.filter((item) => {
           return item.channel == 6;
         });
-        let shopifySalesArray =  shopifySales.map((item) => {
+        let shopifySalesArray = shopifySales.map((item) => {
           return item.total;
         });
-        let totalshopifySales =shopifySalesArray.reduce(
+        let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let parisSales =  obj.filter((item) => {
+        let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
-        let parisSalesArray =  parisSales.map((item) => {
+        let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
-        let totalparisSales =parisSalesArray.reduce(
+        let totalparisSales = parisSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let magentoSales =  obj.filter((item) => {
+        let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
-        let magentoSalesArray =  magentoSales.map((item) => {
+        let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
-        let totalmagentoSales =magentoSalesArray.reduce(
+        let totalmagentoSales = magentoSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let wooCommerceSales =  obj.filter((item) => {
+        let wooCommerceSales = obj.filter((item) => {
           return item.channel == 3;
         });
-        let  wooCommerceArray =  wooCommerceSales.map((item) => {
+        let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
         let totalwooCommerceSales = wooCommerceArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let chambasSales =  obj.filter((item) => {
+        let chambasSales = obj.filter((item) => {
           return item.channel == 11;
         });
-        let  chambasArray =  chambasSales.map((item) => {
+        let chambasArray = chambasSales.map((item) => {
           return item.total;
         });
-        let totalchambasSales =chambasArray.reduce(
+        let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
-        let ListaSales =  obj.filter((item) => {
+        let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
         let ListaArray = ListaSales.map((item) => {
@@ -318,28 +332,64 @@ const [listaTienda, setlistaTienda] = useState(0);
         console.log(totalListaSales);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
-        setlinio( totallinioSales);
+        setlinio(totallinioSales);
         setmercadoLibre(totalmercadoSales);
         setexito(totalexitoSales);
         setshopify(totalshopifySales);
         setparis(totalparisSales);
         setmagento(totalmagentoSales);
-        setwooCommerce( totalwooCommerceSales);
+        setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
         console.log(exitoSales);
 
         console.log(ripley);
         let PIE = {
-          labels: ['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','WooCommerce','chambas','ListaTienda'],
+          labels: [
+            "Vtex",
+            "Linio",
+            "MercadoLibre",
+            "Exito",
+            "Ripley",
+            "Shopify",
+            "Paris",
+            "Magento",
+            "WooCommerce",
+            "chambas",
+            "ListaTienda",
+          ],
           datasets: [
             {
               label: "Emails",
               pointRadius: 0,
               pointHoverRadius: 0,
-              backgroundColor: ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'],
+              backgroundColor: [
+                "#FF6059",
+                "#06CBC1",
+                "#F10096",
+                "purple",
+                "#FFD88C",
+                "#00B6CB",
+                "#00B6CC",
+                "#97D456",
+                "#344FD5",
+                "yellow",
+                "red",
+              ],
               borderWidth: 0,
               barPercentage: 1.6,
-              data: [vtex,linio, mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,chambas,listaTienda],
+              data: [
+                vtex,
+                linio,
+                mercadoLibre,
+                exito,
+                ripley,
+                shopify,
+                paris,
+                magento,
+                wooCommerce,
+                chambas,
+                listaTienda,
+              ],
             },
           ],
         };
@@ -465,7 +515,7 @@ const [listaTienda, setlistaTienda] = useState(0);
       .catch((error) => console.log("error", error));
   };
   const fetchFilterData = async () => {
-    console.log('2');
+    console.log("2");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -532,7 +582,7 @@ const [listaTienda, setlistaTienda] = useState(0);
       })
       .catch((error) => console.log("error", error));
   };
-  const setpieChart = ()=>{
+  const setpieChart = () => {
     setpieChartData({
       labels: channels,
       datasets: [
@@ -547,7 +597,7 @@ const [listaTienda, setlistaTienda] = useState(0);
         },
       ],
     });
-  }
+  };
   const changeDateHandler = (event) => {
     console.log("hi");
     console.log(event);
@@ -615,6 +665,7 @@ const [listaTienda, setlistaTienda] = useState(0);
     });
     console.log(channelsId);
     let x = channelsId.join(",");
+    setchannelId(x);
     console.log(x);
     console.log(channels);
     setchannels(channels);
@@ -622,9 +673,7 @@ const [listaTienda, setlistaTienda] = useState(0);
   const handleDelete = (item) => {
     let x = channels.filter((i) => i !== item);
     setchannels(x);
-    // setchannels({
-    //   items: channels.filter((i) => i !== item),
-    // });
+    console.log(channelId);
   };
   return (
     <>
@@ -1369,33 +1418,14 @@ const [listaTienda, setlistaTienda] = useState(0);
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "blue",
-                        backgroundColor: "blue",
+                        color: "#344FD5",
+                        backgroundColor: "#344FD5",
                         borderRadius: "8px",
                       }}
                     />
-                    Mercadolibre
-                    <p className="card-category">$4.365.222</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#06CBC1",
-                        backgroundColor: "#06CBC1",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Woocommerce
-                    <p className="card-category">$2.689.210</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#FFD88C",
-                        backgroundColor: "#FFD88C",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Shopify
-                    <p className="card-category">$1.000.933</p>
+                    Vtex
+                    {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
+                    <p className="card-category">${vtex}</p>
                     <i
                       className="fa fa-circle"
                       style={{
@@ -1404,8 +1434,98 @@ const [listaTienda, setlistaTienda] = useState(0);
                         borderRadius: "8px",
                       }}
                     />
-                    Otros
-                    <p className="card-category">$2.000.933</p>
+                    Linio
+                    <p className="card-category">${linio}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#F10096",
+                        backgroundColor: "#F10096",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    MercadoLibre
+                    <p className="card-category">${mercadoLibre}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "purple",
+                        backgroundColor: "purple",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Exito
+                    <p className="card-category">${exito}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FFD88C",
+                        backgroundColor: "#FFD88C",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Ripley
+                    <p className="card-category">${ripley}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#00B6CB",
+                        backgroundColor: "#00B6CB",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Shopify
+                    <p className="card-category">${shopify}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#00B6CC",
+                        backgroundColor: "#00B6CC",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Paris
+                    <p className="card-category">${paris}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Magento
+                    <p className="card-category">${magento}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Woo Commerce
+                    <p className="card-category">${wooCommerce}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Chambas
+                    <p className="card-category">${chambas}</p>
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "red",
+                        backgroundColor: "red",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    Lista Tienda
+                    <p className="card-category">${listaTienda}</p>
                   </div>
                 </CardFooter>
               </Card>
