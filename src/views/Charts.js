@@ -4,12 +4,27 @@ import React, { useEffect, useState } from "react";
 import { Line, Bar, Pie } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-import "../assets/css/Charts.css";
+import "./charts.css";
 import "react-datepicker/dist/react-datepicker.css";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
 import FilterMobileButton from "components/ChartComponents/FilterMobileButton";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+import iconG1 from "../assets/img/icons/Reports/iconG1.png";
+import iconG2 from "../assets/img/icons/Reports/iconG2.png";
+import iconG3 from "../assets/img/icons/Reports/iconG3.png";
+import iconCP1 from "../assets/img/icons/Reports/iconCP1.png";
+import iconCP2 from "../assets/img/icons/Reports/iconCP2.png";
+import iconCP3 from "../assets/img/icons/Reports/iconCP3.png";
+import iconCP4 from "../assets/img/icons/Reports/iconCP4.png";
+import iconPP1 from "../assets/img/icons/Reports/iconPP1.png";
+import iconPP2 from "../assets/img/icons/Reports/iconPP2.png";
+import iconPP3 from "../assets/img/icons/Reports/iconPP3.png";
+import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
+import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
+import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
+import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
+
 
 // reactstrap components
 import {
@@ -722,7 +737,6 @@ useEffect(() => {
           <Col md="12">
             <CardBody>
               <Button
-                id="bttnGeneral"
                 style={{
                   borderRadius: "17px",
                   backgroundColor: "#1D308E",
@@ -760,6 +774,7 @@ useEffect(() => {
                  Fulfillment        
                 </Button>
                  
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-single-02" />
@@ -769,64 +784,7 @@ useEffect(() => {
                    */}
             </CardBody>
           </Col>
-
-          {/* FILTERS IN DESKTOP VERSION */}
-
-          <div id="FiltersInDesktop">
           <Col md="12">
-          <label>
-              <h5
-                id="fechaDesde"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Inicio
-              </h5>
-
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                // selected={fromDate}
-                // onChange={(date) => setfromDate(date)}
-                value={selectedDateFrom}
-                onChange={changeDateHandler}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
-
-            <label>
-              <h5
-                id="fechaHasta"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Fin
-              </h5>
-
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                value={selectedDateTo}
-                onChange={changeDateToHandler}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
           <label htmlFor="select-country">
               <h5
                 style={{
@@ -867,7 +825,6 @@ useEffect(() => {
                 )}
               </Select>
             </label>
-
             <label htmlFor="select-tienda">
               <h5
                 style={{
@@ -903,7 +860,59 @@ useEffect(() => {
               </Select>
             </label>
           
-            
+            <label>
+              <h5
+                id="fechaDesde"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Desde
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                // selected={fromDate}
+                // onChange={(date) => setfromDate(date)}
+                value={selectedDateFrom}
+                onChange={changeDateHandler}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
+
+            <label>
+              <h5
+                id="fechaHasta"
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Fecha Hasta
+              </h5>
+
+              <DatePicker
+                id="datepickerCalendar"
+                type="number"
+                value={selectedDateTo}
+                onChange={changeDateToHandler}
+                style={{ width: 200, marginLeft: "1em" }}
+                placeholderText="dd/mm/yy"
+                locale="es"
+              />
+            </label>
             <Button
               color="primary"
               style={{
@@ -979,23 +988,9 @@ useEffect(() => {
               </div>
             ))}
           </Col>
-          </div>
           <br></br>
 
-          {/* FILTERS IN MOBILE VERSION */}
-
-          <Col md="12">
-            <div id="FiltersInMobile">
-              <FilterMobileButton />
-              <br/>
-              <br/>
-            </div>         
-          </Col>
-
-
-          {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
           {/* GENERAL DATA */}
-          <div id="ReportInformationDesktop">
           <Col
             md="12"
             style={{
@@ -1022,10 +1017,14 @@ useEffect(() => {
             </p>
 
             <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+
               {/* TOTAL INCOME */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG1} width="30px" />
+                    &nbsp;Total Ingresos
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $20.154.365 &nbsp; */}
                     {totalIncome} &nbsp;
@@ -1036,7 +1035,7 @@ useEffect(() => {
                         textAlign: "right",
                       }}
                     >
-                      +4.5%
+                      &nbsp;+4.5%
                     </span>
                   </h5>
                 </div>
@@ -1044,7 +1043,10 @@ useEffect(() => {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG2} width="30px" />
+                    &nbsp; Costo Despacho
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
                     {dispatchCost} &nbsp;
@@ -1063,7 +1065,10 @@ useEffect(() => {
               {/* GM */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>GM</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG2} width="30px" />
+                    &nbsp; GM
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
                     {gm} &nbsp;
@@ -1082,7 +1087,10 @@ useEffect(() => {
               {/* CONVERSION */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Conversion</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG3} width="30px" />
+                    &nbsp; Conversión
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
                     {conversion} &nbsp;
@@ -1132,7 +1140,10 @@ useEffect(() => {
               {/* ORDERS */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Pedidos</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP1} width="30px" />
+                    &nbsp; Pedidos
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {totalOrders} &nbsp;
                     <span
@@ -1150,7 +1161,10 @@ useEffect(() => {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Cancelados</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP2} width="30px" />
+                    &nbsp; Cancelados
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {totalCancelledOrders} &nbsp;
                     <span
@@ -1168,7 +1182,10 @@ useEffect(() => {
               {/* DTE SENT */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP3} width="30px" />
+                    &nbsp;DTE enviado
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {totalDte} &nbsp;
                     <span
@@ -1186,7 +1203,10 @@ useEffect(() => {
               {/* DELIVERED */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Entregados</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP4} width="30px" />
+                    &nbsp; Entregados
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     $1.253.369 &nbsp;
                     <span
@@ -1235,7 +1255,10 @@ useEffect(() => {
               {/* IN PROCESS */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>En Proceso</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <img src={iconCP1} width="30px" />
+                  &nbsp;  En Proceso
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {inProcess} &nbsp;
                     <span
@@ -1253,7 +1276,10 @@ useEffect(() => {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP2} width="30px" />
+                    &nbsp;Preparación
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {inPreparation} &nbsp;
                     <span
@@ -1271,7 +1297,10 @@ useEffect(() => {
               {/* READY TO DISPATCH */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP3} width="30px" />
+                    &nbsp; Listo para despacho
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {readyToShip} &nbsp;
                     <span
@@ -1289,7 +1318,10 @@ useEffect(() => {
               {/* READY TO DELIVER */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <img src={iconCP4} width="30px" />
+                  &nbsp; Próximo a llegar
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {onTheWay} &nbsp;
                     <span
@@ -1338,7 +1370,10 @@ useEffect(() => {
               {/* NPS */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>NPS</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconEC1} width="30px" />
+                    &nbsp; NPS
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     325 &nbsp;
                     <span
@@ -1356,7 +1391,10 @@ useEffect(() => {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Reviews</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <img src={iconEC2} width="30px" />
+                  &nbsp;Reviews
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     {reviews} &nbsp;
                     <span
@@ -1374,7 +1412,10 @@ useEffect(() => {
               {/* claims */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4" }}>Reclamos</p>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <img src={iconEC3} width="22px" />
+                  &nbsp;Reclamos
+                  </p>
                   <h5 style={{ fontSize: "22px", color: "#444B54" }}>
                     500 &nbsp;
                     <span
@@ -1409,17 +1450,8 @@ useEffect(() => {
             </Col> */}
             </Row>
           </Col>
-          </div>
-
-           {/* REPORTS INFORMATION MOBILE VERSION */}
-          <div id="ReportInformationMobile">
-            <InformationCardsMobile />         
-          </div>
-
           <br></br>
           <br></br>
-
-          {/* GRAPHS */}
           <Row>
             <Col md="8">
               <Card className="car-chart">
@@ -1660,63 +1692,6 @@ useEffect(() => {
             </Card>
           </Col>
         </Row> */}
-
-         <Row>
-           <div class="text-center" style={{marginTop: "3em"}}>
-              <button
-                id="bttnSubmit"
-                
-                style={{
-                  backgroundColor: "#1D308E",
-                  textAlign: "center",                 
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0",
-                  fontSize: "11px"
-                  
-               
-                }}
-              >
-                
-                <span className="btn-label">
-                  <img src={iconShareReport} width="19px"/>
-                </span>
-                &nbsp;Compartir Reporte &nbsp;
-              </button>
-           
-              <button
-                id="bttnSubmit"
-                
-                style={{
-                  backgroundColor: "FFFFFF",
-                  textAlign: "center",
-                  color: "black",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  fontSize: "11px",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0"
-               
-                }}
-              >
-                Siguiente Reporte &nbsp;
-                <span className="btn-label">
-                   <img src={iconNextReport} width="19px"/>
-                </span>
-              </button>
-            </div>
-          </Row>
-
         </div>
       )}
     </>
