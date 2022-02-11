@@ -225,7 +225,7 @@ useEffect(() => {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
+      
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -437,7 +437,7 @@ useEffect(() => {
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-        console.log(orderQuantityArray);
+      
 
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -562,10 +562,9 @@ useEffect(() => {
         ) {
           return inputArray.indexOf(item) == index;
         });
-        console.log(salesChannelList);
+     
         setchannels(salesChannelList);
-        console.log(channels);
-        console.log(ripley);
+      
         let PIE = {
           labels: salesChannelList,
           datasets: [
@@ -580,7 +579,7 @@ useEffect(() => {
             },
           ],
         };
-        console.log(PIE.labels);
+     
         setpieChartData(PIE);
         let countryArray = [];
 
@@ -606,20 +605,18 @@ useEffect(() => {
     });
   };
   const changeDateHandler = (event) => {
-    console.log("hi");
-    console.log(event);
+  
     const selectedDate = event.toISOString().slice(0, 10);
-    console.log(selectedDate);
+  
     setselectedDateFrom(selectedDate);
-    console.log(selectedDateFrom);
+   
   };
   const changeDateToHandler = (event) => {
-    console.log("hi");
-    console.log(event);
+ 
     const selectedDate = event.toISOString().slice(0, 10);
-    console.log(selectedDate);
+  
     setselectedDateTo(selectedDate);
-    console.log(selectedDateFrom);
+  
   };
   const handleCountryChange = (event) => {
     setcountry(event.target.value);
@@ -644,9 +641,9 @@ useEffect(() => {
     const selectedStoreData = filteredStoreData.filter((selectedStore) => {
       return selectedStore.store === event.target.value;
     });
-    console.log(selectedStoreData);
+  
     const selectedChannelsArray = selectedStoreData[0].channels;
-    console.log(selectedChannelsArray);
+  
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
@@ -663,7 +660,7 @@ useEffect(() => {
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    console.log("hello");
+   
     console.log(filteredChannelArray);
     const channels = filteredChannelArray.map((item) => {
       return item.channel;
@@ -671,14 +668,29 @@ useEffect(() => {
     const channelsId = filteredChannelArray.map((item) => {
       return item.value;
     });
-    console.log(channelsId);
+   
     let x = channelsId.join(",");
     setchannelId(x);
-    console.log(x);
-    console.log(channels);
+  
+   
     setchannels(channels);
   };
   const handleDelete = (item) => {
+    console.log(item);
+    const channelsId = filteredChannelArray.map((item) => {
+      return item.value;
+    });
+    let y = [...channelsId];
+    let z = []
+    if(item==='MercadoLibre'){
+     z = y.filter((i) => i !== 2);
+    }
+    if(item==='Vtex'){
+      z = y.filter((i) => i !== 7);
+     }
+  //  console.log(y.join(","));
+   console.log(z);
+    console.log(channelsId);
     let x = channels.filter((i) => i !== item);
     setchannels(x);
     console.log(channelId);
