@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
@@ -32,8 +32,11 @@ import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 function OrderMobileCard(props) {
+  
   const { data } = props;
   const { isLoading } = props;
+  
+  const [buyer, setbuyer] = useState('');  
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
   const [verticalTabs, setVerticalTabs] = React.useState("info");
   const [pageTabs, setPageTabs] = React.useState("homePages");
@@ -57,6 +60,8 @@ function OrderMobileCard(props) {
   };
 
   const showModalHandler = (props) => {
+    console.log(props);
+    setbuyer(props);
     setshowModal(true);
   };
   const hideModalHandler = () => {
@@ -72,9 +77,16 @@ function OrderMobileCard(props) {
   const searchFilter = (event) => {
     setQuery(event.target.value);
   };
-  // className="text-center text-md-right"
+  
   return (
     <>
+      {showModal && (
+        <SendMail
+          onhideModal={hideModalHandler}
+         data={data}
+         purchaser={buyer}
+        ></SendMail>
+      )}
       {!isLoading && (
         <div className="content">
           <div
@@ -212,12 +224,12 @@ function OrderMobileCard(props) {
                                       <div>
                                         {" "}
                                         Si &nbsp;
-                                        {/* <span
+                                        <span
                                        style={{ marginLeft: "14px", cursor: "pointer" }}
                                        className={classes.si}
-                                     > */}
-                                        {/* <img src={SiIcon} onClick={showModalHandler.bind(this, props)}/>
-                                     </span> */}
+                                     >
+                                        <img src={SiIcon} onClick={showModalHandler.bind(this, post)}/>
+                                     </span>
                                         &nbsp;
                                         <span
                                           style={{ cursor: "pointer" }}

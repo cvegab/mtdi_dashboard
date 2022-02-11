@@ -932,20 +932,20 @@ const chartExample100 = {
 // #########################################
 
 const chartExample11 = {
-  data: {
-    labels: [1, 2, 3,4],
-    datasets: [
-      {
-        label: "Emails",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
-        borderWidth: 0,
-        barPercentage: 1.6,
-        data: [542, 480, 430,211],
-      },
-    ],
-  },
+  // data: {
+  //   labels: [1, 2, 3,4],
+  //   datasets: [
+  //     {
+  //       label: "Emails",
+  //       pointRadius: 0,
+  //       pointHoverRadius: 0,
+  //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
+  //       borderWidth: 0,
+  //       barPercentage: 1.6,
+  //       data: [542, 480, 430,211],
+  //     },
+  //   ],
+  // },
   options: {
     plugins: {
       legend: {
