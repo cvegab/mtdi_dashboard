@@ -174,20 +174,22 @@ function Charts() {
   const [wooCommerce, setwooCommerce] = useState(0);
   const [chambas, setchambas] = useState(0);
   const [listaTienda, setlistaTienda] = useState(0);
+  const [cR, setcR] = useState([{channels:'',channelId:0}]);
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
     setpieChart();
   }, []);
   useEffect(() => {
-   displaysalesChannelHandler();
-  }, [store])
-  
+    displaysalesChannelHandler();
+  }, [store]);
+
   useEffect(() => {
     fetchGeneralData();
   }, [
     channels,
     channelId,
+    cR,
     ripley,
     vtex,
     linio,
@@ -200,11 +202,11 @@ function Charts() {
     chambas,
     listaTienda,
   ]);
-useEffect(() => {
-
-}, [channels])
+  useEffect(() => {}, [channels]);
 
   const fetchGeneralData = () => {
+    console.log(cR.channelId);
+
     console.log("hi i am fetching");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -219,13 +221,13 @@ useEffect(() => {
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=0&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-      
+
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -437,7 +439,6 @@ useEffect(() => {
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-      
 
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -452,7 +453,7 @@ useEffect(() => {
           0
         );
 
-        // console.log(totalDispatchCostArray);
+        //  console.log(totalDispatchCostArray);
         // console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
@@ -551,6 +552,18 @@ useEffect(() => {
         var flattened = [].concat.apply([], allChannelsArray);
 
         console.log(flattened);
+        var resArr = [];
+        flattened.filter(function (item) {
+          var i = resArr.findIndex(
+            (x) => x.channel == item.channel && x.value == item.value
+          );
+          if (i <= -1) {
+            resArr.push(item);
+          }
+          return null;
+        });
+        console.log(resArr);
+        setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
@@ -562,9 +575,9 @@ useEffect(() => {
         ) {
           return inputArray.indexOf(item) == index;
         });
-     
+
         setchannels(salesChannelList);
-      
+
         let PIE = {
           labels: salesChannelList,
           datasets: [
@@ -579,7 +592,7 @@ useEffect(() => {
             },
           ],
         };
-     
+
         setpieChartData(PIE);
         let countryArray = [];
 
@@ -605,18 +618,14 @@ useEffect(() => {
     });
   };
   const changeDateHandler = (event) => {
-  
     const selectedDate = event.toISOString().slice(0, 10);
-  
+
     setselectedDateFrom(selectedDate);
-   
   };
   const changeDateToHandler = (event) => {
- 
     const selectedDate = event.toISOString().slice(0, 10);
-  
+
     setselectedDateTo(selectedDate);
-  
   };
   const handleCountryChange = (event) => {
     setcountry(event.target.value);
@@ -641,9 +650,9 @@ useEffect(() => {
     const selectedStoreData = filteredStoreData.filter((selectedStore) => {
       return selectedStore.store === event.target.value;
     });
-  
+
     const selectedChannelsArray = selectedStoreData[0].channels;
-  
+
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
@@ -660,39 +669,41 @@ useEffect(() => {
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-   
     console.log(filteredChannelArray);
     const channels = filteredChannelArray.map((item) => {
-      return item.channel;
+      // return item.channel;
+      return item;
     });
     const channelsId = filteredChannelArray.map((item) => {
       return item.value;
     });
-   
+
     let x = channelsId.join(",");
     setchannelId(x);
-  
-   
-    setchannels(channels);
+setcR(channels);
+    // setchannels(channels);
+    //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
     console.log(item);
-    const channelsId = filteredChannelArray.map((item) => {
-      return item.value;
-    });
-    let y = [...channelsId];
-    let z = []
-    if(item==='MercadoLibre'){
-     z = y.filter((i) => i !== 2);
-    }
-    if(item==='Vtex'){
-      z = y.filter((i) => i !== 7);
-     }
-  //  console.log(y.join(","));
-   console.log(z);
-    console.log(channelsId);
-    let x = channels.filter((i) => i !== item);
-    setchannels(x);
+    // const channelsId = filteredChannelArray.map((item) => {
+    //   return item.value;
+    // });
+    // let y = [...channelsId];
+    // let z = [];
+    // if (item === "MercadoLibre") {
+    //   z = y.filter((i) => i !== 2);
+    // }
+    // if (item === "Vtex") {
+    //   z = y.filter((i) => i !== 7);
+    // }
+    // //  console.log(y.join(","));
+    // console.log(z);
+    // console.log(channelsId);
+    let x = cR.filter((i) => i !== item);
+    console.log(x.value);
+    setchannels(x.channel);
+    setchannelId(x.value);
     console.log(channelId);
     console.log(channels);
   };
@@ -777,7 +788,7 @@ useEffect(() => {
             </CardBody>
           </Col>
           <Col md="12">
-          <label htmlFor="select-country">
+            <label htmlFor="select-country">
               <h5
                 style={{
                   color: "black",
@@ -851,7 +862,7 @@ useEffect(() => {
                 })}
               </Select>
             </label>
-          
+
             <label>
               <h5
                 id="fechaDesde"
@@ -967,9 +978,9 @@ useEffect(() => {
               +
             </button>
 
-            {channels.map((item) => (
-              <div className="tag-item" key={item}>
-                {item}
+            {cR.map((item) => (
+              <div className="tag-item" key={item.value}>
+                {item.channel}
                 <button
                   type="button"
                   className="button"
