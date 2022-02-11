@@ -180,6 +180,10 @@ function Charts() {
     setpieChart();
   }, []);
   useEffect(() => {
+   displaysalesChannelHandler();
+  }, [store])
+  
+  useEffect(() => {
     fetchGeneralData();
   }, [
     channels,
@@ -196,6 +200,9 @@ function Charts() {
     chambas,
     listaTienda,
   ]);
+useEffect(() => {
+
+}, [channels])
 
   const fetchGeneralData = () => {
     console.log("hi i am fetching");
@@ -445,8 +452,8 @@ function Charts() {
           0
         );
 
-        console.log(totalDispatchCostArray);
-        console.log(sumOfTotalDispatch);
+        // console.log(totalDispatchCostArray);
+        // console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -645,6 +652,7 @@ function Charts() {
     });
     console.log(selectedChannels);
     setfilteredChannelArray(selectedChannels);
+    displaysalesChannelHandler();
     // console.log(filteredChannelArray);
     // const selectedChannelsArray = selectedStoreData[0].channels;
     // const selectedChannels = selectedChannelsArray.map((item) => {
@@ -674,6 +682,7 @@ function Charts() {
     let x = channels.filter((i) => i !== item);
     setchannels(x);
     console.log(channelId);
+    console.log(channels);
   };
   return (
     <>
@@ -756,41 +765,7 @@ function Charts() {
             </CardBody>
           </Col>
           <Col md="12">
-            <label htmlFor="select-tienda">
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                  marginTop: "1em",
-                }}
-              >
-                Tienda
-              </h5>
-              <Select
-                labelId="select-tienda"
-                id="select-tienda"
-                style={{
-                  width: 160,
-                  fontSize: "10px",
-                  marginLeft: "1em",
-                  marginTop: "1em",
-                }}
-                value={store}
-                onChange={handleStoreChange}
-                label="select-canal"
-                placeholder="&nbsp; Seleccione una tienda"
-              >
-                {Array.from(
-                  new Set(filteredStoreData.map((obj) => obj.store))
-                ).map((period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                })}
-              </Select>
-            </label>
-            <label htmlFor="select-country">
+          <label htmlFor="select-country">
               <h5
                 style={{
                   color: "black",
@@ -830,6 +805,41 @@ function Charts() {
                 )}
               </Select>
             </label>
+            <label htmlFor="select-tienda">
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "0px",
+                  marginTop: "1em",
+                }}
+              >
+                Tienda
+              </h5>
+              <Select
+                labelId="select-tienda"
+                id="select-tienda"
+                style={{
+                  width: 160,
+                  fontSize: "10px",
+                  marginLeft: "1em",
+                  marginTop: "1em",
+                }}
+                value={store}
+                onChange={handleStoreChange}
+                label="select-canal"
+                placeholder="&nbsp; Seleccione una tienda"
+              >
+                {Array.from(
+                  new Set(filteredStoreData.map((obj) => obj.store))
+                ).map((period) => {
+                  return <MenuItem value={period}>{period}</MenuItem>;
+                })}
+              </Select>
+            </label>
+          
             <label>
               <h5
                 id="fechaDesde"
