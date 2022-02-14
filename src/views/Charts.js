@@ -362,7 +362,7 @@ function Charts() {
         setchambas(totalchambasSales);
         console.log(exitoSales);
 
-        console.log(ripley);
+       
         let PIE = {
           labels: [
             "Vtex",
