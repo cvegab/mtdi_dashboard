@@ -313,7 +313,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    325
+                                  {props.totalOrders}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -362,7 +362,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    5
+                                  {props.totalCancelledOrders}
                                   </td>
                                
                                   <td className="td-actions text-left">                                 
@@ -409,7 +409,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    320
+                                  {props.totalDte}
                                   </td>
                                
                                   <td className="td-actions text-left">

@@ -1445,7 +1445,8 @@ function Charts() {
 
            {/* REPORTS INFORMATION MOBILE VERSION */}
           <div id="ReportInformationMobile">
-            <InformationCardsMobile totalIncome={totalIncome} dispatchCost={dispatchCost} gm={gm} conversion={conversion}/>         
+            <InformationCardsMobile totalIncome={totalIncome} dispatchCost={dispatchCost} gm={gm} conversion={conversion} totalOrders={totalOrders}
+            totalCancelledOrders={totalCancelledOrders} totalDte={totalDte}/>         
           </div>
 
           <br></br>
