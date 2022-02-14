@@ -219,6 +219,7 @@ function Charts() {
     console.log(x);
     setchannelId(x);
     console.log("hi i am fetching");
+    setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -530,6 +531,7 @@ function Charts() {
         // }
         // settotalIncome(z[0].total);
         // setdispatchCost(z[0].shipping_total);
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
