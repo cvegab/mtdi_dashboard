@@ -42,7 +42,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 
-function InformationCardsMobile() {
+function InformationCardsMobile(props) {
   
 
   
@@ -94,7 +94,7 @@ function InformationCardsMobile() {
                                       width: "100px"
                                     }}
                                   >
-                                    $20.154.365 
+                                  ${props.totalIncome}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -144,7 +144,7 @@ function InformationCardsMobile() {
                                       width: "100px"
                                     }}
                                   >
-                                    $1.253.369
+                                    ${props.dispatchCost}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -192,7 +192,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    $5.369.258
+                                    {props.gm}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -240,7 +240,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    3,2%
+                                   {props.conversion}
                                   </td>
                                
                                   <td className="td-actions text-left">
