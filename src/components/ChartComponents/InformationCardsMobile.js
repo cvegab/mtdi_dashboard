@@ -532,7 +532,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    100
+                                   {props.inProcess}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -580,7 +580,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    50
+                                  {props.inPreparation}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -629,7 +629,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    20
+                                   {props.readyToShip}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -676,7 +676,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    30
+                                   {props.onTheWay}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -794,7 +794,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    4.5
+                                   {props.reviews}
                                   </td>
                                
                                   <td className="td-actions text-left">                                

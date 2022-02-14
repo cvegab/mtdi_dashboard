@@ -115,6 +115,11 @@ const barChartOptions = {
   },
 };
 function Charts() {
+  // const mediaQuery = window.matchMedia('(max-width: 768px)');
+  // if (mediaQuery.matches) {
+  //   // Then trigger an alert
+  //   alert('Media Query Matched!')
+  // }
   let PIE_CHART_DATA = {
     labels: [1, 2, 3, 4],
     datasets: [
@@ -179,7 +184,26 @@ function Charts() {
   const [wooCommerce, setwooCommerce] = useState(0);
   const [chambas, setchambas] = useState(0);
   const [listaTienda, setlistaTienda] = useState(0);
-  const [cR, setcR] = useState([{channels:'',channelId:0}]);
+  const [cR, setcR] = useState([{ channels: "", channelId: 0 }]);
+  const [isNarrowScreen, setIsNarrowScreen] = useState(false);
+  const [isMobileSizes, setIsMobileSized] = useState(false);
+  const [filtersClass, setfiltersClass] = useState('FiltersInDesktop');
+  useEffect(() => {
+    // set initial value
+    const mediaWatcher = window.matchMedia("(max-width: 767px)")
+    setIsMobileSized(mediaWatcher.matches);
+
+    //watch for updates
+    function updateIsNarrowScreen(e) {
+      setIsNarrowScreen(e.matches);
+    }
+    mediaWatcher.addEventListener('change', updateIsNarrowScreen)
+
+    // clean up after ourselves
+    return function cleanup() {
+      mediaWatcher.removeEventListener('change', updateIsNarrowScreen)
+    }
+  });
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
@@ -208,6 +232,11 @@ function Charts() {
     listaTienda,
   ]);
   useEffect(() => {}, [channels]);
+useEffect(() => {
+  if(isMobileSizes)
+ setfiltersClass('FiltersInMobile');
+ if(!isMobileSizes) setfiltersClass('FiltersInDesktop');
+}, [isMobileSizes])
 
   const fetchGeneralData = () => {
     console.log(cR);
@@ -363,7 +392,6 @@ function Charts() {
         setchambas(totalchambasSales);
         console.log(exitoSales);
 
-       
         let PIE = {
           labels: [
             "Vtex",
@@ -693,7 +721,7 @@ function Charts() {
 
     let x = channelsId.join(",");
     setchannelId(x);
-   setcR(channels);
+    setcR(channels);
     // setchannels(channels);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
@@ -723,6 +751,7 @@ function Charts() {
   };
   return (
     <>
+    {isMobileSizes && <h1>Hello</h1>}
       {isLoading && <SplashScreen></SplashScreen>}
       {!isLoading && (
         <div className="content">
@@ -803,9 +832,12 @@ function Charts() {
           </Col>
 
           {/* FILTERS IN DESKTOP VERSION */}
-
-          <div id="FiltersInDesktop">
+           
+          {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
+          {isMobileSizes && <Button>Hello</Button>}
+        <div id={filtersClass}>
           <Col md="12">
+    
           <label>
               <h5
                 id="fechaDesde"
@@ -821,22 +853,152 @@ function Charts() {
                 Fecha Inicio
               </h5>
 
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                // selected={fromDate}
-                // onChange={(date) => setfromDate(date)}
-                value={selectedDateFrom}
-                onChange={changeDateHandler}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
+                <DatePicker
+                  id="datepickerCalendar"
+                  type="number"
+                  // selected={fromDate}
+                  // onChange={(date) => setfromDate(date)}
+                  value={selectedDateFrom}
+                  onChange={changeDateHandler}
+                  style={{ width: 200, marginLeft: "1em" }}
+                  placeholderText="dd/mm/yy"
+                  locale="es"
+                />
+              </label>
 
-            <label>
+              <label>
+                <h5
+                  id="fechaHasta"
+                  style={{
+                    color: "black",
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    marginBottom: "6px",
+                    marginTop: "0px",
+                  }}
+                >
+                  Fecha Fin
+                </h5>
+
+                <DatePicker
+                  id="datepickerCalendar"
+                  type="number"
+                  value={selectedDateTo}
+                  onChange={changeDateToHandler}
+                  style={{ width: 200, marginLeft: "1em" }}
+                  placeholderText="dd/mm/yy"
+                  locale="es"
+                />
+              </label>
+              <label htmlFor="select-country">
+                <h5
+                  style={{
+                    color: "black",
+                    width: "30px",
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    marginBottom: "0px",
+                  }}
+                >
+                  País
+                </h5>
+                <Select
+                  labelId="select-country"
+                  id="select-country"
+                  style={{
+                    width: 150,
+                    marginLeft: "1em",
+                    borderRadius: "17px",
+                    marginBottom: "1em",
+                    fontSize: "10px",
+                    marginTop: "1em",
+                  }}
+                  value={country}
+                  onChange={handleCountryChange}
+                  label="Country"
+                  placeholder="&nbsp; Seleccione un país"
+                >
+                  {Array.from(
+                    new Set(filteredCountryData.map((obj) => obj))
+                  ).map((period) => {
+                    return (
+                      <MenuItem value={period.country}>
+                        {period.country}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </label>
+
+              <label htmlFor="select-tienda">
+                <h5
+                  style={{
+                    color: "black",
+                    fontSize: "12px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    marginBottom: "0px",
+                    marginTop: "1em",
+                  }}
+                >
+                  Tienda
+                </h5>
+                <Select
+                  labelId="select-tienda"
+                  id="select-tienda"
+                  style={{
+                    width: 160,
+                    fontSize: "10px",
+                    marginLeft: "1em",
+                    marginTop: "1em",
+                  }}
+                  value={store}
+                  onChange={handleStoreChange}
+                  label="select-canal"
+                  placeholder="&nbsp; Seleccione una tienda"
+                >
+                  {Array.from(
+                    new Set(filteredStoreData.map((obj) => obj.store))
+                  ).map((period) => {
+                    return <MenuItem value={period}>{period}</MenuItem>;
+                  })}
+                </Select>
+              </label>
+            
+              <Button
+                color="primary"
+                style={{
+                  borderRadius: "22px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  letterSpacing: "1px",
+                  width: "120px",
+                  height: "38px",
+                  fontWeight: "600",
+                }}
+                className="thirdStepTour"
+                onClick={applyFiltersButtonhandler}
+              >
+                Aplicar
+              </Button>
+           
+              <Button
+                className="btn-round btn-icon fourthStepTour"
+                color="primary"
+              >
+                <i
+                  className="nc-icon nc-refresh-69"
+                  style={{ color: "#ffffff" }}
+                />
+              </Button>
+            </Col>
+
+            <Col md="12">
               <h5
-                id="fechaHasta"
+                id="fechaDesde"
                 style={{
                   color: "black",
                   fontSize: "12px",
@@ -846,583 +1008,452 @@ function Charts() {
                   marginTop: "0px",
                 }}
               >
-                Fecha Fin
+                Canales De Venta
               </h5>
-
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                value={selectedDateTo}
-                onChange={changeDateToHandler}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
-          <label htmlFor="select-country">
-              <h5
+              <button
                 style={{
-                  color: "black",
-                  width: "30px",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                }}
-              >
-                País
-              </h5>
-              <Select
-                labelId="select-country"
-                id="select-country"
-                style={{
-                  width: 150,
-                  marginLeft: "1em",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  padding: "12px",
+                  width: "42px",
+                  height: "42px",
+                  left: "1006px",
+                  top: "405px",
+                  background: "#EDEEF6",
                   borderRadius: "17px",
-                  marginBottom: "1em",
-                  fontSize: "10px",
-                  marginTop: "1em",
+                  border: "none",
                 }}
-                value={country}
-                onChange={handleCountryChange}
-                label="Country"
-                placeholder="&nbsp; Seleccione un país"
+                onClick={displaysalesChannelHandler}
               >
-                {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
-                  (period) => {
-                    return (
-                      <MenuItem value={period.country}>
-                        {period.country}
-                      </MenuItem>
-                    );
-                  }
-                )}
-              </Select>
-            </label>
+                +
+              </button>
 
-            <label htmlFor="select-tienda">
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                  marginTop: "1em",
-                }}
-              >
-                Tienda
-              </h5>
-              <Select
-                labelId="select-tienda"
-                id="select-tienda"
-                style={{
-                  width: 160,
-                  fontSize: "10px",
-                  marginLeft: "1em",
-                  marginTop: "1em",
-                }}
-                value={store}
-                onChange={handleStoreChange}
-                label="select-canal"
-                placeholder="&nbsp; Seleccione una tienda"
-              >
-                {Array.from(
-                  new Set(filteredStoreData.map((obj) => obj.store))
-                ).map((period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                })}
-              </Select>
-            </label>
-          
-            
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "120px",
-                height: "38px",
-                fontWeight: "600",
-              }}
-              className="thirdStepTour"
-              onClick={applyFiltersButtonhandler}
-            >
-              Aplicar
-            </Button>
-
-            <Button
-              className="btn-round btn-icon fourthStepTour"
-              color="primary"
-            >
-              <i
-                className="nc-icon nc-refresh-69"
-                style={{ color: "#ffffff" }}
-              />
-            </Button>
-          </Col>
-
-          <Col md="12">
-            <h5
-              id="fechaDesde"
-              style={{
-                color: "black",
-                fontSize: "12px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                marginBottom: "6px",
-                marginTop: "0px",
-              }}
-            >
-              Canales De Venta
-            </h5>
-            <button
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                padding: "12px",
-                width: "42px",
-                height: "42px",
-                left: "1006px",
-                top: "405px",
-                background: "#EDEEF6",
-                borderRadius: "17px",
-                border: "none",
-              }}
-              onClick={displaysalesChannelHandler}
-            >
-              +
-            </button>
-
-            {cR.map((item) => (
-              <div className="tag-item" key={item.value}>
-                {item.channel}
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => handleDelete(item)}
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </Col>
+              {cR.map((item) => (
+                <div className="tag-item" key={item.value}>
+                  {item.channel}
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={() => handleDelete(item)}
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+              
+            </Col>
           </div>
           <br></br>
 
           {/* FILTERS IN MOBILE VERSION */}
 
-          <Col md="12">
+           {/* <Col md="12">
             <div id="FiltersInMobile">
-              <FilterMobileButton />
-              <br/>
-              <br/>
-            </div>         
-          </Col>
-
+              <FilterMobileButton country={country} filteredCountryData={filteredCountryData}  />
+              <br />
+              <br />
+            </div>
+          </Col> */}
 
           {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
           {/* GENERAL DATA */}
           <div id="ReportInformationDesktop">
-          <Col
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-            <p
-              classname="textNameTable"
+            <Col
+              md="12"
               style={{
-                color: "black",
-                width: "450px",
-                fontSize: "20px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                paddingTop: "20px",
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
               }}
             >
-              Datos Generales
-            </p>
+              <p
+                classname="textNameTable"
+                style={{
+                  color: "black",
+                  width: "450px",
+                  fontSize: "20px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  paddingTop: "20px",
+                }}
+              >
+                Datos Generales
+              </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* TOTAL INCOME */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $20.154.365 &nbsp; */}
-                    {totalIncome} &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* DISPATCH COST */}
-              </Col>
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                    {dispatchCost} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* GM */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>GM</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                    {gm} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* CONVERSION */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Conversion</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                    {conversion} &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <br></br>
-          <br></br>
-          {/* ORDER PROCESSING */}
-          <Col
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-            <p
-              classname="textNameTable"
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* TOTAL INCOME */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {/* $20.154.365 &nbsp; */}
+                      {totalIncome} &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* DISPATCH COST */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {/* $1.253.369 &nbsp; */}
+                      {dispatchCost} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* GM */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>GM</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {/* $1.253.369 &nbsp; */}
+                      {gm} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* CONVERSION */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Conversion</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {/* $1.253.369 &nbsp; */}
+                      {conversion} &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <br></br>
+            <br></br>
+            {/* ORDER PROCESSING */}
+            <Col
+              md="12"
               style={{
-                color: "black",
-                width: "450px",
-                fontSize: "20px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                paddingTop: "20px",
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
               }}
             >
-              Procesamiento de pedidos
-            </p>
+              <p
+                classname="textNameTable"
+                style={{
+                  color: "black",
+                  width: "450px",
+                  fontSize: "20px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  paddingTop: "20px",
+                }}
+              >
+                Procesamiento de pedidos
+              </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* ORDERS */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Pedidos</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {totalOrders} &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* ORDERS CANCELLED */}
-              </Col>
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Cancelados</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {totalCancelledOrders} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* DTE SENT */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {totalDte} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* DELIVERED */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Entregados</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    $1.253.369 &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <br></br>
-          <br></br>
-          {/* ORDER FULFILMENT */}
-          <Col
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-            <p
-              classname="textNameTable"
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* ORDERS */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Pedidos</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {totalOrders} &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* ORDERS CANCELLED */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Cancelados</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {totalCancelledOrders} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* DTE SENT */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {totalDte} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* DELIVERED */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Entregados</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      $1.253.369 &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <br></br>
+            <br></br>
+            {/* ORDER FULFILMENT */}
+            <Col
+              md="12"
               style={{
-                color: "black",
-                width: "450px",
-                fontSize: "20px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                paddingTop: "20px",
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
               }}
             >
-              Cumplimiento de pedidos
-            </p>
+              <p
+                classname="textNameTable"
+                style={{
+                  color: "black",
+                  width: "450px",
+                  fontSize: "20px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  paddingTop: "20px",
+                }}
+              >
+                Cumplimiento de pedidos
+              </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* IN PROCESS */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>En Proceso</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {inProcess} &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* PREPARATION */}
-              </Col>
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Preparacion</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {inPreparation} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DISPATCH */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {readyToShip} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DELIVER */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {onTheWay} &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <br></br>
-          <br></br>
-          {/* CLIENT EXPERIENCE */}
-          <Col
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-            <p
-              classname="textNameTable"
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* IN PROCESS */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>En Proceso</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {inProcess} &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* PREPARATION */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Preparacion</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {inPreparation} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DISPATCH */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {readyToShip} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DELIVER */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {onTheWay} &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <br></br>
+            <br></br>
+            {/* CLIENT EXPERIENCE */}
+            <Col
+              md="12"
               style={{
-                color: "black",
-                width: "450px",
-                fontSize: "20px",
-                fontWeight: "800",
-                marginLeft: "1em",
-                paddingTop: "20px",
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
               }}
             >
-              Experiencia del cliente
-            </p>
+              <p
+                classname="textNameTable"
+                style={{
+                  color: "black",
+                  width: "450px",
+                  fontSize: "20px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  paddingTop: "20px",
+                }}
+              >
+                Experiencia del cliente
+              </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* NPS */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>NPS</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    325 &nbsp;
-                    <span
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* REVIEWS */}
-              </Col>
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Reviews</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {reviews} &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* claims */}
-              <Col md="3">
-                <div>
-                  <p style={{ color: "#C4C4C4" }}>Reclamos</p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    500 &nbsp;
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DELIVER */}
-              {/* <Col md="3">
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* NPS */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>NPS</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      325 &nbsp;
+                      <span
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* REVIEWS */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Reviews</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      {reviews} &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* claims */}
+                <Col md="3">
+                  <div>
+                    <p style={{ color: "#C4C4C4" }}>Reclamos</p>
+                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                      500 &nbsp;
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DELIVER */}
+                {/* <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
@@ -1439,14 +1470,26 @@ function Charts() {
                 </h5>
               </div>
             </Col> */}
-            </Row>
-          </Col>
+              </Row>
+            </Col>
           </div>
 
-           {/* REPORTS INFORMATION MOBILE VERSION */}
+          {/* REPORTS INFORMATION MOBILE VERSION */}
           <div id="ReportInformationMobile">
-            <InformationCardsMobile totalIncome={totalIncome} dispatchCost={dispatchCost} gm={gm} conversion={conversion} totalOrders={totalOrders}
-            totalCancelledOrders={totalCancelledOrders} totalDte={totalDte}/>         
+            <InformationCardsMobile
+              totalIncome={totalIncome}
+              dispatchCost={dispatchCost}
+              gm={gm}
+              conversion={conversion}
+              totalOrders={totalOrders}
+              totalCancelledOrders={totalCancelledOrders}
+              totalDte={totalDte}
+              inProcess={inProcess}
+              inPreparation={inPreparation}
+              readyToShip={readyToShip}
+              onTheWay={onTheWay}
+              reviews={reviews}
+            />
           </div>
 
           <br></br>
@@ -1694,14 +1737,13 @@ function Charts() {
           </Col>
         </Row> */}
 
-         <Row>
-           <div class="text-center" style={{marginTop: "3em"}}>
+          <Row>
+            <div class="text-center" style={{ marginTop: "3em" }}>
               <button
                 id="bttnSubmit"
-                
                 style={{
                   backgroundColor: "#1D308E",
-                  textAlign: "center",                 
+                  textAlign: "center",
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
@@ -1709,23 +1751,19 @@ function Charts() {
                   color: "#FFFFFF",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0",
-                  fontSize: "11px"
-                  
-               
+                  fontWeight: "bold",
+                  border: "0",
+                  fontSize: "11px",
                 }}
               >
-                
                 <span className="btn-label">
-                  <img src={iconShareReport} width="19px"/>
+                  <img src={iconShareReport} width="19px" />
                 </span>
                 &nbsp;Compartir Reporte &nbsp;
               </button>
-           
+
               <button
                 id="bttnSubmit"
-                
                 style={{
                   backgroundColor: "FFFFFF",
                   textAlign: "center",
@@ -1737,19 +1775,17 @@ function Charts() {
                   fontSize: "11px",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0"
-               
+                  fontWeight: "bold",
+                  border: "0",
                 }}
               >
                 Siguiente Reporte &nbsp;
                 <span className="btn-label">
-                   <img src={iconNextReport} width="19px"/>
+                  <img src={iconNextReport} width="19px" />
                 </span>
               </button>
             </div>
           </Row>
-
         </div>
       )}
     </>
