@@ -172,6 +172,7 @@ function Charts() {
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
   const [fromDate, setfromDate] = useState(new Date());
+  const [showFilter, setshowFilter] = useState(false);
   //SALES CHANNEL TOTAL SALES STATES
   const [ripley, setripley] = useState(0);
   const [vtex, setvtex] = useState(0);
@@ -233,9 +234,16 @@ function Charts() {
   ]);
   useEffect(() => {}, [channels]);
 useEffect(() => {
-  if(isMobileSizes)
- setfiltersClass('FiltersInMobile');
- if(!isMobileSizes) setfiltersClass('FiltersInDesktop');
+  if(isMobileSizes){
+    setfiltersClass('FiltersInMobile');
+    setshowFilter(false);
+  }
+
+ if(!isMobileSizes) {
+   setfiltersClass('FiltersInDesktop');
+   setshowFilter(true);
+}
+   
 }, [isMobileSizes])
 
   const fetchGeneralData = () => {
@@ -835,7 +843,7 @@ useEffect(() => {
            
           {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
           {isMobileSizes && <Button>Hello</Button>}
-        <div id={filtersClass}>
+      {showFilter && <div id={filtersClass}>
           <Col md="12">
     
           <label>
@@ -1043,7 +1051,7 @@ useEffect(() => {
               ))}
               
             </Col>
-          </div>
+          </div>}
           <br></br>
 
           {/* FILTERS IN MOBILE VERSION */}
