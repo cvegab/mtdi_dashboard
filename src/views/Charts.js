@@ -757,6 +757,9 @@ useEffect(() => {
     // console.log(channelId);
     // console.log(channels);
   };
+  const showFiltersHandler = ()=>{
+    setshowFilter(!showFilter);
+  }
   return (
     <>
     {isMobileSizes && <h1>Hello</h1>}
@@ -842,7 +845,7 @@ useEffect(() => {
           {/* FILTERS IN DESKTOP VERSION */}
            
           {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
-          {isMobileSizes && <Button>Hello</Button>}
+          {isMobileSizes && <Button onClick={showFiltersHandler}>Hello</Button>}
       {showFilter && <div id={filtersClass}>
           <Col md="12">
     
