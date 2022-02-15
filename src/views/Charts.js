@@ -8,7 +8,6 @@ import "../assets/css/Charts.css";
 import "react-datepicker/dist/react-datepicker.css";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
-import FilterMobileButton from "components/ChartComponents/FilterMobileButton";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
 
 // reactstrap components
@@ -115,11 +114,6 @@ const barChartOptions = {
   },
 };
 function Charts() {
-  // const mediaQuery = window.matchMedia('(max-width: 768px)');
-  // if (mediaQuery.matches) {
-  //   // Then trigger an alert
-  //   alert('Media Query Matched!')
-  // }
   let PIE_CHART_DATA = {
     labels: [1, 2, 3, 4],
     datasets: [
@@ -188,22 +182,23 @@ function Charts() {
   const [cR, setcR] = useState([{ channels: "", channelId: 0 }]);
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
-  const [filtersClass, setfiltersClass] = useState('FiltersInDesktop');
+  const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
+  // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
   useEffect(() => {
     // set initial value
-    const mediaWatcher = window.matchMedia("(max-width: 767px)")
+    const mediaWatcher = window.matchMedia("(max-width: 767px)");
     setIsMobileSized(mediaWatcher.matches);
 
     //watch for updates
     function updateIsNarrowScreen(e) {
       setIsNarrowScreen(e.matches);
     }
-    mediaWatcher.addEventListener('change', updateIsNarrowScreen)
+    mediaWatcher.addEventListener("change", updateIsNarrowScreen);
 
     // clean up after ourselves
     return function cleanup() {
-      mediaWatcher.removeEventListener('change', updateIsNarrowScreen)
-    }
+      mediaWatcher.removeEventListener("change", updateIsNarrowScreen);
+    };
   });
   useEffect(() => {
     fetchGeneralData();
@@ -233,18 +228,17 @@ function Charts() {
     listaTienda,
   ]);
   useEffect(() => {}, [channels]);
-useEffect(() => {
-  if(isMobileSizes){
-    setfiltersClass('FiltersInMobile');
-    setshowFilter(false);
-  }
+  useEffect(() => {
+    if (isMobileSizes) {
+      setfiltersClass("FiltersInMobile");
+      setshowFilter(false);
+    }
 
- if(!isMobileSizes) {
-   setfiltersClass('FiltersInDesktop');
-   setshowFilter(true);
-}
-   
-}, [isMobileSizes])
+    if (!isMobileSizes) {
+      setfiltersClass("FiltersInDesktop");
+      setshowFilter(true);
+    }
+  }, [isMobileSizes]);
 
   const fetchGeneralData = () => {
     console.log(cR);
@@ -757,12 +751,11 @@ useEffect(() => {
     // console.log(channelId);
     // console.log(channels);
   };
-  const showFiltersHandler = ()=>{
+  const showFiltersHandler = () => {
     setshowFilter(!showFilter);
-  }
+  };
   return (
     <>
-    {isMobileSizes && <h1>Hello</h1>}
       {isLoading && <SplashScreen></SplashScreen>}
       {!isLoading && (
         <div className="content">
@@ -843,43 +836,185 @@ useEffect(() => {
           </Col>
 
           {/* FILTERS IN DESKTOP VERSION */}
-           
+
           {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
-          {isMobileSizes && <Button onClick={showFiltersHandler}>Hello</Button>}
-      {showFilter && <div id={filtersClass}>
-          <Col md="12">
-    
-          <label>
-              <h5
-                id="fechaDesde"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Inicio
-              </h5>
+          {isMobileSizes && (
+            <Button
+              style={{
+                backgroundColor: "#1D308E",
+                color: "white",
+                width: "100%",
+                padding: "20px",
+              }}
+              onClick={showFiltersHandler}
+            >
+              {showFilter ? "Occultar Filtros" : "Mostrar Filtros"}
+            </Button>
+          )}
+          {showFilter && (
+            <div id={filtersClass}>
+              <Col md="12">
+                <label>
+                  <h5
+                    id="fechaDesde"
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "6px",
+                      marginTop: "0px",
+                    }}
+                  >
+                    Fecha Inicio
+                  </h5>
 
-                <DatePicker
-                  id="datepickerCalendar"
-                  type="number"
-                  // selected={fromDate}
-                  // onChange={(date) => setfromDate(date)}
-                  value={selectedDateFrom}
-                  onChange={changeDateHandler}
-                  style={{ width: 200, marginLeft: "1em" }}
-                  placeholderText="dd/mm/yy"
-                  locale="es"
-                />
-              </label>
+                  <DatePicker
+                    id="datepickerCalendar"
+                    type="number"
+                    // selected={fromDate}
+                    // onChange={(date) => setfromDate(date)}
+                    value={selectedDateFrom}
+                    onChange={changeDateHandler}
+                    style={{ width: 200, marginLeft: "1em" }}
+                    placeholderText="dd/mm/yy"
+                    locale="es"
+                  />
+                </label>
 
-              <label>
+                <label>
+                  <h5
+                    id="fechaHasta"
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "6px",
+                      marginTop: "0px",
+                    }}
+                  >
+                    Fecha Fin
+                  </h5>
+
+                  <DatePicker
+                    id="datepickerCalendar"
+                    type="number"
+                    value={selectedDateTo}
+                    onChange={changeDateToHandler}
+                    style={{ width: 200, marginLeft: "1em" }}
+                    placeholderText="dd/mm/yy"
+                    locale="es"
+                  />
+                </label>
+                <label htmlFor="select-country">
+                  <h5
+                    style={{
+                      color: "black",
+                      width: "30px",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "0px",
+                    }}
+                  >
+                    País
+                  </h5>
+                  <Select
+                    labelId="select-country"
+                    id="select-country"
+                    style={{
+                      width: 150,
+                      marginLeft: "1em",
+                      borderRadius: "17px",
+                      marginBottom: "1em",
+                      fontSize: "10px",
+                      marginTop: "1em",
+                    }}
+                    value={country}
+                    onChange={handleCountryChange}
+                    label="Country"
+                    placeholder="&nbsp; Seleccione un país"
+                  >
+                    {Array.from(
+                      new Set(filteredCountryData.map((obj) => obj))
+                    ).map((period) => {
+                      return (
+                        <MenuItem value={period.country}>
+                          {period.country}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </label>
+
+                <label htmlFor="select-tienda">
+                  <h5
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "0px",
+                      marginTop: "1em",
+                    }}
+                  >
+                    Tienda
+                  </h5>
+                  <Select
+                    labelId="select-tienda"
+                    id="select-tienda"
+                    style={{
+                      width: 160,
+                      fontSize: "10px",
+                      marginLeft: "1em",
+                      marginTop: "1em",
+                    }}
+                    value={store}
+                    onChange={handleStoreChange}
+                    label="select-canal"
+                    placeholder="&nbsp; Seleccione una tienda"
+                  >
+                    {Array.from(
+                      new Set(filteredStoreData.map((obj) => obj.store))
+                    ).map((period) => {
+                      return <MenuItem value={period}>{period}</MenuItem>;
+                    })}
+                  </Select>
+                </label>
+
+                <Button
+                  color="primary"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "120px",
+                    height: "38px",
+                    fontWeight: "600",
+                  }}
+                  className="thirdStepTour"
+                  onClick={applyFiltersButtonhandler}
+                >
+                  Aplicar
+                </Button>
+
+                <Button
+                  className="btn-round btn-icon fourthStepTour"
+                  color="primary"
+                >
+                  <i
+                    className="nc-icon nc-refresh-69"
+                    style={{ color: "#ffffff" }}
+                  />
+                </Button>
+              </Col>
+
+              <Col md="12">
                 <h5
-                  id="fechaHasta"
+                  id="fechaDesde"
                   style={{
                     color: "black",
                     fontSize: "12px",
@@ -889,177 +1024,47 @@ useEffect(() => {
                     marginTop: "0px",
                   }}
                 >
-                  Fecha Fin
+                  Canales De Venta
                 </h5>
-
-                <DatePicker
-                  id="datepickerCalendar"
-                  type="number"
-                  value={selectedDateTo}
-                  onChange={changeDateToHandler}
-                  style={{ width: 200, marginLeft: "1em" }}
-                  placeholderText="dd/mm/yy"
-                  locale="es"
-                />
-              </label>
-              <label htmlFor="select-country">
-                <h5
+                <button
                   style={{
-                    color: "black",
-                    width: "30px",
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    marginLeft: "1em",
-                    marginBottom: "0px",
-                  }}
-                >
-                  País
-                </h5>
-                <Select
-                  labelId="select-country"
-                  id="select-country"
-                  style={{
-                    width: 150,
-                    marginLeft: "1em",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    padding: "12px",
+                    width: "42px",
+                    height: "42px",
+                    left: "1006px",
+                    top: "405px",
+                    background: "#EDEEF6",
                     borderRadius: "17px",
-                    marginBottom: "1em",
-                    fontSize: "10px",
-                    marginTop: "1em",
+                    border: "none",
                   }}
-                  value={country}
-                  onChange={handleCountryChange}
-                  label="Country"
-                  placeholder="&nbsp; Seleccione un país"
+                  onClick={displaysalesChannelHandler}
                 >
-                  {Array.from(
-                    new Set(filteredCountryData.map((obj) => obj))
-                  ).map((period) => {
-                    return (
-                      <MenuItem value={period.country}>
-                        {period.country}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </label>
+                  +
+                </button>
 
-              <label htmlFor="select-tienda">
-                <h5
-                  style={{
-                    color: "black",
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    marginLeft: "1em",
-                    marginBottom: "0px",
-                    marginTop: "1em",
-                  }}
-                >
-                  Tienda
-                </h5>
-                <Select
-                  labelId="select-tienda"
-                  id="select-tienda"
-                  style={{
-                    width: 160,
-                    fontSize: "10px",
-                    marginLeft: "1em",
-                    marginTop: "1em",
-                  }}
-                  value={store}
-                  onChange={handleStoreChange}
-                  label="select-canal"
-                  placeholder="&nbsp; Seleccione una tienda"
-                >
-                  {Array.from(
-                    new Set(filteredStoreData.map((obj) => obj.store))
-                  ).map((period) => {
-                    return <MenuItem value={period}>{period}</MenuItem>;
-                  })}
-                </Select>
-              </label>
-            
-              <Button
-                color="primary"
-                style={{
-                  borderRadius: "22px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  letterSpacing: "1px",
-                  width: "120px",
-                  height: "38px",
-                  fontWeight: "600",
-                }}
-                className="thirdStepTour"
-                onClick={applyFiltersButtonhandler}
-              >
-                Aplicar
-              </Button>
-           
-              <Button
-                className="btn-round btn-icon fourthStepTour"
-                color="primary"
-              >
-                <i
-                  className="nc-icon nc-refresh-69"
-                  style={{ color: "#ffffff" }}
-                />
-              </Button>
-            </Col>
-
-            <Col md="12">
-              <h5
-                id="fechaDesde"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Canales De Venta
-              </h5>
-              <button
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  padding: "12px",
-                  width: "42px",
-                  height: "42px",
-                  left: "1006px",
-                  top: "405px",
-                  background: "#EDEEF6",
-                  borderRadius: "17px",
-                  border: "none",
-                }}
-                onClick={displaysalesChannelHandler}
-              >
-                +
-              </button>
-
-              {cR.map((item) => (
-                <div className="tag-item" key={item.value}>
-                  {item.channel}
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={() => handleDelete(item)}
-                  >
-                    &times;
-                  </button>
-                </div>
-              ))}
-              
-            </Col>
-          </div>}
+                {cR.map((item) => (
+                  <div className="tag-item" key={item.value}>
+                    {item.channel}
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={() => handleDelete(item)}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+              </Col>
+            </div>
+          )}
           <br></br>
 
           {/* FILTERS IN MOBILE VERSION */}
 
-           {/* <Col md="12">
+          {/* <Col md="12">
             <div id="FiltersInMobile">
               <FilterMobileButton country={country} filteredCountryData={filteredCountryData}  />
               <br />
@@ -1535,7 +1540,6 @@ useEffect(() => {
                   <CardTitle>
                     <strong>Participación canal de venta</strong>
                   </CardTitle>
-                  {/* <p className="card-category">Last Campaign Performance</p> */}
                 </CardHeader>
                 <CardBody style={{ height: "342px" }}>
                   <Pie
