@@ -997,8 +997,10 @@ function Charts() {
                     labelId="select-country"
                     id="select-country"
                     style={{
-                      width: 150,
+                      width: "193px",
+                      height:"46px",
                       marginLeft: "1em",
+                      backgroundColor:"white",
                       borderRadius: "17px",
                       marginBottom: "1em",
                       fontSize: "10px",
@@ -1038,9 +1040,13 @@ function Charts() {
                     labelId="select-tienda"
                     id="select-tienda"
                     style={{
-                      width: 160,
-                      fontSize: "10px",
+                      width: "193px",
+                      height:"46px",
                       marginLeft: "1em",
+                      backgroundColor:"white",
+                      borderRadius: "17px",
+                      marginBottom: "1em",
+                      fontSize: "10px",
                       marginTop: "1em",
                     }}
                     value={store}
