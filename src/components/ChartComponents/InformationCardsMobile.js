@@ -42,7 +42,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 
-function InformationCardsMobile() {
+function InformationCardsMobile(props) {
   
 
   
@@ -94,7 +94,7 @@ function InformationCardsMobile() {
                                       width: "100px"
                                     }}
                                   >
-                                    $20.154.365 
+                                  ${props.totalIncome}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -144,7 +144,7 @@ function InformationCardsMobile() {
                                       width: "100px"
                                     }}
                                   >
-                                    $1.253.369
+                                    ${props.dispatchCost}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -192,7 +192,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    $5.369.258
+                                    {props.gm}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -240,7 +240,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    3,2%
+                                   {props.conversion}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -313,7 +313,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    325
+                                  {props.totalOrders}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -362,7 +362,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    5
+                                  {props.totalCancelledOrders}
                                   </td>
                                
                                   <td className="td-actions text-left">                                 
@@ -409,7 +409,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    320
+                                  {props.totalDte}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -532,7 +532,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    100
+                                   {props.inProcess}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -580,7 +580,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    50
+                                  {props.inPreparation}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -629,7 +629,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    20
+                                   {props.readyToShip}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -676,7 +676,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    30
+                                   {props.onTheWay}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -794,7 +794,7 @@ function InformationCardsMobile() {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    4.5
+                                   {props.reviews}
                                   </td>
                                
                                   <td className="td-actions text-left">                                

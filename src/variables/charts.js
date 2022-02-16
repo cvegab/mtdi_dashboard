@@ -1078,6 +1078,7 @@ const data1 = {
     dataSet: [10000, 225000, 10000, 225000]
   }
 };
+
 module.exports = {
   // used for Charts and Dashboard views
   chartExample1,
@@ -1104,5 +1105,6 @@ module.exports = {
   // used for Charts view
   chartExample12,
   chartExample100,
-  data1
+  data1,
+  
 };

@@ -51,13 +51,39 @@
     margin-top:5px !important;
   }
 
+  #datepickerCalendar {
+    background-position: 8rem !important;
+  }
+
+  input[type="text"], input[type="number"] {
+    width: 165px !important;
+  }
+
+  .MuiInput-root {
+    width: 340px !important;
+  }
+
 }
 
 
 @media screen and (min-width:768px) {
 
+
   .infoLegend {
     padding: 7em 1em 6em 1em !important;
+
+  input[type="text"], input[type="number"] {
+    width: 193px !important;
+  }
+
+  .MuiInput-root {
+    width: 193px !important;
+  }
+
+
+  #datepickerCalendar {
+    background-position: 10rem !important;
+
   }
 
   #FiltersInMobile {
