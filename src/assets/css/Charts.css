@@ -4,16 +4,30 @@
 
 }
 
-/* .accordion-button.collapsed,
-.accordion-item {
-  background-color: #f4f3ef !important;
-  
-} */
-
 #accordionFilterBttn {
   background-color: #f4f3ef !important;
 }
+#bttnGeneral {
 
+  border-radius: 17px !important;
+}
+
+#bttnGeneral:hover {
+  background-color: #06cbc1 !important;
+}
+
+.infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 1em 1em 1em 1em;
+  
+}
+
+.titleTextLegend {
+  font-size: 10px;
+}
 
 
 @media screen and (max-width:767px)  {
@@ -25,25 +39,20 @@
   #ReportInformationDesktop {
     display:none;
   }
+  
+  #bttnGeneral {
+    width: 90px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }  
 
-  /* .input[type="text"], input[type="number"] {
-    border-radius: 17px;
-    border: 1px solid white;
-    color: black;
-    width: 128px;
-    height: 36px;
-    padding-left: 20px;
-    font-size: 10px;
-    cursor: pointer;
-    margin-top: 2px;
-    box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
-} */
-} 
+  #textBttnGeneral {
+    font-size: 10px !important;
+    margin-top:5px !important;
+  }
 
-#bttnGeneral {
-  width: 110px !important; 
-  height: 38px !important;
 }
+
 
 @media screen and (min-width:768px) {
 
@@ -56,4 +65,86 @@
     display: none;
   }
 
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 710px !important;
+  }
+
+  .titlesInfoCard {
+    font-size: 12px !important;
+  }
+  .textInfoCard {
+    font-size: 14px !important;
+  }
+
+  #spanTextInfoCard {
+    font-size: 12px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 11px !important;
+  }
+
 }
+
+@media screen and (min-width:1024px) {
+
+
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 900px !important;
+  }
+
+  .titlesInfoCard {
+    font-size: 14px !important;
+  }
+  .textInfoCard {
+    font-size: 18px !important;
+  }
+
+  #spanTextInfoCard {
+    font-size: 18px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 14px !important;
+  }
+
+}
+
+
+
+@media screen and (min-width:1440px) {
+
+
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 1300px !important;
+    height: 190px !important;
+  }
+
+  .titlesInfoCard {
+    font-size: 20px !important;
+  }
+  .textInfoCard {
+    font-size: 24px !important;
+  }
+
+  #spanTextInfoCard {
+    font-size: 24px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 20px !important;
+  }
+
+}
+
+
+

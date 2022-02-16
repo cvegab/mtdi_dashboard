@@ -1079,8 +1079,10 @@ const MtdiTable = (props) => {
                 labelId="select-country"
                 id="select-country"
                 style={{
-                  width: 150,
+                  width: "193px",
+                  height: "46px",
                   marginLeft: "1em",
+                  backgroundColor: "white",
                   borderRadius: "17px",
                   marginBottom: "1em",
                   fontSize: "10px",
@@ -1088,7 +1090,7 @@ const MtdiTable = (props) => {
                 }}
                 value={country}
                 label="Country"
-                placeholder="&nbsp; Seleccione un país"
+                placeholder="&nbsp;&nbsp; Seleccione un país"
                 onChange={handleCountryChange}
               >
                 {/* {Array.from(new Set(data.map((obj) => obj.pais))).map(
@@ -1099,7 +1101,12 @@ const MtdiTable = (props) => {
                 {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
                   (period) => {
                     return (
-                      <MenuItem value={period.country}>
+                      <MenuItem 
+                      style={{
+                        width: "193px",
+                        height: "46px",
+                        backgroundColor: "white"
+                      }} value={period.country}>
                         {period.country}
                       </MenuItem>
                     );
@@ -1124,14 +1131,18 @@ const MtdiTable = (props) => {
                 labelId="select-tienda"
                 id="select-tienda"
                 style={{
-                  width: 160,
+                  width: "193px",
+                  height: "46px",
+                  marginLeft: "1em",
+                  backgroundColor: "white",
+                  borderRadius: "17px",
                   fontSize: "10px",
                   marginLeft: "1em",
                   marginTop: "1em",
                 }}
                 value={store}
                 label="select-canal"
-                placeholder="&nbsp; Seleccione una tienda"
+                placeholder="&nbsp;&nbsp; Seleccione una tienda"
                 onChange={handleStoreChange}
               >
                 {Array.from(
@@ -1158,12 +1169,16 @@ const MtdiTable = (props) => {
               <Select
                 labelId="select-canal"
                 id="select-canal"
-                placeholder="&nbsp; Seleccione un canal"
+                placeholder="&nbsp;&nbsp; Seleccione un canal"
                 style={{
-                  width: 150,
+                  width: "193px",
+                  height: "46px",
                   marginLeft: "1em",
+                  backgroundColor: "white",
                   fontSize: "10px",
-                  marginTop: "1em",
+                  borderRadius: "17px",
+                  marginLeft: "1em",
+                  marginTop: "1em"   
                 }}
                 value={salesChannel}
                 label="select-canal"
@@ -1238,7 +1253,7 @@ const MtdiTable = (props) => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
+                placeholderText="&nbsp; &nbsp;&nbsp; dd/mm/yy"
                 locale="es"
               />
             </label>
@@ -1264,7 +1279,7 @@ const MtdiTable = (props) => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
+                placeholderText="&nbsp; &nbsp;&nbsp; dd/mm/yy"
                 locale="es"
               />
             </label>
@@ -1278,7 +1293,7 @@ const MtdiTable = (props) => {
                 textTransform: "none",
                 letterSpacing: "1px",
                 width: "120px",
-                height: "38px",
+                height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
