@@ -9,6 +9,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+import iconG1 from "../assets/img/icons/Reports/iconG1.png";
+import iconG2 from "../assets/img/icons/Reports/iconG2.png";
+import iconG3 from "../assets/img/icons/Reports/iconG3.png";
+import iconCP1 from "../assets/img/icons/Reports/iconCP1.png";
+import iconCP2 from "../assets/img/icons/Reports/iconCP2.png";
+import iconCP3 from "../assets/img/icons/Reports/iconCP3.png";
+import iconCP4 from "../assets/img/icons/Reports/iconCP4.png";
+import iconPP1 from "../assets/img/icons/Reports/iconPP1.png";
+import iconPP2 from "../assets/img/icons/Reports/iconPP2.png";
+import iconPP3 from "../assets/img/icons/Reports/iconPP3.png";
+import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
+import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
+import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
+import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
 
 // reactstrap components
 import {
@@ -1126,99 +1140,116 @@ function Charts() {
                 Datos Generales
               </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* TOTAL INCOME */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Total Ingresos</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {/* $20.154.365 &nbsp; */}
-                      {totalIncome} &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* DISPATCH COST */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Costo Despacho</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {/* $1.253.369 &nbsp; */}
-                      {dispatchCost} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* GM */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>GM</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {/* $1.253.369 &nbsp; */}
-                      {gm} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -6%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* CONVERSION */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Conversion</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {/* $1.253.369 &nbsp; */}
-                      {conversion} &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* ORDER PROCESSING */}
-            <Col
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* TOTAL INCOME */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG1} width="30px" />
+                    &nbsp; Total Ingresos
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $20.154.365 &nbsp; */}
+                    &nbsp;&nbsp;{totalIncome} &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* DISPATCH COST */}
+              </Col>
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG2} width="30px" />
+                    &nbsp;Costo Despacho
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $1.253.369 &nbsp; */}
+                    &nbsp;&nbsp;{dispatchCost} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* GM */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG2} width="30px" />
+                    &nbsp;GM
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $1.253.369 &nbsp; */}
+                    &nbsp;&nbsp; {gm} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* CONVERSION */}
+              <Col md="3">
+                <div>
+                   <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG3} width="30px" />
+                    &nbsp;Conversión
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $1.253.369 &nbsp; */}
+                    &nbsp;&nbsp;{conversion} &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* ORDER PROCESSING */}
+          <Col
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+          
               <p
                 classname="textNameTable"
                 style={{
@@ -1233,95 +1264,112 @@ function Charts() {
                 Procesamiento de pedidos
               </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* ORDERS */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Pedidos</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {totalOrders} &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* ORDERS CANCELLED */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Cancelados</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {totalCancelledOrders} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* DTE SENT */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>DTE enviado</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {totalDte} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -6%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* DELIVERED */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Entregados</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      $1.253.369 &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* ORDER FULFILMENT */}
-            <Col
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* ORDERS */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                      <img src={iconPP1} width="30px" />
+                      &nbsp; Pedidos
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{totalOrders} &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* ORDERS CANCELLED */}
+              </Col>
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP2} width="30px" />
+                    &nbsp; Cancelados
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp; {totalCancelledOrders} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* DTE SENT */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP3} width="30px" />
+                    &nbsp; DTE enviado
+                  </p>
+
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{totalDte} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* DELIVERED */}
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP4} width="30px" />
+                    &nbsp; Entregados
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;$1.253.369 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* ORDER FULFILMENT */}
+          <Col
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+           
+             
               <p
                 classname="textNameTable"
                 style={{
@@ -1335,96 +1383,109 @@ function Charts() {
               >
                 Cumplimiento de pedidos
               </p>
-
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* IN PROCESS */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>En Proceso</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {inProcess} &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* PREPARATION */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Preparacion</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {inPreparation} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DISPATCH */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Listo para despacho</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {readyToShip} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -6%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DELIVER */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {onTheWay} &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* CLIENT EXPERIENCE */}
-            <Col
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
+             
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* IN PROCESS */}
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP1} width="30px" />
+                    &nbsp; En Proceso
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{inProcess} &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* PREPARATION */}
+              </Col>
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP2} width="30px" />
+                    &nbsp; En Preparación
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{inPreparation} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DISPATCH */}
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP3} width="30px" />
+                    &nbsp; Listo para despacho
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{readyToShip} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DELIVER */}
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP4} width="30px" />
+                    &nbsp;  Próximo a llegar
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{onTheWay} &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* CLIENT EXPERIENCE */}
+          <Col
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+          
               <p
                 classname="textNameTable"
                 style={{
@@ -1439,63 +1500,72 @@ function Charts() {
                 Experiencia del cliente
               </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* NPS */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>NPS</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      325 &nbsp;
-                      <span
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* REVIEWS */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Reviews</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      {reviews} &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* claims */}
-                <Col md="3">
-                  <div>
-                    <p style={{ color: "#C4C4C4" }}>Reclamos</p>
-                    <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                      500 &nbsp;
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -6%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DELIVER */}
-                {/* <Col md="3">
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* NPS */}
+              <Col md="3">
+                <div>
+                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconEC1} width="30px" />
+                    &nbsp; NPS
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;325 &nbsp;
+                    <span
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* REVIEWS */}
+              </Col>
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconEC2} width="30px" />
+                    &nbsp; Reviews
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;{reviews} &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* claims */}
+              <Col md="3">
+                <div>
+                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconEC3} width="30px" />
+                    &nbsp; Reclamos
+                  </p>
+                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;500 &nbsp;
+                    <span
+                      style={{
+                        color: "red",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
+                    >
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DELIVER */}
+              {/* <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
