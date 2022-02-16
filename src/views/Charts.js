@@ -23,6 +23,7 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
+import iconFilterBttn from "../assets/img/icons/Reports/iconFilters.png";
 
 // reactstrap components
 import {
@@ -912,17 +913,23 @@ function Charts() {
 
           {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
           {isMobileSizes && (
-            <Button
+            <button
+              id="bttnFilterChartMobile"
               style={{
-                backgroundColor: "#1D308E",
-                color: "white",
+                backgroundColor: "transparent",
+                color: "black",
                 width: "100%",
-                padding: "20px",
+                marginBottom: "2em",
+                border: "0",
+                fontSize: "12px",
+                fontWeight: "400"
+                
               }}
               onClick={showFiltersHandler}
-            >
-              {showFilter ? "Occultar Filtros" : "Mostrar Filtros"}
-            </Button>
+            > 
+              <img src={iconFilterBttn} width="10px" />
+              &nbsp;&nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+            </button>
           )}
           {showFilter && (
             <div id={filtersClass}>
@@ -989,6 +996,7 @@ function Charts() {
                       fontWeight: "800",
                       marginLeft: "1em",
                       marginBottom: "0px",
+                      marginTop: "1em",
                     }}
                   >
                     País
@@ -1100,29 +1108,12 @@ function Charts() {
                     fontWeight: "800",
                     marginLeft: "1em",
                     marginBottom: "6px",
-                    marginTop: "0px",
+                    marginTop: "1em",
                   }}
                 >
                   Canales De Venta
                 </h5>
-                <button
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    padding: "12px",
-                    width: "42px",
-                    height: "42px",
-                    left: "1006px",
-                    top: "405px",
-                    background: "#EDEEF6",
-                    borderRadius: "17px",
-                    border: "none",
-                  }}
-                  onClick={displaysalesChannelHandler}
-                >
-                  +
-                </button>
+            
 
                 {cR.map((item) => (
                   <div className="tag-item" key={item.value}>
@@ -1136,6 +1127,25 @@ function Charts() {
                     </button>
                   </div>
                 ))}
+
+                <button
+                  style={{
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "12px",
+                    width: "36px",
+                    height: "30px",
+                    left: "1006px",
+                    top: "405px",
+                    background: "#DFE0E8",
+                    borderRadius: "17px",
+                    border: "none",
+                  }}
+                  onClick={displaysalesChannelHandler}
+                >
+                  +
+                </button>
               </Col>
             </div>
           )}

@@ -179,7 +179,7 @@ input[type="number"] {
   background-image: url(../img/DatePickerIcon.png) !important;
   background-size: 15px 15px !important;
   background-repeat: no-repeat !important;
-  background-position: 10rem;
+  background-position: 8rem;
 }
 
 /* input[type="text"]:focus {
