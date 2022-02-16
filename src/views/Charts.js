@@ -269,6 +269,19 @@ function Charts() {
   ]);
   useEffect(() => {}, [channels]);
   useEffect(() => {
+   console.log(selectedDateFrom);
+   console.log(selectedDateTo);
+  let y = monthDiff(selectedDateFrom,selectedDateTo);
+  console.log(y);
+  }, [])
+
+  function monthDiff(dateFrom, dateTo) {
+    const x = new Date(dateFrom);
+    const y = new Date(dateTo);
+    return x.getMonth() - y.getMonth() + 
+      (12 * (x.getFullYear() - y.getFullYear()))
+   }
+  useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
       setshowFilter(false);
