@@ -95,38 +95,43 @@ const barChartData = {
     {
       label: "Ripley",
       backgroundColor: "#F10096",
-      borderRadius: "20px",
       stack: "2",
+      borderRadius:6,
       data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
     },
     {
       label: "Shopify",
       backgroundColor: "#00B6CB",
       stack: "2",
+      borderRadius:6,
       data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
     },
     {
       label: "Mercado Libre",
       backgroundColor: "#344FD5",
       stack: "2",
+      borderRadius:6,
       data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
     },
     {
       label: "CornerShop",
       backgroundColor: "#5E35B1",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Linio",
       backgroundColor: "#97D456",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Rappi",
       backgroundColor: "#FFD88C",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
@@ -134,15 +139,18 @@ const barChartData = {
       backgroundColor: "#FF6059",
      
       stack: "2",
+      borderRadius:5,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
   ],
 };
 
 const barChartOptions = {
-  legend: {
-    display: false,
-    position: "bottom"
+  plugins: {
+    legend: {
+      display: false,
+  },
+  
   },
   scales: {
     xAxes: [
@@ -1929,7 +1937,7 @@ function Charts() {
                   <br></br>
                   <CardBody>
                     <Bar data={barChartData} 
-                    // options={barChartOptions}
+                    options={barChartOptions}
                      />
                   </CardBody>
                 </Card>
@@ -2021,7 +2029,7 @@ function Charts() {
               <button
                 id="bttnSubmit"
                 style={{
-                  backgroundColor: "FFFFFF",
+                  backgroundColor: "white",
                   textAlign: "center",
                   color: "black",
                   width: "296px",
