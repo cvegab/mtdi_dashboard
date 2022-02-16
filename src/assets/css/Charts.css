@@ -70,6 +70,7 @@
 
   .infoLegend {
     padding: 7em 1em 6em 1em !important;
+  }
 
   input[type="text"], input[type="number"] {
     width: 193px !important;
