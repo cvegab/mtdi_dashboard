@@ -29,7 +29,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 
-function FilterMobileButton() {
+function FilterMobileButton(props) {
   
   const [selectedDateFrom, setselectedDateFrom] = useState("");
   
@@ -54,8 +54,8 @@ function FilterMobileButton() {
                       <Accordion.Body>
                         <Table>
                           <tbody>
-                            
-
+                           {props.children} 
+{/* 
                         <Col md="12">
                           <label>
                             <h5
@@ -134,7 +134,10 @@ function FilterMobileButton() {
                 }}
                 label="select-canal"
                 placeholder="&nbsp; Seleccione un país"
-              ></Select>
+                value={props.country}
+              >
+                 
+              </Select>
             </label>
 
             <label htmlFor="select-tienda">
@@ -190,7 +193,7 @@ function FilterMobileButton() {
                 placeholder="&nbsp; Seleccione un canal de venta"
               ></Select>
             </label>
-          </Col>           
+          </Col>            */}
                               </tbody>
                             </Table>
                             {/* </div> */}
