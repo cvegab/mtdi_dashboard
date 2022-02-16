@@ -1555,8 +1555,8 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#344FD5",
-                        backgroundColor: "#344FD5",
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
                         borderRadius: "8px",
                       }}
                     />
@@ -1636,8 +1636,8 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#FF6059",
-                        backgroundColor: "#FF6059",
+                        color: "#344FD5",
+                        backgroundColor: "#344FD5",
                         borderRadius: "8px",
                       }}
                     />
