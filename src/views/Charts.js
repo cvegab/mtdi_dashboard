@@ -90,6 +90,7 @@ const barChartData = {
     {
       label: "WooCommerce",
       backgroundColor: "#FF6059",
+     
       stack: "2",
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
