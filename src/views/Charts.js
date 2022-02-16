@@ -1,7 +1,7 @@
 import { Select, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 // react plugin used to create charts
-import { Line, Bar, Pie } from "react-chartjs-2";
+import { Line, Bar, Pie,Chart } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "../assets/css/Charts.css";
@@ -35,6 +35,31 @@ import {
 } from "variables/charts.js";
 import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
+const line='';
+const bar = '';
+const mixedChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+let mixedData = {
+  mixedChartLabels,
+  datasets: [
+    {
+      type: 'line',
+      label: 'Dataset 1',
+      borderColor: 'rgb(255, 99, 132)',
+      borderWidth: 2,
+      fill: false,
+      data:[100,200,300,400,500,600]
+    },
+    {
+      type: 'bar',
+      label: 'Dataset 2',
+      backgroundColor: 'rgb(75, 192, 192)',
+      data: [78,123,45,67,12],
+      borderColor: 'white',
+      borderWidth: 2,
+    },
+  
+  ],
+};
 const barChartData = {
   labels: [
     "January",
@@ -1525,10 +1550,12 @@ function Charts() {
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar
+                  {/* <Bar
                     data={chartExample100.data}
                     options={chartExample100.options}
-                  />
+                  /> */}
+               
+        
                 </CardBody>
                 <br></br>
                 <br></br>
