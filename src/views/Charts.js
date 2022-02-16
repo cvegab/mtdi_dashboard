@@ -35,6 +35,7 @@ import {
   Row,
   Col,
   Button,
+  Input,
 } from "reactstrap";
 
 // core components
@@ -52,23 +53,24 @@ import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
 const barChartData = {
   labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
   ],
   datasets: [
     {
       label: "Ripley",
       backgroundColor: "#F10096",
+      borderRadius: "20px",
       stack: "2",
       data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
     },
@@ -114,16 +116,17 @@ const barChartData = {
 const barChartOptions = {
   legend: {
     display: false,
+    position: "bottom"
   },
   scales: {
     xAxes: [
       {
-        stacked: true,
+        stacked: false,
       },
     ],
     yAxes: [
       {
-        stacked: true,
+        stacked: false,
       },
     ],
   },
@@ -733,6 +736,10 @@ function Charts() {
     // console.log(channelId);
     // console.log(channels);
   };
+
+
+
+
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
@@ -765,23 +772,37 @@ function Charts() {
           </p>
           <Col md="12">
             <CardBody>
-              <Button
+              <button
                 id="bttnGeneral"
+                type="button"
                 style={{
                   borderRadius: "17px",
                   backgroundColor: "#1D308E",
                   color: "white",
-                  width: "234px",
-                  height: "72px",
-                  fontWeight: "700px",
+                  width: "185px",
+                  height: "60px",
+                  border: "0",
+                  marginBottom: "1em"
+                 
                 }}
-                outline
               >
+                <p
+                id="textBttnGeneral"
+                style={{
+                  alignItems: "initial",
+                  marginLeft: "1em",
+                  display: "flex",
+                  marginTop: "10px",
+                  fontSize: "16px",
+                  textTransform: "none",
+                  fontWeight: "bold"               
+                }}>
                 <span className="btn-label">
                   <i className="nc-icon nc-layout-11" />
                 </span>
-                General
-              </Button>
+                &nbsp; General
+                 </p>
+              </button>
 
               {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
@@ -840,7 +861,7 @@ function Charts() {
                 // onChange={(date) => setfromDate(date)}
                 value={selectedDateFrom}
                 onChange={changeDateHandler}
-                style={{ width: 200, marginLeft: "1em" }}
+                style={{ width: "193px", height:"52px", marginLeft: "1em" }}
                 placeholderText="dd/mm/yy"
                 locale="es"
               />
@@ -867,7 +888,7 @@ function Charts() {
                 value={selectedDateTo}
                 onChange={changeDateToHandler}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
+                placeholderText=" &nbsp;&nbsp; dd/mm/yy"
                 locale="es"
               />
             </label>
@@ -888,8 +909,10 @@ function Charts() {
                 labelId="select-country"
                 id="select-country"
                 style={{
-                  width: 150,
+                  width: "193px",
+                  height: "46px",
                   marginLeft: "1em",
+                  backgroundColor: "white",
                   borderRadius: "17px",
                   marginBottom: "1em",
                   fontSize: "10px",
@@ -898,12 +921,18 @@ function Charts() {
                 value={country}
                 onChange={handleCountryChange}
                 label="Country"
-                placeholder="&nbsp; Seleccione un país"
+                placeholder="&nbsp;&nbsp;Seleccione un país"
               >
                 {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
                   (period) => {
                     return (
-                      <MenuItem value={period.country}>
+                      <MenuItem 
+                      style={{
+                        width: "193px",
+                        height: "46px",
+                        backgroundColor: "white"
+                      }}
+                      value={period.country}>
                         {period.country}
                       </MenuItem>
                     );
@@ -929,20 +958,30 @@ function Charts() {
                 labelId="select-tienda"
                 id="select-tienda"
                 style={{
-                  width: 160,
+                  width: "193px",
+                  height: "46px",
+                  marginLeft: "1em",
+                  backgroundColor: "white",
                   fontSize: "10px",
+                  borderRadius: "17px",
                   marginLeft: "1em",
                   marginTop: "1em",
                 }}
                 value={store}
                 onChange={handleStoreChange}
                 label="select-canal"
-                placeholder="&nbsp; Seleccione una tienda"
+                placeholder="&nbsp; &nbsp;Seleccione una tienda"
               >
                 {Array.from(
                   new Set(filteredStoreData.map((obj) => obj.store))
                 ).map((period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
+                  return <MenuItem
+                  style={{
+                    width: "193px",
+                    height: "46px",
+                    backgroundColor: "white"
+                  }}
+                   value={period}>{period}</MenuItem>;
                 })}
               </Select>
             </label>
@@ -957,7 +996,7 @@ function Charts() {
                 textTransform: "none",
                 letterSpacing: "1px",
                 width: "120px",
-                height: "38px",
+                height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
@@ -986,29 +1025,12 @@ function Charts() {
                 fontWeight: "800",
                 marginLeft: "1em",
                 marginBottom: "6px",
-                marginTop: "0px",
+                marginTop: "3em",
               }}
             >
               Canales De Venta
             </h5>
-            <button
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                padding: "12px",
-                width: "42px",
-                height: "42px",
-                left: "1006px",
-                top: "405px",
-                background: "#EDEEF6",
-                borderRadius: "17px",
-                border: "none",
-              }}
-              onClick={displaysalesChannelHandler}
-            >
-              +
-            </button>
+        
 
             {cR.map((item) => (
               <div className="tag-item" key={item.value}>
@@ -1016,12 +1038,32 @@ function Charts() {
                 <button
                   type="button"
                   className="button"
+                  style={{color:"black"}}
                   onClick={() => handleDelete(item)}
                 >
                   &times;
                 </button>
               </div>
             ))}
+
+            <button
+              style={{
+                display: "initial",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "5px",
+                width: "40px",
+                height: "30px",
+                left: "1006px",
+                top: "405px",
+                background: "#DFE0E8",
+                borderRadius: "17px",
+                border: "none",
+              }}
+              onClick={displaysalesChannelHandler}
+            >
+              +
+            </button>
           </Col>
           </div>
           <br></br>
@@ -1041,10 +1083,11 @@ function Charts() {
           {/* GENERAL DATA */}
           <div id="ReportInformationDesktop">
           <Col
+            id="colReportDatosGenerales"
             md="12"
             style={{
               backgroundColor: "white",
-              width: "1040px",
+              width: "1260px",
               height: "156px",
               left: "118px",
               top: "669px",
@@ -1069,15 +1112,25 @@ function Charts() {
               {/* TOTAL INCOME */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconG1} width="30px" />
                     &nbsp; Total Ingresos
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $20.154.365 &nbsp; */}
-                    &nbsp;&nbsp;{totalIncome} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ {totalIncome}&nbsp;
+                 {/* {(() => {
+                    let number = 1234
+                    let formatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> {formatted} </div>
+                                
+                              })()} */}
+
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
@@ -1092,15 +1145,16 @@ function Charts() {
               </Col>
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconG2} width="30px" />
                     &nbsp;Costo Despacho
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
-                    &nbsp;&nbsp;{dispatchCost} &nbsp;
+                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {dispatchCost}&nbsp;
                     <span
+                      id="spanTextInfoCard"  
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1115,15 +1169,16 @@ function Charts() {
               {/* GM */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconG2} width="30px" />
                     &nbsp;GM
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  <h5 className="textInfoCard"  style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
-                    &nbsp;&nbsp; {gm} &nbsp;
+                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {gm} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1138,15 +1193,16 @@ function Charts() {
               {/* CONVERSION */}
               <Col md="3">
                 <div>
-                   <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                   <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconG3} width="30px" />
                     &nbsp;Conversión
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
-                    &nbsp;&nbsp;{conversion} &nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
@@ -1164,6 +1220,7 @@ function Charts() {
           <br></br>
           {/* ORDER PROCESSING */}
           <Col
+            id="colReportOrderProcessing"
             md="12"
             style={{
               backgroundColor: "white",
@@ -1192,14 +1249,15 @@ function Charts() {
               {/* ORDERS */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                       <img src={iconPP1} width="30px" />
                       &nbsp; Pedidos
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{totalOrders} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
@@ -1214,14 +1272,15 @@ function Charts() {
               </Col>
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconPP2} width="30px" />
                     &nbsp; Cancelados
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp; {totalCancelledOrders} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalCancelledOrders} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1236,21 +1295,22 @@ function Charts() {
               {/* DTE SENT */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconPP3} width="30px" />
                     &nbsp; DTE enviado
                   </p>
 
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{totalDte} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
-                        color: "red",
+                        color: "#33D69F",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
                     >
-                      -6%
+                      +8%
                     </span>
                   </h5>
                 </div>
@@ -1258,20 +1318,21 @@ function Charts() {
               {/* DELIVERED */}
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconPP4} width="30px" />
                     &nbsp; Entregados
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;$1.253.369 &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
                     >
-                      +4.5%
+                      +12%
                     </span>
                   </h5>
                 </div>
@@ -1280,8 +1341,9 @@ function Charts() {
           </Col>
           <br></br>
           <br></br>
-          {/* ORDER FULFILMENT */}
+          {/* ORDER FULFILLMENT */}
           <Col
+            id="colReportOrderFulfillment"
             md="12"
             style={{
               backgroundColor: "white",
@@ -1310,13 +1372,14 @@ function Charts() {
               {/* IN PROCESS */}
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconCP1} width="30px" />
                     &nbsp; En Proceso
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{inProcess} &nbsp;
+                  <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
@@ -1331,13 +1394,14 @@ function Charts() {
               </Col>
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconCP2} width="30px" />
                     &nbsp; En Preparación
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{inPreparation} &nbsp;
+                  <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{inPreparation} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1352,13 +1416,14 @@ function Charts() {
               {/* READY TO DISPATCH */}
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p id="textListoParaDespacho" className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconCP3} width="30px" />
                     &nbsp; Listo para despacho
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{readyToShip} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1373,13 +1438,14 @@ function Charts() {
               {/* READY TO DELIVER */}
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconCP4} width="30px" />
                     &nbsp;  Próximo a llegar
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{onTheWay} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
@@ -1397,6 +1463,7 @@ function Charts() {
           <br></br>
           {/* CLIENT EXPERIENCE */}
           <Col
+            id="colReportClientExperience"
             md="12"
             style={{
               backgroundColor: "white",
@@ -1425,13 +1492,14 @@ function Charts() {
               {/* NPS */}
               <Col md="3">
                 <div>
-                  <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconEC1} width="30px" />
                     &nbsp; NPS
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;325 &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
                         fontSize: "16px",
@@ -1446,13 +1514,14 @@ function Charts() {
               </Col>
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconEC2} width="30px" />
                     &nbsp; Reviews
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;{reviews} &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1467,13 +1536,14 @@ function Charts() {
               {/* claims */}
               <Col md="3">
                 <div>
-                <p style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
                     <img src={iconEC3} width="30px" />
                     &nbsp; Reclamos
                   </p>
-                  <h5 style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;500 &nbsp;
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
                     <span
+                      id="spanTextInfoCard"
                       style={{
                         color: "red",
                         fontSize: "16px",
@@ -1517,7 +1587,7 @@ function Charts() {
 
           {/* GRAPHS */}
           <Row>
-            <Col md="8">
+            <Col md="12">
               <Card className="car-chart">
                 <CardHeader>
                   <CardTitle>
@@ -1538,7 +1608,8 @@ function Charts() {
               </Card>
             </Col>
 
-            <Col md="4">
+            <Col md="6">
+              <Row>
               <Card>
                 <CardHeader>
                   <CardTitle>
@@ -1554,29 +1625,46 @@ function Charts() {
                     height={190}
                   />
                 </CardBody>
-                <CardFooter>
+                </Card>
+              </Row>
+              </Col>
+                  
+                  <Col md="6">
+                    
+                  <Card>
                   <div className="legend">
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#344FD5",
-                        backgroundColor: "#344FD5",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Vtex
+                  <div className="infoLegend">
+                  <div>
+                      <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#344FD5",
+                          backgroundColor: "#344FD5",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;Vtex
                     {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                    <p className="card-category">${vtex}</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#FF6059",
-                        backgroundColor: "#FF6059",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Linio
-                    <p className="card-category">${linio}</p>
+                     <p className="card-category">${vtex}</p>
+                        </p>
+                        </div>
+                        <div>
+                        <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#FF6059",
+                            backgroundColor: "#FF6059",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Linio
+                        <p className="card-category">${linio}</p>
+                      </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
                     <i
                       className="fa fa-circle"
                       style={{
@@ -1585,8 +1673,13 @@ function Charts() {
                         borderRadius: "8px",
                       }}
                     />
-                    MercadoLibre
+                    &nbsp;MercadoLibre
                     <p className="card-category">${mercadoLibre}</p>
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
                     <i
                       className="fa fa-circle"
                       style={{
@@ -1595,8 +1688,12 @@ function Charts() {
                         borderRadius: "8px",
                       }}
                     />
-                    Exito
+                    &nbsp;Exito
                     <p className="card-category">${exito}</p>
+                    </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
                     <i
                       className="fa fa-circle"
                       style={{
@@ -1605,8 +1702,13 @@ function Charts() {
                         borderRadius: "8px",
                       }}
                     />
-                    Ripley
+                    &nbsp;Ripley
                     <p className="card-category">${ripley}</p>
+                    </p>
+                    </div>
+                    
+                    <div>
+                    <p className="titleTextLegend">
                     <i
                       className="fa fa-circle"
                       style={{
@@ -1615,62 +1717,90 @@ function Charts() {
                         borderRadius: "8px",
                       }}
                     />
-                    Shopify
+                    &nbsp;Shopify
                     <p className="card-category">${shopify}</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#00B6CC",
-                        backgroundColor: "#00B6CC",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Paris
-                    <p className="card-category">${paris}</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#97D456",
-                        backgroundColor: "#97D456",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Magento
-                    <p className="card-category">${magento}</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#FF6059",
-                        backgroundColor: "#FF6059",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Woo Commerce
-                    <p className="card-category">${wooCommerce}</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "yellow",
-                        backgroundColor: "yellow",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Chambas
-                    <p className="card-category">${chambas}</p>
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "red",
-                        backgroundColor: "red",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    Lista Tienda
-                    <p className="card-category">${listaTienda}</p>
-                  </div>
-                </CardFooter>
+                    </p>
+                    </div>
+                  
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#00B6CC",
+                          backgroundColor: "#00B6CC",
+                          borderRadius: "8px",
+                        }}
+                      />
+                     &nbsp; Paris
+                      <p className="card-category">${paris}</p>
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#97D456",
+                          backgroundColor: "#97D456",
+                          borderRadius: "8px",
+                        }}
+                      />
+                     &nbsp; Magento
+                      <p className="card-category">${magento}</p>
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FF6059",
+                          backgroundColor: "#FF6059",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;WooCommerce
+                      <p className="card-category">${wooCommerce}</p>
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "yellow",
+                          backgroundColor: "yellow",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;Chambas
+                      <p className="card-category">${chambas}</p>
+                    </p>
+                    </div> 
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "red",
+                          backgroundColor: "red",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;Lista Tienda
+                      <p className="card-category">${listaTienda}</p>
+                    </p>
+                    </div>
+                  </div>     
+              </div>
               </Card>
             </Col>
+            
             <Row>
               <Col md="12">
                 <Card className="card-chart">
@@ -1679,7 +1809,10 @@ function Charts() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={barChartData} options={barChartOptions} />
+                    <Bar
+                     data={barChartData} 
+                     options={barChartOptions} 
+                    />
                   </CardBody>
                 </Card>
               </Col>
@@ -1694,7 +1827,9 @@ function Charts() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={barChartData} options={barChartOptions} />
+                    <Bar data={barChartData} 
+                    // options={barChartOptions}
+                     />
                   </CardBody>
                 </Card>
               </Col>
