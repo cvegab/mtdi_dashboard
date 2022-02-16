@@ -281,8 +281,11 @@ function Charts() {
   function monthDiff(dateFrom, dateTo) {
     const x = new Date(dateFrom);
     const y = new Date(dateTo);
-    return x.getMonth() - y.getMonth() + 
-      (12 * (x.getFullYear() - y.getFullYear()))
+    var months;
+    months = (x.getFullYear() - y.getFullYear()) * 12;
+    months -= x.getMonth();
+    months += y.getMonth();
+    return months <= 0 ? 0 : months;
    }
   useEffect(() => {
     if (isMobileSizes) {
