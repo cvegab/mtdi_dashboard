@@ -104,7 +104,7 @@ function FilterMobileButton() {
                 id="datepickerCalendar"
                 type="number"
                 // onChange={(date) => setEndDate(date)}
-                style={{ width: 200, marginLeft: "1em" }}
+                style={{ width: 300, marginLeft: "1em" }}
                 placeholderText="dd/mm/yy"
                 locale="es"
               />

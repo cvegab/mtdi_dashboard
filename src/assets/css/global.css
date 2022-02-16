@@ -53,14 +53,13 @@ color: white !important;
   margin-left: 1em;
 }
 
-.MuiSelect-select.MuiSelect-select {
-  padding-right: 24px;
-  border-radius: 14px;
-  background-color: white;
-  box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
-  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);  
 
+
+.MuiSelect-select:focus {
+  background-color: white !important;
 }
+
+
 
 .MuiMenu-paper {
   border-radius: 12px !important;
@@ -90,6 +89,15 @@ color: white !important;
 
 .MuiInput-root {
   margin-right: 1em !important;
+}
+
+.MuiInputBase-root {
+  box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
+  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);  
+}
+
+.MuiSelect-select.MuiSelect-select {
+  margin-left:2em;
 }
 
 .MuiInputAdornment-positionEnd {
@@ -157,43 +165,43 @@ input[type="number"] {
   border-radius: 17px;
   border: 1px solid white;
   color: black;
-  width: 100px;
-  height: 24px;
+  width: 193px;
+  height: 46px;
   padding-left: 10px;
   font-size: 10px;
   cursor: pointer;
   margin-top:2px;
+  
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   
 }
-
-input[type="text"]::placeholder {
-  /* background-image: url(../img/DatePickerIcon.png) !important; */
+#datepickerCalendar {
+  background-image: url(../img/DatePickerIcon.png) !important;
   background-size: 15px 15px !important;
   background-repeat: no-repeat !important;
-  background-position: 4rem center !important;
+  background-position: 10rem;
 }
 
-
-input[type="text"]:focus {
+/* input[type="text"]:focus {
   outline: none;
   border: 1px solid white;
   color: black;
   margin-top:2px;
-  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  /* box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%); */
  
-}
+/* } */
 
 
 
 .MuiSelect-nativeInput {
   opacity: inherit !important;
   border: none !important;
-  /* width: 78% !important; */
-  left: 0px !important;
-  border-radius: 8px !important;
-  bottom: 5px !important;
-  padding: 2px 0px 1px 9px;
+  border-radius: 17px !important;
+  bottom: 15px !important;
+  margin-left:1em;
+  width:160px !important;
+  height:20px;
+ 
 }
 
 #logoutButton {
@@ -231,10 +239,10 @@ input[type="text"]:focus {
   margin-left: 1em;
 }
 
-.MuiSelect-select:focus {
+/* .MuiSelect-select:focus {
   border-radius: 14px !important;
   background-color: white !important;
-}
+} */
 
 .MuiTable-root {
   display: block !important;
