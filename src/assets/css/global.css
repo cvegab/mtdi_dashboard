@@ -99,7 +99,10 @@ color: white !important;
 .MuiSelect-select.MuiSelect-select {
   margin-left:2em;
   width:12px;
-  height:25px;
+  height:12px;
+}
+.MuiToolbar-root {
+  align-items: unset !important;
 }
 
 .MuiTablePagination-input {
