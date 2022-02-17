@@ -1253,7 +1253,7 @@ const MtdiTable = (props) => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="&nbsp; &nbsp;&nbsp; dd/mm/yy"
+                placeholderText="dd/mm/yy"
                 locale="es"
               />
             </label>
@@ -1279,7 +1279,7 @@ const MtdiTable = (props) => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="&nbsp; &nbsp;&nbsp; dd/mm/yy"
+                placeholderText="dd/mm/yy"
                 locale="es"
               />
             </label>
