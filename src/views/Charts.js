@@ -319,10 +319,10 @@ function Charts() {
   const [op, setop] = useState({});
   // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
   //ORDERS QUANTITY STATES
-  const [ripleyOrders, setripleyOrders] = useState(0);
-  const [vtexOrders, setvtexOrders] = useState(0);
-  const [linioOrders, setlinioOrders] = useState(0);
-  const [mercadoLibreOrders, setmercadoLibreOrders] = useState(0);
+  const [ripleyOrders,setripleyOrders] = useState(0);
+  const [vtexOrders,setvtexOrders] = useState(0);
+  const [linioOrders,setlinioOrders] = useState(0);
+  const [mercadoLibreOrders,setmercadoLibreOrders] = useState(0);
   const [exitoOrders, setexitoOrders] = useState(0);
   const [shopifyOrders, setshopifyOrders] = useState(0);
   const [parisOrders, setparisOrders] = useState(0);
@@ -376,7 +376,7 @@ function Charts() {
     ripleyOrders,
     vtexOrders,
     linioOrders,
-   mercadoLibreOrders,
+  shopifyOrders,
   ]);
   useEffect(() => {}, [channels]);
   useEffect(() => {
@@ -510,6 +510,7 @@ console.log(obj);
         let mercadoSales = obj.filter((item) => {
           return item.channel == 2;
         });
+        console.log(mercadoSales);
         let mercadoSalesArray = mercadoSales.map((item) => {
           return item.total;
         });
@@ -540,6 +541,15 @@ console.log(obj);
         let shopifySalesArray = shopifySales.map((item) => {
           return item.total;
         });
+        let shopifyOrdersquantity = shopifySales.map((item) => {
+          return item.orders_qty;
+        });
+        
+        let totalShopifyOrder = shopifyOrdersquantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        ); 
+        console.log(totalShopifyOrder);
         let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -608,7 +618,8 @@ console.log(obj);
         setripleyOrders(totalRipleyOrder);
         setvtexOrders(TotalVtexOrder);
         setlinioOrders(totalLinioOrder);
-        setmercadoLibreOrders(totalMercadoOrders);
+        setshopifyOrders(totalShopifyOrder);
+        // setmercadoLibreOrders(totalMercadoOrders);
 
        let MIXED = {
         labels: channels,
@@ -638,7 +649,7 @@ console.log(obj);
           {
             label: "Ordenes",
             yAxisID: 'Ordenes',
-            data: [vtexOrders,linioOrders,mercadoLibreOrders,500,ripleyOrders,77,7],
+            data: [vtexOrders,linioOrders,0,500,ripleyOrders,shopifyOrders,7],
             backgroundColor: "rgba(234, 87, 102, 0.6)",
             borderColor: "rgba(234, 87, 102, 0.6)",
             fill: false,
