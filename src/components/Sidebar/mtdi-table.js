@@ -1444,6 +1444,21 @@ const MtdiTable = (props) => {
                       </div>
                     ),
                   },
+                toolbar: {
+                  searchTooltip: 'Buscar',
+                  searchPlaceholder: 'Buscar',
+                  showColumnsTitle: 'Mostrar Columnas',
+                  addRemoveColumns: 'Agregar o Eliminar Columnas'
+                },
+                pagination: {
+                  labelRowsSelect: 'líneas',
+                  labelDisplayedRows: '{from}-{to} órdenes de {count}',
+                  firstTooltip: 'Primera página',
+                  previousTooltip: 'Página anterior',
+                  nextTooltip: 'Próxima página',
+                  lastTooltip: 'Última página',  
+                }
+                 
                 }}
                 title=""
                 icons={tableIcons}
@@ -1491,6 +1506,20 @@ const MtdiTable = (props) => {
                       </div>
                     ),
                   },
+                  toolbar: {
+                    searchTooltip: 'Buscar',
+                    searchPlaceholder: 'Buscar',
+                    showColumnsTitle: 'Mostrar Columnas',
+                    addRemoveColumns: 'Agregar o Eliminar Columnas'
+                  },
+                  pagination: {
+                    labelRowsSelect: 'líneas',
+                    labelDisplayedRows: '{from}-{to} órdenes de {count}',
+                    firstTooltip: 'Primera página',
+                    previousTooltip: 'Página anterior',
+                    nextTooltip: 'Próxima página',
+                    lastTooltip: 'Última página',  
+                  }
                 }}
                 key={data.id_mtdi}
                 title="Instance Table"
