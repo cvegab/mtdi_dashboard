@@ -23,7 +23,7 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
-
+const moment = require('moment');
 // reactstrap components
 import {
   Card,
@@ -156,6 +156,34 @@ const barChartOptions = {
     ],
   },
 };
+const data11 = [1, 8, 5, 9, 20, 10, 15,];
+const data2 = [2, 3, 10, 5, 5, 9, 10, 10];
+
+//Inside data props
+const dataMix = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  datasets: [
+    {
+      label: "Data1",
+      data: data11,
+      backgroundColor: "rgba(87, 121, 234, 0.6)",
+      borderColor: "rgba(87, 121, 234, 0.6)",
+      order: 1,
+    },
+  
+    {
+      label: "Total",
+      data: data2,
+      backgroundColor: "rgba(234, 87, 102, 0.6)",
+      borderColor: "rgba(234, 87, 102, 0.6)",
+      fill: false,
+      pointHoverRadius: 20,
+      pointHoverBorderWidth: 5,
+      type: "line",
+      order: 0,
+     },
+   ],
+};
 function Charts() {
   let PIE_CHART_DATA = {
     labels: [1, 2, 3, 4],
@@ -274,8 +302,21 @@ function Charts() {
   useEffect(() => {
    console.log(selectedDateFrom);
    console.log(selectedDateTo);
-  let y = monthDiff(selectedDateFrom,selectedDateTo);
-  console.log(y);
+   var startDate = moment(selectedDateFrom);
+var endDate = moment(selectedDateTo);
+
+var dates = [];
+endDate.subtract(1, "month"); //Substract one month to exclude endDate itself
+
+var month = moment(startDate); //clone the startDate
+while( month < endDate ) {
+    month.add(1, "month");
+    dates.push(month.format('YYYY-m'));
+}
+
+console.log(dates);
+ // let y = monthDiff(selectedDateFrom,selectedDateTo);
+ 
   }, [])
 
   function monthDiff(dateFrom, dateTo) {
@@ -1688,11 +1729,10 @@ function Charts() {
                 <CardBody>
                   <br></br>
                   <br></br>
-                  {/* <Bar
-                    data={chartExample100.data}
-                    options={chartExample100.options}
-                  /> */}
-               
+                  <Bar
+          data={dataMix}
+          options={barChartOptions}/>
+                
         
                 </CardBody>
                 <br></br>
