@@ -98,6 +98,12 @@ color: white !important;
 
 .MuiSelect-select.MuiSelect-select {
   margin-left:2em;
+  width:12px;
+  height:25px;
+}
+
+.MuiTablePagination-input {
+  border-radius: 22px !important;
 }
 
 .MuiInputAdornment-positionEnd {
@@ -179,18 +185,18 @@ input[type="number"] {
   background-image: url(../img/DatePickerIcon.png) !important;
   background-size: 15px 15px !important;
   background-repeat: no-repeat !important;
-  background-position: 8rem;
+  background-position: 10rem;
 }
 
-/* input[type="text"]:focus {
-  outline: none;
-  border: 1px solid white;
-  color: black;
-  margin-top:2px;
-  /* box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%); */
- 
-/* } */
+.accordion-item:first-of-type {
+  border-top-left-radius: 4rem !important;
+  border-top-right-radius: 4rem !important;
+}
 
+.accordion-item:last-of-type {
+  border-bottom-right-radius: 3rem !important;
+  border-bottom-left-radius: 3rem !important;
+}
 
 
 .MuiSelect-nativeInput {
