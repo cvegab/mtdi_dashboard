@@ -137,7 +137,20 @@ const barChartData = {
     },
   ],
 };
-
+let options = {
+  scales: {
+    x:{
+stacked:false,
+    },
+      y: {
+          max: 50000000,
+          min: 0,
+          ticks: {
+              stepSize: 10000000
+          }
+      }
+  }
+};
 const barChartOptions = {
   legend: {
     display: false,
@@ -205,7 +218,32 @@ function Charts() {
       },
     ],
   };
+  let MIXED_DATA = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+    datasets: [
+      {
+        label: "Data1",
+        data: data11,
+        backgroundColor: "rgba(87, 121, 234, 0.6)",
+        borderColor: "rgba(87, 121, 234, 0.6)",
+        order: 1,
+      },
+    
+      {
+        label: "Total",
+        data: data2,
+        backgroundColor: "rgba(234, 87, 102, 0.6)",
+        borderColor: "rgba(234, 87, 102, 0.6)",
+        fill: false,
+        pointHoverRadius: 20,
+        pointHoverBorderWidth: 5,
+        type: "line",
+        order: 0,
+       },
+     ],
+  };
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
+  const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
 
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
@@ -274,7 +312,8 @@ function Charts() {
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
-    setpieChart();
+   // setpieChart();
+    setMixedChart();
   }, []);
   useEffect(() => {
     displaysalesChannelHandler();
@@ -370,7 +409,7 @@ console.log(dates);
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-
+console.log(obj);
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -493,7 +532,44 @@ console.log(dates);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
         console.log(exitoSales);
-
+       console.log(channels);
+       let MIXED = {
+        labels: channels,
+        datasets: [
+          {
+            label: "Ventas",
+            data: [
+              vtex,
+              linio,
+              mercadoLibre,
+              exito,
+              ripley,
+              shopify,
+              paris,
+              magento,
+              wooCommerce,
+              chambas,
+              listaTienda,
+            ],
+            backgroundColor: "rgba(87, 121, 234, 0.6)",
+            borderColor: "rgba(87, 121, 234, 0.6)",
+            order: 1,
+          },
+        
+          {
+            label: "Total",
+            data: data2,
+            backgroundColor: "rgba(234, 87, 102, 0.6)",
+            borderColor: "rgba(234, 87, 102, 0.6)",
+            fill: false,
+            pointHoverRadius: 20,
+            pointHoverBorderWidth: 5,
+            type: "line",
+            order: 0,
+           },
+         ],
+      };
+      setmixedChartData(MIXED);
         let PIE = {
           labels: [
             "Vtex",
@@ -760,6 +836,30 @@ console.log(dates);
       ],
     });
   };
+  const setMixedChart = ()=>{
+    setmixedChartData({
+     labels: channels,
+     datasets: [
+      {
+        type: 'line',
+        label: 'Dataset 1',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 2,
+        fill: false,
+        data:[100,200,300,400,500,600]
+      },
+      {
+        type: 'bar',
+        label: 'Dataset 2',
+        backgroundColor: 'rgb(75, 192, 192)',
+        data: [78,123,45,67,12],
+        borderColor: 'white',
+        borderWidth: 2,
+      },
+    
+    ],
+    })
+  }
   const changeDateHandler = (event) => {
     const selectedDate = event.toISOString().slice(0, 10);
 
@@ -1730,8 +1830,8 @@ console.log(dates);
                   <br></br>
                   <br></br>
                   <Bar
-          data={dataMix}
-          options={barChartOptions}/>
+          data={mixedChartData}
+          options={options}/>
                 
         
                 </CardBody>
