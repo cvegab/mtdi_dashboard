@@ -59,6 +59,7 @@ let mixedData = {
     {
       type: 'line',
       label: 'Dataset 1',
+      yAxisID: 'A',
       borderColor: 'rgb(255, 99, 132)',
       borderWidth: 2,
       fill: false,
@@ -67,6 +68,7 @@ let mixedData = {
     {
       type: 'bar',
       label: 'Dataset 2',
+      yAxisID: 'A',
       backgroundColor: 'rgb(75, 192, 192)',
       data: [78,123,45,67,12],
       borderColor: 'white',
@@ -137,20 +139,40 @@ const barChartData = {
     },
   ],
 };
-let options = {
-  scales: {
-    x:{
-stacked:false,
-    },
-      y: {
-          max: 50000000,
-          min: 0,
-          ticks: {
-              stepSize: 10000000
-          }
-      }
+// let options = {
+//   scales: {
+//     x:{
+// stacked:false,
+//     },
+//       y: {
+//           max: 50000000,
+//           min: 0,
+//           position: 'left',
+//           ticks: {
+//               stepSize: 10000000
+//           }
+//       }
+//   }
+// };
+let options12 = {
+  
+    scales: {
+      yAxes: [{
+        id: 'A',
+        type: 'linear',
+        position: 'right',
+      }, {
+        id: 'B',
+        type: 'linear',
+        position: 'right',
+        ticks: {
+          max: 100,
+          min: 0
+        }
+      }]
+    }
   }
-};
+
 const barChartOptions = {
   legend: {
     display: false,
@@ -170,7 +192,7 @@ const barChartOptions = {
   },
 };
 const data11 = [1, 8, 5, 9, 20, 10, 15,];
-const data2 = [2, 3, 10, 5, 5, 9, 10, 10];
+const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
 //Inside data props
 const dataMix = {
@@ -223,6 +245,7 @@ function Charts() {
     datasets: [
       {
         label: "Data1",
+        yAxisID: 'A',
         data: data11,
         backgroundColor: "rgba(87, 121, 234, 0.6)",
         borderColor: "rgba(87, 121, 234, 0.6)",
@@ -231,6 +254,7 @@ function Charts() {
     
       {
         label: "Total",
+        yAxisID: 'A',
         data: data2,
         backgroundColor: "rgba(234, 87, 102, 0.6)",
         borderColor: "rgba(234, 87, 102, 0.6)",
@@ -292,7 +316,20 @@ function Charts() {
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
+  const [op, setop] = useState({});
   // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
+  //ORDERS QUANTITY STATES
+  const [ripleyOrders, setripleyOrders] = useState(0);
+  const [vtexOrders, setvtexOrders] = useState(0);
+  const [linioOrders, setlinioOrders] = useState(0);
+  const [mercadoLibreOrders, setmercadoLibreOrders] = useState(0);
+  const [exitoOrders, setexitoOrders] = useState(0);
+  const [shopifyOrders, setshopifyOrders] = useState(0);
+  const [parisOrders, setparisOrders] = useState(0);
+  const [magentoOrders, setmagentoOrders] = useState(0);
+  const [wooCommerceOrders, setwooCommerceOrders] = useState(0);
+  const [chambasOrders, setchambasOrders] = useState(0);
+  const [listaTiendaOrders, setlistaTiendaOrders] = useState(0);
   useEffect(() => {
     // set initial value
     const mediaWatcher = window.matchMedia("(max-width: 767px)");
@@ -336,6 +373,10 @@ function Charts() {
     wooCommerce,
     chambas,
     listaTienda,
+    ripleyOrders,
+    vtexOrders,
+    linioOrders,
+   mercadoLibreOrders,
   ]);
   useEffect(() => {}, [channels]);
   useEffect(() => {
@@ -416,6 +457,14 @@ console.log(obj);
         let ripleySalesArray = ripleySales.map((item) => {
           return item.total;
         });
+        let ripleyOrder = ripleySales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalRipleyOrder = ripleyOrder.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalRipleyOrder);
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -423,9 +472,18 @@ console.log(obj);
         let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
+        
         let vtexSalesArray = vtexSales.map((item) => {
           return item.total;
         });
+        let vtexrders = vtexSales.map((item) => {
+          return item.orders_qty;
+        });
+        let TotalVtexOrder = vtexrders.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(TotalVtexOrder);
         let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -433,9 +491,18 @@ console.log(obj);
         let linioSales = obj.filter((item) => {
           return item.channel == 5;
         });
+      
         let linioSalesArray = linioSales.map((item) => {
           return item.total;
         });
+        let linioOrderQuantity = linioSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalLinioOrder = linioOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalLinioOrder);
         let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -446,6 +513,13 @@ console.log(obj);
         let mercadoSalesArray = mercadoSales.map((item) => {
           return item.total;
         });
+        let mercadoOrders = mercadoSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalMercadoOrders = mercadoOrders.map((item) => {
+          return item.orders_qty;
+        });
+        console.log(totalMercadoOrders);
         let totalmercadoSales = mercadoSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -531,13 +605,17 @@ console.log(obj);
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
-        console.log(exitoSales);
-       console.log(channels);
+        setripleyOrders(totalRipleyOrder);
+        setvtexOrders(TotalVtexOrder);
+        setlinioOrders(totalLinioOrder);
+        setmercadoLibreOrders(totalMercadoOrders);
+
        let MIXED = {
         labels: channels,
         datasets: [
           {
             label: "Ventas",
+            
             data: [
               vtex,
               linio,
@@ -554,11 +632,13 @@ console.log(obj);
             backgroundColor: "rgba(87, 121, 234, 0.6)",
             borderColor: "rgba(87, 121, 234, 0.6)",
             order: 1,
+           
           },
         
           {
-            label: "Total",
-            data: data2,
+            label: "Ordenes",
+            yAxisID: 'Ordenes',
+            data: [vtexOrders,linioOrders,mercadoLibreOrders,500,ripleyOrders,77,7],
             backgroundColor: "rgba(234, 87, 102, 0.6)",
             borderColor: "rgba(234, 87, 102, 0.6)",
             fill: false,
@@ -568,6 +648,23 @@ console.log(obj);
             order: 0,
            },
          ],
+         options: {
+          scales: {
+            yAxes: [{
+              id: 'Ordenes',
+              type: 'linear',
+              position: 'left',
+            }, {
+              id: 'B',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                max: 1,
+                min: 0
+              }
+            }]
+          }
+        }
       };
       setmixedChartData(MIXED);
         let PIE = {
@@ -1831,7 +1928,7 @@ console.log(obj);
                   <br></br>
                   <Bar
           data={mixedChartData}
-          options={options}/>
+          />
                 
         
                 </CardBody>
