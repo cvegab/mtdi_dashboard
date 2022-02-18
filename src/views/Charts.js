@@ -507,10 +507,11 @@ function Charts() {
 return item.channel === 5
       });
       console.log(ch5);
-    
+      let res1 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
+      
         console.log(stackedDatevalues.length);
-        let res = [];
+       
 
         let ripleyMonthlySales = obj.filter((item) => {
        
@@ -524,10 +525,19 @@ return item.channel === 5
           var month = parts[1];
           var year = parts[0];
           let result = [];
-        return item.channel == 5 && month===splitMonth && year===splitYear;
+         return item.channel == 5 && month===splitMonth && year===splitYear;
+      // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
+      // return res1;
         });
-        console.log(ripleyMonthlySales);
+        for(let j=0;j<=stackedDatevalues.length;j++){
+          res1.push(ripleyMonthlySales)
+          
+        }
+      //  console.log(res1);
+ 
       }
+      console.log('hi');
+      console.log(res1);
         let amoeba = obj.filter((item)=>{
          let dateTobeCompared =  '2021-09-01 ';
           
@@ -540,7 +550,7 @@ return item.channel === 5
           var year = parts[0];
           return item.channel == 5 && month===splitMonth && year===splitYear;
         })
-        console.log(amoeba);
+        // console.log(amoeba);
        
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
@@ -974,6 +984,7 @@ return item.channel === 5
         setreviews(sumOfreview);
         console.log(stackedChartData.labels);
         console.log(stackedDateLabel);
+        console.log(res1);
         setstackedChartData({
           labels: stackedDateLabel,
           datasets: stackedChartData.datasets,
