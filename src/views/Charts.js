@@ -277,7 +277,9 @@ function Charts() {
   };
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
-
+  const [stackedChartData, setstackedChartData] = useState(barChartData);
+  const [stackedDateLabel, setstackedDateLabel] = useState([]);
+  const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
@@ -391,26 +393,61 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
+    stackedDateLabel,
   ]);
   useEffect(() => {}, [channels]);
   useEffect(() => {
     console.log(selectedDateFrom);
     console.log(selectedDateTo);
+
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
 
-    var dates = [];
-    endDate.subtract(1, "month"); //Substract one month to exclude endDate itself
+    var result = [];
 
-    var month = moment(startDate); //clone the startDate
-    while (month < endDate) {
-      month.add(1, "month");
-      dates.push(month.format("YYYY-m"));
+    if (endDate.isBefore(startDate)) {
+      throw "End date must be greated than start date.";
     }
 
-    console.log(dates);
+    while (startDate.isBefore(endDate)) {
+      result.push(startDate.format("YYYY-MM-01"));
+      startDate.add(1, "month");
+    }
+    console.log(result);
+    setstackedDatevalues(result);
+    const MONTHS = [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "septiembre",
+      "Octubre",
+      "Noviembre",
+      "Deciembre",
+    ];
+
+    const date = new Date();
+    console.log(date);
+    const x = result.map((item) => {
+      let d = new Date(item);
+      const dateString = `${d.getDate()}-${
+        MONTHS[d.getMonth()]
+      }-${d.getFullYear()}`;
+      return dateString;
+    });
+    console.log(x);
+    setstackedDateLabel(x);
+    const dateString = `${date.getDate()}-${
+      MONTHS[date.getMonth()]
+    }-${date.getFullYear()}`;
+
+    console.log(dateString);
     // let y = monthDiff(selectedDateFrom,selectedDateTo);
-  }, []);
+  }, [selectedDateFrom, selectedDateTo]);
 
   function monthDiff(dateFrom, dateTo) {
     const x = new Date(dateFrom);
@@ -464,6 +501,47 @@ function Charts() {
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
+       
+        console.log(stackedDatevalues);
+      const ch5 = obj.filter((item)=>{
+return item.channel === 5
+      });
+      console.log(ch5);
+    
+      for(let i = 0;i<=stackedDatevalues.length-1;i++){
+        console.log(stackedDatevalues.length);
+        let res = [];
+
+        let ripleyMonthlySales = obj.filter((item) => {
+       
+          let dateTobeCompared = stackedDatevalues[i];
+          
+          const splitDateCompared = dateTobeCompared.split(/[- :]/);
+          const splitMonth = splitDateCompared[1];
+          const splitYear = splitDateCompared[0];
+          const dateTime = item.date_created;
+          const parts = dateTime.split(/[- :]/);
+          var month = parts[1];
+          var year = parts[0];
+          let result = [];
+        return item.channel == 5 && month===splitMonth && year===splitYear;
+        });
+        console.log(ripleyMonthlySales);
+      }
+        let amoeba = obj.filter((item)=>{
+         let dateTobeCompared =  '2021-09-01 ';
+          
+          const splitDateCompared = dateTobeCompared.split(/[- :]/);
+          const splitMonth = splitDateCompared[1];
+          const splitYear = splitDateCompared[0];
+          const dateTime = item.date_created;
+          const parts = dateTime.split(/[- :]/);
+          var month = parts[1];
+          var year = parts[0];
+          return item.channel == 5 && month===splitMonth && year===splitYear;
+        })
+        console.log(amoeba);
+       
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -524,7 +602,7 @@ function Charts() {
           return item.channel == 2;
         });
         console.log(mercadoSales);
-        if(mercadoSales.length === 0){
+        if (mercadoSales.length === 0) {
           setmercadoLibreOrders(0);
           setmercadoLibre(0);
         }
@@ -545,7 +623,7 @@ function Charts() {
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
-        if(exitoSales.length===0){
+        if (exitoSales.length === 0) {
           setexitoOrders(0);
           setexito(0);
         }
@@ -578,10 +656,10 @@ function Charts() {
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
-       if(parisSales.length === 0){
-         setparisOrders(0);
-         setparis(0);
-       }
+        if (parisSales.length === 0) {
+          setparisOrders(0);
+          setparis(0);
+        }
         let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
@@ -595,7 +673,7 @@ function Charts() {
         let magentoSalesOrders = magentoSales.map((item) => {
           return item.orders_qty;
         });
-        let totalMagentoOrders =  magentoSalesOrders.reduce(
+        let totalMagentoOrders = magentoSalesOrders.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
@@ -647,7 +725,7 @@ function Charts() {
           return item.channel == 8;
         });
         console.log(ListaSales);
-        if(ListaSales.length === 0){
+        if (ListaSales.length === 0) {
           setlistaTiendaOrders(0);
           setlistaTienda(0);
         }
@@ -658,7 +736,7 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalListaSales);
+
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -673,7 +751,7 @@ function Charts() {
         setvtexOrders(TotalVtexOrder);
         setlinioOrders(totalLinioOrder);
         setshopifyOrders(totalShopifyOrder);
-       setmercadoLibreOrders(totalMercadoOrders);
+        setmercadoLibreOrders(totalMercadoOrders);
         setchambasOrders(totalChambasOrders);
         setmagentoOrders(totalMagentoOrders);
         setwooCommerceOrders(totalwooCommerceOrders);
@@ -715,7 +793,7 @@ function Charts() {
                 magentoOrders,
                 wooCommerceOrders,
                 chambasOrders,
-                listaTiendaOrders
+                listaTiendaOrders,
               ],
               backgroundColor: "rgba(234, 87, 102, 0.6)",
               borderColor: "rgba(234, 87, 102, 0.6)",
@@ -849,8 +927,6 @@ function Charts() {
           0
         );
 
-        //  console.log(totalDispatchCostArray);
-        // console.log(sumOfTotalDispatch);
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -896,25 +972,12 @@ function Charts() {
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-        // console.log(obj[0].total);
-        // //NEW API CODE
-        // settotalIncome(obj[0].total);
-        // setdispatchCost(obj[0].shipping_total);
-        // setgm(obj[0].gm);
-        // setConversion(obj[0].conversion);
-        //OLD API CODE
-        // console.log(fromDate.toISOString().slice(0, 10));
-        // const d = fromDate.toISOString().slice(0, 10);
-        // var z = obj[0].filter((item) => {
-        //   return item.date_created === "2022-01-03";
-        // });
-        // console.log(z);
-        // if (z === undefined) {
-        //   settotalIncome(0);
-        //   setdispatchCost(0);
-        // }
-        // settotalIncome(z[0].total);
-        // setdispatchCost(z[0].shipping_total);
+        console.log(stackedChartData.labels);
+        console.log(stackedDateLabel);
+        setstackedChartData({
+          labels: stackedDateLabel,
+          datasets: stackedChartData.datasets,
+        });
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -2300,7 +2363,7 @@ function Charts() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={barChartData} options={barChartOptions} />
+                    <Bar data={stackedChartData} options={barChartOptions} />
                   </CardBody>
                 </Card>
               </Col>
