@@ -1,7 +1,7 @@
 import { Select, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 // react plugin used to create charts
-import { Line, Bar, Pie,Chart } from "react-chartjs-2";
+import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "../assets/css/Charts.css";
@@ -23,7 +23,7 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
-const moment = require('moment');
+const moment = require("moment");
 // reactstrap components
 import {
   Card,
@@ -50,31 +50,38 @@ import {
 } from "variables/charts.js";
 import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
-const line='';
-const bar = '';
-const mixedChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const line = "";
+const bar = "";
+const mixedChartLabels = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+];
 let mixedData = {
   mixedChartLabels,
   datasets: [
     {
-      type: 'line',
-      label: 'Dataset 1',
-      yAxisID: 'A',
-      borderColor: 'rgb(255, 99, 132)',
+      type: "line",
+      label: "Dataset 1",
+      yAxisID: "A",
+      borderColor: "rgb(255, 99, 132)",
       borderWidth: 2,
       fill: false,
-      data:[100,200,300,400,500,600]
+      data: [100, 200, 300, 400, 500, 600],
     },
     {
-      type: 'bar',
-      label: 'Dataset 2',
-      yAxisID: 'A',
-      backgroundColor: 'rgb(75, 192, 192)',
-      data: [78,123,45,67,12],
-      borderColor: 'white',
+      type: "bar",
+      label: "Dataset 2",
+      yAxisID: "A",
+      backgroundColor: "rgb(75, 192, 192)",
+      data: [78, 123, 45, 67, 12],
+      borderColor: "white",
       borderWidth: 2,
     },
-  
   ],
 };
 const barChartData = {
@@ -133,7 +140,7 @@ const barChartData = {
     {
       label: "WooCommerce",
       backgroundColor: "#FF6059",
-     
+
       stack: "2",
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
@@ -155,28 +162,30 @@ const barChartData = {
 //   }
 // };
 let options12 = {
-  
-    scales: {
-      yAxes: [{
-        id: 'A',
-        type: 'linear',
-        position: 'right',
-      }, {
-        id: 'B',
-        type: 'linear',
-        position: 'right',
+  scales: {
+    yAxes: [
+      {
+        id: "A",
+        type: "linear",
+        position: "right",
+      },
+      {
+        id: "B",
+        type: "linear",
+        position: "right",
         ticks: {
           max: 100,
-          min: 0
-        }
-      }]
-    }
-  }
+          min: 0,
+        },
+      },
+    ],
+  },
+};
 
 const barChartOptions = {
   legend: {
     display: false,
-    position: "bottom"
+    position: "bottom",
   },
   scales: {
     xAxes: [
@@ -191,7 +200,7 @@ const barChartOptions = {
     ],
   },
 };
-const data11 = [1, 8, 5, 9, 20, 10, 15,];
+const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
 //Inside data props
@@ -205,7 +214,7 @@ const dataMix = {
       borderColor: "rgba(87, 121, 234, 0.6)",
       order: 1,
     },
-  
+
     {
       label: "Total",
       data: data2,
@@ -216,8 +225,8 @@ const dataMix = {
       pointHoverBorderWidth: 5,
       type: "line",
       order: 0,
-     },
-   ],
+    },
+  ],
 };
 function Charts() {
   let PIE_CHART_DATA = {
@@ -245,16 +254,16 @@ function Charts() {
     datasets: [
       {
         label: "Data1",
-        yAxisID: 'A',
+        yAxisID: "A",
         data: data11,
         backgroundColor: "rgba(87, 121, 234, 0.6)",
         borderColor: "rgba(87, 121, 234, 0.6)",
         order: 1,
       },
-    
+
       {
         label: "Total",
-        yAxisID: 'A',
+        yAxisID: "A",
         data: data2,
         backgroundColor: "rgba(234, 87, 102, 0.6)",
         borderColor: "rgba(234, 87, 102, 0.6)",
@@ -263,8 +272,8 @@ function Charts() {
         pointHoverBorderWidth: 5,
         type: "line",
         order: 0,
-       },
-     ],
+      },
+    ],
   };
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
@@ -319,10 +328,10 @@ function Charts() {
   const [op, setop] = useState({});
   // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
   //ORDERS QUANTITY STATES
-  const [ripleyOrders,setripleyOrders] = useState(0);
-  const [vtexOrders,setvtexOrders] = useState(0);
-  const [linioOrders,setlinioOrders] = useState(0);
-  const [mercadoLibreOrders,setmercadoLibreOrders] = useState(0);
+  const [ripleyOrders, setripleyOrders] = useState(0);
+  const [vtexOrders, setvtexOrders] = useState(0);
+  const [linioOrders, setlinioOrders] = useState(0);
+  const [mercadoLibreOrders, setmercadoLibreOrders] = useState(0);
   const [exitoOrders, setexitoOrders] = useState(0);
   const [shopifyOrders, setshopifyOrders] = useState(0);
   const [parisOrders, setparisOrders] = useState(0);
@@ -349,7 +358,7 @@ function Charts() {
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
-   // setpieChart();
+    // setpieChart();
     setMixedChart();
   }, []);
   useEffect(() => {
@@ -376,28 +385,32 @@ function Charts() {
     ripleyOrders,
     vtexOrders,
     linioOrders,
-  shopifyOrders,
+    shopifyOrders,
+    chambasOrders,
+    magentoOrders,
+    wooCommerceOrders,
+    parisOrders,
+    exitoOrders,
   ]);
   useEffect(() => {}, [channels]);
   useEffect(() => {
-   console.log(selectedDateFrom);
-   console.log(selectedDateTo);
-   var startDate = moment(selectedDateFrom);
-var endDate = moment(selectedDateTo);
+    console.log(selectedDateFrom);
+    console.log(selectedDateTo);
+    var startDate = moment(selectedDateFrom);
+    var endDate = moment(selectedDateTo);
 
-var dates = [];
-endDate.subtract(1, "month"); //Substract one month to exclude endDate itself
+    var dates = [];
+    endDate.subtract(1, "month"); //Substract one month to exclude endDate itself
 
-var month = moment(startDate); //clone the startDate
-while( month < endDate ) {
-    month.add(1, "month");
-    dates.push(month.format('YYYY-m'));
-}
+    var month = moment(startDate); //clone the startDate
+    while (month < endDate) {
+      month.add(1, "month");
+      dates.push(month.format("YYYY-m"));
+    }
 
-console.log(dates);
- // let y = monthDiff(selectedDateFrom,selectedDateTo);
- 
-  }, [])
+    console.log(dates);
+    // let y = monthDiff(selectedDateFrom,selectedDateTo);
+  }, []);
 
   function monthDiff(dateFrom, dateTo) {
     const x = new Date(dateFrom);
@@ -407,7 +420,7 @@ console.log(dates);
     months -= x.getMonth();
     months += y.getMonth();
     return months <= 0 ? 0 : months;
-   }
+  }
   useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
@@ -450,7 +463,7 @@ console.log(dates);
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-console.log(obj);
+        console.log(obj);
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -472,7 +485,7 @@ console.log(obj);
         let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
-        
+
         let vtexSalesArray = vtexSales.map((item) => {
           return item.total;
         });
@@ -491,7 +504,7 @@ console.log(obj);
         let linioSales = obj.filter((item) => {
           return item.channel == 5;
         });
-      
+
         let linioSalesArray = linioSales.map((item) => {
           return item.total;
         });
@@ -511,6 +524,10 @@ console.log(obj);
           return item.channel == 2;
         });
         console.log(mercadoSales);
+        if(mercadoSales.length === 0){
+          setmercadoLibreOrders(0);
+          setmercadoLibre(0);
+        }
         let mercadoSalesArray = mercadoSales.map((item) => {
           return item.total;
         });
@@ -528,6 +545,10 @@ console.log(obj);
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
+        if(exitoSales.length===0){
+          setexitoOrders(0);
+          setexito(0);
+        }
         let exitoSalesArray = exitoSales.map((item) => {
           return item.total;
         });
@@ -544,11 +565,11 @@ console.log(obj);
         let shopifyOrdersquantity = shopifySales.map((item) => {
           return item.orders_qty;
         });
-        
+
         let totalShopifyOrder = shopifyOrdersquantity.reduce(
           (partialSum, a) => partialSum + a,
           0
-        ); 
+        );
         console.log(totalShopifyOrder);
         let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -557,6 +578,10 @@ console.log(obj);
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
+       if(parisSales.length === 0){
+         setparisOrders(0);
+         setparis(0);
+       }
         let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
@@ -567,6 +592,14 @@ console.log(obj);
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
+        let magentoSalesOrders = magentoSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalMagentoOrders =  magentoSalesOrders.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalMagentoOrders);
         let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
@@ -577,6 +610,14 @@ console.log(obj);
         let wooCommerceSales = obj.filter((item) => {
           return item.channel == 3;
         });
+        let wooCommerceOrdersQuantity = wooCommerceSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalwooCommerceOrders = wooCommerceOrdersQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalwooCommerceOrders);
         let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
@@ -590,6 +631,14 @@ console.log(obj);
         let chambasArray = chambasSales.map((item) => {
           return item.total;
         });
+        let chambasOrderQuantity = chambasSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalChambasOrders = chambasOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalChambasOrders);
         let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -597,6 +646,11 @@ console.log(obj);
         let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
+        console.log(ListaSales);
+        if(ListaSales.length === 0){
+          setlistaTiendaOrders(0);
+          setlistaTienda(0);
+        }
         let ListaArray = ListaSales.map((item) => {
           return item.total;
         });
@@ -619,65 +673,81 @@ console.log(obj);
         setvtexOrders(TotalVtexOrder);
         setlinioOrders(totalLinioOrder);
         setshopifyOrders(totalShopifyOrder);
-        // setmercadoLibreOrders(totalMercadoOrders);
+       setmercadoLibreOrders(totalMercadoOrders);
+        setchambasOrders(totalChambasOrders);
+        setmagentoOrders(totalMagentoOrders);
+        setwooCommerceOrders(totalwooCommerceOrders);
+        let MIXED = {
+          labels: channels,
+          datasets: [
+            {
+              label: "Ventas",
 
-       let MIXED = {
-        labels: channels,
-        datasets: [
-          {
-            label: "Ventas",
-            
-            data: [
-              vtex,
-              linio,
-              mercadoLibre,
-              exito,
-              ripley,
-              shopify,
-              paris,
-              magento,
-              wooCommerce,
-              chambas,
-              listaTienda,
-            ],
-            backgroundColor: "rgba(87, 121, 234, 0.6)",
-            borderColor: "rgba(87, 121, 234, 0.6)",
-            order: 1,
-           
+              data: [
+                vtex,
+                linio,
+                mercadoLibre,
+                exito,
+                ripley,
+                shopify,
+                paris,
+                magento,
+                wooCommerce,
+                chambas,
+                listaTienda,
+              ],
+              backgroundColor: "rgba(87, 121, 234, 0.6)",
+              borderColor: "rgba(87, 121, 234, 0.6)",
+              order: 1,
+            },
+
+            {
+              label: "Ordenes",
+              yAxisID: "Ordenes",
+              data: [
+                vtexOrders,
+                linioOrders,
+                mercadoLibreOrders,
+                exitoOrders,
+                ripleyOrders,
+                shopifyOrders,
+                parisOrders,
+                magentoOrders,
+                wooCommerceOrders,
+                chambasOrders,
+                listaTiendaOrders
+              ],
+              backgroundColor: "rgba(234, 87, 102, 0.6)",
+              borderColor: "rgba(234, 87, 102, 0.6)",
+              fill: false,
+              pointHoverRadius: 20,
+              pointHoverBorderWidth: 5,
+              type: "line",
+              order: 0,
+            },
+          ],
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  id: "Ordenes",
+                  type: "linear",
+                  position: "left",
+                },
+                {
+                  id: "B",
+                  type: "linear",
+                  position: "right",
+                  ticks: {
+                    max: 1,
+                    min: 0,
+                  },
+                },
+              ],
+            },
           },
-        
-          {
-            label: "Ordenes",
-            yAxisID: 'Ordenes',
-            data: [vtexOrders,linioOrders,0,500,ripleyOrders,shopifyOrders,7],
-            backgroundColor: "rgba(234, 87, 102, 0.6)",
-            borderColor: "rgba(234, 87, 102, 0.6)",
-            fill: false,
-            pointHoverRadius: 20,
-            pointHoverBorderWidth: 5,
-            type: "line",
-            order: 0,
-           },
-         ],
-         options: {
-          scales: {
-            yAxes: [{
-              id: 'Ordenes',
-              type: 'linear',
-              position: 'left',
-            }, {
-              id: 'B',
-              type: 'linear',
-              position: 'right',
-              ticks: {
-                max: 1,
-                min: 0
-              }
-            }]
-          }
-        }
-      };
-      setmixedChartData(MIXED);
+        };
+        setmixedChartData(MIXED);
         let PIE = {
           labels: [
             "Vtex",
@@ -944,30 +1014,29 @@ console.log(obj);
       ],
     });
   };
-  const setMixedChart = ()=>{
+  const setMixedChart = () => {
     setmixedChartData({
-     labels: channels,
-     datasets: [
-      {
-        type: 'line',
-        label: 'Dataset 1',
-        borderColor: 'rgb(255, 99, 132)',
-        borderWidth: 2,
-        fill: false,
-        data:[100,200,300,400,500,600]
-      },
-      {
-        type: 'bar',
-        label: 'Dataset 2',
-        backgroundColor: 'rgb(75, 192, 192)',
-        data: [78,123,45,67,12],
-        borderColor: 'white',
-        borderWidth: 2,
-      },
-    
-    ],
-    })
-  }
+      labels: channels,
+      datasets: [
+        {
+          type: "line",
+          label: "Dataset 1",
+          borderColor: "rgb(255, 99, 132)",
+          borderWidth: 2,
+          fill: false,
+          data: [100, 200, 300, 400, 500, 600],
+        },
+        {
+          type: "bar",
+          label: "Dataset 2",
+          backgroundColor: "rgb(75, 192, 192)",
+          data: [78, 123, 45, 67, 12],
+          borderColor: "white",
+          borderWidth: 2,
+        },
+      ],
+    });
+  };
   const changeDateHandler = (event) => {
     const selectedDate = event.toISOString().slice(0, 10);
 
@@ -1104,26 +1173,26 @@ console.log(obj);
                   width: "185px",
                   height: "60px",
                   border: "0",
-                  marginBottom: "1em"
-                 
+                  marginBottom: "1em",
                 }}
               >
                 <p
-                id="textBttnGeneral"
-                style={{
-                  alignItems: "initial",
-                  marginLeft: "1em",
-                  display: "flex",
-                  marginTop: "10px",
-                  fontSize: "16px",
-                  textTransform: "none",
-                  fontWeight: "bold"               
-                }}>
-                <span className="btn-label">
-                  <i className="nc-icon nc-layout-11" />
-                </span>
-                &nbsp; General
-                 </p>
+                  id="textBttnGeneral"
+                  style={{
+                    alignItems: "initial",
+                    marginLeft: "1em",
+                    display: "flex",
+                    marginTop: "10px",
+                    fontSize: "16px",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <span className="btn-label">
+                    <i className="nc-icon nc-layout-11" />
+                  </span>
+                  &nbsp; General
+                </p>
               </button>
 
               {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
@@ -1247,9 +1316,9 @@ console.log(obj);
                     id="select-country"
                     style={{
                       width: "193px",
-                      height:"46px",
+                      height: "46px",
                       marginLeft: "1em",
-                      backgroundColor:"white",
+                      backgroundColor: "white",
                       borderRadius: "17px",
                       marginBottom: "1em",
                       fontSize: "10px",
@@ -1290,9 +1359,9 @@ console.log(obj);
                     id="select-tienda"
                     style={{
                       width: "193px",
-                      height:"46px",
+                      height: "46px",
                       marginLeft: "1em",
-                      backgroundColor:"white",
+                      backgroundColor: "white",
                       borderRadius: "17px",
                       marginBottom: "1em",
                       fontSize: "10px",
@@ -1403,19 +1472,18 @@ console.log(obj);
           {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
           {/* GENERAL DATA */}
           <div id="ReportInformationDesktop">
-          <Col
-            id="colReportDatosGenerales"
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1260px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-           
+            <Col
+              id="colReportDatosGenerales"
+              md="12"
+              style={{
+                backgroundColor: "white",
+                width: "1260px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
+              }}
+            >
               <p
                 classname="textNameTable"
                 style={{
@@ -1430,18 +1498,24 @@ console.log(obj);
                 Datos Generales
               </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* TOTAL INCOME */}
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconG1} width="30px" />
-                    &nbsp; Total Ingresos
-                  </p>
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* TOTAL INCOME */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconG1} width="30px" />
+                      &nbsp; Total Ingresos
+                    </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ {totalIncome}&nbsp;
-                 {/* {(() => {
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "20px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ {totalIncome}&nbsp;
+                      {/* {(() => {
                     let number = 1234
                     let formatted = new Intl.NumberFormat("es-CL",{
                       style:'currency',
@@ -1450,110 +1524,127 @@ console.log(obj);
                      return <div> {formatted} </div>
                                 
                               })()} */}
-
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* DISPATCH COST */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* DISPATCH COST */}
-              </Col>
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconG2} width="30px" />
-                    &nbsp;Costo Despacho
-                  </p>
+                      <img src={iconG2} width="30px" />
+                      &nbsp;Costo Despacho
+                    </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {dispatchCost}&nbsp;
-                    <span
-                      id="spanTextInfoCard"  
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "20px", color: "#444B54" }}
                     >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* GM */}
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconG2} width="30px" />
-                    &nbsp;GM
-                  </p>
+                      {/* $1.253.369 &nbsp; */}
+                      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {dispatchCost}
+                      &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* GM */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconG2} width="30px" />
+                      &nbsp;GM
+                    </p>
 
-                  <h5 className="textInfoCard"  style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {gm} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* CONVERSION */}
-              <Col md="3">
-                <div>
-                   <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconG3} width="30px" />
-                    &nbsp;Conversión
-                  </p>
+                      {/* $1.253.369 &nbsp; */}
+                      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {gm} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* CONVERSION */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconG3} width="30px" />
+                      &nbsp;Conversión
+                    </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <br></br>
-          <br></br>
-          {/* ORDER PROCESSING */}
-          <Col
-            id="colReportOrderProcessing"
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-          
+                      {/* $1.253.369 &nbsp; */}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <br></br>
+            <br></br>
+            {/* ORDER PROCESSING */}
+            <Col
+              id="colReportOrderProcessing"
+              md="12"
+              style={{
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
+              }}
+            >
               <p
                 classname="textNameTable"
                 style={{
@@ -1568,117 +1659,140 @@ console.log(obj);
                 Procesamiento de pedidos
               </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* ORDERS */}
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* ORDERS */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
                       <img src={iconPP1} width="30px" />
                       &nbsp; Pedidos
-                  </p>
+                    </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* ORDERS CANCELLED */}
-              </Col>
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconPP2} width="30px" />
-                    &nbsp; Cancelados
-                  </p>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* ORDERS CANCELLED */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconPP2} width="30px" />
+                      &nbsp; Cancelados
+                    </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalCancelledOrders} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* DTE SENT */}
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconPP3} width="30px" />
-                    &nbsp; DTE enviado
-                  </p>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                      {totalCancelledOrders} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* DTE SENT */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconPP3} width="30px" />
+                      &nbsp; DTE enviado
+                    </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      +8%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* DELIVERED */}
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconPP4} width="30px" />
-                    &nbsp; Entregados
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +8%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* DELIVERED */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      +12%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <br></br>
-          <br></br>
-          {/* ORDER FULFILLMENT */}
-          <Col
-            id="colReportOrderFulfillment"
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-           
-             
+                      <img src={iconPP4} width="30px" />
+                      &nbsp; Entregados
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +12%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <br></br>
+            <br></br>
+            {/* ORDER FULFILLMENT */}
+            <Col
+              id="colReportOrderFulfillment"
+              md="12"
+              style={{
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
+              }}
+            >
               <p
                 classname="textNameTable"
                 style={{
@@ -1692,114 +1806,139 @@ console.log(obj);
               >
                 Cumplimiento de pedidos
               </p>
-             
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* IN PROCESS */}
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconCP1} width="30px" />
-                    &nbsp; En Proceso
-                  </p>
-                  <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* IN PROCESS */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* PREPARATION */}
-              </Col>
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconCP2} width="30px" />
-                    &nbsp; En Preparación
-                  </p>
-                  <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{inPreparation} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      <img src={iconCP1} width="30px" />
+                      &nbsp; En Proceso
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DISPATCH */}
-              <Col md="3">
-                <div>
-                <p id="textListoParaDespacho" className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconCP3} width="30px" />
-                    &nbsp; Listo para despacho
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* PREPARATION */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DELIVER */}
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconCP4} width="30px" />
-                    &nbsp;  Próximo a llegar
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      <img src={iconCP2} width="30px" />
+                      &nbsp; En Preparación
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <br></br>
-          <br></br>
-          {/* CLIENT EXPERIENCE */}
-          <Col
-            id="colReportClientExperience"
-            md="12"
-            style={{
-              backgroundColor: "white",
-              width: "1040px",
-              height: "156px",
-              left: "118px",
-              top: "669px",
-              borderRadius: "12px",
-            }}
-          >
-          
+                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{inPreparation}{" "}
+                      &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DISPATCH */}
+                <Col md="3">
+                  <div>
+                    <p
+                      id="textListoParaDespacho"
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconCP3} width="30px" />
+                      &nbsp; Listo para despacho
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DELIVER */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconCP4} width="30px" />
+                      &nbsp; Próximo a llegar
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <br></br>
+            <br></br>
+            {/* CLIENT EXPERIENCE */}
+            <Col
+              id="colReportClientExperience"
+              md="12"
+              style={{
+                backgroundColor: "white",
+                width: "1040px",
+                height: "156px",
+                left: "118px",
+                top: "669px",
+                borderRadius: "12px",
+              }}
+            >
               <p
                 classname="textNameTable"
                 style={{
@@ -1814,75 +1953,93 @@ console.log(obj);
                 Experiencia del cliente
               </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* NPS */}
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconEC1} width="30px" />
-                    &nbsp; NPS
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* NPS */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      +4.5%
-                    </span>
-                  </h5>
-                </div>
-                {/* REVIEWS */}
-              </Col>
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconEC2} width="30px" />
-                    &nbsp; Reviews
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      <img src={iconEC1} width="30px" />
+                      &nbsp; NPS
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      -3%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* claims */}
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconEC3} width="30px" />
-                    &nbsp; Reclamos
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        +4.5%
+                      </span>
+                    </h5>
+                  </div>
+                  {/* REVIEWS */}
+                </Col>
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DELIVER */}
-              {/* <Col md="3">
+                      <img src={iconEC2} width="30px" />
+                      &nbsp; Reviews
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -3%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* claims */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
+                      <img src={iconEC3} width="30px" />
+                      &nbsp; Reclamos
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DELIVER */}
+                {/* <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
@@ -1937,11 +2094,7 @@ console.log(obj);
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar
-          data={mixedChartData}
-          />
-                
-        
+                  <Bar data={mixedChartData} />
                 </CardBody>
                 <br></br>
                 <br></br>
@@ -1950,46 +2103,45 @@ console.log(obj);
 
             <Col md="6">
               <Row>
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    <strong>Participación canal de venta</strong>
-                  </CardTitle>
-                </CardHeader>
-                <CardBody style={{ height: "342px" }}>
-                  <Pie
-                    data={pieChartData}
-                    options={chartExample11.options}
-                    width={456}
-                    height={190}
-                  />
-                </CardBody>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <strong>Participación canal de venta</strong>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardBody style={{ height: "342px" }}>
+                    <Pie
+                      data={pieChartData}
+                      options={chartExample11.options}
+                      width={456}
+                      height={190}
+                    />
+                  </CardBody>
                 </Card>
               </Row>
-              </Col>
-                  
-                  <Col md="6">
-                    
-                  <Card>
-                  <div className="legend">
+            </Col>
+
+            <Col md="6">
+              <Card>
+                <div className="legend">
                   <div className="infoLegend">
-                  <div>
+                    <div>
                       <p className="titleTextLegend">
-                      <i
-                        className="fa fa-circle"
-                        style={{
-                          color: "#344FD5",
-                          backgroundColor: "#344FD5",
-                          borderRadius: "8px",
-                        }}
-                      />
-                      &nbsp;Vtex
-                    {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                     <p className="card-category">${vtex}</p>
-                        </p>
-                        </div>
-                        <div>
-                        <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#344FD5",
+                            backgroundColor: "#344FD5",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Vtex
+                        {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
+                        <p className="card-category">${vtex}</p>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="titleTextLegend">
                         <i
                           className="fa fa-circle"
                           style={{
@@ -2003,143 +2155,143 @@ console.log(obj);
                       </p>
                     </div>
                     <div>
-                    <p className="titleTextLegend">
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#F10096",
-                        backgroundColor: "#F10096",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    &nbsp;MercadoLibre
-                    <p className="card-category">${mercadoLibre}</p>
-                    </p>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#F10096",
+                            backgroundColor: "#F10096",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;MercadoLibre
+                        <p className="card-category">${mercadoLibre}</p>
+                      </p>
                     </div>
 
                     <div>
-                    <p className="titleTextLegend">
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "purple",
-                        backgroundColor: "purple",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    &nbsp;Exito
-                    <p className="card-category">${exito}</p>
-                    </p>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "purple",
+                            backgroundColor: "purple",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Exito
+                        <p className="card-category">${exito}</p>
+                      </p>
                     </div>
                     <div>
-                    <p className="titleTextLegend">
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#FFD88C",
-                        backgroundColor: "#FFD88C",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    &nbsp;Ripley
-                    <p className="card-category">${ripley}</p>
-                    </p>
-                    </div>
-                    
-                    <div>
-                    <p className="titleTextLegend">
-                    <i
-                      className="fa fa-circle"
-                      style={{
-                        color: "#00B6CB",
-                        backgroundColor: "#00B6CB",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    &nbsp;Shopify
-                    <p className="card-category">${shopify}</p>
-                    </p>
-                    </div>
-                  
-                    <div>
-                    <p className="titleTextLegend">
-                      <i
-                        className="fa fa-circle"
-                        style={{
-                          color: "#00B6CC",
-                          backgroundColor: "#00B6CC",
-                          borderRadius: "8px",
-                        }}
-                      />
-                     &nbsp; Paris
-                      <p className="card-category">${paris}</p>
-                    </p>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#FFD88C",
+                            backgroundColor: "#FFD88C",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Ripley
+                        <p className="card-category">${ripley}</p>
+                      </p>
                     </div>
 
                     <div>
-                    <p className="titleTextLegend">
-                      <i
-                        className="fa fa-circle"
-                        style={{
-                          color: "#97D456",
-                          backgroundColor: "#97D456",
-                          borderRadius: "8px",
-                        }}
-                      />
-                     &nbsp; Magento
-                      <p className="card-category">${magento}</p>
-                    </p>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#00B6CB",
+                            backgroundColor: "#00B6CB",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Shopify
+                        <p className="card-category">${shopify}</p>
+                      </p>
                     </div>
 
                     <div>
-                    <p className="titleTextLegend">
-                      <i
-                        className="fa fa-circle"
-                        style={{
-                          color: "#FF6059",
-                          backgroundColor: "#FF6059",
-                          borderRadius: "8px",
-                        }}
-                      />
-                      &nbsp;WooCommerce
-                      <p className="card-category">${wooCommerce}</p>
-                    </p>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#00B6CC",
+                            backgroundColor: "#00B6CC",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp; Paris
+                        <p className="card-category">${paris}</p>
+                      </p>
                     </div>
 
                     <div>
-                    <p className="titleTextLegend">
-                      <i
-                        className="fa fa-circle"
-                        style={{
-                          color: "yellow",
-                          backgroundColor: "yellow",
-                          borderRadius: "8px",
-                        }}
-                      />
-                      &nbsp;Chambas
-                      <p className="card-category">${chambas}</p>
-                    </p>
-                    </div> 
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#97D456",
+                            backgroundColor: "#97D456",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp; Magento
+                        <p className="card-category">${magento}</p>
+                      </p>
+                    </div>
 
                     <div>
-                    <p className="titleTextLegend">
-                      <i
-                        className="fa fa-circle"
-                        style={{
-                          color: "red",
-                          backgroundColor: "red",
-                          borderRadius: "8px",
-                        }}
-                      />
-                      &nbsp;Lista Tienda
-                      <p className="card-category">${listaTienda}</p>
-                    </p>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "#FF6059",
+                            backgroundColor: "#FF6059",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;WooCommerce
+                        <p className="card-category">${wooCommerce}</p>
+                      </p>
                     </div>
-                  </div>     
-              </div>
+
+                    <div>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "yellow",
+                            backgroundColor: "yellow",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Chambas
+                        <p className="card-category">${chambas}</p>
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "red",
+                            backgroundColor: "red",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        &nbsp;Lista Tienda
+                        <p className="card-category">${listaTienda}</p>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </Card>
             </Col>
-            
+
             <Row>
               <Col md="12">
                 <Card className="card-chart">
@@ -2148,10 +2300,7 @@ console.log(obj);
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar
-                     data={barChartData} 
-                     options={barChartOptions} 
-                    />
+                    <Bar data={barChartData} options={barChartOptions} />
                   </CardBody>
                 </Card>
               </Col>
@@ -2166,9 +2315,10 @@ console.log(obj);
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={barChartData} 
-                    // options={barChartOptions}
-                     />
+                    <Bar
+                      data={barChartData}
+                      // options={barChartOptions}
+                    />
                   </CardBody>
                 </Card>
               </Col>
