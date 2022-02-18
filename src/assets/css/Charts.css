@@ -16,6 +16,13 @@
   background-color: #06cbc1 !important;
 }
 
+.titlesInfoCard {
+  margin-bottom: 0px;
+}
+
+#spanTextInfoCard {
+  font-weight: 600;
+}
 .infoLegend {
   
     display: grid;
@@ -40,7 +47,89 @@
 }
 
 
-@media screen and (max-width:767px)  {
+.titlesInfoCard {
+  margin-bottom: 0;
+}
+
+#spanTextInfoCard {
+  font-weight: 600;
+
+.card-category {
+  font-size: 12px !important;
+
+}
+
+@media screen and (max-width:320px) { 
+
+  input[type="text"], input[type="number"] {
+    width: 100px !important;
+  }
+
+  .MuiInput-root,
+  .MuiInputBase-root {
+    width: 215px !important;
+  }
+  #FiltersInDesktop {
+    display: none;
+  }
+
+  #ReportInformationDesktop {
+    display:none;
+  }
+  
+  #bttnGeneral {
+    width: 90px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }  
+
+  #textBttnGeneral {
+    font-size: 10px !important;
+    margin-top:5px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 7em !important;
+  }
+
+}
+
+@media screen and (min-width:321px) and (max-width:375px) { 
+
+  input[type="text"], input[type="number"] {
+    width: 140px !important;
+  }
+
+  .MuiInput-root,
+  .MuiInputBase-root {
+    width: 300px !important;
+  }
+  #FiltersInDesktop {
+    display: none;
+  }
+
+  #ReportInformationDesktop {
+    display:none;
+  }
+  
+  #bttnGeneral {
+    width: 90px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }  
+
+  #textBttnGeneral {
+    font-size: 10px !important;
+    margin-top:5px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 7rem !important;
+  }
+
+}
+
+@media screen and  (min-width: 376px) and (max-width:767px)  {
 
   #FiltersInDesktop {
     display: none;
@@ -61,11 +150,39 @@
     margin-top:5px !important;
   }
 
-}
+  #datepickerCalendar {
+    background-position: 8rem !important;
+  }
 
+  input[type="text"], input[type="number"] {
+    width: 165px !important;
+  }
+
+  .MuiInput-root {
+    width: 340px !important;
+  }
+
+}
 
 @media screen and (min-width:768px) {
 
+
+  .infoLegend {
+    padding: 7em 1em 6em 1em !important;
+  }
+
+  input[type="text"], input[type="number"] {
+    width: 193px !important;
+  }
+
+  .MuiInput-root {
+    width: 193px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 10rem !important;
+
+  }
 
   #FiltersInMobile {
     display:none;
@@ -97,6 +214,11 @@
     font-size: 11px !important;
   }
 
+  .infoLegend {
+    padding: 53px 15px 129px 19px !important;
+  }
+
+
 }
 
 @media screen and (min-width:1024px) {
@@ -106,7 +228,8 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 900px !important;
+    width: 1250px !important;
+
   }
 
   .titlesInfoCard {
@@ -117,7 +240,7 @@
   }
 
   #spanTextInfoCard {
-    font-size: 18px !important;
+    font-size: 14px !important;
   }
 
   #textListoParaDespacho {
@@ -135,7 +258,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1300px !important;
+    width: 1400px !important;
     height: 190px !important;
   }
 
