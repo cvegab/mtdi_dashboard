@@ -1445,18 +1445,18 @@ const MtdiTable = (props) => {
                     ),
                   },
                 toolbar: {
-                  searchTooltip: 'Buscar',
+                  searchTooltip: 'Buscar órdenes específicas',
                   searchPlaceholder: 'Buscar',
-                  showColumnsTitle: 'Mostrar Columnas',
+                  showColumnsTitle: 'Mostrar opciones de columnas',
                   addRemoveColumns: 'Agregar o Eliminar Columnas'
                 },
                 pagination: {
                   labelRowsSelect: 'líneas',
                   labelDisplayedRows: '{from}-{to} órdenes de {count}',
-                  firstTooltip: 'Primera página',
+                  firstTooltip: 'Ir a la primera página',
                   previousTooltip: 'Página anterior',
                   nextTooltip: 'Próxima página',
-                  lastTooltip: 'Última página',  
+                  lastTooltip: 'Ir a la última página',  
                 }
                  
                 }}
@@ -1507,18 +1507,18 @@ const MtdiTable = (props) => {
                     ),
                   },
                   toolbar: {
-                    searchTooltip: 'Buscar',
+                    searchTooltip: 'Buscar órdenes específicas',
                     searchPlaceholder: 'Buscar',
-                    showColumnsTitle: 'Mostrar Columnas',
+                    showColumnsTitle: 'Mostrar opciones de columnas',
                     addRemoveColumns: 'Agregar o Eliminar Columnas'
                   },
                   pagination: {
                     labelRowsSelect: 'líneas',
                     labelDisplayedRows: '{from}-{to} órdenes de {count}',
-                    firstTooltip: 'Primera página',
+                    firstTooltip: 'Ir a la primera página',
                     previousTooltip: 'Página anterior',
                     nextTooltip: 'Próxima página',
-                    lastTooltip: 'Última página',  
+                    lastTooltip: 'Ir a la última página',  
                   }
                 }}
                 key={data.id_mtdi}
