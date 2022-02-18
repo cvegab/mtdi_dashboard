@@ -835,7 +835,7 @@ const chartExample100 = {
       'Ripley',
       'Linio',
       'CornerShop',
-      'Woo commerce',
+      'Woocommerce',
     ],
     datasets: [
       {
@@ -844,7 +844,8 @@ const chartExample100 = {
         fill: true,
         backgroundColor: "#344FD5",
         hoverBorderColor: "#06CBC1",
-        borderWidth: 5,
+        borderWidth: 0,
+        borderRadius:5,
         barPercentage: 0.5,
         data: [
           100,

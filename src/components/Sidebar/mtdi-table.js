@@ -1253,7 +1253,7 @@ const MtdiTable = (props) => {
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="&nbsp; &nbsp;&nbsp; dd/mm/yy"
+                placeholderText="dd/mm/yy"
                 locale="es"
               />
             </label>
@@ -1279,7 +1279,7 @@ const MtdiTable = (props) => {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="&nbsp; &nbsp;&nbsp; dd/mm/yy"
+                placeholderText="dd/mm/yy"
                 locale="es"
               />
             </label>
@@ -1444,6 +1444,21 @@ const MtdiTable = (props) => {
                       </div>
                     ),
                   },
+                toolbar: {
+                  searchTooltip: 'Buscar órdenes específicas',
+                  searchPlaceholder: 'Buscar',
+                  showColumnsTitle: 'Mostrar opciones de columnas',
+                  addRemoveColumns: 'Agregar o Eliminar Columnas'
+                },
+                pagination: {
+                  labelRowsSelect: 'líneas',
+                  labelDisplayedRows: '{from}-{to} órdenes de {count}',
+                  firstTooltip: 'Ir a la primera página',
+                  previousTooltip: 'Página anterior',
+                  nextTooltip: 'Próxima página',
+                  lastTooltip: 'Ir a la última página',  
+                }
+                 
                 }}
                 title=""
                 icons={tableIcons}
@@ -1491,6 +1506,20 @@ const MtdiTable = (props) => {
                       </div>
                     ),
                   },
+                  toolbar: {
+                    searchTooltip: 'Buscar órdenes específicas',
+                    searchPlaceholder: 'Buscar',
+                    showColumnsTitle: 'Mostrar opciones de columnas',
+                    addRemoveColumns: 'Agregar o Eliminar Columnas'
+                  },
+                  pagination: {
+                    labelRowsSelect: 'líneas',
+                    labelDisplayedRows: '{from}-{to} órdenes de {count}',
+                    firstTooltip: 'Ir a la primera página',
+                    previousTooltip: 'Página anterior',
+                    nextTooltip: 'Próxima página',
+                    lastTooltip: 'Ir a la última página',  
+                  }
                 }}
                 key={data.id_mtdi}
                 title="Instance Table"
