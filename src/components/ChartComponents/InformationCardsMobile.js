@@ -58,7 +58,7 @@ function InformationCardsMobile(props) {
                         <Accordion.Item eventKey="0">
                           <Accordion.Header>
                             <p
-                            style={{display: "flex", fontWeight: "bold"}}
+                            style={{display: "flex", fontWeight: "bold", justifyContent:"center"}}
                             >
                               Datos Generales                              
                             </p>
@@ -93,8 +93,18 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em",
                                       width: "100px"
                                     }}
-                                  >
-                                  ${props.totalIncome}
+                                  >                  
+
+                                  {(() => {
+                                    let number  = props.totalIncome;
+                                    let totalIncomeformatted = new Intl.NumberFormat("es-CL",{
+                                      style:'currency',
+                                      currency:'CLP'
+                                    }).format(number);
+                                    return <div> 
+                                        {totalIncomeformatted}
+                                      </div>   
+                                   })()}
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -144,7 +154,17 @@ function InformationCardsMobile(props) {
                                       width: "100px"
                                     }}
                                   >
-                                    ${props.dispatchCost}
+                                   {(() => {
+                                    let number  = props.dispatchCost;
+                                    let formatted = new Intl.NumberFormat("es-CL",{
+                                      style:'currency',
+                                      currency:'CLP'
+                                    }).format(number);
+                                    return <div> 
+                                        {formatted}
+                                      </div>   
+                                   })()}                  
+                                    
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -152,7 +172,7 @@ function InformationCardsMobile(props) {
                                     <br /> */}
                                      <span
                                       style={{
-                                        color: "red",
+                                        color: "#FF6059",
                                         fontSize: "11px",
                                         fontWeight: "bold",
                                         textAlign: "left",
@@ -192,7 +212,17 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    {props.gm}
+                                 {(() => {
+                                    let number  = props.gm;
+                                    let formatted = new Intl.NumberFormat("es-CL",{
+                                      style:'currency',
+                                      currency:'CLP'
+                                    }).format(number);
+                                    return <div> 
+                                        {formatted}
+                                      </div>   
+                                   })()}                  
+                                                          
                                   </td>
                                
                                   <td className="td-actions text-left">
@@ -200,7 +230,7 @@ function InformationCardsMobile(props) {
                                     <br /> */}
                                      <span
                                       style={{
-                                        color: "red",
+                                        color: "#FF6059",
                                         fontSize: "11px",
                                         fontWeight: "bold",
                                         textAlign: "left",
@@ -274,7 +304,7 @@ function InformationCardsMobile(props) {
                         <Accordion.Item eventKey="1">
                           <Accordion.Header>
                             <p
-                            style={{display: "flex", fontWeight: "bold"}}
+                            style={{display: "flex", fontWeight: "bold", justifyContent:"center"}}
                             >
                               Procesamiento de pedidos                             
                             </p>
@@ -493,7 +523,7 @@ function InformationCardsMobile(props) {
                         <Accordion.Item eventKey="2">
                           <Accordion.Header>
                             <p
-                            style={{display: "flex", fontWeight: "bold"}}
+                            style={{display: "flex", fontWeight: "bold", justifyContent:"center"}}
                             >
                               Cumplimiento de pedidos                            
                             </p>
@@ -708,7 +738,7 @@ function InformationCardsMobile(props) {
                         <Accordion.Item eventKey="0">
                           <Accordion.Header>
                             <p
-                            style={{display: "flex", fontWeight: "bold"}}
+                            style={{display: "flex", fontWeight: "bold", justifyContent:"center"}}
                             >
                               Experiencia del cliente                              
                             </p>

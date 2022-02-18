@@ -98,15 +98,6 @@ color: white !important;
 
 .MuiSelect-select.MuiSelect-select {
   margin-left:2em;
-  width:12px;
-  height:12px;
-}
-.MuiToolbar-root {
-  align-items: unset !important;
-}
-
-.MuiTablePagination-input {
-  border-radius: 22px !important;
 }
 
 .MuiInputAdornment-positionEnd {
@@ -191,15 +182,15 @@ input[type="number"] {
   background-position: 10rem;
 }
 
-.accordion-item:first-of-type {
-  border-top-left-radius: 4rem !important;
-  border-top-right-radius: 4rem !important;
-}
+/* input[type="text"]:focus {
+  outline: none;
+  border: 1px solid white;
+  color: black;
+  margin-top:2px;
+  /* box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%); */
+ 
+/* } */
 
-.accordion-item:last-of-type {
-  border-bottom-right-radius: 3rem !important;
-  border-bottom-left-radius: 3rem !important;
-}
 
 
 .MuiSelect-nativeInput {
@@ -248,10 +239,7 @@ input[type="number"] {
   margin-left: 1em;
 }
 
-/* .MuiSelect-select:focus {
-  border-radius: 14px !important;
-  background-color: white !important;
-} */
+
 
 .MuiTable-root {
   display: block !important;
@@ -424,6 +412,15 @@ PROBANDO */
   border-top: none;
 }
 
+.accordion-item:last-of-type {
+  border-bottom-left-radius: 3rem !important;
+  border-bottom-right-radius: 3rem !important;
+}
+
+.accordion-item:first-of-type {
+  border-top-left-radius: 3rem !important;
+  border-top-right-radius: 3rem !important;
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width:321px) {
