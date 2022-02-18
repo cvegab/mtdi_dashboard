@@ -1087,7 +1087,7 @@ function Charts() {
           </Col>
 
 
-          {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
+        {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
           {/* GENERAL DATA */}
           <div id="ReportInformationDesktop">
           <Col
@@ -1125,28 +1125,27 @@ function Charts() {
                     &nbsp; Total Ingresos
                   </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ {totalIncome}&nbsp;
-                 {/* {(() => {
-                    let number = 1234
+                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54", fontWeight: "500" }}>
+                 {(() => {
+                    let number  = totalIncome;
                     let formatted = new Intl.NumberFormat("es-CL",{
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> {formatted} </div>
-                                
-                              })()} */}
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     +4.5%
+                   </span></div>   
+                 })()}
 
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
                   </h5>
                 </div>
                 {/* DISPATCH COST */}
@@ -1159,18 +1158,28 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {dispatchCost}&nbsp;
-                    <span
-                      id="spanTextInfoCard"  
-                      style={{
-                        color: "#FF6059",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -3%
-                    </span>
+
+                  {(() => {
+                    let number  = dispatchCost;
+                    let formatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#FF6059",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     -3%
+                   </span></div>
+                                
+                              })()}
+
                   </h5>
                 </div>
               </Col>
@@ -1183,18 +1192,27 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard"  style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {gm} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#FF6059",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -6%
-                    </span>
+
+                  {(() => {
+                    let number  = gm;
+                    let formatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#FF6059",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     -6%
+                   </span></div>   
+                 })()}
+
                   </h5>
                 </div>
               </Col>
@@ -1208,7 +1226,7 @@ function Charts() {
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1585,7 +1603,10 @@ function Charts() {
           </Col>
           </div>
 
-           {/* REPORTS INFORMATION MOBILE VERSION */}
+
+
+          {/* REPORTS INFORMATION MOBILE VERSION */}
+
           <div id="ReportInformationMobile">
             <InformationCardsMobile />         
           </div>
@@ -1595,9 +1616,10 @@ function Charts() {
 
           {/* GRAPHS */}
           <Row>
-            {/* <Col md="12"> */}
-              {/* <Card className="car-chart"> */}
-                {/* <CardHeader>
+
+            {/* <Col md="12">
+              <Card className="car-chart">
+                <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
                   </CardTitle> */}
@@ -1610,13 +1632,15 @@ function Charts() {
                     data={chartExample100.data}
                     options={chartExample100.options}
                   /> */}
-                {/* </CardBody>
+               
+{/*         
+                </CardBody>
                 <br></br>
                 <br></br>
               </Card>
             </Col> */}
 
-            <Col md="6">
+<Col md="6">
               <Row>
               <Card>
                 <CardHeader>
@@ -1654,7 +1678,16 @@ function Charts() {
                       />
                       &nbsp;Vtex
                     {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                     <p className="card-category">${vtex}</p>
+                     <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p>
                         </p>
                         </div>
                         <div>
@@ -1668,7 +1701,17 @@ function Charts() {
                           }}
                         />
                         &nbsp;Linio
-                        <p className="card-category">${linio}</p>
+                        <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p>
                       </p>
                     </div>
                     <div>
@@ -1682,7 +1725,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;MercadoLibre
-                    <p className="card-category">${mercadoLibre}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p>
                     </p>
                     </div>
 
@@ -1697,7 +1749,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;Exito
-                    <p className="card-category">${exito}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
                     </p>
                     </div>
                     <div>
@@ -1711,7 +1772,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;Ripley
-                    <p className="card-category">${ripley}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
                     </p>
                     </div>
                     
@@ -1726,7 +1796,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;Shopify
-                    <p className="card-category">${shopify}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
                     </p>
                     </div>
                   
@@ -1741,7 +1820,16 @@ function Charts() {
                         }}
                       />
                      &nbsp; Paris
-                      <p className="card-category">${paris}</p>
+                      <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p>
                     </p>
                     </div>
 
@@ -1756,7 +1844,16 @@ function Charts() {
                         }}
                       />
                      &nbsp; Magento
-                      <p className="card-category">${magento}</p>
+                      <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p>
                     </p>
                     </div>
 
@@ -1771,7 +1868,16 @@ function Charts() {
                         }}
                       />
                       &nbsp;WooCommerce
-                      <p className="card-category">${wooCommerce}</p>
+                      <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      </p>
                     </p>
                     </div>
 
@@ -1786,7 +1892,16 @@ function Charts() {
                         }}
                       />
                       &nbsp;Chambas
-                      <p className="card-category">${chambas}</p>
+                      <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p>
                     </p>
                     </div> 
 
@@ -1801,7 +1916,17 @@ function Charts() {
                         }}
                       />
                       &nbsp;Lista Tienda
-                      <p className="card-category">${listaTienda}</p>
+                      <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p>
                     </p>
                     </div>
                   </div>     
