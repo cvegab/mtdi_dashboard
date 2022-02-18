@@ -29,6 +29,13 @@
   font-size: 10px;
 }
 
+.titlesInfoCard {
+  margin-bottom: 0;
+}
+
+#spanTextInfoCard {
+  font-weight: 600;
+}
 
 @media screen and (max-width:767px)  {
 
@@ -111,6 +118,10 @@
     font-size: 11px !important;
   }
 
+  .infoLegend {
+    padding: 53px 15px 129px 19px !important;
+  }
+
 }
 
 @media screen and (min-width:1024px) {
@@ -120,7 +131,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 900px !important;
+    width: 1200px !important;
   }
 
   .titlesInfoCard {
