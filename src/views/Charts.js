@@ -23,6 +23,7 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
+import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 
 // reactstrap components
 import {
@@ -96,42 +97,48 @@ const barChartData = {
       backgroundColor: "#F10096",
       borderRadius: "20px",
       stack: "2",
+      borderRadius:6,
       data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
     },
     {
       label: "Shopify",
       backgroundColor: "#00B6CB",
       stack: "2",
+      borderRadius:6,
       data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
     },
     {
       label: "Mercado Libre",
       backgroundColor: "#344FD5",
       stack: "2",
+      borderRadius:6,
       data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
     },
     {
       label: "CornerShop",
       backgroundColor: "#5E35B1",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Linio",
       backgroundColor: "#97D456",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Rappi",
       backgroundColor: "#FFD88C",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "WooCommerce",
       backgroundColor: "#FF6059",
-     
+      borderRadius:6,
       stack: "2",
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
@@ -139,9 +146,11 @@ const barChartData = {
 };
 
 const barChartOptions = {
-  legend: {
-    display: false,
-    position: "bottom"
+  plugins: {
+    legend: {
+      display: false,
+      
+    },
   },
   scales: {
     xAxes: [
@@ -919,11 +928,13 @@ function Charts() {
                 width: "100%",
                 padding: "20px",
                 border: "none",
+                fontSize: "12px"
 
               }}
               onClick={showFiltersHandler}
             >
-              {showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+             <img src={iconFilterButton} width="15" />
+             &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
             </button>
           )}
           {showFilter && (
@@ -991,6 +1002,7 @@ function Charts() {
                       fontWeight: "800",
                       marginLeft: "1em",
                       marginBottom: "0px",
+                      marginTop: "1em"
                     }}
                   >
                     País
@@ -1107,25 +1119,7 @@ function Charts() {
                 >
                   Canales De Venta
                 </h5>
-                <button
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    padding: "12px",
-                    width: "42px",
-                    height: "42px",
-                    left: "1006px",
-                    top: "405px",
-                    background: "#EDEEF6",
-                    borderRadius: "17px",
-                    border: "none",
-                  }}
-                  onClick={displaysalesChannelHandler}
-                >
-                  +
-                </button>
-
+           
                 {cR.map((item) => (
                   <div className="tag-item" key={item.value}>
                     {item.channel}
@@ -1138,6 +1132,25 @@ function Charts() {
                     </button>
                   </div>
                 ))}
+                         <button
+              style={{
+                display: "initial",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "5px",
+                width: "40px",
+                height: "30px",
+                left: "1006px",
+                top: "405px",
+                background: "#DFE0E8",
+                borderRadius: "17px",
+                border: "none",
+              }}
+              onClick={displaysalesChannelHandler}
+            >
+              +
+            </button>
+
               </Col>
             </div>
           )}
@@ -1157,20 +1170,19 @@ function Charts() {
               borderRadius: "12px",
             }}
           >
-           
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Datos Generales
-              </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Datos Generales
+            </p>
 
             <Row style={{ padding: "10px", paddingLeft: "20px" }}>
               {/* TOTAL INCOME */}
@@ -1181,28 +1193,27 @@ function Charts() {
                     &nbsp; Total Ingresos
                   </p>
 
-                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ {totalIncome}&nbsp;
-                 {/* {(() => {
-                    let number = 1234
-                    let formatted = new Intl.NumberFormat("es-CL",{
+                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54", fontWeight: "500" }}>
+                 {(() => {
+                    let number  = totalIncome;
+                    let totalIncomeformatted = new Intl.NumberFormat("es-CL",{
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> {formatted} </div>
-                                
-                              })()} */}
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     +4.5%
+                   </span></div>   
+                 })()}
 
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#33D69F",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      +4.5%
-                    </span>
                   </h5>
                 </div>
                 {/* DISPATCH COST */}
@@ -1215,18 +1226,27 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {dispatchCost}&nbsp;
-                    <span
-                      id="spanTextInfoCard"  
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -3%
-                    </span>
+                  {(() => {
+                    let number  = dispatchCost;
+                    let formatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#FF6059",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     -3%
+                   </span></div>
+                                
+                              })()}
+
                   </h5>
                 </div>
               </Col>
@@ -1239,18 +1259,27 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard"  style={{ fontSize: "22px", color: "#444B54" }}>
-                    {/* $1.253.369 &nbsp; */}
-                   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {gm} &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
-                    >
-                      -6%
-                    </span>
+                  {(() => {
+                    let number  = gm;
+                    let formatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#FF6059",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     -6%
+                   </span></div>   
+                 })()}
+
+                   
                   </h5>
                 </div>
               </Col>
@@ -1264,7 +1293,7 @@ function Charts() {
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1295,20 +1324,19 @@ function Charts() {
               borderRadius: "12px",
             }}
           >
-          
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Procesamiento de pedidos
-              </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Procesamiento de pedidos
+            </p>
 
             <Row style={{ padding: "10px", paddingLeft: "20px" }}>
               {/* ORDERS */}
@@ -1320,7 +1348,7 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1343,11 +1371,11 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalCancelledOrders} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{totalCancelledOrders} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
-                        color: "red",
+                        color: "#FF6059",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
@@ -1366,7 +1394,7 @@ function Charts() {
                   </p>
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1388,7 +1416,7 @@ function Charts() {
                     &nbsp; Entregados
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1419,22 +1447,20 @@ function Charts() {
               borderRadius: "12px",
             }}
           >
-           
-             
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Cumplimiento de pedidos
-              </p>
-             
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Cumplimiento de pedidos
+            </p>
+
             <Row style={{ padding: "10px", paddingLeft: "20px" }}>
               {/* IN PROCESS */}
               <Col md="3">
@@ -1444,7 +1470,7 @@ function Charts() {
                     &nbsp; En Proceso
                   </p>
                   <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1466,11 +1492,11 @@ function Charts() {
                     &nbsp; En Preparación
                   </p>
                   <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{inPreparation} &nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
-                        color: "red",
+                        color: "#FF6059",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
@@ -1488,11 +1514,11 @@ function Charts() {
                     &nbsp; Listo para despacho
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
-                        color: "red",
+                        color: "#FF6059",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
@@ -1510,7 +1536,7 @@ function Charts() {
                     &nbsp;  Próximo a llegar
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1541,20 +1567,19 @@ function Charts() {
               borderRadius: "12px",
             }}
           >
-          
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Experiencia del cliente
-              </p>
+            <p
+              classname="textNameTable"
+              style={{
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
+              }}
+            >
+              Experiencia del cliente
+            </p>
 
             <Row style={{ padding: "10px", paddingLeft: "20px" }}>
               {/* NPS */}
@@ -1565,7 +1590,7 @@ function Charts() {
                     &nbsp; NPS
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1587,11 +1612,11 @@ function Charts() {
                     &nbsp; Reviews
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
-                        color: "red",
+                        color: "#FF6059",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
@@ -1609,11 +1634,11 @@ function Charts() {
                     &nbsp; Reclamos
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
-                        color: "red",
+                        color: "#FF6059",
                         fontSize: "16px",
                         textAlign: "right",
                       }}
@@ -1641,8 +1666,8 @@ function Charts() {
                 </h5>
               </div>
             </Col> */}
-              </Row>
-            </Col>
+            </Row>
+          </Col>
           </div>
 
           {/* REPORTS INFORMATION MOBILE VERSION */}
@@ -1668,36 +1693,37 @@ function Charts() {
 
           {/* GRAPHS */}
           <Row>
-            <Col md="12">
+          {/* </Row>  <Col md="12">
               <Card className="car-chart">
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
-                  </CardTitle>
+                  </CardTitle>  */}
                   {/* <p className="card-category"> </p> */}
-                </CardHeader>
+                {/* </CardHeader>
                 <CardBody>
                   <br></br>
-                  <br></br>
+                  <br></br> */}
                   {/* <Bar
                     data={chartExample100.data}
                     options={chartExample100.options}
                   /> */}
                
         
-                </CardBody>
+                {/* </CardBody> */}
                 <br></br>
                 <br></br>
-              </Card>
-            </Col>
+              {/* </Card>
+            </Col> */}
 
-            <Col md="6">
+<Col md="6">
               <Row>
               <Card>
                 <CardHeader>
                   <CardTitle>
                     <strong>Participación canal de venta</strong>
                   </CardTitle>
+                  {/* <p className="card-category">Last Campaign Performance</p> */}
                 </CardHeader>
                 <CardBody style={{ height: "342px" }}>
                   <Pie
@@ -1728,7 +1754,16 @@ function Charts() {
                       />
                       &nbsp;Vtex
                     {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                     <p className="card-category">${vtex}</p>
+                     <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p>
                         </p>
                         </div>
                         <div>
@@ -1742,7 +1777,17 @@ function Charts() {
                           }}
                         />
                         &nbsp;Linio
-                        <p className="card-category">${linio}</p>
+                        <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p>
                       </p>
                     </div>
                     <div>
@@ -1756,7 +1801,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;MercadoLibre
-                    <p className="card-category">${mercadoLibre}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p>
                     </p>
                     </div>
 
@@ -1771,7 +1825,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;Exito
-                    <p className="card-category">${exito}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
                     </p>
                     </div>
                     <div>
@@ -1785,7 +1848,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;Ripley
-                    <p className="card-category">${ripley}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
                     </p>
                     </div>
                     
@@ -1800,7 +1872,16 @@ function Charts() {
                       }}
                     />
                     &nbsp;Shopify
-                    <p className="card-category">${shopify}</p>
+                    <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
                     </p>
                     </div>
                   
@@ -1815,7 +1896,16 @@ function Charts() {
                         }}
                       />
                      &nbsp; Paris
-                      <p className="card-category">${paris}</p>
+                      <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p>
                     </p>
                     </div>
 
@@ -1830,7 +1920,16 @@ function Charts() {
                         }}
                       />
                      &nbsp; Magento
-                      <p className="card-category">${magento}</p>
+                      <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p>
                     </p>
                     </div>
 
@@ -1845,7 +1944,16 @@ function Charts() {
                         }}
                       />
                       &nbsp;WooCommerce
-                      <p className="card-category">${wooCommerce}</p>
+                      <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      </p>
                     </p>
                     </div>
 
@@ -1860,7 +1968,16 @@ function Charts() {
                         }}
                       />
                       &nbsp;Chambas
-                      <p className="card-category">${chambas}</p>
+                      <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p>
                     </p>
                     </div> 
 
@@ -1875,7 +1992,17 @@ function Charts() {
                         }}
                       />
                       &nbsp;Lista Tienda
-                      <p className="card-category">${listaTienda}</p>
+                      <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p>
                     </p>
                     </div>
                   </div>     
@@ -1883,8 +2010,8 @@ function Charts() {
               </Card>
             </Col>
             
-            <Row>
-              <Col md="12">
+            <Col md="6">
+              
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Órdenes por canal de venta</strong>
@@ -1897,12 +2024,11 @@ function Charts() {
                     />
                   </CardBody>
                 </Card>
+              
               </Col>
-            </Row>
-            <br></br>
-            <br></br>
-            <Row>
-              <Col md="12">
+            
+
+             <Col md="6">
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Ingresos por canal de venta</strong>
@@ -1910,12 +2036,12 @@ function Charts() {
                   <br></br>
                   <CardBody>
                     <Bar data={barChartData} 
-                    // options={barChartOptions}
+                    options={barChartOptions}
                      />
                   </CardBody>
                 </Card>
-              </Col>
-            </Row>
+              
+            </Col>
 
             {/* <Col md="6">
             <Card className="card-chart">
@@ -1974,13 +2100,14 @@ function Charts() {
           </Col>
         </Row> */}
 
-          <Row>
-            <div class="text-center" style={{ marginTop: "3em" }}>
+         <Row>
+           <div class="text-center" style={{marginTop: "3em"}}>
               <button
                 id="bttnSubmit"
+                
                 style={{
                   backgroundColor: "#1D308E",
-                  textAlign: "center",
+                  textAlign: "center",                 
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
@@ -1988,21 +2115,25 @@ function Charts() {
                   color: "#FFFFFF",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
-                  fontSize: "11px",
+                  fontWeight:"bold",
+                  border:"0",
+                  fontSize: "11px"
+                  
+               
                 }}
               >
+                
                 <span className="btn-label">
-                  <img src={iconShareReport} width="19px" />
+                  <img src={iconShareReport} width="19px"/>
                 </span>
                 &nbsp;Compartir Reporte &nbsp;
               </button>
-
+           
               <button
                 id="bttnSubmit"
+                
                 style={{
-                  backgroundColor: "FFFFFF",
+                  backgroundColor: "white",
                   textAlign: "center",
                   color: "black",
                   width: "296px",
@@ -2012,17 +2143,19 @@ function Charts() {
                   fontSize: "11px",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
+                  fontWeight:"bold",
+                  border:"0"
+               
                 }}
               >
                 Siguiente Reporte &nbsp;
                 <span className="btn-label">
-                  <img src={iconNextReport} width="19px" />
+                   <img src={iconNextReport} width="19px"/>
                 </span>
               </button>
             </div>
           </Row>
+
         </div>
       )}
     </>
