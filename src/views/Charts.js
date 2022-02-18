@@ -912,17 +912,19 @@ function Charts() {
 
           {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
           {isMobileSizes && (
-            <Button
+            <button
               style={{
-                backgroundColor: "#1D308E",
-                color: "white",
+                backgroundColor: "transparent",
+                color: "black",
                 width: "100%",
                 padding: "20px",
+                border: "none",
+
               }}
               onClick={showFiltersHandler}
             >
-              {showFilter ? "Occultar Filtros" : "Mostrar Filtros"}
-            </Button>
+              {showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+            </button>
           )}
           {showFilter && (
             <div id={filtersClass}>
@@ -1141,18 +1143,7 @@ function Charts() {
           )}
           <br></br>
 
-          {/* FILTERS IN MOBILE VERSION */}
-
-          {/* <Col md="12">
-            <div id="FiltersInMobile">
-              <FilterMobileButton country={country} filteredCountryData={filteredCountryData}  />
-              <br />
-              <br />
-            </div>
-          </Col> */}
-
-          {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
-          {/* GENERAL DATA */}
+   
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
