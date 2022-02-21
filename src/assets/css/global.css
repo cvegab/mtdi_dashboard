@@ -239,10 +239,7 @@ input[type="number"] {
   margin-left: 1em;
 }
 
-/* .MuiSelect-select:focus {
-  border-radius: 14px !important;
-  background-color: white !important;
-} */
+
 
 .MuiTable-root {
   display: block !important;
@@ -415,6 +412,15 @@ PROBANDO */
   border-top: none;
 }
 
+.accordion-item:last-of-type {
+  border-bottom-left-radius: 3rem !important;
+  border-bottom-right-radius: 3rem !important;
+}
+
+.accordion-item:first-of-type {
+  border-top-left-radius: 3rem !important;
+  border-top-right-radius: 3rem !important;
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width:321px) {

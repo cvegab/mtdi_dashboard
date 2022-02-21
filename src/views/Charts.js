@@ -24,6 +24,8 @@ import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
 const moment = require("moment");
+import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
+
 // reactstrap components
 import {
   Card,
@@ -105,42 +107,48 @@ const barChartData = {
       backgroundColor: "#F10096",
       borderRadius: "20px",
       stack: "2",
+      borderRadius:6,
       data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
     },
     {
       label: "Shopify",
       backgroundColor: "#00B6CB",
       stack: "2",
+      borderRadius:6,
       data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
     },
     {
       label: "Mercado Libre",
       backgroundColor: "#344FD5",
       stack: "2",
+      borderRadius:6,
       data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
     },
     {
       label: "CornerShop",
       backgroundColor: "#5E35B1",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Linio",
       backgroundColor: "#97D456",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "Rappi",
       backgroundColor: "#FFD88C",
       stack: "2",
+      borderRadius:6,
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
     {
       label: "WooCommerce",
       backgroundColor: "#FF6059",
-
+      borderRadius:6,
       stack: "2",
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
@@ -183,9 +191,11 @@ let options12 = {
 };
 
 const barChartOptions = {
-  legend: {
-    display: false,
-    position: "bottom",
+  plugins: {
+    legend: {
+      display: false,
+      
+    },
   },
   scales: {
     xAxes: [
@@ -1451,17 +1461,21 @@ function Charts() {
 
           {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
           {isMobileSizes && (
-            <Button
+            <button
               style={{
-                backgroundColor: "#1D308E",
-                color: "white",
+                backgroundColor: "transparent",
+                color: "black",
                 width: "100%",
                 padding: "20px",
+                border: "none",
+                fontSize: "12px"
+
               }}
               onClick={showFiltersHandler}
             >
-              {showFilter ? "Occultar Filtros" : "Mostrar Filtros"}
-            </Button>
+             <img src={iconFilterButton} width="15" />
+             &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+            </button>
           )}
           {showFilter && (
             <div id={filtersClass}>
@@ -1528,6 +1542,7 @@ function Charts() {
                       fontWeight: "800",
                       marginLeft: "1em",
                       marginBottom: "0px",
+                      marginTop: "1em"
                     }}
                   >
                     País
@@ -1644,25 +1659,7 @@ function Charts() {
                 >
                   Canales De Venta
                 </h5>
-                <button
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    padding: "12px",
-                    width: "42px",
-                    height: "42px",
-                    left: "1006px",
-                    top: "405px",
-                    background: "#EDEEF6",
-                    borderRadius: "17px",
-                    border: "none",
-                  }}
-                  onClick={displaysalesChannelHandler}
-                >
-                  +
-                </button>
-
+           
                 {cR.map((item) => (
                   <div className="tag-item" key={item.value}>
                     {item.channel}
@@ -1675,210 +1672,211 @@ function Charts() {
                     </button>
                   </div>
                 ))}
+                         <button
+              style={{
+                display: "initial",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "5px",
+                width: "40px",
+                height: "30px",
+                left: "1006px",
+                top: "405px",
+                background: "#DFE0E8",
+                borderRadius: "17px",
+                border: "none",
+              }}
+              onClick={displaysalesChannelHandler}
+            >
+              +
+            </button>
+
               </Col>
             </div>
           )}
           <br></br>
 
-          {/* FILTERS IN MOBILE VERSION */}
-
-          {/* <Col md="12">
-            <div id="FiltersInMobile">
-              <FilterMobileButton country={country} filteredCountryData={filteredCountryData}  />
-              <br />
-              <br />
-            </div>
-          </Col> */}
-
-          {/* REPORT INFORMATION IN CARDS DESKTOP VERSION */}
-          {/* GENERAL DATA */}
+   
           <div id="ReportInformationDesktop">
-            <Col
-              id="colReportDatosGenerales"
-              md="12"
+          <Col
+            id="colReportDatosGenerales"
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1260px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+            <p
+              classname="textNameTable"
               style={{
-                backgroundColor: "white",
-                width: "1260px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
               }}
             >
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Datos Generales
-              </p>
+              Datos Generales
+            </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* TOTAL INCOME */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG1} width="30px" />
-                      &nbsp; Total Ingresos
-                    </p>
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* TOTAL INCOME */}
+              <Col md="3">
+                <div>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG1} width="30px" />
+                    &nbsp; Total Ingresos
+                  </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "20px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $ {totalIncome}&nbsp;
-                      {/* {(() => {
-                    let number = 1234
+                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54", fontWeight: "500" }}>
+                 {(() => {
+                    let number  = totalIncome;
+                    let totalIncomeformatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#33D69F",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     +4.5%
+                   </span></div>   
+                 })()}
+
+                  </h5>
+                </div>
+                {/* DISPATCH COST */}
+              </Col>
+              <Col md="3">
+                <div>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG2} width="30px" />
+                    &nbsp;Costo Despacho
+                  </p>
+
+                  <h5 className="textInfoCard" style={{ fontSize: "20px", color: "#444B54" }}>
+                  {(() => {
+                    let number  = dispatchCost;
                     let formatted = new Intl.NumberFormat("es-CL",{
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> {formatted} </div>
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "#FF6059",
+                          fontSize: "10px",
+                          textAlign: "right",
+                        }}
+                      >
+                     -3%
+                   </span></div>
                                 
-                              })()} */}
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* DISPATCH COST */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG2} width="30px" />
-                      &nbsp;Costo Despacho
-                    </p>
+                              })()}
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "20px", color: "#444B54" }}
-                    >
-                      {/* $1.253.369 &nbsp; */}
-                      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {dispatchCost}
-                      &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* GM */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG2} width="30px" />
-                      &nbsp;GM
-                    </p>
+                  </h5>
+                </div>
+              </Col>
+              {/* GM */}
+              <Col md="3">
+                <div>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG2} width="30px" />
+                    &nbsp;GM
+                  </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      {/* $1.253.369 &nbsp; */}
-                      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ {gm} &nbsp;
-                      <span
+                  <h5 className="textInfoCard"  style={{ fontSize: "22px", color: "#444B54" }}>
+                  {(() => {
+                    let number  = gm;
+                    let formatted = new Intl.NumberFormat("es-CL",{
+                      style:'currency',
+                      currency:'CLP'
+                    }).format(number);
+                     return <div> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                        &nbsp;<span
                         id="spanTextInfoCard"
                         style={{
-                          color: "red",
-                          fontSize: "16px",
+                          color: "#FF6059",
+                          fontSize: "10px",
                           textAlign: "right",
                         }}
                       >
-                        -6%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* CONVERSION */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG3} width="30px" />
-                      &nbsp;Conversión
-                    </p>
+                     -6%
+                   </span></div>   
+                 })()}
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                   
+                  </h5>
+                </div>
+              </Col>
+              {/* CONVERSION */}
+              <Col md="3">
+                <div>
+                   <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconG3} width="30px" />
+                    &nbsp;Conversión
+                  </p>
+
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                    {/* $1.253.369 &nbsp; */}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      {/* $1.253.369 &nbsp; */}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* ORDER PROCESSING */}
-            <Col
-              id="colReportOrderProcessing"
-              md="12"
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* ORDER PROCESSING */}
+          <Col
+            id="colReportOrderProcessing"
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+            <p
+              classname="textNameTable"
               style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
               }}
             >
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Procesamiento de pedidos
-              </p>
+              Procesamiento de pedidos
+            </p>
 
               <Row style={{ padding: "10px", paddingLeft: "20px" }}>
                 {/* ORDERS */}
@@ -1890,347 +1888,289 @@ function Charts() {
                     >
                       <img src={iconPP1} width="30px" />
                       &nbsp; Pedidos
-                    </p>
+                  </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* ORDERS CANCELLED */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconPP2} width="30px" />
-                      &nbsp; Cancelados
-                    </p>
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* ORDERS CANCELLED */}
+              </Col>
+              <Col md="3">
+                <div>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP2} width="30px" />
+                    &nbsp; Cancelados
+                  </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{totalCancelledOrders} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#FF6059",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                      {totalCancelledOrders} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* DTE SENT */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconPP3} width="30px" />
-                      &nbsp; DTE enviado
-                    </p>
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* DTE SENT */}
+              <Col md="3">
+                <div>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP3} width="30px" />
+                    &nbsp; DTE enviado
+                  </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +8%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* DELIVERED */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      +8%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* DELIVERED */}
+              <Col md="3">
+                <div>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconPP4} width="30px" />
+                    &nbsp; Entregados
+                  </p>
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      <img src={iconPP4} width="30px" />
-                      &nbsp; Entregados
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +12%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* ORDER FULFILLMENT */}
-            <Col
-              id="colReportOrderFulfillment"
-              md="12"
+                      +12%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* ORDER FULFILLMENT */}
+          <Col
+            id="colReportOrderFulfillment"
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+            <p
+              classname="textNameTable"
               style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
               }}
             >
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Cumplimiento de pedidos
-              </p>
+              Cumplimiento de pedidos
+            </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* IN PROCESS */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* IN PROCESS */}
+              <Col md="3">
+                <div>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP1} width="30px" />
+                    &nbsp; En Proceso
+                  </p>
+                  <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      <img src={iconCP1} width="30px" />
-                      &nbsp; En Proceso
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* PREPARATION */}
+              </Col>
+              <Col md="3">
+                <div>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP2} width="30px" />
+                    &nbsp; En Preparación
+                  </p>
+                  <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#FF6059",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* PREPARATION */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DISPATCH */}
+              <Col md="3">
+                <div>
+                <p id="textListoParaDespacho" className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP3} width="30px" />
+                    &nbsp; Listo para despacho
+                  </p>
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#FF6059",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      <img src={iconCP2} width="30px" />
-                      &nbsp; En Preparación
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                      -6%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+              {/* READY TO DELIVER */}
+              <Col md="3">
+                <div>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconCP4} width="30px" />
+                    &nbsp;  Próximo a llegar
+                  </p>
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{inPreparation}{" "}
-                      &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DISPATCH */}
-                <Col md="3">
-                  <div>
-                    <p
-                      id="textListoParaDespacho"
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconCP3} width="30px" />
-                      &nbsp; Listo para despacho
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -6%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DELIVER */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconCP4} width="30px" />
-                      &nbsp; Próximo a llegar
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* CLIENT EXPERIENCE */}
-            <Col
-              id="colReportClientExperience"
-              md="12"
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+          <br></br>
+          <br></br>
+          {/* CLIENT EXPERIENCE */}
+          <Col
+            id="colReportClientExperience"
+            md="12"
+            style={{
+              backgroundColor: "white",
+              width: "1040px",
+              height: "156px",
+              left: "118px",
+              top: "669px",
+              borderRadius: "12px",
+            }}
+          >
+            <p
+              classname="textNameTable"
               style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
+                color: "black",
+                width: "450px",
+                fontSize: "20px",
+                fontWeight: "800",
+                marginLeft: "1em",
+                paddingTop: "20px",
               }}
             >
-              <p
-                classname="textNameTable"
-                style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
-                }}
-              >
-                Experiencia del cliente
-              </p>
+              Experiencia del cliente
+            </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* NPS */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+              {/* NPS */}
+              <Col md="3">
+                <div>
+                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconEC1} width="30px" />
+                    &nbsp; NPS
+                  </p>
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#33D69F",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      <img src={iconEC1} width="30px" />
-                      &nbsp; NPS
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
+                      +4.5%
+                    </span>
+                  </h5>
+                </div>
+                {/* REVIEWS */}
+              </Col>
+              <Col md="3">
+                <div>
+                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+                    <img src={iconEC2} width="30px" />
+                    &nbsp; Reviews
+                  </p>
+                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
+                    <span
+                      id="spanTextInfoCard"
+                      style={{
+                        color: "#FF6059",
+                        fontSize: "16px",
+                        textAlign: "right",
+                      }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "#33D69F",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        +4.5%
-                      </span>
-                    </h5>
-                  </div>
-                  {/* REVIEWS */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconEC2} width="30px" />
-                      &nbsp; Reviews
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
-                      <span
-                        id="spanTextInfoCard"
-                        style={{
-                          color: "red",
-                          fontSize: "16px",
-                          textAlign: "right",
-                        }}
-                      >
-                        -3%
-                      </span>
-                    </h5>
-                  </div>
-                </Col>
+                      -3%
+                    </span>
+                  </h5>
+                </div>
+              </Col>
+            
+             
                 {/* claims */}
                 <Col md="3">
                   <div>
@@ -2277,8 +2217,8 @@ function Charts() {
                 </h5>
               </div>
             </Col> */}
-              </Row>
-            </Col>
+            </Row>
+          </Col>
           </div>
 
           {/* REPORTS INFORMATION MOBILE VERSION */}
@@ -2304,14 +2244,15 @@ function Charts() {
 
           {/* GRAPHS */}
           <Row>
-            <Col md="12">
+
+           <Col md="12">
               <Card className="car-chart">
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
-                  </CardTitle>
-                  {/* <p className="card-category"> </p> */}
-                </CardHeader>
+                  </CardTitle>  
+                   <p className="card-category"> </p> 
+                 </CardHeader>
                 <CardBody>
                   <br></br>
                   <br></br>
@@ -2320,9 +2261,10 @@ function Charts() {
                 <br></br>
                 <br></br>
               </Card>
-            </Col>
-
-            <Col md="6">
+            </Col> 
+</Row>
+<Row>
+<Col md="6">
               <Row>
                 <Card>
                   <CardHeader>
@@ -2363,6 +2305,30 @@ function Charts() {
                     </div>
                     <div>
                       <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#344FD5",
+                          backgroundColor: "#344FD5",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;Vtex
+                    {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
+                     <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p>
+                        </p>
+                        </div>
+                        <div>
+                        <p className="titleTextLegend">
                         <i
                           className="fa fa-circle"
                           style={{
@@ -2372,149 +2338,242 @@ function Charts() {
                           }}
                         />
                         &nbsp;Linio
-                        <p className="card-category">${linio}</p>
+                        <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p>
                       </p>
                     </div>
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#F10096",
-                            backgroundColor: "#F10096",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;MercadoLibre
-                        <p className="card-category">${mercadoLibre}</p>
-                      </p>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#F10096",
+                        backgroundColor: "#F10096",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    &nbsp;MercadoLibre
+                    <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p>
+                    </p>
                     </div>
 
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "purple",
-                            backgroundColor: "purple",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;Exito
-                        <p className="card-category">${exito}</p>
-                      </p>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "purple",
+                        backgroundColor: "purple",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    &nbsp;Exito
+                    <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
+                    </p>
                     </div>
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#FFD88C",
-                            backgroundColor: "#FFD88C",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;Ripley
-                        <p className="card-category">${ripley}</p>
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#00B6CB",
-                            backgroundColor: "#00B6CB",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;Shopify
-                        <p className="card-category">${shopify}</p>
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#00B6CC",
-                            backgroundColor: "#00B6CC",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp; Paris
-                        <p className="card-category">${paris}</p>
-                      </p>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FFD88C",
+                        backgroundColor: "#FFD88C",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    &nbsp;Ripley
+                    <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
+                    </p>
                     </div>
 
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#97D456",
-                            backgroundColor: "#97D456",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp; Magento
-                        <p className="card-category">${magento}</p>
-                      </p>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#00B6CB",
+                        backgroundColor: "#00B6CB",
+                        borderRadius: "8px",
+                      }}
+                    />
+                    &nbsp;Shopify
+                    <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p>
+                    </p>
                     </div>
 
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#FF6059",
-                            backgroundColor: "#FF6059",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;WooCommerce
-                        <p className="card-category">${wooCommerce}</p>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#00B6CC",
+                          backgroundColor: "#00B6CC",
+                          borderRadius: "8px",
+                        }}
+                      />
+                     &nbsp; Paris
+                      <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
                       </p>
+                    </p>
                     </div>
 
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "yellow",
-                            backgroundColor: "yellow",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;Chambas
-                        <p className="card-category">${chambas}</p>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#97D456",
+                          backgroundColor: "#97D456",
+                          borderRadius: "8px",
+                        }}
+                      />
+                     &nbsp; Magento
+                      <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
                       </p>
+                    </p>
                     </div>
 
                     <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "red",
-                            backgroundColor: "red",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;Lista Tienda
-                        <p className="card-category">${listaTienda}</p>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FF6059",
+                          backgroundColor: "#FF6059",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;WooCommerce
+                      <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
                       </p>
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "yellow",
+                          backgroundColor: "yellow",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;Chambas
+                      <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p>
+                    </p>
+                    </div> 
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "red",
+                          backgroundColor: "red",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      &nbsp;Lista Tienda
+                      <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p>
+                    </p>
                     </div>
                   </div>
                 </div>
               </Card>
             </Col>
-
+            </Row> 
             <Row>
-              <Col md="12">
+            <Col md="6">
+              
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Órdenes por canal de venta</strong>
@@ -2524,12 +2583,11 @@ function Charts() {
                     <Bar data={stackedChartData} options={barChartOptions} />
                   </CardBody>
                 </Card>
+              
               </Col>
-            </Row>
-            <br></br>
-            <br></br>
-            <Row>
-              <Col md="12">
+            
+
+             <Col md="6">
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Ingresos por canal de venta</strong>
@@ -2542,9 +2600,9 @@ function Charts() {
                     />
                   </CardBody>
                 </Card>
-              </Col>
+              
+            </Col>
             </Row>
-
             {/* <Col md="6">
             <Card className="card-chart">
               <CardHeader>
@@ -2559,7 +2617,7 @@ function Charts() {
               </CardBody>
             </Card>
           </Col> */}
-          </Row>
+          {/* </Row> */}
           <Row>
             {/* <Col md="6">
             <Card className="card-chart">
@@ -2602,13 +2660,14 @@ function Charts() {
           </Col>
         </Row> */}
 
-          <Row>
-            <div class="text-center" style={{ marginTop: "3em" }}>
+         <Row>
+           <div class="text-center" style={{marginTop: "3em"}}>
               <button
                 id="bttnSubmit"
+                
                 style={{
                   backgroundColor: "#1D308E",
-                  textAlign: "center",
+                  textAlign: "center",                 
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
@@ -2616,21 +2675,25 @@ function Charts() {
                   color: "#FFFFFF",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
-                  fontSize: "11px",
+                  fontWeight:"bold",
+                  border:"0",
+                  fontSize: "11px"
+                  
+               
                 }}
               >
+                
                 <span className="btn-label">
-                  <img src={iconShareReport} width="19px" />
+                  <img src={iconShareReport} width="19px"/>
                 </span>
                 &nbsp;Compartir Reporte &nbsp;
               </button>
-
+           
               <button
                 id="bttnSubmit"
+                
                 style={{
-                  backgroundColor: "FFFFFF",
+                  backgroundColor: "white",
                   textAlign: "center",
                   color: "black",
                   width: "296px",
@@ -2640,17 +2703,19 @@ function Charts() {
                   fontSize: "11px",
                   marginLeft: "1em",
                   textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
+                  fontWeight:"bold",
+                  border:"0"
+               
                 }}
               >
                 Siguiente Reporte &nbsp;
                 <span className="btn-label">
-                  <img src={iconNextReport} width="19px" />
+                   <img src={iconNextReport} width="19px"/>
                 </span>
               </button>
             </div>
           </Row>
+
         </div>
       )}
     </>
