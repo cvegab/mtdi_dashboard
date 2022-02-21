@@ -373,6 +373,7 @@ function Charts() {
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
+   
     // setpieChart();
     setMixedChart();
   }, []);
@@ -406,12 +407,14 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
-    stackedDateLabel,
+   stackedDatevalues,
  
   ]);
+ 
   useEffect(() => {
+ 
    fetchStackedGraphData();
-  }, []);
+  }, [stackedDatevalues]);
   
   
   // useEffect(() => {}, [channels]);
@@ -521,68 +524,68 @@ function Charts() {
         var obj = JSON.parse(result);
       
       
-      let res1 = [];
-      for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  //     let res1 = [];
+  //     for(let i = 0;i<=stackedDatevalues.length-1;i++){
       
-        console.log(stackedDatevalues.length);
+  //       console.log(stackedDatevalues.length);
        
 
-        let ripleyMonthlySales = obj.filter((item) => {
+  //       let ripleyMonthlySales = obj.filter((item) => {
        
-          let dateTobeCompared = stackedDatevalues[i];
+  //         let dateTobeCompared = stackedDatevalues[i];
           
-          const splitDateCompared = dateTobeCompared.split(/[- :]/);
-          const splitMonth = splitDateCompared[1];
-          const splitYear = splitDateCompared[0];
-          const dateTime = item.date_created;
-          const parts = dateTime.split(/[- :]/);
-          var month = parts[1];
-          var year = parts[0];
-          let result = [];
-         return item.channel == 5 && month===splitMonth && year===splitYear;
-      // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
-      // return res1;
-        });
-        res1.push(ripleyMonthlySales);
-        // for(let j=0;j<=stackedDatevalues.length;j++){
-        //   res1.push(ripleyMonthlySales)
+  //         const splitDateCompared = dateTobeCompared.split(/[- :]/);
+  //         const splitMonth = splitDateCompared[1];
+  //         const splitYear = splitDateCompared[0];
+  //         const dateTime = item.date_created;
+  //         const parts = dateTime.split(/[- :]/);
+  //         var month = parts[1];
+  //         var year = parts[0];
+  //         let result = [];
+  //        return item.channel == 5 && month===splitMonth && year===splitYear;
+  //     // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
+  //     // return res1;
+  //       });
+  //       res1.push(ripleyMonthlySales);
+  //       // for(let j=0;j<=stackedDatevalues.length;j++){
+  //       //   res1.push(ripleyMonthlySales)
           
-        // }
-      //  console.log(res1);
+  //       // }
+  //     //  console.log(res1);
  
-      }
-      // console.log('hi');
-      // console.log(res1[0]);
-      let orderQuantityArraY = [];
-      for(let i=0;i<=res1.length-1;i++){
-   let channel5MonthlySales = res1[i].map((item,index)=>{
-       return item.orders_qty;
-     });
-     let totalOrder = channel5MonthlySales.reduce(
-      (partialSum, a) => partialSum + a,
-      0
-    );
-     console.log(totalOrder);
-     orderQuantityArraY.push(totalOrder);
-      }
-      console.log(orderQuantityArraY);
-      setlinioMonthly(orderQuantityArraY);
+  //     }
+  //     // console.log('hi');
+  //     // console.log(res1[0]);
+  //     let orderQuantityArraY = [];
+  //     for(let i=0;i<=res1.length-1;i++){
+  //  let channel5MonthlySales = res1[i].map((item,index)=>{
+  //      return item.orders_qty;
+  //    });
+  //    let totalOrder = channel5MonthlySales.reduce(
+  //     (partialSum, a) => partialSum + a,
+  //     0
+  //   );
+  //    console.log(totalOrder);
+  //    orderQuantityArraY.push(totalOrder);
+  //     }
+  //     console.log(orderQuantityArraY);
+  //     setlinioMonthly(orderQuantityArraY);
    
   
-    const flatNumbers = res1.flat(2);
-    console.log(flatNumbers);
-        let amoeba = obj.filter((item)=>{
-         let dateTobeCompared =  '2021-09-01 ';
+    // const flatNumbers = res1.flat(2);
+    // console.log(flatNumbers);
+    //     let amoeba = obj.filter((item)=>{
+    //      let dateTobeCompared =  '2021-09-01 ';
           
-          const splitDateCompared = dateTobeCompared.split(/[- :]/);
-          const splitMonth = splitDateCompared[1];
-          const splitYear = splitDateCompared[0];
-          const dateTime = item.date_created;
-          const parts = dateTime.split(/[- :]/);
-          var month = parts[1];
-          var year = parts[0];
-          return item.channel == 5 && month===splitMonth && year===splitYear;
-        })
+    //       const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    //       const splitMonth = splitDateCompared[1];
+    //       const splitYear = splitDateCompared[0];
+    //       const dateTime = item.date_created;
+    //       const parts = dateTime.split(/[- :]/);
+    //       var month = parts[1];
+    //       var year = parts[0];
+    //       return item.channel == 5 && month===splitMonth && year===splitYear;
+    //     })
         // console.log(amoeba);
        
         let ripleySales = obj.filter((item) => {
@@ -1023,57 +1026,57 @@ function Charts() {
         //   datasets: stackedChartData.datasets,
          
         // });
-        let MONTLY_ORDER_GRAPH = {
-          labels:  stackedDateLabel,
-          datasets: [
-            {
-              label: "Ripley",
-              backgroundColor: "#F10096",
-              borderRadius: "20px",
-              stack: "2",
-              data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
-            },
-            {
-              label: "Shopify",
-              backgroundColor: "#00B6CB",
-              stack: "2",
-              data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
-            },
-            {
-              label: "Mercado Libre",
-              backgroundColor: "#344FD5",
-              stack: "2",
-              data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
-            },
-            {
-              label: "CornerShop",
-              backgroundColor: "#5E35B1",
-              stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-            },
-            {
-              label: "Linio",
-              backgroundColor: "#97D456",
-              stack: "2",
-              data: linioMonthly
-            },
-            {
-              label: "Rappi",
-              backgroundColor: "#FFD88C",
-              stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-            },
-            {
-              label: "WooCommerce",
-              backgroundColor: "#FF6059",
+        // let MONTLY_ORDER_GRAPH = {
+        //   labels:  stackedDateLabel,
+        //   datasets: [
+        //     {
+        //       label: "Ripley",
+        //       backgroundColor: "#F10096",
+        //       borderRadius: "20px",
+        //       stack: "2",
+        //       data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
+        //     },
+        //     {
+        //       label: "Shopify",
+        //       backgroundColor: "#00B6CB",
+        //       stack: "2",
+        //       data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
+        //     },
+        //     {
+        //       label: "Mercado Libre",
+        //       backgroundColor: "#344FD5",
+        //       stack: "2",
+        //       data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
+        //     },
+        //     {
+        //       label: "CornerShop",
+        //       backgroundColor: "#5E35B1",
+        //       stack: "2",
+        //       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+        //     },
+        //     {
+        //       label: "Linio",
+        //       backgroundColor: "#97D456",
+        //       stack: "2",
+        //       data: linioMonthly
+        //     },
+        //     {
+        //       label: "Rappi",
+        //       backgroundColor: "#FFD88C",
+        //       stack: "2",
+        //       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+        //     },
+        //     {
+        //       label: "WooCommerce",
+        //       backgroundColor: "#FF6059",
         
-              stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-            },
-          ],
-        };
-        console.log(stackedChartData.datasets[4].data);
-        setstackedChartData(MONTLY_ORDER_GRAPH);
+        //       stack: "2",
+        //       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+        //     },
+        //   ],
+        // };
+        // console.log(stackedChartData.datasets[4].data);
+        // setstackedChartData(MONTLY_ORDER_GRAPH);
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -1184,7 +1187,7 @@ function Charts() {
         console.log(stackedDatevalues);
         for(let i = 0;i<=stackedDatevalues.length-1;i++){
         
-          console.log(stackedDatevalues.length);
+        
          
   
           let ripleyMonthlySales = obj.filter((item) => {
@@ -1208,11 +1211,10 @@ function Charts() {
           //   res1.push(ripleyMonthlySales)
             
           // }
-         console.log(res1);
+      
    
         }
-        console.log('hi');
-        console.log(res1[0]);
+      
         let orderQuantityArraY = [];
         for(let i=0;i<=res1.length-1;i++){
      let channel5MonthlySales = res1[i].map((item,index)=>{
@@ -1222,11 +1224,70 @@ function Charts() {
         (partialSum, a) => partialSum + a,
         0
       );
-       console.log(totalOrder);
+     
        orderQuantityArraY.push(totalOrder);
         }
         console.log(orderQuantityArraY);
         setlinioMonthly(orderQuantityArraY);
+        console.log(linioMonthly);
+        // setstackedChartData({
+        //   labels: stackedDateLabel,
+        //   datasets: stackedChartData.datasets,
+         
+        // });
+        let MONTLY_ORDER_GRAPH = {
+          labels:  stackedDateLabel,
+          datasets: [
+            {
+              label: "Ripley",
+              backgroundColor: "#F10096",
+              borderRadius: "20px",
+              stack: "2",
+              data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
+            },
+            {
+              label: "Shopify",
+              backgroundColor: "#00B6CB",
+              stack: "2",
+              data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
+            },
+            {
+              label: "Mercado Libre",
+              backgroundColor: "#344FD5",
+              stack: "2",
+              data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
+            },
+            {
+              label: "CornerShop",
+              backgroundColor: "#5E35B1",
+              stack: "2",
+              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+            },
+            {
+              label: "Linio",
+              backgroundColor: "#97D456",
+              stack: "2",
+              data: orderQuantityArraY,
+            },
+            {
+              label: "Rappi",
+              backgroundColor: "#FFD88C",
+              stack: "2",
+              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+            },
+            {
+              label: "WooCommerce",
+              backgroundColor: "#FF6059",
+        
+              stack: "2",
+              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+            },
+          ],
+        };
+        console.log(stackedChartData.datasets[4].data);
+         setstackedChartData(MONTLY_ORDER_GRAPH);
+        // console.log(MONTLY_ORDER_GRAPH);
+        setisLoading(false);
       }).catch((error) => console.log("error", error));
   }
   const setpieChart = () => {
