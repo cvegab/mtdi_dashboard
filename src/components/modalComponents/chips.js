@@ -553,7 +553,7 @@ export default class Chips extends React.Component {
         .replace("dteLink", this.props.purchaser.dte)
         .replace(
           "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-mercadocarozzi.png"
         );
       return finalEmailText;
     }
