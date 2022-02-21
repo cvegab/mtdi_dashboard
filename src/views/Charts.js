@@ -397,6 +397,7 @@ function Charts() {
     parisOrders,
     exitoOrders,
     stackedDateLabel,
+    linioMonthly
   ]);
   useEffect(() => {}, [channels]);
   useEffect(() => {
