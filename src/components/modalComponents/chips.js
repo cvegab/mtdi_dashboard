@@ -547,6 +547,16 @@ export default class Chips extends React.Component {
         );
       return finalEmailText;
     }
+    if (this.props.purchaser.tienda === "Mercado Carozzi") {
+      let finalEmailText = text
+        .replace("[nombre]", this.props.purchaser.comprador)
+        .replace("dteLink", this.props.purchaser.dte)
+        .replace(
+          "storeLogo",
+          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
+        );
+      return finalEmailText;
+    }
     if (this.props.purchaser.tienda === "Babysec") {
       let finalEmailText = text
         .replace("[nombre]", this.props.purchaser.comprador)
@@ -671,6 +681,7 @@ export default class Chips extends React.Component {
     let final = "" + x.toString() + "";
 
     const emailBody = this.parseEmail();
+    console.log(emailBody);
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
