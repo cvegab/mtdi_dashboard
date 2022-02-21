@@ -397,9 +397,14 @@ function Charts() {
     parisOrders,
     exitoOrders,
     stackedDateLabel,
-    linioMonthly
+ 
   ]);
-  useEffect(() => {}, [channels]);
+  useEffect(() => {
+   fetchStackedGraphData();
+  }, []);
+  
+  
+  // useEffect(() => {}, [channels]);
   useEffect(() => {
     console.log(selectedDateFrom);
     console.log(selectedDateTo);
@@ -504,13 +509,8 @@ function Charts() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
-       
-        console.log(stackedDatevalues);
-      const ch5 = obj.filter((item)=>{
-return item.channel === 5
-      });
-      console.log(ch5);
+      
+      
       let res1 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
       
@@ -541,8 +541,8 @@ return item.channel === 5
       //  console.log(res1);
  
       }
-      console.log('hi');
-      console.log(res1[0]);
+      // console.log('hi');
+      // console.log(res1[0]);
       let orderQuantityArraY = [];
       for(let i=0;i<=res1.length-1;i++){
    let channel5MonthlySales = res1[i].map((item,index)=>{
@@ -557,9 +557,7 @@ return item.channel === 5
       }
       console.log(orderQuantityArraY);
       setlinioMonthly(orderQuantityArraY);
-    //  let channel5MonthlySales = res1.map((item,index)=>{
-    //    return item.orders_qty;
-    //  });
+   
   
     const flatNumbers = res1.flat(2);
     console.log(flatNumbers);
@@ -1009,7 +1007,7 @@ return item.channel === 5
         setreviews(sumOfreview);
         console.log(stackedChartData.labels);
         console.log(stackedDateLabel);
-        console.log(res1);
+    
         // setstackedChartData({
         //   labels: stackedDateLabel,
         //   datasets: stackedChartData.datasets,
@@ -1070,6 +1068,7 @@ return item.channel === 5
       })
       .catch((error) => console.log("error", error));
   };
+  
   const fetchFilterData = async () => {
     console.log("2");
     var myHeaders = new Headers();
@@ -1091,15 +1090,15 @@ return item.channel === 5
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        
         var obj = JSON.parse(result);
-        console.log(obj[4].stores);
+      
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
         var flattened = [].concat.apply([], allChannelsArray);
 
-        console.log(flattened);
+      
         var resArr = [];
         flattened.filter(function (item) {
           var i = resArr.findIndex(
@@ -1110,12 +1109,12 @@ return item.channel === 5
           }
           return null;
         });
-        console.log(resArr);
+      
         setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-        console.log(allSalesChannels);
+      
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
@@ -1149,6 +1148,77 @@ return item.channel === 5
       })
       .catch((error) => console.log("error", error));
   };
+  const fetchStackedGraphData = ()=>{
+    setisLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+  
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    console.log(url);
+    fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        var obj = JSON.parse(result);
+        console.log(obj);
+        let res1 = [];
+        console.log(stackedDatevalues);
+        for(let i = 0;i<=stackedDatevalues.length-1;i++){
+        
+          console.log(stackedDatevalues.length);
+         
+  
+          let ripleyMonthlySales = obj.filter((item) => {
+         
+            let dateTobeCompared = stackedDatevalues[i];
+            
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+           return item.channel == 5 && month===splitMonth && year===splitYear;
+        // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
+        // return res1;
+          });
+          res1.push(ripleyMonthlySales);
+          // for(let j=0;j<=stackedDatevalues.length;j++){
+          //   res1.push(ripleyMonthlySales)
+            
+          // }
+         console.log(res1);
+   
+        }
+        console.log('hi');
+        console.log(res1[0]);
+        let orderQuantityArraY = [];
+        for(let i=0;i<=res1.length-1;i++){
+     let channel5MonthlySales = res1[i].map((item,index)=>{
+         return item.orders_qty;
+       });
+       let totalOrder = channel5MonthlySales.reduce(
+        (partialSum, a) => partialSum + a,
+        0
+      );
+       console.log(totalOrder);
+       orderQuantityArraY.push(totalOrder);
+        }
+        console.log(orderQuantityArraY);
+        setlinioMonthly(orderQuantityArraY);
+      }).catch((error) => console.log("error", error));
+  }
   const setpieChart = () => {
     setpieChartData({
       labels: channels,
