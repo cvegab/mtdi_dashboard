@@ -288,6 +288,7 @@ function Charts() {
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [stackedChartData, setstackedChartData] = useState(barChartData);
+  const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
@@ -373,6 +374,8 @@ function Charts() {
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
+  // fetchStackedGraphData();
+   getDateLabels();
     // setpieChart();
     setMixedChart();
   }, []);
@@ -406,16 +409,17 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
-    stackedDateLabel,
- 
+   stackedDatevalues,
+ stackedDateLabel
   ]);
+ 
   useEffect(() => {
-   fetchStackedGraphData();
-  }, []);
+ 
+  // fetchStackedGraphData();
+  }, [stackedDatevalues,stackedDateLabel]);
   
   
-  // useEffect(() => {}, [channels]);
-  useEffect(() => {
+  const getDateLabels = ()=>{
     console.log(selectedDateFrom);
     console.log(selectedDateTo);
 
@@ -466,17 +470,20 @@ function Charts() {
 
     console.log(dateString);
     // let y = monthDiff(selectedDateFrom,selectedDateTo);
+  }
+  useEffect(() => {
+    getDateLabels();
   }, [selectedDateFrom, selectedDateTo]);
 
-  function monthDiff(dateFrom, dateTo) {
-    const x = new Date(dateFrom);
-    const y = new Date(dateTo);
-    var months;
-    months = (x.getFullYear() - y.getFullYear()) * 12;
-    months -= x.getMonth();
-    months += y.getMonth();
-    return months <= 0 ? 0 : months;
-  }
+  // function monthDiff(dateFrom, dateTo) {
+  //   const x = new Date(dateFrom);
+  //   const y = new Date(dateTo);
+  //   var months;
+  //   months = (x.getFullYear() - y.getFullYear()) * 12;
+  //   months -= x.getMonth();
+  //   months += y.getMonth();
+  //   return months <= 0 ? 0 : months;
+  // }
   useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
@@ -514,19 +521,12 @@ function Charts() {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);
-      
-      
+        var obj = JSON.parse(result);  
       let res1 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
-      
-        console.log(stackedDatevalues.length);
-       
-
         let ripleyMonthlySales = obj.filter((item) => {
        
           let dateTobeCompared = stackedDatevalues[i];
@@ -544,15 +544,8 @@ function Charts() {
       // return res1;
         });
         res1.push(ripleyMonthlySales);
-        // for(let j=0;j<=stackedDatevalues.length;j++){
-        //   res1.push(ripleyMonthlySales)
-          
-        // }
-      //  console.log(res1);
- 
       }
-      // console.log('hi');
-      // console.log(res1[0]);
+     
       let orderQuantityArraY = [];
       for(let i=0;i<=res1.length-1;i++){
    let channel5MonthlySales = res1[i].map((item,index)=>{
@@ -562,29 +555,343 @@ function Charts() {
       (partialSum, a) => partialSum + a,
       0
     );
-     console.log(totalOrder);
+   
      orderQuantityArraY.push(totalOrder);
-      }
-      console.log(orderQuantityArraY);
+      } 
       setlinioMonthly(orderQuantityArraY);
    
-  
-    const flatNumbers = res1.flat(2);
-    console.log(flatNumbers);
-        let amoeba = obj.filter((item)=>{
-         let dateTobeCompared =  '2021-09-01 ';
-          
+      let res2 = [];
+      for(let i = 0;i<=stackedDatevalues.length-1;i++){
+        let ripleyMonthlySales = obj.filter((item) => {
+          let dateTobeCompared = stackedDatevalues[i];
           const splitDateCompared = dateTobeCompared.split(/[- :]/);
           const splitMonth = splitDateCompared[1];
           const splitYear = splitDateCompared[0];
           const dateTime = item.date_created;
           const parts = dateTime.split(/[- :]/);
           var month = parts[1];
-          var year = parts[0];
-          return item.channel == 5 && month===splitMonth && year===splitYear;
-        })
-        // console.log(amoeba);
-       
+          var year = parts[0]; 
+         return item.channel == 4 && month===splitMonth && year===splitYear;
+        });
+        res2.push(ripleyMonthlySales);
+      }
+     
+      let ripleyMonthlyArray = [];
+      for(let i=0;i<=res2.length-1;i++){
+   let channel5MonthlySales = res2[i].map((item,index)=>{
+       return item.orders_qty;
+     });
+     let totalOrder = channel5MonthlySales.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+     
+     ripleyMonthlyArray.push(totalOrder);
+      }
+      
+//  WOO COMMERCE STACKED GRAPH ORDERS
+let res3 = [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 3 && month===splitMonth && year===splitYear;
+
+  });
+  res3.push(ripleyMonthlySales);
+}
+
+let WooCommerceMonthlyArray = [];
+for(let i=0;i<=res3.length-1;i++){
+let channel5MonthlySales = res3[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+WooCommerceMonthlyArray.push(totalOrder);
+}
+// SHOPIFY STACKED MONTHLY DATA
+
+let res4 = [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+    let dateTobeCompared = stackedDatevalues[i];  
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 6 && month===splitMonth && year===splitYear;
+
+  });
+  res4.push(ripleyMonthlySales);
+}
+
+let ShopifyMonthlyArray = [];
+for(let i=0;i<=res4.length-1;i++){
+let channel5MonthlySales = res4[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+ShopifyMonthlyArray.push(totalOrder);
+}
+//MERCADO LIBRE STACKED MONTHLY DATA
+let res5= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+    let dateTobeCompared = stackedDatevalues[i];  
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 2 && month===splitMonth && year===splitYear;
+
+  });
+  res5.push(ripleyMonthlySales);
+}
+
+let MercadoArray = [];
+for(let i=0;i<=res5.length-1;i++){
+let channel5MonthlySales = res5[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+MercadoArray.push(totalOrder);
+}
+
+
+//CHAMBAS STACKED GRAPH MONTHLY
+let res6= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+    let dateTobeCompared = stackedDatevalues[i];
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 11 && month===splitMonth && year===splitYear;
+
+  });
+  res6.push(ripleyMonthlySales);
+}
+
+let ChambasMonthlyArray = [];
+for(let i=0;i<=res6.length-1;i++){
+let channel5MonthlySales = res6[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+ChambasMonthlyArray.push(totalOrder);
+}
+
+
+//VTEX STACKED MONTHLY ARRAY
+
+let res7= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 7 && month===splitMonth && year===splitYear;
+
+  });
+  res7.push(ripleyMonthlySales);
+}
+
+let vtexMonthlyArray = [];
+for(let i=0;i<=res7.length-1;i++){
+let channel5MonthlySales = res7[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+vtexMonthlyArray.push(totalOrder);
+}
+//MAGENTO MONTHLY ARRAY
+let res8= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 9 && month===splitMonth && year===splitYear;
+
+  });
+  res8.push(ripleyMonthlySales);
+}
+
+let MagentoMonthlyArray = [];
+for(let i=0;i<=res8.length-1;i++){
+let channel5MonthlySales = res8[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+MagentoMonthlyArray.push(totalOrder);
+}
+// LISTA TIENDA MONTHLY SALES
+let res9= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 8 && month===splitMonth && year===splitYear;
+
+  });
+  res9.push(ripleyMonthlySales);
+}
+
+let ListaMonthlyArray = [];
+for(let i=0;i<=res9.length-1;i++){
+let channel5MonthlySales = res9[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+ListaMonthlyArray.push(totalOrder);
+}
+
+// PARIS STACKED MONTHLY SALES
+let res10= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 1 && month===splitMonth && year===splitYear;
+
+  });
+  res10.push(ripleyMonthlySales);
+}
+
+let ParisMonthlyArray = [];
+for(let i=0;i<=res10.length-1;i++){
+let channel5MonthlySales = res10[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+ParisMonthlyArray.push(totalOrder);
+}
+//EXITO MONTHLY STACKED ARRAY
+
+let res11= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+ let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == '12' && month===splitMonth && year===splitYear;
+
+  });
+  res11.push(ripleyMonthlySales);
+}
+
+let ExitoMonthlyArray = [];
+for(let i=0;i<=res11.length-1;i++){
+let channel5MonthlySales = res11[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+
+ExitoMonthlyArray.push(totalOrder);
+}
+
+
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
         });
@@ -1031,49 +1338,187 @@ function Charts() {
               backgroundColor: "#F10096",
               borderRadius: "20px",
               stack: "2",
-              data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
+              borderRadius:6,
+              data: ripleyMonthlyArray,
+            },
+            {
+              label: "Lista Tienda",
+              backgroundColor: "black",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ListaMonthlyArray,
+            },
+            {
+              label: "Magento",
+              backgroundColor: "red",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: MagentoMonthlyArray,
             },
             {
               label: "Shopify",
               backgroundColor: "#00B6CB",
+              borderRadius: "20px",
               stack: "2",
-              data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
+              borderRadius:6,
+              data: ShopifyMonthlyArray,
             },
             {
               label: "Mercado Libre",
               backgroundColor: "#344FD5",
+              borderRadius: "20px",
               stack: "2",
-              data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
+              borderRadius:6,
+              data: MercadoArray,
             },
             {
-              label: "CornerShop",
+              label: "Chambas",
               backgroundColor: "#5E35B1",
+              borderRadius: "20px",
               stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+              borderRadius:6,
+              data: ChambasMonthlyArray,
             },
             {
               label: "Linio",
               backgroundColor: "#97D456",
+              borderRadius: "20px",
               stack: "2",
-              data: linioMonthly
+              borderRadius:6,
+              data: orderQuantityArraY
             },
             {
-              label: "Rappi",
+              label: "Vtex",
               backgroundColor: "#FFD88C",
+              borderRadius: "20px",
               stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+              borderRadius:6,
+              data:  vtexMonthlyArray,
             },
             {
               label: "WooCommerce",
               backgroundColor: "#FF6059",
-        
+              borderRadius: "20px",
+              borderRadius:6,
               stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+              data: WooCommerceMonthlyArray,
+            },
+            {
+              label: "Paris",
+              backgroundColor: "turquoise",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ParisMonthlyArray,
+            },
+            {
+              label: "Exito",
+              backgroundColor: "grey",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ExitoMonthlyArray,
             },
           ],
         };
-        console.log(stackedChartData.datasets[4].data);
+       
         setstackedChartData(MONTLY_ORDER_GRAPH);
+        let MONTLY_SALES_GRAPH = {
+          labels:  stackedDateLabel,
+          datasets: [
+            {
+              label: "Ripley",
+              backgroundColor: "#F10096",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ripleyMonthlyArray,
+            },
+            {
+              label: "Lista Tienda",
+              backgroundColor: "black",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ListaMonthlyArray,
+            },
+            {
+              label: "Magento",
+              backgroundColor: "red",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: MagentoMonthlyArray,
+            },
+            {
+              label: "Shopify",
+              backgroundColor: "#00B6CB",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ShopifyMonthlyArray,
+            },
+            {
+              label: "Mercado Libre",
+              backgroundColor: "#344FD5",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: MercadoArray,
+            },
+            {
+              label: "Chambas",
+              backgroundColor: "#5E35B1",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ChambasMonthlyArray,
+            },
+            {
+              label: "Linio",
+              backgroundColor: "#97D456",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: orderQuantityArraY
+            },
+            {
+              label: "Vtex",
+              backgroundColor: "#FFD88C",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data:  vtexMonthlyArray,
+            },
+            {
+              label: "WooCommerce",
+              backgroundColor: "#FF6059",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: WooCommerceMonthlyArray,
+            },
+            {
+              label: "Paris",
+              backgroundColor: "turquoise",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ParisMonthlyArray,
+            },
+            {
+              label: "Exito",
+              backgroundColor: "grey",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ExitoMonthlyArray,
+            },
+          ],
+        };
+        setstackedSalesGraph(MONTLY_SALES_GRAPH);
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -1158,93 +1603,7 @@ function Charts() {
       })
       .catch((error) => console.log("error", error));
   };
-  const fetchStackedGraphData = ()=>{
-    setisLoading(true);
-    var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-  
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
-    fetch(url, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        var obj = JSON.parse(result);
-        console.log(obj);
-        let res1 = [];
-        console.log(stackedDatevalues);
-        for(let i = 0;i<=stackedDatevalues.length-1;i++){
-        
-          console.log(stackedDatevalues.length);
-         
-  
-          let ripleyMonthlySales = obj.filter((item) => {
-         
-            let dateTobeCompared = stackedDatevalues[i];
-            
-            const splitDateCompared = dateTobeCompared.split(/[- :]/);
-            const splitMonth = splitDateCompared[1];
-            const splitYear = splitDateCompared[0];
-            const dateTime = item.date_created;
-            const parts = dateTime.split(/[- :]/);
-            var month = parts[1];
-            var year = parts[0];
-            let result = [];
-           return item.channel == 5 && month===splitMonth && year===splitYear;
-        // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
-        // return res1;
-          });
-          res1.push(ripleyMonthlySales);
-          // for(let j=0;j<=stackedDatevalues.length;j++){
-          //   res1.push(ripleyMonthlySales)
-            
-          // }
-         console.log(res1);
-   
-        }
-        console.log('hi');
-        console.log(res1[0]);
-        let orderQuantityArraY = [];
-        for(let i=0;i<=res1.length-1;i++){
-     let channel5MonthlySales = res1[i].map((item,index)=>{
-         return item.orders_qty;
-       });
-       let totalOrder = channel5MonthlySales.reduce(
-        (partialSum, a) => partialSum + a,
-        0
-      );
-       console.log(totalOrder);
-       orderQuantityArraY.push(totalOrder);
-        }
-        console.log(orderQuantityArraY);
-        setlinioMonthly(orderQuantityArraY);
-      }).catch((error) => console.log("error", error));
-  }
-  const setpieChart = () => {
-    setpieChartData({
-      labels: channels,
-      datasets: [
-        {
-          label: "Emails",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-          borderWidth: 0,
-          barPercentage: 1.6,
-          data: [ripley, 480, 430, 211],
-        },
-      ],
-    });
-  };
+ 
   const setMixedChart = () => {
     setmixedChartData({
       labels: channels,
@@ -1310,11 +1669,6 @@ function Charts() {
     console.log(selectedChannels);
     setfilteredChannelArray(selectedChannels);
     displaysalesChannelHandler();
-    // console.log(filteredChannelArray);
-    // const selectedChannelsArray = selectedStoreData[0].channels;
-    // const selectedChannels = selectedChannelsArray.map((item) => {
-    //   return item;
-    // });
   };
   const applyFiltersButtonhandler = () => {
     fetchGeneralData();
@@ -1336,28 +1690,8 @@ function Charts() {
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
-    console.log(item);
-    // const channelsId = filteredChannelArray.map((item) => {
-    //   return item.value;
-    // });
-    // let y = [...channelsId];
-    // let z = [];
-    // if (item === "MercadoLibre") {
-    //   z = y.filter((i) => i !== 2);
-    // }
-    // if (item === "Vtex") {
-    //   z = y.filter((i) => i !== 7);
-    // }
-    // //  console.log(y.join(","));
-    // console.log(z);
-    // console.log(channelsId);
-    let x = cR.filter((i) => i !== item);
+   let x = cR.filter((i) => i !== item);
     setcR(x);
-    console.log(x.value);
-    // setchannels(x.channel);
-    // setchannelId(x.value);
-    // console.log(channelId);
-    // console.log(channels);
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
@@ -2580,7 +2914,7 @@ function Charts() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={stackedChartData} options={barChartOptions} />
+                    <Bar data={stackedChartData}  />
                   </CardBody>
                 </Card>
               
@@ -2595,7 +2929,7 @@ function Charts() {
                   <br></br>
                   <CardBody>
                     <Bar
-                      data={barChartData}
+                      data={stackedSalesGraph}
                       // options={barChartOptions}
                     />
                   </CardBody>
