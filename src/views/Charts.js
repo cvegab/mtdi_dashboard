@@ -460,7 +460,7 @@ function Charts() {
       console.log(item);
       let d = new Date(item);
       d.setDate(1);
-      // d.setMonth(d.getMonth()-1);
+      d.setMonth(d.getMonth()+1);
       console.log(d);
       const dateString = `${d.getDate()}-${
         MONTHS[d.getMonth()]
