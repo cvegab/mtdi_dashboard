@@ -422,7 +422,8 @@ function Charts() {
   const getDateLabels = ()=>{
     console.log(selectedDateFrom);
     console.log(selectedDateTo);
-
+    var futureMonth = moment(selectedDateFrom).add(1, 'month');
+    console.log(futureMonth);
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
 
@@ -434,7 +435,7 @@ function Charts() {
 
     while (startDate.isBefore(endDate)) {
       result.push(startDate.format("YYYY-MM-01"));
-      startDate.add(1, "month");
+       startDate.add(1, "month");
     }
     console.log(result);
     setstackedDatevalues(result);
@@ -453,10 +454,14 @@ function Charts() {
       "Deciembre",
     ];
 
-    const date = new Date();
+    const date = new Date('2021-08-01');
     console.log(date);
     const x = result.map((item) => {
+      console.log(item);
       let d = new Date(item);
+      d.setDate(1);
+     
+      console.log(d);
       const dateString = `${d.getDate()}-${
         MONTHS[d.getMonth()]
       }-${d.getFullYear()}`;
@@ -464,11 +469,11 @@ function Charts() {
     });
     console.log(x);
     setstackedDateLabel(x);
-    const dateString = `${date.getDate()}-${
-      MONTHS[date.getMonth()]
-    }-${date.getFullYear()}`;
+    // const dateString = `${date.getDate()}-${
+    //   MONTHS[date.getMonth()]
+    // }-${date.getFullYear()}`;
 
-    console.log(dateString);
+    // console.log(dateString);
     // let y = monthDiff(selectedDateFrom,selectedDateTo);
   }
   useEffect(() => {
