@@ -669,16 +669,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ShopifyMonthlyArray = [];
+let shopifyStackedSalesArray = [];
 for(let i=0;i<=res4.length-1;i++){
 let channel5MonthlySales = res4[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 ShopifyMonthlyArray.push(totalOrder);
+shopifyStackedSalesArray.push(totalMonthlySales);
 }
 //MERCADO LIBRE STACKED MONTHLY DATA
 let res5= [];
@@ -700,16 +708,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let MercadoArray = [];
+let MercadoStackedSalesArray = [];
 for(let i=0;i<=res5.length-1;i++){
 let channel5MonthlySales = res5[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 MercadoArray.push(totalOrder);
+MercadoStackedSalesArray.push(totalMonthlySales);
 }
 
 
@@ -733,16 +749,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ChambasMonthlyArray = [];
+let ChambasStackedSalesArray = [];
 for(let i=0;i<=res6.length-1;i++){
 let channel5MonthlySales = res6[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 ChambasMonthlyArray.push(totalOrder);
+ChambasStackedSalesArray.push(totalMonthlySales);
 }
 
 
@@ -769,16 +793,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let vtexMonthlyArray = [];
+let vtexStackedSalesArray = [];
 for(let i=0;i<=res7.length-1;i++){
 let channel5MonthlySales = res7[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 vtexMonthlyArray.push(totalOrder);
+vtexStackedSalesArray.push(totalMonthlySales);
 }
 //MAGENTO MONTHLY ARRAY
 let res8= [];
@@ -802,16 +834,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let MagentoMonthlyArray = [];
+let magentoStackedSalesArray = [];
 for(let i=0;i<=res8.length-1;i++){
 let channel5MonthlySales = res8[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 MagentoMonthlyArray.push(totalOrder);
+magentoStackedSalesArray.push(totalMonthlySales);
 }
 // LISTA TIENDA MONTHLY SALES
 let res9= [];
@@ -836,16 +876,25 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ListaMonthlyArray = [];
+let ListaStackedSalesArray = [];
 for(let i=0;i<=res9.length-1;i++){
 let channel5MonthlySales = res9[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 
 ListaMonthlyArray.push(totalOrder);
+ListaStackedSalesArray.push(totalMonthlySales);
 }
 
 // PARIS STACKED MONTHLY SALES
@@ -871,16 +920,25 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ParisMonthlyArray = [];
+let ParisStackedSalesArray = [];
 for(let i=0;i<=res10.length-1;i++){
 let channel5MonthlySales = res10[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 
 ParisMonthlyArray.push(totalOrder);
+ParisStackedSalesArray.push(totalMonthlySales);
 }
 //EXITO MONTHLY STACKED ARRAY
 
@@ -1468,7 +1526,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaMonthlyArray,
+              data: ListaStackedSalesArray,
             },
             {
               label: "Magento",
@@ -1476,7 +1534,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: MagentoMonthlyArray,
+              data: magentoStackedSalesArray,
             },
             {
               label: "Shopify",
@@ -1484,7 +1542,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ShopifyMonthlyArray,
+              data: shopifyStackedSalesArray,
             },
             {
               label: "Mercado Libre",
@@ -1492,7 +1550,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoArray,
+              data: MercadoStackedSalesArray,
             },
             {
               label: "Chambas",
@@ -1500,7 +1558,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasMonthlyArray,
+              data: ChambasStackedSalesArray,
             },
             {
               label: "Linio",
@@ -1516,7 +1574,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data:  vtexMonthlyArray,
+              data: vtexStackedSalesArray,
             },
             {
               label: "WooCommerce",
@@ -1532,7 +1590,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisMonthlyArray,
+              data: ParisStackedSalesArray,
             },
             {
               label: "Exito",
