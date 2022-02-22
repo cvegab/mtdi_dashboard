@@ -562,24 +562,16 @@ function Charts() {
    
       let res2 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
-      
-        console.log(stackedDatevalues.length);
-       
-
         let ripleyMonthlySales = obj.filter((item) => {
-       
           let dateTobeCompared = stackedDatevalues[i];
-          
           const splitDateCompared = dateTobeCompared.split(/[- :]/);
           const splitMonth = splitDateCompared[1];
           const splitYear = splitDateCompared[0];
           const dateTime = item.date_created;
           const parts = dateTime.split(/[- :]/);
           var month = parts[1];
-          var year = parts[0];
-         
+          var year = parts[0]; 
          return item.channel == 4 && month===splitMonth && year===splitYear;
-     
         });
         res2.push(ripleyMonthlySales);
       }
@@ -635,9 +627,7 @@ WooCommerceMonthlyArray.push(totalOrder);
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
+    let dateTobeCompared = stackedDatevalues[i];  
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -667,14 +657,8 @@ ShopifyMonthlyArray.push(totalOrder);
 //MERCADO LIBRE STACKED MONTHLY DATA
 let res5= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
+    let dateTobeCompared = stackedDatevalues[i];  
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -706,14 +690,8 @@ MercadoArray.push(totalOrder);
 //CHAMBAS STACKED GRAPH MONTHLY
 let res6= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
- 
     let dateTobeCompared = stackedDatevalues[i];
-    
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1445,9 +1423,102 @@ ExitoMonthlyArray.push(totalOrder);
             },
           ],
         };
-        console.log(stackedChartData.datasets[4].data);
+       
         setstackedChartData(MONTLY_ORDER_GRAPH);
-        
+        let MONTLY_SALES_GRAPH = {
+          labels:  stackedDateLabel,
+          datasets: [
+            {
+              label: "Ripley",
+              backgroundColor: "#F10096",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ripleyMonthlyArray,
+            },
+            {
+              label: "Lista Tienda",
+              backgroundColor: "black",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ListaMonthlyArray,
+            },
+            {
+              label: "Magento",
+              backgroundColor: "red",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: MagentoMonthlyArray,
+            },
+            {
+              label: "Shopify",
+              backgroundColor: "#00B6CB",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ShopifyMonthlyArray,
+            },
+            {
+              label: "Mercado Libre",
+              backgroundColor: "#344FD5",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: MercadoArray,
+            },
+            {
+              label: "Chambas",
+              backgroundColor: "#5E35B1",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ChambasMonthlyArray,
+            },
+            {
+              label: "Linio",
+              backgroundColor: "#97D456",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: orderQuantityArraY
+            },
+            {
+              label: "Vtex",
+              backgroundColor: "#FFD88C",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data:  vtexMonthlyArray,
+            },
+            {
+              label: "WooCommerce",
+              backgroundColor: "#FF6059",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: WooCommerceMonthlyArray,
+            },
+            {
+              label: "Paris",
+              backgroundColor: "turquoise",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ParisMonthlyArray,
+            },
+            {
+              label: "Exito",
+              backgroundColor: "grey",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ExitoMonthlyArray,
+            },
+          ],
+        };
+        setstackedSalesGraph(MONTLY_SALES_GRAPH);
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -1598,11 +1669,6 @@ ExitoMonthlyArray.push(totalOrder);
     console.log(selectedChannels);
     setfilteredChannelArray(selectedChannels);
     displaysalesChannelHandler();
-    // console.log(filteredChannelArray);
-    // const selectedChannelsArray = selectedStoreData[0].channels;
-    // const selectedChannels = selectedChannelsArray.map((item) => {
-    //   return item;
-    // });
   };
   const applyFiltersButtonhandler = () => {
     fetchGeneralData();
@@ -1624,28 +1690,8 @@ ExitoMonthlyArray.push(totalOrder);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
-    console.log(item);
-    // const channelsId = filteredChannelArray.map((item) => {
-    //   return item.value;
-    // });
-    // let y = [...channelsId];
-    // let z = [];
-    // if (item === "MercadoLibre") {
-    //   z = y.filter((i) => i !== 2);
-    // }
-    // if (item === "Vtex") {
-    //   z = y.filter((i) => i !== 7);
-    // }
-    // //  console.log(y.join(","));
-    // console.log(z);
-    // console.log(channelsId);
-    let x = cR.filter((i) => i !== item);
+   let x = cR.filter((i) => i !== item);
     setcR(x);
-    console.log(x.value);
-    // setchannels(x.channel);
-    // setchannelId(x.value);
-    // console.log(channelId);
-    // console.log(channels);
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
