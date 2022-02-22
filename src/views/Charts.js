@@ -963,16 +963,25 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ExitoMonthlyArray = [];
+let ExitoStackedSalesArray = [];
 for(let i=0;i<=res11.length-1;i++){
 let channel5MonthlySales = res11[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 
 ExitoMonthlyArray.push(totalOrder);
+ExitoStackedSalesArray.push(totalMonthlySales);
 }
 
 
@@ -1598,7 +1607,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoMonthlyArray,
+              data: ExitoStackedSalesArray,
             },
           ],
         };
@@ -1653,7 +1662,7 @@ ExitoMonthlyArray.push(totalOrder);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-      
+     
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
