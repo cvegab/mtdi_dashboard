@@ -288,6 +288,7 @@ function Charts() {
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [stackedChartData, setstackedChartData] = useState(barChartData);
+  const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
@@ -474,15 +475,15 @@ function Charts() {
     getDateLabels();
   }, [selectedDateFrom, selectedDateTo]);
 
-  function monthDiff(dateFrom, dateTo) {
-    const x = new Date(dateFrom);
-    const y = new Date(dateTo);
-    var months;
-    months = (x.getFullYear() - y.getFullYear()) * 12;
-    months -= x.getMonth();
-    months += y.getMonth();
-    return months <= 0 ? 0 : months;
-  }
+  // function monthDiff(dateFrom, dateTo) {
+  //   const x = new Date(dateFrom);
+  //   const y = new Date(dateTo);
+  //   var months;
+  //   months = (x.getFullYear() - y.getFullYear()) * 12;
+  //   months -= x.getMonth();
+  //   months += y.getMonth();
+  //   return months <= 0 ? 0 : months;
+  // }
   useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
@@ -520,17 +521,12 @@ function Charts() {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);  
       let res1 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
-      
-        console.log(stackedDatevalues.length);
-       
-
         let ripleyMonthlySales = obj.filter((item) => {
        
           let dateTobeCompared = stackedDatevalues[i];
@@ -548,8 +544,6 @@ function Charts() {
       // return res1;
         });
         res1.push(ripleyMonthlySales);
-       
- 
       }
      
       let orderQuantityArraY = [];
@@ -561,10 +555,9 @@ function Charts() {
       (partialSum, a) => partialSum + a,
       0
     );
-     console.log(totalOrder);
+   
      orderQuantityArraY.push(totalOrder);
-      }
-     console.log(orderQuantityArraY);
+      } 
       setlinioMonthly(orderQuantityArraY);
    
       let res2 = [];
@@ -607,10 +600,6 @@ function Charts() {
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
  
     let dateTobeCompared = stackedDatevalues[i];
@@ -645,10 +634,6 @@ WooCommerceMonthlyArray.push(totalOrder);
 
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
  
     let dateTobeCompared = stackedDatevalues[i];
@@ -761,10 +746,6 @@ ChambasMonthlyArray.push(totalOrder);
 
 let res7= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
  
     let dateTobeCompared = stackedDatevalues[i];
@@ -798,10 +779,6 @@ vtexMonthlyArray.push(totalOrder);
 //MAGENTO MONTHLY ARRAY
 let res8= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
  
     let dateTobeCompared = stackedDatevalues[i];
@@ -835,9 +812,6 @@ MagentoMonthlyArray.push(totalOrder);
 // LISTA TIENDA MONTHLY SALES
 let res9= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
 
   let ripleyMonthlySales = obj.filter((item) => {
  
@@ -874,9 +848,6 @@ ListaMonthlyArray.push(totalOrder);
 let res10= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
-  console.log(stackedDatevalues.length);
- 
-
   let ripleyMonthlySales = obj.filter((item) => {
  
     let dateTobeCompared = stackedDatevalues[i];
@@ -911,11 +882,7 @@ ParisMonthlyArray.push(totalOrder);
 
 let res11= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  console.log(stackedDatevalues.length);
- 
-
-  let ripleyMonthlySales = obj.filter((item) => {
+ let ripleyMonthlySales = obj.filter((item) => {
  
     let dateTobeCompared = stackedDatevalues[i];
     
@@ -945,16 +912,6 @@ let totalOrder = channel5MonthlySales.reduce(
 
 ExitoMonthlyArray.push(totalOrder);
 }
-console.log(ExitoMonthlyArray);
-
-
-
-
-
-
-
-
-
 
 
         let ripleySales = obj.filter((item) => {
@@ -1575,154 +1532,7 @@ console.log(ExitoMonthlyArray);
       })
       .catch((error) => console.log("error", error));
   };
-  const fetchStackedGraphData = ()=>{
-    setisLoading(true);
-    var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-  
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
-    fetch(url, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        var obj = JSON.parse(result);
-        console.log(obj);
-        let res1 = [];
-        console.log(stackedDatevalues);
-        for(let i = 0;i<=stackedDatevalues.length-1;i++){
-        
-        
-         
-  
-          let ripleyMonthlySales = obj.filter((item) => {
-         
-            let dateTobeCompared = stackedDatevalues[i];
-            
-            const splitDateCompared = dateTobeCompared.split(/[- :]/);
-            const splitMonth = splitDateCompared[1];
-            const splitYear = splitDateCompared[0];
-            const dateTime = item.date_created;
-            const parts = dateTime.split(/[- :]/);
-            var month = parts[1];
-            var year = parts[0];
-            let result = [];
-           return item.channel == 5 && month===splitMonth && year===splitYear;
-        
-          });
-          res1.push(ripleyMonthlySales);
-        
-      
-   
-        }
-      
-        let LinioArraY = [];
-        for(let i=0;i<=res1.length-1;i++){
-     let channel5MonthlySales = res1[i].map((item,index)=>{
-         return item.orders_qty;
-       });
-       let totalOrder = channel5MonthlySales.reduce(
-        (partialSum, a) => partialSum + a,
-        0
-      );
-     
-      LinioArraY.push(totalOrder);
-        }
-        console.log(LinioArraY);
-        // setlinioMonthly(orderQuantityArraY);
-        console.log(linioMonthly);
-        // setstackedChartData({
-        //   labels: stackedDateLabel,
-        //   datasets: stackedChartData.datasets,
-         
-        // });
-        let MONTLY_ORDER_GRAPH = {
-          labels:   [
-            "Enero",
-            "Febrero",
-            "Marzo",
-            "Abril",
-            "Mayo"],
-          datasets: [
-            {
-              label: "Ripley",
-              backgroundColor: "#F10096",
-              borderRadius: "20px",
-              stack: "2",
-              data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
-            },
-            {
-              label: "Shopify",
-              backgroundColor: "#00B6CB",
-              stack: "2",
-              data: ShopifyMonthlyArray,
-            },
-            {
-              label: "Mercado Libre",
-              backgroundColor: "#344FD5",
-              stack: "2",
-              data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
-            },
-            {
-              label: "CornerShop",
-              backgroundColor: "#5E35B1",
-              stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-            },
-            {
-              label: "Linio",
-              backgroundColor: "#97D456",
-              stack: "2",
-              data: orderQuantityArraY
-            },
-            {
-              label: "Rappi",
-              backgroundColor: "#FFD88C",
-              stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-            },
-            {
-              label: "WooCommerce",
-              backgroundColor: "#FF6059",
-        
-              stack: "2",
-              data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-            },
-          ],
-        };
-        console.log(stackedChartData.datasets[4].data);
-        //  setstackedChartData(barChartData);
-         setstackedChartData(MONTLY_ORDER_GRAPH);
-         console.log(MONTLY_ORDER_GRAPH);
-         console.log(stackedDateLabel);
-        setisLoading(false);
-      }).catch((error) => console.log("error", error));
-  }
-  const setpieChart = () => {
-    setpieChartData({
-      labels: channels,
-      datasets: [
-        {
-          label: "Emails",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-          borderWidth: 0,
-          barPercentage: 1.6,
-          data: [ripley, 480, 430, 211],
-        },
-      ],
-    });
-  };
+ 
   const setMixedChart = () => {
     setmixedChartData({
       labels: channels,
@@ -3073,7 +2883,7 @@ console.log(ExitoMonthlyArray);
                   <br></br>
                   <CardBody>
                     <Bar
-                      data={barChartData}
+                      data={stackedSalesGraph}
                       // options={barChartOptions}
                     />
                   </CardBody>
