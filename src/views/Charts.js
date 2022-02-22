@@ -1761,7 +1761,7 @@ function Charts() {
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                      </p>
                         </p>
@@ -1784,7 +1784,7 @@ function Charts() {
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
 
                         </p>
@@ -1808,7 +1808,7 @@ function Charts() {
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend">{formatted}</p>   
                        })()}  
                     </p>
                     </p>
@@ -1832,7 +1832,7 @@ function Charts() {
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -1855,7 +1855,7 @@ function Charts() {
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -1879,7 +1879,7 @@ function Charts() {
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -1903,7 +1903,7 @@ function Charts() {
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -1927,7 +1927,7 @@ function Charts() {
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -1951,7 +1951,7 @@ function Charts() {
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}
                       </p>
                     </p>
@@ -1975,7 +1975,7 @@ function Charts() {
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}  
                       </p>
                     </p>
@@ -1999,7 +1999,7 @@ function Charts() {
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend">{formatted}</p>   
                           })()}
                       
                       </p>
@@ -2131,7 +2131,7 @@ function Charts() {
            
               <button
                 id="bttnSubmit"
-                
+                className="bttnNextReport"
                 style={{
                   backgroundColor: "white",
                   textAlign: "center",
