@@ -26,7 +26,7 @@
 .infoLegend {
   
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     padding: 1em 0em 0em 1em;
   
@@ -34,7 +34,9 @@
 
 .titleTextLegend {
   font-size: 14px;
-  width:130px;
+  width:140px;
+  font-weight:600;
+  color: #232A38;
 }
 
 .numberTextLegend {
@@ -72,6 +74,7 @@
 .card-category {
   font-size: 13px !important;
   font-weight: 400 !important;
+  color:#858F99;
 
 }
 
@@ -118,6 +121,18 @@
   #datepickerCalendar {
     background-position: 7em !important;
   }
+  .titleTextLegend {
+    font-size: 10px;
+    width:140px;
+    font-weight:400;
+    color: #232A38;
+  }
+  .card-category {
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    color:#858F99;
+  
+  }
 
 }
 
@@ -153,7 +168,21 @@
   #datepickerCalendar {
     background-position: 7rem !important;
   }
-
+  .titleTextLegend {
+    font-size: 12px;
+    width:140px;
+    font-weight:600;
+    color: #232A38;
+  }
+  .card-category {
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    color:#858F99;
+  
+  }
+  .numberTextLegend {
+    font-size: 12px !important;
+  }
 }
 
 @media screen and  (min-width: 376px) and (max-width:767px)  {
@@ -188,7 +217,21 @@
   .MuiInput-root {
     width: 340px !important;
   }
-
+  .titleTextLegend {
+    font-size: 12px;
+    width:140px;
+    font-weight:600;
+    color: #232A38;
+  }
+  .card-category {
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    color:#858F99;
+  
+  }
+  .numberTextLegend {
+    font-size: 12px !important;
+  }
 }
 
 @media screen and (min-width:768px) {
@@ -239,7 +282,23 @@
   }
 
   .infoLegend {
-    padding: 68px 15px 100px 30px !important;
+    padding: 22px 15px 0px 30px !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .titleTextLegend {
+    font-size: 11px;
+    width:140px;
+    font-weight:600;
+    color: #232A38;
+  }
+  .card-category {
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    color:#858F99;
+  
+  }
+  .numberTextLegend {
+    font-size: 14px !important;
   }
 
 
@@ -252,7 +311,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1250px !important;
+    width: 1120px !important;
 
   }
 
@@ -264,17 +323,18 @@
   }
 
   #spanTextInfoCard {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   #textListoParaDespacho {
     font-size: 14px !important;
   }
 
+  
   .infoLegend {
-    padding: 50px 0px 70px 28px !important;
+    padding: 22px 15px 0px 30px !important;
+    grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
 
@@ -286,23 +346,27 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1400px !important;
+    width: 1200px !important;
     height: 190px !important;
   }
 
   .titlesInfoCard {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
   .textInfoCard {
-    font-size: 24px !important;
+    font-size: 20px !important;
   }
 
   #spanTextInfoCard {
-    font-size: 24px !important;
+    font-size: 16px !important;
   }
 
   #textListoParaDespacho {
     font-size: 20px !important;
+  }
+  .infoLegend {
+    padding: 22px 15px 0px 30px !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }

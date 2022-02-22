@@ -1749,7 +1749,7 @@ function Charts() {
                         style={{
                           color: "#344FD5",
                           backgroundColor: "#344FD5",
-                          borderRadius: "8px",
+                          borderRadius: "5px",
                         }}
                       />
                       &nbsp;Vtex
@@ -1773,7 +1773,7 @@ function Charts() {
                           style={{
                             color: "#FF6059",
                             backgroundColor: "#FF6059",
-                            borderRadius: "8px",
+                            borderRadius: "5px",
                           }}
                         />
                         &nbsp;Linio
@@ -1797,7 +1797,7 @@ function Charts() {
                       style={{
                         color: "#F10096",
                         backgroundColor: "#F10096",
-                        borderRadius: "8px",
+                        borderRadius: "5px",
                       }}
                     />
                     &nbsp;MercadoLibre
@@ -1821,7 +1821,7 @@ function Charts() {
                       style={{
                         color: "purple",
                         backgroundColor: "purple",
-                        borderRadius: "8px",
+                        borderRadius: "5px",
                       }}
                     />
                     &nbsp;Exito
@@ -1844,7 +1844,7 @@ function Charts() {
                       style={{
                         color: "#FFD88C",
                         backgroundColor: "#FFD88C",
-                        borderRadius: "8px",
+                        borderRadius: "5px",
                       }}
                     />
                     &nbsp;Ripley
@@ -1868,7 +1868,7 @@ function Charts() {
                       style={{
                         color: "#00B6CB",
                         backgroundColor: "#00B6CB",
-                        borderRadius: "8px",
+                        borderRadius: "5px",
                       }}
                     />
                     &nbsp;Shopify
@@ -1892,7 +1892,7 @@ function Charts() {
                         style={{
                           color: "#00B6CC",
                           backgroundColor: "#00B6CC",
-                          borderRadius: "8px",
+                          borderRadius: "5px",
                         }}
                       />
                      &nbsp; Paris
@@ -1916,7 +1916,7 @@ function Charts() {
                         style={{
                           color: "#97D456",
                           backgroundColor: "#97D456",
-                          borderRadius: "8px",
+                          borderRadius: "5px",
                         }}
                       />
                      &nbsp; Magento
@@ -1940,7 +1940,7 @@ function Charts() {
                         style={{
                           color: "#FF6059",
                           backgroundColor: "#FF6059",
-                          borderRadius: "8px",
+                          borderRadius: "5px",
                         }}
                       />
                       &nbsp;WooCommerce
@@ -1964,7 +1964,7 @@ function Charts() {
                         style={{
                           color: "yellow",
                           backgroundColor: "yellow",
-                          borderRadius: "8px",
+                          borderRadius: "5px",
                         }}
                       />
                       &nbsp;Chambas
@@ -1988,7 +1988,7 @@ function Charts() {
                         style={{
                           color: "red",
                           backgroundColor: "red",
-                          borderRadius: "8px",
+                          borderRadius: "5px",
                         }}
                       />
                       &nbsp;Lista Tienda
