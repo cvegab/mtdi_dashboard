@@ -547,17 +547,26 @@ function Charts() {
       }
      
       let orderQuantityArraY = [];
+      let linioStackedSalesArray = [];
       for(let i=0;i<=res1.length-1;i++){
    let channel5MonthlySales = res1[i].map((item,index)=>{
        return item.orders_qty;
      });
+     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+      return item.total;
+    });
      let totalOrder = channel5MonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
-   
+   let totalMonthlySales = stackedSalesMonthlySales.reduce(
+    (partialSum, a) => partialSum + a,
+    0
+  );
      orderQuantityArraY.push(totalOrder);
+     linioStackedSalesArray.push(totalMonthlySales);
       } 
+     
       setlinioMonthly(orderQuantityArraY);
    
       let res2 = [];
@@ -577,16 +586,25 @@ function Charts() {
       }
      
       let ripleyMonthlyArray = [];
+    let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
    let channel5MonthlySales = res2[i].map((item,index)=>{
        return item.orders_qty;
      });
+     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+      return item.total;
+    });
      let totalOrder = channel5MonthlySales.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+    let totalMonthlySales = stackedSalesMonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
      
      ripleyMonthlyArray.push(totalOrder);
+     ripleyStackedSalesArray.push(totalMonthlySales);
       }
       
 //  WOO COMMERCE STACKED GRAPH ORDERS
@@ -611,16 +629,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let WooCommerceMonthlyArray = [];
+let WooCommerceStackedSalesArray = [];
 for(let i=0;i<=res3.length-1;i++){
 let channel5MonthlySales = res3[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 WooCommerceMonthlyArray.push(totalOrder);
+WooCommerceStackedSalesArray.push(totalMonthlySales);
 }
 // SHOPIFY STACKED MONTHLY DATA
 
@@ -1434,7 +1460,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ripleyMonthlyArray,
+              data: ripleyStackedSalesArray,
             },
             {
               label: "Lista Tienda",
@@ -1482,7 +1508,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: orderQuantityArraY
+              data: linioStackedSalesArray
             },
             {
               label: "Vtex",
@@ -1498,7 +1524,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceMonthlyArray,
+              data: WooCommerceStackedSalesArray,
             },
             {
               label: "Paris",
