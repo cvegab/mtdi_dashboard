@@ -28,12 +28,17 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 1em 1em 1em 1em;
+    padding: 1em 0em 0em 1em;
   
 }
 
 .titleTextLegend {
-  font-size: 10px;
+  font-size: 14px;
+  width:130px;
+}
+
+.numberTextLegend {
+  font-size:16px;
 }
 
 .MuiTablePagination-select {
@@ -69,6 +74,17 @@
   font-weight: 400 !important;
 
 }
+
+.textInfoCard {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed:hover {
+  background-color:#06cbc1;
+  color:#ffff;
+}
+
 
 @media screen and (max-width:320px) { 
 
@@ -253,6 +269,10 @@
 
   #textListoParaDespacho {
     font-size: 14px !important;
+  }
+
+  .infoLegend {
+    padding: 50px 0px 70px 28px !important;
   }
 
 }
