@@ -482,17 +482,17 @@ function Charts() {
               pointRadius: 0,
               pointHoverRadius: 0,
               backgroundColor: [
-                "#FF6059",
-                "#06CBC1",
                 "#F10096",
+                "orange",
+                "yellow",
+                "green",
+                "red",
+                "#97D456",
+                "#00B6CC",
+                "#FF6059",
                 "purple",
                 "#FFD88C",
-                "#00B6CB",
-                "#00B6CC",
-                "#97D456",
-                "#344FD5",
-                "yellow",
-                "red",
+                "blue",
               ],
               borderWidth: 0,
               barPercentage: 1.6,
@@ -1747,9 +1747,9 @@ function Charts() {
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#344FD5",
-                          backgroundColor: "#344FD5",
-                          borderRadius: "5px",
+                          color: "#F10096",
+                          backgroundColor: "#F10096",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;Vtex
@@ -1771,9 +1771,9 @@ function Charts() {
                         <i
                           className="fa fa-circle"
                           style={{
-                            color: "#FF6059",
-                            backgroundColor: "#FF6059",
-                            borderRadius: "5px",
+                            color: "orange",
+                            backgroundColor: "orange",
+                            borderRadius: "3px",
                           }}
                         />
                         &nbsp;Linio
@@ -1795,9 +1795,9 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#F10096",
-                        backgroundColor: "#F10096",
-                        borderRadius: "5px",
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;MercadoLibre
@@ -1819,9 +1819,9 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "purple",
-                        backgroundColor: "purple",
-                        borderRadius: "5px",
+                        color: "green",
+                        backgroundColor: "green",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;Exito
@@ -1842,9 +1842,9 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#FFD88C",
-                        backgroundColor: "#FFD88C",
-                        borderRadius: "5px",
+                        color: "red",
+                        backgroundColor: "red",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;Ripley
@@ -1866,9 +1866,9 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#00B6CB",
-                        backgroundColor: "#00B6CB",
-                        borderRadius: "5px",
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;Shopify
@@ -1892,7 +1892,7 @@ function Charts() {
                         style={{
                           color: "#00B6CC",
                           backgroundColor: "#00B6CC",
-                          borderRadius: "5px",
+                          borderRadius: "3px",
                         }}
                       />
                      &nbsp; Paris
@@ -1914,9 +1914,9 @@ function Charts() {
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#97D456",
-                          backgroundColor: "#97D456",
-                          borderRadius: "5px",
+                          color: "#FF6059",
+                          backgroundColor: "#FF6059",
+                          borderRadius: "3px",
                         }}
                       />
                      &nbsp; Magento
@@ -1938,9 +1938,9 @@ function Charts() {
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#FF6059",
-                          backgroundColor: "#FF6059",
-                          borderRadius: "5px",
+                          color: "purple",
+                          backgroundColor: "purple",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;WooCommerce
@@ -1962,9 +1962,9 @@ function Charts() {
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "yellow",
-                          backgroundColor: "yellow",
-                          borderRadius: "5px",
+                          color: "#FFD88C",
+                          backgroundColor: "#FFD88C",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;Chambas
@@ -1986,9 +1986,9 @@ function Charts() {
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "red",
-                          backgroundColor: "red",
-                          borderRadius: "5px",
+                          color: "blue",
+                          backgroundColor: "blue",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;Lista Tienda
