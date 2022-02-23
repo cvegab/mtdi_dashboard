@@ -288,6 +288,7 @@ function Charts() {
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [mixedChartLoading, setmixedChartLoading] = useState(true);
+  const [mixedChartLables, setmixedChartLables] = useState([]);
   const [stackedChartData, setstackedChartData] = useState(barChartData);
   const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
@@ -378,7 +379,7 @@ function Charts() {
   // fetchStackedGraphData();
    getDateLabels();
      //setpieChart();
-    setMixedChart();
+    //setMixedChart();
   }, []);
   useEffect(() => {
     displaysalesChannelHandler();
@@ -410,6 +411,7 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
+    mixedChartLabels,
    stackedDatevalues,
  stackedDateLabel
   ]);
@@ -482,13 +484,12 @@ function Charts() {
     const channelsId = cR.map((item) => {
       return item.value;
     });
-//     const channelList = cR.map((item) => {
-//       return item.channels;
-//     });
-// console.log(channelList);
+
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
+   
+
     console.log("hi i am fetching");
     setisLoading(true);
     var myHeaders = new Headers();
@@ -510,6 +511,7 @@ function Charts() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);  
+           
       let res1 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
         let ripleyMonthlySales = obj.filter((item) => {
@@ -1183,10 +1185,13 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         setchambasOrders(totalChambasOrders);
         setmagentoOrders(totalMagentoOrders);
         setwooCommerceOrders(totalwooCommerceOrders);
-        console.log(channels);
-        console.log(cR);
+        let channelsList =cR.map((item) => {
+          return item.channel;
+        });
+        console.log(channelsList);
+        setmixedChartLables(channelsList);
         let MIXED = {
-          labels: channels,
+          labels: channelsList,
           datasets: [
             {
               label: "Ventas",
