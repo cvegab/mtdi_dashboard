@@ -421,10 +421,6 @@ function Charts() {
   
   
   const getDateLabels = ()=>{
-    console.log(selectedDateFrom);
-    console.log(selectedDateTo);
-    var futureMonth = moment(selectedDateFrom).add(1, 'month');
-    console.log(futureMonth);
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
 
@@ -438,7 +434,6 @@ function Charts() {
       result.push(startDate.format("YYYY-MM-01"));
        startDate.add(1, "month");
     }
-    console.log(result);
     setstackedDatevalues(result);
     const MONTHS = [
       "Enero",
@@ -456,26 +451,16 @@ function Charts() {
     ];
 
     const date = new Date('2021-08-01');
-    console.log(date);
     const x = result.map((item) => {
-      console.log(item);
       let d = new Date(item);
       d.setDate(1);
       d.setMonth(d.getMonth()+1);
-      console.log(d);
       const dateString = `${d.getDate()}-${
         MONTHS[d.getMonth()]
       }-${d.getFullYear()}`;
       return dateString;
     });
-    console.log(x);
     setstackedDateLabel(x);
-    // const dateString = `${date.getDate()}-${
-    //   MONTHS[date.getMonth()]
-    // }-${date.getFullYear()}`;
-
-    // console.log(dateString);
-    // let y = monthDiff(selectedDateFrom,selectedDateTo);
   }
   useEffect(() => {
     getDateLabels();
@@ -497,7 +482,10 @@ function Charts() {
     const channelsId = cR.map((item) => {
       return item.value;
     });
-
+//     const channelList = cR.map((item) => {
+//       return item.channels;
+//     });
+// console.log(channelList);
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
@@ -517,6 +505,7 @@ function Charts() {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -994,7 +983,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalRipleyOrder);
+    
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1013,7 +1002,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(TotalVtexOrder);
+    
         let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1032,7 +1021,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalLinioOrder);
+       
         let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1040,7 +1029,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let mercadoSales = obj.filter((item) => {
           return item.channel == 2;
         });
-        console.log(mercadoSales);
+   
         if (mercadoSales.length === 0) {
           setmercadoLibreOrders(0);
           setmercadoLibre(0);
@@ -1054,7 +1043,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let totalMercadoOrders = mercadoOrders.map((item) => {
           return item.orders_qty;
         });
-        console.log(totalMercadoOrders);
+   
         let totalmercadoSales = mercadoSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1087,7 +1076,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalShopifyOrder);
+  
         let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1116,7 +1105,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalMagentoOrders);
+     
         let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
@@ -1134,7 +1123,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalwooCommerceOrders);
+    
         let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
@@ -1155,7 +1144,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalChambasOrders);
+       
         let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1163,7 +1152,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
-        console.log(ListaSales);
+     
         if (ListaSales.length === 0) {
           setlistaTiendaOrders(0);
           setlistaTienda(0);
@@ -1194,6 +1183,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         setchambasOrders(totalChambasOrders);
         setmagentoOrders(totalMagentoOrders);
         setwooCommerceOrders(totalwooCommerceOrders);
+        console.log(channels);
+        console.log(cR);
         let MIXED = {
           labels: channels,
           datasets: [
@@ -1413,8 +1404,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-        console.log(stackedChartData.labels);
-        console.log(stackedDateLabel);
+       
     
         // setstackedChartData({
         //   labels: stackedDateLabel,
@@ -1616,7 +1606,6 @@ ExitoStackedSalesArray.push(totalMonthlySales);
   };
   
   const fetchFilterData = async () => {
-    console.log("2");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -1757,7 +1746,6 @@ ExitoStackedSalesArray.push(totalMonthlySales);
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
-    console.log(selectedChannels);
     setfilteredChannelArray(selectedChannels);
     displaysalesChannelHandler();
   };
@@ -1765,7 +1753,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    console.log(filteredChannelArray);
+    
     const channels = filteredChannelArray.map((item) => {
       // return item.channel;
       return item;
