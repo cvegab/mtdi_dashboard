@@ -287,6 +287,7 @@ function Charts() {
   };
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
+  const [mixedChartLoading, setmixedChartLoading] = useState(true);
   const [stackedChartData, setstackedChartData] = useState(barChartData);
   const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
@@ -376,7 +377,7 @@ function Charts() {
     fetchFilterData();
   // fetchStackedGraphData();
    getDateLabels();
-    // setpieChart();
+     //setpieChart();
     setMixedChart();
   }, []);
   useEffect(() => {
@@ -479,16 +480,6 @@ function Charts() {
   useEffect(() => {
     getDateLabels();
   }, [selectedDateFrom, selectedDateTo]);
-
-  // function monthDiff(dateFrom, dateTo) {
-  //   const x = new Date(dateFrom);
-  //   const y = new Date(dateTo);
-  //   var months;
-  //   months = (x.getFullYear() - y.getFullYear()) * 12;
-  //   months -= x.getMonth();
-  //   months += y.getMonth();
-  //   return months <= 0 ? 0 : months;
-  // }
   useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
@@ -1273,7 +1264,9 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             },
           },
         };
+    
         setmixedChartData(MIXED);
+      
         let PIE = {
           labels: [
             "Vtex",
