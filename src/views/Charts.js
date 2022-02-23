@@ -287,6 +287,7 @@ function Charts() {
   };
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
+  const [mixedChartLoading, setmixedChartLoading] = useState(true);
   const [stackedChartData, setstackedChartData] = useState(barChartData);
   const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
@@ -376,7 +377,7 @@ function Charts() {
     fetchFilterData();
   // fetchStackedGraphData();
    getDateLabels();
-    // setpieChart();
+     //setpieChart();
     setMixedChart();
   }, []);
   useEffect(() => {
@@ -422,7 +423,8 @@ function Charts() {
   const getDateLabels = ()=>{
     console.log(selectedDateFrom);
     console.log(selectedDateTo);
-
+    var futureMonth = moment(selectedDateFrom).add(1, 'month');
+    console.log(futureMonth);
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
 
@@ -434,7 +436,7 @@ function Charts() {
 
     while (startDate.isBefore(endDate)) {
       result.push(startDate.format("YYYY-MM-01"));
-      startDate.add(1, "month");
+       startDate.add(1, "month");
     }
     console.log(result);
     setstackedDatevalues(result);
@@ -453,10 +455,14 @@ function Charts() {
       "Deciembre",
     ];
 
-    const date = new Date();
+    const date = new Date('2021-08-01');
     console.log(date);
     const x = result.map((item) => {
+      console.log(item);
       let d = new Date(item);
+      d.setDate(1);
+      d.setMonth(d.getMonth()+1);
+      console.log(d);
       const dateString = `${d.getDate()}-${
         MONTHS[d.getMonth()]
       }-${d.getFullYear()}`;
@@ -464,26 +470,16 @@ function Charts() {
     });
     console.log(x);
     setstackedDateLabel(x);
-    const dateString = `${date.getDate()}-${
-      MONTHS[date.getMonth()]
-    }-${date.getFullYear()}`;
+    // const dateString = `${date.getDate()}-${
+    //   MONTHS[date.getMonth()]
+    // }-${date.getFullYear()}`;
 
-    console.log(dateString);
+    // console.log(dateString);
     // let y = monthDiff(selectedDateFrom,selectedDateTo);
   }
   useEffect(() => {
     getDateLabels();
   }, [selectedDateFrom, selectedDateTo]);
-
-  // function monthDiff(dateFrom, dateTo) {
-  //   const x = new Date(dateFrom);
-  //   const y = new Date(dateTo);
-  //   var months;
-  //   months = (x.getFullYear() - y.getFullYear()) * 12;
-  //   months -= x.getMonth();
-  //   months += y.getMonth();
-  //   return months <= 0 ? 0 : months;
-  // }
   useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
@@ -547,17 +543,26 @@ function Charts() {
       }
      
       let orderQuantityArraY = [];
+      let linioStackedSalesArray = [];
       for(let i=0;i<=res1.length-1;i++){
    let channel5MonthlySales = res1[i].map((item,index)=>{
        return item.orders_qty;
      });
+     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+      return item.total;
+    });
      let totalOrder = channel5MonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
-   
+   let totalMonthlySales = stackedSalesMonthlySales.reduce(
+    (partialSum, a) => partialSum + a,
+    0
+  );
      orderQuantityArraY.push(totalOrder);
+     linioStackedSalesArray.push(totalMonthlySales);
       } 
+     
       setlinioMonthly(orderQuantityArraY);
    
       let res2 = [];
@@ -577,16 +582,25 @@ function Charts() {
       }
      
       let ripleyMonthlyArray = [];
+    let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
    let channel5MonthlySales = res2[i].map((item,index)=>{
        return item.orders_qty;
      });
+     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+      return item.total;
+    });
      let totalOrder = channel5MonthlySales.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+    let totalMonthlySales = stackedSalesMonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
      
      ripleyMonthlyArray.push(totalOrder);
+     ripleyStackedSalesArray.push(totalMonthlySales);
       }
       
 //  WOO COMMERCE STACKED GRAPH ORDERS
@@ -611,16 +625,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let WooCommerceMonthlyArray = [];
+let WooCommerceStackedSalesArray = [];
 for(let i=0;i<=res3.length-1;i++){
 let channel5MonthlySales = res3[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 WooCommerceMonthlyArray.push(totalOrder);
+WooCommerceStackedSalesArray.push(totalMonthlySales);
 }
 // SHOPIFY STACKED MONTHLY DATA
 
@@ -643,16 +665,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ShopifyMonthlyArray = [];
+let shopifyStackedSalesArray = [];
 for(let i=0;i<=res4.length-1;i++){
 let channel5MonthlySales = res4[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 ShopifyMonthlyArray.push(totalOrder);
+shopifyStackedSalesArray.push(totalMonthlySales);
 }
 //MERCADO LIBRE STACKED MONTHLY DATA
 let res5= [];
@@ -674,16 +704,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let MercadoArray = [];
+let MercadoStackedSalesArray = [];
 for(let i=0;i<=res5.length-1;i++){
 let channel5MonthlySales = res5[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 MercadoArray.push(totalOrder);
+MercadoStackedSalesArray.push(totalMonthlySales);
 }
 
 
@@ -707,16 +745,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ChambasMonthlyArray = [];
+let ChambasStackedSalesArray = [];
 for(let i=0;i<=res6.length-1;i++){
 let channel5MonthlySales = res6[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 ChambasMonthlyArray.push(totalOrder);
+ChambasStackedSalesArray.push(totalMonthlySales);
 }
 
 
@@ -743,16 +789,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let vtexMonthlyArray = [];
+let vtexStackedSalesArray = [];
 for(let i=0;i<=res7.length-1;i++){
 let channel5MonthlySales = res7[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 vtexMonthlyArray.push(totalOrder);
+vtexStackedSalesArray.push(totalMonthlySales);
 }
 //MAGENTO MONTHLY ARRAY
 let res8= [];
@@ -776,16 +830,24 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let MagentoMonthlyArray = [];
+let magentoStackedSalesArray = [];
 for(let i=0;i<=res8.length-1;i++){
 let channel5MonthlySales = res8[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
-
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 MagentoMonthlyArray.push(totalOrder);
+magentoStackedSalesArray.push(totalMonthlySales);
 }
 // LISTA TIENDA MONTHLY SALES
 let res9= [];
@@ -810,16 +872,25 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ListaMonthlyArray = [];
+let ListaStackedSalesArray = [];
 for(let i=0;i<=res9.length-1;i++){
 let channel5MonthlySales = res9[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 
 ListaMonthlyArray.push(totalOrder);
+ListaStackedSalesArray.push(totalMonthlySales);
 }
 
 // PARIS STACKED MONTHLY SALES
@@ -845,16 +916,25 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ParisMonthlyArray = [];
+let ParisStackedSalesArray = [];
 for(let i=0;i<=res10.length-1;i++){
 let channel5MonthlySales = res10[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 
 ParisMonthlyArray.push(totalOrder);
+ParisStackedSalesArray.push(totalMonthlySales);
 }
 //EXITO MONTHLY STACKED ARRAY
 
@@ -879,16 +959,25 @@ for(let i = 0;i<=stackedDatevalues.length-1;i++){
 }
 
 let ExitoMonthlyArray = [];
+let ExitoStackedSalesArray = [];
 for(let i=0;i<=res11.length-1;i++){
 let channel5MonthlySales = res11[i].map((item,index)=>{
  return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
 (partialSum, a) => partialSum + a,
 0
 );
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
 
 ExitoMonthlyArray.push(totalOrder);
+ExitoStackedSalesArray.push(totalMonthlySales);
 }
 
 
@@ -1175,7 +1264,9 @@ ExitoMonthlyArray.push(totalOrder);
             },
           },
         };
+    
         setmixedChartData(MIXED);
+      
         let PIE = {
           labels: [
             "Vtex",
@@ -1434,7 +1525,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ripleyMonthlyArray,
+              data: ripleyStackedSalesArray,
             },
             {
               label: "Lista Tienda",
@@ -1442,7 +1533,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaMonthlyArray,
+              data: ListaStackedSalesArray,
             },
             {
               label: "Magento",
@@ -1450,7 +1541,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: MagentoMonthlyArray,
+              data: magentoStackedSalesArray,
             },
             {
               label: "Shopify",
@@ -1458,7 +1549,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ShopifyMonthlyArray,
+              data: shopifyStackedSalesArray,
             },
             {
               label: "Mercado Libre",
@@ -1466,7 +1557,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoArray,
+              data: MercadoStackedSalesArray,
             },
             {
               label: "Chambas",
@@ -1474,7 +1565,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasMonthlyArray,
+              data: ChambasStackedSalesArray,
             },
             {
               label: "Linio",
@@ -1482,7 +1573,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: orderQuantityArraY
+              data: linioStackedSalesArray
             },
             {
               label: "Vtex",
@@ -1490,7 +1581,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data:  vtexMonthlyArray,
+              data: vtexStackedSalesArray,
             },
             {
               label: "WooCommerce",
@@ -1498,7 +1589,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceMonthlyArray,
+              data: WooCommerceStackedSalesArray,
             },
             {
               label: "Paris",
@@ -1506,7 +1597,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisMonthlyArray,
+              data: ParisStackedSalesArray,
             },
             {
               label: "Exito",
@@ -1514,7 +1605,7 @@ ExitoMonthlyArray.push(totalOrder);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoMonthlyArray,
+              data: ExitoStackedSalesArray,
             },
           ],
         };
@@ -1569,7 +1660,7 @@ ExitoMonthlyArray.push(totalOrder);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-      
+     
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
