@@ -30,6 +30,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     padding: 0em 1em 1em 2em;
+
   
 }
 .infoLegendPieChart {
@@ -44,11 +45,16 @@
 .titleTextLegend {
   font-size: 12px;
   width:113px;
+  font-weight:600;
+  color: #232A38;
 }
+
+
 
 .MuiTablePagination-select {
   width: 45px !important;
   height: 30px !important;
+  border-radius: 20px !important;
 }
 .Component-paginationSelectRoot-4 {
   border-radius: 20px !important;
@@ -76,8 +82,20 @@
 .card-category {
   font-size: 13px !important;
   font-weight: 400 !important;
+  color:#858F99;
 
 }
+
+.textInfoCard {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed:hover {
+  background-color:#06cbc1;
+  color:#ffff;
+}
+
 
 @media screen and (max-width:320px) { 
 
@@ -111,6 +129,7 @@
   #datepickerCalendar {
     background-position: 7em !important;
   }
+
   .infoLegend {
   
     display: grid;
@@ -133,6 +152,7 @@
   padding:22px 50px !important;
   margin-bottom: 1em;
 }
+
 
 }
 
@@ -168,6 +188,7 @@
   #datepickerCalendar {
     background-position: 7rem !important;
   }
+
   .infoLegend {
   
     display: grid;
@@ -182,6 +203,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
   padding: 0em 1em 1em 0em;
+
 
 }
 .bttnSiguienteReporte,
@@ -222,6 +244,7 @@
   .MuiInput-root {
     width: 340px !important;
   }
+
   .infoLegend {
   
     display: grid;
@@ -313,8 +336,6 @@
     font-size: 11px !important;
   }
 
-  
-
 
 
 }
@@ -338,7 +359,7 @@
   }
 
   #spanTextInfoCard {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   #textListoParaDespacho {
@@ -368,6 +389,7 @@
   
 }
 
+
 }
 
 
@@ -392,6 +414,7 @@
 
   #spanTextInfoCard {
     font-size: 14px !important;
+
   }
 
   #textListoParaDespacho {

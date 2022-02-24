@@ -1272,6 +1272,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               pointHoverRadius: 0,
               backgroundColor: [
                 "#F10096",
+
                 "#F29A32",
                 "yellow",
                 "#E4C41B",
@@ -2730,7 +2731,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                      </p>
                         </p>
@@ -2753,7 +2754,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
 
                         </p>
@@ -2777,7 +2778,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend">{formatted}</p>   
                        })()}  
                     </p>
                     </p>
@@ -2801,7 +2802,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -2824,7 +2825,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -2848,7 +2849,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -2872,7 +2873,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -2896,7 +2897,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -2920,7 +2921,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}
                       </p>
                     </p>
@@ -2944,7 +2945,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}  
                       </p>
                     </p>
@@ -2968,7 +2969,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend">{formatted}</p>   
                           })()}
                       
                       </p>
