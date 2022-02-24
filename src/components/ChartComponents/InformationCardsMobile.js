@@ -776,7 +776,7 @@ function InformationCardsMobile(props) {
                                       marginLeft: "1em"
                                     }}
                                   >
-                                    95
+                                   {props.totalNps}
                                   </td>
                                
                                   <td className="td-actions text-left">

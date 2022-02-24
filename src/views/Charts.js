@@ -1,7 +1,7 @@
 import { Select, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 // react plugin used to create charts
-import { Line, Bar, Pie,Chart } from "react-chartjs-2";
+import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "../assets/css/Charts.css";
@@ -23,6 +23,7 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
+const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 
 // reactstrap components
@@ -42,38 +43,48 @@ import {
 import {
   chartExample1,
   chartExample4,
+  chartExample5,
   chartExample9,
   chartExample10,
   chartExample100,
   chartExample11,
   chartExample12,
+  chartExample13,
   data1,
 } from "variables/charts.js";
 import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
-const line='';
-const bar = '';
-const mixedChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const line = "";
+const bar = "";
+const mixedChartLabels = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+];
 let mixedData = {
   mixedChartLabels,
   datasets: [
     {
-      type: 'line',
-      label: 'Dataset 1',
-      borderColor: 'rgb(255, 99, 132)',
+      type: "line",
+      label: "Dataset 1",
+      yAxisID: "A",
+      borderColor: "#06CBC1",
       borderWidth: 2,
       fill: false,
-      data:[100,200,300,400,500,600]
+      data: [100, 200, 300, 400, 500, 600],
     },
     {
-      type: 'bar',
-      label: 'Dataset 2',
-      backgroundColor: 'rgb(75, 192, 192)',
-      data: [78,123,45,67,12],
-      borderColor: 'white',
-      borderWidth: 2,
+      type: "bar",
+      label: "Dataset 2",
+      yAxisID: "A",
+      backgroundColor: "#344FD5",
+      data: [78, 123, 45, 67, 12],
+      borderRadius:5,
     },
-  
   ],
 };
 const barChartData = {
@@ -108,7 +119,7 @@ const barChartData = {
       data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
     },
     {
-      label: "Mercado Libre",
+      label: "Mercadolibre",
       backgroundColor: "#344FD5",
       stack: "2",
       borderRadius:6,
@@ -144,6 +155,41 @@ const barChartData = {
     },
   ],
 };
+// let options = {
+//   scales: {
+//     x:{
+// stacked:false,
+//     },
+//       y: {
+//           max: 50000000,
+//           min: 0,
+//           position: 'left',
+//           ticks: {
+//               stepSize: 10000000
+//           }
+//       }
+//   }
+// };
+let options12 = {
+  scales: {
+    yAxes: [
+      {
+        id: "A",
+        type: "linear",
+        position: "right",
+      },
+      {
+        id: "B",
+        type: "linear",
+        position: "right",
+        ticks: {
+          max: 100,
+          min: 0,
+        },
+      },
+    ],
+  },
+};
 
 const barChartOptions = {
   plugins: {
@@ -164,6 +210,34 @@ const barChartOptions = {
       },
     ],
   },
+};
+const data11 = [1, 8, 5, 9, 20, 10, 15];
+const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
+
+//Inside data props
+const dataMix = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  datasets: [
+    {
+      label: "Data1",
+      data: data11,
+      backgroundColor: "rgba(87, 121, 234, 0.6)",
+      borderColor: "rgba(87, 121, 234, 0.6)",
+      order: 1,
+    },
+
+    {
+      label: "Total",
+      data: data2,
+      backgroundColor: "rgba(234, 87, 102, 0.6)",
+      borderColor: "rgba(234, 87, 102, 0.6)",
+      fill: false,
+      pointHoverRadius: 20,
+      pointHoverBorderWidth: 5,
+      type: "line",
+      order: 0,
+    },
+  ],
 };
 function Charts() {
   let PIE_CHART_DATA = {
@@ -186,9 +260,42 @@ function Charts() {
       },
     ],
   };
-  const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
+  let MIXED_DATA = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+    datasets: [
+      {
+        label: "Data1",
+        yAxisID: "A",
+        data: data11,
+        backgroundColor: "rgba(87, 121, 234, 0.6)",
+        borderColor: "rgba(87, 121, 234, 0.6)",
+        order: 1,
+      },
 
+      {
+        label: "Total",
+        yAxisID: "A",
+        data: data2,
+        backgroundColor: "rgba(234, 87, 102, 0.6)",
+        borderColor: "rgba(234, 87, 102, 0.6)",
+        fill: false,
+        pointHoverRadius: 20,
+        pointHoverBorderWidth: 5,
+        type: "line",
+        order: 0,
+      },
+    ],
+  };
+  const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
+  const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
+  const [mixedChartLoading, setmixedChartLoading] = useState(true);
+  const [stackedChartData, setstackedChartData] = useState(barChartData);
+  const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
+  const [stackedDateLabel, setstackedDateLabel] = useState([]);
+  const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
+  const [totalNps, settotalNps] = useState(0);
+  
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
@@ -235,7 +342,23 @@ function Charts() {
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
-  // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
+  const [op, setop] = useState({});
+  
+  //ORDERS QUANTITY STATES
+  const [ripleyOrders, setripleyOrders] = useState(0);
+  const [vtexOrders, setvtexOrders] = useState(0);
+  const [linioOrders, setlinioOrders] = useState(0);
+  const [mercadoLibreOrders, setmercadoLibreOrders] = useState(0);
+  const [exitoOrders, setexitoOrders] = useState(0);
+  const [shopifyOrders, setshopifyOrders] = useState(0);
+  const [parisOrders, setparisOrders] = useState(0);
+  const [magentoOrders, setmagentoOrders] = useState(0);
+  const [wooCommerceOrders, setwooCommerceOrders] = useState(0);
+  const [chambasOrders, setchambasOrders] = useState(0);
+  const [listaTiendaOrders, setlistaTiendaOrders] = useState(0);
+
+  //MONTHLY SALES STATES
+  const [linioMonthly, setlinioMonthly] = useState([]);
   useEffect(() => {
     // set initial value
     const mediaWatcher = window.matchMedia("(max-width: 767px)");
@@ -255,7 +378,10 @@ function Charts() {
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
-    setpieChart();
+  // fetchStackedGraphData();
+   getDateLabels();
+     //setpieChart();
+    setMixedChart();
   }, []);
   useEffect(() => {
     displaysalesChannelHandler();
@@ -278,24 +404,70 @@ function Charts() {
     wooCommerce,
     chambas,
     listaTienda,
+    ripleyOrders,
+    vtexOrders,
+    linioOrders,
+    shopifyOrders,
+    chambasOrders,
+    magentoOrders,
+    wooCommerceOrders,
+    parisOrders,
+    exitoOrders,
+   stackedDatevalues,
+ stackedDateLabel
   ]);
-  useEffect(() => {}, [channels]);
+ 
   useEffect(() => {
-   console.log(selectedDateFrom);
-   console.log(selectedDateTo);
-  let y = monthDiff(selectedDateFrom,selectedDateTo);
-  console.log(y);
-  }, [])
+ 
+  // fetchStackedGraphData();
+  }, [stackedDatevalues,stackedDateLabel]);
+  
+  
+  const getDateLabels = ()=>{
+    var startDate = moment(selectedDateFrom);
+    var endDate = moment(selectedDateTo);
 
-  function monthDiff(dateFrom, dateTo) {
-    const x = new Date(dateFrom);
-    const y = new Date(dateTo);
-    var months;
-    months = (x.getFullYear() - y.getFullYear()) * 12;
-    months -= x.getMonth();
-    months += y.getMonth();
-    return months <= 0 ? 0 : months;
-   }
+    var result = [];
+
+    if (endDate.isBefore(startDate)) {
+      throw "End date must be greated than start date.";
+    }
+
+    while (startDate.isBefore(endDate)) {
+      result.push(startDate.format("YYYY-MM-01"));
+       startDate.add(1, "month");
+    }
+    setstackedDatevalues(result);
+    const MONTHS = [
+      "En",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agos",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dic",
+    ];
+
+    const date = new Date('2021-08-01');
+    const x = result.map((item) => {
+      let d = new Date(item);
+      d.setDate(1);
+      d.setMonth(d.getMonth()+1);
+      const dateString = `${d.getDate()}-${
+        MONTHS[d.getMonth()]
+      }-${d.getFullYear()}`;
+      return dateString;
+    });
+    setstackedDateLabel(x);
+  }
+  useEffect(() => {
+    getDateLabels();
+  }, [selectedDateFrom, selectedDateTo]);
   useEffect(() => {
     if (isMobileSizes) {
       setfiltersClass("FiltersInMobile");
@@ -313,7 +485,10 @@ function Charts() {
     const channelsId = cR.map((item) => {
       return item.value;
     });
-
+//     const channelList = cR.map((item) => {
+//       return item.channels;
+//     });
+// console.log(channelList);
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
@@ -337,7 +512,466 @@ function Charts() {
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);
+        var obj = JSON.parse(result);  
+      let res1 = [];
+      for(let i = 0;i<=stackedDatevalues.length-1;i++){
+        let ripleyMonthlySales = obj.filter((item) => {
+       
+          let dateTobeCompared = stackedDatevalues[i];
+          
+          const splitDateCompared = dateTobeCompared.split(/[- :]/);
+          const splitMonth = splitDateCompared[1];
+          const splitYear = splitDateCompared[0];
+          const dateTime = item.date_created;
+          const parts = dateTime.split(/[- :]/);
+          var month = parts[1];
+          var year = parts[0];
+          let result = [];
+         return item.channel == 5 && month===splitMonth && year===splitYear;
+      // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
+      // return res1;
+        });
+        res1.push(ripleyMonthlySales);
+      }
+     
+      let orderQuantityArraY = [];
+      let linioStackedSalesArray = [];
+      for(let i=0;i<=res1.length-1;i++){
+   let channel5MonthlySales = res1[i].map((item,index)=>{
+       return item.orders_qty;
+     });
+     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+      return item.total;
+    });
+     let totalOrder = channel5MonthlySales.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+   let totalMonthlySales = stackedSalesMonthlySales.reduce(
+    (partialSum, a) => partialSum + a,
+    0
+  );
+     orderQuantityArraY.push(totalOrder);
+     linioStackedSalesArray.push(totalMonthlySales);
+      } 
+     
+      setlinioMonthly(orderQuantityArraY);
+   
+      let res2 = [];
+      for(let i = 0;i<=stackedDatevalues.length-1;i++){
+        let ripleyMonthlySales = obj.filter((item) => {
+          let dateTobeCompared = stackedDatevalues[i];
+          const splitDateCompared = dateTobeCompared.split(/[- :]/);
+          const splitMonth = splitDateCompared[1];
+          const splitYear = splitDateCompared[0];
+          const dateTime = item.date_created;
+          const parts = dateTime.split(/[- :]/);
+          var month = parts[1];
+          var year = parts[0]; 
+         return item.channel == 4 && month===splitMonth && year===splitYear;
+        });
+        res2.push(ripleyMonthlySales);
+      }
+     
+      let ripleyMonthlyArray = [];
+    let  ripleyStackedSalesArray = [];
+      for(let i=0;i<=res2.length-1;i++){
+   let channel5MonthlySales = res2[i].map((item,index)=>{
+       return item.orders_qty;
+     });
+     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+      return item.total;
+    });
+     let totalOrder = channel5MonthlySales.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+    let totalMonthlySales = stackedSalesMonthlySales.reduce(
+      (partialSum, a) => partialSum + a,
+      0
+    );
+     
+     ripleyMonthlyArray.push(totalOrder);
+     ripleyStackedSalesArray.push(totalMonthlySales);
+      }
+      
+//  WOO COMMERCE STACKED GRAPH ORDERS
+let res3 = [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 3 && month===splitMonth && year===splitYear;
+
+  });
+  res3.push(ripleyMonthlySales);
+}
+
+let WooCommerceMonthlyArray = [];
+let WooCommerceStackedSalesArray = [];
+for(let i=0;i<=res3.length-1;i++){
+let channel5MonthlySales = res3[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+WooCommerceMonthlyArray.push(totalOrder);
+WooCommerceStackedSalesArray.push(totalMonthlySales);
+}
+// SHOPIFY STACKED MONTHLY DATA
+
+let res4 = [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+    let dateTobeCompared = stackedDatevalues[i];  
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 6 && month===splitMonth && year===splitYear;
+
+  });
+  res4.push(ripleyMonthlySales);
+}
+
+let ShopifyMonthlyArray = [];
+let shopifyStackedSalesArray = [];
+for(let i=0;i<=res4.length-1;i++){
+let channel5MonthlySales = res4[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+ShopifyMonthlyArray.push(totalOrder);
+shopifyStackedSalesArray.push(totalMonthlySales);
+}
+//MERCADO LIBRE STACKED MONTHLY DATA
+let res5= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+    let dateTobeCompared = stackedDatevalues[i];  
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 2 && month===splitMonth && year===splitYear;
+
+  });
+  res5.push(ripleyMonthlySales);
+}
+
+let MercadoArray = [];
+let MercadoStackedSalesArray = [];
+for(let i=0;i<=res5.length-1;i++){
+let channel5MonthlySales = res5[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+MercadoArray.push(totalOrder);
+MercadoStackedSalesArray.push(totalMonthlySales);
+}
+
+
+//CHAMBAS STACKED GRAPH MONTHLY
+let res6= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+    let dateTobeCompared = stackedDatevalues[i];
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 11 && month===splitMonth && year===splitYear;
+
+  });
+  res6.push(ripleyMonthlySales);
+}
+
+let ChambasMonthlyArray = [];
+let ChambasStackedSalesArray = [];
+for(let i=0;i<=res6.length-1;i++){
+let channel5MonthlySales = res6[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+ChambasMonthlyArray.push(totalOrder);
+ChambasStackedSalesArray.push(totalMonthlySales);
+}
+
+
+//VTEX STACKED MONTHLY ARRAY
+
+let res7= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 7 && month===splitMonth && year===splitYear;
+
+  });
+  res7.push(ripleyMonthlySales);
+}
+
+let vtexMonthlyArray = [];
+let vtexStackedSalesArray = [];
+for(let i=0;i<=res7.length-1;i++){
+let channel5MonthlySales = res7[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+vtexMonthlyArray.push(totalOrder);
+vtexStackedSalesArray.push(totalMonthlySales);
+}
+//MAGENTO MONTHLY ARRAY
+let res8= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 9 && month===splitMonth && year===splitYear;
+
+  });
+  res8.push(ripleyMonthlySales);
+}
+
+let MagentoMonthlyArray = [];
+let magentoStackedSalesArray = [];
+for(let i=0;i<=res8.length-1;i++){
+let channel5MonthlySales = res8[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+MagentoMonthlyArray.push(totalOrder);
+magentoStackedSalesArray.push(totalMonthlySales);
+}
+// LISTA TIENDA MONTHLY SALES
+let res9= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 8 && month===splitMonth && year===splitYear;
+
+  });
+  res9.push(ripleyMonthlySales);
+}
+
+let ListaMonthlyArray = [];
+let ListaStackedSalesArray = [];
+for(let i=0;i<=res9.length-1;i++){
+let channel5MonthlySales = res9[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+
+ListaMonthlyArray.push(totalOrder);
+ListaStackedSalesArray.push(totalMonthlySales);
+}
+
+// PARIS STACKED MONTHLY SALES
+let res10= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+
+  let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == 1 && month===splitMonth && year===splitYear;
+
+  });
+  res10.push(ripleyMonthlySales);
+}
+
+let ParisMonthlyArray = [];
+let ParisStackedSalesArray = [];
+for(let i=0;i<=res10.length-1;i++){
+let channel5MonthlySales = res10[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+
+ParisMonthlyArray.push(totalOrder);
+ParisStackedSalesArray.push(totalMonthlySales);
+}
+//EXITO MONTHLY STACKED ARRAY
+
+let res11= [];
+for(let i = 0;i<=stackedDatevalues.length-1;i++){
+ let ripleyMonthlySales = obj.filter((item) => {
+ 
+    let dateTobeCompared = stackedDatevalues[i];
+    
+    const splitDateCompared = dateTobeCompared.split(/[- :]/);
+    const splitMonth = splitDateCompared[1];
+    const splitYear = splitDateCompared[0];
+    const dateTime = item.date_created;
+    const parts = dateTime.split(/[- :]/);
+    var month = parts[1];
+    var year = parts[0];
+    let result = [];
+   return item.channel == '12' && month===splitMonth && year===splitYear;
+
+  });
+  res11.push(ripleyMonthlySales);
+}
+
+let ExitoMonthlyArray = [];
+let ExitoStackedSalesArray = [];
+for(let i=0;i<=res11.length-1;i++){
+let channel5MonthlySales = res11[i].map((item,index)=>{
+ return item.orders_qty;
+});
+let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+let totalOrder = channel5MonthlySales.reduce(
+(partialSum, a) => partialSum + a,
+0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+  );
+
+ExitoMonthlyArray.push(totalOrder);
+ExitoStackedSalesArray.push(totalMonthlySales);
+}
+
 
         let ripleySales = obj.filter((item) => {
           return item.channel == 4;
@@ -345,6 +979,14 @@ function Charts() {
         let ripleySalesArray = ripleySales.map((item) => {
           return item.total;
         });
+        let ripleyOrder = ripleySales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalRipleyOrder = ripleyOrder.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+    
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -352,9 +994,18 @@ function Charts() {
         let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
+
         let vtexSalesArray = vtexSales.map((item) => {
           return item.total;
         });
+        let vtexrders = vtexSales.map((item) => {
+          return item.orders_qty;
+        });
+        let TotalVtexOrder = vtexrders.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+    
         let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -362,9 +1013,18 @@ function Charts() {
         let linioSales = obj.filter((item) => {
           return item.channel == 5;
         });
+
         let linioSalesArray = linioSales.map((item) => {
           return item.total;
         });
+        let linioOrderQuantity = linioSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalLinioOrder = linioOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+       
         let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -372,9 +1032,21 @@ function Charts() {
         let mercadoSales = obj.filter((item) => {
           return item.channel == 2;
         });
+   
+        if (mercadoSales.length === 0) {
+          setmercadoLibreOrders(0);
+          setmercadoLibre(0);
+        }
         let mercadoSalesArray = mercadoSales.map((item) => {
           return item.total;
         });
+        let mercadoOrders = mercadoSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalMercadoOrders = mercadoOrders.map((item) => {
+          return item.orders_qty;
+        });
+   
         let totalmercadoSales = mercadoSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -382,6 +1054,10 @@ function Charts() {
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
+        if (exitoSales.length === 0) {
+          setexitoOrders(0);
+          setexito(0);
+        }
         let exitoSalesArray = exitoSales.map((item) => {
           return item.total;
         });
@@ -395,6 +1071,15 @@ function Charts() {
         let shopifySalesArray = shopifySales.map((item) => {
           return item.total;
         });
+        let shopifyOrdersquantity = shopifySales.map((item) => {
+          return item.orders_qty;
+        });
+
+        let totalShopifyOrder = shopifyOrdersquantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+  
         let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -402,6 +1087,10 @@ function Charts() {
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
+        if (parisSales.length === 0) {
+          setparisOrders(0);
+          setparis(0);
+        }
         let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
@@ -412,6 +1101,14 @@ function Charts() {
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
+        let magentoSalesOrders = magentoSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalMagentoOrders = magentoSalesOrders.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+     
         let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
@@ -422,6 +1119,14 @@ function Charts() {
         let wooCommerceSales = obj.filter((item) => {
           return item.channel == 3;
         });
+        let wooCommerceOrdersQuantity = wooCommerceSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalwooCommerceOrders = wooCommerceOrdersQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+    
         let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
@@ -435,6 +1140,14 @@ function Charts() {
         let chambasArray = chambasSales.map((item) => {
           return item.total;
         });
+        let chambasOrderQuantity = chambasSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalChambasOrders = chambasOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+       
         let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -442,6 +1155,11 @@ function Charts() {
         let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
+     
+        if (ListaSales.length === 0) {
+          setlistaTiendaOrders(0);
+          setlistaTienda(0);
+        }
         let ListaArray = ListaSales.map((item) => {
           return item.total;
         });
@@ -449,7 +1167,7 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
-        console.log(totalListaSales);
+
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -460,20 +1178,91 @@ function Charts() {
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
-        console.log(exitoSales);
+        setripleyOrders(totalRipleyOrder);
+        setvtexOrders(TotalVtexOrder);
+        setlinioOrders(totalLinioOrder);
+        setshopifyOrders(totalShopifyOrder);
+        setmercadoLibreOrders(totalMercadoOrders);
+        setchambasOrders(totalChambasOrders);
+        setmagentoOrders(totalMagentoOrders);
+        setwooCommerceOrders(totalwooCommerceOrders);
+        console.log(channels);
+        console.log(cR);
+        let MIXED = {
+          labels: channels,
+          datasets: [
+            {
+              label: "Ventas",
 
+              data: [
+                vtex,
+                linio,
+                mercadoLibre,
+                exito,
+                ripley,
+                shopify,
+                paris,
+                magento,
+                wooCommerce,
+                chambas,
+                listaTienda,
+              ],
+              backgroundColor: "#344FD5",
+              
+              borderRadius:5,
+              order: 1,
+            },
+
+            {
+              label: "Órdenes",
+              yAxisID: "Ordenes",
+              data: [
+                vtexOrders,
+                linioOrders,
+                mercadoLibreOrders,
+                exitoOrders,
+                ripleyOrders,
+                shopifyOrders,
+                parisOrders,
+                magentoOrders,
+                wooCommerceOrders,
+                chambasOrders,
+                listaTiendaOrders,
+              ],
+              backgroundColor: "#06CBC1",
+              borderColor: "#06CBC1",
+              fill: false,
+              pointHoverRadius: 20,
+              pointHoverBorderWidth: 5,
+              type: "line",
+              order: 0,
+            },
+          ],
+           options: {
+      
+             plugins: {
+               legend: {
+                 display: false,
+          },
+        
+            },
+          },
+        };
+    
+        setmixedChartData(MIXED);
+      
         let PIE = {
           labels: [
             "Vtex",
             "Linio",
-            "MercadoLibre",
+            "Mercadolibre",
             "Exito",
             "Ripley",
             "Shopify",
             "Paris",
             "Magento",
             "WooCommerce",
-            "chambas",
+            "Chambas",
             "ListaTienda",
           ],
           datasets: [
@@ -483,15 +1272,16 @@ function Charts() {
               pointHoverRadius: 0,
               backgroundColor: [
                 "#F10096",
-                "orange",
+
+                "#F29A32",
                 "yellow",
-                "green",
-                "red",
+                "#E4C41B",
+                "#FFD88C",
                 "#97D456",
-                "#00B6CC",
+                "#00B6CB",
                 "#FF6059",
                 "purple",
-                "#FFD88C",
+                "#EDA4D1",
                 "blue",
               ],
               borderWidth: 0,
@@ -513,6 +1303,7 @@ function Charts() {
           ],
         };
         setpieChartData(PIE);
+       
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -549,7 +1340,10 @@ function Charts() {
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-
+        let npsArray = obj.map((item) => {
+          return item.nps;
+        });
+        
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -563,8 +1357,7 @@ function Charts() {
           0
         );
 
-        //  console.log(totalDispatchCostArray);
-        // console.log(sumOfTotalDispatch);
+
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
           (partialSum, a) => partialSum + a,
@@ -598,6 +1391,11 @@ function Charts() {
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfTotalnps = npsArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        settotalNps(sumOfTotalnps);
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -610,31 +1408,215 @@ function Charts() {
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-        // console.log(obj[0].total);
-        // //NEW API CODE
-        // settotalIncome(obj[0].total);
-        // setdispatchCost(obj[0].shipping_total);
-        // setgm(obj[0].gm);
-        // setConversion(obj[0].conversion);
-        //OLD API CODE
-        // console.log(fromDate.toISOString().slice(0, 10));
-        // const d = fromDate.toISOString().slice(0, 10);
-        // var z = obj[0].filter((item) => {
-        //   return item.date_created === "2022-01-03";
+       
+    
+        // setstackedChartData({
+        //   labels: stackedDateLabel,
+        //   datasets: stackedChartData.datasets,
+         
         // });
-        // console.log(z);
-        // if (z === undefined) {
-        //   settotalIncome(0);
-        //   setdispatchCost(0);
-        // }
-        // settotalIncome(z[0].total);
-        // setdispatchCost(z[0].shipping_total);
+        let MONTLY_ORDER_GRAPH = {
+          labels:  stackedDateLabel,
+          datasets: [
+            {
+              label: "Ripley",
+              backgroundColor: "#FFD88C",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ripleyMonthlyArray,
+            },
+            {
+              label: "ListaTienda",
+              backgroundColor: "blue",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ListaMonthlyArray,
+            },
+            {
+              label: "Magento",
+              backgroundColor: "#FF6059",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: MagentoMonthlyArray,
+            },
+            {
+              label: "Shopify",
+              backgroundColor: "#97D456",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ShopifyMonthlyArray,
+            },
+            {
+              label: "Mercadolibre",
+              backgroundColor: "yellow",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: MercadoArray,
+            },
+            {
+              label: "Chambas",
+              backgroundColor: "#EDA4D1",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ChambasMonthlyArray,
+            },
+            {
+              label: "Linio",
+              backgroundColor: "#F29A32",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: orderQuantityArraY
+            },
+            {
+              label: "Vtex",
+              backgroundColor: "#F10096",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data:  vtexMonthlyArray,
+            },
+            {
+              label: "WooCommerce",
+              backgroundColor: "purple",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: WooCommerceMonthlyArray,
+            },
+            {
+              label: "Paris",
+              backgroundColor: "#00B6CB",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ParisMonthlyArray,
+            },
+            {
+              label: "Exito",
+              backgroundColor: "#E4C41B",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ExitoMonthlyArray,
+            },
+          ],
+           options: {
+            plugins: {
+              legend: {
+                display: false,
+      },
+            },
+           },
+        };
+       
+        setstackedChartData(MONTLY_ORDER_GRAPH);
+        let MONTLY_SALES_GRAPH = {
+          labels:  stackedDateLabel,
+          datasets: [
+            {
+              label: "Ripley",
+              backgroundColor: "#FFD88C",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ripleyStackedSalesArray,
+            },
+            {
+              label: "ListaTienda",
+              backgroundColor: "blue",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ListaStackedSalesArray,
+            },
+            {
+              label: "Magento",
+              backgroundColor: "#FF6059",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: magentoStackedSalesArray,
+            },
+            {
+              label: "Shopify",
+              backgroundColor: "#97D456",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: shopifyStackedSalesArray,
+            },
+            {
+              label: "Mercadolibre",
+              backgroundColor: "yellow",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: MercadoStackedSalesArray,
+            },
+            {
+              label: "Chambas",
+              backgroundColor: "#EDA4D1",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: ChambasStackedSalesArray,
+            },
+            {
+              label: "Linio",
+              backgroundColor: "#F29A32",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: linioStackedSalesArray
+            },
+            {
+              label: "Vtex",
+              backgroundColor: "#F10096",
+              borderRadius: "20px",
+              stack: "2",
+              borderRadius:6,
+              data: vtexStackedSalesArray,
+            },
+            {
+              label: "WooCommerce",
+              backgroundColor: "purple",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: WooCommerceStackedSalesArray,
+            },
+            {
+              label: "Paris",
+              backgroundColor: "#00B6CB",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ParisStackedSalesArray,
+            },
+            {
+              label: "Exito",
+              backgroundColor: "#E4C41B",
+              borderRadius: "20px",
+              borderRadius:6,
+              stack: "2",
+              data: ExitoStackedSalesArray,
+            },
+          ],
+        };
+        setstackedSalesGraph(MONTLY_SALES_GRAPH);
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
+  
   const fetchFilterData = async () => {
-    console.log("2");
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -654,15 +1636,15 @@ function Charts() {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        
         var obj = JSON.parse(result);
-        console.log(obj[4].stores);
+      
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
         var flattened = [].concat.apply([], allChannelsArray);
 
-        console.log(flattened);
+      
         var resArr = [];
         flattened.filter(function (item) {
           var i = resArr.findIndex(
@@ -673,12 +1655,12 @@ function Charts() {
           }
           return null;
         });
-        console.log(resArr);
+      
         setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-        console.log(allSalesChannels);
+     
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
@@ -712,20 +1694,30 @@ function Charts() {
       })
       .catch((error) => console.log("error", error));
   };
-  const setpieChart = () => {
-    setpieChartData({
+ 
+  const setMixedChart = () => {
+    setmixedChartData({
       labels: channels,
       datasets: [
         {
-          label: "Emails",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-          borderWidth: 0,
-          barPercentage: 1.6,
-          data: [ripley, 480, 430, 211],
+          type: "line",
+          label: "Dataset 1",
+          borderColor: "#06CBC1",
+          borderWidth: 2,
+          fill: false,
+          data: [100, 200, 300, 400, 500, 600],
+        },
+        {
+          type: "bar",
+          label: "Dataset 2",
+          backgroundColor: "#344FD5",
+          data: [78, 123, 45, 67, 12],
+          borderColor: "#344FD5",
+          borderRadius: 5,
+          borderWidth: 2,
         },
       ],
+      
     });
   };
   const changeDateHandler = (event) => {
@@ -767,20 +1759,14 @@ function Charts() {
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
-    console.log(selectedChannels);
     setfilteredChannelArray(selectedChannels);
     displaysalesChannelHandler();
-    // console.log(filteredChannelArray);
-    // const selectedChannelsArray = selectedStoreData[0].channels;
-    // const selectedChannels = selectedChannelsArray.map((item) => {
-    //   return item;
-    // });
   };
   const applyFiltersButtonhandler = () => {
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    console.log(filteredChannelArray);
+    
     const channels = filteredChannelArray.map((item) => {
       // return item.channel;
       return item;
@@ -796,28 +1782,8 @@ function Charts() {
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
-    console.log(item);
-    // const channelsId = filteredChannelArray.map((item) => {
-    //   return item.value;
-    // });
-    // let y = [...channelsId];
-    // let z = [];
-    // if (item === "MercadoLibre") {
-    //   z = y.filter((i) => i !== 2);
-    // }
-    // if (item === "Vtex") {
-    //   z = y.filter((i) => i !== 7);
-    // }
-    // //  console.log(y.join(","));
-    // console.log(z);
-    // console.log(channelsId);
-    let x = cR.filter((i) => i !== item);
+   let x = cR.filter((i) => i !== item);
     setcR(x);
-    console.log(x.value);
-    // setchannels(x.channel);
-    // setchannelId(x.value);
-    // console.log(channelId);
-    // console.log(channels);
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
@@ -864,26 +1830,26 @@ function Charts() {
                   width: "185px",
                   height: "60px",
                   border: "0",
-                  marginBottom: "1em"
-                 
+                  marginBottom: "1em",
                 }}
               >
                 <p
-                id="textBttnGeneral"
-                style={{
-                  alignItems: "initial",
-                  marginLeft: "1em",
-                  display: "flex",
-                  marginTop: "10px",
-                  fontSize: "16px",
-                  textTransform: "none",
-                  fontWeight: "bold"               
-                }}>
-                <span className="btn-label">
-                  <i className="nc-icon nc-layout-11" />
-                </span>
-                &nbsp; General
-                 </p>
+                  id="textBttnGeneral"
+                  style={{
+                    alignItems: "initial",
+                    marginLeft: "1em",
+                    display: "flex",
+                    marginTop: "10px",
+                    fontSize: "16px",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <span className="btn-label">
+                    <i className="nc-icon nc-layout-11" />
+                  </span>
+                  &nbsp; General
+                </p>
               </button>
 
               {/* {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
@@ -1012,9 +1978,9 @@ function Charts() {
                     id="select-country"
                     style={{
                       width: "193px",
-                      height:"46px",
+                      height: "46px",
                       marginLeft: "1em",
-                      backgroundColor:"white",
+                      backgroundColor: "white",
                       borderRadius: "17px",
                       marginBottom: "1em",
                       fontSize: "10px",
@@ -1055,9 +2021,9 @@ function Charts() {
                     id="select-tienda"
                     style={{
                       width: "193px",
-                      height:"46px",
+                      height: "46px",
                       marginLeft: "1em",
-                      backgroundColor:"white",
+                      backgroundColor: "white",
                       borderRadius: "17px",
                       marginBottom: "1em",
                       fontSize: "10px",
@@ -1338,11 +2304,14 @@ function Charts() {
               Procesamiento de pedidos
             </p>
 
-            <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-              {/* ORDERS */}
-              <Col md="3">
-                <div>
-                  <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
+              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                {/* ORDERS */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                    >
                       <img src={iconPP1} width="30px" />
                       &nbsp; Pedidos
                   </p>
@@ -1590,7 +2559,7 @@ function Charts() {
                     &nbsp; NPS
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -1626,30 +2595,38 @@ function Charts() {
                   </h5>
                 </div>
               </Col>
-              {/* claims */}
-              <Col md="3">
-                <div>
-                <p className="titlesInfoCard" style={{ color: "#C4C4C4", fontWeight:"bold" }}>
-                    <img src={iconEC3} width="30px" />
-                    &nbsp; Reclamos
-                  </p>
-                  <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
-                    <span
-                      id="spanTextInfoCard"
-                      style={{
-                        color: "#FF6059",
-                        fontSize: "16px",
-                        textAlign: "right",
-                      }}
+            
+             
+                {/* claims */}
+                <Col md="3">
+                  <div>
+                    <p
+                      className="titlesInfoCard"
+                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
                     >
-                      -6%
-                    </span>
-                  </h5>
-                </div>
-              </Col>
-              {/* READY TO DELIVER */}
-              {/* <Col md="3">
+                      <img src={iconEC3} width="30px" />
+                      &nbsp; Reclamos
+                    </p>
+                    <h5
+                      className="textInfoCard"
+                      style={{ fontSize: "22px", color: "#444B54" }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
+                      <span
+                        id="spanTextInfoCard"
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          textAlign: "right",
+                        }}
+                      >
+                        -6%
+                      </span>
+                    </h5>
+                  </div>
+                </Col>
+                {/* READY TO DELIVER */}
+                {/* <Col md="3">
               <div>
                 <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                 <h5 style={{ fontSize: "22px", color: "#444B54" }}>
@@ -1685,6 +2662,7 @@ function Charts() {
               readyToShip={readyToShip}
               onTheWay={onTheWay}
               reviews={reviews}
+              totalNps={totalNps}
             />
           </div>
 
@@ -1693,56 +2671,48 @@ function Charts() {
 
           {/* GRAPHS */}
           <Row>
-          {/* </Row>  <Col md="12">
-              <Card className="car-chart">
+
+           <Col id="ColMixedChart" lg="6" md="12" sm="12" >
+              <Card className="car-chart" style={{ height: "97%"}}>
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
-                  </CardTitle>  */}
-                  {/* <p className="card-category"> </p> */}
-                {/* </CardHeader>
+                  </CardTitle>  
+                   <p className="card-category"> </p> 
+                 </CardHeader>
                 <CardBody>
                   <br></br>
-                  <br></br> */}
-                  {/* <Bar
-                    data={chartExample100.data}
-                    options={chartExample100.options}
-                  /> */}
-               
-        
-                {/* </CardBody> */}
-                <br></br>
-                <br></br>
-              {/* </Card>
-            </Col> */}
-
-<Col md="6">
-              <Row>
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    <strong>Participación canal de venta</strong>
-                  </CardTitle>
-                  {/* <p className="card-category">Last Campaign Performance</p> */}
-                </CardHeader>
-                <CardBody style={{ height: "342px" }}>
-                  <Pie
-                    data={pieChartData}
-                    options={chartExample11.options}
-                    width={456}
-                    height={190}
-                  />
+                  <br></br>
+                  <Bar data={mixedChartData} 
+                  options={chartExample13.options}
+                   />
                 </CardBody>
-                </Card>
-              </Row>
+                <br></br>
+                <br></br>
+              </Card>
               </Col>
-                  
-                  <Col md="6">
-                    
-                  <Card>
-                  <div className="legend">
-                  <div className="infoLegend">
-                  <div>
+
+
+              <Col id="ColPieChart" lg="6" md="12" sm="12">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      <strong>Participación canal de venta</strong>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardBody style={{ height: "342px" }}>
+                    <Pie
+                      data={pieChartData}
+                      options={chartExample11.options}
+                      width={456}
+                      height={190}
+                    />
+                  </CardBody>
+                  <CardFooter>
+
+                  <div className="infoLegendPieChart">
+  
+                    <div>
                       <p className="titleTextLegend">
                       <i
                         className="fa fa-circle"
@@ -1771,8 +2741,8 @@ function Charts() {
                         <i
                           className="fa fa-circle"
                           style={{
-                            color: "orange",
-                            backgroundColor: "orange",
+                            color: "#F29A32",
+                            backgroundColor: "#F29A32",
                             borderRadius: "3px",
                           }}
                         />
@@ -1800,7 +2770,7 @@ function Charts() {
                         borderRadius: "3px",
                       }}
                     />
-                    &nbsp;MercadoLibre
+                    &nbsp;Mercadolibre
                     <p className="card-category">
                       {(() => {
                           let number  = mercadoLibre;
@@ -1819,8 +2789,8 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "green",
-                        backgroundColor: "green",
+                        color: "#E4C41B",
+                        backgroundColor: "#E4C41B",
                         borderRadius: "3px",
                       }}
                     />
@@ -1842,8 +2812,8 @@ function Charts() {
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "red",
-                        backgroundColor: "red",
+                        color: "#FFD88C",
+                        backgroundColor: "#FFD88C",
                         borderRadius: "3px",
                       }}
                     />
@@ -1860,7 +2830,7 @@ function Charts() {
                     </p>
                     </p>
                     </div>
-                    
+
                     <div>
                     <p className="titleTextLegend">
                     <i
@@ -1884,14 +2854,14 @@ function Charts() {
                     </p>
                     </p>
                     </div>
-                  
+
                     <div>
                     <p className="titleTextLegend">
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#00B6CC",
-                          backgroundColor: "#00B6CC",
+                          color: "#00B6CB",
+                          backgroundColor: "#00B6CB",
                           borderRadius: "3px",
                         }}
                       />
@@ -1962,8 +2932,8 @@ function Charts() {
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#FFD88C",
-                          backgroundColor: "#FFD88C",
+                          color: "#EDA4D1",
+                          backgroundColor: "#EDA4D1",
                           borderRadius: "3px",
                         }}
                       />
@@ -1991,7 +2961,7 @@ function Charts() {
                           borderRadius: "3px",
                         }}
                       />
-                      &nbsp;Lista Tienda
+                      &nbsp;ListaTienda
                       <p className="card-category">
                           {(() => {
                               let number  = listaTienda;
@@ -2004,12 +2974,17 @@ function Charts() {
                       
                       </p>
                     </p>
-                    </div>
-                  </div>     
-              </div>
-              </Card>
-            </Col>
+                    
+                  </div>
+                </div>
+                  </CardFooter>
+                </Card>
+                </Col>
+              
             
+            </Row> 
+
+            <Row>
             <Col md="6">
               
                 <Card className="card-chart">
@@ -2018,11 +2993,281 @@ function Charts() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar
-                     data={barChartData} 
-                     options={barChartOptions} 
-                    />
+                    <Bar data={stackedChartData} 
+                    options={chartExample5.options}
+                     />
                   </CardBody>
+                    <CardFooter>
+                  <div className="legend">
+                  <div className="infoLegend">
+             
+                    <div>
+                      <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FFD88C",
+                          backgroundColor: "#FFD88C",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Ripley
+                    
+                     {/* <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p> */}
+                        </p>
+                        </div>
+                        <div>
+                        <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "blue",
+                            backgroundColor: "blue",
+                            borderRadius: "3px",
+                          }}
+                        />
+                        &nbsp;ListaTienda
+                        {/* <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p> */}
+                      </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Magento
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Shopify
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Mercadolibre
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#EDA4D1",
+                        backgroundColor: "#EDA4D1",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Chambas
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#F29A32",
+                          backgroundColor: "#F29A32",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Linio
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#F10096",
+                          backgroundColor: "#F10096",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Vtex
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "purple",
+                          backgroundColor: "purple",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;WooCommerce
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#00B6CB",
+                          backgroundColor: "#00B6CB",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Paris
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p> */}
+                    </p>
+                    </div> 
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#E4C41B",
+                          backgroundColor: "#E4C41B",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Exito
+                      {/* <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p> */}
+                    </p>
+                    </div>
+                  </div>
+                </div>
+
+                    </CardFooter>
                 </Card>
               
               </Col>
@@ -2035,14 +3280,288 @@ function Charts() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={barChartData} 
-                    options={barChartOptions}
-                     />
+                    <Bar
+                      data={stackedSalesGraph}
+                      options={chartExample5.options}
+                      // options={barChartOptions}
+                    />
                   </CardBody>
+                     <CardFooter>
+                  
+              
+                <div className="legend">
+                  <div className="infoLegend">
+             
+                    <div>
+                      <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FFD88C",
+                          backgroundColor: "#FFD88C",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Ripley
+                    
+                     {/* <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p> */}
+                        </p>
+                        </div>
+                        <div>
+                        <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "blue",
+                            backgroundColor: "blue",
+                            borderRadius: "3px",
+                          }}
+                        />
+                        &nbsp;ListaTienda
+                        {/* <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p> */}
+                      </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Magento
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Shopify
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Mercadolibre
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#EDA4D1",
+                        backgroundColor: "#EDA4D1",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Chambas
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FF7ECE",
+                          backgroundColor: "#FF7ECE",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Linio
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#F10096",
+                          backgroundColor: "#F10096",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Vtex
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "purple",
+                          backgroundColor: "purple",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;WooCommerce
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#00B6CB",
+                          backgroundColor: "#00B6CB",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Paris
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p> */}
+                    </p>
+                    </div> 
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#E4C41B",
+                          backgroundColor: "#E4C41B",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Exito
+                      {/* <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p> */}
+                    </p>
+                    </div>
+                  </div>
+                </div>
+                  </CardFooter>
                 </Card>
               
             </Col>
-
+            </Row>
             {/* <Col md="6">
             <Card className="card-chart">
               <CardHeader>
@@ -2057,7 +3576,7 @@ function Charts() {
               </CardBody>
             </Card>
           </Col> */}
-          </Row>
+          {/* </Row> */}
           <Row>
             {/* <Col md="6">
             <Card className="card-chart">
@@ -2104,7 +3623,7 @@ function Charts() {
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
                 id="bttnSubmit"
-                
+                className="bttnCompartirReporte"
                 style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",                 
@@ -2131,7 +3650,7 @@ function Charts() {
            
               <button
                 id="bttnSubmit"
-                className="bttnNextReport"
+                className="bttnSiguienteReporte"
                 style={{
                   backgroundColor: "white",
                   textAlign: "center",
