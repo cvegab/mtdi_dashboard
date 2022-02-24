@@ -540,6 +540,7 @@ useEffect(() => {
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
+    console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -1228,6 +1229,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
      const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
        return item.channel
      })
+     console.log(lineAndBarChartLabels);
      const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
       return item.value
     })
@@ -1549,7 +1551,10 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
            },
         };
-       
+       console.log(ripleyStackedSalesArray);
+       console.log(ChambasStackedSalesArray);
+    // ripleyStackedSalesArray = ripleyStackedSalesArray. every(item => item === 0);
+    console.log(ripleyStackedSalesArray);
         setstackedChartData(MONTLY_ORDER_GRAPH);
         let MONTLY_SALES_GRAPH = {
           labels:  stackedDateLabel,
