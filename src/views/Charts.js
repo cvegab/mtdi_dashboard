@@ -3366,17 +3366,17 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Ripley
-                    
-                     {/* <p className="card-category">
+                  
+                      <p className="card-category">
                        {(() => {
-                          let number  = vtex;
+                          let number  = ripley;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
                           return <div> {formatted}</div>   
                        })()}
-                     </p> */}
+                     </p> 
                         </p>
                         </div>
                         <div>
@@ -3390,9 +3390,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                           }}
                         />
                         &nbsp;ListaTienda
-                        {/* <p className="card-category">
+                        <p className="card-category">
                           {(() => {
-                            let number  = linio;
+                            let number  = listaTienda;
                             let formatted = new Intl.NumberFormat("es-CL",{
                               style:'currency',
                               currency:'CLP'
@@ -3400,7 +3400,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                             return <div> {formatted}</div>   
                         })()}
 
-                        </p> */}
+                    </p>  
                       </p>
                     </div>
                     <div>
@@ -3414,16 +3414,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Magento
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = mercadoLibre;
+                          let number  = magento;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
                           return <div> {formatted}</div>   
                        })()}  
-                    </p> */}
+                    </p>
                     </p>
                     </div>
 
@@ -3438,16 +3438,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Shopify
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = exito;
+                          let number  = shopify;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
                           return <div> {formatted}</div>   
                        })()}
-                    </p> */}
+                    </p>
                     </p>
                     </div>
                     <div>
@@ -3461,16 +3461,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Mercadolibre
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = ripley;
+                          let number  = mercadoLibre;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
                           return <div> {formatted}</div>   
                        })()}
-                    </p> */}
+                    </p>
                     </p>
                     </div>
 
@@ -3485,16 +3485,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Chambas
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = shopify;
+                          let number  = chambas;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
                           return <div> {formatted}</div>   
                        })()}
-                    </p> */}
+                    </p>
                     </p>
                     </div>
 
@@ -3509,16 +3509,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                      &nbsp; Linio
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
-                            let number  = paris;
+                            let number  = linio;
                             let formatted = new Intl.NumberFormat("es-CL",{
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
                             return <div> {formatted}</div>   
                         })()}
-                      </p> */}
+                      </p>
                     </p>
                     </div>
 
@@ -3533,16 +3533,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                      &nbsp; Vtex
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
-                            let number  = magento;
+                            let number  = vtex;
                             let formatted = new Intl.NumberFormat("es-CL",{
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
                             return <div> {formatted}</div>   
                         })()}
-                      </p> */}
+                      </p>
                     </p>
                     </div>
 
@@ -3557,7 +3557,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;WooCommerce
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
                               let number  = wooCommerce;
                               let formatted = new Intl.NumberFormat("es-CL",{
@@ -3566,7 +3566,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                               }).format(number);
                               return <div> {formatted}</div>   
                           })()}
-                      </p> */}
+                      </p>
                     </p>
                     </div>
 
@@ -3581,16 +3581,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Paris
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
-                              let number  = chambas;
+                              let number  = paris;
                               let formatted = new Intl.NumberFormat("es-CL",{
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
                               return <div> {formatted}</div>   
                           })()}  
-                      </p> */}
+                      </p>
                     </p>
                     </div> 
 
@@ -3605,9 +3605,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Exito
-                      {/* <p className="card-category">
+                      <p className="card-category">
                           {(() => {
-                              let number  = listaTienda;
+                              let number  = exito;
                               let formatted = new Intl.NumberFormat("es-CL",{
                                 style:'currency',
                                 currency:'CLP'
@@ -3615,7 +3615,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                               return <div> {formatted}</div>   
                           })()}
                       
-                      </p> */}
+                      </p>
                     </p>
                     </div>
                   </div>
