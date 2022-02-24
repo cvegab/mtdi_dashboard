@@ -420,10 +420,10 @@ function Charts() {
  stackedDateLabel
   ]);
  
-  useEffect(() => {
-  handleRemovetheLabelsData();
-  }, [vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
-    chambas,listaTienda,ChannelSelectedForDelete])
+  // useEffect(() => {
+  // handleRemovetheLabelsData();
+  // }, [vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
+  //   chambas,listaTienda,ChannelSelectedForDelete])
   
 
   
@@ -1171,7 +1171,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-
+setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -1199,7 +1199,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         console.log(ChannelSelectedForDelete.channel);
        
        console.log(mixedChartsalesData);
-       let xing = [100,200,300,400,500,600];
+       let xing = mixedChartsalesData;
        var ring = channelsList.map((id, index) => {
         
         return {
@@ -1209,13 +1209,13 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         }
       });
       console.log(ring);
-      let ping = [...ring];
-      console.log(ChannelSelectedForDelete);
-      let x = ping.filter((i) => {
-       
-        i.channel !== ChannelSelectedForDelete
-      });
-       console.log(x);
+      
+      console.log(ChannelSelectedForDelete.channel);
+     
+     let x = ring.filter((item,index) => {
+        console.log(item.channel);
+        item.channel !== ChannelSelectedForDelete.channel});
+       console.log(ring);
       //  setmixedChartsalesData([vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
       //   chambas,listaTienda]);
         console.log(mixedChartsalesData);
@@ -1238,7 +1238,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               //   chambas,
               //   listaTienda,
               // ],
-              data:mixedChartsalesData,
+            data: mixedChartsalesData,
               backgroundColor: "rgba(87, 121, 234, 0.6)",
               borderColor: "rgba(87, 121, 234, 0.6)",
               order: 1,
@@ -1290,7 +1290,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             },
           },
         };
-//     console.log(MIXED.datasets[0].data);
+   console.log(MIXED.datasets[0].data);
 // //     let resultos={};
 // //     channelsList.forEach((key, i) => resultos[key] = MIXED.datasets[0].data[i]);
 // //     console.log(resultos);
@@ -1827,16 +1827,18 @@ ExitoStackedSalesArray.push(totalMonthlySales);
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
-const handleRemovetheLabelsData = ()=>{
-  setmixedChartsalesData([vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
-    chambas,listaTienda]);
-    console.log(ChannelSelectedForDelete.channel);
-    let x = [];
-    if(ChannelSelectedForDelete.channel === 'Paris'){
-    x = mixedChartsalesData.filter((i,index) => i !== paris);  
-    }
-    setmixedChartsalesData(x);
-}
+// const handleRemovetheLabelsData = ()=>{
+//   setmixedChartsalesData([vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
+//     chambas,listaTienda]);
+//     console.log(ChannelSelectedForDelete.channel);
+//     let x = [];
+//     if(ChannelSelectedForDelete.channel === 'Paris'){
+//       console.log(paris);
+//     x = mixedChartsalesData.filter((i,index) => i !== paris);  
+//     }
+//     console.log(x);
+//     setmixedChartsalesData(x);
+// }
 
 
   const  handleRemovetheLabels=(item)=>{
