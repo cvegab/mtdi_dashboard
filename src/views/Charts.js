@@ -294,6 +294,8 @@ function Charts() {
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
+  const [totalNps, settotalNps] = useState(0);
+  
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
@@ -1300,6 +1302,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           ],
         };
         setpieChartData(PIE);
+       
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -1336,7 +1339,10 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-
+        let npsArray = obj.map((item) => {
+          return item.nps;
+        });
+        
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1349,6 +1355,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+
 
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
@@ -1383,6 +1390,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfTotalnps = npsArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        settotalNps(sumOfTotalnps);
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -2546,7 +2558,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     &nbsp; NPS
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -2649,6 +2661,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               readyToShip={readyToShip}
               onTheWay={onTheWay}
               reviews={reviews}
+              totalNps={totalNps}
             />
           </div>
 
