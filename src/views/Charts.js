@@ -289,6 +289,8 @@ function Charts() {
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [mixedChartLoading, setmixedChartLoading] = useState(true);
   const [mixedChartLables, setmixedChartLables] = useState([]);
+  const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
+  const [ChannelSelectedForDelete, setChannelSelectedForDelete] = useState('');
   const [stackedChartData, setstackedChartData] = useState(barChartData);
   const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
@@ -378,6 +380,7 @@ function Charts() {
     fetchFilterData();
   // fetchStackedGraphData();
    getDateLabels();
+ //  handleRemovetheLabelsData();
      //setpieChart();
     //setMixedChart();
   }, []);
@@ -411,16 +414,18 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
-    mixedChartLabels,
+   
+   
    stackedDatevalues,
  stackedDateLabel
   ]);
  
   useEffect(() => {
- 
-  // fetchStackedGraphData();
-  }, [stackedDatevalues,stackedDateLabel]);
+  handleRemovetheLabelsData();
+  }, [vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
+    chambas,listaTienda,ChannelSelectedForDelete])
   
+
   
   const getDateLabels = ()=>{
     var startDate = moment(selectedDateFrom);
@@ -1188,27 +1193,52 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let channelsList =cR.map((item) => {
           return item.channel;
         });
+        
         console.log(channelsList);
-        setmixedChartLables(channelsList);
+        // setmixedChartLables(channelsList);
+        console.log(ChannelSelectedForDelete.channel);
+       
+       console.log(mixedChartsalesData);
+       let xing = [100,200,300,400,500,600];
+       var ring = channelsList.map((id, index) => {
+        
+        return {
+          channel: id,
+          value:xing[index],
+         
+        }
+      });
+      console.log(ring);
+      let ping = [...ring];
+      console.log(ChannelSelectedForDelete);
+      let x = ping.filter((i) => {
+       
+        i.channel !== ChannelSelectedForDelete
+      });
+       console.log(x);
+      //  setmixedChartsalesData([vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
+      //   chambas,listaTienda]);
+        console.log(mixedChartsalesData);
         let MIXED = {
           labels: channelsList,
           datasets: [
             {
               label: "Ventas",
 
-              data: [
-                vtex,
-                linio,
-                mercadoLibre,
-                exito,
-                ripley,
-                shopify,
-                paris,
-                magento,
-                wooCommerce,
-                chambas,
-                listaTienda,
-              ],
+              // data: [
+              //   vtex,
+              //   linio,
+              //   mercadoLibre,
+              //   exito,
+              //   ripley,
+              //   shopify,
+              //   paris,
+              //   magento,
+              //   wooCommerce,
+              //   chambas,
+              //   listaTienda,
+              // ],
+              data:mixedChartsalesData,
               backgroundColor: "rgba(87, 121, 234, 0.6)",
               borderColor: "rgba(87, 121, 234, 0.6)",
               order: 1,
@@ -1260,8 +1290,23 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             },
           },
         };
-    
-        setmixedChartData(MIXED);
+//     console.log(MIXED.datasets[0].data);
+// //     let resultos={};
+// //     channelsList.forEach((key, i) => resultos[key] = MIXED.datasets[0].data[i]);
+// //     console.log(resultos);
+// //     let zebra = [];
+// //    zebra.push(resultos);
+// //    console.log(zebra);
+// //    var pink = zebra.map(o => {
+// //     var k = Object.keys(o)[0];
+// //     return {
+// //         channel: k,
+// //         value: o[k]
+// //     };
+// // });
+// // console.log(pink);
+
+         setmixedChartData(MIXED);
       
         let PIE = {
           labels: [
@@ -1774,12 +1819,107 @@ ExitoStackedSalesArray.push(totalMonthlySales);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
+    //handleRemovetheLabels(item);
+    setChannelSelectedForDelete(item);
    let x = cR.filter((i) => i !== item);
     setcR(x);
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
+const handleRemovetheLabelsData = ()=>{
+  setmixedChartsalesData([vtex,linio,mercadoLibre,exito,ripley,shopify,paris,magento,wooCommerce,
+    chambas,listaTienda]);
+    console.log(ChannelSelectedForDelete.channel);
+    let x = [];
+    if(ChannelSelectedForDelete.channel === 'Paris'){
+    x = mixedChartsalesData.filter((i,index) => i !== paris);  
+    }
+    setmixedChartsalesData(x);
+}
+
+
+  const  handleRemovetheLabels=(item)=>{
+//     console.log(item);
+//     let channelsList =cR.map((item) => {
+//       return item.channel;
+//     });
+//     console.log(channelsList);
+//     let x = [];
+//     let y = [];
+   
+//     if(item.channel === 'Ripley'){
+//       console.log(ripley);
+//     x = mixedChartsalesData.filter((i,index) => i !== ripley);
+//     y =channelsList.filter((i,index) => i !== 'Ripley');
+//     }  
+//  setmixedChartsalesData(x);
+   
+    console.log(mixedChartsalesData);
+    // if(item.channel === 'Linio'){
+    //  console.log(linio);
+    // x =z.filter((i,index) => i !==  linio);
+    // console.log(x);
+    // y =channelsList.filter((i,index) => i !== 'Linio');
+    // }  
+    // z=x;
+    // console.log(z);
+    
+    // console.log(x);
+    // console.log(y);
+    // console.log(mixedChartsalesData);
+   
+    let MIXED = {
+      labels: y,
+      datasets: [
+        {
+          label: "Ventas",
+
+          data: x,
+          backgroundColor: "rgba(87, 121, 234, 0.6)",
+          borderColor: "rgba(87, 121, 234, 0.6)",
+          order: 1,
+        },
+
+        {
+          label: "Ordenes",
+          yAxisID: "Ordenes",
+          data: mixedChartsalesData,
+          backgroundColor: "rgba(234, 87, 102, 0.6)",
+          borderColor: "rgba(234, 87, 102, 0.6)",
+          fill: false,
+          pointHoverRadius: 20,
+          pointHoverBorderWidth: 5,
+          type: "line",
+          order: 0,
+        },
+      ],
+      options: {
+        scales: {
+          yAxes: [
+            {
+              id: "Ordenes",
+              type: "linear",
+              position: "left",
+            },
+            {
+              id: "B",
+              type: "linear",
+              position: "right",
+              ticks: {
+                max: 1,
+                min: 0,
+              },
+            },
+          ],
+        },
+      },
+    };
+console.log(MIXED.datasets[0].data);
+
+    setmixedChartData(MIXED);
+
+  }
   return (
     <>
       {isLoading && <SplashScreen></SplashScreen>}
