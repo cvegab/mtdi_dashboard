@@ -1204,7 +1204,7 @@ setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalex
         
         return {
           channel: id,
-          value:xing[index],
+          value:mixedChartsalesData[index],
          
         }
       });
@@ -1212,7 +1212,7 @@ setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalex
       
       console.log(ChannelSelectedForDelete.channel);
      
-     let x = ring.filter((item,index) => {
+     ring = ring.filter((item,index) => {
         console.log(item.channel);
         item.channel !== ChannelSelectedForDelete.channel});
        console.log(ring);
