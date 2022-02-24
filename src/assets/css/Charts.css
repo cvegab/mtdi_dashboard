@@ -29,7 +29,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 0em 1em 1em 5em;
+    padding: 0em 1em 1em 2em;
   
 }
 .infoLegendPieChart {
@@ -37,12 +37,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  padding: 0em 1em 1em 2em;
+  padding: 0em 1em 1em 1em;
 
 }
 
 .titleTextLegend {
-  font-size: 14px;
+  font-size: 12px;
+  width:120px;
 }
 
 .MuiTablePagination-select {
@@ -294,7 +295,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1250px !important;
+    width: 1150px !important;
 
   }
 
@@ -330,7 +331,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1400px !important;
+    width: 1200px !important;
     height: 190px !important;
   }
 

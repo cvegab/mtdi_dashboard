@@ -1091,6 +1091,70 @@ const data1 = {
   }
 };
 
+const chartExample13 = {
+  // data: {
+  //   labels: [
+  //     0,
+  //     1,
+  //     2,
+  //     3,
+  //     4,
+  //     5,
+  //     6,
+  //     7,
+  //     8,
+  //     9,
+  //     10,
+  //     11,
+  //     12,
+  //     13,
+  //     14,
+  //     15,
+  //     16,
+  //     17,
+  //     18,
+  //     19,
+  //     20,
+  //   ],
+   
+  options: {
+    plugins: {
+      legend: {
+        display: false, 
+      },
+
+    },
+    // scales: {
+    //   y: {
+    //     ticks: {
+    //       color: "#9f9f9f",
+    //       beginAtZero: true,
+    //       maxTicksLimit: 5,
+    //       // padding: 100,
+          
+    //     },
+    //     grid: {
+    //       zeroLineColor: "transparent",
+    //       display: true,
+    //       drawBorder: false,
+    //       color: "#9f9f9f",
+    //     },
+    //   },
+    //   x: {
+    //     grid: {
+    //       display: false,
+    //       drawBorder: false,
+    //     },
+    //     ticks: {
+    //       padding: 20,
+    //       color: "#9f9f9f",
+          
+    //     },
+    //   },
+    // },
+  },
+};
+
 module.exports = {
   // used for Charts and Dashboard views
   chartExample1,
@@ -1116,6 +1180,7 @@ module.exports = {
   chartExample11,
   // used for Charts view
   chartExample12,
+  chartExample13,
   chartExample100,
   data1,
   
