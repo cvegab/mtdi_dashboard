@@ -2,7 +2,7 @@ import { Select, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 // react plugin used to create charts
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
-import "chartjs-plugin-datalabels";
+// import "chartjs-plugin-datalabels";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "../assets/css/Charts.css";
