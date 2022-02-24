@@ -43,11 +43,13 @@ import {
 import {
   chartExample1,
   chartExample4,
+  chartExample5,
   chartExample9,
   chartExample10,
   chartExample100,
   chartExample11,
   chartExample12,
+  chartExample13,
   data1,
 } from "variables/charts.js";
 import SplashScreen from "components/UI/splash-screen";
@@ -70,7 +72,7 @@ let mixedData = {
       type: "line",
       label: "Dataset 1",
       yAxisID: "A",
-      borderColor: "rgb(255, 99, 132)",
+      borderColor: "#06CBC1",
       borderWidth: 2,
       fill: false,
       data: [100, 200, 300, 400, 500, 600],
@@ -79,10 +81,9 @@ let mixedData = {
       type: "bar",
       label: "Dataset 2",
       yAxisID: "A",
-      backgroundColor: "rgb(75, 192, 192)",
+      backgroundColor: "#344FD5",
       data: [78, 123, 45, 67, 12],
-      borderColor: "white",
-      borderWidth: 2,
+      borderRadius:5,
     },
   ],
 };
@@ -118,7 +119,7 @@ const barChartData = {
       data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
     },
     {
-      label: "Mercado Libre",
+      label: "Mercadolibre",
       backgroundColor: "#344FD5",
       stack: "2",
       borderRadius:6,
@@ -298,6 +299,8 @@ function Charts() {
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
+  const [totalNps, settotalNps] = useState(0);
+  
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
@@ -345,7 +348,7 @@ function Charts() {
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [op, setop] = useState({});
-  // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
+  
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
   const [vtexOrders, setvtexOrders] = useState(0);
@@ -468,18 +471,18 @@ useEffect(() => {
     }
     setstackedDatevalues(result);
     const MONTHS = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "septiembre",
-      "Octubre",
-      "Noviembre",
-      "Deciembre",
+      "En",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agos",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dic",
     ];
 
     const date = new Date('2021-08-01');
@@ -1237,13 +1240,14 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             {
               label: "Ventas",
             data: lineAndBarChartValues,
-              backgroundColor: "rgba(87, 121, 234, 0.6)",
-              borderColor: "rgba(87, 121, 234, 0.6)",
+            backgroundColor: "#344FD5",
+              
+            borderRadius:5,
               order: 1,
             },
 
             {
-              label: "Ordenes",
+              label: "Órdenes",
               yAxisID: "Ordenes",
               // data: [
               //   vtexOrders,
@@ -1259,8 +1263,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
               //   listaTiendaOrders,
               // ],
               data:lineAndBarChartOrderValues,
-              backgroundColor: "rgba(234, 87, 102, 0.6)",
-              borderColor: "rgba(234, 87, 102, 0.6)",
+              backgroundColor: "#06CBC1",
+              borderColor: "#06CBC1",
               fill: false,
               pointHoverRadius: 20,
               pointHoverBorderWidth: 5,
@@ -1268,24 +1272,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
               order: 0,
             },
           ],
-          options: {
-            scales: {
-              yAxes: [
-                {
-                  id: "Ordenes",
-                  type: "linear",
-                  position: "left",
-                },
-                {
-                  id: "B",
-                  type: "linear",
-                  position: "right",
-                  ticks: {
-                    max: 1,
-                    min: 0,
-                  },
-                },
-              ],
+           options: {
+      
+             plugins: {
+               legend: {
+                 display: false,
+          },
+        
             },
           },
         };
@@ -1297,14 +1290,14 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           labels: [
             "Vtex",
             "Linio",
-            "MercadoLibre",
+            "Mercadolibre",
             "Exito",
             "Ripley",
             "Shopify",
             "Paris",
             "Magento",
             "WooCommerce",
-            "chambas",
+            "Chambas",
             "ListaTienda",
           ],
           datasets: [
@@ -1313,17 +1306,17 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
               pointRadius: 0,
               pointHoverRadius: 0,
               backgroundColor: [
-                "#FF6059",
-                "#06CBC1",
                 "#F10096",
-                "purple",
-                "#FFD88C",
-                "#00B6CB",
-                "#00B6CC",
-                "#97D456",
-                "#344FD5",
+                "#F29A32",
                 "yellow",
-                "red",
+                "#E4C41B",
+                "#FFD88C",
+                "#97D456",
+                "#00B6CB",
+                "#FF6059",
+                "purple",
+                "#EDA4D1",
+                "blue",
               ],
               borderWidth: 0,
               barPercentage: 1.6,
@@ -1344,6 +1337,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           ],
         };
         setpieChartData(PIE);
+       
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -1380,7 +1374,10 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-
+        let npsArray = obj.map((item) => {
+          return item.nps;
+        });
+        
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1393,6 +1390,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           (partialSum, a) => partialSum + a,
           0
         );
+
 
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
@@ -1427,6 +1425,11 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfTotalnps = npsArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        settotalNps(sumOfTotalnps);
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -1451,15 +1454,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           datasets: [
             {
               label: "Ripley",
-              backgroundColor: "#F10096",
+              backgroundColor: "#FFD88C",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
               data: ripleyMonthlyArray,
             },
             {
-              label: "Lista Tienda",
-              backgroundColor: "black",
+              label: "ListaTienda",
+              backgroundColor: "blue",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1467,7 +1470,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Magento",
-              backgroundColor: "red",
+              backgroundColor: "#FF6059",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1475,15 +1478,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Shopify",
-              backgroundColor: "#00B6CB",
+              backgroundColor: "#97D456",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
               data: ShopifyMonthlyArray,
             },
             {
-              label: "Mercado Libre",
-              backgroundColor: "#344FD5",
+              label: "Mercadolibre",
+              backgroundColor: "yellow",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1491,7 +1494,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Chambas",
-              backgroundColor: "#5E35B1",
+              backgroundColor: "#EDA4D1",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1499,7 +1502,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Linio",
-              backgroundColor: "#97D456",
+              backgroundColor: "#F29A32",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1507,7 +1510,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Vtex",
-              backgroundColor: "#FFD88C",
+              backgroundColor: "#F10096",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1515,7 +1518,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "WooCommerce",
-              backgroundColor: "#FF6059",
+              backgroundColor: "purple",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1523,7 +1526,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Paris",
-              backgroundColor: "turquoise",
+              backgroundColor: "#00B6CB",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1531,13 +1534,20 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Exito",
-              backgroundColor: "grey",
+              backgroundColor: "#E4C41B",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
               data: ExitoMonthlyArray,
             },
           ],
+           options: {
+            plugins: {
+              legend: {
+                display: false,
+      },
+            },
+           },
         };
        
         setstackedChartData(MONTLY_ORDER_GRAPH);
@@ -1546,15 +1556,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           datasets: [
             {
               label: "Ripley",
-              backgroundColor: "#F10096",
+              backgroundColor: "#FFD88C",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
               data: ripleyStackedSalesArray,
             },
             {
-              label: "Lista Tienda",
-              backgroundColor: "black",
+              label: "ListaTienda",
+              backgroundColor: "blue",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1562,7 +1572,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Magento",
-              backgroundColor: "red",
+              backgroundColor: "#FF6059",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1570,15 +1580,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Shopify",
-              backgroundColor: "#00B6CB",
+              backgroundColor: "#97D456",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
               data: shopifyStackedSalesArray,
             },
             {
-              label: "Mercado Libre",
-              backgroundColor: "#344FD5",
+              label: "Mercadolibre",
+              backgroundColor: "yellow",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1586,7 +1596,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Chambas",
-              backgroundColor: "#5E35B1",
+              backgroundColor: "#EDA4D1",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1594,7 +1604,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Linio",
-              backgroundColor: "#97D456",
+              backgroundColor: "#F29A32",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1602,7 +1612,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Vtex",
-              backgroundColor: "#FFD88C",
+              backgroundColor: "#F10096",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
@@ -1610,7 +1620,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "WooCommerce",
-              backgroundColor: "#FF6059",
+              backgroundColor: "purple",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1618,7 +1628,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Paris",
-              backgroundColor: "turquoise",
+              backgroundColor: "#00B6CB",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1626,7 +1636,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
             },
             {
               label: "Exito",
-              backgroundColor: "grey",
+              backgroundColor: "#E4C41B",
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
@@ -1726,7 +1736,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
         {
           type: "line",
           label: "Dataset 1",
-          borderColor: "rgb(255, 99, 132)",
+          borderColor: "#06CBC1",
           borderWidth: 2,
           fill: false,
           data: [100, 200, 300, 400, 500, 600],
@@ -1734,12 +1744,14 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
         {
           type: "bar",
           label: "Dataset 2",
-          backgroundColor: "rgb(75, 192, 192)",
+          backgroundColor: "#344FD5",
           data: [78, 123, 45, 67, 12],
-          borderColor: "white",
+          borderColor: "#344FD5",
+          borderRadius: 5,
           borderWidth: 2,
         },
       ],
+      
     });
   };
   const changeDateHandler = (event) => {
@@ -2586,7 +2598,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                     &nbsp; NPS
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps} &nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -2689,6 +2701,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
               readyToShip={readyToShip}
               onTheWay={onTheWay}
               reviews={reviews}
+              totalNps={totalNps}
             />
           </div>
 
@@ -2698,8 +2711,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           {/* GRAPHS */}
           <Row>
 
-           <Col md="12">
-              <Card className="car-chart">
+           <Col id="ColMixedChart" lg="6" md="12" sm="12" >
+              <Card className="car-chart" style={{ height: "97%"}}>
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
@@ -2709,16 +2722,17 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar data={mixedChartData} />
+                  <Bar data={mixedChartData} 
+                  options={chartExample13.options}
+                   />
                 </CardBody>
                 <br></br>
                 <br></br>
               </Card>
-            </Col> 
-</Row>
-<Row>
-<Col md="6">
-              <Row>
+              </Col>
+
+
+              <Col id="ColPieChart" lg="6" md="12" sm="12">
                 <Card>
                   <CardHeader>
                     <CardTitle>
@@ -2733,37 +2747,18 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       height={190}
                     />
                   </CardBody>
-                </Card>
-              </Row>
-            </Col>
+                  <CardFooter>
 
-            <Col md="6">
-              <Card>
-                <div className="legend">
-                  <div className="infoLegend">
-                    <div>
-                      <p className="titleTextLegend">
-                        <i
-                          className="fa fa-circle"
-                          style={{
-                            color: "#344FD5",
-                            backgroundColor: "#344FD5",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        &nbsp;Vtex
-                        {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                        <p className="card-category">${vtex}</p>
-                      </p>
-                    </div>
+                  <div className="infoLegendPieChart">
+  
                     <div>
                       <p className="titleTextLegend">
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#344FD5",
-                          backgroundColor: "#344FD5",
-                          borderRadius: "8px",
+                          color: "#F10096",
+                          backgroundColor: "#F10096",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;Vtex
@@ -2785,9 +2780,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         <i
                           className="fa fa-circle"
                           style={{
-                            color: "#FF6059",
-                            backgroundColor: "#FF6059",
-                            borderRadius: "8px",
+                            color: "#F29A32",
+                            backgroundColor: "#F29A32",
+                            borderRadius: "3px",
                           }}
                         />
                         &nbsp;Linio
@@ -2809,12 +2804,12 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#F10096",
-                        backgroundColor: "#F10096",
-                        borderRadius: "8px",
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "3px",
                       }}
                     />
-                    &nbsp;MercadoLibre
+                    &nbsp;Mercadolibre
                     <p className="card-category">
                       {(() => {
                           let number  = mercadoLibre;
@@ -2833,9 +2828,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "purple",
-                        backgroundColor: "purple",
-                        borderRadius: "8px",
+                        color: "#E4C41B",
+                        backgroundColor: "#E4C41B",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;Exito
@@ -2858,7 +2853,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       style={{
                         color: "#FFD88C",
                         backgroundColor: "#FFD88C",
-                        borderRadius: "8px",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;Ripley
@@ -2880,9 +2875,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                     <i
                       className="fa fa-circle"
                       style={{
-                        color: "#00B6CB",
-                        backgroundColor: "#00B6CB",
-                        borderRadius: "8px",
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "3px",
                       }}
                     />
                     &nbsp;Shopify
@@ -2904,9 +2899,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#00B6CC",
-                          backgroundColor: "#00B6CC",
-                          borderRadius: "8px",
+                          color: "#00B6CB",
+                          backgroundColor: "#00B6CB",
+                          borderRadius: "3px",
                         }}
                       />
                      &nbsp; Paris
@@ -2928,9 +2923,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#97D456",
-                          backgroundColor: "#97D456",
-                          borderRadius: "8px",
+                          color: "#FF6059",
+                          backgroundColor: "#FF6059",
+                          borderRadius: "3px",
                         }}
                       />
                      &nbsp; Magento
@@ -2952,9 +2947,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "#FF6059",
-                          backgroundColor: "#FF6059",
-                          borderRadius: "8px",
+                          color: "purple",
+                          backgroundColor: "purple",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;WooCommerce
@@ -2976,9 +2971,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "yellow",
-                          backgroundColor: "yellow",
-                          borderRadius: "8px",
+                          color: "#EDA4D1",
+                          backgroundColor: "#EDA4D1",
+                          borderRadius: "3px",
                         }}
                       />
                       &nbsp;Chambas
@@ -3000,12 +2995,12 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       <i
                         className="fa fa-circle"
                         style={{
-                          color: "red",
-                          backgroundColor: "red",
-                          borderRadius: "8px",
+                          color: "blue",
+                          backgroundColor: "blue",
+                          borderRadius: "3px",
                         }}
                       />
-                      &nbsp;Lista Tienda
+                      &nbsp;ListaTienda
                       <p className="card-category">
                           {(() => {
                               let number  = listaTienda;
@@ -3018,12 +3013,16 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       
                       </p>
                     </p>
-                    </div>
+                    
                   </div>
                 </div>
-              </Card>
-            </Col>
+                  </CardFooter>
+                </Card>
+                </Col>
+              
+            
             </Row> 
+
             <Row>
             <Col md="6">
               
@@ -3033,8 +3032,281 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={stackedChartData}  />
+                    <Bar data={stackedChartData} 
+                    options={chartExample5.options}
+                     />
                   </CardBody>
+                    <CardFooter>
+                  <div className="legend">
+                  <div className="infoLegend">
+             
+                    <div>
+                      <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FFD88C",
+                          backgroundColor: "#FFD88C",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Ripley
+                    
+                     {/* <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p> */}
+                        </p>
+                        </div>
+                        <div>
+                        <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "blue",
+                            backgroundColor: "blue",
+                            borderRadius: "3px",
+                          }}
+                        />
+                        &nbsp;ListaTienda
+                        {/* <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p> */}
+                      </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Magento
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Shopify
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Mercadolibre
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#EDA4D1",
+                        backgroundColor: "#EDA4D1",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Chambas
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#F29A32",
+                          backgroundColor: "#F29A32",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Linio
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#F10096",
+                          backgroundColor: "#F10096",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Vtex
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "purple",
+                          backgroundColor: "purple",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;WooCommerce
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#00B6CB",
+                          backgroundColor: "#00B6CB",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Paris
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p> */}
+                    </p>
+                    </div> 
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#E4C41B",
+                          backgroundColor: "#E4C41B",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Exito
+                      {/* <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p> */}
+                    </p>
+                    </div>
+                  </div>
+                </div>
+
+                    </CardFooter>
                 </Card>
               
               </Col>
@@ -3049,9 +3321,282 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                   <CardBody>
                     <Bar
                       data={stackedSalesGraph}
+                      options={chartExample5.options}
                       // options={barChartOptions}
                     />
                   </CardBody>
+                     <CardFooter>
+                  
+              
+                <div className="legend">
+                  <div className="infoLegend">
+             
+                    <div>
+                      <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FFD88C",
+                          backgroundColor: "#FFD88C",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Ripley
+                    
+                     {/* <p className="card-category">
+                       {(() => {
+                          let number  = vtex;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                     </p> */}
+                        </p>
+                        </div>
+                        <div>
+                        <p className="titleTextLegend">
+                        <i
+                          className="fa fa-circle"
+                          style={{
+                            color: "blue",
+                            backgroundColor: "blue",
+                            borderRadius: "3px",
+                          }}
+                        />
+                        &nbsp;ListaTienda
+                        {/* <p className="card-category">
+                          {(() => {
+                            let number  = linio;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+
+                        </p> */}
+                      </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#FF6059",
+                        backgroundColor: "#FF6059",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Magento
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = mercadoLibre;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}  
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#97D456",
+                        backgroundColor: "#97D456",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Shopify
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = exito;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "yellow",
+                        backgroundColor: "yellow",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Mercadolibre
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = ripley;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                    <i
+                      className="fa fa-circle"
+                      style={{
+                        color: "#EDA4D1",
+                        backgroundColor: "#EDA4D1",
+                        borderRadius: "3px",
+                      }}
+                    />
+                    &nbsp;Chambas
+                    {/* <p className="card-category">
+                      {(() => {
+                          let number  = shopify;
+                          let formatted = new Intl.NumberFormat("es-CL",{
+                            style:'currency',
+                            currency:'CLP'
+                          }).format(number);
+                          return <div> {formatted}</div>   
+                       })()}
+                    </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#FF7ECE",
+                          backgroundColor: "#FF7ECE",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Linio
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = paris;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#F10096",
+                          backgroundColor: "#F10096",
+                          borderRadius: "3px",
+                        }}
+                      />
+                     &nbsp; Vtex
+                      {/* <p className="card-category">
+                        {(() => {
+                            let number  = magento;
+                            let formatted = new Intl.NumberFormat("es-CL",{
+                              style:'currency',
+                              currency:'CLP'
+                            }).format(number);
+                            return <div> {formatted}</div>   
+                        })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "purple",
+                          backgroundColor: "purple",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;WooCommerce
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = wooCommerce;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      </p> */}
+                    </p>
+                    </div>
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#00B6CB",
+                          backgroundColor: "#00B6CB",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Paris
+                      {/* <p className="card-category">
+                        {(() => {
+                              let number  = chambas;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}  
+                      </p> */}
+                    </p>
+                    </div> 
+
+                    <div>
+                    <p className="titleTextLegend">
+                      <i
+                        className="fa fa-circle"
+                        style={{
+                          color: "#E4C41B",
+                          backgroundColor: "#E4C41B",
+                          borderRadius: "3px",
+                        }}
+                      />
+                      &nbsp;Exito
+                      {/* <p className="card-category">
+                          {(() => {
+                              let number  = listaTienda;
+                              let formatted = new Intl.NumberFormat("es-CL",{
+                                style:'currency',
+                                currency:'CLP'
+                              }).format(number);
+                              return <div> {formatted}</div>   
+                          })()}
+                      
+                      </p> */}
+                    </p>
+                    </div>
+                  </div>
+                </div>
+                  </CardFooter>
                 </Card>
               
             </Col>
@@ -3117,7 +3662,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
                 id="bttnSubmit"
-                
+                className="bttnCompartirReporte"
                 style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",                 
@@ -3144,7 +3689,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
            
               <button
                 id="bttnSubmit"
-                
+                className="bttnSiguienteReporte"
                 style={{
                   backgroundColor: "white",
                   textAlign: "center",
