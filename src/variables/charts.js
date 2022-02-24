@@ -1124,6 +1124,16 @@ const chartExample13 = {
       },
 
     },
+
+    // scales: {
+      
+    //     grid: {
+    //       drawBorder: false,
+    //       zeroLineColor: "transparent",
+    //     }
+      
+    // }
+    
     // scales: {
     //   y: {
     //     ticks: {
@@ -1148,7 +1158,7 @@ const chartExample13 = {
     //     ticks: {
     //       padding: 20,
     //       color: "#9f9f9f",
-          
+        
     //     },
     //   },
     // },

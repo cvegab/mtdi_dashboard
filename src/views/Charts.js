@@ -2155,7 +2155,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     }).format(number);
                      return <div> 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
-                        &nbsp;<span
+                        &nbsp;
+                        {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "#33D69F",
@@ -2164,7 +2165,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       >
                      +4.5%
-                   </span></div>   
+                   </span> */}
+                   </div>   
                  })()}
 
                   </h5>
@@ -2187,7 +2189,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     }).format(number);
                      return <div> 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
-                        &nbsp;<span
+                        &nbsp;
+                        {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "#FF6059",
@@ -2196,7 +2199,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       >
                      -3%
-                   </span></div>
+                   </span> */}
+                   </div>
                                 
                               })()}
 
@@ -2220,7 +2224,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     }).format(number);
                      return <div> 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
-                        &nbsp;<span
+                        &nbsp;
+                        {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "#FF6059",
@@ -2229,7 +2234,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       >
                      -6%
-                   </span></div>   
+                   </span> */}
+                   </div>   
                  })()}
 
                    
@@ -2247,7 +2253,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2256,7 +2262,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2305,7 +2311,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2314,7 +2320,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
                 {/* ORDERS CANCELLED */}
@@ -2328,7 +2334,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{totalCancelledOrders} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -2337,7 +2343,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       -3%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2351,7 +2357,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2360,7 +2366,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +8%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2373,7 +2379,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2382,7 +2388,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +12%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2427,7 +2433,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2436,7 +2442,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
                 {/* PREPARATION */}
@@ -2449,7 +2455,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -2458,7 +2464,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       -3%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2471,7 +2477,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -2480,7 +2486,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       -6%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2493,7 +2499,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2502,7 +2508,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2547,7 +2553,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2556,7 +2562,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
                 {/* REVIEWS */}
@@ -2569,7 +2575,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -2578,7 +2584,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       -3%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -2598,8 +2604,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
-                      <span
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 500 &nbsp;
+                      {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "red",
@@ -2608,7 +2614,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       >
                         -6%
-                      </span>
+                      </span> */}
                     </h5>
                   </div>
                 </Col>
