@@ -348,12 +348,13 @@ const chartExample4 = {
     plugins: {
       legend: {
         display: false,
+        
       },
 
       tooltips: {
         tooltipFillColor: "rgba(0,0,0,0.5)",
         tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-        tooltipFontSize: 14,
+        tooltipFontSize: 20,
         tooltipFontStyle: "normal",
         tooltipFontColor: "#fff",
         tooltipTitleFontFamily:
@@ -415,49 +416,60 @@ const chartExample5 = {
       },
     ],
   },
-  options: {
+    options: {
     plugins: {
       legend: {
         display: false,
+        
       },
+
       tooltips: {
-        enabled: false,
-      },
-      title: {
-        display: true,
-        text: "60%",
-        position: "bottom",
-        color: "#66615c",
-        font: {
-          weight: 400,
-          size: 30,
-        },
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 20,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10,
       },
     },
-    maintainAspectRatio: false,
-    cutout: "90%",
     scales: {
       y: {
         ticks: {
-          display: false,
+          color: "#9f9f9f",
+          beginAtZero: true,
+          maxTicksLimit: 8,
+          padding: 20,
         },
         grid: {
+          zeroLineColor: "transparent",
+          display: true,
           drawBorder: false,
-          display: false,
+          color: "#9f9f9f",
         },
       },
       x: {
         grid: {
-          drawBorder: false,
           display: false,
+          drawBorder: false,
         },
         ticks: {
-          display: false,
+          padding: 20,
+          color: "#9f9f9f",
         },
       },
     },
   },
 };
+
 
 // #########################################
 // // // used inside src/views/Dashboard.js

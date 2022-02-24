@@ -22,18 +22,27 @@
 
 #spanTextInfoCard {
   font-weight: 600;
+  font-size: 10px;
 }
 .infoLegend {
   
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 1em 1em 1em 1em;
+    padding: 0em 1em 1em 5em;
   
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 2em;
+
 }
 
 .titleTextLegend {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .MuiTablePagination-select {
@@ -88,7 +97,7 @@
   }
   
   #bttnGeneral {
-    width: 90px !important;
+    width: 100px !important;
     height: 30px !important;
     border-radius: 10px !important;
   }  
@@ -101,6 +110,22 @@
   #datepickerCalendar {
     background-position: 7em !important;
   }
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 0em;
+
+}
 
 }
 
@@ -123,7 +148,7 @@
   }
   
   #bttnGeneral {
-    width: 90px !important;
+    width: 100px !important;
     height: 30px !important;
     border-radius: 10px !important;
   }  
@@ -136,7 +161,22 @@
   #datepickerCalendar {
     background-position: 7rem !important;
   }
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 0em;
 
+}
 }
 
 @media screen and  (min-width: 376px) and (max-width:767px)  {
@@ -150,7 +190,7 @@
   }
   
   #bttnGeneral {
-    width: 90px !important;
+    width: 100px !important;
     height: 30px !important;
     border-radius: 10px !important;
   }  
@@ -171,6 +211,26 @@
   .MuiInput-root {
     width: 340px !important;
   }
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 0em;
+
+}
+.titleTextLegend {
+  font-size: 10px !important;
+}
+
 
 }
 
@@ -221,9 +281,8 @@
     font-size: 11px !important;
   }
 
-  .infoLegend {
-    padding: 68px 15px 100px 30px !important;
-  }
+  
+
 
 
 }
@@ -254,6 +313,12 @@
     font-size: 14px !important;
   }
 
+  #ColPieChart {
+    width: 45%;
+  }
+  #ColMixedChart {
+    width: 55%;
+  }
 }
 
 
@@ -270,14 +335,14 @@
   }
 
   .titlesInfoCard {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
   .textInfoCard {
-    font-size: 24px !important;
+    font-size: 14px !important;
   }
 
   #spanTextInfoCard {
-    font-size: 24px !important;
+    font-size: 14px !important;
   }
 
   #textListoParaDespacho {
