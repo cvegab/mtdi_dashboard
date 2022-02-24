@@ -294,6 +294,8 @@ function Charts() {
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
+  const [totalNps, settotalNps] = useState(0);
+  
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
@@ -341,7 +343,7 @@ function Charts() {
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [op, setop] = useState({});
-  // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
+  
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
   const [vtexOrders, setvtexOrders] = useState(0);
@@ -1270,6 +1272,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               pointHoverRadius: 0,
               backgroundColor: [
                 "#F10096",
+
                 "#F29A32",
                 "yellow",
                 "#E4C41B",
@@ -1300,6 +1303,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           ],
         };
         setpieChartData(PIE);
+       
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -1336,7 +1340,10 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let reviewArray = obj.map((item) => {
           return item.reviews;
         });
-
+        let npsArray = obj.map((item) => {
+          return item.nps;
+        });
+        
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1349,6 +1356,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+
 
         let Totalgm = gmArray.reduce((partialSum, a) => partialSum + a, 0);
         let TotalConversion = conversionArray.reduce(
@@ -1383,6 +1391,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfTotalnps = npsArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        settotalNps(sumOfTotalnps);
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
         setgm(Totalgm);
@@ -2552,8 +2565,9 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     &nbsp; NPS
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325 &nbsp;
-                    {/* <span
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps} &nbsp;
+                    <span
+
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -2655,6 +2669,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               readyToShip={readyToShip}
               onTheWay={onTheWay}
               reviews={reviews}
+              totalNps={totalNps}
             />
           </div>
 
@@ -2723,7 +2738,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                      </p>
                         </p>
@@ -2746,7 +2761,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
 
                         </p>
@@ -2770,7 +2785,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend">{formatted}</p>   
                        })()}  
                     </p>
                     </p>
@@ -2794,7 +2809,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -2817,7 +2832,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -2841,7 +2856,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -2865,7 +2880,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -2889,7 +2904,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -2913,7 +2928,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}
                       </p>
                     </p>
@@ -2937,7 +2952,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}  
                       </p>
                     </p>
@@ -2961,7 +2976,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend">{formatted}</p>   
                           })()}
                       
                       </p>
