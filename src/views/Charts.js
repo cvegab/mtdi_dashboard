@@ -2566,7 +2566,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps} &nbsp;
-                    <span
+                    {/* <span
 
                       id="spanTextInfoCard"
                       style={{
@@ -2576,7 +2576,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     >
                       +4.5%
-                    </span> */}
+                    </span>  */}
                   </h5>
                 </div>
                 {/* REVIEWS */}
