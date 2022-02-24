@@ -343,7 +343,7 @@ function Charts() {
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [op, setop] = useState({});
-  // const [FilterButtonTitle, setFilterButtonTitle] = useState(second)
+  
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
   const [vtexOrders, setvtexOrders] = useState(0);
