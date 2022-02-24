@@ -419,8 +419,7 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
-   
-   
+  parisOrders,
    stackedDatevalues,
  stackedDateLabel,
 
@@ -434,7 +433,7 @@ function Charts() {
 useEffect(() => {
  
  
-  let newChannel=['Vtex', 'Linio', 'MercadoLibre', 'Exito', 'Ripley', 'Shopify', 'Paris', 'Magento', 'Woocommerce', 'Chambas', 'ListaTienda'];
+  let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
        var ring = newChannel.map((id, index) => {
       
         return {
@@ -445,6 +444,13 @@ useEffect(() => {
       });
       setmixedGraphDatas(ring);
       let x = [];
+      console.log(ChannelSelectedForDelete);
+      // if(ChannelSelectedForDelete !== undefined&&ChannelSelectedForDelete.channel === 'Paris'){
+      //   x = mixedGraphDatas.filter((item,index) => {
+          
+      // return  item.channel !== ChannelSelectedForDelete.channel});
+      // setmixedGraphDatas(x);
+      // }
     if(ChannelSelectedForDelete !== undefined){
       x = mixedGraphDatas.filter((item,index) => {
         
@@ -1066,10 +1072,10 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           return item.channel == 2;
         });
    
-        if (mercadoSales.length === 0) {
-          setmercadoLibreOrders(0);
-          setmercadoLibre(0);
-        }
+        // if (mercadoSales.length === 0) {
+        //   setmercadoLibreOrders(0);
+        //   setmercadoLibre(0);
+        // }
         let mercadoSalesArray = mercadoSales.map((item) => {
           return item.total;
         });
@@ -1120,10 +1126,10 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
-        if (parisSales.length === 0) {
-          setparisOrders(0);
-          setparis(0);
-        }
+        // if (parisSales.length === 0) {
+        //   setparisOrders(0);
+        //   setparis(0);
+        // }
         let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
@@ -1201,7 +1207,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           0
         );
 setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
-setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,totalRipleyOrder,totalShopifyOrder,0,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,0]);
+setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,totalparisSales,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -1650,7 +1656,10 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
           ],
         };
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
-        setisLoading(false);
+        
+          setisLoading(false);
+      
+      
       })
       .catch((error) => console.log("error", error));
   };
@@ -3056,7 +3065,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         }}
                       />
                       &nbsp;Ripley
-                    
+                    <p className="card-category">{ripleyOrders} Ordenes</p>
                      {/* <p className="card-category">
                        {(() => {
                           let number  = vtex;
@@ -3080,6 +3089,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                           }}
                         />
                         &nbsp;ListaTienda
+                        <p className="card-category">{listaTiendaOrders} Ordenes</p>
                         {/* <p className="card-category">
                           {(() => {
                             let number  = linio;
@@ -3104,6 +3114,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       }}
                     />
                     &nbsp;Magento
+                    <p className="card-category">{magentoOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = mercadoLibre;
@@ -3128,6 +3139,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       }}
                     />
                     &nbsp;Shopify
+                    <p className="card-category">{shopifyOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = exito;
@@ -3151,6 +3163,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       }}
                     />
                     &nbsp;Mercadolibre
+                    <p className="card-category">{mercadoLibreOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = ripley;
@@ -3175,6 +3188,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                       }}
                     />
                     &nbsp;Chambas
+                    <p className="card-category">{chambasOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = shopify;
@@ -3199,6 +3213,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         }}
                       />
                      &nbsp; Linio
+                     <p className="card-category">{linioOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                             let number  = paris;
@@ -3223,6 +3238,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         }}
                       />
                      &nbsp; Vtex
+                     <p className="card-category">{vtexOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                             let number  = magento;
@@ -3247,6 +3263,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         }}
                       />
                       &nbsp;WooCommerce
+                      <p className="card-category">{wooCommerceOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                               let number  = wooCommerce;
@@ -3271,6 +3288,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         }}
                       />
                       &nbsp;Paris
+                      <p className="card-category">{parisOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                               let number  = chambas;
@@ -3295,6 +3313,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,0,tot
                         }}
                       />
                       &nbsp;Exito
+                      <p className="card-category">{exitoOrders} Ordenes</p>
                       {/* <p className="card-category">
                           {(() => {
                               let number  = listaTienda;
