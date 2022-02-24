@@ -2671,7 +2671,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           {/* GRAPHS */}
           <Row>
 
-           <Col id="ColMixedChart" md="6" sm="12" >
+           <Col id="ColMixedChart" lg="6" md="12" sm="12" >
               <Card className="car-chart" style={{ height: "97%"}}>
                 <CardHeader>
                   <CardTitle>
@@ -2692,7 +2692,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               </Col>
 
 
-              <Col id="ColPieChart" md="6" sm="12">
+              <Col id="ColPieChart" lg="6" md="12" sm="12">
                 <Card>
                   <CardHeader>
                     <CardTitle>
@@ -3622,7 +3622,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
                 id="bttnSubmit"
-                
+                className="bttnCompartirReporte"
                 style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",                 
@@ -3649,7 +3649,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
            
               <button
                 id="bttnSubmit"
-                
+                className="bttnSiguienteReporte"
                 style={{
                   backgroundColor: "white",
                   textAlign: "center",
