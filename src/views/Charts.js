@@ -301,7 +301,7 @@ function Charts() {
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
   const [totalNps, settotalNps] = useState(0);
-  
+  const [totalClaims, settotalClaims] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
@@ -1462,7 +1462,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         let npsArray = obj.map((item) => {
           return item.nps;
         });
-        
+        let claimsArray = obj.map((item) => {
+          return item.claims;
+        });
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1514,6 +1516,11 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfTotalClaims = claimsArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        settotalClaims(sumOfTotalClaims);
         settotalNps(sumOfTotalnps);
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
@@ -3151,7 +3158,7 @@ if(ChannelSelectedForDelete !== undefined){
                     &nbsp; Entregados
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;<Badge color="info" pill>Coming soon</Badge>&nbsp;
+                  &nbsp;&nbsp;&nbsp;<Badge color="info" pill>Próximamente</Badge>&nbsp;
                     <span
                       id="spanTextInfoCard"
                       style={{
@@ -3377,7 +3384,7 @@ if(ChannelSelectedForDelete !== undefined){
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 &nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalClaims} &nbsp;
                       <span
                         id="spanTextInfoCard"
                         style={{
@@ -3429,6 +3436,7 @@ if(ChannelSelectedForDelete !== undefined){
               onTheWay={onTheWay}
               reviews={reviews}
               totalNps={totalNps}
+              totalClaims={totalClaims}
             />
           </div>
 
