@@ -386,6 +386,8 @@ function Charts() {
       mediaWatcher.removeEventListener("change", updateIsNarrowScreen);
     };
   });
+
+  
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
@@ -431,19 +433,7 @@ function Charts() {
    stackedDatevalues,
  stackedDateLabel,
   ]);
-//  useEffect(() => {
-//   renderStackedSalesGraph();
-//  }, [
-//   channelId,
-//   cR,
-// selectedDateFrom,
-// selectedDateTo,
-// countryId,
-// storeId,
-// stackedDatevalues,
 
-// ripleyLength,
-// ])
  
   
   
@@ -1392,6 +1382,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               pointHoverRadius: 0,
               backgroundColor: [
                 "#F10096",
+
                 "#F29A32",
                 "yellow",
                 "#E4C41B",
@@ -2941,7 +2932,8 @@ if(ChannelSelectedForDelete !== undefined){
                     }).format(number);
                      return <div> 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
-                        &nbsp;<span
+                        &nbsp;
+                        {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "#33D69F",
@@ -2950,7 +2942,8 @@ if(ChannelSelectedForDelete !== undefined){
                         }}
                       >
                      +4.5%
-                   </span></div>   
+                   </span> */}
+                   </div>   
                  })()}
 
                   </h5>
@@ -2973,7 +2966,8 @@ if(ChannelSelectedForDelete !== undefined){
                     }).format(number);
                      return <div> 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
-                        &nbsp;<span
+                        &nbsp;
+                        {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "#FF6059",
@@ -2982,7 +2976,8 @@ if(ChannelSelectedForDelete !== undefined){
                         }}
                       >
                      -3%
-                   </span></div>
+                   </span> */}
+                   </div>
                                 
                               })()}
 
@@ -3006,7 +3001,8 @@ if(ChannelSelectedForDelete !== undefined){
                     }).format(number);
                      return <div> 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
-                        &nbsp;<span
+                        &nbsp;
+                        {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "#FF6059",
@@ -3015,7 +3011,8 @@ if(ChannelSelectedForDelete !== undefined){
                         }}
                       >
                      -6%
-                   </span></div>   
+                   </span> */}
+                   </div>   
                  })()}
 
                    
@@ -3033,7 +3030,7 @@ if(ChannelSelectedForDelete !== undefined){
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                     {/* $1.253.369 &nbsp; */}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{conversion} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3042,7 +3039,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3091,7 +3088,7 @@ if(ChannelSelectedForDelete !== undefined){
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalOrders} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3100,7 +3097,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
                 {/* ORDERS CANCELLED */}
@@ -3114,7 +3111,7 @@ if(ChannelSelectedForDelete !== undefined){
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{totalCancelledOrders} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -3123,7 +3120,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       -3%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3137,7 +3134,7 @@ if(ChannelSelectedForDelete !== undefined){
 
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalDte} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3146,7 +3143,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +8%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3158,8 +3155,8 @@ if(ChannelSelectedForDelete !== undefined){
                     &nbsp; Entregados
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;<Badge color="info" pill>Próximamente</Badge>&nbsp;
-                    <span
+                  &nbsp;&nbsp;&nbsp;<Badge style={{backgroundColor:'#06CBC1',color:'white'}} pill>Próximamente</Badge>&nbsp;
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3168,7 +3165,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +12%
-                    </span>
+                    </span> */} 
                   </h5>
                 </div>
               </Col>
@@ -3213,7 +3210,7 @@ if(ChannelSelectedForDelete !== undefined){
                   </p>
                   <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{inProcess} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3222,7 +3219,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
                 {/* PREPARATION */}
@@ -3235,7 +3232,7 @@ if(ChannelSelectedForDelete !== undefined){
                   </p>
                   <h5  className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -3244,7 +3241,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       -3%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3257,7 +3254,7 @@ if(ChannelSelectedForDelete !== undefined){
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{readyToShip} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -3266,7 +3263,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       -6%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3279,7 +3276,7 @@ if(ChannelSelectedForDelete !== undefined){
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3288,7 +3285,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3333,7 +3330,8 @@ if(ChannelSelectedForDelete !== undefined){
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps} &nbsp;
-                    <span
+                    {/* <span
+
                       id="spanTextInfoCard"
                       style={{
                         color: "#33D69F",
@@ -3342,7 +3340,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +4.5%
-                    </span>
+                    </span>  */}
                   </h5>
                 </div>
                 {/* REVIEWS */}
@@ -3355,7 +3353,7 @@ if(ChannelSelectedForDelete !== undefined){
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews} &nbsp;
-                    <span
+                    {/* <span
                       id="spanTextInfoCard"
                       style={{
                         color: "#FF6059",
@@ -3364,7 +3362,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       -3%
-                    </span>
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3385,7 +3383,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalClaims} &nbsp;
-                      <span
+                      {/* <span
                         id="spanTextInfoCard"
                         style={{
                           color: "red",
@@ -3394,7 +3392,7 @@ if(ChannelSelectedForDelete !== undefined){
                         }}
                       >
                         -6%
-                      </span>
+                      </span> */}
                     </h5>
                   </div>
                 </Col>
@@ -3505,7 +3503,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                      </p>
                         </p>
@@ -3528,7 +3526,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
 
                         </p>
@@ -3552,7 +3550,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend">{formatted}</p>   
                        })()}  
                     </p>
                     </p>
@@ -3576,7 +3574,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -3599,7 +3597,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -3623,7 +3621,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <p className="numberTextLegend"> {formatted}</p>   
                        })()}
                     </p>
                     </p>
@@ -3647,7 +3645,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -3671,7 +3669,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <p className="numberTextLegend"> {formatted}</p>   
                         })()}
                       </p>
                     </p>
@@ -3695,7 +3693,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}
                       </p>
                     </p>
@@ -3719,7 +3717,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend"> {formatted}</p>   
                           })()}  
                       </p>
                     </p>
@@ -3743,7 +3741,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <p className="numberTextLegend">{formatted}</p>   
                           })()}
                       
                       </p>

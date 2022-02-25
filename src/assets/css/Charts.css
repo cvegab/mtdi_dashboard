@@ -30,6 +30,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     padding: 0em 1em 1em 2em;
+
   
 }
 .infoLegendPieChart {
@@ -42,13 +43,18 @@
 }
 
 .titleTextLegend {
-  font-size: 12px;
-  width:113px;
+  font-size: 11px;
+  width:116px;
+  font-weight:600;
+  color: #232A38;
 }
+
+
 
 .MuiTablePagination-select {
   width: 45px !important;
   height: 30px !important;
+  border-radius: 20px !important;
 }
 .Component-paginationSelectRoot-4 {
   border-radius: 20px !important;
@@ -76,8 +82,20 @@
 .card-category {
   font-size: 13px !important;
   font-weight: 400 !important;
+  color:#858F99;
 
 }
+
+.textInfoCard {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed:hover {
+  background-color:#06cbc1;
+  color:#ffff;
+}
+
 
 @media screen and (max-width:320px) { 
 
@@ -111,6 +129,7 @@
   #datepickerCalendar {
     background-position: 7em !important;
   }
+
   .infoLegend {
   
     display: grid;
@@ -131,7 +150,9 @@
 .bttnCompartirReporte {
   width: 250px !important;
   padding:22px 50px !important;
+  margin-bottom: 1em;
 }
+
 
 }
 
@@ -167,6 +188,7 @@
   #datepickerCalendar {
     background-position: 7rem !important;
   }
+
   .infoLegend {
   
     display: grid;
@@ -182,6 +204,11 @@
   grid-gap: 10px;
   padding: 0em 1em 1em 0em;
 
+
+}
+.bttnSiguienteReporte,
+.bttnCompartirReporte {
+  margin-bottom: 1em;
 }
 }
 
@@ -217,6 +244,7 @@
   .MuiInput-root {
     width: 340px !important;
   }
+
   .infoLegend {
   
     display: grid;
@@ -237,8 +265,13 @@
   font-size: 10px !important;
 }
 
-
+.bttnSiguienteReporte,
+.bttnCompartirReporte {
+  margin-bottom: 1em;
 }
+}
+
+
 
 @media screen and (min-width:768px) {
 
@@ -277,7 +310,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  padding: 0em 1em 1em 5em;
+  padding: 0em 1em 1em 2em;
 
 }
 
@@ -303,8 +336,6 @@
     font-size: 11px !important;
   }
 
-  
-
 
 
 }
@@ -316,7 +347,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1120px !important;
+    width: 1060px !important;
 
   }
 
@@ -328,7 +359,7 @@
   }
 
   #spanTextInfoCard {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   #textListoParaDespacho {
@@ -346,7 +377,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 0em 1em 1em 0em;
+    padding: 0em 1em 1em 1em;
   
   }
   .infoLegend {
@@ -354,8 +385,14 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 0em 1em 1em 4em;
+    padding: 0em 1em 1em 2em;
   
+}
+.titleTextLegend {
+  font-size: 11px;
+  width:116px;
+  font-weight:600;
+  color: #232A38;
 }
 
 }
@@ -382,10 +419,29 @@
 
   #spanTextInfoCard {
     font-size: 14px !important;
+
   }
 
   #textListoParaDespacho {
     font-size: 20px !important;
+  }
+  .infoLegend {
+    padding: 22px 15px 0px 30px !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .infoLegendPieChart {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+  }
+  .titleTextLegend {
+    font-size: 12px;
+    width:116px;
+    font-weight:600;
+    color: #232A38;
   }
 
 }
