@@ -288,10 +288,13 @@ function Charts() {
     ],
   };
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
+ const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
+  const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
+  const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
-  const [mixedChartLoading, setmixedChartLoading] = useState(true);
-  const [mixedChartLables, setmixedChartLables] = useState([]);
+  // const [mixedChartLoading, setmixedChartLoading] = useState(true);
+  // const [mixedChartLables, setmixedChartLables] = useState([]);
   const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
   const [mixedChartOrdersData, setmixedChartOrdersData] = useState([]);
   const [ChannelSelectedForDelete, setChannelSelectedForDelete] = useState(undefined);
@@ -346,6 +349,7 @@ function Charts() {
   const [chambas, setchambas] = useState(0);
   const [listaTienda, setlistaTienda] = useState(0);
   const [cR, setcR] = useState([{ channels: "", channelId: 0 }]);
+
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
@@ -369,6 +373,14 @@ function Charts() {
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
   const [shopifyStackedSalesState, setshopifyStackedSalesState] = useState([]);
   const [magentoStackedSalesState, setmagentoStackedSalesState] = useState([]);
+  const [linioStackedSalesState, setlinioStackedSalesState] = useState([]);
+  const [mercadoStackedSalesState, setmercadoStackedSalesState] = useState([]);
+  const [chambasStackedSalesState, setchambasStackedSalesState] = useState([]);
+  const [parisStackedSalesState, setparisStackedSalesState] = useState([]);
+  const [vtexStackedSalesState, setvtexStackedSalesState] = useState([]);
+  const [wooCommerceStackedSalesState, setwooCommerceStackedSalesState] = useState([]);
+  const [listaStackedSalesState, setlistaStackedSalesState] = useState([]);
+  const [exitoStackedSalesState, setexitoStackedSalesState] = useState([]);
   const [ripleyLength, setripleyLength] = useState();
   useEffect(() => {
     // set initial value
@@ -386,6 +398,17 @@ function Charts() {
       mediaWatcher.removeEventListener("change", updateIsNarrowScreen);
     };
   });
+  const handleLoading = () => {
+   setpageFullyLoaded(false);
+    }
+    useEffect(()=>{
+      window.addEventListener('load', (event) => {
+        console.log('page is fully loaded');
+        setpageFullyLoaded(false);
+      });
+      },[])
+      
+
 
   
   useEffect(() => {
@@ -452,17 +475,13 @@ useEffect(() => {
       setmixedGraphDatas(ring);
       let x = [];
       console.log(ChannelSelectedForDelete);
-      if(ChannelSelectedForDelete !== undefined&&ChannelSelectedForDelete.channel === 'Paris'){
-        x = mixedGraphDatas.filter((item,index) => {
-          
-      return  item.channel !== ChannelSelectedForDelete.channel});
-      setmixedGraphDatas(x);
-      }
+     
     if(ChannelSelectedForDelete !== undefined){
       x = mixedGraphDatas.filter((item,index) => {
         
     return  item.channel !== ChannelSelectedForDelete.channel});
     setmixedGraphDatas(x);
+    
    if(ChannelSelectedForDelete.channel === 'Ripley'){
      setripleyStackedSalesState(0);
    }
@@ -472,8 +491,52 @@ useEffect(() => {
   if(ChannelSelectedForDelete.channel === 'Magento'){
     setmagentoStackedSalesState(0);
   }
+  if(ChannelSelectedForDelete.channel === 'Linio'){
+   setlinioStackedSalesState(0);
+  }
+  if(ChannelSelectedForDelete.channel === 'MercadoLibre'){
+    
+   setmercadoStackedSalesState(0);
+   }
+   if(ChannelSelectedForDelete.channel === 'Chambas'){
+    
+    setchambasStackedSalesState(0);
+    }
+    if(ChannelSelectedForDelete.channel === 'Paris'){
+    console.log('hi');
+      setparisStackedSalesState(0);
+      }
+      if(ChannelSelectedForDelete.channel === 'Vtex'){
+        console.log('hi');
+        setvtexStackedSalesState(0);
+          }
+          if(ChannelSelectedForDelete.channel === 'Woocommerce'){
+            console.log('hi');
+            setwooCommerceStackedSalesState(0);
+              }
+              if(ChannelSelectedForDelete.channel === 'ListaTienda'){
+                console.log('hi');
+              setlistaStackedSalesState(0);
+                  }
+                  if(ChannelSelectedForDelete.channel === 'Exito'){
+                    console.log('hi');
+                  setexitoStackedSalesState(0);
+                      }
     }
   console.log (ripleyStackedSalesState);
+  console.log(mixedGraphDatas);
+  const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
+    return item.channel
+  });
+  setmixedGraphChannels(lineAndBarChartLabels);
+  console.log(lineAndBarChartLabels);
+  const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
+   return item.value
+ });
+ 
+ const lineAndBarChartOrderValues = mixedGraphDatas.map((item)=>{
+   return item.orderValue
+ })
 }, [mixedChartsalesData,mixedChartOrdersData])
 
   
@@ -561,59 +624,45 @@ useEffect(() => {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
-    console.log(url);
+   console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);  
-           
-      // let res1 = [];
-      // for(let i = 0;i<=stackedDatevalues.length-1;i++){
-      //   let ripleyMonthlySales = obj.filter((item) => {
-       
-      //     let dateTobeCompared = stackedDatevalues[i];
-          
-      //     const splitDateCompared = dateTobeCompared.split(/[- :]/);
-      //     const splitMonth = splitDateCompared[1];
-      //     const splitYear = splitDateCompared[0];
-      //     const dateTime = item.date_created;
-      //     const parts = dateTime.split(/[- :]/);
-      //     var month = parts[1];
-      //     var year = parts[0];
-      //     let result = [];
-      //    return item.channel == 5 && month===splitMonth && year===splitYear;
-      // // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
-      // // return res1;
-      //   });
-      //   res1.push(ripleyMonthlySales);
-      // }
-     
-  //     let orderQuantityArraY = [];
-  //     let linioStackedSalesArray = [];
-  //     for(let i=0;i<=res1.length-1;i++){
-  //  let channel5MonthlySales = res1[i].map((item,index)=>{
-  //      return item.orders_qty;
-  //    });
-  //    let stackedSalesMonthlySales = res1[i].map((item,index)=>{
-  //     return item.total;
-  //   });
-  //    let totalOrder = channel5MonthlySales.reduce(
-  //     (partialSum, a) => partialSum + a,
-  //     0
-  //   );
-  //  let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  //   (partialSum, a) => partialSum + a,
-  //   0
-  // );
-  //    orderQuantityArraY.push(totalOrder);
-  //    linioStackedSalesArray.push(totalMonthlySales);
-  //     } 
-     
-  //     setlinioMonthly(orderQuantityArraY);
-
-  //LINIO STACKED SALES ARRAY
+        console.log(obj);
   let res1 = [];
+ 
+console.log(ChannelSelectedForDelete);
+let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
+let xio = [];
+if(ChannelSelectedForDelete !== undefined){
+  if(ChannelSelectedForDelete.channel === 'Ripley'){
+   
+    xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Shopify'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Magento'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Linio'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'MercadoLibre'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Chambas'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+}
+console.log(xio);
+setdeleteChannelArray(xio);
   for(let i = 0;i<=stackedDatevalues.length-1;i++){
     let LINIOMonthlySales = obj.filter((item) => {
       let dateTobeCompared = stackedDatevalues[i];
@@ -628,7 +677,7 @@ useEffect(() => {
     });
     res1.push(LINIOMonthlySales);
   }
- 
+
   let LINIOMonthlyArray = [];
 let  LINIOStackedSalesArray = [];
   for(let i=0;i<=res1.length-1;i++){
@@ -649,9 +698,15 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
  
  LINIOMonthlyArray.push(totalOrder);
  LINIOStackedSalesArray.push(totalMonthlySales);
+ if(deleteChannelArray.includes('Linio')){
+ setlinioStackedSalesState(LINIOStackedSalesArray);
+ }
   }
-  
+
  //RIPLEY STACKED  
+
+
+
       let res2 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
         let ripleyMonthlySales = obj.filter((item) => {
@@ -688,11 +743,17 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
      
      ripleyMonthlyArray.push(totalOrder);
      ripleyStackedSalesArray.push(totalMonthlySales);
-     console.log(ripleyStackedSalesArray.length);
-     setripleyLength(ripleyStackedSalesArray.length);
-     setripleyStackedSalesState(ripleyStackedSalesArray);
-      }
-      
+    
+    if(deleteChannelArray.includes('Ripley')){
+      console.log('ripley present');
+     setripleyLength(ripleyMonthlyArray.length);
+      setripleyStackedSalesState(ripleyStackedSalesArray);
+    }
+    
+   
+     
+    } 
+    
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
@@ -733,6 +794,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 WooCommerceMonthlyArray.push(totalOrder);
 WooCommerceStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('Chambas')){
+  setwooCommerceStackedSalesState(WooCommerceStackedSalesArray);
+}
 }
 // SHOPIFY STACKED MONTHLY DATA
 
@@ -771,10 +835,11 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
   );
+  if(deleteChannelArray.includes('Shopify')){
 ShopifyMonthlyArray.push(totalOrder);
 shopifyStackedSalesArray.push(totalMonthlySales);
 setshopifyStackedSalesState(shopifyStackedSalesArray);
-
+  }
 }
 //MERCADO LIBRE STACKED MONTHLY DATA
 let res5= [];
@@ -813,7 +878,12 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   0
   );
 MercadoArray.push(totalOrder);
+
 MercadoStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('MercadoLibre')){
+  console.log('mercado');
+setmercadoStackedSalesState(MercadoStackedSalesArray);
+}
 }
 
 
@@ -854,7 +924,10 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   0
   );
 ChambasMonthlyArray.push(totalOrder);
+if(deleteChannelArray.includes('Chambas')){
 ChambasStackedSalesArray.push(totalMonthlySales);
+setchambasStackedSalesState(ChambasStackedSalesArray);
+}
 }
 
 
@@ -899,6 +972,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 vtexMonthlyArray.push(totalOrder);
 vtexStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('Chambas')){
+setvtexStackedSalesState(vtexStackedSalesArray);
+}
 }
 //MAGENTO MONTHLY ARRAY
 let res8= [];
@@ -938,9 +1014,11 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
   );
+  if(deleteChannelArray.includes('Magento')){
 MagentoMonthlyArray.push(totalOrder);
 magentoStackedSalesArray.push(totalMonthlySales);
 setmagentoStackedSalesState(magentoStackedSalesArray);
+  }
 }
 // LISTA TIENDA MONTHLY SALES
 let res9= [];
@@ -984,6 +1062,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ListaMonthlyArray.push(totalOrder);
 ListaStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('ListaTienda')){
+setlistaStackedSalesState(ListaStackedSalesArray);
+}
 }
 
 // PARIS STACKED MONTHLY SALES
@@ -1028,6 +1109,10 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ParisMonthlyArray.push(totalOrder);
 ParisStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('Paris')){
+  setparisStackedSalesState(ParisStackedSalesArray);
+}
+
 }
 //EXITO MONTHLY STACKED ARRAY
 
@@ -1071,6 +1156,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ExitoMonthlyArray.push(totalOrder);
 ExitoStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('ListaTienda')){
+  setexitoStackedSalesState(ExitoStackedSalesArray);
+}
 }
 
 
@@ -1193,17 +1281,38 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
-        // if (parisSales.length === 0) {
-        //   setparisOrders(0);
-        //   setparis(0);
-        // }
+
         let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
+        let parisOrderQuantity = parisSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalparisOrder = parisOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+       
         let totalparisSales = parisSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
+        // let parisSales = obj.filter((item) => {
+        //   return item.channel == 1;
+        // });
+       
+        // // if (parisSales.length === 0) {
+        // //   setparisOrders(0);
+        // //   setparis(0);
+        // // }
+        // let parisSalesArray = parisSales.map((item) => {
+        //   return item.total;
+        // });
+        // console.log(parisSalesArray);
+        // let totalparisSales = parisSalesArray.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
@@ -1282,6 +1391,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setexito(totalexitoSales);
         setshopify(totalshopifySales);
         setparis(totalparisSales);
+        setparisOrders(totalparisOrder);
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
@@ -1302,6 +1412,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
      const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
        return item.channel
      })
+     setmixedGraphChannels(lineAndBarChartLabels);
      console.log(lineAndBarChartLabels);
      const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
       return item.value
@@ -1310,7 +1421,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
       return item.orderValue
     })
         let MIXED = {
-          labels: lineAndBarChartLabels,
+          labels: mixedGraphChannels,
           datasets: [
             {
               label: "Ventas",
@@ -1660,6 +1771,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
   //    vtexStackedSalesArray = 0;
   //  }
   }
+  console.log(ripleyStackedSalesState);
+  console.log(ripleyStackedSalesArray);
+  console.log(shopifyStackedSalesState);
+  console.log(linioStackedSalesState);
+  console.log(mercadoStackedSalesState);
+  console.log(chambasStackedSalesState);
+  console.log(listaStackedSalesState);
         setstackedChartData(MONTLY_ORDER_GRAPH);
         let MONTLY_SALES_GRAPH = {
           labels:  stackedDateLabel,
@@ -1670,7 +1788,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-             data: stackedRipleyArray,
+             data: ripleyStackedSalesState,
              
             },
             {
@@ -1679,7 +1797,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaStackedSalesArray,
+              data: listaStackedSalesState,
             },
             {
               label: "Magento",
@@ -1703,7 +1821,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoStackedSalesArray,
+              data: mercadoStackedSalesState,
             },
             {
               label: "Chambas",
@@ -1711,7 +1829,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasStackedSalesArray,
+              data: chambasStackedSalesState,
             },
             {
               label: "Linio",
@@ -1719,7 +1837,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: LINIOStackedSalesArray
+              data: linioStackedSalesState,
             },
             {
               label: "Vtex",
@@ -1727,7 +1845,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: vtexStackedSalesArray,
+              data: vtexStackedSalesState,
             },
             {
               label: "WooCommerce",
@@ -1735,7 +1853,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceStackedSalesArray,
+              data: wooCommerceStackedSalesState,
             },
             {
               label: "Paris",
@@ -1743,7 +1861,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisStackedSalesArray,
+              data: parisStackedSalesState,
             },
             {
               label: "Exito",
@@ -1751,7 +1869,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoStackedSalesArray,
+              data: exitoStackedSalesState,
             },
           ],
         };
@@ -1792,6 +1910,7 @@ setStackedisLoading(true);
       .then((result) => {
         var obj = JSON.parse(result);  
         //LINIO STACKED SALES ARRAY
+
   let res1 = [];
   console.log(stackedDatevalues);
   for(let i = 0;i<=stackedDatevalues.length-1;i++){
@@ -1847,7 +1966,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
         });
         res2.push(ripleyMonthlySales);
       }
-     
+    
       let ripleyMonthlyArray = [];
     let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
@@ -1869,7 +1988,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
      ripleyMonthlyArray.push(totalOrder);
      ripleyStackedSalesArray.push(totalMonthlySales);
      setripleyLength(ripleyStackedSalesArray.length);
-     setripleyStackedSalesState(ripleyStackedSalesArray);
+     setripleyStackedSalesState(ripleyStackedSalesArray);[]
       }
       
 //  WOO COMMERCE STACKED GRAPH ORDERS
@@ -2283,7 +2402,7 @@ if(ChannelSelectedForDelete !== undefined){
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-             data: ripleyStackedSalesState,
+              data: ripleyStackedSalesState,
              
             },
             {
@@ -2376,6 +2495,7 @@ if(ChannelSelectedForDelete !== undefined){
   }
   
   const fetchFilterData = async () => {
+    setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -2430,26 +2550,27 @@ if(ChannelSelectedForDelete !== undefined){
 
         setchannels(salesChannelList);
 
-        let PIE = {
-          labels: salesChannelList,
-          datasets: [
-            {
-              label: "Emails",
-              pointRadius: 0,
-              pointHoverRadius: 0,
-              backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-              borderWidth: 0,
-              barPercentage: 1.6,
-              data: [ripley, 480, 430, 211],
-            },
-          ],
-        };
+        // let PIE = {
+        //   labels: salesChannelList,
+        //   datasets: [
+        //     {
+        //       label: "Emails",
+        //       pointRadius: 0,
+        //       pointHoverRadius: 0,
+        //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
+        //       borderWidth: 0,
+        //       barPercentage: 1.6,
+        //       data: [ripley, 480, 430, 211],
+        //     },
+        //   ],
+        // };
 
-        setpieChartData(PIE);
+        // setpieChartData(PIE);
         let countryArray = [];
 
         setfilteredCountryData(obj);
-        // setfilteredStoreData(y[0].stores);
+  
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -2547,6 +2668,7 @@ if(ChannelSelectedForDelete !== undefined){
     setChannelSelectedForDelete(item);
    let x = cR.filter((i) => i !== item);
     setcR(x);
+   
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
@@ -2554,7 +2676,9 @@ if(ChannelSelectedForDelete !== undefined){
 
   return (
     <>
+    {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen></SplashScreen>}
+
       {!isLoading && (
         <div className="content">
           <h5
@@ -3442,6 +3566,7 @@ if(ChannelSelectedForDelete !== undefined){
           <br></br>
 
           {/* GRAPHS */}
+        {!pageFullyLoaded && <div>
           <Row>
 
            <Col id="ColMixedChart" lg="6" md="12" sm="12" >
@@ -4457,6 +4582,7 @@ if(ChannelSelectedForDelete !== undefined){
             </div>
           </Row>
 
+        </div>}
         </div>
       )}
     </>
