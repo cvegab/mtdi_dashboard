@@ -2075,22 +2075,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
 
         setchannels(salesChannelList);
 
-        // let PIE = {
-        //   labels: salesChannelList,
-        //   datasets: [
-        //     {
-        //       label: "Emails",
-        //       pointRadius: 0,
-        //       pointHoverRadius: 0,
-        //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-        //       borderWidth: 0,
-        //       barPercentage: 1.6,
-        //       data: [ripley, 480, 430, 211],
-        //     },
-        //   ],
-        // };
-
-        // setpieChartData(PIE);
+        
         let countryArray = [];
 
         setfilteredCountryData(obj);
