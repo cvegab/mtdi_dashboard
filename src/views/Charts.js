@@ -1767,11 +1767,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
         setreviews(sumOfreview);
 
 
-        // setstackedChartData({
-        //   labels: stackedDateLabel,
-        //   datasets: stackedChartData.datasets,
-
-        // });
+        
         let MONTLY_ORDER_GRAPH = {
           labels:  stackedDateLabel,
           datasets: [
