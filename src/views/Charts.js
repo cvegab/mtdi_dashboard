@@ -390,7 +390,9 @@ function Charts() {
   const [wooCommerceStackedSalesState, setwooCommerceStackedSalesState] = useState([]);
   const [wooCommerceStackedOrdersState, setwooCommerceStackedOrdersState] = useState([]);
   const [listaStackedSalesState, setlistaStackedSalesState] = useState([]);
+  const [listaStackedOrdersState, setlistaStackedOrdersState] = useState([]);
   const [exitoStackedSalesState, setexitoStackedSalesState] = useState([]);
+  const [exitoStackedOrdersState, setexitoStackedOrdersState] = useState([]);
   const [ripleyLength, setripleyLength] = useState();
   useEffect(() => {
     // set initial value
@@ -534,10 +536,12 @@ setchambasStackedOrdersState(0);
               }
               if(ChannelSelectedForDelete.channel === 'ListaTienda'){
                 console.log('hi');
+                setlistaStackedOrdersState(0);
               setlistaStackedSalesState(0);
                   }
                   if(ChannelSelectedForDelete.channel === 'Exito'){
                     console.log('hi');
+                    setexitoStackedOrdersState(0);
                   setexitoStackedSalesState(0);
                       }
     }
@@ -1094,6 +1098,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 ListaMonthlyArray.push(totalOrder);
 ListaStackedSalesArray.push(totalMonthlySales);
 if(deleteChannelArray.includes('ListaTienda')){
+  setlistaStackedOrdersState(ListaMonthlyArray);
 setlistaStackedSalesState(ListaStackedSalesArray);
 }
 }
@@ -1188,7 +1193,8 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ExitoMonthlyArray.push(totalOrder);
 ExitoStackedSalesArray.push(totalMonthlySales);
-if(deleteChannelArray.includes('ListaTienda')){
+if(deleteChannelArray.includes('Exito')){
+  setexitoStackedOrdersState(ExitoMonthlyArray);
   setexitoStackedSalesState(ExitoStackedSalesArray);
 }
 }
@@ -1735,7 +1741,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaMonthlyArray,
+              data: listaStackedOrdersState,
             },
             {
               label: "Magento",
@@ -1808,7 +1814,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoMonthlyArray,
+              data: exitoStackedOrdersState,
             },
           ],
            options: {
