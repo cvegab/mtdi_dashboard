@@ -1,0 +1,450 @@
+#bttnMoreFilters {
+  color:black;
+  background-color: #f4f3ef !important;
+
+}
+
+#accordionFilterBttn {
+  background-color: #f4f3ef !important;
+}
+#bttnGeneral {
+
+  border-radius: 17px !important;
+}
+
+#bttnGeneral:hover {
+  background-color: #06cbc1 !important;
+}
+
+.titlesInfoCard {
+  margin-bottom: 0px;
+}
+
+#spanTextInfoCard {
+  font-weight: 600;
+  font-size: 10px;
+}
+.infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 2em;
+
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 1em;
+
+}
+
+.titleTextLegend {
+  font-size: 11px;
+  width:116px;
+  font-weight:600;
+  color: #232A38;
+}
+
+
+
+.MuiTablePagination-select {
+  width: 45px !important;
+  height: 30px !important;
+  border-radius: 20px !important;
+}
+.Component-paginationSelectRoot-4 {
+  border-radius: 20px !important;
+}
+
+.accordion-item:last-of-type {
+  border-bottom-right-radius: 3rem;
+  border-bottom-left-radius: 3rem;
+}
+
+.accordion-item:first-of-type {
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
+}
+
+
+.titlesInfoCard {
+  margin-bottom: 0;
+}
+
+#spanTextInfoCard {
+  font-weight: 600;
+}
+
+.card-category {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color:#858F99;
+
+}
+
+.textInfoCard {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed:hover {
+  background-color:#06cbc1;
+  color:#ffff;
+}
+
+
+@media screen and (max-width:320px) { 
+
+  input[type="text"], input[type="number"] {
+    width: 100px !important;
+  }
+
+  .MuiInput-root,
+  .MuiInputBase-root {
+    width: 215px !important;
+  }
+  #FiltersInDesktop {
+    display: none;
+  }
+
+  #ReportInformationDesktop {
+    display:none;
+  }
+  
+  #bttnGeneral {
+    width: 100px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }  
+
+  #textBttnGeneral {
+    font-size: 10px !important;
+    margin-top:5px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 7em !important;
+  }
+
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 0em;
+
+}
+.bttnSiguienteReporte,
+.bttnCompartirReporte {
+  width: 250px !important;
+  padding:22px 50px !important;
+  margin-bottom: 1em;
+}
+
+
+}
+
+@media screen and (min-width:321px) and (max-width:375px) { 
+
+  input[type="text"], input[type="number"] {
+    width: 140px !important;
+  }
+
+  .MuiInput-root,
+  .MuiInputBase-root {
+    width: 300px !important;
+  }
+  #FiltersInDesktop {
+    display: none;
+  }
+
+  #ReportInformationDesktop {
+    display:none;
+  }
+  
+  #bttnGeneral {
+    width: 100px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }  
+
+  #textBttnGeneral {
+    font-size: 10px !important;
+    margin-top:5px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 7rem !important;
+  }
+
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 0em;
+
+
+}
+.bttnSiguienteReporte,
+.bttnCompartirReporte {
+  margin-bottom: 1em;
+}
+}
+
+@media screen and  (min-width: 376px) and (max-width:767px)  {
+
+  #FiltersInDesktop {
+    display: none;
+  }
+
+  #ReportInformationDesktop {
+    display:none;
+  }
+  
+  #bttnGeneral {
+    width: 100px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+  }  
+
+  #textBttnGeneral {
+    font-size: 10px !important;
+    margin-top:5px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 8rem !important;
+  }
+
+  input[type="text"], input[type="number"] {
+    width: 165px !important;
+  }
+
+  .MuiInput-root {
+    width: 340px !important;
+  }
+
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 4em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 4em;
+
+}
+.titleTextLegend {
+  font-size: 10px !important;
+}
+
+.bttnSiguienteReporte,
+.bttnCompartirReporte {
+  margin-bottom: 1em;
+}
+}
+
+
+
+@media screen and (min-width:768px) {
+
+
+
+  input[type="text"], input[type="number"] {
+    width: 193px !important;
+  }
+
+  .MuiInput-root {
+    width: 193px !important;
+  }
+
+  #datepickerCalendar {
+    background-position: 10rem !important;
+
+  }
+
+  #FiltersInMobile {
+    display:none;
+  }
+
+  #ReportInformationMobile {
+    display: none;
+  }
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+}
+.infoLegendPieChart {
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 0em 1em 1em 2em;
+
+}
+
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 710px !important;
+  }
+
+  .titlesInfoCard {
+    font-size: 12px !important;
+  }
+  .textInfoCard {
+    font-size: 14px !important;
+  }
+
+  #spanTextInfoCard {
+    font-size: 12px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 11px !important;
+  }
+
+
+
+}
+
+@media screen and (min-width:1024px) {
+
+
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 1060px !important;
+
+  }
+
+  .titlesInfoCard {
+    font-size: 14px !important;
+  }
+  .textInfoCard {
+    font-size: 18px !important;
+  }
+
+  #spanTextInfoCard {
+    font-size: 12px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 14px !important;
+  }
+
+  #ColPieChart {
+    width: 45%;
+  }
+  #ColMixedChart {
+    width: 55%;
+  }
+  .infoLegendPieChart {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 1em;
+  
+  }
+  .infoLegend {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 2em;
+  
+}
+.titleTextLegend {
+  font-size: 11px;
+  width:116px;
+  font-weight:600;
+  color: #232A38;
+}
+
+}
+
+
+
+@media screen and (min-width:1440px) {
+
+
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 1200px !important;
+    height: 190px !important;
+  }
+
+  .titlesInfoCard {
+    font-size: 16px !important;
+  }
+  .textInfoCard {
+    font-size: 14px !important;
+  }
+
+  #spanTextInfoCard {
+    font-size: 14px !important;
+
+  }
+
+  #textListoParaDespacho {
+    font-size: 20px !important;
+  }
+  .infoLegend {
+    padding: 22px 15px 0px 30px !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .infoLegendPieChart {
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+  }
+  .titleTextLegend {
+    font-size: 12px;
+    width:116px;
+    font-weight:600;
+    color: #232A38;
+  }
+
+}
+
+
+

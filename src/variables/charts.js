@@ -348,12 +348,13 @@ const chartExample4 = {
     plugins: {
       legend: {
         display: false,
+        
       },
 
       tooltips: {
         tooltipFillColor: "rgba(0,0,0,0.5)",
         tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-        tooltipFontSize: 14,
+        tooltipFontSize: 20,
         tooltipFontStyle: "normal",
         tooltipFontColor: "#fff",
         tooltipTitleFontFamily:
@@ -415,49 +416,60 @@ const chartExample5 = {
       },
     ],
   },
-  options: {
+    options: {
     plugins: {
       legend: {
         display: false,
+        
       },
+
       tooltips: {
-        enabled: false,
-      },
-      title: {
-        display: true,
-        text: "60%",
-        position: "bottom",
-        color: "#66615c",
-        font: {
-          weight: 400,
-          size: 30,
-        },
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 20,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10,
       },
     },
-    maintainAspectRatio: false,
-    cutout: "90%",
     scales: {
       y: {
         ticks: {
-          display: false,
+          color: "#9f9f9f",
+          beginAtZero: true,
+          maxTicksLimit: 8,
+          padding: 20,
         },
         grid: {
+          zeroLineColor: "transparent",
+          display: true,
           drawBorder: false,
-          display: false,
+          color: "#9f9f9f",
         },
       },
       x: {
         grid: {
-          drawBorder: false,
           display: false,
+          drawBorder: false,
         },
         ticks: {
-          display: false,
+          padding: 20,
+          color: "#9f9f9f",
         },
       },
     },
   },
 };
+
 
 // #########################################
 // // // used inside src/views/Dashboard.js
@@ -714,13 +726,13 @@ const chartExample9 = {
 const chartExample10 = {
   data: {
     labels: [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
+      'MercadoLibre',
+      'Shopify',
+      'Rappi',
+      'Ripley',
+      'Linio',
+      'CornerShop',
+      'Woo commerce',
       7,
       8,
       9,
@@ -739,10 +751,10 @@ const chartExample10 = {
     datasets: [
       {
         label: "Data",
-        borderColor: "#fcc468",
+        borderColor: "#344FD5",
         fill: true,
-        backgroundColor: "#fcc468",
-        hoverBorderColor: "#fcc468",
+        backgroundColor: "#344FD5",
+        hoverBorderColor: "#06CBC1",
         borderWidth: 5,
         barPercentage: 0.4,
         data: [
@@ -826,26 +838,127 @@ const chartExample10 = {
     },
   },
 };
+const chartExample100 = {
+  data: {
+    labels: [
+      'MercadoLibre',
+      'Shopify',
+      'Rappi',
+      'Ripley',
+      'Linio',
+      'CornerShop',
+      'Woocommerce',
+    ],
+    datasets: [
+      {
+        label: "Data",
+        borderColor: "#344FD5",
+        fill: true,
+        backgroundColor: "#344FD5",
+        hoverBorderColor: "#06CBC1",
+        borderWidth: 0,
+        borderRadius:5,
+        barPercentage: 0.5,
+        data: [
+          100,
+          120,
+          80,
+          100,
+          90,
+          130,
+          110,
+          // 100,
+          // 80,
+          // 110,
+          // 130,
+          // 140,
+          // 130,
+          // 120,
+          // 130,
+          // 80,
+          // 100,
+          // 90,
+          // 120,
+          // 130,
+        ],
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: false,
+      },
 
+      tooltips: {
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 14,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10,
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: "#9f9f9f",
+          fontStyle: "bold",
+          beginAtZero: true,
+          maxTicksLimit: 5,
+          padding: 20,
+        },
+        grid: {
+          zeroLineColor: "transparent",
+          display: true,
+          drawBorder: false,
+          color: "#9f9f9f",
+        },
+      },
+      x: {
+        grid: {
+          zeroLineColor: "white",
+          display: false,
+          drawBorder: false,
+          color: "transparent",
+        },
+        ticks: {
+          padding: 20,
+          color: "#9f9f9f",
+          fontStyle: "bold",
+        },
+      },
+    },
+  },
+};
 // #########################################
 // // // used inside src/views/Charts.js
 // #########################################
 
 const chartExample11 = {
-  data: {
-    labels: [1, 2, 3],
-    datasets: [
-      {
-        label: "Emails",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468"],
-        borderWidth: 0,
-        barPercentage: 1.6,
-        data: [542, 480, 430],
-      },
-    ],
-  },
+  // data: {
+  //   labels: [1, 2, 3,4],
+  //   datasets: [
+  //     {
+  //       label: "Emails",
+  //       pointRadius: 0,
+  //       pointHoverRadius: 0,
+  //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
+  //       borderWidth: 0,
+  //       barPercentage: 1.6,
+  //       data: [542, 480, 430,211],
+  //     },
+  //   ],
+  // },
   options: {
     plugins: {
       legend: {
@@ -966,6 +1079,91 @@ const chartExample12 = {
     },
   },
 };
+const data1 = {
+  labels: ["Organic", "Sponsored", "Organic", "Sponsored"],
+  previousDate: {
+    label: "08/10/2019 - 09/30/2019",
+    dataSet: [10000, 150000, 10000, 150000]
+  },
+  currentDate: {
+    label: "10/01/2019 - 11/20/2019",
+    dataSet: [10000, 225000, 10000, 225000]
+  }
+};
+
+const chartExample13 = {
+  // data: {
+  //   labels: [
+  //     0,
+  //     1,
+  //     2,
+  //     3,
+  //     4,
+  //     5,
+  //     6,
+  //     7,
+  //     8,
+  //     9,
+  //     10,
+  //     11,
+  //     12,
+  //     13,
+  //     14,
+  //     15,
+  //     16,
+  //     17,
+  //     18,
+  //     19,
+  //     20,
+  //   ],
+   
+  options: {
+    plugins: {
+      legend: {
+        display: false, 
+      },
+
+    },
+
+    // scales: {
+      
+    //     grid: {
+    //       drawBorder: false,
+    //       zeroLineColor: "transparent",
+    //     }
+      
+    // }
+    
+    // scales: {
+    //   y: {
+    //     ticks: {
+    //       color: "#9f9f9f",
+    //       beginAtZero: true,
+    //       maxTicksLimit: 5,
+    //       // padding: 100,
+          
+    //     },
+    //     grid: {
+    //       zeroLineColor: "transparent",
+    //       display: true,
+    //       drawBorder: false,
+    //       color: "#9f9f9f",
+    //     },
+    //   },
+    //   x: {
+    //     grid: {
+    //       display: false,
+    //       drawBorder: false,
+    //     },
+    //     ticks: {
+    //       padding: 20,
+    //       color: "#9f9f9f",
+        
+    //     },
+    //   },
+    // },
+  },
+};
 
 module.exports = {
   // used for Charts and Dashboard views
@@ -992,4 +1190,8 @@ module.exports = {
   chartExample11,
   // used for Charts view
   chartExample12,
+  chartExample13,
+  chartExample100,
+  data1,
+  
 };

@@ -26,14 +26,14 @@ const routes = [
 
  
 
-  // {
-  //   path: "/charts",
-  //   name: "Reportes",
-  //   icon: "nc-icon nc-chart-bar-32",
-  //   component: Charts,
-  //   layout: "/admin",
+  {
+    path: "/charts",
+    name: "Reportes",
+    icon: "nc-icon nc-chart-bar-32",
+    component: Charts,
+    layout: "/admin",
 
-  // },
+  },
 
   {
     path: "/logysto",

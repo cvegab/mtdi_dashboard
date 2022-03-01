@@ -14,6 +14,14 @@ body {
  
 }
 
+.MuiTablePagination-input {
+  border-radius: 22px;
+}
+
+.MuiInput-root {
+  border-radius: 22px;
+}
+
 .Button:hover {
   background-color:#06cbc1;
 }
@@ -53,14 +61,13 @@ color: white !important;
   margin-left: 1em;
 }
 
-.MuiSelect-select.MuiSelect-select {
-  padding-right: 24px;
-  border-radius: 14px;
-  background-color: white;
-  box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
-  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);  
 
+
+.MuiSelect-select:focus {
+  background-color: white !important;
 }
+
+
 
 .MuiMenu-paper {
   border-radius: 12px !important;
@@ -90,6 +97,15 @@ color: white !important;
 
 .MuiInput-root {
   margin-right: 1em !important;
+}
+
+.MuiInputBase-root {
+  box-shadow: 0px 4px 60px rgb(122 122 122 / 12%);
+  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);  
+}
+
+.MuiSelect-select.MuiSelect-select {
+  margin-left:2em;
 }
 
 .MuiInputAdornment-positionEnd {
@@ -157,43 +173,43 @@ input[type="number"] {
   border-radius: 17px;
   border: 1px solid white;
   color: black;
-  width: 100px;
-  height: 24px;
+  width: 193px;
+  height: 46px;
   padding-left: 10px;
   font-size: 10px;
   cursor: pointer;
   margin-top:2px;
+  
   box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
   
 }
-
-input[type="text"]::placeholder {
-  /* background-image: url(../img/DatePickerIcon.png) !important; */
+#datepickerCalendar {
+  background-image: url(../img/DatePickerIcon.png) !important;
   background-size: 15px 15px !important;
   background-repeat: no-repeat !important;
-  background-position: 4rem center !important;
+  background-position: 10rem;
 }
 
-
-input[type="text"]:focus {
+/* input[type="text"]:focus {
   outline: none;
   border: 1px solid white;
   color: black;
   margin-top:2px;
-  box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  /* box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%); */
  
-}
+/* } */
 
 
 
 .MuiSelect-nativeInput {
   opacity: inherit !important;
   border: none !important;
-  /* width: 78% !important; */
-  left: 0px !important;
-  border-radius: 8px !important;
-  bottom: 5px !important;
-  padding: 2px 0px 1px 9px;
+  border-radius: 17px !important;
+  bottom: 15px !important;
+  margin-left:1em;
+  width:160px !important;
+  height:20px;
+ 
 }
 
 #logoutButton {
@@ -231,10 +247,7 @@ input[type="text"]:focus {
   margin-left: 1em;
 }
 
-.MuiSelect-select:focus {
-  border-radius: 14px !important;
-  background-color: white !important;
-}
+
 
 .MuiTable-root {
   display: block !important;
@@ -275,6 +288,8 @@ input[type="text"]:focus {
 border-collapse: inherit !important;
 }
 
+
+
 /* Accordion Button  */
 .accordion-button {
   text-align: center !important;
@@ -286,6 +301,7 @@ border-collapse: inherit !important;
   color: white;
   border-radius: 22px !important;
   font-size: 12px;
+  height: 50px;
 }
 .accordion-button::after {
   background-image: none !important;
@@ -370,7 +386,51 @@ color: white !important;
 .MuiTableSortLabel-icon {
     color: white !important;
 }
+/* 
+PROBANDO */
 
+.panel-wrap {
+  margin-bottom: 5px;
+}
+
+.panel-wrap.active-panel .panel-header {
+  background: #396ea5;
+}
+.panel-wrap.active-panel .panel-header button {
+  color: #ffffff;
+}
+
+.panel-header {
+  border: 1px solid #cccc;
+  font-weight: normal;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.panel-header button {
+  border: none;
+  background: transparent;
+}
+.panel-header button:focus {
+  outline: 0px auto -webkit-focus-ring-color;
+}
+
+.panel-body {
+  border: 1px solid #dddddd;
+  background: #efefef;
+  color: #333333;
+  padding: 5px;
+  border-top: none;
+}
+
+.accordion-item:last-of-type {
+  border-bottom-left-radius: 3rem !important;
+  border-bottom-right-radius: 3rem !important;
+}
+
+.accordion-item:first-of-type {
+  border-top-left-radius: 3rem !important;
+  border-top-right-radius: 3rem !important;
+}
 /* MEDIA QUERIES */
 
 @media screen and (max-width:321px) {

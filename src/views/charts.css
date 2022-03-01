@@ -1,0 +1,30 @@
+.tag-item {
+    background-color: #DFE0E8;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 30px;
+    height: 30px;
+    padding: 0 4px 0 1rem;
+    display: inline-flex;
+    align-items: center;
+    margin: 10px 0.3rem 0.3rem 0;
+  }
+  
+  .tag-item > .button {
+    background-color: #DFE0E8; 
+    color: black !important;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    margin-left: 10px;
+    font-weight: medium;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
