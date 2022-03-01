@@ -196,7 +196,7 @@ const barChartOptions = {
   plugins: {
     legend: {
       display: false,
-      
+
     },
   },
   scales: {
@@ -355,7 +355,7 @@ function Charts() {
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [op, setop] = useState({});
-  
+
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
   const [vtexOrders, setvtexOrders] = useState(0);
@@ -372,14 +372,23 @@ function Charts() {
   //MONTHLY SALES STATES
   const [linioMonthly, setlinioMonthly] = useState([]);
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
+  const [ripleyStackedOrdersState, setripleyStackedOrdersState] = useState([]);
   const [shopifyStackedSalesState, setshopifyStackedSalesState] = useState([]);
+  const [shopifyStackedOrdersState, setshopifyStackedOrdersState] = useState([]);
   const [magentoStackedSalesState, setmagentoStackedSalesState] = useState([]);
+  const [magentoStackedOrdersState, setmagentoStackedOrdersState] = useState([]);
   const [linioStackedSalesState, setlinioStackedSalesState] = useState([]);
+  const [linioStackedOrdersState, setlinioStackedOrdersState] = useState([]);
   const [mercadoStackedSalesState, setmercadoStackedSalesState] = useState([]);
+  const [mercadoStackedOrdersState, setmercadoStackedOrdersState] = useState([]);
   const [chambasStackedSalesState, setchambasStackedSalesState] = useState([]);
+  const [chambasStackedOrdersState, setchambasStackedOrdersState] = useState([]);
   const [parisStackedSalesState, setparisStackedSalesState] = useState([]);
+  const [parisStackedOrdersState, setparisStackedOrdersState] = useState([]);
   const [vtexStackedSalesState, setvtexStackedSalesState] = useState([]);
+  const [vtexStackedOrdersState, setvtexStackedOrdersState] = useState([]);
   const [wooCommerceStackedSalesState, setwooCommerceStackedSalesState] = useState([]);
+  const [wooCommerceStackedOrdersState, setwooCommerceStackedOrdersState] = useState([]);
   const [listaStackedSalesState, setlistaStackedSalesState] = useState([]);
   const [exitoStackedSalesState, setexitoStackedSalesState] = useState([]);
   const [ripleyLength, setripleyLength] = useState();
@@ -408,20 +417,20 @@ function Charts() {
         setpageFullyLoaded(false);
       });
       },[])
-      
 
 
-  
+
+
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
-    
+
   // fetchStackedGraphData();
    getDateLabels();
  //  handleRemovetheLabelsData();
      //setpieChart();
     //setMixedChart();
-   
+
   }, []);
   useEffect(() => {
     displaysalesChannelHandler();
@@ -453,21 +462,21 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
- 
+
    stackedDatevalues,
  stackedDateLabel,
- 
+
   ]);
 
- 
-  
-  
+
+
+
 useEffect(() => {
- 
- 
+
+
   let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
        var ring = newChannel.map((id, index) => {
-      
+
         return {
           channel: id,
           value:mixedChartsalesData[index],
@@ -477,43 +486,50 @@ useEffect(() => {
       setmixedGraphDatas(ring);
       let x = [];
       console.log(ChannelSelectedForDelete);
-     
+
     if(ChannelSelectedForDelete !== undefined){
       x = mixedGraphDatas.filter((item,index) => {
-        
+
     return  item.channel !== ChannelSelectedForDelete.channel});
     setmixedGraphDatas(x);
-    
+
    if(ChannelSelectedForDelete.channel === 'Ripley'){
      setripleyStackedSalesState(0);
+     setripleyStackedOrdersState(0);
    }
    if(ChannelSelectedForDelete.channel === 'Shopify'){
+     setshopifyStackedOrdersState(0);
     setshopifyStackedSalesState(0);
   }
   if(ChannelSelectedForDelete.channel === 'Magento'){
+    setmagentoStackedOrdersState(0);
     setmagentoStackedSalesState(0);
   }
   if(ChannelSelectedForDelete.channel === 'Linio'){
+    setlinioStackedOrdersState(0);
    setlinioStackedSalesState(0);
   }
   if(ChannelSelectedForDelete.channel === 'MercadoLibre'){
-    
+    setmercadoStackedOrdersState(0);
    setmercadoStackedSalesState(0);
    }
    if(ChannelSelectedForDelete.channel === 'Chambas'){
-    
+setchambasStackedOrdersState(0);
     setchambasStackedSalesState(0);
     }
     if(ChannelSelectedForDelete.channel === 'Paris'){
     console.log('hi');
+    setparisStackedOrdersState(0);
       setparisStackedSalesState(0);
       }
       if(ChannelSelectedForDelete.channel === 'Vtex'){
         console.log('hi');
+        setvtexStackedOrdersState(0);
         setvtexStackedSalesState(0);
           }
           if(ChannelSelectedForDelete.channel === 'Woocommerce'){
             console.log('hi');
+            setwooCommerceStackedOrdersState(0);
             setwooCommerceStackedSalesState(0);
               }
               if(ChannelSelectedForDelete.channel === 'ListaTienda'){
@@ -536,13 +552,13 @@ useEffect(() => {
   const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
    return item.value
  });
- 
+
  const lineAndBarChartOrderValues = mixedGraphDatas.map((item)=>{
    return item.orderValue
  })
 }, [mixedChartsalesData,mixedChartOrdersData])
 
-  
+
   const getDateLabels = ()=>{
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
@@ -609,7 +625,7 @@ useEffect(() => {
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
-   
+
 
     console.log("hi i am fetching");
     setisLoading(true);
@@ -627,20 +643,20 @@ useEffect(() => {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-   
+
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);  
-     
+        var obj = JSON.parse(result);
+
   let res1 = [];
- 
+
 console.log(ChannelSelectedForDelete);
 let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
 let xio = [];
 if(ChannelSelectedForDelete !== undefined){
   if(ChannelSelectedForDelete.channel === 'Ripley'){
-   
+
     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
   }
   if(ChannelSelectedForDelete.channel === 'Shopify'){
@@ -675,7 +691,7 @@ setdeleteChannelArray(xio);
       const dateTime = item.date_created;
       const parts = dateTime.split(/[- :]/);
       var month = parts[1];
-      var year = parts[0]; 
+      var year = parts[0];
      return item.channel == 5 && month===splitMonth && year===splitYear;
     });
     res1.push(LINIOMonthlySales);
@@ -698,15 +714,16 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
 );
- 
+
  LINIOMonthlyArray.push(totalOrder);
  LINIOStackedSalesArray.push(totalMonthlySales);
  if(deleteChannelArray.includes('Linio')){
+   setlinioStackedOrdersState(LINIOMonthlyArray);
  setlinioStackedSalesState(LINIOStackedSalesArray);
  }
   }
 
- //RIPLEY STACKED  
+ //RIPLEY STACKED
 
 
 
@@ -720,12 +737,12 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
           const dateTime = item.date_created;
           const parts = dateTime.split(/[- :]/);
           var month = parts[1];
-          var year = parts[0]; 
+          var year = parts[0];
          return item.channel == 4 && month===splitMonth && year===splitYear;
         });
         res2.push(ripleyMonthlySales);
       }
-     
+
       let ripleyMonthlyArray = [];
     let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
@@ -743,27 +760,29 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
-     
+
      ripleyMonthlyArray.push(totalOrder);
      ripleyStackedSalesArray.push(totalMonthlySales);
-    
+
     if(deleteChannelArray.includes('Ripley')){
       console.log('ripley present');
      setripleyLength(ripleyMonthlyArray.length);
+     setripleyStackedOrdersState(ripleyMonthlyArray);
       setripleyStackedSalesState(ripleyStackedSalesArray);
+
     }
-    
-   
-     
-    } 
-    
+
+
+
+    }
+
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -797,7 +816,8 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 WooCommerceMonthlyArray.push(totalOrder);
 WooCommerceStackedSalesArray.push(totalMonthlySales);
-if(deleteChannelArray.includes('Chambas')){
+if(deleteChannelArray.includes('Woocommerce')){
+  setwooCommerceStackedOrdersState(WooCommerceMonthlyArray);
   setwooCommerceStackedSalesState(WooCommerceStackedSalesArray);
 }
 }
@@ -806,7 +826,7 @@ if(deleteChannelArray.includes('Chambas')){
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -841,6 +861,8 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   if(deleteChannelArray.includes('Shopify')){
 ShopifyMonthlyArray.push(totalOrder);
 shopifyStackedSalesArray.push(totalMonthlySales);
+
+ setshopifyStackedOrdersState(ShopifyMonthlyArray);
 setshopifyStackedSalesState(shopifyStackedSalesArray);
   }
 }
@@ -848,7 +870,7 @@ setshopifyStackedSalesState(shopifyStackedSalesArray);
 let res5= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -885,6 +907,7 @@ MercadoArray.push(totalOrder);
 MercadoStackedSalesArray.push(totalMonthlySales);
 if(deleteChannelArray.includes('MercadoLibre')){
   console.log('mercado');
+  setmercadoStackedOrdersState(MercadoArray);
 setmercadoStackedSalesState(MercadoStackedSalesArray);
 }
 }
@@ -929,7 +952,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 ChambasMonthlyArray.push(totalOrder);
 if(deleteChannelArray.includes('Chambas')){
 ChambasStackedSalesArray.push(totalMonthlySales);
+setchambasStackedOrdersState(ChambasMonthlyArray);
 setchambasStackedSalesState(ChambasStackedSalesArray);
+
 }
 }
 
@@ -939,9 +964,9 @@ setchambasStackedSalesState(ChambasStackedSalesArray);
 let res7= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -975,7 +1000,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 vtexMonthlyArray.push(totalOrder);
 vtexStackedSalesArray.push(totalMonthlySales);
-if(deleteChannelArray.includes('Chambas')){
+console.log(vtexMonthlyArray);
+if(deleteChannelArray.includes('Vtex')){
+setvtexStackedOrdersState(vtexMonthlyArray);
 setvtexStackedSalesState(vtexStackedSalesArray);
 }
 }
@@ -983,9 +1010,9 @@ setvtexStackedSalesState(vtexStackedSalesArray);
 let res8= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1020,6 +1047,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   if(deleteChannelArray.includes('Magento')){
 MagentoMonthlyArray.push(totalOrder);
 magentoStackedSalesArray.push(totalMonthlySales);
+setmagentoStackedOrdersState(MagentoMonthlyArray);
 setmagentoStackedSalesState(magentoStackedSalesArray);
   }
 }
@@ -1028,9 +1056,9 @@ let res9= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1075,9 +1103,9 @@ let res10= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1113,6 +1141,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 ParisMonthlyArray.push(totalOrder);
 ParisStackedSalesArray.push(totalMonthlySales);
 if(deleteChannelArray.includes('Paris')){
+  setparisStackedOrdersState(ParisMonthlyArray);
   setparisStackedSalesState(ParisStackedSalesArray);
 }
 
@@ -1122,9 +1151,9 @@ if(deleteChannelArray.includes('Paris')){
 let res11= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
  let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1178,7 +1207,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1198,7 +1227,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1217,7 +1246,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-       
+
         let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1240,25 +1269,26 @@ if(deleteChannelArray.includes('ListaTienda')){
           let totalMercadoOrders = mercadoOrders.map((item) => {
             return item.orders_qty;
           });
-     
+
           let totalmercadoSales = mercadoSalesArray.reduce(
             (partialSum, a) => partialSum + a,
             0
           );
           if(ChannelSelectedForDelete !== undefined){
             if(ChannelSelectedForDelete.channel === 'MercadoLibre')
+            totalMercadoOrders='0';
             totalmercadoSales = '0';
-           
+
           }
           console.log(totalmercadoSales);
           if(ChannelSelectedForDelete !== undefined){
             if(ChannelSelectedForDelete.channel === 'Paris')
             totalparisSales = '0';
-           
+
           }
-         
-        
-       
+
+
+
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
@@ -1276,7 +1306,7 @@ if(deleteChannelArray.includes('ListaTienda')){
         if(ChannelSelectedForDelete !== undefined){
           if(ChannelSelectedForDelete.channel === 'Exito')
           totalexitoSales = '0';
-         
+
         }
         let shopifySales = obj.filter((item) => {
           return item.channel == 6;
@@ -1292,7 +1322,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-  
+
         let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1311,7 +1341,7 @@ if(deleteChannelArray.includes('ListaTienda')){
         //   (partialSum, a) => partialSum + a,
         //   0
         // );
-       
+
         // let totalparisSales = parisSalesArray.reduce(
         //   (partialSum, a) => partialSum + a,
         //   0
@@ -1319,7 +1349,7 @@ if(deleteChannelArray.includes('ListaTienda')){
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
-       
+
         // // if (parisSales.length === 0) {
         // //   console.log('hi');
         // //   setparisOrders(0);
@@ -1334,10 +1364,18 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
+         let parisOrderQuantity = parisSales.map((item) => {
+          return item.orders_qty;
+        });
+         let totalparisOrder = parisOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        
       if(ChannelSelectedForDelete !== undefined){
         if(ChannelSelectedForDelete.channel === 'Paris')
         totalparisSales = '0';
-       
+        totalparisOrder='0';
       }
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
@@ -1349,7 +1387,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-     
+
         let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
@@ -1367,7 +1405,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
@@ -1388,7 +1426,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-       
+
         let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1396,7 +1434,7 @@ if(deleteChannelArray.includes('ListaTienda')){
         let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
-     
+
         // if (ListaSales.length === 0) {
         //   setlistaTiendaOrders(0);
         //   setlistaTienda(0);
@@ -1411,11 +1449,11 @@ if(deleteChannelArray.includes('ListaTienda')){
         if(ChannelSelectedForDelete !== undefined){
           if(ChannelSelectedForDelete.channel === 'ListaTienda')
           totalListaSales = '0';
-         
+
         }
         console.log(totalListaSales);
 setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
-setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,0,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
+setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,totalparisOrder,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -1423,7 +1461,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setexito(totalexitoSales);
         setshopify(totalshopifySales);
         setparis(totalparisSales);
-       // setparisOrders(totalparisOrder);
+      //  setparisOrders(totalparisOrder);
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
@@ -1441,7 +1479,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         let channelsList =cR.map((item) => {
           return item.channel;
         });
-       
+
       //   console.log(channelsList);
      console.log(mixedGraphDatas);
      const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
@@ -1450,7 +1488,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
      setmixedGraphChannels(lineAndBarChartLabels);
      console.log(lineAndBarChartLabels);
      console.log(BarLineGraphLabels);
-    
+
      const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
       return item.value
     })
@@ -1464,7 +1502,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               label: "Ventas",
             data: lineAndBarChartValues,
             backgroundColor: "#344FD5",
-              
+
             borderRadius:5,
               order: 1,
             },
@@ -1496,19 +1534,19 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
             },
           ],
            options: {
-      
+
              plugins: {
                legend: {
                  display: false,
           },
-        
+
             },
           },
         };
    console.log(MIXED.datasets[0].data);
 
          setmixedChartData(MIXED);
-      
+
         let PIE = {
           labels: [
             "Vtex",
@@ -1561,7 +1599,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
           ],
         };
         setpieChartData(PIE);
-       
+
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -1673,12 +1711,12 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-       
-    
+
+
         // setstackedChartData({
         //   labels: stackedDateLabel,
         //   datasets: stackedChartData.datasets,
-         
+
         // });
         let MONTLY_ORDER_GRAPH = {
           labels:  stackedDateLabel,
@@ -1689,7 +1727,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ripleyMonthlyArray,
+              data: ripleyStackedOrdersState,
             },
             {
               label: "ListaTienda",
@@ -1705,7 +1743,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: MagentoMonthlyArray,
+              data: magentoStackedOrdersState,
             },
             {
               label: "Shopify",
@@ -1713,7 +1751,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ShopifyMonthlyArray,
+              data: shopifyStackedOrdersState,
             },
             {
               label: "Mercadolibre",
@@ -1721,7 +1759,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoArray,
+              data: mercadoStackedOrdersState,
             },
             {
               label: "Chambas",
@@ -1729,7 +1767,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasMonthlyArray,
+              data: chambasStackedOrdersState,
             },
             {
               label: "Linio",
@@ -1737,8 +1775,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: LINIOMonthlyArray,
-              // data: orderQuantityArray
+              data: linioStackedOrdersState,
+             
             },
             {
               label: "Vtex",
@@ -1746,7 +1784,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data:  vtexMonthlyArray,
+              data: vtexStackedOrdersState,
             },
             {
               label: "WooCommerce",
@@ -1754,7 +1792,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceMonthlyArray,
+              data: wooCommerceStackedOrdersState,
             },
             {
               label: "Paris",
@@ -1762,7 +1800,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisMonthlyArray,
+              data: parisStackedOrdersState,
             },
             {
               label: "Exito",
@@ -1781,8 +1819,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
             },
            },
         };
-     
-       
+
+
    let stackedRipleyArray = [...ripleyStackedSalesArray];
    if(ChannelSelectedForDelete !== undefined){
     if(ChannelSelectedForDelete.channel === 'Ripley'){
@@ -1826,7 +1864,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               stack: "2",
               borderRadius:6,
              data: ripleyStackedSalesState,
-             
+
             },
             {
               label: "ListaTienda",
@@ -1915,12 +1953,12 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
       //  setstackedSalesGraph({
       //     labels: [...MONTLY_SALES_GRAPH.labels],
       //     datasets: [...MONTLY_SALES_GRAPH.datasets],
-         
+
       //   });
-        
+
           setisLoading(false);
-      
-      
+
+
       })
       .catch((error) => console.log("error", error));
   };
@@ -1945,7 +1983,7 @@ setStackedisLoading(true);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);  
+        var obj = JSON.parse(result);
         //LINIO STACKED SALES ARRAY
 
   let res1 = [];
@@ -1959,12 +1997,12 @@ setStackedisLoading(true);
       const dateTime = item.date_created;
       const parts = dateTime.split(/[- :]/);
       var month = parts[1];
-      var year = parts[0]; 
+      var year = parts[0];
      return item.channel == 5 && month===splitMonth && year===splitYear;
     });
     res1.push(LINIOMonthlySales);
   }
- 
+
   let LINIOMonthlyArray = [];
 let  LINIOStackedSalesArray = [];
   for(let i=0;i<=res1.length-1;i++){
@@ -1982,12 +2020,12 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
 );
- 
+
  LINIOMonthlyArray.push(totalOrder);
  LINIOStackedSalesArray.push(totalMonthlySales);
   }
-  
- //RIPLEY STACKED  
+
+ //RIPLEY STACKED
       let res2 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
         let ripleyMonthlySales = obj.filter((item) => {
@@ -1998,12 +2036,12 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
           const dateTime = item.date_created;
           const parts = dateTime.split(/[- :]/);
           var month = parts[1];
-          var year = parts[0]; 
+          var year = parts[0];
          return item.channel == 4 && month===splitMonth && year===splitYear;
         });
         res2.push(ripleyMonthlySales);
       }
-    
+
       let ripleyMonthlyArray = [];
     let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
@@ -2021,20 +2059,21 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
-     
+
      ripleyMonthlyArray.push(totalOrder);
      ripleyStackedSalesArray.push(totalMonthlySales);
      setripleyLength(ripleyStackedSalesArray.length);
-     setripleyStackedSalesState(ripleyStackedSalesArray);[]
+     setripleyStackedSalesState(ripleyStackedSalesArray);
+     setripleyStackedOrdersState(ripleyMontlyArray);
       }
-      
+
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2074,7 +2113,7 @@ WooCommerceStackedSalesArray.push(totalMonthlySales);
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2113,7 +2152,7 @@ shopifyStackedSalesArray.push(totalMonthlySales);
 let res5= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2196,9 +2235,9 @@ ChambasStackedSalesArray.push(totalMonthlySales);
 let res7= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2237,9 +2276,9 @@ vtexStackedSalesArray.push(totalMonthlySales);
 let res8= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2279,9 +2318,9 @@ let res9= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2323,9 +2362,9 @@ let res10= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2366,9 +2405,9 @@ ParisStackedSalesArray.push(totalMonthlySales);
 let res11= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
  let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -2440,7 +2479,7 @@ if(ChannelSelectedForDelete !== undefined){
               stack: "2",
               borderRadius:6,
               data: ripleyStackedSalesState,
-             
+
             },
             {
               label: "ListaTienda",
@@ -2524,13 +2563,13 @@ if(ChannelSelectedForDelete !== undefined){
             },
           ],
         };
-      
+
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
         setStackedisLoading(false);
 
       }) .catch((error) => console.log("error", error));
   }
-  
+
   const fetchFilterData = async () => {
     setisLoading(true);
     var myHeaders = new Headers();
@@ -2552,15 +2591,15 @@ if(ChannelSelectedForDelete !== undefined){
     )
       .then((response) => response.text())
       .then((result) => {
-        
+
         var obj = JSON.parse(result);
-      
+
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
         var flattened = [].concat.apply([], allChannelsArray);
 
-      
+
         var resArr = [];
         flattened.filter(function (item) {
           var i = resArr.findIndex(
@@ -2571,12 +2610,12 @@ if(ChannelSelectedForDelete !== undefined){
           }
           return null;
         });
-      
+
         setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-     
+
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
@@ -2606,12 +2645,12 @@ if(ChannelSelectedForDelete !== undefined){
         let countryArray = [];
 
         setfilteredCountryData(obj);
-  
+
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
- 
+
   const setMixedChart = () => {
     setmixedChartData({
       labels: channels,
@@ -2634,7 +2673,7 @@ if(ChannelSelectedForDelete !== undefined){
           borderWidth: 2,
         },
       ],
-      
+
     });
   };
   const changeDateHandler = (event) => {
@@ -2683,7 +2722,7 @@ if(ChannelSelectedForDelete !== undefined){
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    
+
     const channels = filteredChannelArray.map((item) => {
       // return item.channel;
       return item;
@@ -2695,7 +2734,7 @@ if(ChannelSelectedForDelete !== undefined){
     let x = channelsId.join(",");
     setchannelId(x);
     setcR(channels);
-    
+
     // setchannels(channels);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
@@ -2705,7 +2744,7 @@ if(ChannelSelectedForDelete !== undefined){
     setChannelSelectedForDelete(item);
    let x = cR.filter((i) => i !== item);
     setcR(x);
-   
+
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
@@ -2781,28 +2820,28 @@ if(ChannelSelectedForDelete !== undefined){
                   <span className="btn-label">
                     <i className="nc-icon nc-shop" />
                   </span>
-                  Tiendas        
+                  Tiendas
                 </Button> */}
 
               {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-settings-gear-65" />
                   </span>
-                  Backoffice    
+                  Backoffice
                 </Button>
-                 
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-box-2" />
                   </span>
-                 Fulfillment        
+                 Fulfillment
                 </Button>
-                 
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-single-02" />
                   </span>
-                 Cliente    
+                 Cliente
                 </Button>
                    */}
             </CardBody>
@@ -3010,7 +3049,7 @@ if(ChannelSelectedForDelete !== undefined){
                 >
                   Canales De Venta
                 </h5>
-           
+
                 {cR.map((item) => (
                   <div className="tag-item" key={item.value}>
                     {item.channel}
@@ -3047,7 +3086,7 @@ if(ChannelSelectedForDelete !== undefined){
           )}
           <br></br>
 
-   
+
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
@@ -3091,7 +3130,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
                         &nbsp;
                         {/* <span
@@ -3104,7 +3143,7 @@ if(ChannelSelectedForDelete !== undefined){
                       >
                      +4.5%
                    </span> */}
-                   </div>   
+                   </div>
                  })()}
 
                   </h5>
@@ -3125,7 +3164,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                         &nbsp;
                         {/* <span
@@ -3139,7 +3178,7 @@ if(ChannelSelectedForDelete !== undefined){
                      -3%
                    </span> */}
                    </div>
-                                
+
                               })()}
 
                   </h5>
@@ -3160,7 +3199,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                         &nbsp;
                         {/* <span
@@ -3173,10 +3212,10 @@ if(ChannelSelectedForDelete !== undefined){
                       >
                      -6%
                    </span> */}
-                   </div>   
+                   </div>
                  })()}
 
-                   
+
                   </h5>
                 </div>
               </Col>
@@ -3326,7 +3365,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +12%
-                    </span> */} 
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3527,8 +3566,8 @@ if(ChannelSelectedForDelete !== undefined){
                   </h5>
                 </div>
               </Col>
-            
-             
+
+
                 {/* claims */}
                 <Col md="3">
                   <div>
@@ -3611,13 +3650,13 @@ if(ChannelSelectedForDelete !== undefined){
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
-                  </CardTitle>  
-                   <p className="card-category"> </p> 
+                  </CardTitle>
+                   <p className="card-category"> </p>
                  </CardHeader>
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar data={mixedChartData} 
+                  <Bar data={mixedChartData}
                   options={chartExample13.options}
                    />
                 </CardBody>
@@ -3645,7 +3684,7 @@ if(ChannelSelectedForDelete !== undefined){
                   <CardFooter>
 
                   <div className="infoLegendPieChart">
-  
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -3665,7 +3704,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                      </p>
                         </p>
@@ -3688,7 +3727,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
 
                         </p>
@@ -3712,8 +3751,8 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend">{formatted}</p>   
-                       })()}  
+                          return <p className="numberTextLegend">{formatted}</p>
+                       })()}
                     </p>
                     </p>
                     </div>
@@ -3736,7 +3775,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -3759,7 +3798,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -3783,7 +3822,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -3807,7 +3846,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
                       </p>
                     </p>
@@ -3831,7 +3870,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
                       </p>
                     </p>
@@ -3855,7 +3894,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend"> {formatted}</p>   
+                              return <p className="numberTextLegend"> {formatted}</p>
                           })()}
                       </p>
                     </p>
@@ -3879,11 +3918,11 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend"> {formatted}</p>   
-                          })()}  
+                              return <p className="numberTextLegend"> {formatted}</p>
+                          })()}
                       </p>
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -3903,38 +3942,38 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend">{formatted}</p>   
+                              return <p className="numberTextLegend">{formatted}</p>
                           })()}
-                      
+
                       </p>
                     </p>
-                    
+
                   </div>
                 </div>
                   </CardFooter>
                 </Card>
                 </Col>
-              
-            
-            </Row> 
+
+
+            </Row>
 
             <Row>
             <Col md="6">
-              
+
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Órdenes por canal de venta</strong>
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={stackedChartData} 
-                 
+                    <Bar data={stackedChartData}
+                    options={chartExample5.options}
                      />
                   </CardBody>
                     <CardFooter>
                   <div className="legend">
                   <div className="infoLegend">
-             
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -3954,7 +3993,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                      </p> */}
                         </p>
@@ -3978,7 +4017,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
 
                         </p> */}
@@ -4003,8 +4042,8 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
-                       })()}  
+                          return <div> {formatted}</div>
+                       })()}
                     </p> */}
                     </p>
                     </div>
@@ -4028,7 +4067,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -4052,7 +4091,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -4077,7 +4116,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -4102,7 +4141,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p> */}
                     </p>
@@ -4127,7 +4166,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p> */}
                     </p>
@@ -4152,7 +4191,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
                       </p> */}
                     </p>
@@ -4177,11 +4216,11 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
-                          })()}  
+                              return <div> {formatted}</div>
+                          })()}
                       </p> */}
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -4202,9 +4241,9 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      
+
                       </p> */}
                     </p>
                     </div>
@@ -4213,9 +4252,9 @@ if(ChannelSelectedForDelete !== undefined){
 
                     </CardFooter>
                 </Card>
-              
+
               </Col>
-            
+
 {StackedisLoading && <SplashScreen></SplashScreen>}
            {!StackedisLoading &&  <Col md="6">
                 <Card className="card-chart">
@@ -4227,15 +4266,15 @@ if(ChannelSelectedForDelete !== undefined){
                     <Bar
                       data={stackedSalesGraph}
                       options={chartExample5.options}
-                       options={barChartOptions}
+                      //  options={barChartOptions}
                     />
                   </CardBody>
                      <CardFooter>
-                  
-              
+
+
                 <div className="legend">
                   <div className="infoLegend">
-             
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -4247,7 +4286,7 @@ if(ChannelSelectedForDelete !== undefined){
                         }}
                       />
                       &nbsp;Ripley
-                  
+
                       <p className="card-category">
                        {(() => {
                           let number  = ripley;
@@ -4255,9 +4294,9 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
-                     </p> 
+                     </p>
                         </p>
                         </div>
                         <div>
@@ -4278,10 +4317,10 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
 
-                    </p>  
+                    </p>
                       </p>
                     </div>
                     <div>
@@ -4302,8 +4341,8 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
-                       })()}  
+                          return <div> {formatted}</div>
+                       })()}
                     </p>
                     </p>
                     </div>
@@ -4326,7 +4365,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p>
                     </p>
@@ -4349,7 +4388,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p>
                     </p>
@@ -4373,7 +4412,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p>
                     </p>
@@ -4397,7 +4436,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p>
                     </p>
@@ -4421,7 +4460,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p>
                     </p>
@@ -4445,7 +4484,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
                       </p>
                     </p>
@@ -4469,11 +4508,11 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
-                          })()}  
+                              return <div> {formatted}</div>
+                          })()}
                       </p>
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -4493,9 +4532,9 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      
+
                       </p>
                     </p>
                     </div>
@@ -4503,7 +4542,7 @@ if(ChannelSelectedForDelete !== undefined){
                 </div>
                   </CardFooter>
                 </Card>
-              
+
             </Col>}
             </Row>
             {/* <Col md="6">
@@ -4570,7 +4609,7 @@ if(ChannelSelectedForDelete !== undefined){
                 className="bttnCompartirReporte"
                 style={{
                   backgroundColor: "#1D308E",
-                  textAlign: "center",                 
+                  textAlign: "center",
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
@@ -4581,17 +4620,17 @@ if(ChannelSelectedForDelete !== undefined){
                   fontWeight:"bold",
                   border:"0",
                   fontSize: "11px"
-                  
-               
+
+
                 }}
               >
-                
+
                 <span className="btn-label">
                   <img src={iconShareReport} width="19px"/>
                 </span>
                 &nbsp;Compartir Reporte &nbsp;
               </button>
-           
+
               <button
                 id="bttnSubmit"
                 className="bttnSiguienteReporte"
@@ -4608,7 +4647,7 @@ if(ChannelSelectedForDelete !== undefined){
                   textTransform: "none",
                   fontWeight:"bold",
                   border:"0"
-               
+
                 }}
               >
                 Siguiente Reporte &nbsp;
