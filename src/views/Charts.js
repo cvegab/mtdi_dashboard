@@ -2000,11 +2000,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
         };
         console.log(MONTLY_SALES_GRAPH.datasets[1].label);
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
-      //  setstackedSalesGraph({
-      //     labels: [...MONTLY_SALES_GRAPH.labels],
-      //     datasets: [...MONTLY_SALES_GRAPH.datasets],
-
-      //   });
+     
 
           setisLoading(false);
 
