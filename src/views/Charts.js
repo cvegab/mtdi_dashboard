@@ -37,6 +37,7 @@ import {
   Col,
   Button,
   Input,
+  Badge
 } from "reactstrap";
 
 // core components
@@ -195,7 +196,7 @@ const barChartOptions = {
   plugins: {
     legend: {
       display: false,
-      
+
     },
   },
   scales: {
@@ -214,31 +215,7 @@ const barChartOptions = {
 const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
-//Inside data props
-const dataMix = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
-  datasets: [
-    {
-      label: "Data1",
-      data: data11,
-      backgroundColor: "rgba(87, 121, 234, 0.6)",
-      borderColor: "rgba(87, 121, 234, 0.6)",
-      order: 1,
-    },
 
-    {
-      label: "Total",
-      data: data2,
-      backgroundColor: "rgba(234, 87, 102, 0.6)",
-      borderColor: "rgba(234, 87, 102, 0.6)",
-      fill: false,
-      pointHoverRadius: 20,
-      pointHoverBorderWidth: 5,
-      type: "line",
-      order: 0,
-    },
-  ],
-};
 function Charts() {
   let PIE_CHART_DATA = {
     labels: [1, 2, 3, 4],
@@ -286,16 +263,93 @@ function Charts() {
       },
     ],
   };
+  const BAR_CHART_DATA = {
+    labels: [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ],
+    datasets: [
+      {
+        label: "Ripley",
+        backgroundColor: "#F10096",
+        borderRadius: "20px",
+        stack: "2",
+        borderRadius:6,
+        data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
+      },
+      {
+        label: "Shopify",
+        backgroundColor: "#00B6CB",
+        stack: "2",
+        borderRadius:6,
+        data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
+      },
+      {
+        label: "Mercadolibre",
+        backgroundColor: "#344FD5",
+        stack: "2",
+        borderRadius:6,
+        data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
+      },
+      {
+        label: "CornerShop",
+        backgroundColor: "#5E35B1",
+        stack: "2",
+        borderRadius:6,
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+      {
+        label: "Linio",
+        backgroundColor: "#97D456",
+        stack: "2",
+        borderRadius:6,
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+      {
+        label: "Rappi",
+        backgroundColor: "#FFD88C",
+        stack: "2",
+        borderRadius:6,
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+      {
+        label: "WooCommerce",
+        backgroundColor: "#FF6059",
+        borderRadius:6,
+        stack: "2",
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+    ],
+  };
+  const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
+ const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
+  const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
+  const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
-  const [mixedChartLoading, setmixedChartLoading] = useState(true);
+  const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
+  // const [mixedChartLoading, setmixedChartLoading] = useState(true);
+  // const [mixedChartLables, setmixedChartLables] = useState([]);
+  const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
+  const [mixedChartOrdersData, setmixedChartOrdersData] = useState([]);
+  const [ChannelSelectedForDelete, setChannelSelectedForDelete] = useState(undefined);
   const [stackedChartData, setstackedChartData] = useState(barChartData);
   const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([])
   const [totalIncome, settotalIncome] = useState(0);
   const [totalNps, settotalNps] = useState(0);
-  
+  const [totalClaims, settotalClaims] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
   const [gm, setgm] = useState(0);
@@ -322,6 +376,7 @@ function Charts() {
     new Date().toISOString().slice(0, 10)
   );
   const [isLoading, setisLoading] = useState(false);
+  const [StackedisLoading, setStackedisLoading] = useState(false);
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
   const [fromDate, setfromDate] = useState(new Date());
@@ -339,11 +394,12 @@ function Charts() {
   const [chambas, setchambas] = useState(0);
   const [listaTienda, setlistaTienda] = useState(0);
   const [cR, setcR] = useState([{ channels: "", channelId: 0 }]);
+
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [op, setop] = useState({});
-  
+
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
   const [vtexOrders, setvtexOrders] = useState(0);
@@ -359,6 +415,29 @@ function Charts() {
 
   //MONTHLY SALES STATES
   const [linioMonthly, setlinioMonthly] = useState([]);
+  const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
+  const [ripleyStackedOrdersState, setripleyStackedOrdersState] = useState([]);
+  const [shopifyStackedSalesState, setshopifyStackedSalesState] = useState([]);
+  const [shopifyStackedOrdersState, setshopifyStackedOrdersState] = useState([]);
+  const [magentoStackedSalesState, setmagentoStackedSalesState] = useState([]);
+  const [magentoStackedOrdersState, setmagentoStackedOrdersState] = useState([]);
+  const [linioStackedSalesState, setlinioStackedSalesState] = useState([]);
+  const [linioStackedOrdersState, setlinioStackedOrdersState] = useState([]);
+  const [mercadoStackedSalesState, setmercadoStackedSalesState] = useState([]);
+  const [mercadoStackedOrdersState, setmercadoStackedOrdersState] = useState([]);
+  const [chambasStackedSalesState, setchambasStackedSalesState] = useState([]);
+  const [chambasStackedOrdersState, setchambasStackedOrdersState] = useState([]);
+  const [parisStackedSalesState, setparisStackedSalesState] = useState([]);
+  const [parisStackedOrdersState, setparisStackedOrdersState] = useState([]);
+  const [vtexStackedSalesState, setvtexStackedSalesState] = useState([]);
+  const [vtexStackedOrdersState, setvtexStackedOrdersState] = useState([]);
+  const [wooCommerceStackedSalesState, setwooCommerceStackedSalesState] = useState([]);
+  const [wooCommerceStackedOrdersState, setwooCommerceStackedOrdersState] = useState([]);
+  const [listaStackedSalesState, setlistaStackedSalesState] = useState([]);
+  const [listaStackedOrdersState, setlistaStackedOrdersState] = useState([]);
+  const [exitoStackedSalesState, setexitoStackedSalesState] = useState([]);
+  const [exitoStackedOrdersState, setexitoStackedOrdersState] = useState([]);
+  const [ripleyLength, setripleyLength] = useState();
   useEffect(() => {
     // set initial value
     const mediaWatcher = window.matchMedia("(max-width: 767px)");
@@ -375,13 +454,28 @@ function Charts() {
       mediaWatcher.removeEventListener("change", updateIsNarrowScreen);
     };
   });
+  const handleLoading = () => {
+   setpageFullyLoaded(false);
+    }
+   
+      useEffect(()=>{
+        window.addEventListener("load",handleLoading);
+        return () => window.removeEventListener("load",handleLoading);
+        },[])
+  
+
+
+
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
+
   // fetchStackedGraphData();
    getDateLabels();
+ //  handleRemovetheLabelsData();
      //setpieChart();
-    setMixedChart();
+    //setMixedChart();
+
   }, []);
   useEffect(() => {
     displaysalesChannelHandler();
@@ -413,16 +507,110 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
+
    stackedDatevalues,
- stackedDateLabel
+ stackedDateLabel,
+ ripleyStackedSalesState,
+ vtexStackedSalesState,
+ linioStackedSalesState,
+ magentoStackedSalesState,
+ wooCommerceStackedSalesState,
   ]);
- 
-  useEffect(() => {
- 
-  // fetchStackedGraphData();
-  }, [stackedDatevalues,stackedDateLabel]);
-  
-  
+
+
+
+
+useEffect(() => {
+
+
+  let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
+       var ring = newChannel.map((id, index) => {
+
+        return {
+          channel: id,
+          value:mixedChartsalesData[index],
+          orderValue:mixedChartOrdersData[index]
+        }
+      });
+      setmixedGraphDatas(ring);
+      let x = [];
+      console.log(ChannelSelectedForDelete);
+
+    if(ChannelSelectedForDelete !== undefined){
+      x = mixedGraphDatas.filter((item,index) => {
+
+    return  item.channel !== ChannelSelectedForDelete.channel});
+    setmixedGraphDatas(x);
+
+   if(ChannelSelectedForDelete.channel === 'Ripley'){
+     setripleyStackedSalesState(0);
+     setripleyStackedOrdersState(0);
+   }
+   if(ChannelSelectedForDelete.channel === 'Shopify'){
+     setshopifyStackedOrdersState(0);
+    setshopifyStackedSalesState(0);
+  }
+  if(ChannelSelectedForDelete.channel === 'Magento'){
+    setmagentoStackedOrdersState(0);
+    setmagentoStackedSalesState(0);
+  }
+  if(ChannelSelectedForDelete.channel === 'Linio'){
+    setlinioStackedOrdersState(0);
+   setlinioStackedSalesState(0);
+  }
+  if(ChannelSelectedForDelete.channel === 'MercadoLibre'){
+    setmercadoStackedOrdersState(0);
+   setmercadoStackedSalesState(0);
+   }
+   if(ChannelSelectedForDelete.channel === 'Chambas'){
+setchambasStackedOrdersState(0);
+    setchambasStackedSalesState(0);
+    }
+    if(ChannelSelectedForDelete.channel === 'Paris'){
+    console.log('hi');
+    setparisStackedOrdersState(0);
+      setparisStackedSalesState(0);
+      }
+      if(ChannelSelectedForDelete.channel === 'Vtex'){
+        console.log('hi');
+        setvtexStackedOrdersState(0);
+        setvtexStackedSalesState(0);
+          }
+          if(ChannelSelectedForDelete.channel === 'Woocommerce'){
+            console.log('hi');
+            setwooCommerceStackedOrdersState(0);
+            setwooCommerceStackedSalesState(0);
+              }
+              if(ChannelSelectedForDelete.channel === 'ListaTienda'){
+                console.log('hi');
+                setlistaStackedOrdersState(0);
+              setlistaStackedSalesState(0);
+                  }
+                  if(ChannelSelectedForDelete.channel === 'Exito'){
+                    console.log('hi');
+                    setexitoStackedOrdersState(0);
+                  setexitoStackedSalesState(0);
+                      }
+    }
+  console.log (ripleyStackedSalesState);
+  console.log(mixedGraphDatas);
+  const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
+    return item.channel
+  });
+  // setmixedGraphChannels(lineAndBarChartLabels);
+  console.log(lineAndBarChartLabels);
+  setBarLineGraphLabels(lineAndBarChartLabels);
+  const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
+   return item.value
+ });
+
+ const lineAndBarChartOrderValues = mixedGraphDatas.map((item)=>{
+   return item.orderValue
+ })
+}, [mixedChartsalesData,mixedChartOrdersData])
+
+
+
   const getDateLabels = ()=>{
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
@@ -485,13 +673,12 @@ function Charts() {
     const channelsId = cR.map((item) => {
       return item.value;
     });
-//     const channelList = cR.map((item) => {
-//       return item.channels;
-//     });
-// console.log(channelList);
+
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
+
+
     console.log("hi i am fetching");
     setisLoading(true);
     var myHeaders = new Headers();
@@ -508,55 +695,90 @@ function Charts() {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
+
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);  
-      let res1 = [];
-      for(let i = 0;i<=stackedDatevalues.length-1;i++){
-        let ripleyMonthlySales = obj.filter((item) => {
-       
-          let dateTobeCompared = stackedDatevalues[i];
-          
-          const splitDateCompared = dateTobeCompared.split(/[- :]/);
-          const splitMonth = splitDateCompared[1];
-          const splitYear = splitDateCompared[0];
-          const dateTime = item.date_created;
-          const parts = dateTime.split(/[- :]/);
-          var month = parts[1];
-          var year = parts[0];
-          let result = [];
-         return item.channel == 5 && month===splitMonth && year===splitYear;
-      // if(item.channel == 5 && month===splitMonth && year===splitYear) res1.push(item);
-      // return res1;
-        });
-        res1.push(ripleyMonthlySales);
-      }
-     
-      let orderQuantityArraY = [];
-      let linioStackedSalesArray = [];
-      for(let i=0;i<=res1.length-1;i++){
-   let channel5MonthlySales = res1[i].map((item,index)=>{
-       return item.orders_qty;
-     });
-     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
-      return item.total;
+        var obj = JSON.parse(result);
+
+  let res1 = [];
+
+console.log(ChannelSelectedForDelete);
+let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
+let xio = [];
+if(ChannelSelectedForDelete !== undefined){
+  if(ChannelSelectedForDelete.channel === 'Ripley'){
+
+    xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Shopify'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Magento'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Linio'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'MercadoLibre'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+  if(ChannelSelectedForDelete.channel === 'Chambas'){
+    console.log('hello');
+     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
+  }
+}
+console.log(xio);
+setdeleteChannelArray(xio);
+  for(let i = 0;i<=stackedDatevalues.length-1;i++){
+    let LINIOMonthlySales = obj.filter((item) => {
+      let dateTobeCompared = stackedDatevalues[i];
+      const splitDateCompared = dateTobeCompared.split(/[- :]/);
+      const splitMonth = splitDateCompared[1];
+      const splitYear = splitDateCompared[0];
+      const dateTime = item.date_created;
+      const parts = dateTime.split(/[- :]/);
+      var month = parts[1];
+      var year = parts[0];
+     return item.channel == 5 && month===splitMonth && year===splitYear;
     });
-     let totalOrder = channel5MonthlySales.reduce(
-      (partialSum, a) => partialSum + a,
-      0
-    );
-   let totalMonthlySales = stackedSalesMonthlySales.reduce(
-    (partialSum, a) => partialSum + a,
-    0
-  );
-     orderQuantityArraY.push(totalOrder);
-     linioStackedSalesArray.push(totalMonthlySales);
-      } 
-     
-      setlinioMonthly(orderQuantityArraY);
-   
+    res1.push(LINIOMonthlySales);
+  }
+
+  let LINIOMonthlyArray = [];
+let  LINIOStackedSalesArray = [];
+  for(let i=0;i<=res1.length-1;i++){
+let channel5MonthlySales = res1[i].map((item,index)=>{
+   return item.orders_qty;
+ });
+ let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+  return item.total;
+});
+ let totalOrder = channel5MonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+);
+let totalMonthlySales = stackedSalesMonthlySales.reduce(
+  (partialSum, a) => partialSum + a,
+  0
+);
+
+ LINIOMonthlyArray.push(totalOrder);
+ LINIOStackedSalesArray.push(totalMonthlySales);
+ if(deleteChannelArray.includes('Linio')){
+   setlinioStackedOrdersState(LINIOMonthlyArray);
+ setlinioStackedSalesState(LINIOStackedSalesArray);
+ }
+  }
+
+ //RIPLEY STACKED
+
+
+
       let res2 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
         let ripleyMonthlySales = obj.filter((item) => {
@@ -567,19 +789,19 @@ function Charts() {
           const dateTime = item.date_created;
           const parts = dateTime.split(/[- :]/);
           var month = parts[1];
-          var year = parts[0]; 
+          var year = parts[0];
          return item.channel == 4 && month===splitMonth && year===splitYear;
         });
         res2.push(ripleyMonthlySales);
       }
-     
+
       let ripleyMonthlyArray = [];
     let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
    let channel5MonthlySales = res2[i].map((item,index)=>{
        return item.orders_qty;
      });
-     let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+     let stackedSalesMonthlySales = res2[i].map((item,index)=>{
       return item.total;
     });
      let totalOrder = channel5MonthlySales.reduce(
@@ -590,18 +812,29 @@ function Charts() {
       (partialSum, a) => partialSum + a,
       0
     );
-     
+
      ripleyMonthlyArray.push(totalOrder);
      ripleyStackedSalesArray.push(totalMonthlySales);
-      }
-      
+
+    if(deleteChannelArray.includes('Ripley')){
+      console.log('ripley present');
+     setripleyLength(ripleyMonthlyArray.length);
+     setripleyStackedOrdersState(ripleyMonthlyArray);
+      setripleyStackedSalesState(ripleyStackedSalesArray);
+
+    }
+
+
+
+    }
+
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -622,7 +855,7 @@ for(let i=0;i<=res3.length-1;i++){
 let channel5MonthlySales = res3[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res3[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -635,13 +868,17 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 WooCommerceMonthlyArray.push(totalOrder);
 WooCommerceStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('Woocommerce')){
+  setwooCommerceStackedOrdersState(WooCommerceMonthlyArray);
+  setwooCommerceStackedSalesState(WooCommerceStackedSalesArray);
+}
 }
 // SHOPIFY STACKED MONTHLY DATA
 
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -662,7 +899,7 @@ for(let i=0;i<=res4.length-1;i++){
 let channel5MonthlySales = res4[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res4[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -673,14 +910,19 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
   );
+  if(deleteChannelArray.includes('Shopify')){
 ShopifyMonthlyArray.push(totalOrder);
 shopifyStackedSalesArray.push(totalMonthlySales);
+
+ setshopifyStackedOrdersState(ShopifyMonthlyArray);
+setshopifyStackedSalesState(shopifyStackedSalesArray);
+  }
 }
 //MERCADO LIBRE STACKED MONTHLY DATA
 let res5= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -701,7 +943,7 @@ for(let i=0;i<=res5.length-1;i++){
 let channel5MonthlySales = res5[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res5[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -713,7 +955,13 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   0
   );
 MercadoArray.push(totalOrder);
+
 MercadoStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('MercadoLibre')){
+  console.log('mercado');
+  setmercadoStackedOrdersState(MercadoArray);
+setmercadoStackedSalesState(MercadoStackedSalesArray);
+}
 }
 
 
@@ -742,7 +990,7 @@ for(let i=0;i<=res6.length-1;i++){
 let channel5MonthlySales = res6[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res6[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -754,7 +1002,12 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   0
   );
 ChambasMonthlyArray.push(totalOrder);
+if(deleteChannelArray.includes('Chambas')){
 ChambasStackedSalesArray.push(totalMonthlySales);
+setchambasStackedOrdersState(ChambasMonthlyArray);
+setchambasStackedSalesState(ChambasStackedSalesArray);
+
+}
 }
 
 
@@ -763,9 +1016,9 @@ ChambasStackedSalesArray.push(totalMonthlySales);
 let res7= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -786,7 +1039,7 @@ for(let i=0;i<=res7.length-1;i++){
 let channel5MonthlySales = res7[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res7[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -799,14 +1052,19 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 vtexMonthlyArray.push(totalOrder);
 vtexStackedSalesArray.push(totalMonthlySales);
+console.log(vtexMonthlyArray);
+if(deleteChannelArray.includes('Vtex')){
+setvtexStackedOrdersState(vtexMonthlyArray);
+setvtexStackedSalesState(vtexStackedSalesArray);
+}
 }
 //MAGENTO MONTHLY ARRAY
 let res8= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -827,7 +1085,7 @@ for(let i=0;i<=res8.length-1;i++){
 let channel5MonthlySales = res8[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res8[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -838,17 +1096,21 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
   );
+  if(deleteChannelArray.includes('Magento')){
 MagentoMonthlyArray.push(totalOrder);
 magentoStackedSalesArray.push(totalMonthlySales);
+setmagentoStackedOrdersState(MagentoMonthlyArray);
+setmagentoStackedSalesState(magentoStackedSalesArray);
+  }
 }
 // LISTA TIENDA MONTHLY SALES
 let res9= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -869,7 +1131,7 @@ for(let i=0;i<=res9.length-1;i++){
 let channel5MonthlySales = res9[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res9[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -883,6 +1145,10 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ListaMonthlyArray.push(totalOrder);
 ListaStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('ListaTienda')){
+  setlistaStackedOrdersState(ListaMonthlyArray);
+setlistaStackedSalesState(ListaStackedSalesArray);
+}
 }
 
 // PARIS STACKED MONTHLY SALES
@@ -890,9 +1156,9 @@ let res10= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -913,7 +1179,7 @@ for(let i=0;i<=res10.length-1;i++){
 let channel5MonthlySales = res10[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res10[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -927,15 +1193,20 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ParisMonthlyArray.push(totalOrder);
 ParisStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('Paris')){
+  setparisStackedOrdersState(ParisMonthlyArray);
+  setparisStackedSalesState(ParisStackedSalesArray);
+}
+
 }
 //EXITO MONTHLY STACKED ARRAY
 
 let res11= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
  let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -956,7 +1227,7 @@ for(let i=0;i<=res11.length-1;i++){
 let channel5MonthlySales = res11[i].map((item,index)=>{
  return item.orders_qty;
 });
-let stackedSalesMonthlySales = res1[i].map((item,index)=>{
+let stackedSalesMonthlySales = res11[i].map((item,index)=>{
   return item.total;
 });
 let totalOrder = channel5MonthlySales.reduce(
@@ -970,6 +1241,10 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ExitoMonthlyArray.push(totalOrder);
 ExitoStackedSalesArray.push(totalMonthlySales);
+if(deleteChannelArray.includes('Exito')){
+  setexitoStackedOrdersState(ExitoMonthlyArray);
+  setexitoStackedSalesState(ExitoStackedSalesArray);
+}
 }
 
 
@@ -986,11 +1261,12 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
+        console.log(totalRipleySales);
         let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
@@ -1005,7 +1281,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1024,7 +1300,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-       
+
         let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1032,32 +1308,48 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let mercadoSales = obj.filter((item) => {
           return item.channel == 2;
         });
-   
-        if (mercadoSales.length === 0) {
-          setmercadoLibreOrders(0);
-          setmercadoLibre(0);
-        }
-        let mercadoSalesArray = mercadoSales.map((item) => {
-          return item.total;
-        });
-        let mercadoOrders = mercadoSales.map((item) => {
-          return item.orders_qty;
-        });
-        let totalMercadoOrders = mercadoOrders.map((item) => {
-          return item.orders_qty;
-        });
-   
-        let totalmercadoSales = mercadoSalesArray.reduce(
-          (partialSum, a) => partialSum + a,
-          0
-        );
+        console.log(mercadoSales);
+        // if (mercadoSales.length === 0) {
+        //   setmercadoLibreOrders(0);
+        //   setmercadoLibre(0);
+        // }else{
+          let mercadoSalesArray = mercadoSales.map((item) => {
+            return item.total;
+          });
+          console.log(mercadoSalesArray);
+          let mercadoOrders = mercadoSales.map((item) => {
+            return item.orders_qty;
+          });
+          let totalMercadoOrders = mercadoOrders.map((item) => {
+            return item.orders_qty;
+          });
+
+          let totalmercadoSales = mercadoSalesArray.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          if(ChannelSelectedForDelete !== undefined){
+            if(ChannelSelectedForDelete.channel === 'MercadoLibre')
+            totalMercadoOrders='0';
+            totalmercadoSales = '0';
+
+          }
+          console.log(totalmercadoSales);
+          if(ChannelSelectedForDelete !== undefined){
+            if(ChannelSelectedForDelete.channel === 'Paris')
+            totalparisSales = '0';
+
+          }
+
+
+
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
-        if (exitoSales.length === 0) {
-          setexitoOrders(0);
-          setexito(0);
-        }
+        // if (exitoSales.length === 0) {
+        //   setexitoOrders(0);
+        //   setexito(0);
+        // }
         let exitoSalesArray = exitoSales.map((item) => {
           return item.total;
         });
@@ -1065,6 +1357,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+        if(ChannelSelectedForDelete !== undefined){
+          if(ChannelSelectedForDelete.channel === 'Exito')
+          totalexitoSales = '0';
+
+        }
         let shopifySales = obj.filter((item) => {
           return item.channel == 6;
         });
@@ -1079,25 +1376,61 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-  
+
         let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
+        // let parisSales = obj.filter((item) => {
+        //   return item.channel == 1;
+        // });
+
+        // let parisSalesArray = parisSales.map((item) => {
+        //   return item.total;
+        // });
+        // let parisOrderQuantity = parisSales.map((item) => {
+        //   return item.orders_qty;
+        // });
+        // let totalparisOrder = parisOrderQuantity.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
+
+        // let totalparisSales = parisSalesArray.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
         let parisSales = obj.filter((item) => {
           return item.channel == 1;
         });
-        if (parisSales.length === 0) {
-          setparisOrders(0);
-          setparis(0);
-        }
+
+        // // if (parisSales.length === 0) {
+        // //   console.log('hi');
+        // //   setparisOrders(0);
+        // //   setparis(0);
+        // //   totalparisSales = 0;
+        // // }
         let parisSalesArray = parisSales.map((item) => {
           return item.total;
         });
+        console.log(parisSalesArray);
         let totalparisSales = parisSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
+         let parisOrderQuantity = parisSales.map((item) => {
+          return item.orders_qty;
+        });
+         let totalparisOrder = parisOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        
+      if(ChannelSelectedForDelete !== undefined){
+        if(ChannelSelectedForDelete.channel === 'Paris')
+        totalparisSales = '0';
+        totalparisOrder='0';
+      }
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
@@ -1108,7 +1441,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-     
+
         let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
@@ -1126,7 +1459,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
@@ -1147,7 +1480,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
-       
+
         let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1155,11 +1488,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
-     
-        if (ListaSales.length === 0) {
-          setlistaTiendaOrders(0);
-          setlistaTienda(0);
-        }
+
+        // if (ListaSales.length === 0) {
+        //   setlistaTiendaOrders(0);
+        //   setlistaTienda(0);
+        // }
         let ListaArray = ListaSales.map((item) => {
           return item.total;
         });
@@ -1167,14 +1500,22 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+        if(ChannelSelectedForDelete !== undefined){
+          if(ChannelSelectedForDelete.channel === 'ListaTienda')
+          totalListaSales = '0';
 
+        }
+        console.log(totalListaSales);
+setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
+setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,totalparisOrder,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
-        setmercadoLibre(totalmercadoSales);
+        // setmercadoLibre(totalmercadoSales);
         setexito(totalexitoSales);
         setshopify(totalshopifySales);
         setparis(totalparisSales);
+      //  setparisOrders(totalparisOrder);
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
@@ -1182,53 +1523,61 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         setvtexOrders(TotalVtexOrder);
         setlinioOrders(totalLinioOrder);
         setshopifyOrders(totalShopifyOrder);
-        setmercadoLibreOrders(totalMercadoOrders);
+        // setmercadoLibreOrders(totalMercadoOrders);
         setchambasOrders(totalChambasOrders);
         setmagentoOrders(totalMagentoOrders);
         setwooCommerceOrders(totalwooCommerceOrders);
-        console.log(channels);
-        console.log(cR);
+        setmercadoLibreOrders(totalMercadoOrders);
+        setmercadoLibre(totalmercadoSales);
+        setlistaTienda(totalListaSales);
+        let channelsList =cR.map((item) => {
+          return item.channel;
+        });
+
+      //   console.log(channelsList);
+     console.log(mixedGraphDatas);
+     const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
+       return item.channel
+     })
+     setmixedGraphChannels(lineAndBarChartLabels);
+     console.log(lineAndBarChartLabels);
+     console.log(BarLineGraphLabels);
+
+     const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
+      return item.value
+    })
+    const lineAndBarChartOrderValues = mixedGraphDatas.map((item)=>{
+      return item.orderValue
+    })
         let MIXED = {
-          labels: channels,
+          labels: lineAndBarChartLabels,
           datasets: [
             {
               label: "Ventas",
+            data: lineAndBarChartValues,
+            backgroundColor: "#344FD5",
 
-              data: [
-                vtex,
-                linio,
-                mercadoLibre,
-                exito,
-                ripley,
-                shopify,
-                paris,
-                magento,
-                wooCommerce,
-                chambas,
-                listaTienda,
-              ],
-              backgroundColor: "#344FD5",
-              
-              borderRadius:5,
+            borderRadius:5,
               order: 1,
             },
 
             {
               label: "Órdenes",
               yAxisID: "Ordenes",
-              data: [
-                vtexOrders,
-                linioOrders,
-                mercadoLibreOrders,
-                exitoOrders,
-                ripleyOrders,
-                shopifyOrders,
-                parisOrders,
-                magentoOrders,
-                wooCommerceOrders,
-                chambasOrders,
-                listaTiendaOrders,
-              ],
+              // data: [
+              //   vtexOrders,
+              //   linioOrders,
+              //   mercadoLibreOrders,
+              //   exitoOrders,
+              //   ripleyOrders,
+              //   shopifyOrders,
+              //   parisOrders,
+              //   magentoOrders,
+              //   wooCommerceOrders,
+              //   chambasOrders,
+              //   listaTiendaOrders,
+              // ],
+              data:lineAndBarChartOrderValues,
               backgroundColor: "#06CBC1",
               borderColor: "#06CBC1",
               fill: false,
@@ -1239,18 +1588,19 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             },
           ],
            options: {
-      
+
              plugins: {
                legend: {
                  display: false,
           },
-        
+
             },
           },
         };
-    
-        setmixedChartData(MIXED);
-      
+   console.log(MIXED.datasets[0].data);
+
+         setmixedChartData(MIXED);
+
         let PIE = {
           labels: [
             "Vtex",
@@ -1303,7 +1653,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           ],
         };
         setpieChartData(PIE);
-       
+
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -1343,7 +1693,9 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         let npsArray = obj.map((item) => {
           return item.nps;
         });
-        
+        let claimsArray = obj.map((item) => {
+          return item.claims;
+        });
         let sumOfTotalIncome = totalIncomeArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1395,6 +1747,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           (partialSum, a) => partialSum + a,
           0
         );
+        let sumOfTotalClaims = claimsArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        settotalClaims(sumOfTotalClaims);
         settotalNps(sumOfTotalnps);
         settotalIncome(sumOfTotalIncome);
         setdispatchCost(sumOfTotalDispatch);
@@ -1408,13 +1765,9 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-       
-    
-        // setstackedChartData({
-        //   labels: stackedDateLabel,
-        //   datasets: stackedChartData.datasets,
-         
-        // });
+
+
+        
         let MONTLY_ORDER_GRAPH = {
           labels:  stackedDateLabel,
           datasets: [
@@ -1424,7 +1777,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ripleyMonthlyArray,
+              data: ripleyStackedOrdersState,
             },
             {
               label: "ListaTienda",
@@ -1432,7 +1785,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaMonthlyArray,
+              data: listaStackedOrdersState,
             },
             {
               label: "Magento",
@@ -1440,7 +1793,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: MagentoMonthlyArray,
+              data: magentoStackedOrdersState,
             },
             {
               label: "Shopify",
@@ -1448,7 +1801,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ShopifyMonthlyArray,
+              data: shopifyStackedOrdersState,
             },
             {
               label: "Mercadolibre",
@@ -1456,7 +1809,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoArray,
+              data: mercadoStackedOrdersState,
             },
             {
               label: "Chambas",
@@ -1464,7 +1817,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasMonthlyArray,
+              data: chambasStackedOrdersState,
             },
             {
               label: "Linio",
@@ -1472,7 +1825,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: orderQuantityArraY
+              data: linioStackedOrdersState,
+             
             },
             {
               label: "Vtex",
@@ -1480,7 +1834,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data:  vtexMonthlyArray,
+              data: vtexStackedOrdersState,
             },
             {
               label: "WooCommerce",
@@ -1488,7 +1842,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceMonthlyArray,
+              data: wooCommerceStackedOrdersState,
             },
             {
               label: "Paris",
@@ -1496,7 +1850,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisMonthlyArray,
+              data: parisStackedOrdersState,
             },
             {
               label: "Exito",
@@ -1504,7 +1858,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoMonthlyArray,
+              data: exitoStackedOrdersState,
             },
           ],
            options: {
@@ -1515,18 +1869,52 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             },
            },
         };
-       
+
+
+   let stackedRipleyArray = [...ripleyStackedSalesArray];
+   if(ChannelSelectedForDelete !== undefined){
+    if(ChannelSelectedForDelete.channel === 'Ripley'){
+    stackedRipleyArray = 0;
+    //  setripleyLength(0);
+    }
+    if(ChannelSelectedForDelete.channel === 'Magento'){
+     magentoStackedSalesArray = 0;
+   }
+  //  if(ChannelSelectedForDelete.channel === 'Paris'){
+  //    ParisStackedSalesArray = 0;
+  //  }
+  //  if(ChannelSelectedForDelete.channel === 'ListaTienda'){
+  //    ListaStackedSalesArray = 0;
+  //  }
+  //  if(ChannelSelectedForDelete.channel === 'Linio'){
+  //    LINIOStackedSalesArray = 0;
+  //  }
+  //  if(ChannelSelectedForDelete.channel === 'Shopify'){
+  //    shopifyStackedSalesArray = 0;
+  //  }
+  //  if(ChannelSelectedForDelete.channel === 'Vtex'){
+  //    vtexStackedSalesArray = 0;
+  //  }
+  }
+  console.log(ripleyStackedSalesState);
+  console.log(ripleyStackedSalesArray);
+  console.log(shopifyStackedSalesState);
+  console.log(linioStackedSalesState);
+  console.log(mercadoStackedSalesState);
+  console.log(chambasStackedSalesState);
+  console.log(listaStackedSalesState);
         setstackedChartData(MONTLY_ORDER_GRAPH);
         let MONTLY_SALES_GRAPH = {
           labels:  stackedDateLabel,
           datasets: [
             {
-              label: "Ripley",
+              label:ripleyStackedSalesArray!=0?'Ripley':'',
               backgroundColor: "#FFD88C",
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ripleyStackedSalesArray,
+             data: ripleyStackedSalesState,
+
             },
             {
               label: "ListaTienda",
@@ -1534,7 +1922,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaStackedSalesArray,
+              data: listaStackedSalesState,
             },
             {
               label: "Magento",
@@ -1542,7 +1930,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: magentoStackedSalesArray,
+              data: magentoStackedSalesState,
             },
             {
               label: "Shopify",
@@ -1550,7 +1938,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: shopifyStackedSalesArray,
+              data: shopifyStackedSalesState,
             },
             {
               label: "Mercadolibre",
@@ -1558,7 +1946,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoStackedSalesArray,
+              data: mercadoStackedSalesState,
             },
             {
               label: "Chambas",
@@ -1566,7 +1954,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasStackedSalesArray,
+              data: chambasStackedSalesState,
             },
             {
               label: "Linio",
@@ -1574,7 +1962,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: linioStackedSalesArray
+              data: linioStackedSalesState,
             },
             {
               label: "Vtex",
@@ -1582,7 +1970,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: vtexStackedSalesArray,
+              data: vtexStackedSalesState,
             },
             {
               label: "WooCommerce",
@@ -1590,7 +1978,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceStackedSalesArray,
+              data: wooCommerceStackedSalesState,
             },
             {
               label: "Paris",
@@ -1598,7 +1986,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisStackedSalesArray,
+              data: parisStackedSalesState,
             },
             {
               label: "Exito",
@@ -1606,17 +1994,25 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoStackedSalesArray,
+              data: exitoStackedSalesState,
             },
           ],
         };
+        console.log(MONTLY_SALES_GRAPH.datasets[1].label);
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
-        setisLoading(false);
+     
+
+          setisLoading(false);
+
+
       })
       .catch((error) => console.log("error", error));
   };
+
   
+
   const fetchFilterData = async () => {
+    setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -1636,15 +2032,15 @@ ExitoStackedSalesArray.push(totalMonthlySales);
     )
       .then((response) => response.text())
       .then((result) => {
-        
+
         var obj = JSON.parse(result);
-      
+
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
         var flattened = [].concat.apply([], allChannelsArray);
 
-      
+
         var resArr = [];
         flattened.filter(function (item) {
           var i = resArr.findIndex(
@@ -1655,12 +2051,12 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           }
           return null;
         });
-      
+
         setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-     
+
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
@@ -1671,55 +2067,41 @@ ExitoStackedSalesArray.push(totalMonthlySales);
 
         setchannels(salesChannelList);
 
-        let PIE = {
-          labels: salesChannelList,
-          datasets: [
-            {
-              label: "Emails",
-              pointRadius: 0,
-              pointHoverRadius: 0,
-              backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-              borderWidth: 0,
-              barPercentage: 1.6,
-              data: [ripley, 480, 430, 211],
-            },
-          ],
-        };
-
-        setpieChartData(PIE);
+        
         let countryArray = [];
 
         setfilteredCountryData(obj);
-        // setfilteredStoreData(y[0].stores);
+
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
- 
-  const setMixedChart = () => {
-    setmixedChartData({
-      labels: channels,
-      datasets: [
-        {
-          type: "line",
-          label: "Dataset 1",
-          borderColor: "#06CBC1",
-          borderWidth: 2,
-          fill: false,
-          data: [100, 200, 300, 400, 500, 600],
-        },
-        {
-          type: "bar",
-          label: "Dataset 2",
-          backgroundColor: "#344FD5",
-          data: [78, 123, 45, 67, 12],
-          borderColor: "#344FD5",
-          borderRadius: 5,
-          borderWidth: 2,
-        },
-      ],
-      
-    });
-  };
+
+  // const setMixedChart = () => {
+  //   setmixedChartData({
+  //     labels: channels,
+  //     datasets: [
+  //       {
+  //         type: "line",
+  //         label: "Dataset 1",
+  //         borderColor: "#06CBC1",
+  //         borderWidth: 2,
+  //         fill: false,
+  //         data: [100, 200, 300, 400, 500, 600],
+  //       },
+  //       {
+  //         type: "bar",
+  //         label: "Dataset 2",
+  //         backgroundColor: "#344FD5",
+  //         data: [78, 123, 45, 67, 12],
+  //         borderColor: "#344FD5",
+  //         borderRadius: 5,
+  //         borderWidth: 2,
+  //       },
+  //     ],
+
+  //   });
+  // };
   const changeDateHandler = (event) => {
     const selectedDate = event.toISOString().slice(0, 10);
 
@@ -1766,7 +2148,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    
+
     const channels = filteredChannelArray.map((item) => {
       // return item.channel;
       return item;
@@ -1778,19 +2160,27 @@ ExitoStackedSalesArray.push(totalMonthlySales);
     let x = channelsId.join(",");
     setchannelId(x);
     setcR(channels);
+
     // setchannels(channels);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
   const handleDelete = (item) => {
+    //handleRemovetheLabels(item);
+  console.log(mixedChartsalesData);
+    setChannelSelectedForDelete(item);
    let x = cR.filter((i) => i !== item);
     setcR(x);
+
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
+ 
   return (
     <>
+    {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen></SplashScreen>}
+
       {!isLoading && (
         <div className="content">
           <h5
@@ -1856,28 +2246,28 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   <span className="btn-label">
                     <i className="nc-icon nc-shop" />
                   </span>
-                  Tiendas        
+                  Tiendas
                 </Button> */}
 
               {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-settings-gear-65" />
                   </span>
-                  Backoffice    
+                  Backoffice
                 </Button>
-                 
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-box-2" />
                   </span>
-                 Fulfillment        
+                 Fulfillment
                 </Button>
-                 
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-single-02" />
                   </span>
-                 Cliente    
+                 Cliente
                 </Button>
                    */}
             </CardBody>
@@ -2085,7 +2475,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                 >
                   Canales De Venta
                 </h5>
-           
+
                 {cR.map((item) => (
                   <div className="tag-item" key={item.value}>
                     {item.channel}
@@ -2122,7 +2512,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           )}
           <br></br>
 
-   
+
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
@@ -2166,7 +2556,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
                         &nbsp;
                         {/* <span
@@ -2179,7 +2569,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       >
                      +4.5%
                    </span> */}
-                   </div>   
+                   </div>
                  })()}
 
                   </h5>
@@ -2200,7 +2590,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                         &nbsp;
                         {/* <span
@@ -2214,7 +2604,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                      -3%
                    </span> */}
                    </div>
-                                
+
                               })()}
 
                   </h5>
@@ -2235,7 +2625,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                         &nbsp;
                         {/* <span
@@ -2248,10 +2638,10 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       >
                      -6%
                    </span> */}
-                   </div>   
+                   </div>
                  })()}
 
-                   
+
                   </h5>
                 </div>
               </Col>
@@ -2391,7 +2781,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     &nbsp; Entregados
                   </p>
                   <h5 className="textInfoCard" style={{ fontSize: "22px", color: "#444B54" }}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;220 &nbsp;
+                  &nbsp;&nbsp;&nbsp;<Badge style={{backgroundColor:'#06CBC1',color:'white'}} pill>Próximamente</Badge>&nbsp;
                     {/* <span
                       id="spanTextInfoCard"
                       style={{
@@ -2602,8 +2992,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   </h5>
                 </div>
               </Col>
-            
-             
+
+
                 {/* claims */}
                 <Col md="3">
                   <div>
@@ -2618,7 +3008,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 500 &nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalClaims} &nbsp;
                       {/* <span
                         id="spanTextInfoCard"
                         style={{
@@ -2670,6 +3060,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               onTheWay={onTheWay}
               reviews={reviews}
               totalNps={totalNps}
+              totalClaims={totalClaims}
             />
           </div>
 
@@ -2677,6 +3068,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           <br></br>
 
           {/* GRAPHS */}
+        {!pageFullyLoaded && <div>
           <Row>
 
            <Col id="ColMixedChart" lg="6" md="12" sm="12" >
@@ -2684,13 +3076,13 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
-                  </CardTitle>  
-                   <p className="card-category"> </p> 
+                  </CardTitle>
+                   <p className="card-category"> </p>
                  </CardHeader>
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar data={mixedChartData} 
+                  <Bar data={mixedChartData}
                   options={chartExample13.options}
                    />
                 </CardBody>
@@ -2718,7 +3110,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   <CardFooter>
 
                   <div className="infoLegendPieChart">
-  
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -2738,7 +3130,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                      </p>
                         </p>
@@ -2761,7 +3153,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
 
                         </p>
@@ -2785,8 +3177,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend">{formatted}</p>   
-                       })()}  
+                          return <p className="numberTextLegend">{formatted}</p>
+                       })()}
                     </p>
                     </p>
                     </div>
@@ -2809,7 +3201,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -2832,7 +3224,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -2856,7 +3248,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -2880,7 +3272,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
                       </p>
                     </p>
@@ -2904,7 +3296,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
                       </p>
                     </p>
@@ -2928,7 +3320,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend"> {formatted}</p>   
+                              return <p className="numberTextLegend"> {formatted}</p>
                           })()}
                       </p>
                     </p>
@@ -2952,11 +3344,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend"> {formatted}</p>   
-                          })()}  
+                              return <p className="numberTextLegend"> {formatted}</p>
+                          })()}
                       </p>
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -2976,38 +3368,38 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend">{formatted}</p>   
+                              return <p className="numberTextLegend">{formatted}</p>
                           })()}
-                      
+
                       </p>
                     </p>
-                    
+
                   </div>
                 </div>
                   </CardFooter>
                 </Card>
                 </Col>
-              
-            
-            </Row> 
+
+
+            </Row>
 
             <Row>
-            <Col md="6">
-              
+           <Col md="6">
+
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Órdenes por canal de venta</strong>
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={stackedChartData} 
+                    <Bar data={stackedChartData}
                     options={chartExample5.options}
                      />
                   </CardBody>
                     <CardFooter>
                   <div className="legend">
                   <div className="infoLegend">
-             
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -3019,7 +3411,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;Ripley
-                    
+                    <p className="card-category">{ripleyOrders} Ordenes</p>
                      {/* <p className="card-category">
                        {(() => {
                           let number  = vtex;
@@ -3027,7 +3419,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                      </p> */}
                         </p>
@@ -3043,6 +3435,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                           }}
                         />
                         &nbsp;ListaTienda
+                        <p className="card-category">{listaTiendaOrders} Ordenes</p>
                         {/* <p className="card-category">
                           {(() => {
                             let number  = linio;
@@ -3050,7 +3443,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
 
                         </p> */}
@@ -3067,6 +3460,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Magento
+                    <p className="card-category">{magentoOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = mercadoLibre;
@@ -3074,8 +3468,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
-                       })()}  
+                          return <div> {formatted}</div>
+                       })()}
                     </p> */}
                     </p>
                     </div>
@@ -3091,6 +3485,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Shopify
+                    <p className="card-category">{shopifyOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = exito;
@@ -3098,7 +3493,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -3114,6 +3509,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Mercadolibre
+                    <p className="card-category">{mercadoLibreOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = ripley;
@@ -3121,7 +3517,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -3138,6 +3534,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Chambas
+                    <p className="card-category">{chambasOrders} Ordenes</p>
                     {/* <p className="card-category">
                       {(() => {
                           let number  = shopify;
@@ -3145,7 +3542,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -3162,6 +3559,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                      &nbsp; Linio
+                     <p className="card-category">{linioOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                             let number  = paris;
@@ -3169,7 +3567,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p> */}
                     </p>
@@ -3186,6 +3584,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                      &nbsp; Vtex
+                     <p className="card-category">{vtexOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                             let number  = magento;
@@ -3193,7 +3592,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p> */}
                     </p>
@@ -3210,6 +3609,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;WooCommerce
+                      <p className="card-category">{wooCommerceOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                               let number  = wooCommerce;
@@ -3217,7 +3617,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
                       </p> */}
                     </p>
@@ -3234,6 +3634,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;Paris
+                      <p className="card-category">{parisOrders} Ordenes</p>
                       {/* <p className="card-category">
                         {(() => {
                               let number  = chambas;
@@ -3241,11 +3642,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
-                          })()}  
+                              return <div> {formatted}</div>
+                          })()}
                       </p> */}
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -3258,6 +3659,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;Exito
+                      <p className="card-category">{exitoOrders} Ordenes</p>
                       {/* <p className="card-category">
                           {(() => {
                               let number  = listaTienda;
@@ -3265,9 +3667,9 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      
+
                       </p> */}
                     </p>
                     </div>
@@ -3276,11 +3678,11 @@ ExitoStackedSalesArray.push(totalMonthlySales);
 
                     </CardFooter>
                 </Card>
-              
-              </Col>
-            
 
-             <Col md="6">
+              </Col>
+
+{StackedisLoading && <SplashScreen></SplashScreen>}
+           {!StackedisLoading &&  <Col md="6">
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Ingresos por canal de venta</strong>
@@ -3290,15 +3692,15 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                     <Bar
                       data={stackedSalesGraph}
                       options={chartExample5.options}
-                      // options={barChartOptions}
+                      //  options={barChartOptions}
                     />
                   </CardBody>
                      <CardFooter>
-                  
-              
+
+
                 <div className="legend">
                   <div className="infoLegend">
-             
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -3310,17 +3712,17 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;Ripley
-                    
-                     {/* <p className="card-category">
+
+                      <p className="card-category">
                        {(() => {
-                          let number  = vtex;
+                          let number  = ripley;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
-                     </p> */}
+                     </p>
                         </p>
                         </div>
                         <div>
@@ -3334,17 +3736,17 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                           }}
                         />
                         &nbsp;ListaTienda
-                        {/* <p className="card-category">
+                        <p className="card-category">
                           {(() => {
-                            let number  = linio;
+                            let number  = listaTienda;
                             let formatted = new Intl.NumberFormat("es-CL",{
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
 
-                        </p> */}
+                    </p>
                       </p>
                     </div>
                     <div>
@@ -3358,16 +3760,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Magento
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = mercadoLibre;
+                          let number  = magento;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
-                       })()}  
-                    </p> */}
+                          return <div> {formatted}</div>
+                       })()}
+                    </p>
                     </p>
                     </div>
 
@@ -3382,16 +3784,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Shopify
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = exito;
+                          let number  = shopify;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
-                    </p> */}
+                    </p>
                     </p>
                     </div>
                     <div>
@@ -3405,16 +3807,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Mercadolibre
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = ripley;
+                          let number  = mercadoLibre;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
-                    </p> */}
+                    </p>
                     </p>
                     </div>
 
@@ -3429,16 +3831,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                       }}
                     />
                     &nbsp;Chambas
-                    {/* <p className="card-category">
+                    <p className="card-category">
                       {(() => {
-                          let number  = shopify;
+                          let number  = chambas;
                           let formatted = new Intl.NumberFormat("es-CL",{
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
-                    </p> */}
+                    </p>
                     </p>
                     </div>
 
@@ -3453,16 +3855,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                      &nbsp; Linio
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
-                            let number  = paris;
+                            let number  = linio;
                             let formatted = new Intl.NumberFormat("es-CL",{
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
-                      </p> */}
+                      </p>
                     </p>
                     </div>
 
@@ -3477,16 +3879,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                      &nbsp; Vtex
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
-                            let number  = magento;
+                            let number  = vtex;
                             let formatted = new Intl.NumberFormat("es-CL",{
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
-                      </p> */}
+                      </p>
                     </p>
                     </div>
 
@@ -3501,16 +3903,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;WooCommerce
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
                               let number  = wooCommerce;
                               let formatted = new Intl.NumberFormat("es-CL",{
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      </p> */}
+                      </p>
                     </p>
                     </div>
 
@@ -3525,18 +3927,18 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;Paris
-                      {/* <p className="card-category">
+                      <p className="card-category">
                         {(() => {
-                              let number  = chambas;
+                              let number  = paris;
                               let formatted = new Intl.NumberFormat("es-CL",{
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
-                          })()}  
-                      </p> */}
+                              return <div> {formatted}</div>
+                          })()}
+                      </p>
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -3549,83 +3951,31 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                         }}
                       />
                       &nbsp;Exito
-                      {/* <p className="card-category">
+                      <p className="card-category">
                           {(() => {
-                              let number  = listaTienda;
+                              let number  = exito;
                               let formatted = new Intl.NumberFormat("es-CL",{
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      
-                      </p> */}
+
+                      </p>
                     </p>
                     </div>
                   </div>
                 </div>
                   </CardFooter>
                 </Card>
-              
-            </Col>
-            </Row>
-            {/* <Col md="6">
-            <Card className="card-chart">
-              <CardHeader>
-                <CardTitle>NASDAQ: AAPL</CardTitle>
-                <p className="card-category">Line Chart with Points</p>
-              </CardHeader>
-              <CardBody>
-                <Line
-                  data={chartExample9.data}
-                  options={chartExample9.options}
-                />
-              </CardBody>
-            </Card>
-          </Col> */}
-          {/* </Row> */}
-          <Row>
-            {/* <Col md="6">
-            <Card className="card-chart">
-              <CardHeader>
-                <CardTitle>Views</CardTitle>
-                <p className="card-category">Bar Chart</p>
-              </CardHeader>
-              <CardBody>
-                <Bar
-                  data={chartExample10.data}
-                  options={chartExample10.options}
-                />
-              </CardBody>
-            </Card>
-          </Col> */}
-          </Row>
-          {/* <Row>
-          <Col md="8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Users Behavior</CardTitle>
-                <p className="card-category">24 Hours performance</p>
-              </CardHeader>
-              <CardBody>
-                <Line
-                  data={chartExample12.data}
-                  options={chartExample12.options}
-                  width={400}
-                  height={100}
-                />
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-history" />
-                  Updated 3 minutes ago
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
-        </Row> */}
 
+            </Col>}
+            </Row>
+          
+          <Row>
+         
+          </Row>
+       
          <Row>
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
@@ -3633,7 +3983,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                 className="bttnCompartirReporte"
                 style={{
                   backgroundColor: "#1D308E",
-                  textAlign: "center",                 
+                  textAlign: "center",
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
@@ -3644,17 +3994,17 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   fontWeight:"bold",
                   border:"0",
                   fontSize: "11px"
-                  
-               
+
+
                 }}
               >
-                
+
                 <span className="btn-label">
                   <img src={iconShareReport} width="19px"/>
                 </span>
                 &nbsp;Compartir Reporte &nbsp;
               </button>
-           
+
               <button
                 id="bttnSubmit"
                 className="bttnSiguienteReporte"
@@ -3671,7 +4021,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   textTransform: "none",
                   fontWeight:"bold",
                   border:"0"
-               
+
                 }}
               >
                 Siguiente Reporte &nbsp;
@@ -3682,6 +4032,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             </div>
           </Row>
 
+        </div>}
         </div>
       )}
     </>
