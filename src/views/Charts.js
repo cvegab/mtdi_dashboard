@@ -196,7 +196,7 @@ const barChartOptions = {
   plugins: {
     legend: {
       display: false,
-      
+
     },
   },
   scales: {
@@ -215,31 +215,7 @@ const barChartOptions = {
 const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
-//Inside data props
-const dataMix = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
-  datasets: [
-    {
-      label: "Data1",
-      data: data11,
-      backgroundColor: "rgba(87, 121, 234, 0.6)",
-      borderColor: "rgba(87, 121, 234, 0.6)",
-      order: 1,
-    },
 
-    {
-      label: "Total",
-      data: data2,
-      backgroundColor: "rgba(234, 87, 102, 0.6)",
-      borderColor: "rgba(234, 87, 102, 0.6)",
-      fill: false,
-      pointHoverRadius: 20,
-      pointHoverBorderWidth: 5,
-      type: "line",
-      order: 0,
-    },
-  ],
-};
 function Charts() {
   let PIE_CHART_DATA = {
     labels: [1, 2, 3, 4],
@@ -287,12 +263,81 @@ function Charts() {
       },
     ],
   };
+  const BAR_CHART_DATA = {
+    labels: [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ],
+    datasets: [
+      {
+        label: "Ripley",
+        backgroundColor: "#F10096",
+        borderRadius: "20px",
+        stack: "2",
+        borderRadius:6,
+        data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
+      },
+      {
+        label: "Shopify",
+        backgroundColor: "#00B6CB",
+        stack: "2",
+        borderRadius:6,
+        data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
+      },
+      {
+        label: "Mercadolibre",
+        backgroundColor: "#344FD5",
+        stack: "2",
+        borderRadius:6,
+        data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
+      },
+      {
+        label: "CornerShop",
+        backgroundColor: "#5E35B1",
+        stack: "2",
+        borderRadius:6,
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+      {
+        label: "Linio",
+        backgroundColor: "#97D456",
+        stack: "2",
+        borderRadius:6,
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+      {
+        label: "Rappi",
+        backgroundColor: "#FFD88C",
+        stack: "2",
+        borderRadius:6,
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+      {
+        label: "WooCommerce",
+        backgroundColor: "#FF6059",
+        borderRadius:6,
+        stack: "2",
+        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
+      },
+    ],
+  };
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
  const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
   const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
+  const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   // const [mixedChartLoading, setmixedChartLoading] = useState(true);
   // const [mixedChartLables, setmixedChartLables] = useState([]);
   const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
@@ -354,7 +399,7 @@ function Charts() {
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [op, setop] = useState({});
-  
+
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
   const [vtexOrders, setvtexOrders] = useState(0);
@@ -371,16 +416,27 @@ function Charts() {
   //MONTHLY SALES STATES
   const [linioMonthly, setlinioMonthly] = useState([]);
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
+  const [ripleyStackedOrdersState, setripleyStackedOrdersState] = useState([]);
   const [shopifyStackedSalesState, setshopifyStackedSalesState] = useState([]);
+  const [shopifyStackedOrdersState, setshopifyStackedOrdersState] = useState([]);
   const [magentoStackedSalesState, setmagentoStackedSalesState] = useState([]);
+  const [magentoStackedOrdersState, setmagentoStackedOrdersState] = useState([]);
   const [linioStackedSalesState, setlinioStackedSalesState] = useState([]);
+  const [linioStackedOrdersState, setlinioStackedOrdersState] = useState([]);
   const [mercadoStackedSalesState, setmercadoStackedSalesState] = useState([]);
+  const [mercadoStackedOrdersState, setmercadoStackedOrdersState] = useState([]);
   const [chambasStackedSalesState, setchambasStackedSalesState] = useState([]);
+  const [chambasStackedOrdersState, setchambasStackedOrdersState] = useState([]);
   const [parisStackedSalesState, setparisStackedSalesState] = useState([]);
+  const [parisStackedOrdersState, setparisStackedOrdersState] = useState([]);
   const [vtexStackedSalesState, setvtexStackedSalesState] = useState([]);
+  const [vtexStackedOrdersState, setvtexStackedOrdersState] = useState([]);
   const [wooCommerceStackedSalesState, setwooCommerceStackedSalesState] = useState([]);
+  const [wooCommerceStackedOrdersState, setwooCommerceStackedOrdersState] = useState([]);
   const [listaStackedSalesState, setlistaStackedSalesState] = useState([]);
+  const [listaStackedOrdersState, setlistaStackedOrdersState] = useState([]);
   const [exitoStackedSalesState, setexitoStackedSalesState] = useState([]);
+  const [exitoStackedOrdersState, setexitoStackedOrdersState] = useState([]);
   const [ripleyLength, setripleyLength] = useState();
   useEffect(() => {
     // set initial value
@@ -401,26 +457,25 @@ function Charts() {
   const handleLoading = () => {
    setpageFullyLoaded(false);
     }
-    useEffect(()=>{
-      window.addEventListener('load', (event) => {
-        console.log('page is fully loaded');
-        setpageFullyLoaded(false);
-      });
-      },[])
-      
-
-
+   
+      useEffect(()=>{
+        window.addEventListener("load",handleLoading);
+        return () => window.removeEventListener("load",handleLoading);
+        },[])
   
+
+
+
   useEffect(() => {
     fetchGeneralData();
     fetchFilterData();
-    
+
   // fetchStackedGraphData();
    getDateLabels();
  //  handleRemovetheLabelsData();
      //setpieChart();
     //setMixedChart();
-   
+
   }, []);
   useEffect(() => {
     displaysalesChannelHandler();
@@ -452,20 +507,25 @@ function Charts() {
     wooCommerceOrders,
     parisOrders,
     exitoOrders,
- 
+
    stackedDatevalues,
  stackedDateLabel,
+ ripleyStackedSalesState,
+ vtexStackedSalesState,
+ linioStackedSalesState,
+ magentoStackedSalesState,
+ wooCommerceStackedSalesState,
   ]);
 
- 
-  
-  
+
+
+
 useEffect(() => {
- 
- 
+
+
   let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
        var ring = newChannel.map((id, index) => {
-      
+
         return {
           channel: id,
           value:mixedChartsalesData[index],
@@ -475,51 +535,60 @@ useEffect(() => {
       setmixedGraphDatas(ring);
       let x = [];
       console.log(ChannelSelectedForDelete);
-     
+
     if(ChannelSelectedForDelete !== undefined){
       x = mixedGraphDatas.filter((item,index) => {
-        
+
     return  item.channel !== ChannelSelectedForDelete.channel});
     setmixedGraphDatas(x);
-    
+
    if(ChannelSelectedForDelete.channel === 'Ripley'){
      setripleyStackedSalesState(0);
+     setripleyStackedOrdersState(0);
    }
    if(ChannelSelectedForDelete.channel === 'Shopify'){
+     setshopifyStackedOrdersState(0);
     setshopifyStackedSalesState(0);
   }
   if(ChannelSelectedForDelete.channel === 'Magento'){
+    setmagentoStackedOrdersState(0);
     setmagentoStackedSalesState(0);
   }
   if(ChannelSelectedForDelete.channel === 'Linio'){
+    setlinioStackedOrdersState(0);
    setlinioStackedSalesState(0);
   }
   if(ChannelSelectedForDelete.channel === 'MercadoLibre'){
-    
+    setmercadoStackedOrdersState(0);
    setmercadoStackedSalesState(0);
    }
    if(ChannelSelectedForDelete.channel === 'Chambas'){
-    
+setchambasStackedOrdersState(0);
     setchambasStackedSalesState(0);
     }
     if(ChannelSelectedForDelete.channel === 'Paris'){
     console.log('hi');
+    setparisStackedOrdersState(0);
       setparisStackedSalesState(0);
       }
       if(ChannelSelectedForDelete.channel === 'Vtex'){
         console.log('hi');
+        setvtexStackedOrdersState(0);
         setvtexStackedSalesState(0);
           }
           if(ChannelSelectedForDelete.channel === 'Woocommerce'){
             console.log('hi');
+            setwooCommerceStackedOrdersState(0);
             setwooCommerceStackedSalesState(0);
               }
               if(ChannelSelectedForDelete.channel === 'ListaTienda'){
                 console.log('hi');
+                setlistaStackedOrdersState(0);
               setlistaStackedSalesState(0);
                   }
                   if(ChannelSelectedForDelete.channel === 'Exito'){
                     console.log('hi');
+                    setexitoStackedOrdersState(0);
                   setexitoStackedSalesState(0);
                       }
     }
@@ -528,18 +597,20 @@ useEffect(() => {
   const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
     return item.channel
   });
-  setmixedGraphChannels(lineAndBarChartLabels);
+  // setmixedGraphChannels(lineAndBarChartLabels);
   console.log(lineAndBarChartLabels);
+  setBarLineGraphLabels(lineAndBarChartLabels);
   const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
    return item.value
  });
- 
+
  const lineAndBarChartOrderValues = mixedGraphDatas.map((item)=>{
    return item.orderValue
  })
 }, [mixedChartsalesData,mixedChartOrdersData])
 
-  
+
+
   const getDateLabels = ()=>{
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
@@ -606,7 +677,7 @@ useEffect(() => {
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
-   
+
 
     console.log("hi i am fetching");
     setisLoading(true);
@@ -624,20 +695,20 @@ useEffect(() => {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-   console.log(url);
+
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);  
-        console.log(obj);
+        var obj = JSON.parse(result);
+
   let res1 = [];
- 
+
 console.log(ChannelSelectedForDelete);
 let newChannel=['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda'];
 let xio = [];
 if(ChannelSelectedForDelete !== undefined){
   if(ChannelSelectedForDelete.channel === 'Ripley'){
-   
+
     xio = deleteChannelArray.filter(item=>{return item !==ChannelSelectedForDelete.channel});
   }
   if(ChannelSelectedForDelete.channel === 'Shopify'){
@@ -672,7 +743,7 @@ setdeleteChannelArray(xio);
       const dateTime = item.date_created;
       const parts = dateTime.split(/[- :]/);
       var month = parts[1];
-      var year = parts[0]; 
+      var year = parts[0];
      return item.channel == 5 && month===splitMonth && year===splitYear;
     });
     res1.push(LINIOMonthlySales);
@@ -695,15 +766,16 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   (partialSum, a) => partialSum + a,
   0
 );
- 
+
  LINIOMonthlyArray.push(totalOrder);
  LINIOStackedSalesArray.push(totalMonthlySales);
  if(deleteChannelArray.includes('Linio')){
+   setlinioStackedOrdersState(LINIOMonthlyArray);
  setlinioStackedSalesState(LINIOStackedSalesArray);
  }
   }
 
- //RIPLEY STACKED  
+ //RIPLEY STACKED
 
 
 
@@ -717,12 +789,12 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
           const dateTime = item.date_created;
           const parts = dateTime.split(/[- :]/);
           var month = parts[1];
-          var year = parts[0]; 
+          var year = parts[0];
          return item.channel == 4 && month===splitMonth && year===splitYear;
         });
         res2.push(ripleyMonthlySales);
       }
-     
+
       let ripleyMonthlyArray = [];
     let  ripleyStackedSalesArray = [];
       for(let i=0;i<=res2.length-1;i++){
@@ -740,27 +812,29 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
       (partialSum, a) => partialSum + a,
       0
     );
-     
+
      ripleyMonthlyArray.push(totalOrder);
      ripleyStackedSalesArray.push(totalMonthlySales);
-    
+
     if(deleteChannelArray.includes('Ripley')){
       console.log('ripley present');
      setripleyLength(ripleyMonthlyArray.length);
+     setripleyStackedOrdersState(ripleyMonthlyArray);
       setripleyStackedSalesState(ripleyStackedSalesArray);
+
     }
-    
-   
-     
-    } 
-    
+
+
+
+    }
+
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -794,7 +868,8 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 WooCommerceMonthlyArray.push(totalOrder);
 WooCommerceStackedSalesArray.push(totalMonthlySales);
-if(deleteChannelArray.includes('Chambas')){
+if(deleteChannelArray.includes('Woocommerce')){
+  setwooCommerceStackedOrdersState(WooCommerceMonthlyArray);
   setwooCommerceStackedSalesState(WooCommerceStackedSalesArray);
 }
 }
@@ -803,7 +878,7 @@ if(deleteChannelArray.includes('Chambas')){
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -838,6 +913,8 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   if(deleteChannelArray.includes('Shopify')){
 ShopifyMonthlyArray.push(totalOrder);
 shopifyStackedSalesArray.push(totalMonthlySales);
+
+ setshopifyStackedOrdersState(ShopifyMonthlyArray);
 setshopifyStackedSalesState(shopifyStackedSalesArray);
   }
 }
@@ -845,7 +922,7 @@ setshopifyStackedSalesState(shopifyStackedSalesArray);
 let res5= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
+    let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -882,6 +959,7 @@ MercadoArray.push(totalOrder);
 MercadoStackedSalesArray.push(totalMonthlySales);
 if(deleteChannelArray.includes('MercadoLibre')){
   console.log('mercado');
+  setmercadoStackedOrdersState(MercadoArray);
 setmercadoStackedSalesState(MercadoStackedSalesArray);
 }
 }
@@ -926,7 +1004,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 ChambasMonthlyArray.push(totalOrder);
 if(deleteChannelArray.includes('Chambas')){
 ChambasStackedSalesArray.push(totalMonthlySales);
+setchambasStackedOrdersState(ChambasMonthlyArray);
 setchambasStackedSalesState(ChambasStackedSalesArray);
+
 }
 }
 
@@ -936,9 +1016,9 @@ setchambasStackedSalesState(ChambasStackedSalesArray);
 let res7= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -972,7 +1052,9 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   );
 vtexMonthlyArray.push(totalOrder);
 vtexStackedSalesArray.push(totalMonthlySales);
-if(deleteChannelArray.includes('Chambas')){
+console.log(vtexMonthlyArray);
+if(deleteChannelArray.includes('Vtex')){
+setvtexStackedOrdersState(vtexMonthlyArray);
 setvtexStackedSalesState(vtexStackedSalesArray);
 }
 }
@@ -980,9 +1062,9 @@ setvtexStackedSalesState(vtexStackedSalesArray);
 let res8= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1017,6 +1099,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
   if(deleteChannelArray.includes('Magento')){
 MagentoMonthlyArray.push(totalOrder);
 magentoStackedSalesArray.push(totalMonthlySales);
+setmagentoStackedOrdersState(MagentoMonthlyArray);
 setmagentoStackedSalesState(magentoStackedSalesArray);
   }
 }
@@ -1025,9 +1108,9 @@ let res9= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1063,6 +1146,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 ListaMonthlyArray.push(totalOrder);
 ListaStackedSalesArray.push(totalMonthlySales);
 if(deleteChannelArray.includes('ListaTienda')){
+  setlistaStackedOrdersState(ListaMonthlyArray);
 setlistaStackedSalesState(ListaStackedSalesArray);
 }
 }
@@ -1072,9 +1156,9 @@ let res10= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
   let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1110,6 +1194,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 ParisMonthlyArray.push(totalOrder);
 ParisStackedSalesArray.push(totalMonthlySales);
 if(deleteChannelArray.includes('Paris')){
+  setparisStackedOrdersState(ParisMonthlyArray);
   setparisStackedSalesState(ParisStackedSalesArray);
 }
 
@@ -1119,9 +1204,9 @@ if(deleteChannelArray.includes('Paris')){
 let res11= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
  let ripleyMonthlySales = obj.filter((item) => {
- 
+
     let dateTobeCompared = stackedDatevalues[i];
-    
+
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
     const splitYear = splitDateCompared[0];
@@ -1156,7 +1241,8 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
 ExitoMonthlyArray.push(totalOrder);
 ExitoStackedSalesArray.push(totalMonthlySales);
-if(deleteChannelArray.includes('ListaTienda')){
+if(deleteChannelArray.includes('Exito')){
+  setexitoStackedOrdersState(ExitoMonthlyArray);
   setexitoStackedSalesState(ExitoStackedSalesArray);
 }
 }
@@ -1175,11 +1261,12 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let totalRipleySales = ripleySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
+        console.log(totalRipleySales);
         let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
@@ -1194,7 +1281,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let totalVtexSales = vtexSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1213,7 +1300,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-       
+
         let totallinioSales = linioSalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1222,10 +1309,10 @@ if(deleteChannelArray.includes('ListaTienda')){
           return item.channel == 2;
         });
         console.log(mercadoSales);
-        if (mercadoSales.length === 0) {
-          setmercadoLibreOrders(0);
-          setmercadoLibre(0);
-        }else{
+        // if (mercadoSales.length === 0) {
+        //   setmercadoLibreOrders(0);
+        //   setmercadoLibre(0);
+        // }else{
           let mercadoSalesArray = mercadoSales.map((item) => {
             return item.total;
           });
@@ -1236,22 +1323,33 @@ if(deleteChannelArray.includes('ListaTienda')){
           let totalMercadoOrders = mercadoOrders.map((item) => {
             return item.orders_qty;
           });
-     
+
           let totalmercadoSales = mercadoSalesArray.reduce(
             (partialSum, a) => partialSum + a,
             0
           );
-          setmercadoLibreOrders(totalMercadoOrders);
-          setmercadoLibre(totalmercadoSales);
-        }
-       
+          if(ChannelSelectedForDelete !== undefined){
+            if(ChannelSelectedForDelete.channel === 'MercadoLibre')
+            totalMercadoOrders='0';
+            totalmercadoSales = '0';
+
+          }
+          console.log(totalmercadoSales);
+          if(ChannelSelectedForDelete !== undefined){
+            if(ChannelSelectedForDelete.channel === 'Paris')
+            totalparisSales = '0';
+
+          }
+
+
+
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
-        if (exitoSales.length === 0) {
-          setexitoOrders(0);
-          setexito(0);
-        }
+        // if (exitoSales.length === 0) {
+        //   setexitoOrders(0);
+        //   setexito(0);
+        // }
         let exitoSalesArray = exitoSales.map((item) => {
           return item.total;
         });
@@ -1259,6 +1357,11 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
+        if(ChannelSelectedForDelete !== undefined){
+          if(ChannelSelectedForDelete.channel === 'Exito')
+          totalexitoSales = '0';
+
+        }
         let shopifySales = obj.filter((item) => {
           return item.channel == 6;
         });
@@ -1273,46 +1376,61 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-  
-        let totalshopifySales = shopifySalesArray.reduce(
-          (partialSum, a) => partialSum + a,
-          0
-        );
-        let parisSales = obj.filter((item) => {
-          return item.channel == 1;
-        });
 
-        let parisSalesArray = parisSales.map((item) => {
-          return item.total;
-        });
-        let parisOrderQuantity = parisSales.map((item) => {
-          return item.orders_qty;
-        });
-        let totalparisOrder = parisOrderQuantity.reduce(
-          (partialSum, a) => partialSum + a,
-          0
-        );
-       
-        let totalparisSales = parisSalesArray.reduce(
+        let totalshopifySales = shopifySalesArray.reduce(
           (partialSum, a) => partialSum + a,
           0
         );
         // let parisSales = obj.filter((item) => {
         //   return item.channel == 1;
         // });
-       
-        // // if (parisSales.length === 0) {
-        // //   setparisOrders(0);
-        // //   setparis(0);
-        // // }
+
         // let parisSalesArray = parisSales.map((item) => {
         //   return item.total;
         // });
-        // console.log(parisSalesArray);
+        // let parisOrderQuantity = parisSales.map((item) => {
+        //   return item.orders_qty;
+        // });
+        // let totalparisOrder = parisOrderQuantity.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
+
         // let totalparisSales = parisSalesArray.reduce(
         //   (partialSum, a) => partialSum + a,
         //   0
         // );
+        let parisSales = obj.filter((item) => {
+          return item.channel == 1;
+        });
+
+        // // if (parisSales.length === 0) {
+        // //   console.log('hi');
+        // //   setparisOrders(0);
+        // //   setparis(0);
+        // //   totalparisSales = 0;
+        // // }
+        let parisSalesArray = parisSales.map((item) => {
+          return item.total;
+        });
+        console.log(parisSalesArray);
+        let totalparisSales = parisSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+         let parisOrderQuantity = parisSales.map((item) => {
+          return item.orders_qty;
+        });
+         let totalparisOrder = parisOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        
+      if(ChannelSelectedForDelete !== undefined){
+        if(ChannelSelectedForDelete.channel === 'Paris')
+        totalparisSales = '0';
+        totalparisOrder='0';
+      }
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
@@ -1323,7 +1441,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-     
+
         let magentoSalesArray = magentoSales.map((item) => {
           return item.total;
         });
@@ -1341,7 +1459,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-    
+
         let wooCommerceArray = wooCommerceSales.map((item) => {
           return item.total;
         });
@@ -1362,7 +1480,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-       
+
         let totalchambasSales = chambasArray.reduce(
           (partialSum, a) => partialSum + a,
           0
@@ -1370,11 +1488,11 @@ if(deleteChannelArray.includes('ListaTienda')){
         let ListaSales = obj.filter((item) => {
           return item.channel == 8;
         });
-     
-        if (ListaSales.length === 0) {
-          setlistaTiendaOrders(0);
-          setlistaTienda(0);
-        }
+
+        // if (ListaSales.length === 0) {
+        //   setlistaTiendaOrders(0);
+        //   setlistaTienda(0);
+        // }
         let ListaArray = ListaSales.map((item) => {
           return item.total;
         });
@@ -1382,8 +1500,14 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-setmixedChartsalesData([totalVtexSales,totallinioSales,mercadoLibre,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
-setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,totalparisSales,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
+        if(ChannelSelectedForDelete !== undefined){
+          if(ChannelSelectedForDelete.channel === 'ListaTienda')
+          totalListaSales = '0';
+
+        }
+        console.log(totalListaSales);
+setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
+setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,totalparisOrder,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -1391,7 +1515,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setexito(totalexitoSales);
         setshopify(totalshopifySales);
         setparis(totalparisSales);
-        setparisOrders(totalparisOrder);
+      //  setparisOrders(totalparisOrder);
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
@@ -1403,10 +1527,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setchambasOrders(totalChambasOrders);
         setmagentoOrders(totalMagentoOrders);
         setwooCommerceOrders(totalwooCommerceOrders);
+        setmercadoLibreOrders(totalMercadoOrders);
+        setmercadoLibre(totalmercadoSales);
+        setlistaTienda(totalListaSales);
         let channelsList =cR.map((item) => {
           return item.channel;
         });
-       
+
       //   console.log(channelsList);
      console.log(mixedGraphDatas);
      const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
@@ -1414,6 +1541,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
      })
      setmixedGraphChannels(lineAndBarChartLabels);
      console.log(lineAndBarChartLabels);
+     console.log(BarLineGraphLabels);
+
      const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
       return item.value
     })
@@ -1421,13 +1550,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
       return item.orderValue
     })
         let MIXED = {
-          labels: mixedGraphChannels,
+          labels: lineAndBarChartLabels,
           datasets: [
             {
               label: "Ventas",
             data: lineAndBarChartValues,
             backgroundColor: "#344FD5",
-              
+
             borderRadius:5,
               order: 1,
             },
@@ -1459,19 +1588,19 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
             },
           ],
            options: {
-      
+
              plugins: {
                legend: {
                  display: false,
           },
-        
+
             },
           },
         };
    console.log(MIXED.datasets[0].data);
 
          setmixedChartData(MIXED);
-      
+
         let PIE = {
           labels: [
             "Vtex",
@@ -1524,7 +1653,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
           ],
         };
         setpieChartData(PIE);
-       
+
         var totalIncomeArray = obj.map((item) => {
           return item.total;
         });
@@ -1636,12 +1765,12 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-       
-    
+
+
         // setstackedChartData({
         //   labels: stackedDateLabel,
         //   datasets: stackedChartData.datasets,
-         
+
         // });
         let MONTLY_ORDER_GRAPH = {
           labels:  stackedDateLabel,
@@ -1652,7 +1781,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ripleyMonthlyArray,
+              data: ripleyStackedOrdersState,
             },
             {
               label: "ListaTienda",
@@ -1660,7 +1789,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ListaMonthlyArray,
+              data: listaStackedOrdersState,
             },
             {
               label: "Magento",
@@ -1668,7 +1797,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: MagentoMonthlyArray,
+              data: magentoStackedOrdersState,
             },
             {
               label: "Shopify",
@@ -1676,7 +1805,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ShopifyMonthlyArray,
+              data: shopifyStackedOrdersState,
             },
             {
               label: "Mercadolibre",
@@ -1684,7 +1813,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: MercadoArray,
+              data: mercadoStackedOrdersState,
             },
             {
               label: "Chambas",
@@ -1692,7 +1821,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: ChambasMonthlyArray,
+              data: chambasStackedOrdersState,
             },
             {
               label: "Linio",
@@ -1700,8 +1829,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data: LINIOMonthlyArray,
-              // data: orderQuantityArray
+              data: linioStackedOrdersState,
+             
             },
             {
               label: "Vtex",
@@ -1709,7 +1838,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
-              data:  vtexMonthlyArray,
+              data: vtexStackedOrdersState,
             },
             {
               label: "WooCommerce",
@@ -1717,7 +1846,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: WooCommerceMonthlyArray,
+              data: wooCommerceStackedOrdersState,
             },
             {
               label: "Paris",
@@ -1725,7 +1854,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ParisMonthlyArray,
+              data: parisStackedOrdersState,
             },
             {
               label: "Exito",
@@ -1733,7 +1862,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
-              data: ExitoMonthlyArray,
+              data: exitoStackedOrdersState,
             },
           ],
            options: {
@@ -1744,8 +1873,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
             },
            },
         };
-     
-       
+
+
    let stackedRipleyArray = [...ripleyStackedSalesArray];
    if(ChannelSelectedForDelete !== undefined){
     if(ChannelSelectedForDelete.channel === 'Ripley'){
@@ -1789,7 +1918,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
               stack: "2",
               borderRadius:6,
              data: ripleyStackedSalesState,
-             
+
             },
             {
               label: "ListaTienda",
@@ -1878,622 +2007,18 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
       //  setstackedSalesGraph({
       //     labels: [...MONTLY_SALES_GRAPH.labels],
       //     datasets: [...MONTLY_SALES_GRAPH.datasets],
-         
+
       //   });
-        
+
           setisLoading(false);
-      
-      
+
+
       })
       .catch((error) => console.log("error", error));
   };
 
-  const renderStackedSalesGraph = ()=>{
-setStackedisLoading(true);
-    var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
-    myHeaders.append(
-      "Authorization",
-      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-    //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-   console.log(url);
-    fetch(url, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        var obj = JSON.parse(result);  
-        //LINIO STACKED SALES ARRAY
-
-  let res1 = [];
-  console.log(stackedDatevalues);
-  for(let i = 0;i<=stackedDatevalues.length-1;i++){
-    let LINIOMonthlySales = obj.filter((item) => {
-      let dateTobeCompared = stackedDatevalues[i];
-      const splitDateCompared = dateTobeCompared.split(/[- :]/);
-      const splitMonth = splitDateCompared[1];
-      const splitYear = splitDateCompared[0];
-      const dateTime = item.date_created;
-      const parts = dateTime.split(/[- :]/);
-      var month = parts[1];
-      var year = parts[0]; 
-     return item.channel == 5 && month===splitMonth && year===splitYear;
-    });
-    res1.push(LINIOMonthlySales);
-  }
- 
-  let LINIOMonthlyArray = [];
-let  LINIOStackedSalesArray = [];
-  for(let i=0;i<=res1.length-1;i++){
-let channel5MonthlySales = res1[i].map((item,index)=>{
-   return item.orders_qty;
- });
- let stackedSalesMonthlySales = res1[i].map((item,index)=>{
-  return item.total;
-});
- let totalOrder = channel5MonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-);
- 
- LINIOMonthlyArray.push(totalOrder);
- LINIOStackedSalesArray.push(totalMonthlySales);
-  }
   
- //RIPLEY STACKED  
-      let res2 = [];
-      for(let i = 0;i<=stackedDatevalues.length-1;i++){
-        let ripleyMonthlySales = obj.filter((item) => {
-          let dateTobeCompared = stackedDatevalues[i];
-          const splitDateCompared = dateTobeCompared.split(/[- :]/);
-          const splitMonth = splitDateCompared[1];
-          const splitYear = splitDateCompared[0];
-          const dateTime = item.date_created;
-          const parts = dateTime.split(/[- :]/);
-          var month = parts[1];
-          var year = parts[0]; 
-         return item.channel == 4 && month===splitMonth && year===splitYear;
-        });
-        res2.push(ripleyMonthlySales);
-      }
-    
-      let ripleyMonthlyArray = [];
-    let  ripleyStackedSalesArray = [];
-      for(let i=0;i<=res2.length-1;i++){
-   let channel5MonthlySales = res2[i].map((item,index)=>{
-       return item.orders_qty;
-     });
-     let stackedSalesMonthlySales = res2[i].map((item,index)=>{
-      return item.total;
-    });
-     let totalOrder = channel5MonthlySales.reduce(
-      (partialSum, a) => partialSum + a,
-      0
-    );
-    let totalMonthlySales = stackedSalesMonthlySales.reduce(
-      (partialSum, a) => partialSum + a,
-      0
-    );
-     
-     ripleyMonthlyArray.push(totalOrder);
-     ripleyStackedSalesArray.push(totalMonthlySales);
-     setripleyLength(ripleyStackedSalesArray.length);
-     setripleyStackedSalesState(ripleyStackedSalesArray);[]
-      }
-      
-//  WOO COMMERCE STACKED GRAPH ORDERS
-let res3 = [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 3 && month===splitMonth && year===splitYear;
 
-  });
-  res3.push(ripleyMonthlySales);
-}
-
-let WooCommerceMonthlyArray = [];
-let WooCommerceStackedSalesArray = [];
-for(let i=0;i<=res3.length-1;i++){
-let channel5MonthlySales = res3[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res3[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-WooCommerceMonthlyArray.push(totalOrder);
-WooCommerceStackedSalesArray.push(totalMonthlySales);
-}
-// SHOPIFY STACKED MONTHLY DATA
-
-let res4 = [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 6 && month===splitMonth && year===splitYear;
-
-  });
-  res4.push(ripleyMonthlySales);
-}
-
-let ShopifyMonthlyArray = [];
-let shopifyStackedSalesArray = [];
-for(let i=0;i<=res4.length-1;i++){
-let channel5MonthlySales = res4[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res4[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-ShopifyMonthlyArray.push(totalOrder);
-shopifyStackedSalesArray.push(totalMonthlySales);
-}
-//MERCADO LIBRE STACKED MONTHLY DATA
-let res5= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];  
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 2 && month===splitMonth && year===splitYear;
-
-  });
-  res5.push(ripleyMonthlySales);
-}
-
-let MercadoArray = [];
-let MercadoStackedSalesArray = [];
-for(let i=0;i<=res5.length-1;i++){
-let channel5MonthlySales = res5[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res5[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-MercadoArray.push(totalOrder);
-MercadoStackedSalesArray.push(totalMonthlySales);
-}
-
-
-//CHAMBAS STACKED GRAPH MONTHLY
-let res6= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
-    let dateTobeCompared = stackedDatevalues[i];
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 11 && month===splitMonth && year===splitYear;
-
-  });
-  res6.push(ripleyMonthlySales);
-}
-
-let ChambasMonthlyArray = [];
-let ChambasStackedSalesArray = [];
-for(let i=0;i<=res6.length-1;i++){
-let channel5MonthlySales = res6[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res6[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-ChambasMonthlyArray.push(totalOrder);
-ChambasStackedSalesArray.push(totalMonthlySales);
-}
-
-
-//VTEX STACKED MONTHLY ARRAY
-
-let res7= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 7 && month===splitMonth && year===splitYear;
-
-  });
-  res7.push(ripleyMonthlySales);
-}
-
-let vtexMonthlyArray = [];
-let vtexStackedSalesArray = [];
-for(let i=0;i<=res7.length-1;i++){
-let channel5MonthlySales = res7[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res7[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-vtexMonthlyArray.push(totalOrder);
-vtexStackedSalesArray.push(totalMonthlySales);
-}
-//MAGENTO MONTHLY ARRAY
-let res8= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 9 && month===splitMonth && year===splitYear;
-
-  });
-  res8.push(ripleyMonthlySales);
-}
-
-let MagentoMonthlyArray = [];
-let magentoStackedSalesArray = [];
-for(let i=0;i<=res8.length-1;i++){
-let channel5MonthlySales = res8[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res8[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-MagentoMonthlyArray.push(totalOrder);
-magentoStackedSalesArray.push(totalMonthlySales);
-}
-// LISTA TIENDA MONTHLY SALES
-let res9= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 8 && month===splitMonth && year===splitYear;
-
-  });
-  res9.push(ripleyMonthlySales);
-}
-
-let ListaMonthlyArray = [];
-let ListaStackedSalesArray = [];
-for(let i=0;i<=res9.length-1;i++){
-let channel5MonthlySales = res9[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res9[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-
-ListaMonthlyArray.push(totalOrder);
-ListaStackedSalesArray.push(totalMonthlySales);
-}
-
-// PARIS STACKED MONTHLY SALES
-let res10= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
-
-  let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == 1 && month===splitMonth && year===splitYear;
-
-  });
-  res10.push(ripleyMonthlySales);
-}
-
-let ParisMonthlyArray = [];
-let ParisStackedSalesArray = [];
-for(let i=0;i<=res10.length-1;i++){
-let channel5MonthlySales = res10[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res10[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-
-ParisMonthlyArray.push(totalOrder);
-ParisStackedSalesArray.push(totalMonthlySales);
-}
-//EXITO MONTHLY STACKED ARRAY
-
-let res11= [];
-for(let i = 0;i<=stackedDatevalues.length-1;i++){
- let ripleyMonthlySales = obj.filter((item) => {
- 
-    let dateTobeCompared = stackedDatevalues[i];
-    
-    const splitDateCompared = dateTobeCompared.split(/[- :]/);
-    const splitMonth = splitDateCompared[1];
-    const splitYear = splitDateCompared[0];
-    const dateTime = item.date_created;
-    const parts = dateTime.split(/[- :]/);
-    var month = parts[1];
-    var year = parts[0];
-    let result = [];
-   return item.channel == '12' && month===splitMonth && year===splitYear;
-
-  });
-  res11.push(ripleyMonthlySales);
-}
-
-let ExitoMonthlyArray = [];
-let ExitoStackedSalesArray = [];
-for(let i=0;i<=res11.length-1;i++){
-let channel5MonthlySales = res11[i].map((item,index)=>{
- return item.orders_qty;
-});
-let stackedSalesMonthlySales = res11[i].map((item,index)=>{
-  return item.total;
-});
-let totalOrder = channel5MonthlySales.reduce(
-(partialSum, a) => partialSum + a,
-0
-);
-let totalMonthlySales = stackedSalesMonthlySales.reduce(
-  (partialSum, a) => partialSum + a,
-  0
-  );
-
-ExitoMonthlyArray.push(totalOrder);
-ExitoStackedSalesArray.push(totalMonthlySales);
-}
-
-if(ChannelSelectedForDelete !== undefined){
-  if(ChannelSelectedForDelete.channel === 'Ripley'){
-  //  setripleyStackedSalesState(0);
-  //  setripleyLength(0);
-  }
-  if(ChannelSelectedForDelete.channel === 'Magento'){
-   magentoStackedSalesArray = 0;
- }
-//  if(ChannelSelectedForDelete.channel === 'Paris'){
-//    ParisStackedSalesArray = 0;
-//  }
-//  if(ChannelSelectedForDelete.channel === 'ListaTienda'){
-//    ListaStackedSalesArray = 0;
-//  }
-//  if(ChannelSelectedForDelete.channel === 'Linio'){
-//    LINIOStackedSalesArray = 0;
-//  }
-//  if(ChannelSelectedForDelete.channel === 'Shopify'){
-//    shopifyStackedSalesArray = 0;
-//  }
-//  if(ChannelSelectedForDelete.channel === 'Vtex'){
-//    vtexStackedSalesArray = 0;
-//  }
-}
-
-        let MONTLY_SALES_GRAPH = {
-          labels:  stackedDateLabel,
-          datasets: [
-            {
-              label:ripleyStackedSalesArray!=0?'Ripley':'',
-              backgroundColor: "#FFD88C",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: ripleyStackedSalesState,
-             
-            },
-            {
-              label: "ListaTienda",
-              backgroundColor: "blue",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: ListaStackedSalesArray,
-            },
-            {
-              label: "Magento",
-              backgroundColor: "#FF6059",
-              borderRadius: "20px",
-              borderRadius:6,
-              stack: "2",
-              data: magentoStackedSalesArray,
-            },
-            {
-              label: "Shopify",
-              backgroundColor: "#97D456",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: shopifyStackedSalesArray,
-            },
-            {
-              label: "Mercadolibre",
-              backgroundColor: "yellow",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: MercadoStackedSalesArray,
-            },
-            {
-              label: "Chambas",
-              backgroundColor: "#EDA4D1",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: ChambasStackedSalesArray,
-            },
-            {
-              label: "Linio",
-              backgroundColor: "#F29A32",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: LINIOStackedSalesArray
-            },
-            {
-              label: "Vtex",
-              backgroundColor: "#F10096",
-              borderRadius: "20px",
-              stack: "2",
-              borderRadius:6,
-              data: vtexStackedSalesArray,
-            },
-            {
-              label: "WooCommerce",
-              backgroundColor: "purple",
-              borderRadius: "20px",
-              borderRadius:6,
-              stack: "2",
-              data: WooCommerceStackedSalesArray,
-            },
-            {
-              label: "Paris",
-              backgroundColor: "#00B6CB",
-              borderRadius: "20px",
-              borderRadius:6,
-              stack: "2",
-              data: ParisStackedSalesArray,
-            },
-            {
-              label: "Exito",
-              backgroundColor: "#E4C41B",
-              borderRadius: "20px",
-              borderRadius:6,
-              stack: "2",
-              data: ExitoStackedSalesArray,
-            },
-          ],
-        };
-      
-        setstackedSalesGraph(MONTLY_SALES_GRAPH);
-        setStackedisLoading(false);
-
-      }) .catch((error) => console.log("error", error));
-  }
-  
   const fetchFilterData = async () => {
     setisLoading(true);
     var myHeaders = new Headers();
@@ -2515,15 +2040,15 @@ if(ChannelSelectedForDelete !== undefined){
     )
       .then((response) => response.text())
       .then((result) => {
-        
+
         var obj = JSON.parse(result);
-      
+
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
         var flattened = [].concat.apply([], allChannelsArray);
 
-      
+
         var resArr = [];
         flattened.filter(function (item) {
           var i = resArr.findIndex(
@@ -2534,12 +2059,12 @@ if(ChannelSelectedForDelete !== undefined){
           }
           return null;
         });
-      
+
         setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
-     
+
         let salesChannelList = allSalesChannels.filter(function (
           item,
           index,
@@ -2550,56 +2075,41 @@ if(ChannelSelectedForDelete !== undefined){
 
         setchannels(salesChannelList);
 
-        // let PIE = {
-        //   labels: salesChannelList,
-        //   datasets: [
-        //     {
-        //       label: "Emails",
-        //       pointRadius: 0,
-        //       pointHoverRadius: 0,
-        //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C", "#FF6059"],
-        //       borderWidth: 0,
-        //       barPercentage: 1.6,
-        //       data: [ripley, 480, 430, 211],
-        //     },
-        //   ],
-        // };
-
-        // setpieChartData(PIE);
+        
         let countryArray = [];
 
         setfilteredCountryData(obj);
-  
+
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
- 
-  const setMixedChart = () => {
-    setmixedChartData({
-      labels: channels,
-      datasets: [
-        {
-          type: "line",
-          label: "Dataset 1",
-          borderColor: "#06CBC1",
-          borderWidth: 2,
-          fill: false,
-          data: [100, 200, 300, 400, 500, 600],
-        },
-        {
-          type: "bar",
-          label: "Dataset 2",
-          backgroundColor: "#344FD5",
-          data: [78, 123, 45, 67, 12],
-          borderColor: "#344FD5",
-          borderRadius: 5,
-          borderWidth: 2,
-        },
-      ],
-      
-    });
-  };
+
+  // const setMixedChart = () => {
+  //   setmixedChartData({
+  //     labels: channels,
+  //     datasets: [
+  //       {
+  //         type: "line",
+  //         label: "Dataset 1",
+  //         borderColor: "#06CBC1",
+  //         borderWidth: 2,
+  //         fill: false,
+  //         data: [100, 200, 300, 400, 500, 600],
+  //       },
+  //       {
+  //         type: "bar",
+  //         label: "Dataset 2",
+  //         backgroundColor: "#344FD5",
+  //         data: [78, 123, 45, 67, 12],
+  //         borderColor: "#344FD5",
+  //         borderRadius: 5,
+  //         borderWidth: 2,
+  //       },
+  //     ],
+
+  //   });
+  // };
   const changeDateHandler = (event) => {
     const selectedDate = event.toISOString().slice(0, 10);
 
@@ -2646,7 +2156,7 @@ if(ChannelSelectedForDelete !== undefined){
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    
+
     const channels = filteredChannelArray.map((item) => {
       // return item.channel;
       return item;
@@ -2658,7 +2168,7 @@ if(ChannelSelectedForDelete !== undefined){
     let x = channelsId.join(",");
     setchannelId(x);
     setcR(channels);
-    
+
     // setchannels(channels);
     //I HAVE COMMENTED THIS BECAUSE I AM TESTING WITH CR;
   };
@@ -2668,12 +2178,12 @@ if(ChannelSelectedForDelete !== undefined){
     setChannelSelectedForDelete(item);
    let x = cR.filter((i) => i !== item);
     setcR(x);
-   
+
   };
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
-
+ 
   return (
     <>
     {pageFullyLoaded && <SplashScreen></SplashScreen>}
@@ -2744,28 +2254,28 @@ if(ChannelSelectedForDelete !== undefined){
                   <span className="btn-label">
                     <i className="nc-icon nc-shop" />
                   </span>
-                  Tiendas        
+                  Tiendas
                 </Button> */}
 
               {/* <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-settings-gear-65" />
                   </span>
-                  Backoffice    
+                  Backoffice
                 </Button>
-                 
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-box-2" />
                   </span>
-                 Fulfillment        
+                 Fulfillment
                 </Button>
-                 
+
                 <Button color="primary" style={{borderRadius: "17px"}} outline>
                   <span className="btn-label">
                     <i className="nc-icon nc-single-02" />
                   </span>
-                 Cliente    
+                 Cliente
                 </Button>
                    */}
             </CardBody>
@@ -2973,7 +2483,7 @@ if(ChannelSelectedForDelete !== undefined){
                 >
                   Canales De Venta
                 </h5>
-           
+
                 {cR.map((item) => (
                   <div className="tag-item" key={item.value}>
                     {item.channel}
@@ -3010,7 +2520,7 @@ if(ChannelSelectedForDelete !== undefined){
           )}
           <br></br>
 
-   
+
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
@@ -3054,7 +2564,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {totalIncomeformatted}
                         &nbsp;
                         {/* <span
@@ -3067,7 +2577,7 @@ if(ChannelSelectedForDelete !== undefined){
                       >
                      +4.5%
                    </span> */}
-                   </div>   
+                   </div>
                  })()}
 
                   </h5>
@@ -3088,7 +2598,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                         &nbsp;
                         {/* <span
@@ -3102,7 +2612,7 @@ if(ChannelSelectedForDelete !== undefined){
                      -3%
                    </span> */}
                    </div>
-                                
+
                               })()}
 
                   </h5>
@@ -3123,7 +2633,7 @@ if(ChannelSelectedForDelete !== undefined){
                       style:'currency',
                       currency:'CLP'
                     }).format(number);
-                     return <div> 
+                     return <div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                         &nbsp;
                         {/* <span
@@ -3136,10 +2646,10 @@ if(ChannelSelectedForDelete !== undefined){
                       >
                      -6%
                    </span> */}
-                   </div>   
+                   </div>
                  })()}
 
-                   
+
                   </h5>
                 </div>
               </Col>
@@ -3289,7 +2799,7 @@ if(ChannelSelectedForDelete !== undefined){
                       }}
                     >
                       +12%
-                    </span> */} 
+                    </span> */}
                   </h5>
                 </div>
               </Col>
@@ -3490,8 +3000,8 @@ if(ChannelSelectedForDelete !== undefined){
                   </h5>
                 </div>
               </Col>
-            
-             
+
+
                 {/* claims */}
                 <Col md="3">
                   <div>
@@ -3574,13 +3084,13 @@ if(ChannelSelectedForDelete !== undefined){
                 <CardHeader>
                   <CardTitle>
                     <strong>Resumen general de venta y órdenes</strong>
-                  </CardTitle>  
-                   <p className="card-category"> </p> 
+                  </CardTitle>
+                   <p className="card-category"> </p>
                  </CardHeader>
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar data={mixedChartData} 
+                  <Bar data={mixedChartData}
                   options={chartExample13.options}
                    />
                 </CardBody>
@@ -3608,7 +3118,7 @@ if(ChannelSelectedForDelete !== undefined){
                   <CardFooter>
 
                   <div className="infoLegendPieChart">
-  
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -3628,7 +3138,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                      </p>
                         </p>
@@ -3651,7 +3161,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
 
                         </p>
@@ -3675,8 +3185,8 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend">{formatted}</p>   
-                       })()}  
+                          return <p className="numberTextLegend">{formatted}</p>
+                       })()}
                     </p>
                     </p>
                     </div>
@@ -3699,7 +3209,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -3722,7 +3232,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -3746,7 +3256,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <p className="numberTextLegend"> {formatted}</p>   
+                          return <p className="numberTextLegend"> {formatted}</p>
                        })()}
                     </p>
                     </p>
@@ -3770,7 +3280,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
                       </p>
                     </p>
@@ -3794,7 +3304,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <p className="numberTextLegend"> {formatted}</p>   
+                            return <p className="numberTextLegend"> {formatted}</p>
                         })()}
                       </p>
                     </p>
@@ -3818,7 +3328,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend"> {formatted}</p>   
+                              return <p className="numberTextLegend"> {formatted}</p>
                           })()}
                       </p>
                     </p>
@@ -3842,11 +3352,11 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend"> {formatted}</p>   
-                          })()}  
+                              return <p className="numberTextLegend"> {formatted}</p>
+                          })()}
                       </p>
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -3866,38 +3376,38 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <p className="numberTextLegend">{formatted}</p>   
+                              return <p className="numberTextLegend">{formatted}</p>
                           })()}
-                      
+
                       </p>
                     </p>
-                    
+
                   </div>
                 </div>
                   </CardFooter>
                 </Card>
                 </Col>
-              
-            
-            </Row> 
+
+
+            </Row>
 
             <Row>
-            <Col md="6">
-              
+           <Col md="6">
+
                 <Card className="card-chart">
                   <CardHeader>
                     <strong>Órdenes por canal de venta</strong>
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={stackedChartData} 
-                 
+                    <Bar data={stackedChartData}
+                    options={chartExample5.options}
                      />
                   </CardBody>
                     <CardFooter>
                   <div className="legend">
                   <div className="infoLegend">
-             
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -3917,7 +3427,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                      </p> */}
                         </p>
@@ -3941,7 +3451,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
 
                         </p> */}
@@ -3966,8 +3476,8 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
-                       })()}  
+                          return <div> {formatted}</div>
+                       })()}
                     </p> */}
                     </p>
                     </div>
@@ -3991,7 +3501,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -4015,7 +3525,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -4040,7 +3550,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p> */}
                     </p>
@@ -4065,7 +3575,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p> */}
                     </p>
@@ -4090,7 +3600,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p> */}
                     </p>
@@ -4115,7 +3625,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
                       </p> */}
                     </p>
@@ -4140,11 +3650,11 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
-                          })()}  
+                              return <div> {formatted}</div>
+                          })()}
                       </p> */}
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -4165,9 +3675,9 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      
+
                       </p> */}
                     </p>
                     </div>
@@ -4176,9 +3686,9 @@ if(ChannelSelectedForDelete !== undefined){
 
                     </CardFooter>
                 </Card>
-              
+
               </Col>
-            
+
 {StackedisLoading && <SplashScreen></SplashScreen>}
            {!StackedisLoading &&  <Col md="6">
                 <Card className="card-chart">
@@ -4190,15 +3700,15 @@ if(ChannelSelectedForDelete !== undefined){
                     <Bar
                       data={stackedSalesGraph}
                       options={chartExample5.options}
-                       options={barChartOptions}
+                      //  options={barChartOptions}
                     />
                   </CardBody>
                      <CardFooter>
-                  
-              
+
+
                 <div className="legend">
                   <div className="infoLegend">
-             
+
                     <div>
                       <p className="titleTextLegend">
                       <i
@@ -4210,7 +3720,7 @@ if(ChannelSelectedForDelete !== undefined){
                         }}
                       />
                       &nbsp;Ripley
-                  
+
                       <p className="card-category">
                        {(() => {
                           let number  = ripley;
@@ -4218,9 +3728,9 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
-                     </p> 
+                     </p>
                         </p>
                         </div>
                         <div>
@@ -4241,10 +3751,10 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
 
-                    </p>  
+                    </p>
                       </p>
                     </div>
                     <div>
@@ -4265,8 +3775,8 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
-                       })()}  
+                          return <div> {formatted}</div>
+                       })()}
                     </p>
                     </p>
                     </div>
@@ -4289,7 +3799,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p>
                     </p>
@@ -4312,7 +3822,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p>
                     </p>
@@ -4336,7 +3846,7 @@ if(ChannelSelectedForDelete !== undefined){
                             style:'currency',
                             currency:'CLP'
                           }).format(number);
-                          return <div> {formatted}</div>   
+                          return <div> {formatted}</div>
                        })()}
                     </p>
                     </p>
@@ -4360,7 +3870,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p>
                     </p>
@@ -4384,7 +3894,7 @@ if(ChannelSelectedForDelete !== undefined){
                               style:'currency',
                               currency:'CLP'
                             }).format(number);
-                            return <div> {formatted}</div>   
+                            return <div> {formatted}</div>
                         })()}
                       </p>
                     </p>
@@ -4408,7 +3918,7 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
                       </p>
                     </p>
@@ -4432,11 +3942,11 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
-                          })()}  
+                              return <div> {formatted}</div>
+                          })()}
                       </p>
                     </p>
-                    </div> 
+                    </div>
 
                     <div>
                     <p className="titleTextLegend">
@@ -4456,9 +3966,9 @@ if(ChannelSelectedForDelete !== undefined){
                                 style:'currency',
                                 currency:'CLP'
                               }).format(number);
-                              return <div> {formatted}</div>   
+                              return <div> {formatted}</div>
                           })()}
-                      
+
                       </p>
                     </p>
                     </div>
@@ -4466,66 +3976,14 @@ if(ChannelSelectedForDelete !== undefined){
                 </div>
                   </CardFooter>
                 </Card>
-              
+
             </Col>}
             </Row>
-            {/* <Col md="6">
-            <Card className="card-chart">
-              <CardHeader>
-                <CardTitle>NASDAQ: AAPL</CardTitle>
-                <p className="card-category">Line Chart with Points</p>
-              </CardHeader>
-              <CardBody>
-                <Line
-                  data={chartExample9.data}
-                  options={chartExample9.options}
-                />
-              </CardBody>
-            </Card>
-          </Col> */}
-          {/* </Row> */}
+          
           <Row>
-            {/* <Col md="6">
-            <Card className="card-chart">
-              <CardHeader>
-                <CardTitle>Views</CardTitle>
-                <p className="card-category">Bar Chart</p>
-              </CardHeader>
-              <CardBody>
-                <Bar
-                  data={chartExample10.data}
-                  options={chartExample10.options}
-                />
-              </CardBody>
-            </Card>
-          </Col> */}
+         
           </Row>
-          {/* <Row>
-          <Col md="8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Users Behavior</CardTitle>
-                <p className="card-category">24 Hours performance</p>
-              </CardHeader>
-              <CardBody>
-                <Line
-                  data={chartExample12.data}
-                  options={chartExample12.options}
-                  width={400}
-                  height={100}
-                />
-              </CardBody>
-              <CardFooter>
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-history" />
-                  Updated 3 minutes ago
-                </div>
-              </CardFooter>
-            </Card>
-          </Col>
-        </Row> */}
-
+       
          <Row>
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
@@ -4533,7 +3991,7 @@ if(ChannelSelectedForDelete !== undefined){
                 className="bttnCompartirReporte"
                 style={{
                   backgroundColor: "#1D308E",
-                  textAlign: "center",                 
+                  textAlign: "center",
                   width: "296px",
                   height: "64px",
                   padding: "22px 81px",
@@ -4544,17 +4002,17 @@ if(ChannelSelectedForDelete !== undefined){
                   fontWeight:"bold",
                   border:"0",
                   fontSize: "11px"
-                  
-               
+
+
                 }}
               >
-                
+
                 <span className="btn-label">
                   <img src={iconShareReport} width="19px"/>
                 </span>
                 &nbsp;Compartir Reporte &nbsp;
               </button>
-           
+
               <button
                 id="bttnSubmit"
                 className="bttnSiguienteReporte"
@@ -4571,7 +4029,7 @@ if(ChannelSelectedForDelete !== undefined){
                   textTransform: "none",
                   fontWeight:"bold",
                   border:"0"
-               
+
                 }}
               >
                 Siguiente Reporte &nbsp;
