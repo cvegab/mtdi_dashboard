@@ -293,6 +293,7 @@ function Charts() {
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
+  const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   // const [mixedChartLoading, setmixedChartLoading] = useState(true);
   // const [mixedChartLables, setmixedChartLables] = useState([]);
   const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
@@ -455,6 +456,7 @@ function Charts() {
  
    stackedDatevalues,
  stackedDateLabel,
+ 
   ]);
 
  
@@ -528,8 +530,9 @@ useEffect(() => {
   const lineAndBarChartLabels = mixedGraphDatas.map((item)=>{
     return item.channel
   });
-  setmixedGraphChannels(lineAndBarChartLabels);
+  // setmixedGraphChannels(lineAndBarChartLabels);
   console.log(lineAndBarChartLabels);
+  setBarLineGraphLabels(lineAndBarChartLabels);
   const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
    return item.value
  });
@@ -624,12 +627,12 @@ useEffect(() => {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-   console.log(url);
+   
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);  
-        console.log(obj);
+     
   let res1 = [];
  
 console.log(ChannelSelectedForDelete);
@@ -1180,6 +1183,7 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
+        console.log(totalRipleySales);
         let vtexSales = obj.filter((item) => {
           return item.channel == 7;
         });
@@ -1222,10 +1226,10 @@ if(deleteChannelArray.includes('ListaTienda')){
           return item.channel == 2;
         });
         console.log(mercadoSales);
-        if (mercadoSales.length === 0) {
-          setmercadoLibreOrders(0);
-          setmercadoLibre(0);
-        }else{
+        // if (mercadoSales.length === 0) {
+        //   setmercadoLibreOrders(0);
+        //   setmercadoLibre(0);
+        // }else{
           let mercadoSalesArray = mercadoSales.map((item) => {
             return item.total;
           });
@@ -1241,17 +1245,27 @@ if(deleteChannelArray.includes('ListaTienda')){
             (partialSum, a) => partialSum + a,
             0
           );
-          setmercadoLibreOrders(totalMercadoOrders);
-          setmercadoLibre(totalmercadoSales);
-        }
+          if(ChannelSelectedForDelete !== undefined){
+            if(ChannelSelectedForDelete.channel === 'MercadoLibre')
+            totalmercadoSales = '0';
+           
+          }
+          console.log(totalmercadoSales);
+          if(ChannelSelectedForDelete !== undefined){
+            if(ChannelSelectedForDelete.channel === 'Paris')
+            totalparisSales = '0';
+           
+          }
+         
+        
        
         let exitoSales = obj.filter((item) => {
           return item.channel == "12";
         });
-        if (exitoSales.length === 0) {
-          setexitoOrders(0);
-          setexito(0);
-        }
+        // if (exitoSales.length === 0) {
+        //   setexitoOrders(0);
+        //   setexito(0);
+        // }
         let exitoSalesArray = exitoSales.map((item) => {
           return item.total;
         });
@@ -1259,6 +1273,11 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
+        if(ChannelSelectedForDelete !== undefined){
+          if(ChannelSelectedForDelete.channel === 'Exito')
+          totalexitoSales = '0';
+         
+        }
         let shopifySales = obj.filter((item) => {
           return item.channel == 6;
         });
@@ -1278,41 +1297,48 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-        let parisSales = obj.filter((item) => {
-          return item.channel == 1;
-        });
-
-        let parisSalesArray = parisSales.map((item) => {
-          return item.total;
-        });
-        let parisOrderQuantity = parisSales.map((item) => {
-          return item.orders_qty;
-        });
-        let totalparisOrder = parisOrderQuantity.reduce(
-          (partialSum, a) => partialSum + a,
-          0
-        );
-       
-        let totalparisSales = parisSalesArray.reduce(
-          (partialSum, a) => partialSum + a,
-          0
-        );
         // let parisSales = obj.filter((item) => {
         //   return item.channel == 1;
         // });
-       
-        // // if (parisSales.length === 0) {
-        // //   setparisOrders(0);
-        // //   setparis(0);
-        // // }
+
         // let parisSalesArray = parisSales.map((item) => {
         //   return item.total;
         // });
-        // console.log(parisSalesArray);
+        // let parisOrderQuantity = parisSales.map((item) => {
+        //   return item.orders_qty;
+        // });
+        // let totalparisOrder = parisOrderQuantity.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
+       
         // let totalparisSales = parisSalesArray.reduce(
         //   (partialSum, a) => partialSum + a,
         //   0
         // );
+        let parisSales = obj.filter((item) => {
+          return item.channel == 1;
+        });
+       
+        // // if (parisSales.length === 0) {
+        // //   console.log('hi');
+        // //   setparisOrders(0);
+        // //   setparis(0);
+        // //   totalparisSales = 0;
+        // // }
+        let parisSalesArray = parisSales.map((item) => {
+          return item.total;
+        });
+        console.log(parisSalesArray);
+        let totalparisSales = parisSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+      if(ChannelSelectedForDelete !== undefined){
+        if(ChannelSelectedForDelete.channel === 'Paris')
+        totalparisSales = '0';
+       
+      }
         let magentoSales = obj.filter((item) => {
           return item.channel == 9;
         });
@@ -1371,10 +1397,10 @@ if(deleteChannelArray.includes('ListaTienda')){
           return item.channel == 8;
         });
      
-        if (ListaSales.length === 0) {
-          setlistaTiendaOrders(0);
-          setlistaTienda(0);
-        }
+        // if (ListaSales.length === 0) {
+        //   setlistaTiendaOrders(0);
+        //   setlistaTienda(0);
+        // }
         let ListaArray = ListaSales.map((item) => {
           return item.total;
         });
@@ -1382,8 +1408,14 @@ if(deleteChannelArray.includes('ListaTienda')){
           (partialSum, a) => partialSum + a,
           0
         );
-setmixedChartsalesData([totalVtexSales,totallinioSales,mercadoLibre,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
-setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,totalparisSales,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
+        if(ChannelSelectedForDelete !== undefined){
+          if(ChannelSelectedForDelete.channel === 'ListaTienda')
+          totalListaSales = '0';
+         
+        }
+        console.log(totalListaSales);
+setmixedChartsalesData([totalVtexSales,totallinioSales,totalmercadoSales,totalexitoSales,totalRipleySales,totalshopifySales,totalparisSales,totalmagentoSales,totalwooCommerceSales,totalchambasSales,totalListaSales]);
+setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,totalexitoSales,totalRipleyOrder,totalShopifyOrder,0,totalMagentoOrders,totalwooCommerceOrders,totalChambasOrders,totalListaSales]);
         setripley(totalRipleySales);
         setvtex(totalVtexSales);
         setlinio(totallinioSales);
@@ -1391,7 +1423,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setexito(totalexitoSales);
         setshopify(totalshopifySales);
         setparis(totalparisSales);
-        setparisOrders(totalparisOrder);
+       // setparisOrders(totalparisOrder);
         setmagento(totalmagentoSales);
         setwooCommerce(totalwooCommerceSales);
         setchambas(totalchambasSales);
@@ -1403,6 +1435,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
         setchambasOrders(totalChambasOrders);
         setmagentoOrders(totalMagentoOrders);
         setwooCommerceOrders(totalwooCommerceOrders);
+        setmercadoLibreOrders(totalMercadoOrders);
+        setmercadoLibre(totalmercadoSales);
+        setlistaTienda(totalListaSales);
         let channelsList =cR.map((item) => {
           return item.channel;
         });
@@ -1414,6 +1449,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
      })
      setmixedGraphChannels(lineAndBarChartLabels);
      console.log(lineAndBarChartLabels);
+     console.log(BarLineGraphLabels);
+    
      const lineAndBarChartValues = mixedGraphDatas.map((item)=>{
       return item.value
     })
@@ -1421,7 +1458,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,mercadoLibreOrders,total
       return item.orderValue
     })
         let MIXED = {
-          labels: mixedGraphChannels,
+          labels: lineAndBarChartLabels,
           datasets: [
             {
               label: "Ventas",
