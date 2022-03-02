@@ -4,6 +4,8 @@
 
 }
 
+
+
 #accordionFilterBttn {
   background-color: #f4f3ef !important;
 }
@@ -80,7 +82,7 @@
 }
 
 .card-category {
-  font-size: 13px !important;
+  font-size: 11px !important;
   font-weight: 400 !important;
   color:#858F99;
 
@@ -248,21 +250,21 @@
   .infoLegend {
   
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 0em 1em 1em 4em;
+    padding: 0em 1em 1em 0em;
   
 }
 .infoLegendPieChart {
   
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  padding: 0em 1em 1em 4em;
+  padding: 0em 1em 1em 0em;
 
 }
 .titleTextLegend {
-  font-size: 10px !important;
+  font-size: 9px !important;
 }
 
 .bttnSiguienteReporte,
@@ -310,8 +312,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  padding: 0em 1em 1em 2em;
+  padding: 0em 1em 1em 3em;
 
+}
+#barChartCustom {
+  width: 666px !important;
+  height: 224px  !important;
 }
 
   #colReportDatosGenerales,
@@ -324,6 +330,11 @@
   .titlesInfoCard {
     font-size: 12px !important;
   }
+
+  #textNameTable {
+    font-size: 18px !important;
+  }
+
   .textInfoCard {
     font-size: 14px !important;
   }
@@ -337,22 +348,23 @@
   }
 
 
-
 }
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1024px) and (max-width:1439px) {
 
 
   #colReportDatosGenerales,
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1060px !important;
+    width: 1000px !important;
 
   }
-
+  #textNameTable {
+    font-size: 17px !important;
+  }
   .titlesInfoCard {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
   .textInfoCard {
     font-size: 18px !important;
@@ -363,21 +375,25 @@
   }
 
   #textListoParaDespacho {
-    font-size: 14px !important;
+    font-size: 12px !important;
   }
 
   #ColPieChart {
-    width: 45%;
+    width: 41%;
   }
   #ColMixedChart {
-    width: 55%;
+    width: 59%;
+  }
+  #barChartCustom {
+    width: 330px !important;
+    height: 120px  !important;
   }
   .infoLegendPieChart {
   
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    padding: 0em 1em 1em 1em;
+    grid-gap: 0px;
+    padding: 0em 1em 1em 0em;
   
   }
   .infoLegend {
@@ -389,10 +405,14 @@
   
 }
 .titleTextLegend {
-  font-size: 11px;
+  font-size: 9px;
   width:116px;
   font-weight:600;
   color: #232A38;
+}
+#pieChartCard {
+  height: 450px !important;
+  width: 400px !important;
 }
 
 }
@@ -406,15 +426,19 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1200px !important;
+    width: 1210px !important;
     height: 190px !important;
   }
 
   .titlesInfoCard {
-    font-size: 16px !important;
+    font-size: 20px !important;
   }
   .textInfoCard {
-    font-size: 14px !important;
+    font-size: 20px !important;
+  }
+  #barChartCustom {
+    width: 480px !important;
+    height: 220px  !important;
   }
 
   #spanTextInfoCard {
@@ -427,7 +451,7 @@
   }
   .infoLegend {
     padding: 22px 15px 0px 30px !important;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .infoLegendPieChart {
   
@@ -443,8 +467,54 @@
     font-weight:600;
     color: #232A38;
   }
-
+  #pieChartCard {
+    height: 585px !important;
+    width: 430px !important;
+  }
 }
 
+@media screen and (min-width:2560px) {
 
+  #colReportDatosGenerales, #colReportClientExperience, #colReportOrderProcessing, #colReportOrderFulfillment {
+    width:2400px !important;
+  }
+
+  #textNameTable {
+    font-size: 30px !important;
+  }  
+
+  .titlesInfoCard {
+    font-size: 30px !important;
+    width:330px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 30px !important;
+    width: 380px !important;
+  }
+
+  .textInfoCard {
+    font-size: 30px !important;
+  }
+
+  #pieChartCard {
+    height: 853px !important;
+  }
+  #barChartCustom {
+    width: 955px !important;
+    height: 524px  !important;
+  }
+  .infoLegend {
+    padding: 22px 15px 0px 30px !important;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .infoLegendPieChart {
+  
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    padding: 0em 1em 1em 0em;
+  
+  }
+}
 
