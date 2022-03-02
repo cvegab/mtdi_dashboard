@@ -1570,8 +1570,6 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               pointHoverBorderWidth: 5,
               type: "line",
               order: 0,
-              type: "line",
-              order: 0,
               color: "#9f9f9f",
             },
           ],
@@ -3163,13 +3161,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
         {!pageFullyLoaded && <div>
           <Row>
 
-           <Col id="ColMixedChart" lg="8" md="12" sm="12" >
+           <Col id="ColMixedChart" lg="7" md="12" sm="12" >
               <Card 
               className="car-chart" 
-              style={{ height: "96%"}}
+              style={{ height: "95%"}}
               >
                 <CardHeader>
-                  <CardTitle>
+                  <CardTitle id="textNameTable">
                     <strong>Resumen general de órdenes y ventas</strong>
                   </CardTitle>
                    <p className="card-category"> </p>
@@ -3177,9 +3175,11 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar data={mixedChartData} 
-                  options={mixedChartData.options}
+                  <Bar 
                   
+                  data={mixedChartData} 
+                  options={mixedChartData.options}
+                  style={{width: "400px",height:"300px"}}
                    />
                 </CardBody>
                 <br></br>
@@ -3188,7 +3188,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               </Col>
 
 
-              <Col id="ColPieChart" lg="4" md="12" sm="12">
+              <Col id="ColPieChart" lg="5" md="12" sm="12">
                 <Card id="pieChartCard">
                   <CardHeader>
                     <CardTitle id="textNameTable">
@@ -3199,10 +3199,10 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   // style={{ height: "342px" }}
                   >
                     <Pie
+                      id="barChartCustom"
                       data={pieChartData}
                       options={chartExample11.options}
-                      width={456}
-                      height={190}
+                      style={{width: "300px"}}
                     />
                   </CardBody>
                   <CardFooter>
