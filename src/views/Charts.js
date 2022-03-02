@@ -1316,18 +1316,22 @@ if(deleteChannelArray.includes('Exito')){
           let mercadoSalesArray = mercadoSales.map((item) => {
             return item.total;
           });
-          console.log(mercadoSalesArray);
-          let mercadoOrders = mercadoSales.map((item) => {
-            return item.orders_qty;
-          });
-          let totalMercadoOrders = mercadoOrders.map((item) => {
-            return item.orders_qty;
-          });
-
           let totalmercadoSales = mercadoSalesArray.reduce(
             (partialSum, a) => partialSum + a,
             0
           );
+          console.log(mercadoSalesArray);
+          let mercadoOrderQuantity = mercadoSales.map((item) => {
+            return item.orders_qty;
+          });
+          // let totalMercadoOrders =  mercadoOrderQuantity.map((item) => {
+          //   return item.orders_qty;
+          // });
+          let totalMercadoOrders =mercadoOrderQuantity.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+         
           if(ChannelSelectedForDelete !== undefined){
             if(ChannelSelectedForDelete.channel === 'MercadoLibre')
             totalMercadoOrders='0';
