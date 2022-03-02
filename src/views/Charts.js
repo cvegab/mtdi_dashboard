@@ -44,6 +44,7 @@ import {
   chartExample1,
   chartExample4,
   chartExample5,
+  chartExample6,
   chartExample9,
   chartExample10,
   chartExample100,
@@ -155,21 +156,7 @@ const barChartData = {
     },
   ],
 };
-// let options = {
-//   scales: {
-//     x:{
-// stacked:false,
-//     },
-//       y: {
-//           max: 50000000,
-//           min: 0,
-//           position: 'left',
-//           ticks: {
-//               stepSize: 10000000
-//           }
-//       }
-//   }
-// };
+
 let options12 = {
   scales: {
     yAxes: [
@@ -1188,8 +1175,37 @@ ExitoStackedSalesArray.push(totalMonthlySales);
         setwooCommerceOrders(totalwooCommerceOrders);
         console.log(channels);
         console.log(cR);
+
+        // let imoji = new Image(15, 15);
+        // imoji.src = "https://picsum.photos/200/200";
+        // let imoji = iconCP1;
+        // const labels1 = [ "Vtex", "Linio","Ripley"];
+
+
+        // TESTEANDO !! // 
+        
+        // const IMAGES = [
+        //   'https://i.ibb.co/b2Z5Myr/logo-vtex.png',
+        //   'https://i.ibb.co/JB4XQsf/logo-woocommerce.png',
+        //   'https://i.ibb.co/TBth2WC/logo-exito.png'
+        // ]
+
+        // const imagesMixedChart = () => {
+        //   return (
+        //     <div> <imageListChart source={IMAGES} /> </div>
+        //   )
+        // }
+
+    
+
         let MIXED = {
-          labels: channels,
+          // labels: channels,
+          
+          labels: ["Vtex", "Linio", "Mercadolibre", "Exito", "Ripley", "Shopify", "Paris", "Magento", "WooCommerce", "Chambas", "ListaTienda"],
+          // labels : "labels",
+         
+   
+          
           datasets: [
             {
               label: "Ventas",
@@ -1208,7 +1224,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                 listaTienda,
               ],
               backgroundColor: "#344FD5",
-              
+              barThickness: 25,
               borderRadius:5,
               order: 1,
             },
@@ -1216,6 +1232,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             {
               label: "Órdenes",
               yAxisID: "Ordenes",
+              
               data: [
                 vtexOrders,
                 linioOrders,
@@ -1228,26 +1245,84 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                 wooCommerceOrders,
                 chambasOrders,
                 listaTiendaOrders,
-              ],
+              ],      
               backgroundColor: "#06CBC1",
               borderColor: "#06CBC1",
               fill: false,
-              pointHoverRadius: 20,
+              pointHoverRadius: 10,
               pointHoverBorderWidth: 5,
               type: "line",
               order: 0,
+              color: "#9f9f9f",
             },
-          ],
-           options: {
-      
-             plugins: {
-               legend: {
-                 display: false,
+          ],   
+          options: {
+            responsive: true,
+            // maintainAspectRatio: false,
+            aspectRatio: 2,
+            plugins: {
+              legend: {
+                display: false, 
+              },    
+             
+            },  
+            scales: {
+              grid: {
+                drawBorder: false,
+                display:false,
+                zeroLineColor: "transparent",
+              },
+              y: {
+                display: true,
+                position: "right",          
+                ticks: {
+                  color: "#9f9f9f",
+                  beginAtZero: true,
+                  maxTicksLimit: 5,
+                  callback: function(data) {
+                    let number  = data;
+                           let totalValueFormatted = new Intl.NumberFormat("es-CL",{
+                             style:'currency',
+                            currency:'CLP'
+                           }).format(number);
+                             return totalValueFormatted
+                  }
+                  // padding: 100,
+                  
+                },
+                grid: {
+                  zeroLineColor: "transparent",
+                  display: false,
+                  drawBorder: false,
+                  color: "#EBEBEBf",
+                  // borderDash: [8, 6],
+                  lineWidth: 0,
+                },
+                
+              },
+              
+              
+              x: {
+                
+                display: true,
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  padding: 20,
+                  color: "#9f9f9f",
+              //  color:"blue",
+          
+                },
+              },
+            },
           },
+       };
+  
+
+
         
-            },
-          },
-        };
     
         setmixedChartData(MIXED);
       
@@ -1272,7 +1347,6 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               pointHoverRadius: 0,
               backgroundColor: [
                 "#F10096",
-
                 "#F29A32",
                 "yellow",
                 "#E4C41B",
@@ -1425,6 +1499,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               stack: "2",
               borderRadius:6,
               data: ripleyMonthlyArray,
+              barThickness: 30,
             },
             {
               label: "ListaTienda",
@@ -1432,6 +1507,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: ListaMonthlyArray,
             },
             {
@@ -1440,6 +1516,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
+              barThickness: 30,
               data: MagentoMonthlyArray,
             },
             {
@@ -1448,6 +1525,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: ShopifyMonthlyArray,
             },
             {
@@ -1456,6 +1534,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: MercadoArray,
             },
             {
@@ -1464,6 +1543,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: ChambasMonthlyArray,
             },
             {
@@ -1472,6 +1552,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: orderQuantityArraY
             },
             {
@@ -1480,6 +1561,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data:  vtexMonthlyArray,
             },
             {
@@ -1487,6 +1569,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               backgroundColor: "purple",
               borderRadius: "20px",
               borderRadius:6,
+              barThickness: 30,
               stack: "2",
               data: WooCommerceMonthlyArray,
             },
@@ -1496,6 +1579,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
+              barThickness: 30,
               data: ParisMonthlyArray,
             },
             {
@@ -1504,6 +1588,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
+              barThickness: 30,
               data: ExitoMonthlyArray,
             },
           ],
@@ -1511,14 +1596,23 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             plugins: {
               legend: {
                 display: false,
-      },
+          },
             },
            },
+           scales: {
+            grid: {
+              drawBorder: false,
+              display:false,
+            },
+            }
         };
        
+        // INGRESOS POR CANAL DE VENTA DATA 
+
         setstackedChartData(MONTLY_ORDER_GRAPH);
         let MONTLY_SALES_GRAPH = {
           labels:  stackedDateLabel,
+          
           datasets: [
             {
               label: "Ripley",
@@ -1526,6 +1620,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: ripleyStackedSalesArray,
             },
             {
@@ -1534,6 +1629,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: ListaStackedSalesArray,
             },
             {
@@ -1542,6 +1638,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
+              barThickness: 30,
               data: magentoStackedSalesArray,
             },
             {
@@ -1550,6 +1647,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: shopifyStackedSalesArray,
             },
             {
@@ -1558,6 +1656,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: MercadoStackedSalesArray,
             },
             {
@@ -1566,6 +1665,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: ChambasStackedSalesArray,
             },
             {
@@ -1574,6 +1674,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: linioStackedSalesArray
             },
             {
@@ -1582,6 +1683,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               stack: "2",
               borderRadius:6,
+              barThickness: 30,
               data: vtexStackedSalesArray,
             },
             {
@@ -1590,6 +1692,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               borderRadius: "20px",
               borderRadius:6,
               stack: "2",
+              barThickness: 30,
               data: WooCommerceStackedSalesArray,
             },
             {
@@ -1597,6 +1700,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               backgroundColor: "#00B6CB",
               borderRadius: "20px",
               borderRadius:6,
+              barThickness: 30,
               stack: "2",
               data: ParisStackedSalesArray,
             },
@@ -1605,10 +1709,25 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               backgroundColor: "#E4C41B",
               borderRadius: "20px",
               borderRadius:6,
+              barThickness: 30,
               stack: "2",
               data: ExitoStackedSalesArray,
             },
           ],
+        
+        options: {
+         plugins: {
+           legend: {
+             display: false,
+       },
+         },
+        },
+        scales: {
+         grid: {
+           drawBorder: false,
+           display:false,
+         },
+         }
         };
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
         setisLoading(false);
@@ -1698,6 +1817,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
   const setMixedChart = () => {
     setmixedChartData({
       labels: channels,
+
+
       datasets: [
         {
           type: "line",
@@ -1714,7 +1835,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           data: [78, 123, 45, 67, 12],
           borderColor: "#344FD5",
           borderRadius: 5,
-          borderWidth: 2,
+          borderWidth: 1,
         },
       ],
       
@@ -1807,7 +1928,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             Dashboard: Vista Administrador
           </h5>
           <p
-            classname="textNameTable"
+            id="textNameTable"
             style={{
               color: "black",
               width: "450px",
@@ -2137,7 +2258,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2297,7 +2418,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2423,7 +2544,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2543,7 +2664,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2679,11 +2800,14 @@ ExitoStackedSalesArray.push(totalMonthlySales);
           {/* GRAPHS */}
           <Row>
 
-           <Col id="ColMixedChart" lg="6" md="12" sm="12" >
-              <Card className="car-chart" style={{ height: "97%"}}>
+           <Col id="ColMixedChart" lg="8" md="12" sm="12" >
+              <Card 
+              className="car-chart" 
+              style={{ height: "96%"}}
+              >
                 <CardHeader>
-                  <CardTitle>
-                    <strong>Resumen general de venta y órdenes</strong>
+                  <CardTitle id="textNameTable">
+                    <strong>Resumen general de órdenes y venta</strong>
                   </CardTitle>  
                    <p className="card-category"> </p> 
                  </CardHeader>
@@ -2691,7 +2815,8 @@ ExitoStackedSalesArray.push(totalMonthlySales);
                   <br></br>
                   <br></br>
                   <Bar data={mixedChartData} 
-                  options={chartExample13.options}
+                  options={mixedChartData.options}
+                  
                    />
                 </CardBody>
                 <br></br>
@@ -2700,14 +2825,16 @@ ExitoStackedSalesArray.push(totalMonthlySales);
               </Col>
 
 
-              <Col id="ColPieChart" lg="6" md="12" sm="12">
-                <Card>
+              <Col id="ColPieChart" lg="4" md="12" sm="12">
+                <Card id="pieChartCard">
                   <CardHeader>
-                    <CardTitle>
+                    <CardTitle id="textNameTable">
                       <strong>Participación canal de venta</strong>
                     </CardTitle>
                   </CardHeader>
-                  <CardBody style={{ height: "342px" }}>
+                  <CardBody 
+                  // style={{ height: "342px" }}
+                  >
                     <Pie
                       data={pieChartData}
                       options={chartExample11.options}
@@ -2995,13 +3122,13 @@ ExitoStackedSalesArray.push(totalMonthlySales);
             <Col md="6">
               
                 <Card className="card-chart">
-                  <CardHeader>
+                  <CardHeader id="textNameTable">
                     <strong>Órdenes por canal de venta</strong>
                   </CardHeader>
                   <br></br>
                   <CardBody>
                     <Bar data={stackedChartData} 
-                    options={chartExample5.options}
+                    options={chartExample6.options}
                      />
                   </CardBody>
                     <CardFooter>
@@ -3282,7 +3409,7 @@ ExitoStackedSalesArray.push(totalMonthlySales);
 
              <Col md="6">
                 <Card className="card-chart">
-                  <CardHeader>
+                  <CardHeader id="textNameTable">
                     <strong>Ingresos por canal de venta</strong>
                   </CardHeader>
                   <br></br>
