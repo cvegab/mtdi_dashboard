@@ -4,6 +4,8 @@
 
 }
 
+
+
 #accordionFilterBttn {
   background-color: #f4f3ef !important;
 }
@@ -324,6 +326,11 @@
   .titlesInfoCard {
     font-size: 12px !important;
   }
+
+  #textNameTable {
+    font-size: 18px !important;
+  }
+
   .textInfoCard {
     font-size: 14px !important;
   }
@@ -337,17 +344,16 @@
   }
 
 
-
 }
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width:1024px) and (max-width:1439px) {
 
 
   #colReportDatosGenerales,
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1060px !important;
+    width: 1000px !important;
 
   }
 
@@ -377,7 +383,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    padding: 0em 1em 1em 1em;
+    padding: 0em 1em 1em 0em;
   
   }
   .infoLegend {
@@ -406,15 +412,15 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1200px !important;
+    width: 1210px !important;
     height: 190px !important;
   }
 
   .titlesInfoCard {
-    font-size: 16px !important;
+    font-size: 22px !important;
   }
   .textInfoCard {
-    font-size: 14px !important;
+    font-size: 20px !important;
   }
 
   #spanTextInfoCard {
@@ -443,8 +449,33 @@
     font-weight:600;
     color: #232A38;
   }
-
+  #pieChartCard {
+    height: 585px !important;
+  }
 }
 
+@media screen and (min-width:2560px) {
 
+  #colReportDatosGenerales, #colReportClientExperience, #colReportOrderProcessing, #colReportOrderFulfillment {
+    width:2400px !important;
+  }
+
+  #textNameTable {
+    font-size: 30px !important;
+  }  
+
+  .titlesInfoCard {
+    font-size: 30px !important;
+    width:330px !important;
+  }
+
+  #textListoParaDespacho {
+    font-size: 30px !important;
+    width: 380px !important;
+  }
+
+  .textInfoCard {
+    font-size: 30px !important;
+  }
+}
 
