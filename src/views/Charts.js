@@ -3164,7 +3164,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
            <Col id="ColMixedChart" lg="7" md="12" sm="12" >
               <Card 
               className="car-chart" 
-              style={{ height: "95%"}}
+              style={{ height: "94%"}}
               >
                 <CardHeader>
                   <CardTitle id="textNameTable">
