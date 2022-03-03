@@ -517,6 +517,9 @@ const chartExample5 = {
           zeroLineColor: "transparent",
         },
         ticks: {
+          font: {
+            size: 10,
+          },
           padding: 1,
           color: "#9f9f9f",
      
@@ -585,6 +588,9 @@ const chartExample6 = {
           zeroLineColor: "transparent",
         },
         ticks: {
+          font: {
+            size: 10,
+          },
           padding: 0,
           color: "#9f9f9f",
         },
@@ -1050,6 +1056,9 @@ const chartExample11 = {
           zeroLineColor: "transparent",
         },
         ticks: {
+          font: {
+            size: 10,
+          },
           display: false,
         },
       },
