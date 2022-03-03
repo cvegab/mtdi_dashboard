@@ -48,10 +48,10 @@ import {
   chartExample6,
   chartExample9,
   chartExample10,
-  chartExample100,
   chartExample11,
   chartExample12,
   chartExample13,
+  chartExample100,
   data1,
 } from "variables/charts.js";
 import SplashScreen from "components/UI/splash-screen";
@@ -183,7 +183,6 @@ const barChartOptions = {
   plugins: {
     legend: {
       display: false,
-
     },
   },
   scales: {
@@ -1619,19 +1618,20 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   color: "#EBEBEBf",
                   // borderDash: [8, 6],
                   lineWidth: 0,
-                },
-                
+                },               
               },
               
               
-              x: {
-                
+              x: {              
                 display: true,
                 grid: {
                   display: false,
                   drawBorder: false,
                 },
                 ticks: {
+                  font: {
+                    size: 10,
+                  },
                   padding: 20,
                   color: "#9f9f9f",
               //  color:"blue",
@@ -3167,7 +3167,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
            <Col id="ColMixedChart" lg="7" md="12" sm="12" >
               <Card 
               className="car-chart" 
-              style={{ height: "94%"}}
+              id="mixedChartCustom"
               >
                 <CardHeader>
                   <CardTitle id="textNameTable">
