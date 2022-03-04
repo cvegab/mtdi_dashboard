@@ -41,19 +41,19 @@ import {
 } from "reactstrap";
 
 // core components
-import {
-  chartExample1,
-  chartExample4,
-  chartExample5,
-  chartExample6,
-  chartExample9,
-  chartExample10,
-  chartExample11,
-  chartExample12,
-  chartExample13,
-  chartExample100,
-  data1,
-} from "variables/charts.js";
+// import {
+//   chartExample1,
+//   chartExample4,
+//   chartExample5,
+//   chartExample6,
+//   chartExample9,
+//   chartExample10,
+//   chartExample11,
+//   chartExample12,
+//   chartExample13,
+//   chartExample100,
+//   data1,
+// } from "variables/charts.js";
 
 import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
@@ -3495,7 +3495,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   <br></br>
                   <CardBody>
                     <Bar data={stackedChartData} 
-                    options={chartExample6.options}
+                    // options={chartExample6.options}
                      />
                   </CardBody>
                     <CardFooter>
