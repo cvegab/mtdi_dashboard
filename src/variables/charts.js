@@ -1,6 +1,14 @@
-const { blue } = require("@material-ui/core/colors");
-
-
+/*!
+=========================================================
+* Paper Dashboard PRO React - v1.3.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/paper-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Coded by Creative Tim
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+// default color for the charts
 let chartColor = "#FFFFFF";
 // ##############################
 // // // Function that converts a hex color number to a RGB color number
@@ -384,88 +392,12 @@ const chartExample4 = {
   },
 };
 
-
-
-const chartExample5 = {
-  data: {
-    labels: [1, 2],
-    barThickness: 20,
-    datasets: [
-      {
-        label: "Emails",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        backgroundColor: ["#4acccd", "#f4f3ef"],
-        borderWidth: 0,
-        // barPercentage: 1.6,
-        data: [60, 40],
-      },
-    ],
-  },
-    options: {
-    plugins: {
-      legend: {
-        display: false,
-      },
-      
-    },
-    scales: {
-      y: {
-        gridLines: { drawBorder: false, lineWidth: 0 },
-        ticks: {
-          color: "#9f9f9f", 
-          // beginAtZero: true,
-          maxTicksLimit:6,
-          fontSize: 40,
-          // padding: 20,
-          callback: function(data) {
-            let number  = data;
-                   let totalValueFormatted = new Intl.NumberFormat("es-CL",{
-                     style:'currency',
-                    currency:'CLP'
-                   }).format(number);
-                     return totalValueFormatted
-          }
-      
-        },
-         },
-        grid: {
-          zeroLineColor: "transparent",
-          display: false,
-          drawBorder: false,
-          color: "#9f9f9f",
-        },
-      
-      x: {
-        grid: {
-          display: false,
-          drawBorder: false,
-          zeroLineColor: "transparent",
-        },
-        ticks: {
-          font: {
-            size: 10,
-          },
-          padding: 1,
-          color: "#9f9f9f",
-     
-        },
-      },
-    },
-      
-    
-},
-};
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-
-
-
-const chartExample6 = {
+const chartExample5 = {
   data: {
     labels: [1, 2],
-    barThickness: 20,
     datasets: [
       {
         label: "Emails",
@@ -473,7 +405,7 @@ const chartExample6 = {
         pointHoverRadius: 0,
         backgroundColor: ["#4acccd", "#f4f3ef"],
         borderWidth: 0,
-        // barPercentage: 1.6,
+        barPercentage: 1.6,
         data: [60, 40],
       },
     ],
@@ -485,48 +417,119 @@ const chartExample6 = {
         
       },
 
-      
+      tooltips: {
+        tooltipFillColor: "rgba(0,0,0,0.5)",
+        tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipFontSize: 20,
+        tooltipFontStyle: "normal",
+        tooltipFontColor: "#fff",
+        tooltipTitleFontFamily:
+          "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        tooltipTitleFontSize: 14,
+        tooltipTitleFontStyle: "bold",
+        tooltipTitleFontColor: "#fff",
+        tooltipYPadding: 6,
+        tooltipXPadding: 6,
+        tooltipCaretSize: 8,
+        tooltipCornerRadius: 6,
+        tooltipXOffset: 10,
+      },
     },
- 
     scales: {
       y: {
-        gridLines: { drawBorder: false, lineWidth: 0 },
         ticks: {
-          color: "#9f9f9f", 
-          // beginAtZero: true,
-          maxTicksLimit:6,
-          fontSize: 100,
-          // padding: 20,
-      
+          color: "#9f9f9f",
+          beginAtZero: true,
+          maxTicksLimit: 8,
+          padding: 20,
         },
-         },
         grid: {
           zeroLineColor: "transparent",
-          display: false,
+          display: true,
           drawBorder: false,
           color: "#9f9f9f",
         },
-      
+      },
       x: {
         grid: {
           display: false,
           drawBorder: false,
-          zeroLineColor: "transparent",
         },
         ticks: {
-          font: {
-            size: 10,
-          },
-          padding: 0,
+          padding: 20,
           color: "#9f9f9f",
         },
       },
-      },
-      
-    
-},
+    },
+  },
 };
 
+
+// #########################################
+// // // used inside src/views/Dashboard.js
+// #########################################
+const chartExample6 = {
+  data: {
+    labels: [1, 2],
+    datasets: [
+      {
+        label: "Emails",
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        backgroundColor: ["#fcc468", "#f4f3ef"],
+        borderWidth: 0,
+        barPercentage: 1.6,
+        data: [34, 66],
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltips: {
+        enabled: false,
+      },
+      title: {
+        display: true,
+        text: "34%",
+        position: "bottom",
+        color: "#66615c",
+        font: {
+          weight: 400,
+          size: 30,
+        },
+      },
+    },
+    maintainAspectRatio: false,
+    cutout: "90%",
+    scales: {
+      y: {
+        ticks: {
+          display: false,
+        },
+        grid: {
+          drawBorder: false,
+          display: false,
+        },
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    },
+  },
+};
+
+// #########################################
+// // // used inside src/views/Dashboard.js
+// #########################################
 const chartExample7 = {
   data: {
     labels: [1, 2],
@@ -936,7 +939,20 @@ const chartExample100 = {
 // #########################################
 
 const chartExample11 = {
-  
+  // data: {
+  //   labels: [1, 2, 3,4],
+  //   datasets: [
+  //     {
+  //       label: "Emails",
+  //       pointRadius: 0,
+  //       pointHoverRadius: 0,
+  //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
+  //       borderWidth: 0,
+  //       barPercentage: 1.6,
+  //       data: [542, 480, 430,211],
+  //     },
+  //   ],
+  // },
   options: {
     plugins: {
       legend: {
@@ -952,9 +968,6 @@ const chartExample11 = {
       y: {
         ticks: {
           display: false,
-          callback: function(value) {
-            return '$' + value;
-        }
         },
         grid: {
           drawBorder: false,
@@ -969,9 +982,6 @@ const chartExample11 = {
           zeroLineColor: "transparent",
         },
         ticks: {
-          font: {
-            size: 10,
-          },
           display: false,
         },
       },
@@ -1075,95 +1085,78 @@ const data1 = {
   }
 };
 
-// let imagesArray = [Image1];
-const labels = ['Red Vans', 'Blue Vans', 'Green Vans', 'Gray Vans'];
-const images = ['https://i.stack.imgur.com/2RAv2.png', 'https://i.stack.imgur.com/Tq5DA.png', 'https://i.stack.imgur.com/3KRtW.png', 'https://i.stack.imgur.com/iLyVi.png'];
-const values = [48, 56, 33, 44];
-
 const chartExample13 = {
-  
+  // data: {
+  //   labels: [
+  //     0,
+  //     1,
+  //     2,
+  //     3,
+  //     4,
+  //     5,
+  //     6,
+  //     7,
+  //     8,
+  //     9,
+  //     10,
+  //     11,
+  //     12,
+  //     13,
+  //     14,
+  //     15,
+  //     16,
+  //     17,
+  //     18,
+  //     19,
+  //     20,
+  //   ],
    
   options: {
-    responsive: true,
-    // maintainAspectRatio: false,
-    aspectRatio: 2,
-    // plugins: {
-    //   legend: {
-    //     display: false, 
-    //   },
+    plugins: {
+      legend: {
+        display: false, 
+      },
 
-    // },
-    plugins: [{
-      afterDraw: chart => {      
-        var ctx = chart.chart.ctx; 
-        var xAxis = chart.scales['x-axis-0'];
-        var yAxis = chart.scales['y-axis-0'];
-        xAxis.ticks.forEach((value, index) => {  
-          var x = xAxis.getPixelForTick(index);      
-          var image = new Image();
-          image.src = images[index],
-          ctx.drawImage(image, x - 12, yAxis.bottom + 10);
-        });      
-      }
-    }],
-    scales: {
-      
-        grid: {
-          drawBorder: false,
-          display: false,
-          zeroLineColor: "transparent",
-        }
-      
     },
+
+    // scales: {
+      
+    //     grid: {
+    //       drawBorder: false,
+    //       zeroLineColor: "transparent",
+    //     }
+      
+    // }
     
-    scales: {
-      grid: {
-        drawBorder: false,
-        display:false,
-      },
-      y: {
-        display: true,
-        position: "right",
-        
-        ticks: {
-          color: "#9f9f9f",
-          beginAtZero: true,
-          maxTicksLimit: 5,
-          // padding: 100,
+    // scales: {
+    //   y: {
+    //     ticks: {
+    //       color: "#9f9f9f",
+    //       beginAtZero: true,
+    //       maxTicksLimit: 5,
+    //       // padding: 100,
           
-        },
-        grid: {
-          zeroLineColor: "transparent",
-          display: false,
-          drawBorder: false,
-          color: "#EBEBEBf",
-          // borderDash: [8, 6],
-          lineWidth: 0,
-        },
+    //     },
+    //     grid: {
+    //       zeroLineColor: "transparent",
+    //       display: true,
+    //       drawBorder: false,
+    //       color: "#9f9f9f",
+    //     },
+    //   },
+    //   x: {
+    //     grid: {
+    //       display: false,
+    //       drawBorder: false,
+    //     },
+    //     ticks: {
+    //       padding: 20,
+    //       color: "#9f9f9f",
         
-      },
-      
-      
-      x: {
-        
-        display: true,
-        grid: {
-          display: false,
-          drawBorder: false,
-        },
-        ticks: {
-          padding: 20,
-          color: "#9f9f9f",
-       
-        // callback: function(index){
-        //   return imagesArray;
-        
-        // }
-        },
-      },
-    },
+    //     },
+    //   },
+    // },
   },
-  
 };
 
 module.exports = {
@@ -1191,9 +1184,7 @@ module.exports = {
   chartExample11,
   // used for Charts view
   chartExample12,
-  // used for Charts view
   chartExample13,
-  // used for Charts view
   chartExample100,
   data1,
   
