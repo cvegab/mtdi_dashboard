@@ -41,19 +41,21 @@ import {
 } from "reactstrap";
 
 // core components
-import {
-  chartExample1,
-  chartExample4,
-  chartExample5,
-  chartExample6,
-  chartExample9,
-  chartExample10,
-  chartExample11,
-  chartExample12,
-  chartExample13,
-  chartExample100,
-  data1,
-} from "variables/charts.js";
+// import {
+//   chartExample1,
+//   chartExample4,
+//   chartExample5,
+//   chartExample6,
+//   chartExample9,
+//   chartExample10,
+//   chartExample11,
+//   chartExample12,
+//   chartExample13,
+//   chartExample100,
+//   data1,
+// } from "variables/charts.js";
+
+let chartExample = require ("variables/charts.js")
 import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
 const line = "";
@@ -3204,7 +3206,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                     <Pie
                       id="barChartCustom"
                       data={pieChartData}
-                      options={chartExample11.options}
+                      options={chartExample.chartExample11.options}
                       style={{width: "300px"}}
                     />
                   </CardBody>
@@ -3494,7 +3496,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   <br></br>
                   <CardBody>
                     <Bar data={stackedChartData} 
-                    options={chartExample6.options}
+                    options={chartExample.chartExample6.options}
                      />
                   </CardBody>
                     <CardFooter>
@@ -3691,7 +3693,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   <CardBody>
                     <Bar
                       data={stackedSalesGraph}
-                      options={chartExample5.options}
+                      options={chartExample.chartExample5.options}
                       //  options={barChartOptions}
                     />
                   </CardBody>
