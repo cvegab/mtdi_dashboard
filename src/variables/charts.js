@@ -384,78 +384,7 @@ const chartExample4 = {
   },
 };
 
-// #########################################
-// // // used inside src/views/Dashboard.js
-// #########################################
-// const chartExample5 = {
-//   data: {
-//     labels: [1, 2],
-//     datasets: [
-//       {
-//         label: "Emails",
-//         pointRadius: 0,
-//         pointHoverRadius: 0,
-//         backgroundColor: ["#4acccd", "#f4f3ef"],
-//         borderWidth: 0,
-//         // barPercentage: 1.6,
-//         data: [60, 40],
-//       },
-//     ],
-//   },
-//     options: {
-//     plugins: {
-//       legend: {
-//         display: false,
-        
-//       },
 
-     
-//       },
-    
-//     scales: {
-//       yAxes: {
-        
-//         ticks: {
-//           color: "#9f9f9f",
-//           // beginAtZero: true,
-//           maxTicksLimit: 6,
-//           borderWidth: 0,
-//         barPercentage: 0,
-//           // padding: 20,
-     
-
-//           // callback: function(data) {
-//           //   let number  = data;
-//           //           let totalValueFormatted = new Intl.NumberFormat("es-CL",{
-//           //             style:'currency',
-//           //             currency:'CLP'
-//           //           }).format(number);
-//           //            return totalValueFormatted
-//           // }
-//         },
-//          },
-//         grid: {
-//           zeroLineColor: "transparent",
-//           display: true,
-//           drawBorder: false,
-//           color: "#9f9f9f",
-//         },
-      
-//       xAxes: {
-//         grid: {
-//           display: false,
-//           drawBorder: false,
-//         },
-//         ticks: {
-//           padding: 20,
-//           // color: "#9f9f9f",
-          
-//           color: "blue",
-//         },
-//       },
-//     },
-//     },
-// };
 
 const chartExample5 = {
   data: {
@@ -478,11 +407,8 @@ const chartExample5 = {
       legend: {
         display: false,
       },
-    
-
       
     },
- 
     scales: {
       y: {
         gridLines: { drawBorder: false, lineWidth: 0 },
@@ -1010,20 +936,7 @@ const chartExample100 = {
 // #########################################
 
 const chartExample11 = {
-  // data: {
-  //   labels: [1, 2, 3,4],
-  //   datasets: [
-  //     {
-  //       label: "Emails",
-  //       pointRadius: 0,
-  //       pointHoverRadius: 0,
-  //       backgroundColor: ["#344FD5", "#06CBC1", "#FFD88C",'#FF6059'],
-  //       borderWidth: 0,
-  //       barPercentage: 1.6,
-  //       data: [542, 480, 430,211],
-  //     },
-  //   ],
-  // },
+  
   options: {
     plugins: {
       legend: {
@@ -1039,7 +952,7 @@ const chartExample11 = {
       y: {
         ticks: {
           display: false,
-          callback: function(value, index, ticks) {
+          callback: function(value) {
             return '$' + value;
         }
         },
@@ -1278,7 +1191,9 @@ module.exports = {
   chartExample11,
   // used for Charts view
   chartExample12,
+  // used for Charts view
   chartExample13,
+  // used for Charts view
   chartExample100,
   data1,
   
