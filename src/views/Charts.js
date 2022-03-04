@@ -1318,6 +1318,7 @@ if(deleteChannelArray.includes('Exito')){
             (partialSum, a) => partialSum + a,
             0
           );
+         
           if(ChannelSelectedForDelete !== undefined){
             if(ChannelSelectedForDelete.channel === 'MercadoLibre')
             totalMercadoOrders='0';
