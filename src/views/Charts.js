@@ -687,7 +687,7 @@ setchambasStackedOrdersState(0);
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-
+console.log(obj);
   let res1 = [];
 
 console.log(ChannelSelectedForDelete);
@@ -2127,7 +2127,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
       .then((result) => {
 
         var obj = JSON.parse(result);
-
+        console.log(obj);
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
