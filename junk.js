@@ -3611,6 +3611,35 @@ const lin = obj.resume.stackedOrderGraph.filter(item=>{
   return item.Linio;
 });
 console.log(lin[0].Linio);
+
+const fetchResumenGraphDetails= ()=>{
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+
+    fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        var obj = JSON.parse(result);
+        console.log(obj.stackedOrderQtyGraphTotal);
+        const lin = obj.resume.stackedOrderQtyGraphTotal.filter(item=>{
+            return item.Linio;
+          });
+          console.log(lin[0].Linio);
+}).catch((error) => console.log("error", error)); 
+}
+
 /*!
 
 =========================================================
