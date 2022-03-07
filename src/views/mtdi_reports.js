@@ -458,9 +458,7 @@ function MtdiReports() {
     
       useEffect(() => {
         fetchGeneralData();
-        fetchFilterData();
-    
-     
+        fetchFilterData();   
        getDateLabels();
     
       }, []);
@@ -477,11 +475,15 @@ function MtdiReports() {
       }, [
         channels,
         channelId,
-        cR,
-       
+        cR,   
       ]);
+    useEffect(() => {
+   fetchStackedGraphForOrders();
+    }, [])
     
-    
+    const fetchStackedGraphForOrders = ()=>{
+        
+    }
     
     
     useEffect(() => {
