@@ -1698,6 +1698,40 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               ],
             },
           ],
+          options: {
+            plugins: {
+              legend: {
+                display: false,
+              },
+        
+              tooltips: {
+                enabled: false,
+              },
+            },
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  drawBorder: false,
+                  zeroLineColor: "transparent",
+                  color: "rgba(255,255,255,0.05)",
+                },
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  color: "rgba(255,255,255,0.1)",
+                  zeroLineColor: "transparent",
+                },
+                ticks: {
+                  display: false,
+                },
+              },
+            },
+          },
         };
         setpieChartData(PIE);
 
@@ -1920,19 +1954,51 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               barThickness: 30,
             },
           ],
-           options: {
+          options: {
             plugins: {
               legend: {
                 display: false,
-          },
+                
+              },
+        
+              
             },
-           },
-           scales: {
-            grid: {
-              drawBorder: false,
-              display:false,
-            },
-            }
+         
+            scales: {
+              y: {
+                gridLines: { drawBorder: false, lineWidth: 0 },
+                ticks: {
+                  color: "#9f9f9f", 
+                  // beginAtZero: true,
+                  maxTicksLimit:6,
+                  fontSize: 100,
+                  // padding: 20,
+              
+                },
+                 },
+                grid: {
+                  zeroLineColor: "transparent",
+                  display: false,
+                  drawBorder: false,
+                  color: "#9f9f9f",
+                },
+              
+              x: {
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                  zeroLineColor: "transparent",
+                },
+                ticks: {
+                  font: {
+                    size: 10,
+                  },
+                  padding: 0,
+                  color: "#9f9f9f",
+                },
+              },
+              },
+      },        
         };
 
 
@@ -2077,19 +2143,59 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             },
           ],
         
-        options: {
-         plugins: {
-           legend: {
-             display: false,
-       },
-         },
+          options: {
+            plugins: {
+              legend: {
+                display: false,
+              },
+              
+            },
+            scales: {
+              y: {
+                gridLines: { drawBorder: false, lineWidth: 0 },
+                ticks: {
+                  color: "#9f9f9f", 
+                  // beginAtZero: true,
+                  maxTicksLimit:6,
+                  fontSize: 40,
+                  // padding: 20,
+                  callback: function(data) {
+                    let number  = data;
+                           let totalValueFormatted = new Intl.NumberFormat("es-CL",{
+                             style:'currency',
+                            currency:'CLP'
+                           }).format(number);
+                             return totalValueFormatted
+                  }
+              
+                },
+                 },
+                grid: {
+                  zeroLineColor: "transparent",
+                  display: false,
+                  drawBorder: false,
+                  color: "#9f9f9f",
+                },
+              
+              x: {
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                  zeroLineColor: "transparent",
+                },
+                ticks: {
+                  font: {
+                    size: 10,
+                  },
+                  padding: 1,
+                  color: "#9f9f9f",
+             
+                },
+              },
+            },
+              
+            
         },
-        scales: {
-         grid: {
-           drawBorder: false,
-           display:false,
-         },
-         }
         };
         console.log(MONTLY_SALES_GRAPH.datasets[1].label);
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
@@ -3206,7 +3312,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                     <Pie
                       id="barChartCustom"
                       data={pieChartData}
-                      // options={chartExample11.options}
+                      options={pieChartData.options}
                       style={{width: "300px"}}
                     />
                   </CardBody>
@@ -3496,7 +3602,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   <br></br>
                   <CardBody>
                     <Bar data={stackedChartData} 
-                    // options={chartExample6.options}
+                    options={stackedChartData.options}
                      />
                   </CardBody>
                     <CardFooter>
@@ -3514,7 +3620,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Ripley
-                    <p className="card-category">{ripleyOrders} órdenes</p>
+                    <p id="ordersGraphText" className="card-category">{ripleyOrders} órdenes</p>
                     
                         </p>
                         </div>
@@ -3529,7 +3635,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                           }}
                         />
                         &nbsp;ListaTienda
-                        <p className="card-category">{listaTiendaOrders} órdenes</p>
+                        <p id="ordersGraphText" className="card-category">{listaTiendaOrders} órdenes</p>
                       
                       </p>
                     </div>
@@ -3544,7 +3650,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Magento
-                    <p className="card-category">{magentoOrders} órdenes</p>
+                    <p id="ordersGraphText" className="card-category">{magentoOrders} órdenes</p>
                   
                     </p>
                     </div>
@@ -3560,7 +3666,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Shopify
-                    <p className="card-category">{shopifyOrders} órdenes</p>
+                    <p id="ordersGraphText" className="card-category">{shopifyOrders} órdenes</p>
                    
                     </p>
                     </div>
@@ -3575,7 +3681,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Mercadolibre
-                    <p className="card-category">{mercadoLibreOrders} órdenes</p>
+                    <p id="ordersGraphText" className="card-category">{mercadoLibreOrders} órdenes</p>
                 
                     </p>
                     </div>
@@ -3591,7 +3697,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Chambas
-                    <p className="card-category">{chambasOrders} órdenes</p>
+                    <p id="ordersGraphText" className="card-category">{chambasOrders} órdenes</p>
                     
                     </p>
                     </div>
@@ -3607,7 +3713,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                      &nbsp; Linio
-                     <p className="card-category">{linioOrders} órdenes</p>
+                     <p id="ordersGraphText" className="card-category">{linioOrders} órdenes</p>
                   
                     </p>
                     </div>
@@ -3623,7 +3729,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                      &nbsp; Vtex
-                     <p className="card-category">{vtexOrders} órdenes</p>
+                     <p id="ordersGraphText" className="card-category">{vtexOrders} órdenes</p>
                  
                     </p>
                     </div>
@@ -3639,7 +3745,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;WooCommerce
-                      <p className="card-category">{wooCommerceOrders} órdenes</p>
+                      <p id="ordersGraphText" className="card-category">{wooCommerceOrders} órdenes</p>
                  
                     </p>
                     </div>
@@ -3655,7 +3761,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Paris
-                      <p className="card-category">{parisOrders} órdenes</p>
+                      <p id="ordersGraphText" className="card-category">{parisOrders} órdenes</p>
                     
                     </p>
                     </div>
@@ -3671,7 +3777,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Exito
-                      <p className="card-category">{exitoOrders} órdenes</p>
+                      <p id="ordersGraphText" className="card-category">{exitoOrders} órdenes</p>
                    
                     </p>
                     </div>
@@ -3693,7 +3799,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   <CardBody>
                     <Bar
                       data={stackedSalesGraph}
-                      // options={chartExample5.options}
+                      options={stackedSalesGraph.options}
                       //  options={barChartOptions}
                     />
                   </CardBody>
