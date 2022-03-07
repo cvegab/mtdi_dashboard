@@ -98,6 +98,9 @@
   color:#ffff;
 }
 
+#ordersGraphText {
+  text-transform: lowercase !important;
+}
 
 @media screen and (max-width:320px) { 
 
@@ -503,11 +506,11 @@
 
   #pieChartCard {
     height: 870px !important;
-    width: 538px !important;
+    width: 700px !important;
   }
   #barChartCustom {
-    width: 550px !important;
-    height: 460px  !important;
+    width: 600px !important;
+    height: 490px  !important;
   }
   .infoLegend {
     padding: 22px 15px 0px 30px !important;
