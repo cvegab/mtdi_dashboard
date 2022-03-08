@@ -480,7 +480,12 @@ function MtdiReports() {
     useEffect(() => {
    fetchStackedGraphForOrders();
     }, [cR,ChannelSelectedForDelete])
-    
+    useEffect(() => {
+    setStackedGraphForOrders();
+    }, [])
+    const setStackedGraphForOrders = ()=>{
+      
+    }
     const fetchStackedGraphForOrders = ()=>{
         var myHeaders = new Headers();
         myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -513,7 +518,7 @@ function MtdiReports() {
                     return item.Linio;
                 })
                 console.log(linio[0].Linio);
-                setlinioMonthly(linio[0].Linio)
+              setlinioMonthly(linio[0].Linio);
             }
            
          console.log(cR);
