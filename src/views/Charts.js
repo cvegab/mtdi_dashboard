@@ -4084,7 +4084,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
          
           </Row>
        
-         <Row>
+         {/* <Row>
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
                 id="bttnSubmit"
@@ -4138,7 +4138,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 </span>
               </button>
             </div>
-          </Row>
+          </Row> */}
 
         </div>}
         </div>
