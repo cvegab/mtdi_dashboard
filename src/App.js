@@ -85,7 +85,7 @@ const App = () => {
       .catch((error) => console.log("error", error));
   }, []);
   if (userName === undefined && localStorage.getItem("name") === null) {
-    return (window.location.href = "https://dev.instancelatam.com/login");
+    return (window.location.href = "https://www.instancelatam.com/login");
   }
   return (
     <BrowserRouter>
