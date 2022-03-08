@@ -18,6 +18,10 @@ import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import noDataImage from "../assets/img/noDataImageBlue.png";
 import  * as XLSX from "xlsx";
+//buttonImages
+import falabellaLogo from "../assets/img/logos/falabellaLogo.png";
+import rappiLogo from "../assets/img/logos/rappiLogo.png";
+import cornershopLogo from "../assets/img/logos/cornershopLogo.png";
 // import sentEmail from "../../assets/img/emailSent.png";
 // reactstrap components
 import {
@@ -75,7 +79,7 @@ const uploadFile = (e) => {
       const json = XLSX.utils.sheet_to_json(file);
       // console.log(json);
       jsonFather.data = json;
-      console.log(jsonFather);
+      sendOC(jsonFather);
     } else {
       alert('El archivo no corresponde a un archivo Falabella');
     }
@@ -90,7 +94,7 @@ const uploadFile = (e) => {
       const json = XLSX.utils.sheet_to_json(file);
       // console.log(json);
       jsonFather.data = json;
-      console.log(jsonFather);
+      sendOC(jsonFather);
     } else {
       alert('El archivo no corresponde a un archivo Rappi');
     }
@@ -105,9 +109,9 @@ const uploadFile = (e) => {
       const json = XLSX.utils.sheet_to_json(file);
       // console.log(json);
       jsonFather.data = json;
-      console.log(jsonFather);
+      sendOC(jsonFather);
     } else {
-      alert ('El archivo no corresponde a un archivo Corneershop');
+      alert ('El archivo no corresponde a un archivo Cornershop');
     }
   }
 
@@ -123,6 +127,11 @@ const uploadFile = (e) => {
     }
     return false;
 
+  };
+
+  const sendOC = (json) => {
+    console.log(json);
+    // TO DO: Acá se tiene  que enviar el formulario OC
   };
 
 
@@ -152,7 +161,7 @@ const uploadFile = (e) => {
             marginLeft: "1em",
           }}
         >
-          Ingreso OC
+        Ingreso manual OC
         </p>
 
           <div className="card text-center">
@@ -175,24 +184,28 @@ const uploadFile = (e) => {
             <div className="card-footer">
               <Button
                 className="btn btn-primary"
+                style={{backgroundColor: "white"}}
                 onClick={sendFalabellaDataHandler}
                 disabled={bttnEnable}
               >
-                Falabella
+                <img src={falabellaLogo} width="100"/>
+                
               </Button>
               <Button
                 className="btn btn-primary"
+                style={{backgroundColor: "white"}}
                 onClick={sendRappiDataHandler}
                 disabled={bttnEnable}
               >
-                Rappi
+                <img src={rappiLogo} width="60" />
               </Button>
               <Button
                 className="btn btn-primary"
+                style={{backgroundColor: "white"}}
                 onClick={sendCornershopDataHandler}
                 disabled={bttnEnable}
               >
-                Cornershop
+                <img src={cornershopLogo} width="100"/>
               </Button>
               </div>
 
