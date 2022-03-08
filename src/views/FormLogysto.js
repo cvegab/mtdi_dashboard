@@ -17,7 +17,7 @@ import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
 import noDataImage from "../assets/img/noDataImageBlue.png";
-import XLSX from "xlsx";
+import  * as XLSX from "xlsx";
 // import sentEmail from "../../assets/img/emailSent.png";
 // reactstrap components
 import {
@@ -34,6 +34,7 @@ import Modal from "components/UI/Modal";
 
 const Form = (props) => {
   const [file, setFile] = useState({});
+  const [bttnEnable, setbttnEnable] = useState(true);
   const nameInput = useRef("");
   const directionInput = useRef("");
   const instructionInput = useRef("");
@@ -44,6 +45,7 @@ const Form = (props) => {
   const maxheightInput = useRef("");
   const maxlengthInput = useRef("");
   const maxwidthinput = useRef("");
+
   
 const uploadFile = (e) => {
   e.preventDefault();
@@ -52,14 +54,76 @@ const uploadFile = (e) => {
     reader.onload = (e) => {
       const data = e.target.result;
       const workbook = XLSX.read(data, { type: "binary" });
+      console.log(workbook);
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
-      const json = XLSX.utils.sheet_to_json(worksheet);
-      console.log(json);
+      setFile(worksheet);
+      setbttnEnable(false);
+      
     };
     reader.readAsBinaryString(e.target.files[0]);
   };
 };
+
+  const sendFalabellaDataHandler = () => {
+    // console.log(file);
+    if (validateData('Falabella')) {
+      const jsonFather = {
+        "id": 123,
+        "channel": 'Falabella',
+      }
+      const json = XLSX.utils.sheet_to_json(file);
+      // console.log(json);
+      jsonFather.data = json;
+      console.log(jsonFather);
+    } else {
+      alert('El archivo no corresponde a un archivo Falabella');
+    }
+  };
+
+  const sendRappiDataHandler = () => {
+    if (validateData('Rappi')) {
+      const jsonFather = {
+        "id": 123,
+        "channel": 'Rappi',
+      } 
+      const json = XLSX.utils.sheet_to_json(file);
+      // console.log(json);
+      jsonFather.data = json;
+      console.log(jsonFather);
+    } else {
+      alert('El archivo no corresponde a un archivo Rappi');
+    }
+  };
+
+  const sendCornershopDataHandler = () => {
+    if (validateData('Cornershop')) {
+      const jsonFather = {
+        "id":123,
+        "channel": 'Cornershop',
+      }
+      const json = XLSX.utils.sheet_to_json(file);
+      // console.log(json);
+      jsonFather.data = json;
+      console.log(jsonFather);
+    } else {
+      alert ('El archivo no corresponde a un archivo Corneershop');
+    }
+  }
+
+  const validateData = (channel) => {
+    if (channel === 'Falabella' && file["A1"].v === 'FECHA COMPRA') {
+      return true; 
+    } 
+    if (channel === 'Rappi' && file["A1"].v === 'state') {
+      return true;
+    }
+    if (channel == 'Cornershop' && file["A1"].v === '# Order') {
+      return true;
+    }
+    return false;
+
+  };
 
 
   return (
@@ -111,16 +175,22 @@ const uploadFile = (e) => {
             <div className="card-footer">
               <Button
                 className="btn btn-primary"
+                onClick={sendFalabellaDataHandler}
+                disabled={bttnEnable}
               >
                 Falabella
               </Button>
               <Button
                 className="btn btn-primary"
+                onClick={sendRappiDataHandler}
+                disabled={bttnEnable}
               >
                 Rappi
               </Button>
               <Button
                 className="btn btn-primary"
+                onClick={sendCornershopDataHandler}
+                disabled={bttnEnable}
               >
                 Cornershop
               </Button>
