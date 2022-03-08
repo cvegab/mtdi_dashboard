@@ -404,6 +404,8 @@ function MtdiReports() {
   //MONTHLY SALES STATES
   const [linioMonthly, setlinioMonthly] = useState([]);
   const [newlinioMonthly, setnewlinioMonthly] = useState([]);
+  const [newVtexMonthly, setnewVtexMonthly] = useState([]);
+  const [newRipleyMonthly, setnewRipleyMonthly] = useState([]);
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
   const [ripleyStackedOrdersState, setripleyStackedOrdersState] = useState([]);
   const [shopifyStackedSalesState, setshopifyStackedSalesState] = useState([]);
@@ -483,12 +485,30 @@ function MtdiReports() {
   }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
   useEffect(() => {
     setStackedGraphForOrders();
-  }, [newlinioMonthly, stackedDateLabel]);
+  }, [newlinioMonthly, stackedDateLabel,newVtexMonthly,newRipleyMonthly]);
   const setStackedGraphForOrders = () => {
-    console.log(newlinioMonthly);
+   
     let MONTLY_ORDER_GRAPH = {
       labels: stackedDateLabel,
       datasets: [
+        {
+          label: "Ripley",
+          backgroundColor: "#FFD88C",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data:newRipleyMonthly,
+          barThickness: 30,
+        },
+        {
+          label: "Vtex",
+          backgroundColor: "#F10096",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data: newVtexMonthly,
+          barThickness: 30,
+        },
         {
           label: "Linio",
           backgroundColor: "#F29A32",
@@ -583,7 +603,28 @@ function MtdiReports() {
        if(!newChannelList.includes('Linio')){
         setnewlinioMonthly(0);
        }
-       
+       let Vtex = [];
+       if(newChannelList.includes('Vtex')){
+        Vtex = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+              return item.Vtex;
+            });
+             console.log(Vtex[0].Vtex);
+            setnewVtexMonthly(Vtex[0].Vtex);
+       }
+       if(!newChannelList.includes('Vtex')){
+        setnewVtexMonthly(0);
+       }
+       let ripley = [];
+       if(newChannelList.includes('Ripley')){
+        ripley = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+              return item.Ripley;
+            });
+             console.log(ripley[0].Ripley);
+            setnewRipleyMonthly(ripley[0].Ripley);
+       }
+       if(!newChannelList.includes('Ripley')){
+       setnewRipleyMonthly(0);
+       }
       
       
        
