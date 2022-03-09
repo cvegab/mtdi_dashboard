@@ -16,6 +16,7 @@
 
 #bttnGeneral:hover {
   background-color: #06cbc1 !important;
+  color: #FFFF !important;
 }
 
 .titlesInfoCard {
@@ -158,7 +159,10 @@
   margin-bottom: 1em;
 }
 
-
+.bttnCompartirReporte:hover {
+  background-color: #06cbc1 !important;
+  color: #FFFF !important;
+}
 }
 
 @media screen and (min-width:321px) and (max-width:375px) { 
