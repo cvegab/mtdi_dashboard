@@ -2386,13 +2386,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
     const canvas = await html2canvas(element);
     const data = canvas.toDataURL('image/png');
 
-    const pdf = new jsPDF('p', 'in', 'a3');
+    const pdf = new jsPDF('p', 'in', 'legal', true);
     const imgProperties = pdf.getImageProperties(data);
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = 
       (imgProperties.height * pdfWidth) / imgProperties.width;
 
-    pdf.addImage(data, 'PNG', 0, 0);
+    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
     pdf.save('print.pdf');
   };
 
@@ -2734,8 +2734,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
           )}
           <br></br>
 
-        <div id="generateReport" ref={printReport}> 
-        <iframe id="ifmcontentstoprint" style={{height: "0px", width: "0px", position: "absolute"}}></iframe>       
+        <div id="generateReport" ref={printReport}>     
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
