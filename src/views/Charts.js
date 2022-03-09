@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import iconG1 from "../assets/img/icons/Reports/iconG1.png";
 import iconG2 from "../assets/img/icons/Reports/iconG2.png";
 import iconG3 from "../assets/img/icons/Reports/iconG3.png";
@@ -319,7 +321,7 @@ function Charts() {
     ],
   };
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
- const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
+  const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
   const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
@@ -368,6 +370,7 @@ function Charts() {
 
   const [fromDate, setfromDate] = useState(new Date());
   const [showFilter, setshowFilter] = useState(false);
+  const printReport = React.useRef();
   //SALES CHANNEL TOTAL SALES STATES
   const [ripley, setripley] = useState(0);
   const [vtex, setvtex] = useState(0);
@@ -2376,6 +2379,24 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
+
+  // Function to generate a PDF Report 
+  const handleDownloadPdf = async () => {
+    const element = printReport.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF('p', 'in', 'a3');
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = 
+      (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, 'PNG', 0, 0);
+    pdf.save('print.pdf');
+  };
+
+
  
   return (
     <>
@@ -2713,7 +2734,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
           )}
           <br></br>
 
-
+        <div id="generateReport" ref={printReport}> 
+        <iframe id="ifmcontentstoprint" style={{height: "0px", width: "0px", position: "absolute"}}></iframe>       
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
@@ -4083,12 +4105,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
           <Row>
          
           </Row>
+          
        
-         {/* <Row>
+         <Row>
            <div class="text-center" style={{marginTop: "3em"}}>
               <button
+                type="button"
                 id="bttnSubmit"
                 className="bttnCompartirReporte"
+                onClick={handleDownloadPdf}
                 style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",
@@ -4102,8 +4127,6 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   fontWeight:"bold",
                   border:"0",
                   fontSize: "11px"
-
-
                 }}
               >
 
@@ -4113,7 +4136,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 &nbsp;Compartir Reporte &nbsp;
               </button>
 
-              <button
+              {/* <button
                 id="bttnSubmit"
                 className="bttnSiguienteReporte"
                 style={{
@@ -4135,13 +4158,13 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 Siguiente Reporte &nbsp;
                 <span className="btn-label">
                    <img src={iconNextReport} width="19px"/>
-                </span>
-              </button>
+                </span> */}
+              {/* </button> */}
             </div>
-          </Row> */}
-
-        </div>}
+          </Row>
+          </div>}
         </div>
+        </div>  
       )}
     </>
   );
