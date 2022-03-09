@@ -2396,7 +2396,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
     const pdfHeight = 
       (imgProperties.height * pdfWidth) / imgProperties.width;
 
-    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-3);
     pdf.save('print.pdf');
     setisDownloadingReports(false);
   };
@@ -4118,7 +4118,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
              
             
               {!isDownloadingReports && (
-                <Button
+                <button
                   type="button"
                   id="bttnSubmit"
                   className="bttnCompartirReporte"    
@@ -4142,7 +4142,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   <img src={iconShareReport} width="19px"/>
                 </span>
                   &nbsp;Descargar Reporte &nbsp;
-                </Button>
+                </button>
               )}
               {isDownloadingReports && (
                 <Button
@@ -4150,7 +4150,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 id="bttnSubmit"
                 className="bttnCompartirReporte"    
                 style={{
-                  backgroundColor: "#1D308E",
+                  backgroundColor: "#06cbc1",
                   textAlign: "center",
                   width: "296px",
                   height: "64px",
