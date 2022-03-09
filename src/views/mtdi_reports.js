@@ -43,8 +43,7 @@ import {
 import SplashScreen from "components/UI/splash-screen";
 
 registerLocale("es", es);
-const line = "";
-const bar = "";
+
 const mixedChartLabels = [
   "January",
   "February",
@@ -54,28 +53,6 @@ const mixedChartLabels = [
   "June",
   "July",
 ];
-let mixedData = {
-  mixedChartLabels,
-  datasets: [
-    {
-      type: "line",
-      label: "Dataset 1",
-      yAxisID: "A",
-      borderColor: "#06CBC1",
-      borderWidth: 2,
-      fill: false,
-      data: [100, 200, 300, 400, 500, 600],
-    },
-    {
-      type: "bar",
-      label: "Dataset 2",
-      yAxisID: "A",
-      backgroundColor: "#344FD5",
-      data: [78, 123, 45, 67, 12],
-      borderRadius: 5,
-    },
-  ],
-};
 const barChartData = {
   labels: [
     "Enero",
@@ -143,27 +120,6 @@ const barChartData = {
       data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
     },
   ],
-};
-
-let options12 = {
-  scales: {
-    yAxes: [
-      {
-        id: "A",
-        type: "linear",
-        position: "right",
-      },
-      {
-        id: "B",
-        type: "linear",
-        position: "right",
-        ticks: {
-          max: 100,
-          min: 0,
-        },
-      },
-    ],
-  },
 };
 
 const barChartOptions = {
@@ -500,7 +456,7 @@ function MtdiReports() {
   }, [channels, channelId, cR,store]);
   useEffect(() => {
     fetchStackedGraphForOrders();
-  }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
+  }, [cR,ChannelSelectedForDelete,store,channelId,filteredStoreData]);
   useEffect(() => {
    fetchStackedGraphForSales();
   }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
@@ -772,6 +728,7 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
+        console.log(obj);
         console.log(redefinedChannel);
         console.log(newChannelList);
         let linio = [];
@@ -881,6 +838,7 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
+        console.log(obj);
         console.log(redefinedChannel);
         console.log(newChannelList);
         console.log(obj.resume.stackedSalesGraphByMonth);
