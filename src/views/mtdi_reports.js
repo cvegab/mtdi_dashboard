@@ -323,6 +323,9 @@ function MtdiReports() {
     "Chambas",
     "ListaTienda",
   ]);
+    //PIE CHART STATES
+    const [linioPie, setlinioPie] = useState(0);
+    const [vtexPie, setvtexPie] = useState(0);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   // const [mixedChartLoading, setmixedChartLoading] = useState(true);
@@ -1112,10 +1115,145 @@ function MtdiReports() {
     }
   }, [isMobileSizes]);
   useEffect(() => {
-    console.log("hi set data");
-    console.log(newData);
+    // console.log("hi set data");
+    // console.log(newData);
     setResumenGraph();
   }, [newData]);
+  useEffect(() => {
+   fetchPieChartDetails();
+  }, [cR, ChannelSelectedForDelete])
+  useEffect(() => {
+ setpieChartGraph();
+  }, [linioPie,vtexPie])
+  const setpieChartGraph = ()=>{
+    let PIE = {
+      labels: [
+        "Vtex",
+        "Linio",
+        "Mercadolibre",
+        "Exito",
+        "Ripley",
+        "Shopify",
+        "Paris",
+        "Magento",
+        "WooCommerce",
+        "Chambas",
+        "ListaTienda",
+      ],
+      datasets: [
+        {
+          label: "Emails",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          backgroundColor: [
+            "#F10096",
+            "#F29A32",
+            "yellow",
+            "#E4C41B",
+            "#FFD88C",
+            "#97D456",
+            "#00B6CB",
+            "#FF6059",
+            "purple",
+            "#EDA4D1",
+            "blue",
+          ],
+          borderWidth: 0,
+          barPercentage: 1.6,
+          data: [
+          vtexPie,
+          linioPie
+          ],
+        },
+      ],
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
+
+          tooltips: {
+            enabled: false,
+          },
+        },
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            ticks: {
+              display: false,
+            },
+            grid: {
+              drawBorder: false,
+              zeroLineColor: "transparent",
+              color: "rgba(255,255,255,0.05)",
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              color: "rgba(255,255,255,0.1)",
+              zeroLineColor: "transparent",
+            },
+            ticks: {
+              display: false,
+            },
+          },
+        },
+      },
+    };
+    setpieChartData(PIE);
+
+  }
+  const fetchPieChartDetails = ()=>{
+    console.log(cR);
+    let newChannelList = cR.map(item=>{
+      return item.channel;
+    })
+    console.log(newChannelList);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+
+    fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        var obj = JSON.parse(result);
+        console.log(obj.resume.stackedSalesGraphTotal);
+        if(newChannelList.includes('Linio')){
+        let linio;
+        linio = obj.resume.stackedSalesGraphTotal.filter((item) => {
+          return item.Linio;
+        });
+       
+        setlinioPie(linio[0].Linio);
+      } if(!newChannelList.includes('Linio')){
+        setlinioPie(0);
+      }
+      let vtex;
+      if(newChannelList.includes('Vtex')){
+       
+        vtex = obj.resume.stackedSalesGraphTotal.filter((item) => {
+          return item.Vtex;
+        });
+       
+        setvtexPie(vtex[0].Vtex);
+      } if(!newChannelList.includes('Vtex')){
+      setvtexPie(0);
+      }
+      })
+      .catch((error) => console.log("error", error));
+  }
   const setResumenGraph = () => {
     const labels = newData.map((item) => {
       return item.channel;
@@ -2519,7 +2657,7 @@ function MtdiReports() {
             },
           },
         };
-        setpieChartData(PIE);
+        //setpieChartData(PIE);
 
         var totalIncomeArray = obj.detail.map((item) => {
           return item.total;
