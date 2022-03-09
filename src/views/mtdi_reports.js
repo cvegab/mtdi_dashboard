@@ -326,6 +326,7 @@ function MtdiReports() {
     //PIE CHART STATES
     const [linioPie, setlinioPie] = useState(0);
     const [vtexPie, setvtexPie] = useState(0);
+    const [shopifyPie, setshopifyPie] = useState(0)
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   // const [mixedChartLoading, setmixedChartLoading] = useState(true);
@@ -1124,7 +1125,7 @@ function MtdiReports() {
   }, [cR, ChannelSelectedForDelete])
   useEffect(() => {
  setpieChartGraph();
-  }, [linioPie,vtexPie])
+  }, [linioPie,vtexPie,shopifyPie])
   const setpieChartGraph = ()=>{
     let PIE = {
       labels: [
@@ -1162,7 +1163,12 @@ function MtdiReports() {
           barPercentage: 1.6,
           data: [
           vtexPie,
-          linioPie
+          linioPie,
+          0,
+          0,
+          0,
+          shopifyPie
+
           ],
         },
       ],
@@ -1250,6 +1256,17 @@ function MtdiReports() {
         setvtexPie(vtex[0].Vtex);
       } if(!newChannelList.includes('Vtex')){
       setvtexPie(0);
+      }
+      let shopify;
+      if(newChannelList.includes('Shopify')){
+      shopify = obj.resume.stackedSalesGraphTotal.filter((item) => {
+             return item.Shopify;
+           });
+          
+          setshopifyPie(shopify[0].Shopify);
+      }
+      if(!newChannelList.includes('Shopify')){
+      setshopifyPie(0);
       }
       })
       .catch((error) => console.log("error", error));
