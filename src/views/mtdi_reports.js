@@ -414,7 +414,9 @@ function MtdiReports() {
   const [newMagentoMonthly, setnewMagentoMonthly] = useState([]);
   const [newMagentoSalesMonthly, setnewMagentoSalesMonthly] = useState([]);
   const [newWooCommerceMonthly, setnewWooCommerceMonthly] = useState([]);
+  const [newWooCommerceSalesMonthly, setnewWooCommerceSalesMonthly] = useState([]);
   const [newShopifyMonthly, setnewShopifyMonthly] = useState([]);
+  const [newShopifySalesMonthly, setnewShopifySalesMonthly] = useState([]);
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
   const [ripleyStackedOrdersState, setripleyStackedOrdersState] = useState([]);
   const [shopifyStackedSalesState, setshopifyStackedSalesState] = useState([]);
@@ -500,7 +502,7 @@ function MtdiReports() {
   }, [newlinioMonthly, stackedDateLabel,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
   useEffect(() => {
     setStackedGraphForSales();
-  }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly]);
+  }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly]);
   const setStackedGraphForSales = ()=>{
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
@@ -540,6 +542,24 @@ function MtdiReports() {
           borderRadius: 6,
           stack: "2",
           data:newMagentoSalesMonthly,
+          barThickness: 30,
+        },
+        {
+          label: "WooCommerce",
+          backgroundColor: "purple",
+          borderRadius: "20px",
+          borderRadius: 6,
+          barThickness: 30,
+          stack: "2",
+          data: newWooCommerceSalesMonthly,
+        },
+        {
+          label: "Shopify",
+          backgroundColor: "#97D456",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data: newShopifySalesMonthly,
           barThickness: 30,
         },
         {
@@ -901,39 +921,39 @@ function MtdiReports() {
        if(!newChannelList.includes('Chambas')){
        setnewChambasSalesMonthly(0);
        }
-      //  let magento = [];
-      //  if(newChannelList.includes('Magento')){
-      //   magento = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-      //         return item.Magento;
-      //       });
-      //        console.log(magento[0].Magento);
-      //      setnewMagentoMonthly(magento[0].Magento);
-      //  }
-      //  if(!newChannelList.includes('Magento')){
-      //  setnewMagentoMonthly(0);
-      //  }
-      //  let woo = [];
-      //  if(newChannelList.includes('Woocommerce')){
-      //   woo = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-      //         return item.Woocommerce;
-      //       });
-      //        console.log(woo[0].Woocommerce);
-      //      setnewWooCommerceMonthly(woo[0].Woocommerce);
-      //  }
-      //  if(!newChannelList.includes('Woocommerce')){
-      //   setnewWooCommerceMonthly(0);
-      //  }
-      //  let shopify = [];
-      //  if(newChannelList.includes('Shopify')){
-      //  shopify = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-      //         return item.Shopify;
-      //       });
-      //        console.log(shopify[0].Shopify);
-      //      setnewShopifyMonthly(shopify[0].Shopify);
-      //  }
-      //  if(!newChannelList.includes('Shopify')){
-      // setnewShopifyMonthly(0);
-      //  }
+       let magento = [];
+       if(newChannelList.includes('Magento')){
+        magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+              return item.Magento;
+            });
+             console.log(magento[0].Magento);
+           setnewMagentoSalesMonthly(magento[0].Magento);
+       }
+       if(!newChannelList.includes('Magento')){
+      setnewMagentoSalesMonthly(0);
+       }
+       let woo = [];
+       if(newChannelList.includes('Woocommerce')){
+        woo = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+              return item.Woocommerce;
+            });
+           
+           setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
+       }
+       if(!newChannelList.includes('Woocommerce')){
+     setnewWooCommerceSalesMonthly(0);
+       }
+       let shopify = [];
+       if(newChannelList.includes('Shopify')){
+       shopify = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+              return item.Shopify;
+            });
+
+          setnewShopifySalesMonthly(shopify[0].Shopify);
+       }
+       if(!newChannelList.includes('Shopify')){
+     setnewShopifySalesMonthly(0);
+       }
       })
       .catch((error) => console.log("error", error));
   }; 
