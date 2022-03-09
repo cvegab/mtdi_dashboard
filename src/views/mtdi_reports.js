@@ -326,7 +326,10 @@ function MtdiReports() {
     //PIE CHART STATES
     const [linioPie, setlinioPie] = useState(0);
     const [vtexPie, setvtexPie] = useState(0);
-    const [shopifyPie, setshopifyPie] = useState(0)
+    const [shopifyPie, setshopifyPie] = useState(0);
+    const [ripleyPie, setripleyPie] = useState(0);
+    const [magentoPie, setmagentoPie] = useState(0);
+    const [wooPie, setwooPie] = useState(0);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   // const [mixedChartLoading, setmixedChartLoading] = useState(true);
@@ -1117,7 +1120,7 @@ function MtdiReports() {
   }, [isMobileSizes]);
   useEffect(() => {
     // console.log("hi set data");
-    // console.log(newData);
+     console.log(newData);
     setResumenGraph();
   }, [newData]);
   useEffect(() => {
@@ -1125,7 +1128,7 @@ function MtdiReports() {
   }, [cR, ChannelSelectedForDelete])
   useEffect(() => {
  setpieChartGraph();
-  }, [linioPie,vtexPie,shopifyPie])
+  }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie])
   const setpieChartGraph = ()=>{
     let PIE = {
       labels: [
@@ -1166,8 +1169,13 @@ function MtdiReports() {
           linioPie,
           0,
           0,
+          ripleyPie,
+          shopifyPie,
           0,
-          shopifyPie
+          magentoPie,
+          wooPie,
+         0,
+         0
 
           ],
         },
@@ -1268,6 +1276,39 @@ function MtdiReports() {
       if(!newChannelList.includes('Shopify')){
       setshopifyPie(0);
       }
+      let ripley;
+      if(newChannelList.includes('Ripley')){
+       ripley = obj.resume.stackedSalesGraphTotal.filter((item) => {
+             return item.Ripley;
+           });
+            
+           setripleyPie(ripley[0].Ripley);
+      }
+      if(!newChannelList.includes('Ripley')){
+     setripleyPie(0);
+      }
+      let magento;
+       if(newChannelList.includes('Magento')){
+        magento = obj.resume.stackedSalesGraphTotal.filter((item) => {
+              return item.Magento;
+            });
+             
+         setmagentoPie(magento[0].Magento);
+       }
+       if(!newChannelList.includes('Magento')){
+      setmagentoPie(0);
+       }
+       let woo;
+       if(newChannelList.includes('Woocommerce')){
+        woo = obj.resume.stackedSalesGraphTotal.filter((item) => {
+              return item.Woocommerce;
+            });
+            
+           setwooPie(woo[0].Woocommerce);
+       }
+       if(!newChannelList.includes('Woocommerce')){
+       setwooPie(0);
+       }
       })
       .catch((error) => console.log("error", error));
   }
