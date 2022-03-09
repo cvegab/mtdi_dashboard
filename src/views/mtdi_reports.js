@@ -406,9 +406,13 @@ function MtdiReports() {
   const [newlinioMonthly, setnewlinioMonthly] = useState([]);
   const [newlinioSalesMonthly, setnewlinioSalesMonthly] = useState([]);
   const [newVtexMonthly, setnewVtexMonthly] = useState([]);
+  const [newVtexSalesMonthly, setnewVtexSalesMonthly] = useState([]);
   const [newRipleyMonthly, setnewRipleyMonthly] = useState([]);
+  const [newRipleySalesMonthly, setnewRipleySalesMonthly] = useState([]);
   const [newChambasMonthly, setnewChambasMonthly] = useState([]);
+  const [newChambasSalesMonthly, setnewChambasSalesMonthly] = useState([]);
   const [newMagentoMonthly, setnewMagentoMonthly] = useState([]);
+  const [newMagentoSalesMonthly, setnewMagentoSalesMonthly] = useState([]);
   const [newWooCommerceMonthly, setnewWooCommerceMonthly] = useState([]);
   const [newShopifyMonthly, setnewShopifyMonthly] = useState([]);
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
@@ -496,21 +500,30 @@ function MtdiReports() {
   }, [newlinioMonthly, stackedDateLabel,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
   useEffect(() => {
     setStackedGraphForSales();
-  }, [newlinioSalesMonthly]);
+  }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly]);
   const setStackedGraphForSales = ()=>{
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
 
       datasets: [
-        // {
-        //   label: "Ripley",
-        //   backgroundColor: "#FFD88C",
-        //   borderRadius: "20px",
-        //   stack: "2",
-        //   borderRadius: 6,
-        //   data:new,
-        //   barThickness: 30,
-        // },
+        {
+          label: "Ripley",
+          backgroundColor: "#FFD88C",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data:newRipleySalesMonthly,
+          barThickness: 30,
+        },
+        {
+          label: "Chambas",
+          backgroundColor: "#EDA4D1",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data: newChambasSalesMonthly,
+          barThickness: 30,
+        },
         {
           label: "Linio",
           backgroundColor: "#F29A32",
@@ -518,6 +531,24 @@ function MtdiReports() {
           stack: "2",
           borderRadius: 6,
           data: newlinioSalesMonthly,
+          barThickness: 30,
+        },
+        {
+          label: "Magento",
+          backgroundColor: "#FF6059",
+          borderRadius: "20px",
+          borderRadius: 6,
+          stack: "2",
+          data:newMagentoSalesMonthly,
+          barThickness: 30,
+        },
+        {
+          label: "Vtex",
+          backgroundColor: "#F10096",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data: newVtexSalesMonthly,
           barThickness: 30,
         },
       ],
@@ -837,39 +868,39 @@ function MtdiReports() {
        if(!newChannelList.includes('Linio')){
        setnewlinioSalesMonthly(0);
        }
-      //  let Vtex = [];
-      //  if(newChannelList.includes('Vtex')){
-      //   Vtex = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-      //         return item.Vtex;
-      //       });
-      //        console.log(Vtex[0].Vtex);
-      //       setnewVtexMonthly(Vtex[0].Vtex);
-      //  }
-      //  if(!newChannelList.includes('Vtex')){
-      //   setnewVtexMonthly(0);
-      //  }
-      //  let ripley = [];
-      //  if(newChannelList.includes('Ripley')){
-      //   ripley = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-      //         return item.Ripley;
-      //       });
-      //        console.log(ripley[0].Ripley);
-      //       setnewRipleyMonthly(ripley[0].Ripley);
-      //  }
-      //  if(!newChannelList.includes('Ripley')){
-      //  setnewRipleyMonthly(0);
-      //  }
-      // let chambas = [];
-      // if(newChannelList.includes('Chambas')){
-      //   chambas = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-      //         return item.Chambas;
-      //       });
-      //        console.log(chambas[0].Chambas);
-      //       setnewChambasMonthly(chambas[0].Chambas);
-      //  }
-      //  if(!newChannelList.includes('Chambas')){
-      //   setnewChambasMonthly(0);
-      //  }
+       let Vtex = [];
+       if(newChannelList.includes('Vtex')){
+        Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+              return item.Vtex;
+            });
+             
+            setnewVtexSalesMonthly(Vtex[0].Vtex);
+       }
+       if(!newChannelList.includes('Vtex')){
+       setnewVtexSalesMonthly(0);
+       }
+       let ripley = [];
+       if(newChannelList.includes('Ripley')){
+        ripley = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+              return item.Ripley;
+            });
+           
+           setnewRipleySalesMonthly(ripley[0].Ripley);
+       }
+       if(!newChannelList.includes('Ripley')){
+       setnewRipleySalesMonthly(0);
+       }
+      let chambas = [];
+      if(newChannelList.includes('Chambas')){
+        chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+              return item.Chambas;
+            });
+             console.log(chambas[0].Chambas);
+           setnewChambasSalesMonthly(chambas[0].Chambas);
+       }
+       if(!newChannelList.includes('Chambas')){
+       setnewChambasSalesMonthly(0);
+       }
       //  let magento = [];
       //  if(newChannelList.includes('Magento')){
       //   magento = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
