@@ -285,7 +285,12 @@ function MtdiReports() {
     const [shopifyPie, setshopifyPie] = useState(0);
     const [ripleyPie, setripleyPie] = useState(0);
     const [magentoPie, setmagentoPie] = useState(0);
+    const [chambasPie, setchambasPie] = useState(0);
     const [wooPie, setwooPie] = useState(0);
+    const [mercadoPie, setmercadoPie] = useState(0);
+    const [exitoPie, setexitoPie] = useState(0);
+    const [parisPie, setparisPie] = useState(0);
+    const [listaPie, setlistaPie] = useState(0);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   // const [mixedChartLoading, setmixedChartLoading] = useState(true);
@@ -1086,7 +1091,7 @@ function MtdiReports() {
   // }, [cR, ChannelSelectedForDelete])
   useEffect(() => {
  setpieChartGraph();
-  }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie])
+  }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie,chambasPie,mercadoPie,exitoPie,parisPie,listaPie])
   const setpieChartGraph = ()=>{
     let PIE = {
       labels: [
@@ -1125,15 +1130,15 @@ function MtdiReports() {
           data: [
           vtexPie,
           linioPie,
-          0,
-          0,
+        mercadoPie,
+          exitoPie,
           ripleyPie,
           shopifyPie,
-          0,
+         parisPie,
           magentoPie,
           wooPie,
-         0,
-         0
+        chambasPie,
+        listaPie
 
           ],
         },
@@ -1310,19 +1315,56 @@ const shopifySalesValue = shopifySales.map((item)=>{
   return item.salesValue;
 })
 setshopifyPie(shopifySalesValue[0]);
-    // const lineandBarChartLabels = cR.map(item=>{
-    //     return item.channel;
-    // });
-    // console.log(lineandBarChartLabels);
-    // setmixedGraphLabels(lineandBarChartLabels);
-    // let stackedOrderQtyGraphTotal = obj.resume.stackedOrderQtyGraphTotal;
-    // console.log(stackedOrderQtyGraphTotal);
-    // let mixedChartLabelArary = Object.values(stackedOrderQtyGraphTotal);
-    // console.log(mixedChartLabelArary);
-    // const lin = obj.resume.stackedOrderQtyGraphTotal.filter(item=>{
-    //     return item.Linio;
-    //   });
-    //   console.log(lin[0].Linio);
+const magentoSales = newData.filter((item)=>{
+  return item.channel === 'Magento';
+})
+const magentoSalesValue = magentoSales.map((item)=>{
+  return item.salesValue;
+})
+setmagentoPie(magentoSalesValue[0]);
+const wooSales = newData.filter((item)=>{
+  return item.channel === 'Woocommerce';
+})
+const wooSalesValue = wooSales.map((item)=>{
+  return item.salesValue;
+})
+setwooPie(wooSalesValue[0]);
+const chambasSales = newData.filter((item)=>{
+  return item.channel === 'Chambas';
+})
+const chambasSalesValue = chambasSales.map((item)=>{
+  return item.salesValue;
+})
+setchambasPie(chambasSalesValue[0]);
+const merSales = newData.filter((item)=>{
+  return item.channel === 'MercadoLibre';
+})
+const merSalesValue = merSales.map((item)=>{
+  return item.salesValue;
+})
+setmercadoPie(merSalesValue[0]);
+const exiSales = newData.filter((item)=>{
+  return item.channel === 'Exito';
+})
+const exiSalesValue = exiSales.map((item)=>{
+  return item.salesValue;
+})
+setexitoPie(exiSalesValue[0]);
+const parisSales = newData.filter((item)=>{
+  return item.channel === 'Paris';
+})
+const parisSalesValue = parisSales.map((item)=>{
+  return item.salesValue;
+})
+setparisPie(parisSalesValue[0]);
+const listaSales = newData.filter((item)=>{
+  return item.channel === 'ListaTienda';
+})
+const listaSalesValue = listaSales.map((item)=>{
+  return item.salesValue;
+})
+setlistaPie(listaSalesValue[0]);
+    
     let MIXED = {
       labels: labels,
       datasets: [
