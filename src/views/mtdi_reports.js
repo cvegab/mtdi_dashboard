@@ -349,7 +349,7 @@ function MtdiReports() {
   const [wooCommerce, setwooCommerce] = useState(0);
   const [chambas, setchambas] = useState(0);
   const [listaTienda, setlistaTienda] = useState(0);
-  const [cR, setcR] = useState([{ channels: "", channelId: 0 }]);
+  const [cR, setcR] = useState([]);
 
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
@@ -452,13 +452,13 @@ function MtdiReports() {
     fetchFilterData();
     getDateLabels();
     fetchResumenGraphDetails();
-   // fetchStackedGraphForSales();
+    fetchStackedGraphForSales();
     //fetchStackedGraphForOrders();
     //fetchStackedGraphSalesForFirstTime();
   }, []);
   useEffect(() => {
     fetchResumenGraphDetails();
-   // fetchStackedGraphForSales();
+    fetchStackedGraphForSales();
     //fetchStackedGraphForOrders();
   }, [channelId]);
   
@@ -869,7 +869,7 @@ function MtdiReports() {
       .catch((error) => console.log("error", error));
   };
 
-  const fetchStackedGraphForSales = async() => {
+  const fetchStackedGraphForSales = ()=> {
     console.log(cR);
     let newChannelList = cR.map(item=>{
       return item.channel;
@@ -891,7 +891,7 @@ function MtdiReports() {
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
 
-   await fetch(url, requestOptions)
+   fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
@@ -1734,7 +1734,7 @@ setlistaPie(listaSalesValue[0]);
           },
         };
         setmixedChartData(MIXED);
-        fetchStackedGraphForSales();
+        //fetchStackedGraphForSales();
       })
       .catch((error) => console.log("error", error));
   };
@@ -3426,8 +3426,13 @@ console.log(selectedChannelsArray);
 
     let x = channelsId.join(",");
     console.log(filteredChannelArray);
+   if(filteredChannelArray.length!==0){
     setcR(filteredChannelArray);
     setchannelId(x);
+   }
+    
+   
+    
     //COOMENTED OUT DURING THE REDEFINING CHARTS
   //  setcR(channels);
 
