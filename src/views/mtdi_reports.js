@@ -1078,17 +1078,15 @@ function MtdiReports() {
       setshowFilter(true);
     }
   }, [isMobileSizes]);
-  useEffect(() => {
-  
-     console.log(newData);
+  useEffect(() => { 
     setResumenGraph();
   }, [newData]);
   // useEffect(() => {
   //  fetchPieChartDetails();
   // }, [cR, ChannelSelectedForDelete])
-//   useEffect(() => {
-//  setpieChartGraph();
-//   }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie])
+  useEffect(() => {
+ setpieChartGraph();
+  }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie])
   const setpieChartGraph = ()=>{
     let PIE = {
       labels: [
@@ -1273,6 +1271,7 @@ function MtdiReports() {
       .catch((error) => console.log("error", error));
   }
   const setResumenGraph = () => {
+   
     const labels = newData.map((item) => {
       return item.channel;
     });
@@ -1282,6 +1281,35 @@ function MtdiReports() {
     const orderValue = newData.map((item) => {
       return item.orderValue;
     });
+    //SET PIE CHART HERE
+    const linioSales = newData.filter((item)=>{
+      return item.channel === 'Linio';
+    })
+    const linioSalesValue = linioSales.map((item)=>{
+      return item.salesValue;
+    })
+   setlinioPie(linioSalesValue[0]);
+   const vtexSales = newData.filter((item)=>{
+    return item.channel === 'Vtex';
+  })
+  const vtexSalesValue = vtexSales.map((item)=>{
+    return item.salesValue;
+  })
+ setvtexPie(vtexSalesValue[0]);
+ const ripleySales = newData.filter((item)=>{
+  return item.channel === 'Ripley';
+})
+const ripleySalesValue = ripleySales.map((item)=>{
+  return item.salesValue;
+})
+setripleyPie(ripleySalesValue[0]);
+const shopifySales = newData.filter((item)=>{
+  return item.channel === 'Shopify';
+})
+const shopifySalesValue = shopifySales.map((item)=>{
+  return item.salesValue;
+})
+setshopifyPie(shopifySalesValue[0]);
     // const lineandBarChartLabels = cR.map(item=>{
     //     return item.channel;
     // });
@@ -1455,6 +1483,7 @@ function MtdiReports() {
         // }
 
         console.log(newData);
+       
         const labels = newData.map((item) => {
           return item.channel;
         });
@@ -1464,6 +1493,7 @@ function MtdiReports() {
         const orderValue = newData.map((item) => {
           return item.orderValue;
         });
+       
         // const lineandBarChartLabels = cR.map(item=>{
         //     return item.channel;
         // });
