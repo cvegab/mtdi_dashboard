@@ -3,7 +3,13 @@
   background-color: #f4f3ef !important;
 
 }
+#colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    width: 100% !important;
 
+  }
 
 .card {
   box-shadow: unset !important;
@@ -157,9 +163,7 @@
 }
 .bttnSiguienteReporte,
 .bttnCompartirReporte {
-  width: 250px !important;
-  padding:22px 50px !important;
-  margin-bottom: 1em;
+  display:none;
 }
 
 .bttnCompartirReporte:hover {
@@ -225,7 +229,7 @@
 }
 .bttnSiguienteReporte,
 .bttnCompartirReporte {
-  margin-bottom: 1em;
+  display:none;
 }
 }
 
@@ -237,6 +241,14 @@
 
   #ReportInformationDesktop {
     display:none;
+  }
+
+  #colReportDatosGenerales,
+  #colReportClientExperience,
+  #colReportOrderProcessing,
+  #colReportOrderFulfillment {
+    height: 380px !important;
+    width:100% !important;
   }
   
   #bttnGeneral {
@@ -284,7 +296,14 @@
 
 .bttnSiguienteReporte,
 .bttnCompartirReporte {
-  margin-bottom: 1em;
+  display:none;
+}
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+.bttnSiguienteReporte,
+.bttnCompartirReporte {
+  display:none;
 }
 }
 
@@ -370,7 +389,7 @@
   #colReportClientExperience,
   #colReportOrderProcessing,
   #colReportOrderFulfillment {
-    width: 1000px !important;
+    width: 100% !important;
 
   }
   #textNameTable {
