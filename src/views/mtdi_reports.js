@@ -442,10 +442,11 @@ function MtdiReports() {
     fetchGeneralData();
     fetchFilterData();
     getDateLabels();
+    fetchResumenGraphDetails();
   }, []);
   useEffect(() => {
     fetchResumenGraphDetails();
-  }, [cR, ChannelSelectedForDelete]);
+  }, [channelId]);
 
   useEffect(() => {
     displaysalesChannelHandler();
@@ -454,18 +455,19 @@ function MtdiReports() {
   useEffect(() => {
     fetchGeneralData();
   }, [channels, channelId, cR,store]);
-  useEffect(() => {
-    fetchStackedGraphForOrders();
-  }, [cR,ChannelSelectedForDelete,store,channelId,filteredStoreData]);
-  useEffect(() => {
-   fetchStackedGraphForSales();
-  }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
-  useEffect(() => {
-    setStackedGraphForOrders();
-  }, [newlinioMonthly, stackedDateLabel,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
-  useEffect(() => {
-    setStackedGraphForSales();
-  }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly]);
+  //I AM CHANGING THIS TO SEE HOW THE DATA WORKS EVENING 7PM
+  // useEffect(() => {
+  //   fetchStackedGraphForOrders();
+  // }, [cR,store,channelId]);
+  // useEffect(() => {
+  //  fetchStackedGraphForSales();
+  // }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
+  // useEffect(() => {
+  //   setStackedGraphForOrders();
+  // }, [newlinioMonthly, stackedDateLabel,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
+  // useEffect(() => {
+  //   setStackedGraphForSales();
+  // }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly]);
   const setStackedGraphForSales = ()=>{
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
@@ -1077,16 +1079,16 @@ function MtdiReports() {
     }
   }, [isMobileSizes]);
   useEffect(() => {
-    // console.log("hi set data");
+  
      console.log(newData);
     setResumenGraph();
   }, [newData]);
-  useEffect(() => {
-   fetchPieChartDetails();
-  }, [cR, ChannelSelectedForDelete])
-  useEffect(() => {
- setpieChartGraph();
-  }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie])
+  // useEffect(() => {
+  //  fetchPieChartDetails();
+  // }, [cR, ChannelSelectedForDelete])
+//   useEffect(() => {
+//  setpieChartGraph();
+//   }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie])
   const setpieChartGraph = ()=>{
     let PIE = {
       labels: [
@@ -1401,56 +1403,56 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
-        let x = [
-          { channel: "Vtex", salesValue: 12102450, orderValue: 252 },
-          { channel: "Linio", salesValue: 4992411, orderValue: 173 },
-          { channel: "MercadoLibre", salesValue: 0, orderValue: 0 },
-          { channel: "Exito", salesValue: 0, orderValue: 0 },
-          { channel: "Ripley", salesValue: 3160779, orderValue: 209 },
-          { channel: "Shopify", salesValue: 20262542, orderValue: 533 },
-          { channel: "Paris", salesValue: 0, orderValue: 0 },
-          { channel: "Magento", salesValue: 1737280, orderValue: 40 },
-          { channel: "Woocommerce", salesValue: 45860801, orderValue: 1107 },
-          { channel: "Chambas", salesValue: 33065889.5, orderValue: 267 },
-          { channel: "ListaTienda", salesValue: 0, orderValue: 0 },
-        ];
-        setnewData(x);
-        let y = [];
-        console.log(ChannelSelectedForDelete);
-        if (ChannelSelectedForDelete !== undefined) {
-          if (ChannelSelectedForDelete.channel === "Ripley") {
-            console.log("hi");
-            y = newData.filter((item) => {
-              return item.channel !== "Ripley";
-            });
-          }
-          if (ChannelSelectedForDelete.channel === "Shopify") {
-            console.log("hi");
-            y = newData.filter((item) => {
-              return item.channel !== "Shopify";
-            });
-          }
-          if (ChannelSelectedForDelete.channel === "Exito") {
-            console.log("hi");
-            y = newData.filter((item) => {
-              return item.channel !== "Exito";
-            });
-          }
-          if (ChannelSelectedForDelete.channel === "Paris") {
-            console.log("hi");
-            y = newData.filter((item) => {
-              return item.channel !== "Paris";
-            });
-          }
-          if (ChannelSelectedForDelete.channel === "Linio") {
-            console.log("hi");
-            y = newData.filter((item) => {
-              return item.channel !== "Linio";
-            });
-          }
-          setnewData(y);
-        }
+        console.log(obj.resume.lineAndBarChart);
+        // let x = [
+        //   { channel: "Vtex", salesValue: 12102450, orderValue: 252 },
+        //   { channel: "Linio", salesValue: 4992411, orderValue: 173 },
+        //   { channel: "MercadoLibre", salesValue: 0, orderValue: 0 },
+        //   { channel: "Exito", salesValue: 0, orderValue: 0 },
+        //   { channel: "Ripley", salesValue: 3160779, orderValue: 209 },
+        //   { channel: "Shopify", salesValue: 20262542, orderValue: 533 },
+        //   { channel: "Paris", salesValue: 0, orderValue: 0 },
+        //   { channel: "Magento", salesValue: 1737280, orderValue: 40 },
+        //   { channel: "Woocommerce", salesValue: 45860801, orderValue: 1107 },
+        //   { channel: "Chambas", salesValue: 33065889.5, orderValue: 267 },
+        //   { channel: "ListaTienda", salesValue: 0, orderValue: 0 },
+        // ];
+        setnewData(obj.resume.lineAndBarChart);
+        // let y = [];
+        // console.log(ChannelSelectedForDelete);
+        // if (ChannelSelectedForDelete !== undefined) {
+        //   if (ChannelSelectedForDelete.channel === "Ripley") {
+        //     console.log("hi");
+        //     y = newData.filter((item) => {
+        //       return item.channel !== "Ripley";
+        //     });
+        //   }
+        //   if (ChannelSelectedForDelete.channel === "Shopify") {
+        //     console.log("hi");
+        //     y = newData.filter((item) => {
+        //       return item.channel !== "Shopify";
+        //     });
+        //   }
+        //   if (ChannelSelectedForDelete.channel === "Exito") {
+        //     console.log("hi");
+        //     y = newData.filter((item) => {
+        //       return item.channel !== "Exito";
+        //     });
+        //   }
+        //   if (ChannelSelectedForDelete.channel === "Paris") {
+        //     console.log("hi");
+        //     y = newData.filter((item) => {
+        //       return item.channel !== "Paris";
+        //     });
+        //   }
+        //   if (ChannelSelectedForDelete.channel === "Linio") {
+        //     console.log("hi");
+        //     y = newData.filter((item) => {
+        //       return item.channel !== "Linio";
+        //     });
+        //   }
+        //   setnewData(y);
+        // }
 
         console.log(newData);
         const labels = newData.map((item) => {
