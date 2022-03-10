@@ -5,6 +5,9 @@
 }
 
 
+.card {
+  box-shadow: unset !important;
+}
 
 #accordionFilterBttn {
   background-color: #f4f3ef !important;
@@ -159,9 +162,14 @@
   margin-bottom: 1em;
 }
 
+.bttnCompartirReporte:hover {
+  background-color: #06cbc1 !important;
+  color: #FFFFFF !important;
+}
+
 #bttnSubmit:hover {
   background-color: #06cbc1 !important;
-  color: #FFFF !important;
+  color: #FFFFFF !important;
 }
 }
 

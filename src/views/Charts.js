@@ -2389,15 +2389,18 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
     const element = printReport.current;
     const canvas = await html2canvas(element);
     const data = canvas.toDataURL('image/png');
+    
 
     const pdf = new jsPDF('p', 'in', 'legal', true);
+    pdf.setFillColor(245);
+    pdf.rect(0, 0, 210, 700, "F");
     const imgProperties = pdf.getImageProperties(data);
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = 
       (imgProperties.height * pdfWidth) / imgProperties.width;
 
     pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-3);
-    pdf.save('print.pdf');
+    pdf.save('InstanceReporte.pdf');
     setisDownloadingReports(false);
   };
 
@@ -3300,8 +3303,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
 
            <Col id="ColMixedChart" lg="7" md="12" sm="12" >
               <Card 
-              className="car-chart" 
+              className="card-chart" 
               id="mixedChartCustom"
+              
               >
                 <CardHeader>
                   <CardTitle id="textNameTable">
@@ -4119,7 +4123,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             
               {!isDownloadingReports && (
                 <button
-                  type="button"
+                  
                   id="bttnSubmit"
                   className="bttnCompartirReporte"    
                   style={{
