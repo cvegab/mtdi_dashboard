@@ -1284,6 +1284,42 @@ const MtdiTable = (props) => {
               />
             </label>
 
+            <label>
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Número de orden
+              </h5>
+
+              <input 
+              type="number" 
+              id="quantity" 
+              name="quantity"
+              min="1"             
+              style={{
+                width: "193px",
+                height: "46px",
+                marginLeft: "1em",
+                backgroundColor: "white",
+                borderRadius: "17px",
+                fontSize: "10px",
+                marginLeft: "1em",
+                marginTop: "1em",
+                border:"none",
+                outline:"none"
+              }}
+              placeholder="&nbsp;&nbsp; Digite el número de orden"
+               />
+            </label>
+
+
             <Button
               color="primary"
               style={{
@@ -1353,10 +1389,11 @@ const MtdiTable = (props) => {
           <div id="OrderDesktopTable">
             {isLoading && (
               <MaterialTable
-                title=""
+                // title=""
                 options={{
                   search: false,
                 }}
+                title=""
                 icons={tableIcons}
                 columns={columns}
                 data={[]}
@@ -1522,7 +1559,6 @@ const MtdiTable = (props) => {
                   }
                 }}
                 key={data.id_mtdi}
-                title="Instance Table"
                 icons={tableIcons}
                 title=""
                 data={data}
