@@ -261,6 +261,7 @@ function MtdiReports() {
   };
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
   const [newData, setnewData] = useState([]);
+  const [newStackedData, setnewStackedData] = useState([]);
   const [redefinedChannel, setredefinedChannel] = useState([]);
   const [mixedGraphLabels, setmixedGraphLabels] = useState([]);
   const [pageFullyLoaded, setpageFullyLoaded] = useState(false);
@@ -458,9 +459,13 @@ function MtdiReports() {
   }, []);
   useEffect(() => {
     fetchResumenGraphDetails();
-    fetchStackedGraphForSales();
-    //fetchStackedGraphForOrders();
+   
+  fetchStackedGraphForSales();
+  
   }, [channelId]);
+  // useEffect(() => {
+  //  fetchStackedGraphForSales();
+  // }, [redefinedChannel])
   
   
   useEffect(() => {
@@ -484,7 +489,13 @@ function MtdiReports() {
   useEffect(() => {
     setStackedGraphForSales();
   }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
- 
+ //FOR CLEANING UP STATES
+  useEffect(() => {
+    return () => {
+      setnewStackedData(null);
+      setcR(null);
+    }
+}, []);
   const setStackedGraphForSales = ()=>{
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
@@ -642,7 +653,7 @@ function MtdiReports() {
         },
       },
     };
-    setstackedSalesGraph(MONTLY_SALES_GRAPH);
+   setstackedSalesGraph(MONTLY_SALES_GRAPH);
   }
   const setStackedGraphForOrders = () => {
    
@@ -891,17 +902,22 @@ function MtdiReports() {
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
 
-   fetch(url, requestOptions)
+  fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
-        console.log(redefinedChannel);
-        console.log(cR);
-        console.log(newChannelList);
-        console.log(obj.resume.stackedSalesGraphByMonth);
-        console.log(obj.resume.stackedOrderQtyGraphByMonth);
-        //NEW LOGIC
+        // console.log(obj);
+        // console.log(redefinedChannel);
+        // console.log(cR);
+         console.log(newChannelList);
+         if(newChannelList.length===0){
+           newChannelList = ['Vtex', 'Linio', 'MercadoLibre', 'Exito', 'Ripley', 'Shopify', 'Paris', 'Magento', 'Woocommerce', 'Chambas', 'ListaTienda'];
+         }
+        // console.log(obj.resume.stackedSalesGraphByMonth);
+        // console.log(obj.resume.stackedOrderQtyGraphByMonth);
+        //  setnewStackedData(obj.resume.stackedSalesGraphByMonth);
+      //  console.log(newStackedData);
+       // NEW LOGIC
         let linio = [];
         if(newChannelList.includes('Linio')){
               linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
@@ -913,17 +929,7 @@ function MtdiReports() {
              if(!newChannelList.includes('Linio')){
              setnewlinioSalesMonthly(0);
              }
-            //  let linioOrders = [];
-            //  if(newChannelList.includes('Linio')){
-            //        linioOrders = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            //              return item.Linio;
-            //            });
-            //             console.log(linioOrders[0].Linio);
-            //         setnewlinioMonthly(linioOrders[0].Linio);
-            //       }
-            //       if(!newChannelList.includes('Linio')){
-            //      setnewlinioMonthly(0);
-            //       }
+          
                 let Vtex = [];
        if(newChannelList.includes('Vtex')){
         Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
@@ -1196,6 +1202,7 @@ function MtdiReports() {
   useEffect(() => { 
     setResumenGraph();
   }, [newData]);
+ 
   // useEffect(() => {
   //  fetchPieChartDetails();
   // }, [cR, ChannelSelectedForDelete])
@@ -3427,6 +3434,7 @@ console.log(selectedChannelsArray);
     let x = channelsId.join(",");
     console.log(filteredChannelArray);
    if(filteredChannelArray.length!==0){
+     console.log('hi');
     setcR(filteredChannelArray);
     setchannelId(x);
    }
