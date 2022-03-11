@@ -386,6 +386,7 @@ function MtdiReports() {
   const [newWooCommerceSalesMonthly, setnewWooCommerceSalesMonthly] = useState([]);
   const [newShopifyMonthly, setnewShopifyMonthly] = useState([]);
   const [newShopifySalesMonthly, setnewShopifySalesMonthly] = useState([]);
+  const [newMercadoOrdersMonthly, setnewMercadoOrdersMonthly] = useState([]);
   const [newMercadoSalesMonthly, setnewMercadoSalesMonthly] = useState([]);
   const [newParisSales, setnewParisSales] = useState([]);
   const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
@@ -454,14 +455,14 @@ function MtdiReports() {
     getDateLabels();
     fetchResumenGraphDetails();
     fetchStackedGraphForSales();
-    //fetchStackedGraphForOrders();
+    fetchStackedGraphForOrders();
     //fetchStackedGraphSalesForFirstTime();
   }, []);
   useEffect(() => {
     fetchResumenGraphDetails();
    
   fetchStackedGraphForSales();
-  
+  fetchStackedGraphForOrders();
   }, [channelId]);
   // useEffect(() => {
   //  fetchStackedGraphForSales();
@@ -483,9 +484,9 @@ function MtdiReports() {
   // useEffect(() => {
   //  fetchStackedGraphForSales();
   // }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
-  // useEffect(() => {
-  //   setStackedGraphForOrders();
-  // }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
+  useEffect(() => {
+    setStackedGraphForOrders();
+  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
   useEffect(() => {
     setStackedGraphForSales();
   }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
@@ -799,6 +800,10 @@ function MtdiReports() {
         console.log(obj);
         console.log(redefinedChannel);
         console.log(newChannelList);
+       
+        if(newChannelList.length===0){
+          newChannelList = ['Vtex', 'Linio', 'MercadoLibre', 'Exito', 'Ripley', 'Shopify', 'Paris', 'Magento', 'Woocommerce', 'Chambas', 'ListaTienda'];
+        }
         let linio = [];
        if(newChannelList.includes('Linio')){
         linio = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
