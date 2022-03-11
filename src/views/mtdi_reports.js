@@ -388,6 +388,7 @@ function MtdiReports() {
   const [newShopifySalesMonthly, setnewShopifySalesMonthly] = useState([]);
   const [newMercadoOrdersMonthly, setnewMercadoOrdersMonthly] = useState([]);
   const [newMercadoSalesMonthly, setnewMercadoSalesMonthly] = useState([]);
+  const [newParisOrders, setnewParisOrders] = useState([]);
   const [newParisSales, setnewParisSales] = useState([]);
   const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
   const [newListaSales, setnewListaSales] = useState([]);
@@ -486,7 +487,7 @@ function MtdiReports() {
   // }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
   useEffect(() => {
     setStackedGraphForOrders();
-  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly]);
+  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisSales]);
   useEffect(() => {
     setStackedGraphForSales();
   }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
@@ -707,6 +708,16 @@ function MtdiReports() {
           barThickness: 30,
         },
         {
+          label: "Paris",
+          backgroundColor: "#00B6CB",
+          borderRadius: "20px",
+          borderRadius: 6,
+          barThickness: 30,
+          stack: "2",
+          data: newParisOrders,
+          barThickness: 30,
+        },
+        {
           label: "Linio",
           backgroundColor: "#F29A32",
           borderRadius: "20px",
@@ -900,7 +911,18 @@ function MtdiReports() {
        }
        if(!newChannelList.includes('MercadoLibre')){
         setnewMercadoOrdersMonthly(0);
-       }    
+       }  
+       let  pari=[];
+       if(newChannelList.includes('Paris')){
+       pari = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+              return item.Paris;
+            });
+             
+           setnewParisOrders(pari[0].Paris);
+       }
+       if(!newChannelList.includes('Paris')){
+      setnewParisOrders(0);
+       }      
       })
       .catch((error) => console.log("error", error));
   };
