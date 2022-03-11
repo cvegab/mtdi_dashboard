@@ -489,7 +489,7 @@ function MtdiReports() {
   // }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
   useEffect(() => {
     setStackedGraphForOrders();
-  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisOrders,newExtitoOrders]);
+  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisOrders,newExtitoOrders,newListaOrders]);
   useEffect(() => {
     setStackedGraphForSales();
   }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
@@ -749,6 +749,15 @@ function MtdiReports() {
           barThickness: 30,
         },
         {
+          label: "ListaTienda",
+          backgroundColor: "blue",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data: newListaOrders,
+          barThickness: 30,
+        },
+        {
           label: "WooCommerce",
           backgroundColor: "purple",
           borderRadius: "20px",
@@ -945,7 +954,18 @@ function MtdiReports() {
        }
        if(!newChannelList.includes('Exito')){
     setnewExtitoOrders(0);
-       }      
+       }  
+       let  lista=[];
+       if(newChannelList.includes('ListaTienda')){
+       lista = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+              return item.ListaTienda;
+            });
+             
+          setnewListaOrders(lista[0].ListaTienda);
+       }
+       if(!newChannelList.includes('ListaTienda')){
+   setnewListaOrders(0);
+       }     
       })
       .catch((error) => console.log("error", error));
   };
