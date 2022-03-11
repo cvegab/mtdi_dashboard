@@ -390,6 +390,8 @@ function MtdiReports() {
   const [newMercadoSalesMonthly, setnewMercadoSalesMonthly] = useState([]);
   const [newParisOrders, setnewParisOrders] = useState([]);
   const [newParisSales, setnewParisSales] = useState([]);
+  const [newExtitoOrders, setnewExtitoOrders] = useState([]);
+  const [newListaOrders, setnewListaOrders] = useState([]);
   const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
   const [newListaSales, setnewListaSales] = useState([]);
   const [ripleyStackedSalesState, setripleyStackedSalesState] = useState([]);
@@ -487,7 +489,7 @@ function MtdiReports() {
   // }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
   useEffect(() => {
     setStackedGraphForOrders();
-  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisSales]);
+  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisOrders,newExtitoOrders]);
   useEffect(() => {
     setStackedGraphForSales();
   }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
@@ -718,6 +720,16 @@ function MtdiReports() {
           barThickness: 30,
         },
         {
+          label: "Exito",
+          backgroundColor: "#E4C41B",
+          borderRadius: "20px",
+          borderRadius: 6,
+          barThickness: 30,
+          stack: "2",
+          data: newExtitoOrders,
+          barThickness: 30,
+        },
+        {
           label: "Linio",
           backgroundColor: "#F29A32",
           borderRadius: "20px",
@@ -922,6 +934,17 @@ function MtdiReports() {
        }
        if(!newChannelList.includes('Paris')){
       setnewParisOrders(0);
+       }   
+       let  exi=[];
+       if(newChannelList.includes('Exito')){
+       exi = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+              return item.Exito;
+            });
+             
+          setnewExtitoOrders(exi[0].Exito);
+       }
+       if(!newChannelList.includes('Exito')){
+    setnewExtitoOrders(0);
        }      
       })
       .catch((error) => console.log("error", error));
