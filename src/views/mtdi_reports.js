@@ -486,7 +486,7 @@ function MtdiReports() {
   // }, [cR,ChannelSelectedForDelete,store,channelId,channels,filteredStoreData]);
   useEffect(() => {
     setStackedGraphForOrders();
-  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly]);
+  }, [newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly]);
   useEffect(() => {
     setStackedGraphForSales();
   }, [newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
@@ -698,6 +698,15 @@ function MtdiReports() {
           barThickness: 30,
         },
         {
+          label: "Mercadolibre",
+          backgroundColor: "yellow",
+          borderRadius: "20px",
+          stack: "2",
+          borderRadius: 6,
+          data: newMercadoOrdersMonthly,
+          barThickness: 30,
+        },
+        {
           label: "Linio",
           backgroundColor: "#F29A32",
           borderRadius: "20px",
@@ -881,6 +890,17 @@ function MtdiReports() {
        if(!newChannelList.includes('Shopify')){
       setnewShopifyMonthly(0);
        }
+       let  mer=[];
+       if(newChannelList.includes('MercadoLibre')){
+       mer = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+              return item.MercadoLibre;
+            });
+             
+           setnewMercadoOrdersMonthly(mer[0].MercadoLibre);
+       }
+       if(!newChannelList.includes('MercadoLibre')){
+        setnewMercadoOrdersMonthly(0);
+       }    
       })
       .catch((error) => console.log("error", error));
   };
