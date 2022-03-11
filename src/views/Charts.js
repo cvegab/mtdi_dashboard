@@ -4113,15 +4113,11 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
     
           
        
-<<<<<<< HEAD
-         {/* <Row>
-=======
      
           </div>}
         </div>
 
         <Row>
->>>>>>> Dev
            <div class="text-center" style={{marginTop: "3em"}}>
              
             
