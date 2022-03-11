@@ -24,6 +24,5 @@ ReactDOM.render(
   // </BrowserRouter>,
     <App />,
 
-
   document.getElementById("root")
 );
