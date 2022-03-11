@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import iconG1 from "../assets/img/icons/Reports/iconG1.png";
 import iconG2 from "../assets/img/icons/Reports/iconG2.png";
 import iconG3 from "../assets/img/icons/Reports/iconG3.png";
@@ -37,6 +39,7 @@ import {
   Col,
   Button,
   Input,
+  Spinner,
   Badge
 } from "reactstrap";
 
@@ -319,7 +322,7 @@ function Charts() {
     ],
   };
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
- const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
+  const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
   const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
@@ -363,11 +366,13 @@ function Charts() {
     new Date().toISOString().slice(0, 10)
   );
   const [isLoading, setisLoading] = useState(false);
+  const [isDownloadingReports, setisDownloadingReports] = useState(false);
   const [StackedisLoading, setStackedisLoading] = useState(false);
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
   const [fromDate, setfromDate] = useState(new Date());
   const [showFilter, setshowFilter] = useState(false);
+  const printReport = React.useRef();
   //SALES CHANNEL TOTAL SALES STATES
   const [ripley, setripley] = useState(0);
   const [vtex, setvtex] = useState(0);
@@ -687,7 +692,7 @@ setchambasStackedOrdersState(0);
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-
+console.log(obj);
   let res1 = [];
 
 console.log(ChannelSelectedForDelete);
@@ -2233,7 +2238,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
       .then((result) => {
 
         var obj = JSON.parse(result);
-
+        console.log(obj);
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
@@ -2376,6 +2381,30 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
+
+  // Function to generate a PDF Report 
+  const handleDownloadPdf = async () => {
+
+    setisDownloadingReports(true);
+    const element = printReport.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL('image/png');
+    
+
+    const pdf = new jsPDF('p', 'in', 'legal', true);
+    pdf.setFillColor(245);
+    pdf.rect(0, 0, 210, 700, "F");
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = 
+      (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-3);
+    pdf.save('InstanceReporte.pdf');
+    setisDownloadingReports(false);
+  };
+
+
  
   return (
     <>
@@ -2713,7 +2742,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
           )}
           <br></br>
 
-
+        <div id="generateReport" ref={printReport}>     
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
@@ -3274,8 +3303,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
 
            <Col id="ColMixedChart" lg="7" md="12" sm="12" >
               <Card 
-              className="car-chart" 
+              className="card-chart" 
               id="mixedChartCustom"
+              
               >
                 <CardHeader>
                   <CardTitle id="textNameTable">
@@ -3307,7 +3337,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                     </CardTitle>
                   </CardHeader>
                   <CardBody 
-                  // style={{ height: "342px" }}
+                  
                   >
                     <Pie
                       id="barChartCustom"
@@ -3331,8 +3361,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Vtex
-                    {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                     <p className="card-category">
+                   
+                      <p className="card-category">
                        {(() => {
                           let number  = vtex;
                           let formatted = new Intl.NumberFormat("es-CL",{
@@ -3587,15 +3617,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 </div>
                   </CardFooter>
                 </Card>
-                </Col>
+                </Col> 
 
 
             </Row>
 
             <Row>
-           <Col md="6">
+          <Col md="6">
 
-                <Card className="card-chart">
+            <Card className="card-chart">
                   <CardHeader id="textNameTable">
                     <strong>Órdenes por canal de venta</strong>
                   </CardHeader>
@@ -3785,9 +3815,9 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 </div>
 
                     </CardFooter>
-                </Card>
+            </Card>
 
-              </Col>
+          </Col> 
 
 {StackedisLoading && <SplashScreen></SplashScreen>}
            {!StackedisLoading &&  <Col md="6">
@@ -4080,17 +4110,55 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             </Col>}
             </Row>
           
-          <Row>
-         
-          </Row>
+    
+          
        
+<<<<<<< HEAD
          {/* <Row>
+=======
+     
+          </div>}
+        </div>
+
+        <Row>
+>>>>>>> Dev
            <div class="text-center" style={{marginTop: "3em"}}>
-              <button
+             
+            
+              {!isDownloadingReports && (
+                <button
+                  
+                  id="bttnSubmit"
+                  className="bttnCompartirReporte"    
+                  style={{
+                    backgroundColor: "#1D308E",
+                    textAlign: "center",
+                    width: "296px",
+                    height: "64px",
+                    padding: "22px 81px",
+                    borderRadius: "33px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    fontWeight:"bold",
+                    border:"0",
+                    fontSize: "11px"
+                  }}
+                  onClick={handleDownloadPdf}
+                >
+                <span className="btn-label">
+                  <img src={iconShareReport} width="19px"/>
+                </span>
+                  &nbsp;Descargar Reporte &nbsp;
+                </button>
+              )}
+              {isDownloadingReports && (
+                <Button
+                type="button"
                 id="bttnSubmit"
-                className="bttnCompartirReporte"
+                className="bttnCompartirReporte"    
                 style={{
-                  backgroundColor: "#1D308E",
+                  backgroundColor: "#06cbc1",
                   textAlign: "center",
                   width: "296px",
                   height: "64px",
@@ -4102,18 +4170,23 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   fontWeight:"bold",
                   border:"0",
                   fontSize: "11px"
-
-
                 }}
-              >
+                onClick={handleDownloadPdf}
+                disabled
+                >
+                  <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Descargando...
+                </Button>
+              )}
+            
+        
+        
 
-                <span className="btn-label">
-                  <img src={iconShareReport} width="19px"/>
-                </span>
-                &nbsp;Compartir Reporte &nbsp;
-              </button>
-
-              <button
+              {/* <button
                 id="bttnSubmit"
                 className="bttnSiguienteReporte"
                 style={{
@@ -4135,13 +4208,11 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 Siguiente Reporte &nbsp;
                 <span className="btn-label">
                    <img src={iconNextReport} width="19px"/>
-                </span>
-              </button>
+                </span> */}
+              {/* </button> */}
             </div>
-          </Row> */}
-
-        </div>}
-        </div>
+          </Row>
+        </div>  
       )}
     </>
   );
