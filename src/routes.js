@@ -27,14 +27,14 @@ const routes = [
 
  
 
-  {
-    path: "/charts",
-    name: "Reportes",
-    icon: "nc-icon nc-chart-bar-32",
-    component: Charts,
-    layout: "/admin",
+  // {
+  //   path: "/charts",
+  //   name: "Reportes",
+  //   icon: "nc-icon nc-chart-bar-32",
+  //   component: Charts,
+  //   layout: "/admin",
 
-  },
+  // },
   {
     path: "/reports",
     name: "Reportes",
@@ -44,13 +44,13 @@ const routes = [
 
   },
 
-  {
-    path: "/logysto",
-    name: "Ingreso manual OC",
-    icon: "nc-icon nc-laptop",
-    component: Logysto,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/logysto",
+  //   name: "Ingreso manual OC",
+  //   icon: "nc-icon nc-laptop",
+  //   component: Logysto,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/extended-tables",
   //   name: "Extended Tables",
