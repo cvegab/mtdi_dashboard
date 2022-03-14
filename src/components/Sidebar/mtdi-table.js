@@ -93,7 +93,7 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
-
+const [searchOrderId, setsearchOrderId] = useState('');
   var stepsDesk = [];
   var a = navigator.userAgent;
   var agents = new Array(
@@ -537,11 +537,19 @@ const MtdiTable = (props) => {
   };
 
   const applyFiltersButtonhandler = async () => {
+    console.log(searchOrderId);
+    let url = '';
+    if(searchOrderId !== ''){
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`
+    }else{
+       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    }
     setisLoading(true);
     setfiltersApplied(true);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+   
     // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     console.log(url);
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -1007,6 +1015,7 @@ const MtdiTable = (props) => {
   };
  const searchOrderIdHandler = (event)=>{
 console.log(event.target.value);
+setsearchOrderId(event.target.value);
  }
   return (
     <React.Fragment>
