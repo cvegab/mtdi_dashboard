@@ -569,12 +569,19 @@ const [searchOrderId, setsearchOrderId] = useState('');
       }
       const data = await response.json();
       console.log(data);
-      console.log(data[0].total);
-      if (data[0].total === 0) {
+ //CONDITION FOR THE FILTER BY ORDER ID    
+if(data.length === 0){
+  setData([]);
+}else {
+  setData(data);
+}
+   //CONDITION FOR FILTER THE ORDER BY PAIS,TIENDA 
+      if (data.length === 1 &&data[0].total === 0) {
         setData([]);
       } else {
         setData(data);
       }
+    
       console.log(data.length);
 
       setisLoading(false);
