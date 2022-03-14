@@ -3181,7 +3181,7 @@ console.log(selectedChannelsArray);
     const pdfHeight = 
       (imgProperties.height * pdfWidth) / imgProperties.width;
 
-    pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-5);
+    pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-4);
     pdf.save('InstanceReporte.pdf');
     setisDownloadingReports(false);
   };
@@ -5075,18 +5075,47 @@ console.log(selectedChannelsArray);
               </Row>
               
 
-              
-
+          
+            </div>
+          )}
+          </div>
               <Row>
-              <div class="text-center" style={{ marginTop: "3em" }}>
-            
-                {!isDownloadingReports && (
-                <button
-                  
+                <div class="text-center" style={{ marginTop: "3em" }}>
+              
+                  {!isDownloadingReports && (
+                  <button
+                    
+                    id="bttnSubmit"
+                    className="bttnCompartirReporte"    
+                    style={{
+                      backgroundColor: "#1D308E",
+                      textAlign: "center",
+                      width: "296px",
+                      height: "64px",
+                      padding: "22px 81px",
+                      borderRadius: "33px",
+                      color: "#FFFFFF",
+                      marginLeft: "1em",
+                      textTransform: "none",
+                      fontWeight:"bold",
+                      border:"0",
+                      fontSize: "11px"
+                    }}
+                    onClick={handleDownloadPdf}
+                  >
+                  <span className="btn-label">
+                    <img src={iconShareReport} width="19px"/>
+                  </span>
+                    &nbsp;Descargar Reporte &nbsp;
+                  </button>
+                )}
+                {isDownloadingReports && (
+                  <Button
+                  type="button"
                   id="bttnSubmit"
                   className="bttnCompartirReporte"    
                   style={{
-                    backgroundColor: "#1D308E",
+                    backgroundColor: "#06cbc1",
                     textAlign: "center",
                     width: "296px",
                     height: "64px",
@@ -5100,75 +5129,23 @@ console.log(selectedChannelsArray);
                     fontSize: "11px"
                   }}
                   onClick={handleDownloadPdf}
-                >
-                <span className="btn-label">
-                  <img src={iconShareReport} width="19px"/>
-                </span>
-                  &nbsp;Descargar Reporte &nbsp;
-                </button>
-              )}
-              {isDownloadingReports && (
-                <Button
-                type="button"
-                id="bttnSubmit"
-                className="bttnCompartirReporte"    
-                style={{
-                  backgroundColor: "#06cbc1",
-                  textAlign: "center",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight:"bold",
-                  border:"0",
-                  fontSize: "11px"
-                }}
-                onClick={handleDownloadPdf}
-                disabled
-                >
-                  <Spinner
-                    style={{ width: "0.7rem", height: "0.7rem" }}
-                    type="grow"
-                    color="light"
-                  />
-                  &nbsp; Descargando...
-                </Button>
-              )}
-    {/* 
-                  <button
-                    id="bttnSubmit"
-                    className="bttnSiguienteReporte"
-                    style={{
-                      backgroundColor: "white",
-                      textAlign: "center",
-                      color: "black",
-                      width: "296px",
-                      height: "64px",
-                      padding: "22px 81px",
-                      borderRadius: "33px",
-                      fontSize: "11px",
-                      marginLeft: "1em",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                      border: "0",
-                    }}
+                  disabled
                   >
-                    Siguiente Reporte &nbsp;
-                    <span className="btn-label">
-                      <img src={iconNextReport} width="19px" />
-                    </span>
-                  </button> */}
+                    <Spinner
+                      style={{ width: "0.7rem", height: "0.7rem" }}
+                      type="grow"
+                      color="light"
+                    />
+                    &nbsp; Descargando...
+                  </Button>
+                )}
+                
                 </div>
               </Row>
-            </div>
-          )}
-        </div>
-      </div>
+        
+        </div> 
       )}
-    </>
+    </> 
   );
 }
 
