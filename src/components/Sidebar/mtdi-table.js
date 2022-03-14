@@ -1005,7 +1005,9 @@ const MtdiTable = (props) => {
 
     location.reload();
   };
-
+ const searchOrderIdHandler = (event)=>{
+console.log(event.target.value);
+ }
   return (
     <React.Fragment>
       {isLoading && <SplashScreen />}
@@ -1316,6 +1318,7 @@ const MtdiTable = (props) => {
                 outline:"none"
               }}
               placeholder="&nbsp;&nbsp; Digite el número de orden"
+              onChange={searchOrderIdHandler}
                />
             </label>
 
