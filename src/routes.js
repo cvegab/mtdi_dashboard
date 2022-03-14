@@ -13,6 +13,7 @@ import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
 import MtdiTable from "components/Sidebar/mtdi-table";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
+import MtdiReports from "views/mtdi_reports";
 
 const routes = [
   {
@@ -26,11 +27,19 @@ const routes = [
 
  
 
+  // {
+  //   path: "/charts",
+  //   name: "Reportes",
+  //   icon: "nc-icon nc-chart-bar-32",
+  //   component: Charts,
+  //   layout: "/admin",
+
+  // },
   {
-    path: "/charts",
+    path: "/reports",
     name: "Reportes",
     icon: "nc-icon nc-chart-bar-32",
-    component: Charts,
+    component: MtdiReports,
     layout: "/admin",
 
   },
