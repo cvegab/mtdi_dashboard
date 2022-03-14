@@ -537,7 +537,6 @@ const [searchOrderId, setsearchOrderId] = useState('');
   };
 
   const applyFiltersButtonhandler = async () => {
-    console.log(searchOrderId);
     let url = '';
     if(searchOrderId !== ''){
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`
