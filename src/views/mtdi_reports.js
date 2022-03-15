@@ -1850,7 +1850,895 @@ setlistaPie(listaSalesValue[0]);
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
-        let res1 = []; 
+        let res1 = [];
+
+        console.log(ChannelSelectedForDelete);
+        let newChannel = [
+          "Vtex",
+          "Linio",
+          "MercadoLibre",
+          "Exito",
+          "Ripley",
+          "Shopify",
+          "Paris",
+          "Magento",
+          "Woocommerce",
+          "Chambas",
+          "ListaTienda",
+        ];
+        let xio = [];
+        if (ChannelSelectedForDelete !== undefined) {
+          if (ChannelSelectedForDelete.channel === "Ripley") {
+            xio = deleteChannelArray.filter((item) => {
+              return item !== ChannelSelectedForDelete.channel;
+            });
+          }
+          if (ChannelSelectedForDelete.channel === "Shopify") {
+            console.log("hello");
+            xio = deleteChannelArray.filter((item) => {
+              return item !== ChannelSelectedForDelete.channel;
+            });
+          }
+          if (ChannelSelectedForDelete.channel === "Magento") {
+            console.log("hello");
+            xio = deleteChannelArray.filter((item) => {
+              return item !== ChannelSelectedForDelete.channel;
+            });
+          }
+          if (ChannelSelectedForDelete.channel === "Linio") {
+            console.log("hello");
+            xio = deleteChannelArray.filter((item) => {
+              return item !== ChannelSelectedForDelete.channel;
+            });
+          }
+          if (ChannelSelectedForDelete.channel === "MercadoLibre") {
+            console.log("hello");
+            xio = deleteChannelArray.filter((item) => {
+              return item !== ChannelSelectedForDelete.channel;
+            });
+          }
+          if (ChannelSelectedForDelete.channel === "Chambas") {
+            console.log("hello");
+            xio = deleteChannelArray.filter((item) => {
+              return item !== ChannelSelectedForDelete.channel;
+            });
+          }
+        }
+        console.log(xio);
+        setdeleteChannelArray(xio);
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let LINIOMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            return (
+              item.channel == 5 && month === splitMonth && year === splitYear
+            );
+          });
+          res1.push(LINIOMonthlySales);
+        }
+
+        let LINIOMonthlyArray = [];
+        let LINIOStackedSalesArray = [];
+        for (let i = 0; i <= res1.length - 1; i++) {
+          let channel5MonthlySales = res1[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res1[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+
+          LINIOMonthlyArray.push(totalOrder);
+          LINIOStackedSalesArray.push(totalMonthlySales);
+          if (deleteChannelArray.includes("Linio")) {
+            setlinioStackedOrdersState(LINIOMonthlyArray);
+            setlinioStackedSalesState(LINIOStackedSalesArray);
+          }
+        }
+
+        //RIPLEY STACKED
+
+        let res2 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            return (
+              item.channel == 4 && month === splitMonth && year === splitYear
+            );
+          });
+          res2.push(ripleyMonthlySales);
+        }
+
+        let ripleyMonthlyArray = [];
+        let ripleyStackedSalesArray = [];
+        for (let i = 0; i <= res2.length - 1; i++) {
+          let channel5MonthlySales = res2[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res2[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+
+          ripleyMonthlyArray.push(totalOrder);
+          ripleyStackedSalesArray.push(totalMonthlySales);
+
+          if (deleteChannelArray.includes("Ripley")) {
+            console.log("ripley present");
+            setripleyLength(ripleyMonthlyArray.length);
+            setripleyStackedOrdersState(ripleyMonthlyArray);
+            setripleyStackedSalesState(ripleyStackedSalesArray);
+          }
+        }
+
+        //  WOO COMMERCE STACKED GRAPH ORDERS
+        let res3 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 3 && month === splitMonth && year === splitYear
+            );
+          });
+          res3.push(ripleyMonthlySales);
+        }
+
+        let WooCommerceMonthlyArray = [];
+        let WooCommerceStackedSalesArray = [];
+        for (let i = 0; i <= res3.length - 1; i++) {
+          let channel5MonthlySales = res3[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res3[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          WooCommerceMonthlyArray.push(totalOrder);
+          WooCommerceStackedSalesArray.push(totalMonthlySales);
+          if (deleteChannelArray.includes("Woocommerce")) {
+            setwooCommerceStackedOrdersState(WooCommerceMonthlyArray);
+            setwooCommerceStackedSalesState(WooCommerceStackedSalesArray);
+          }
+        }
+        // SHOPIFY STACKED MONTHLY DATA
+
+        let res4 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 6 && month === splitMonth && year === splitYear
+            );
+          });
+          res4.push(ripleyMonthlySales);
+        }
+
+        let ShopifyMonthlyArray = [];
+        let shopifyStackedSalesArray = [];
+        for (let i = 0; i <= res4.length - 1; i++) {
+          let channel5MonthlySales = res4[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res4[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          if (deleteChannelArray.includes("Shopify")) {
+            ShopifyMonthlyArray.push(totalOrder);
+            shopifyStackedSalesArray.push(totalMonthlySales);
+
+            setshopifyStackedOrdersState(ShopifyMonthlyArray);
+            setshopifyStackedSalesState(shopifyStackedSalesArray);
+          }
+        }
+        //MERCADO LIBRE STACKED MONTHLY DATA
+        let res5 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 2 && month === splitMonth && year === splitYear
+            );
+          });
+          res5.push(ripleyMonthlySales);
+        }
+
+        let MercadoArray = [];
+        let MercadoStackedSalesArray = [];
+        for (let i = 0; i <= res5.length - 1; i++) {
+          let channel5MonthlySales = res5[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res5[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          MercadoArray.push(totalOrder);
+
+          MercadoStackedSalesArray.push(totalMonthlySales);
+          if (deleteChannelArray.includes("MercadoLibre")) {
+            console.log("mercado");
+            setmercadoStackedOrdersState(MercadoArray);
+            setmercadoStackedSalesState(MercadoStackedSalesArray);
+          }
+        }
+
+        //CHAMBAS STACKED GRAPH MONTHLY
+        let res6 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 11 && month === splitMonth && year === splitYear
+            );
+          });
+          res6.push(ripleyMonthlySales);
+        }
+
+        let ChambasMonthlyArray = [];
+        let ChambasStackedSalesArray = [];
+        for (let i = 0; i <= res6.length - 1; i++) {
+          let channel5MonthlySales = res6[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res6[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          ChambasMonthlyArray.push(totalOrder);
+          if (deleteChannelArray.includes("Chambas")) {
+            ChambasStackedSalesArray.push(totalMonthlySales);
+            setchambasStackedOrdersState(ChambasMonthlyArray);
+            setchambasStackedSalesState(ChambasStackedSalesArray);
+          }
+        }
+
+        //VTEX STACKED MONTHLY ARRAY
+
+        let res7 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 7 && month === splitMonth && year === splitYear
+            );
+          });
+          res7.push(ripleyMonthlySales);
+        }
+
+        let vtexMonthlyArray = [];
+        let vtexStackedSalesArray = [];
+        for (let i = 0; i <= res7.length - 1; i++) {
+          let channel5MonthlySales = res7[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res7[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          vtexMonthlyArray.push(totalOrder);
+          vtexStackedSalesArray.push(totalMonthlySales);
+          console.log(vtexMonthlyArray);
+          if (deleteChannelArray.includes("Vtex")) {
+            setvtexStackedOrdersState(vtexMonthlyArray);
+            setvtexStackedSalesState(vtexStackedSalesArray);
+          }
+        }
+        //MAGENTO MONTHLY ARRAY
+        let res8 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 9 && month === splitMonth && year === splitYear
+            );
+          });
+          res8.push(ripleyMonthlySales);
+        }
+
+        let MagentoMonthlyArray = [];
+        let magentoStackedSalesArray = [];
+        for (let i = 0; i <= res8.length - 1; i++) {
+          let channel5MonthlySales = res8[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res8[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          if (deleteChannelArray.includes("Magento")) {
+            MagentoMonthlyArray.push(totalOrder);
+            magentoStackedSalesArray.push(totalMonthlySales);
+            setmagentoStackedOrdersState(MagentoMonthlyArray);
+            setmagentoStackedSalesState(magentoStackedSalesArray);
+          }
+        }
+        // LISTA TIENDA MONTHLY SALES
+        let res9 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 8 && month === splitMonth && year === splitYear
+            );
+          });
+          res9.push(ripleyMonthlySales);
+        }
+
+        let ListaMonthlyArray = [];
+        let ListaStackedSalesArray = [];
+        for (let i = 0; i <= res9.length - 1; i++) {
+          let channel5MonthlySales = res9[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res9[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+
+          ListaMonthlyArray.push(totalOrder);
+          ListaStackedSalesArray.push(totalMonthlySales);
+          if (deleteChannelArray.includes("ListaTienda")) {
+            setlistaStackedOrdersState(ListaMonthlyArray);
+            setlistaStackedSalesState(ListaStackedSalesArray);
+          }
+        }
+
+        // PARIS STACKED MONTHLY SALES
+        let res10 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == 1 && month === splitMonth && year === splitYear
+            );
+          });
+          res10.push(ripleyMonthlySales);
+        }
+
+        let ParisMonthlyArray = [];
+        let ParisStackedSalesArray = [];
+        for (let i = 0; i <= res10.length - 1; i++) {
+          let channel5MonthlySales = res10[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res10[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+
+          ParisMonthlyArray.push(totalOrder);
+          ParisStackedSalesArray.push(totalMonthlySales);
+          if (deleteChannelArray.includes("Paris")) {
+            setparisStackedOrdersState(ParisMonthlyArray);
+            setparisStackedSalesState(ParisStackedSalesArray);
+          }
+        }
+        //EXITO MONTHLY STACKED ARRAY
+
+        let res11 = [];
+        for (let i = 0; i <= stackedDatevalues.length - 1; i++) {
+          let ripleyMonthlySales = obj.detail.filter((item) => {
+            let dateTobeCompared = stackedDatevalues[i];
+
+            const splitDateCompared = dateTobeCompared.split(/[- :]/);
+            const splitMonth = splitDateCompared[1];
+            const splitYear = splitDateCompared[0];
+            const dateTime = item.date_created;
+            const parts = dateTime.split(/[- :]/);
+            var month = parts[1];
+            var year = parts[0];
+            let result = [];
+            return (
+              item.channel == "12" && month === splitMonth && year === splitYear
+            );
+          });
+          res11.push(ripleyMonthlySales);
+        }
+
+        let ExitoMonthlyArray = [];
+        let ExitoStackedSalesArray = [];
+        for (let i = 0; i <= res11.length - 1; i++) {
+          let channel5MonthlySales = res11[i].map((item, index) => {
+            return item.orders_qty;
+          });
+          let stackedSalesMonthlySales = res11[i].map((item, index) => {
+            return item.total;
+          });
+          let totalOrder = channel5MonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+          let totalMonthlySales = stackedSalesMonthlySales.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+
+          ExitoMonthlyArray.push(totalOrder);
+          ExitoStackedSalesArray.push(totalMonthlySales);
+          if (deleteChannelArray.includes("Exito")) {
+            setexitoStackedOrdersState(ExitoMonthlyArray);
+            setexitoStackedSalesState(ExitoStackedSalesArray);
+          }
+        }
+
+        let ripleySales = obj.detail.filter((item) => {
+          return item.channel == 4;
+        });
+        let ripleySalesArray = ripleySales.map((item) => {
+          return item.total;
+        });
+        let ripleyOrder = ripleySales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalRipleyOrder = ripleyOrder.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let totalRipleySales = ripleySalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(totalRipleySales);
+        let vtexSales = obj.detail.filter((item) => {
+          return item.channel == 7;
+        });
+
+        let vtexSalesArray = vtexSales.map((item) => {
+          return item.total;
+        });
+        let vtexrders = vtexSales.map((item) => {
+          return item.orders_qty;
+        });
+        let TotalVtexOrder = vtexrders.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let totalVtexSales = vtexSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let linioSales = obj.detail.filter((item) => {
+          return item.channel == 5;
+        });
+
+        let linioSalesArray = linioSales.map((item) => {
+          return item.total;
+        });
+        let linioOrderQuantity = linioSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalLinioOrder = linioOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let totallinioSales = linioSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let mercadoSales = obj.detail.filter((item) => {
+          return item.channel == 2;
+        });
+        console.log(mercadoSales);
+        // if (mercadoSales.length === 0) {
+        //   setmercadoLibreOrders(0);
+        //   setmercadoLibre(0);
+        // }else{
+        let mercadoSalesArray = mercadoSales.map((item) => {
+          return item.total;
+        });
+        let totalmercadoSales = mercadoSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        console.log(mercadoSalesArray);
+        let mercadoOrderQuantity = mercadoSales.map((item) => {
+          return item.orders_qty;
+        });
+        // let totalMercadoOrders =  mercadoOrderQuantity.map((item) => {
+        //   return item.orders_qty;
+        // });
+        let totalMercadoOrders = mercadoOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        if (ChannelSelectedForDelete !== undefined) {
+          if (ChannelSelectedForDelete.channel === "MercadoLibre")
+            totalMercadoOrders = "0";
+          totalmercadoSales = "0";
+        }
+        console.log(totalmercadoSales);
+        if (ChannelSelectedForDelete !== undefined) {
+          if (ChannelSelectedForDelete.channel === "Paris")
+            totalparisSales = "0";
+        }
+
+        let exitoSales = obj.detail.filter((item) => {
+          return item.channel == "12";
+        });
+        // if (exitoSales.length === 0) {
+        //   setexitoOrders(0);
+        //   setexito(0);
+        // }
+        let exitoSalesArray = exitoSales.map((item) => {
+          return item.total;
+        });
+        let totalexitoSales = exitoSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        if (ChannelSelectedForDelete !== undefined) {
+          if (ChannelSelectedForDelete.channel === "Exito")
+            totalexitoSales = "0";
+        }
+        let shopifySales = obj.detail.filter((item) => {
+          return item.channel == 6;
+        });
+        let shopifySalesArray = shopifySales.map((item) => {
+          return item.total;
+        });
+        let shopifyOrdersquantity = shopifySales.map((item) => {
+          return item.orders_qty;
+        });
+
+        let totalShopifyOrder = shopifyOrdersquantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let totalshopifySales = shopifySalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        // let parisSales = obj.filter((item) => {
+        //   return item.channel == 1;
+        // });
+
+        // let parisSalesArray = parisSales.map((item) => {
+        //   return item.total;
+        // });
+        // let parisOrderQuantity = parisSales.map((item) => {
+        //   return item.orders_qty;
+        // });
+        // let totalparisOrder = parisOrderQuantity.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
+
+        // let totalparisSales = parisSalesArray.reduce(
+        //   (partialSum, a) => partialSum + a,
+        //   0
+        // );
+        let parisSales = obj.detail.filter((item) => {
+          return item.channel == 1;
+        });
+
+        // // if (parisSales.length === 0) {
+        // //   console.log('hi');
+        // //   setparisOrders(0);
+        // //   setparis(0);
+        // //   totalparisSales = 0;
+        // // }
+        let parisSalesArray = parisSales.map((item) => {
+          return item.total;
+        });
+        console.log(parisSalesArray);
+        let totalparisSales = parisSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let parisOrderQuantity = parisSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalparisOrder = parisOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        if (ChannelSelectedForDelete !== undefined) {
+          if (ChannelSelectedForDelete.channel === "Paris")
+            totalparisSales = "0";
+          totalparisOrder = "0";
+        }
+        let magentoSales = obj.detail.filter((item) => {
+          return item.channel == 9;
+        });
+        let magentoSalesOrders = magentoSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalMagentoOrders = magentoSalesOrders.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let magentoSalesArray = magentoSales.map((item) => {
+          return item.total;
+        });
+        let totalmagentoSales = magentoSalesArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let wooCommerceSales = obj.detail.filter((item) => {
+          return item.channel == 3;
+        });
+        let wooCommerceOrdersQuantity = wooCommerceSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalwooCommerceOrders = wooCommerceOrdersQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let wooCommerceArray = wooCommerceSales.map((item) => {
+          return item.total;
+        });
+        let totalwooCommerceSales = wooCommerceArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let chambasSales = obj.detail.filter((item) => {
+          return item.channel == 11;
+        });
+        let chambasArray = chambasSales.map((item) => {
+          return item.total;
+        });
+        let chambasOrderQuantity = chambasSales.map((item) => {
+          return item.orders_qty;
+        });
+        let totalChambasOrders = chambasOrderQuantity.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+
+        let totalchambasSales = chambasArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        let ListaSales = obj.detail.filter((item) => {
+          return item.channel == 8;
+        });
+
+        // if (ListaSales.length === 0) {
+        //   setlistaTiendaOrders(0);
+        //   setlistaTienda(0);
+        // }
+        let ListaArray = ListaSales.map((item) => {
+          return item.total;
+        });
+        let totalListaSales = ListaArray.reduce(
+          (partialSum, a) => partialSum + a,
+          0
+        );
+        if (ChannelSelectedForDelete !== undefined) {
+          if (ChannelSelectedForDelete.channel === "ListaTienda")
+            totalListaSales = "0";
+        }
+        console.log(totalListaSales);
+        setmixedChartsalesData([
+          totalVtexSales,
+          totallinioSales,
+          totalmercadoSales,
+          totalexitoSales,
+          totalRipleySales,
+          totalshopifySales,
+          totalparisSales,
+          totalmagentoSales,
+          totalwooCommerceSales,
+          totalchambasSales,
+          totalListaSales,
+        ]);
+        setmixedChartOrdersData([
+          TotalVtexOrder,
+          totalLinioOrder,
+          totalMercadoOrders,
+          totalexitoSales,
+          totalRipleyOrder,
+          totalShopifyOrder,
+          totalparisOrder,
+          totalMagentoOrders,
+          totalwooCommerceOrders,
+          totalChambasOrders,
+          totalListaSales,
+        ]);
+        setripley(totalRipleySales);
+        setvtex(totalVtexSales);
+        setlinio(totallinioSales);
+        // setmercadoLibre(totalmercadoSales);
+        setexito(totalexitoSales);
+        setshopify(totalshopifySales);
+        setparis(totalparisSales);
+        //  setparisOrders(totalparisOrder);
+        setmagento(totalmagentoSales);
+        setwooCommerce(totalwooCommerceSales);
+        setchambas(totalchambasSales);
+        setripleyOrders(totalRipleyOrder);
+        setvtexOrders(TotalVtexOrder);
+        setlinioOrders(totalLinioOrder);
+        setshopifyOrders(totalShopifyOrder);
+        // setmercadoLibreOrders(totalMercadoOrders);
+        setchambasOrders(totalChambasOrders);
+        setmagentoOrders(totalMagentoOrders);
+        setwooCommerceOrders(totalwooCommerceOrders);
+        setmercadoLibreOrders(totalMercadoOrders);
+        setmercadoLibre(totalmercadoSales);
+        setlistaTienda(totalListaSales);
+        let channelsList = cR.map((item) => {
+          return item.channel;
+        });
+
+        //   console.log(channelsList);
+        console.log(mixedGraphDatas);
+        const lineAndBarChartLabels = mixedGraphDatas.map((item) => {
+          return item.channel;
+        });
+        setmixedGraphChannels(lineAndBarChartLabels);
+        console.log(lineAndBarChartLabels);
+        console.log(BarLineGraphLabels);
+
+        const lineAndBarChartValues = mixedGraphDatas.map((item) => {
+          return item.value;
+        });
+        const lineAndBarChartOrderValues = mixedGraphDatas.map((item) => {
+          return item.orderValue;
+        });
+       
+
         var totalIncomeArray = obj.detail.map((item) => {
           return item.total;
         });
@@ -1967,6 +2855,7 @@ setlistaPie(listaSalesValue[0]);
       })
       .catch((error) => console.log("error", error));
   };
+
 
   const fetchFilterData = async () => {
     setisLoading(true);
