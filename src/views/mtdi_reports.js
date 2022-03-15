@@ -48,6 +48,7 @@ import {
 
 import SplashScreen from "components/UI/splash-screen";
 import SalesCard from "components/GraphComponent/Sales-card";
+import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales-card";
 
 registerLocale("es", es);
 
@@ -1292,6 +1293,7 @@ function MtdiReports() {
   }, [isMobileSizes]);
   useEffect(() => { 
     setResumenGraph();
+    setSalesCardData();
   }, [newData]);
  
   // useEffect(() => {
@@ -1482,6 +1484,30 @@ function MtdiReports() {
        }
       })
       .catch((error) => console.log("error", error));
+  }
+  const setSalesCardData = ()=>{
+   
+    const vtexSales = newData.filter(item=>{
+      return item.channel === 'Vtex';
+    });
+    const vtexSalesValue = vtexSales.map(item=>{
+      return item.salesValue;
+    });
+    setvtex(vtexSalesValue[0]);
+    const linioSales = newData.filter(item=>{
+      return item.channel === 'Linio';
+    });
+    const linioSalesValue = linioSales.map(item=>{
+      return item.salesValue;
+    });
+    setlinio(linioSalesValue[0]);
+    const magentoSales = newData.filter(item=>{
+      return item.channel === 'Magento';
+    });
+    const magentoSalesValue = magentoSales.map(item=>{
+      return item.salesValue;
+    });
+    setmagento(magentoSalesValue[0]);
   }
   const setResumenGraph = () => {
    
@@ -3146,7 +3172,7 @@ console.log(selectedChannelsArray);
                       />
                     </CardBody>
                     <CardFooter>
-                     <SalesCard></SalesCard>
+                     <SalesCard vtex={vtex} linio={linio} magento={magento}></SalesCard>
                     </CardFooter>
                   </Card>
                 </Col>
@@ -3373,312 +3399,12 @@ console.log(selectedChannelsArray);
                         />
                       </CardBody>
                       <CardFooter>
-                        <div className="legend">
-                          <div className="infoLegend">
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#FFD88C",
-                                    backgroundColor: "#FFD88C",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Ripley
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = ripley;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "blue",
-                                    backgroundColor: "blue",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;ListaTienda
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = listaTienda;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#FF6059",
-                                    backgroundColor: "#FF6059",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Magento
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = magento;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#97D456",
-                                    backgroundColor: "#97D456",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Shopify
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = shopify;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "yellow",
-                                    backgroundColor: "yellow",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Mercadolibre
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = mercadoLibre;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#EDA4D1",
-                                    backgroundColor: "#EDA4D1",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Chambas
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = chambas;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#F29A32",
-                                    backgroundColor: "#F29A32",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp; Linio
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = linio;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#F10096",
-                                    backgroundColor: "#F10096",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp; Vtex
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = vtex;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "purple",
-                                    backgroundColor: "purple",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;WooCommerce
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = wooCommerce;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#00B6CB",
-                                    backgroundColor: "#00B6CB",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Paris
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = paris;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-
-                            <div>
-                              <p className="titleTextLegend">
-                                <i
-                                  className="fa fa-circle"
-                                  style={{
-                                    color: "#E4C41B",
-                                    backgroundColor: "#E4C41B",
-                                    borderRadius: "3px",
-                                  }}
-                                />
-                                &nbsp;Exito
-                                <p className="card-category">
-                                  {(() => {
-                                    let number = exito;
-                                    let formatted = new Intl.NumberFormat(
-                                      "es-CL",
-                                      {
-                                        style: "currency",
-                                        currency: "CLP",
-                                      }
-                                    ).format(number);
-                                    return <div> {formatted}</div>;
-                                  })()}
-                                </p>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+                       <StackedGraphSalesCard></StackedGraphSalesCard>
                       </CardFooter>
                     </Card>
                   </Col>
-                )}
-                
+                )}  
               </Row>
-              
-
-          
             </div>
           )}
           </div>

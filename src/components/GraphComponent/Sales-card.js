@@ -1,4 +1,7 @@
-const SalesCard = ()=>{
+const SalesCard = (props)=>{
+    let vtex = props.vtex;
+    let linio = props.linio;
+    let magento = props.magento;
     return(
         <div className="infoLegendPieChart">
         <div>
@@ -15,7 +18,7 @@ const SalesCard = ()=>{
             {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number =vtex;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -43,7 +46,7 @@ const SalesCard = ()=>{
             &nbsp;Linio
             <p className="card-category">
               {(() => {
-                let number =1999999;
+                let number =linio;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -214,7 +217,7 @@ const SalesCard = ()=>{
             &nbsp; Magento
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = magento;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
