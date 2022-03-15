@@ -581,9 +581,6 @@ const MtdiTable = (props) => {
       } else {
         setData(data);
       }
-
-      console.log(data.length);
-
       setisLoading(false);
     } catch (error) {
       console.log(error);
@@ -596,7 +593,6 @@ const MtdiTable = (props) => {
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
-    console.log(url);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -1554,8 +1550,6 @@ const MtdiTable = (props) => {
                         >
                           {" "}
                           &nbsp;
-                          <span> No hay información disponible.</span>
-                          <span> No hay información disponible.</span>
                           <span> No hay información disponible.</span>
                         </p>
                       </div>
