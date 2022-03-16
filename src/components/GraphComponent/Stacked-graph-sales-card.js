@@ -1,4 +1,15 @@
-const StackedGraphSalesCard = ()=>{
+const StackedGraphSalesCard = (props)=>{
+  let vtex = props.vtex;
+    let linio = props.linio;
+    let magento = props.magento;
+    let mercadoLibre = props.mercadoLibre;
+    let exito = props.exito;
+    let ripley = props.ripley;
+    let shopify = props.shopify;
+    let paris = props.paris;
+    let wooCommerce = props.wooCommerce;
+    let chambas = props.chambas;
+    let listTienda = props.listaTienda;
    return (
     <div className="legend">
     <div className="infoLegend">
@@ -15,7 +26,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;Ripley
           <p className="card-category">
             {(() => {
-              let number =109090;
+              let number = ripley;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -41,7 +52,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;ListaTienda
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = listTienda;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -67,7 +78,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;Magento
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = magento;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -94,7 +105,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;Shopify
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = shopify;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -120,7 +131,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;Mercadolibre
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = mercadoLibre;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -147,7 +158,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;Chambas
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = chambas;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -174,7 +185,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp; Linio
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = linio;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -201,7 +212,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp; Vtex
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = vtex;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -228,7 +239,7 @@ const StackedGraphSalesCard = ()=>{
           &nbsp;WooCommerce
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = wooCommerce;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {

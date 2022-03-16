@@ -4294,7 +4294,7 @@ console.log(selectedChannelsArray);
                         />
                       </CardBody>
                       <CardFooter>
-                       <StackedGraphSalesCard></StackedGraphSalesCard>
+                       <StackedGraphSalesCard channel={cR} vtex={vtex} linio={linioPie} magento={magentoPie} mercadoLibre={mercadoPie} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie} ></StackedGraphSalesCard>
                       </CardFooter>
                     </Card>
                   </Col>
