@@ -73,7 +73,7 @@ const SalesCard = (props)=>{
           </p>}
         </div>
         <div>
-          <p className="titleTextLegend">
+         {channel.includes('MercadoLibre')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -97,7 +97,7 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>

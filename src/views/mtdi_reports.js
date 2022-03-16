@@ -1167,51 +1167,57 @@ function MtdiReports() {
       setmixedGraphDatas(x);
 
       if (ChannelSelectedForDelete.channel === "Ripley") {
+        setripleyPie(0);
         setripleyStackedSalesState(0);
         setripleyStackedOrdersState(0);
       }
       if (ChannelSelectedForDelete.channel === "Shopify") {
+        setshopifyPie(0);
         setshopifyStackedOrdersState(0);
         setshopifyStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Magento") {
+        setmagentoPie(0);
         setmagentoStackedOrdersState(0);
         setmagentoStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Linio") {
+        setlinioPie(0);
         setlinioStackedOrdersState(0);
         setlinioStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "MercadoLibre") {
+        setmercadoPie(0);
         setmercadoStackedOrdersState(0);
         setmercadoStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Chambas") {
+        setchambasPie(0);
         setchambasStackedOrdersState(0);
         setchambasStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Paris") {
-        console.log("hi");
+      setparisPie(0);
         setparisStackedOrdersState(0);
         setparisStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Vtex") {
-        console.log("hi");
+        setvtexPie(0);
         setvtexStackedOrdersState(0);
         setvtexStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Woocommerce") {
-        console.log("hi");
+       setwooPie(0);
         setwooCommerceStackedOrdersState(0);
         setwooCommerceStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "ListaTienda") {
-        console.log("hi");
+        setlistaPie(0);
         setlistaStackedOrdersState(0);
         setlistaStackedSalesState(0);
       }
       if (ChannelSelectedForDelete.channel === "Exito") {
-        console.log("hi");
+        setexitoPie(0);
         setexitoStackedOrdersState(0);
         setexitoStackedSalesState(0);
       }
@@ -4061,7 +4067,7 @@ console.log(selectedChannelsArray);
                       />
                     </CardBody>
                     <CardFooter>
-                     <SalesCard vtex={vtex} linio={linio} magento={magento}></SalesCard>
+                     <SalesCard channel={cR} vtex={vtex} linio={linioPie} magento={magento} mercadoLibre={mercadoLibre} exito={exito} ripley={ripley} shopify={shopify} paris={paris} wooCommerce={wooCommerce} chambas={chambas} listaTienda={listaTienda}></SalesCard>
                     </CardFooter>
                   </Card>
                 </Col>
