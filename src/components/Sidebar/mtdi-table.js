@@ -93,7 +93,7 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
-
+  const [searchOrderId, setsearchOrderId] = useState("");
   var stepsDesk = [];
   var a = navigator.userAgent;
   var agents = new Array(
@@ -537,10 +537,17 @@ const MtdiTable = (props) => {
   };
 
   const applyFiltersButtonhandler = async () => {
+    let url = '';
+    if (searchOrderId !== "") {
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/order?orderNo=${searchOrderId}`;
+    } else {
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    }
     setisLoading(true);
     setfiltersApplied(true);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     console.log(url);
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -561,14 +568,18 @@ const MtdiTable = (props) => {
       }
       const data = await response.json();
       console.log(data);
-      console.log(data[0].total);
-      if (data[0].total === 0) {
+      //CONDITION FOR THE FILTER BY ORDER ID
+      if (data.length === 0) {
         setData([]);
       } else {
         setData(data);
       }
-      console.log(data.length);
-
+      //CONDITION FOR FILTER THE ORDER BY PAIS,TIENDA
+      if (data.length === 1 && data[0].total === 0) {
+        setData([]);
+      } else {
+        setData(data);
+      }
       setisLoading(false);
     } catch (error) {
       console.log(error);
@@ -581,7 +592,6 @@ const MtdiTable = (props) => {
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
-    console.log(url);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -1004,7 +1014,10 @@ const MtdiTable = (props) => {
 
     location.reload();
   };
-
+  const searchOrderIdHandler = (event) => {
+    console.log(event.target.value);
+    setsearchOrderId(event.target.value);
+  };
   return (
     <React.Fragment>
       {isLoading && <SplashScreen />}
@@ -1100,12 +1113,14 @@ const MtdiTable = (props) => {
                 {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
                   (period) => {
                     return (
-                      <MenuItem 
-                      style={{
-                        width: "193px",
-                        height: "46px",
-                        backgroundColor: "white"
-                      }} value={period.country}>
+                      <MenuItem
+                        style={{
+                          width: "193px",
+                          height: "46px",
+                          backgroundColor: "white",
+                        }}
+                        value={period.country}
+                      >
                         {period.country}
                       </MenuItem>
                     );
@@ -1177,7 +1192,7 @@ const MtdiTable = (props) => {
                   fontSize: "10px",
                   borderRadius: "17px",
                   marginLeft: "1em",
-                  marginTop: "1em"   
+                  marginTop: "1em",
                 }}
                 value={salesChannel}
                 label="select-canal"
@@ -1283,6 +1298,42 @@ const MtdiTable = (props) => {
               />
             </label>
 
+            <label>
+              <h5
+                style={{
+                  color: "black",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  marginLeft: "1em",
+                  marginBottom: "6px",
+                  marginTop: "0px",
+                }}
+              >
+                Número de orden
+              </h5>
+
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                style={{
+                  width: "193px",
+                  height: "46px",
+                  marginLeft: "1em",
+                  backgroundColor: "white",
+                  borderRadius: "17px",
+                  fontSize: "10px",
+                  marginLeft: "1em",
+                  marginTop: "1em",
+                  border: "none",
+                  outline: "none",
+                }}
+                placeholder="&nbsp;&nbsp; Digite el número de orden"
+                onChange={searchOrderIdHandler}
+              />
+            </label>
+
             <Button
               color="primary"
               style={{
@@ -1352,10 +1403,11 @@ const MtdiTable = (props) => {
           <div id="OrderDesktopTable">
             {isLoading && (
               <MaterialTable
-                title=""
+                // title=""
                 options={{
                   search: false,
                 }}
+                title=""
                 icons={tableIcons}
                 columns={columns}
                 data={[]}
@@ -1443,21 +1495,20 @@ const MtdiTable = (props) => {
                       </div>
                     ),
                   },
-                toolbar: {
-                  searchTooltip: 'Buscar órdenes específicas',
-                  searchPlaceholder: 'Buscar',
-                  showColumnsTitle: 'Mostrar opciones de columnas',
-                  addRemoveColumns: 'Agregar o Eliminar Columnas'
-                },
-                pagination: {
-                  labelRowsSelect: 'líneas',
-                  labelDisplayedRows: '{from}-{to} órdenes de {count}',
-                  firstTooltip: 'Ir a la primera página',
-                  previousTooltip: 'Página anterior',
-                  nextTooltip: 'Próxima página',
-                  lastTooltip: 'Ir a la última página',  
-                }
-                 
+                  toolbar: {
+                    searchTooltip: "Buscar órdenes específicas",
+                    searchPlaceholder: "Buscar",
+                    showColumnsTitle: "Mostrar opciones de columnas",
+                    addRemoveColumns: "Agregar o Eliminar Columnas",
+                  },
+                  pagination: {
+                    labelRowsSelect: "líneas",
+                    labelDisplayedRows: "{from}-{to} órdenes de {count}",
+                    firstTooltip: "Ir a la primera página",
+                    previousTooltip: "Página anterior",
+                    nextTooltip: "Próxima página",
+                    lastTooltip: "Ir a la última página",
+                  },
                 }}
                 title=""
                 icons={tableIcons}
@@ -1499,29 +1550,26 @@ const MtdiTable = (props) => {
                           {" "}
                           &nbsp;
                           <span> No hay información disponible.</span>
-                          <span> No hay información disponible.</span>
-                          <span> No hay información disponible.</span>
                         </p>
                       </div>
                     ),
                   },
                   toolbar: {
-                    searchTooltip: 'Buscar órdenes específicas',
-                    searchPlaceholder: 'Buscar',
-                    showColumnsTitle: 'Mostrar opciones de columnas',
-                    addRemoveColumns: 'Agregar o Eliminar Columnas'
+                    searchTooltip: "Buscar órdenes específicas",
+                    searchPlaceholder: "Buscar",
+                    showColumnsTitle: "Mostrar opciones de columnas",
+                    addRemoveColumns: "Agregar o Eliminar Columnas",
                   },
                   pagination: {
-                    labelRowsSelect: 'líneas',
-                    labelDisplayedRows: '{from}-{to} órdenes de {count}',
-                    firstTooltip: 'Ir a la primera página',
-                    previousTooltip: 'Página anterior',
-                    nextTooltip: 'Próxima página',
-                    lastTooltip: 'Ir a la última página',  
-                  }
+                    labelRowsSelect: "líneas",
+                    labelDisplayedRows: "{from}-{to} órdenes de {count}",
+                    firstTooltip: "Ir a la primera página",
+                    previousTooltip: "Página anterior",
+                    nextTooltip: "Próxima página",
+                    lastTooltip: "Ir a la última página",
+                  },
                 }}
                 key={data.id_mtdi}
-                title="Instance Table"
                 icons={tableIcons}
                 title=""
                 data={data}

@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import iconG1 from "../assets/img/icons/Reports/iconG1.png";
 import iconG2 from "../assets/img/icons/Reports/iconG2.png";
 import iconG3 from "../assets/img/icons/Reports/iconG3.png";
@@ -37,22 +39,25 @@ import {
   Col,
   Button,
   Input,
+  Spinner,
   Badge
 } from "reactstrap";
 
 // core components
-import {
-  chartExample1,
-  chartExample4,
-  chartExample5,
-  chartExample9,
-  chartExample10,
-  chartExample100,
-  chartExample11,
-  chartExample12,
-  chartExample13,
-  data1,
-} from "variables/charts.js";
+// import {
+//   chartExample1,
+//   chartExample4,
+//   chartExample5,
+//   chartExample6,
+//   chartExample9,
+//   chartExample10,
+//   chartExample11,
+//   chartExample12,
+//   chartExample13,
+//   chartExample100,
+//   data1,
+// } from "variables/charts.js";
+
 import SplashScreen from "components/UI/splash-screen";
 registerLocale("es", es);
 const line = "";
@@ -156,21 +161,7 @@ const barChartData = {
     },
   ],
 };
-// let options = {
-//   scales: {
-//     x:{
-// stacked:false,
-//     },
-//       y: {
-//           max: 50000000,
-//           min: 0,
-//           position: 'left',
-//           ticks: {
-//               stepSize: 10000000
-//           }
-//       }
-//   }
-// };
+
 let options12 = {
   scales: {
     yAxes: [
@@ -196,7 +187,6 @@ const barChartOptions = {
   plugins: {
     legend: {
       display: false,
-
     },
   },
   scales: {
@@ -332,7 +322,7 @@ function Charts() {
     ],
   };
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
- const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
+  const [pageFullyLoaded, setpageFullyLoaded] = useState(true);
   const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
   const [deleteChannelArray, setdeleteChannelArray] = useState(['Vtex','Linio','MercadoLibre','Exito','Ripley','Shopify','Paris','Magento','Woocommerce','Chambas','ListaTienda']);
@@ -376,11 +366,13 @@ function Charts() {
     new Date().toISOString().slice(0, 10)
   );
   const [isLoading, setisLoading] = useState(false);
+  const [isDownloadingReports, setisDownloadingReports] = useState(false);
   const [StackedisLoading, setStackedisLoading] = useState(false);
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
 
   const [fromDate, setfromDate] = useState(new Date());
   const [showFilter, setshowFilter] = useState(false);
+  const printReport = React.useRef();
   //SALES CHANNEL TOTAL SALES STATES
   const [ripley, setripley] = useState(0);
   const [vtex, setvtex] = useState(0);
@@ -700,7 +692,7 @@ setchambasStackedOrdersState(0);
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-
+console.log(obj);
   let res1 = [];
 
 console.log(ChannelSelectedForDelete);
@@ -735,7 +727,7 @@ if(ChannelSelectedForDelete !== undefined){
 console.log(xio);
 setdeleteChannelArray(xio);
   for(let i = 0;i<=stackedDatevalues.length-1;i++){
-    let LINIOMonthlySales = obj.filter((item) => {
+    let LINIOMonthlySales = obj.detail.filter((item) => {
       let dateTobeCompared = stackedDatevalues[i];
       const splitDateCompared = dateTobeCompared.split(/[- :]/);
       const splitMonth = splitDateCompared[1];
@@ -781,7 +773,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 
       let res2 = [];
       for(let i = 0;i<=stackedDatevalues.length-1;i++){
-        let ripleyMonthlySales = obj.filter((item) => {
+        let ripleyMonthlySales = obj.detail.filter((item) => {
           let dateTobeCompared = stackedDatevalues[i];
           const splitDateCompared = dateTobeCompared.split(/[- :]/);
           const splitMonth = splitDateCompared[1];
@@ -831,7 +823,7 @@ let totalMonthlySales = stackedSalesMonthlySales.reduce(
 //  WOO COMMERCE STACKED GRAPH ORDERS
 let res3 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
 
     let dateTobeCompared = stackedDatevalues[i];
 
@@ -877,7 +869,7 @@ if(deleteChannelArray.includes('Woocommerce')){
 
 let res4 = [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
     let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
@@ -921,7 +913,7 @@ setshopifyStackedSalesState(shopifyStackedSalesArray);
 //MERCADO LIBRE STACKED MONTHLY DATA
 let res5= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
     let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
@@ -968,7 +960,7 @@ setmercadoStackedSalesState(MercadoStackedSalesArray);
 //CHAMBAS STACKED GRAPH MONTHLY
 let res6= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
     let dateTobeCompared = stackedDatevalues[i];
     const splitDateCompared = dateTobeCompared.split(/[- :]/);
     const splitMonth = splitDateCompared[1];
@@ -1015,7 +1007,7 @@ setchambasStackedSalesState(ChambasStackedSalesArray);
 
 let res7= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
 
     let dateTobeCompared = stackedDatevalues[i];
 
@@ -1061,7 +1053,7 @@ setvtexStackedSalesState(vtexStackedSalesArray);
 //MAGENTO MONTHLY ARRAY
 let res8= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
 
     let dateTobeCompared = stackedDatevalues[i];
 
@@ -1107,7 +1099,7 @@ setmagentoStackedSalesState(magentoStackedSalesArray);
 let res9= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
 
     let dateTobeCompared = stackedDatevalues[i];
 
@@ -1155,7 +1147,7 @@ setlistaStackedSalesState(ListaStackedSalesArray);
 let res10= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
 
-  let ripleyMonthlySales = obj.filter((item) => {
+  let ripleyMonthlySales = obj.detail.filter((item) => {
 
     let dateTobeCompared = stackedDatevalues[i];
 
@@ -1203,7 +1195,7 @@ if(deleteChannelArray.includes('Paris')){
 
 let res11= [];
 for(let i = 0;i<=stackedDatevalues.length-1;i++){
- let ripleyMonthlySales = obj.filter((item) => {
+ let ripleyMonthlySales = obj.detail.filter((item) => {
 
     let dateTobeCompared = stackedDatevalues[i];
 
@@ -1248,7 +1240,7 @@ if(deleteChannelArray.includes('Exito')){
 }
 
 
-        let ripleySales = obj.filter((item) => {
+        let ripleySales = obj.detail.filter((item) => {
           return item.channel == 4;
         });
         let ripleySalesArray = ripleySales.map((item) => {
@@ -1267,7 +1259,7 @@ if(deleteChannelArray.includes('Exito')){
           0
         );
         console.log(totalRipleySales);
-        let vtexSales = obj.filter((item) => {
+        let vtexSales = obj.detail.filter((item) => {
           return item.channel == 7;
         });
 
@@ -1286,7 +1278,7 @@ if(deleteChannelArray.includes('Exito')){
           (partialSum, a) => partialSum + a,
           0
         );
-        let linioSales = obj.filter((item) => {
+        let linioSales = obj.detail.filter((item) => {
           return item.channel == 5;
         });
 
@@ -1305,7 +1297,7 @@ if(deleteChannelArray.includes('Exito')){
           (partialSum, a) => partialSum + a,
           0
         );
-        let mercadoSales = obj.filter((item) => {
+        let mercadoSales = obj.detail.filter((item) => {
           return item.channel == 2;
         });
         console.log(mercadoSales);
@@ -1316,18 +1308,22 @@ if(deleteChannelArray.includes('Exito')){
           let mercadoSalesArray = mercadoSales.map((item) => {
             return item.total;
           });
-          console.log(mercadoSalesArray);
-          let mercadoOrders = mercadoSales.map((item) => {
-            return item.orders_qty;
-          });
-          let totalMercadoOrders = mercadoOrders.map((item) => {
-            return item.orders_qty;
-          });
-
           let totalmercadoSales = mercadoSalesArray.reduce(
             (partialSum, a) => partialSum + a,
             0
           );
+          console.log(mercadoSalesArray);
+          let mercadoOrderQuantity = mercadoSales.map((item) => {
+            return item.orders_qty;
+          });
+          // let totalMercadoOrders =  mercadoOrderQuantity.map((item) => {
+          //   return item.orders_qty;
+          // });
+          let totalMercadoOrders =mercadoOrderQuantity.reduce(
+            (partialSum, a) => partialSum + a,
+            0
+          );
+         
           if(ChannelSelectedForDelete !== undefined){
             if(ChannelSelectedForDelete.channel === 'MercadoLibre')
             totalMercadoOrders='0';
@@ -1343,7 +1339,7 @@ if(deleteChannelArray.includes('Exito')){
 
 
 
-        let exitoSales = obj.filter((item) => {
+        let exitoSales = obj.detail.filter((item) => {
           return item.channel == "12";
         });
         // if (exitoSales.length === 0) {
@@ -1362,7 +1358,7 @@ if(deleteChannelArray.includes('Exito')){
           totalexitoSales = '0';
 
         }
-        let shopifySales = obj.filter((item) => {
+        let shopifySales = obj.detail.filter((item) => {
           return item.channel == 6;
         });
         let shopifySalesArray = shopifySales.map((item) => {
@@ -1400,7 +1396,7 @@ if(deleteChannelArray.includes('Exito')){
         //   (partialSum, a) => partialSum + a,
         //   0
         // );
-        let parisSales = obj.filter((item) => {
+        let parisSales = obj.detail.filter((item) => {
           return item.channel == 1;
         });
 
@@ -1431,7 +1427,7 @@ if(deleteChannelArray.includes('Exito')){
         totalparisSales = '0';
         totalparisOrder='0';
       }
-        let magentoSales = obj.filter((item) => {
+        let magentoSales = obj.detail.filter((item) => {
           return item.channel == 9;
         });
         let magentoSalesOrders = magentoSales.map((item) => {
@@ -1449,7 +1445,7 @@ if(deleteChannelArray.includes('Exito')){
           (partialSum, a) => partialSum + a,
           0
         );
-        let wooCommerceSales = obj.filter((item) => {
+        let wooCommerceSales = obj.detail.filter((item) => {
           return item.channel == 3;
         });
         let wooCommerceOrdersQuantity = wooCommerceSales.map((item) => {
@@ -1467,7 +1463,7 @@ if(deleteChannelArray.includes('Exito')){
           (partialSum, a) => partialSum + a,
           0
         );
-        let chambasSales = obj.filter((item) => {
+        let chambasSales = obj.detail.filter((item) => {
           return item.channel == 11;
         });
         let chambasArray = chambasSales.map((item) => {
@@ -1485,7 +1481,7 @@ if(deleteChannelArray.includes('Exito')){
           (partialSum, a) => partialSum + a,
           0
         );
-        let ListaSales = obj.filter((item) => {
+        let ListaSales = obj.detail.filter((item) => {
           return item.channel == 8;
         });
 
@@ -1550,17 +1546,15 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
       return item.orderValue
     })
         let MIXED = {
-          labels: lineAndBarChartLabels,
+          labels: lineAndBarChartLabels,   
           datasets: [
             {
               label: "Ventas",
             data: lineAndBarChartValues,
             backgroundColor: "#344FD5",
-
             borderRadius:5,
-              order: 1,
+            order: 1,
             },
-
             {
               label: "Órdenes",
               yAxisID: "Ordenes",
@@ -1581,26 +1575,85 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               backgroundColor: "#06CBC1",
               borderColor: "#06CBC1",
               fill: false,
-              pointHoverRadius: 20,
+              pointHoverRadius: 10,
               pointHoverBorderWidth: 5,
               type: "line",
               order: 0,
+              color: "#9f9f9f",
             },
           ],
-           options: {
-
-             plugins: {
-               legend: {
-                 display: false,
-          },
-
+         
+       
+          options: {
+            responsive: true,
+            // maintainAspectRatio: false,
+            aspectRatio: 2,
+            plugins: {
+              legend: {
+                display: false, 
+              },    
+             
+            },  
+            scales: {
+              grid: {
+                drawBorder: false,
+                display:false,
+                zeroLineColor: "transparent",
+              },
+              y: {
+                display: true,
+                position: "right",          
+                ticks: {
+                  color: "#9f9f9f",
+                  beginAtZero: true,
+                  maxTicksLimit: 5,
+                  callback: function(data) {
+                    let number  = data;
+                           let totalValueFormatted = new Intl.NumberFormat("es-CL",{
+                             style:'currency',
+                            currency:'CLP'
+                           }).format(number);
+                             return totalValueFormatted
+                  }
+                  // padding: 100,
+                  
+                },
+                grid: {
+                  zeroLineColor: "transparent",
+                  display: false,
+                  drawBorder: false,
+                  color: "#EBEBEBf",
+                  // borderDash: [8, 6],
+                  lineWidth: 0,
+                },               
+              },
+              
+              
+              x: {              
+                display: true,
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  font: {
+                    size: 10,
+                  },
+                  padding: 20,
+                  color: "#9f9f9f",
+              //  color:"blue",
+          
+                },
+              },
             },
           },
-        };
-   console.log(MIXED.datasets[0].data);
+       };
+  
+       console.log(MIXED.datasets[0].data);
 
-         setmixedChartData(MIXED);
+       setmixedChartData(MIXED);
 
+      
         let PIE = {
           labels: [
             "Vtex",
@@ -1622,7 +1675,6 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               pointHoverRadius: 0,
               backgroundColor: [
                 "#F10096",
-
                 "#F29A32",
                 "yellow",
                 "#E4C41B",
@@ -1651,49 +1703,83 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               ],
             },
           ],
+          options: {
+            plugins: {
+              legend: {
+                display: false,
+              },
+        
+              tooltips: {
+                enabled: false,
+              },
+            },
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  drawBorder: false,
+                  zeroLineColor: "transparent",
+                  color: "rgba(255,255,255,0.05)",
+                },
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  color: "rgba(255,255,255,0.1)",
+                  zeroLineColor: "transparent",
+                },
+                ticks: {
+                  display: false,
+                },
+              },
+            },
+          },
         };
         setpieChartData(PIE);
 
-        var totalIncomeArray = obj.map((item) => {
+        var totalIncomeArray = obj.detail.map((item) => {
           return item.total;
         });
-        var totalDispatchCostArray = obj.map((item) => {
+        var totalDispatchCostArray = obj.detail.map((item) => {
           return item.shipping_total;
         });
-        var gmArray = obj.map((item) => {
+        var gmArray = obj.detail.map((item) => {
           return item.gm;
         });
-        let conversionArray = obj.map((item) => {
+        let conversionArray = obj.detail.map((item) => {
           return item.conversion;
         });
-        let ordersCancelledArray = obj.map((item) => {
+        let ordersCancelledArray = obj.detail.map((item) => {
           return item.orders_canceled;
         });
-        let dteSentArray = obj.map((item) => {
+        let dteSentArray = obj.detail.map((item) => {
           return item.send_dte_qty;
         });
-        let inProcessArray = obj.map((item) => {
+        let inProcessArray = obj.detail.map((item) => {
           return item.in_process;
         });
-        let inPreparationArray = obj.map((item) => {
+        let inPreparationArray = obj.detail.map((item) => {
           return item.in_preparation;
         });
-        let readyToShipArray = obj.map((item) => {
+        let readyToShipArray = obj.detail.map((item) => {
           return item.ready_to_ship;
         });
-        let onThewayarray = obj.map((item) => {
+        let onThewayarray = obj.detail.map((item) => {
           return item.in_way;
         });
-        let orderQuantityArray = obj.map((item) => {
+        let orderQuantityArray = obj.detail.map((item) => {
           return item.orders_qty;
         });
-        let reviewArray = obj.map((item) => {
+        let reviewArray = obj.detail.map((item) => {
           return item.reviews;
         });
-        let npsArray = obj.map((item) => {
+        let npsArray = obj.detail.map((item) => {
           return item.nps;
         });
-        let claimsArray = obj.map((item) => {
+        let claimsArray = obj.detail.map((item) => {
           return item.claims;
         });
         let sumOfTotalIncome = totalIncomeArray.reduce(
@@ -1778,6 +1864,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: ripleyStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "ListaTienda",
@@ -1786,6 +1873,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: listaStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "Magento",
@@ -1794,6 +1882,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius:6,
               stack: "2",
               data: magentoStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "Shopify",
@@ -1802,6 +1891,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: shopifyStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "Mercadolibre",
@@ -1810,6 +1900,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: mercadoStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "Chambas",
@@ -1818,6 +1909,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: chambasStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "Linio",
@@ -1826,6 +1918,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: linioStackedOrdersState,
+              barThickness: 30,
              
             },
             {
@@ -1835,14 +1928,17 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: vtexStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "WooCommerce",
               backgroundColor: "purple",
               borderRadius: "20px",
               borderRadius:6,
+              barThickness: 30,
               stack: "2",
               data: wooCommerceStackedOrdersState,
+              
             },
             {
               label: "Paris",
@@ -1851,6 +1947,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius:6,
               stack: "2",
               data: parisStackedOrdersState,
+              barThickness: 30,
             },
             {
               label: "Exito",
@@ -1859,15 +1956,54 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius:6,
               stack: "2",
               data: exitoStackedOrdersState,
+              barThickness: 30,
             },
           ],
-           options: {
+          options: {
             plugins: {
               legend: {
                 display: false,
-      },
+                
+              },
+        
+              
             },
-           },
+         
+            scales: {
+              y: {
+                gridLines: { drawBorder: false, lineWidth: 0 },
+                ticks: {
+                  color: "#9f9f9f", 
+                  // beginAtZero: true,
+                  maxTicksLimit:6,
+                  fontSize: 100,
+                  // padding: 20,
+              
+                },
+                 },
+                grid: {
+                  zeroLineColor: "transparent",
+                  display: false,
+                  drawBorder: false,
+                  color: "#9f9f9f",
+                },
+              
+              x: {
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                  zeroLineColor: "transparent",
+                },
+                ticks: {
+                  font: {
+                    size: 10,
+                  },
+                  padding: 0,
+                  color: "#9f9f9f",
+                },
+              },
+              },
+      },        
         };
 
 
@@ -1906,6 +2042,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
         setstackedChartData(MONTLY_ORDER_GRAPH);
         let MONTLY_SALES_GRAPH = {
           labels:  stackedDateLabel,
+          
           datasets: [
             {
               label:ripleyStackedSalesArray!=0?'Ripley':'',
@@ -1914,6 +2051,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
              data: ripleyStackedSalesState,
+             barThickness: 30,
 
             },
             {
@@ -1923,6 +2061,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: listaStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Magento",
@@ -1931,6 +2070,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius:6,
               stack: "2",
               data: magentoStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Shopify",
@@ -1939,6 +2079,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: shopifyStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Mercadolibre",
@@ -1947,6 +2088,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: mercadoStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Chambas",
@@ -1955,6 +2097,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: chambasStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Linio",
@@ -1963,6 +2106,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: linioStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Vtex",
@@ -1971,6 +2115,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               stack: "2",
               borderRadius:6,
               data: vtexStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "WooCommerce",
@@ -1979,24 +2124,83 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               borderRadius:6,
               stack: "2",
               data: wooCommerceStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Paris",
               backgroundColor: "#00B6CB",
               borderRadius: "20px",
               borderRadius:6,
+              barThickness: 30,
               stack: "2",
               data: parisStackedSalesState,
+              barThickness: 30,
             },
             {
               label: "Exito",
               backgroundColor: "#E4C41B",
               borderRadius: "20px",
               borderRadius:6,
+              barThickness: 30,
               stack: "2",
               data: exitoStackedSalesState,
+              barThickness: 30,
             },
           ],
+        
+          options: {
+            plugins: {
+              legend: {
+                display: false,
+              },
+              
+            },
+            scales: {
+              y: {
+                gridLines: { drawBorder: false, lineWidth: 0 },
+                ticks: {
+                  color: "#9f9f9f", 
+                  // beginAtZero: true,
+                  maxTicksLimit:6,
+                  fontSize: 40,
+                  // padding: 20,
+                  callback: function(data) {
+                    let number  = data;
+                           let totalValueFormatted = new Intl.NumberFormat("es-CL",{
+                             style:'currency',
+                            currency:'CLP'
+                           }).format(number);
+                             return totalValueFormatted
+                  }
+              
+                },
+                 },
+                grid: {
+                  zeroLineColor: "transparent",
+                  display: false,
+                  drawBorder: false,
+                  color: "#9f9f9f",
+                },
+              
+              x: {
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                  zeroLineColor: "transparent",
+                },
+                ticks: {
+                  font: {
+                    size: 10,
+                  },
+                  padding: 1,
+                  color: "#9f9f9f",
+             
+                },
+              },
+            },
+              
+            
+        },
         };
         console.log(MONTLY_SALES_GRAPH.datasets[1].label);
         setstackedSalesGraph(MONTLY_SALES_GRAPH);
@@ -2034,7 +2238,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
       .then((result) => {
 
         var obj = JSON.parse(result);
-
+        console.log(obj);
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
@@ -2102,6 +2306,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
 
   //   });
   // };
+ 
+  
   const changeDateHandler = (event) => {
     const selectedDate = event.toISOString().slice(0, 10);
 
@@ -2175,6 +2381,30 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
+
+  // Function to generate a PDF Report 
+  const handleDownloadPdf = async () => {
+
+    setisDownloadingReports(true);
+    const element = printReport.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL('image/png');
+    
+
+    const pdf = new jsPDF('p', 'in', 'legal', true);
+    pdf.setFillColor(245);
+    pdf.rect(0, 0, 210, 700, "F");
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = 
+      (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-3);
+    pdf.save('InstanceReporte.pdf');
+    setisDownloadingReports(false);
+  };
+
+
  
   return (
     <>
@@ -2197,7 +2427,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             Dashboard: Vista Administrador
           </h5>
           <p
-            classname="textNameTable"
+            id="textNameTable"
             style={{
               color: "black",
               width: "450px",
@@ -2512,7 +2742,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
           )}
           <br></br>
 
-
+        <div id="generateReport" ref={printReport}>     
           <div id="ReportInformationDesktop">
           <Col
             id="colReportDatosGenerales"
@@ -2527,7 +2757,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2687,7 +2917,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2813,7 +3043,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -2933,7 +3163,7 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             }}
           >
             <p
-              classname="textNameTable"
+              id="textNameTable"
               style={{
                 color: "black",
                 width: "450px",
@@ -3071,19 +3301,26 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
         {!pageFullyLoaded && <div>
           <Row>
 
-           <Col id="ColMixedChart" lg="6" md="12" sm="12" >
-              <Card className="car-chart" style={{ height: "97%"}}>
+           <Col id="ColMixedChart" lg="7" md="12" sm="12" >
+              <Card 
+              className="card-chart" 
+              id="mixedChartCustom"
+              
+              >
                 <CardHeader>
-                  <CardTitle>
-                    <strong>Resumen general de venta y órdenes</strong>
+                  <CardTitle id="textNameTable">
+                    <strong>Resumen general de órdenes y ventas</strong>
                   </CardTitle>
                    <p className="card-category"> </p>
                  </CardHeader>
                 <CardBody>
                   <br></br>
                   <br></br>
-                  <Bar data={mixedChartData}
-                  options={chartExample13.options}
+                  <Bar 
+                  
+                  data={mixedChartData} 
+                  options={mixedChartData.options}
+                  style={{width: "400px",height:"300px"}}
                    />
                 </CardBody>
                 <br></br>
@@ -3092,19 +3329,21 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
               </Col>
 
 
-              <Col id="ColPieChart" lg="6" md="12" sm="12">
-                <Card>
+              <Col id="ColPieChart" lg="5" md="12" sm="12">
+                <Card id="pieChartCard">
                   <CardHeader>
-                    <CardTitle>
+                    <CardTitle id="textNameTable">
                       <strong>Participación canal de venta</strong>
                     </CardTitle>
                   </CardHeader>
-                  <CardBody style={{ height: "342px" }}>
+                  <CardBody 
+                  
+                  >
                     <Pie
+                      id="barChartCustom"
                       data={pieChartData}
-                      options={chartExample11.options}
-                      width={456}
-                      height={190}
+                      options={pieChartData.options}
+                      style={{width: "300px"}}
                     />
                   </CardBody>
                   <CardFooter>
@@ -3122,8 +3361,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Vtex
-                    {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-                     <p className="card-category">
+                   
+                      <p className="card-category">
                        {(() => {
                           let number  = vtex;
                           let formatted = new Intl.NumberFormat("es-CL",{
@@ -3378,22 +3617,22 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 </div>
                   </CardFooter>
                 </Card>
-                </Col>
+                </Col> 
 
 
             </Row>
 
             <Row>
-           <Col md="6">
+          <Col md="6">
 
-                <Card className="card-chart">
-                  <CardHeader>
+            <Card className="card-chart">
+                  <CardHeader id="textNameTable">
                     <strong>Órdenes por canal de venta</strong>
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Bar data={stackedChartData}
-                    options={chartExample5.options}
+                    <Bar data={stackedChartData} 
+                    options={stackedChartData.options}
                      />
                   </CardBody>
                     <CardFooter>
@@ -3411,17 +3650,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Ripley
-                    <p className="card-category">{ripleyOrders} Ordenes</p>
-                     {/* <p className="card-category">
-                       {(() => {
-                          let number  = vtex;
-                          let formatted = new Intl.NumberFormat("es-CL",{
-                            style:'currency',
-                            currency:'CLP'
-                          }).format(number);
-                          return <div> {formatted}</div>
-                       })()}
-                     </p> */}
+                    <p id="ordersGraphText" className="card-category">{ripleyOrders} órdenes</p>
+                    
                         </p>
                         </div>
                         <div>
@@ -3435,18 +3665,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                           }}
                         />
                         &nbsp;ListaTienda
-                        <p className="card-category">{listaTiendaOrders} Ordenes</p>
-                        {/* <p className="card-category">
-                          {(() => {
-                            let number  = linio;
-                            let formatted = new Intl.NumberFormat("es-CL",{
-                              style:'currency',
-                              currency:'CLP'
-                            }).format(number);
-                            return <div> {formatted}</div>
-                        })()}
-
-                        </p> */}
+                        <p id="ordersGraphText" className="card-category">{listaTiendaOrders} órdenes</p>
+                      
                       </p>
                     </div>
                     <div>
@@ -3460,17 +3680,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Magento
-                    <p className="card-category">{magentoOrders} Ordenes</p>
-                    {/* <p className="card-category">
-                      {(() => {
-                          let number  = mercadoLibre;
-                          let formatted = new Intl.NumberFormat("es-CL",{
-                            style:'currency',
-                            currency:'CLP'
-                          }).format(number);
-                          return <div> {formatted}</div>
-                       })()}
-                    </p> */}
+                    <p id="ordersGraphText" className="card-category">{magentoOrders} órdenes</p>
+                  
                     </p>
                     </div>
 
@@ -3485,17 +3696,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Shopify
-                    <p className="card-category">{shopifyOrders} Ordenes</p>
-                    {/* <p className="card-category">
-                      {(() => {
-                          let number  = exito;
-                          let formatted = new Intl.NumberFormat("es-CL",{
-                            style:'currency',
-                            currency:'CLP'
-                          }).format(number);
-                          return <div> {formatted}</div>
-                       })()}
-                    </p> */}
+                    <p id="ordersGraphText" className="card-category">{shopifyOrders} órdenes</p>
+                   
                     </p>
                     </div>
                     <div>
@@ -3509,17 +3711,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Mercadolibre
-                    <p className="card-category">{mercadoLibreOrders} Ordenes</p>
-                    {/* <p className="card-category">
-                      {(() => {
-                          let number  = ripley;
-                          let formatted = new Intl.NumberFormat("es-CL",{
-                            style:'currency',
-                            currency:'CLP'
-                          }).format(number);
-                          return <div> {formatted}</div>
-                       })()}
-                    </p> */}
+                    <p id="ordersGraphText" className="card-category">{mercadoLibreOrders} órdenes</p>
+                
                     </p>
                     </div>
 
@@ -3534,17 +3727,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                       }}
                     />
                     &nbsp;Chambas
-                    <p className="card-category">{chambasOrders} Ordenes</p>
-                    {/* <p className="card-category">
-                      {(() => {
-                          let number  = shopify;
-                          let formatted = new Intl.NumberFormat("es-CL",{
-                            style:'currency',
-                            currency:'CLP'
-                          }).format(number);
-                          return <div> {formatted}</div>
-                       })()}
-                    </p> */}
+                    <p id="ordersGraphText" className="card-category">{chambasOrders} órdenes</p>
+                    
                     </p>
                     </div>
 
@@ -3559,17 +3743,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                      &nbsp; Linio
-                     <p className="card-category">{linioOrders} Ordenes</p>
-                      {/* <p className="card-category">
-                        {(() => {
-                            let number  = paris;
-                            let formatted = new Intl.NumberFormat("es-CL",{
-                              style:'currency',
-                              currency:'CLP'
-                            }).format(number);
-                            return <div> {formatted}</div>
-                        })()}
-                      </p> */}
+                     <p id="ordersGraphText" className="card-category">{linioOrders} órdenes</p>
+                  
                     </p>
                     </div>
 
@@ -3584,17 +3759,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                      &nbsp; Vtex
-                     <p className="card-category">{vtexOrders} Ordenes</p>
-                      {/* <p className="card-category">
-                        {(() => {
-                            let number  = magento;
-                            let formatted = new Intl.NumberFormat("es-CL",{
-                              style:'currency',
-                              currency:'CLP'
-                            }).format(number);
-                            return <div> {formatted}</div>
-                        })()}
-                      </p> */}
+                     <p id="ordersGraphText" className="card-category">{vtexOrders} órdenes</p>
+                 
                     </p>
                     </div>
 
@@ -3609,17 +3775,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;WooCommerce
-                      <p className="card-category">{wooCommerceOrders} Ordenes</p>
-                      {/* <p className="card-category">
-                        {(() => {
-                              let number  = wooCommerce;
-                              let formatted = new Intl.NumberFormat("es-CL",{
-                                style:'currency',
-                                currency:'CLP'
-                              }).format(number);
-                              return <div> {formatted}</div>
-                          })()}
-                      </p> */}
+                      <p id="ordersGraphText" className="card-category">{wooCommerceOrders} órdenes</p>
+                 
                     </p>
                     </div>
 
@@ -3634,17 +3791,8 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Paris
-                      <p className="card-category">{parisOrders} Ordenes</p>
-                      {/* <p className="card-category">
-                        {(() => {
-                              let number  = chambas;
-                              let formatted = new Intl.NumberFormat("es-CL",{
-                                style:'currency',
-                                currency:'CLP'
-                              }).format(number);
-                              return <div> {formatted}</div>
-                          })()}
-                      </p> */}
+                      <p id="ordersGraphText" className="card-category">{parisOrders} órdenes</p>
+                    
                     </p>
                     </div>
 
@@ -3659,39 +3807,29 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                         }}
                       />
                       &nbsp;Exito
-                      <p className="card-category">{exitoOrders} Ordenes</p>
-                      {/* <p className="card-category">
-                          {(() => {
-                              let number  = listaTienda;
-                              let formatted = new Intl.NumberFormat("es-CL",{
-                                style:'currency',
-                                currency:'CLP'
-                              }).format(number);
-                              return <div> {formatted}</div>
-                          })()}
-
-                      </p> */}
+                      <p id="ordersGraphText" className="card-category">{exitoOrders} órdenes</p>
+                   
                     </p>
                     </div>
                   </div>
                 </div>
 
                     </CardFooter>
-                </Card>
+            </Card>
 
-              </Col>
+          </Col> 
 
 {StackedisLoading && <SplashScreen></SplashScreen>}
            {!StackedisLoading &&  <Col md="6">
                 <Card className="card-chart">
-                  <CardHeader>
+                  <CardHeader id="textNameTable">
                     <strong>Ingresos por canal de venta</strong>
                   </CardHeader>
                   <br></br>
                   <CardBody>
                     <Bar
                       data={stackedSalesGraph}
-                      options={chartExample5.options}
+                      options={stackedSalesGraph.options}
                       //  options={barChartOptions}
                     />
                   </CardBody>
@@ -3972,17 +4110,51 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
             </Col>}
             </Row>
           
-          <Row>
-         
-          </Row>
+    
+          
        
-         <Row>
+     
+          </div>}
+        </div>
+
+        <Row>
            <div class="text-center" style={{marginTop: "3em"}}>
-              <button
+             
+            
+              {!isDownloadingReports && (
+                <button
+                  
+                  id="bttnSubmit"
+                  className="bttnCompartirReporte"    
+                  style={{
+                    backgroundColor: "#1D308E",
+                    textAlign: "center",
+                    width: "296px",
+                    height: "64px",
+                    padding: "22px 81px",
+                    borderRadius: "33px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    fontWeight:"bold",
+                    border:"0",
+                    fontSize: "11px"
+                  }}
+                  onClick={handleDownloadPdf}
+                >
+                <span className="btn-label">
+                  <img src={iconShareReport} width="19px"/>
+                </span>
+                  &nbsp;Descargar Reporte &nbsp;
+                </button>
+              )}
+              {isDownloadingReports && (
+                <Button
+                type="button"
                 id="bttnSubmit"
-                className="bttnCompartirReporte"
+                className="bttnCompartirReporte"    
                 style={{
-                  backgroundColor: "#1D308E",
+                  backgroundColor: "#06cbc1",
                   textAlign: "center",
                   width: "296px",
                   height: "64px",
@@ -3994,18 +4166,23 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                   fontWeight:"bold",
                   border:"0",
                   fontSize: "11px"
-
-
                 }}
-              >
+                onClick={handleDownloadPdf}
+                disabled
+                >
+                  <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Descargando...
+                </Button>
+              )}
+            
+        
+        
 
-                <span className="btn-label">
-                  <img src={iconShareReport} width="19px"/>
-                </span>
-                &nbsp;Compartir Reporte &nbsp;
-              </button>
-
-              <button
+              {/* <button
                 id="bttnSubmit"
                 className="bttnSiguienteReporte"
                 style={{
@@ -4027,13 +4204,11 @@ setmixedChartOrdersData([TotalVtexOrder,totalLinioOrder,totalMercadoOrders,total
                 Siguiente Reporte &nbsp;
                 <span className="btn-label">
                    <img src={iconNextReport} width="19px"/>
-                </span>
-              </button>
+                </span> */}
+              {/* </button> */}
             </div>
           </Row>
-
-        </div>}
-        </div>
+        </div>  
       )}
     </>
   );
