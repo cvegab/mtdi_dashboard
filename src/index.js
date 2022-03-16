@@ -22,12 +22,7 @@ ReactDOM.render(
   //     <Redirect to="/admin/dashboard" />
   //   </Switch>
   // </BrowserRouter>,
-<<<<<<< HEAD
     <App />,
-=======
-     <App />,
-
->>>>>>> main
 
   document.getElementById("root")
 );
