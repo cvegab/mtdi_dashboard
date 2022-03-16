@@ -33,6 +33,7 @@ const routes = [
   //   icon: "nc-icon nc-chart-bar-32",
   //   component: Charts,
   //   layout: "/admin",
+<<<<<<< HEAD
 
   // },
   {
@@ -41,8 +42,10 @@ const routes = [
     icon: "nc-icon nc-chart-bar-32",
     component: MtdiReports,
     layout: "/admin",
+=======
+>>>>>>> main
 
-  },
+  // },
 
   // {
   //   path: "/logysto",
