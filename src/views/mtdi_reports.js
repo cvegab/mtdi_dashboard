@@ -49,7 +49,7 @@ import {
 import SplashScreen from "components/UI/splash-screen";
 import SalesCard from "components/GraphComponent/Sales-card";
 import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales-card";
-
+import StackedGraphOrderCard from 'components/GraphComponent/stacked-graph-order-card';
 registerLocale("es", es);
 
 const mixedChartLabels = [
@@ -500,6 +500,7 @@ function MtdiReports() {
       setcR(null);
     }
 }, []);
+
   const setStackedGraphForSales = ()=>{
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
@@ -1502,9 +1503,9 @@ function MtdiReports() {
       return item.channel === 'Linio';
     });
     const linioSalesValue = linioSales.map(item=>{
-      return item.salesValue;
+      return item.orderValue;
     });
-    setlinio(linioSalesValue[0]);
+    setlinioOrders(linioSalesValue[0]);
     const magentoSales = newData.filter(item=>{
       return item.channel === 'Magento';
     });
@@ -4085,7 +4086,7 @@ console.log(selectedChannelsArray);
                       />
                     </CardBody>
                     <CardFooter>
-                      
+                      <StackedGraphOrderCard></StackedGraphOrderCard>
                     </CardFooter>
                   </Card>
                 </Col>

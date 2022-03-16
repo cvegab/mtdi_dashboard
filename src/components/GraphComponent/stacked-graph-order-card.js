@@ -1,4 +1,15 @@
-const StackedGraphOrderCard = ()=>{
+const StackedGraphOrderCard = (props)=>{
+    let vtex = props.vtex;
+    let linio = props.linio;
+    let magento = props.magento;
+    let mercadoLibre = props.mercadoLibre;
+    let exito = props.exito;
+    let ripley = props.ripley;
+    let shopify = props.shopify;
+    let paris = props.paris;
+    let wooCommerce = props.wooCommerce;
+    let chambas = props.chambas;
+    let listTienda = props.listaTienda;
     return (
 <div className="legend">
                         <div className="infoLegend">
@@ -14,7 +25,7 @@ const StackedGraphOrderCard = ()=>{
                               />
                               &nbsp;Ripley
                               <p id="ordersGraphText" className="card-category">
-                                {ripleyOrders} órdenes
+                                {ripley} órdenes
                               </p>
                             </p>
                           </div>
@@ -30,7 +41,7 @@ const StackedGraphOrderCard = ()=>{
                               />
                               &nbsp;ListaTienda
                               <p id="ordersGraphText" className="card-category">
-                                {listaTiendaOrders} órdenes
+                                {listTienda} órdenes
                               </p>
                             </p>
                           </div>
@@ -46,7 +57,7 @@ const StackedGraphOrderCard = ()=>{
                               />
                               &nbsp;Magento
                               <p id="ordersGraphText" className="card-category">
-                                {magentoOrders} órdenes
+                                {magento} órdenes
                               </p>
                             </p>
                           </div>
@@ -63,7 +74,7 @@ const StackedGraphOrderCard = ()=>{
                               />
                               &nbsp;Shopify
                               <p id="ordersGraphText" className="card-category">
-                                {shopifyOrders} órdenes
+                                {shopify} órdenes
                               </p>
                             </p>
                           </div>
