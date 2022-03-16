@@ -90,7 +90,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp;Mercadolibre
                               <p id="ordersGraphText" className="card-category">
-                                {mercadoLibreOrders} órdenes
+                                {mercadoLibre} órdenes
                               </p>
                             </p>
                           </div>
@@ -107,7 +107,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp;Chambas
                               <p id="ordersGraphText" className="card-category">
-                                {chambasOrders} órdenes
+                                {chambas} órdenes
                               </p>
                             </p>
                           </div>
@@ -124,7 +124,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp; Linio
                               <p id="ordersGraphText" className="card-category">
-                                {linioOrders} órdenes
+                                {linio} órdenes
                               </p>
                             </p>
                           </div>
@@ -141,7 +141,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp; Vtex
                               <p id="ordersGraphText" className="card-category">
-                                {vtexOrders} órdenes
+                                {vtex} órdenes
                               </p>
                             </p>
                           </div>
@@ -158,7 +158,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp;WooCommerce
                               <p id="ordersGraphText" className="card-category">
-                                {wooCommerceOrders} órdenes
+                                {wooCommerce} órdenes
                               </p>
                             </p>
                           </div>
@@ -175,7 +175,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp;Paris
                               <p id="ordersGraphText" className="card-category">
-                                {parisOrders} órdenes
+                                {paris} órdenes
                               </p>
                             </p>
                           </div>
@@ -192,7 +192,7 @@ const StackedGraphOrderCard = (props)=>{
                               />
                               &nbsp;Exito
                               <p id="ordersGraphText" className="card-category">
-                                {exitoOrders} órdenes
+                                {exito} órdenes
                               </p>
                             </p>
                           </div>

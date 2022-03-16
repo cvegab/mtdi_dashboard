@@ -52,15 +52,6 @@ import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales
 import StackedGraphOrderCard from 'components/GraphComponent/stacked-graph-order-card';
 registerLocale("es", es);
 
-const mixedChartLabels = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-];
 const barChartData = {
   labels: [
     "Enero",
@@ -1496,9 +1487,9 @@ function MtdiReports() {
       return item.channel === 'Vtex';
     });
     const vtexSalesValue = vtexSales.map(item=>{
-      return item.salesValue;
+      return item.orderValue;
     });
-    setvtex(vtexSalesValue[0]);
+    setvtexOrders(vtexSalesValue[0]);
     const linioSales = newData.filter(item=>{
       return item.channel === 'Linio';
     });
@@ -1510,9 +1501,16 @@ function MtdiReports() {
       return item.channel === 'Magento';
     });
     const magentoSalesValue = magentoSales.map(item=>{
-      return item.salesValue;
+      return item.orderValue;
     });
-    setmagento(magentoSalesValue[0]);
+    setmagentoOrders(magentoSalesValue[0]);
+    const merSales = newData.filter(item=>{
+      return item.channel === 'MercadoLibre';
+    });
+    const merSalesValue = merSales.map(item=>{
+      return item.orderValue;
+    });
+    setmercadoLibreOrders(merSalesValue[0]);
   }
   const setResumenGraph = () => {
    
@@ -4086,7 +4084,7 @@ console.log(selectedChannelsArray);
                       />
                     </CardBody>
                     <CardFooter>
-                      <StackedGraphOrderCard></StackedGraphOrderCard>
+                      <StackedGraphOrderCard channel={cR} vtex={vtexOrders} linio={linioOrders} magento={magentoOrders} mercadoLibre={mercadoLibreOrders} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie}></StackedGraphOrderCard>
                     </CardFooter>
                   </Card>
                 </Col>
