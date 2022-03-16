@@ -1511,6 +1511,48 @@ function MtdiReports() {
       return item.orderValue;
     });
     setmercadoLibreOrders(merSalesValue[0]);
+    const exiSales = newData.filter(item=>{
+      return item.channel === 'Exito';
+    });
+    const exiSalesValue = exiSales.map(item=>{
+      return item.orderValue;
+    });
+    setexitoOrders(exiSalesValue[0]);
+    const ripSales = newData.filter(item=>{
+      return item.channel === 'Ripley';
+    });
+    const ripSalesValue = ripSales.map(item=>{
+      return item.orderValue;
+    });
+   setripleyOrders(ripSalesValue[0]);
+   const shopSales = newData.filter(item=>{
+    return item.channel === 'Shopify';
+  });
+  const shopSalesValue = shopSales.map(item=>{
+    return item.orderValue;
+  });
+setshopifyOrders(shopSalesValue[0]);
+const pariSales = newData.filter(item=>{
+  return item.channel === 'Paris';
+});
+const pariSalesValue = pariSales.map(item=>{
+  return item.orderValue;
+});
+setparisOrders(pariSalesValue[0]);
+const wooSales = newData.filter(item=>{
+  return item.channel === 'Paris';
+});
+const wooSalesValue = wooSales.map(item=>{
+  return item.orderValue;
+});
+setwooCommerceOrders(wooSalesValue[0]);
+const chambasSales = newData.filter(item=>{
+  return item.channel === 'Chambas';
+});
+const chambasSalesValue = chambasSales.map(item=>{
+  return item.orderValue;
+});
+setchambasOrders(chambasSalesValue[0]);
   }
   const setResumenGraph = () => {
    
@@ -4084,7 +4126,7 @@ console.log(selectedChannelsArray);
                       />
                     </CardBody>
                     <CardFooter>
-                      <StackedGraphOrderCard channel={cR} vtex={vtexOrders} linio={linioOrders} magento={magentoOrders} mercadoLibre={mercadoLibreOrders} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie}></StackedGraphOrderCard>
+                      <StackedGraphOrderCard channel={cR} vtex={vtexOrders} linio={linioOrders} magento={magentoOrders} mercadoLibre={mercadoLibreOrders} exito={exitoOrders} ripley={ripleyOrders} shopify={shopifyOrders} paris={parisOrders} wooCommerce={wooCommerceOrders} chambas={chambasOrders} listaTienda={listaTiendaOrders}></StackedGraphOrderCard>
                     </CardFooter>
                   </Card>
                 </Col>
