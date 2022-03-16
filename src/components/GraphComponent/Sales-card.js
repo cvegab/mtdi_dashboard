@@ -1,11 +1,22 @@
 const SalesCard = (props)=>{
+  let channel = props.channel.map(item=>{
+    return item.channel;
+  })
     let vtex = props.vtex;
     let linio = props.linio;
     let magento = props.magento;
+    let mercadoLibre = props.mercadoLibre;
+    let exito = props.exito;
+    let ripley = props.ripley;
+    let shopify = props.shopify;
+    let paris = props.paris;
+    let wooCommerce = props.wooCommerce;
+    let chambas = props.chambas;
+    let listTienda = props.listaTienda;
     return(
         <div className="infoLegendPieChart">
         <div>
-          <p className="titleTextLegend">
+         {channel.includes('Vtex') && <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -31,10 +42,10 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
         <div>
-          <p className="titleTextLegend">
+         {channel.includes('Linio')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -59,7 +70,7 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
         <div>
           <p className="titleTextLegend">
@@ -74,7 +85,7 @@ const SalesCard = (props)=>{
             &nbsp;Mercadolibre
             <p className="card-category">
               {(() => {
-                let number =1999999;
+                let number =mercadoLibre;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -102,7 +113,7 @@ const SalesCard = (props)=>{
             &nbsp;Exito
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = exito;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -130,7 +141,7 @@ const SalesCard = (props)=>{
             &nbsp;Ripley
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = ripley;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -159,7 +170,7 @@ const SalesCard = (props)=>{
             &nbsp;Shopify
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = shopify;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -188,7 +199,7 @@ const SalesCard = (props)=>{
             &nbsp; Paris
             <p className="card-category">
               {(() => {
-                let number =1999999;
+                let number = paris;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -246,7 +257,7 @@ const SalesCard = (props)=>{
             &nbsp;WooCommerce
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = wooCommerce;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -275,7 +286,7 @@ const SalesCard = (props)=>{
             &nbsp;Chambas
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = chambas;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
@@ -304,7 +315,7 @@ const SalesCard = (props)=>{
             &nbsp;ListaTienda
             <p className="card-category">
               {(() => {
-                let number = 1999999;
+                let number = listTienda;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
