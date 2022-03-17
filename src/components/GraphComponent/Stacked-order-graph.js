@@ -114,6 +114,12 @@ const StackedOrderGraph = (props) => {
         fetchStackedGraphForOrders();  
       }, [props.channelId])
       useEffect(() => {
+        return () => {
+          setstackedChartData(null);
+          setcR(null);
+        }
+    }, []);
+      useEffect(() => {
         setStackedGraphForOrders();
       }, [props.stackedDateLabel,newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisOrders,newExtitoOrders,newListaOrders]);
     const fetchStackedGraphForOrders = () => {
