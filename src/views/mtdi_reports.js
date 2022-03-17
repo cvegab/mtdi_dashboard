@@ -51,6 +51,7 @@ import SalesCard from "components/GraphComponent/Sales-card";
 import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales-card";
 import StackedGraphOrderCard from 'components/GraphComponent/stacked-graph-order-card';
 import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
+import PieChart from "components/GraphComponent/pie-chart";
 registerLocale("es", es);
 
 const barChartData = {
@@ -1656,7 +1657,6 @@ setlistaPie(listaSalesValue[0]);
           },
         };
         setmixedChartData(MIXED);
-        //fetchStackedGraphForSales();
       })
       .catch((error) => console.log("error", error));
   };
@@ -1811,8 +1811,10 @@ setlistaPie(listaSalesValue[0]);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
 
-       
+       setTimeout(() => {
         setisLoading(false);
+       }, 2000);
+        
       })
       .catch((error) => console.log("error", error));
   };
@@ -2078,8 +2080,6 @@ console.log(selectedChannelsArray);
           </Col>
 
           {/* FILTERS IN DESKTOP VERSION */}
-
-          {/* <div id={isMobileSizes?'FiltersInDesktop':'FiltersInMobile'}> */}
           {isMobileSizes && (
             <button
               style={{
@@ -2985,21 +2985,7 @@ console.log(selectedChannelsArray);
               <MixedAndPieChart mixedChartData={mixedChartData}></MixedAndPieChart>
                 <Col id="ColPieChart" lg="5" md="12" sm="12">
                   <Card id="pieChartCard">
-                    <CardHeader>
-                      <CardTitle id="textNameTable">
-                        <strong>Participación canal de venta</strong>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardBody
-                    // style={{ height: "342px" }}
-                    >
-                      <Pie
-                        id="barChartCustom"
-                        data={pieChartData}
-                        options={pieChartData.options}
-                        style={{ width: "300px" }}
-                      />
-                    </CardBody>
+                   <PieChart pieChartData={pieChartData}></PieChart>
                     <CardFooter>
                      <SalesCard channel={cR} vtex={vtexPie} linio={linioPie} magento={magentoPie} mercadoLibre={mercadoPie} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie}></SalesCard>
                     </CardFooter>
