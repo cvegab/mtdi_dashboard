@@ -50,6 +50,7 @@ import SplashScreen from "components/UI/splash-screen";
 import SalesCard from "components/GraphComponent/Sales-card";
 import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales-card";
 import StackedGraphOrderCard from 'components/GraphComponent/stacked-graph-order-card';
+import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
 registerLocale("es", es);
 
 const barChartData = {
@@ -121,25 +122,7 @@ const barChartData = {
   ],
 };
 
-const barChartOptions = {
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-  scales: {
-    xAxes: [
-      {
-        stacked: false,
-      },
-    ],
-    yAxes: [
-      {
-        stacked: false,
-      },
-    ],
-  },
-};
+
 const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
@@ -190,74 +173,7 @@ function MtdiReports() {
       },
     ],
   };
-  const BAR_CHART_DATA = {
-    labels: [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ],
-    datasets: [
-      {
-        label: "Ripley",
-        backgroundColor: "#F10096",
-        borderRadius: "20px",
-        stack: "2",
-        borderRadius: 6,
-        data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
-      },
-      {
-        label: "Shopify",
-        backgroundColor: "#00B6CB",
-        stack: "2",
-        borderRadius: 6,
-        data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
-      },
-      {
-        label: "Mercadolibre",
-        backgroundColor: "#344FD5",
-        stack: "2",
-        borderRadius: 6,
-        data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
-      },
-      {
-        label: "CornerShop",
-        backgroundColor: "#5E35B1",
-        stack: "2",
-        borderRadius: 6,
-        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-      },
-      {
-        label: "Linio",
-        backgroundColor: "#97D456",
-        stack: "2",
-        borderRadius: 6,
-        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-      },
-      {
-        label: "Rappi",
-        backgroundColor: "#FFD88C",
-        stack: "2",
-        borderRadius: 6,
-        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-      },
-      {
-        label: "WooCommerce",
-        backgroundColor: "#FF6059",
-        borderRadius: 6,
-        stack: "2",
-        data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-      },
-    ],
-  };
+ 
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
@@ -461,14 +377,11 @@ function MtdiReports() {
    
   }, []);
   useEffect(() => {
-    fetchResumenGraphDetails();
-   
+    fetchResumenGraphDetails();  
   fetchStackedGraphForSales();
   fetchStackedGraphForOrders();
   }, [channelId]);
-  
-  
-  
+   
   useEffect(() => {
     displaysalesChannelHandler();
   }, [store]);
@@ -988,17 +901,11 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        // console.log(obj);
-        // console.log(redefinedChannel);
-        // console.log(cR);
          console.log(newChannelList);
          if(newChannelList.length===0){
            newChannelList = ['Vtex', 'Linio', 'MercadoLibre', 'Exito', 'Ripley', 'Shopify', 'Paris', 'Magento', 'Woocommerce', 'Chambas', 'ListaTienda'];
          }
-        // console.log(obj.resume.stackedSalesGraphByMonth);
-        // console.log(obj.resume.stackedOrderQtyGraphByMonth);
-        //  setnewStackedData(obj.resume.stackedSalesGraphByMonth);
-      //  console.log(newStackedData);
+        
        // NEW LOGIC
         let linio = [];
         if(newChannelList.includes('Linio')){
@@ -1125,110 +1032,6 @@ function MtdiReports() {
       })
       .catch((error) => console.log("error", error));
   }; 
-  useEffect(() => {
-    let newChannel = [
-      "Vtex",
-      "Linio",
-      "MercadoLibre",
-      "Exito",
-      "Ripley",
-      "Shopify",
-      "Paris",
-      "Magento",
-      "Woocommerce",
-      "Chambas",
-      "ListaTienda",
-    ];
-    var ring = newChannel.map((id, index) => {
-      return {
-        channel: id,
-        value: mixedChartsalesData[index],
-        orderValue: mixedChartOrdersData[index],
-      };
-    });
-    setmixedGraphDatas(ring);
-    let x = [];
-    console.log(ChannelSelectedForDelete);
-
-    if (ChannelSelectedForDelete !== undefined) {
-      x = mixedGraphDatas.filter((item, index) => {
-        return item.channel !== ChannelSelectedForDelete.channel;
-      });
-      setmixedGraphDatas(x);
-
-      if (ChannelSelectedForDelete.channel === "Ripley") {
-        setripleyPie(0);
-        setripleyStackedSalesState(0);
-        setripleyStackedOrdersState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Shopify") {
-        setshopifyPie(0);
-        setshopifyStackedOrdersState(0);
-        setshopifyStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Magento") {
-        setmagentoPie(0);
-        setmagentoStackedOrdersState(0);
-        setmagentoStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Linio") {
-        setlinioPie(0);
-        setlinioStackedOrdersState(0);
-        setlinioStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "MercadoLibre") {
-        setmercadoPie(0);
-        setmercadoStackedOrdersState(0);
-        setmercadoStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Chambas") {
-        setchambasPie(0);
-        setchambasStackedOrdersState(0);
-        setchambasStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Paris") {
-      setparisPie(0);
-        setparisStackedOrdersState(0);
-        setparisStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Vtex") {
-        setvtexPie(0);
-        setvtexStackedOrdersState(0);
-        setvtexStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Woocommerce") {
-       setwooPie(0);
-        setwooCommerceStackedOrdersState(0);
-        setwooCommerceStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "ListaTienda") {
-        setlistaPie(0);
-        setlistaStackedOrdersState(0);
-        setlistaStackedSalesState(0);
-      }
-      if (ChannelSelectedForDelete.channel === "Exito") {
-        setexitoPie(0);
-        setexitoStackedOrdersState(0);
-        setexitoStackedSalesState(0);
-      }
-    }
-    console.log(ripleyStackedSalesState);
-    console.log(mixedGraphDatas);
-    const lineAndBarChartLabels = mixedGraphDatas.map((item) => {
-      return item.channel;
-    });
-    // setmixedGraphChannels(lineAndBarChartLabels);
-    console.log(lineAndBarChartLabels);
-    setBarLineGraphLabels(lineAndBarChartLabels);
-    const lineAndBarChartValues = mixedGraphDatas.map((item) => {
-      return item.value;
-    });
-
-    const lineAndBarChartOrderValues = mixedGraphDatas.map((item) => {
-      return item.orderValue;
-    });
-  }, [mixedChartsalesData, mixedChartOrdersData]);
-
   const getDateLabels = () => {
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
@@ -1236,7 +1039,7 @@ function MtdiReports() {
     var result = [];
 
     if (endDate.isBefore(startDate)) {
-      throw "End date must be greated than start date.";
+      throw "End date must be greater than start date.";
     }
 
     while (startDate.isBefore(endDate)) {
@@ -1292,9 +1095,6 @@ function MtdiReports() {
     setSalesCardData();
   }, [newData]);
  
-  // useEffect(() => {
-  //  fetchPieChartDetails();
-  // }, [cR, ChannelSelectedForDelete])
   useEffect(() => {
  setpieChartGraph();
   }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie,chambasPie,mercadoPie,exitoPie,parisPie,listaPie])
@@ -3182,28 +2982,7 @@ console.log(selectedChannelsArray);
           {!pageFullyLoaded && (
             <div>
               <Row>
-                <Col id="ColMixedChart" lg="7" md="12" sm="12">
-                  <Card className="car-chart" id="mixedChartCustom">
-                    <CardHeader>
-                      <CardTitle id="textNameTable">
-                        <strong>Resumen general de órdenes y ventas</strong>
-                      </CardTitle>
-                      <p className="card-category"> </p>
-                    </CardHeader>
-                    <CardBody>
-                      <br></br>
-                      <br></br>
-                      <Bar
-                        data={mixedChartData}
-                        options={mixedChartData.options}
-                        style={{ width: "400px", height: "300px" }}
-                      />
-                    </CardBody>
-                    <br></br>
-                    <br></br>
-                  </Card>
-                </Col>
-
+              <MixedAndPieChart mixedChartData={mixedChartData}></MixedAndPieChart>
                 <Col id="ColPieChart" lg="5" md="12" sm="12">
                   <Card id="pieChartCard">
                     <CardHeader>
@@ -3227,7 +3006,7 @@ console.log(selectedChannelsArray);
                   </Card>
                 </Col>
               </Row>
-
+         
               <Row>
                 <Col md="6">
                   <Card className="card-chart">

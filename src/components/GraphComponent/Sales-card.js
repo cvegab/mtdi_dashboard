@@ -246,7 +246,7 @@ const SalesCard = (props)=>{
         </div>
 
         <div>
-        {channel.includes('WooCommerce') &&<p className="titleTextLegend">
+        {channel.includes('Woocommerce') &&<p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
