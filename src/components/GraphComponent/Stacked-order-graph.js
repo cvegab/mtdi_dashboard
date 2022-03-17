@@ -116,7 +116,7 @@ const StackedOrderGraph = (props) => {
       useEffect(() => {
         return () => {
           setstackedChartData(null);
-          setcR(null);
+          
         }
     }, []);
       useEffect(() => {
