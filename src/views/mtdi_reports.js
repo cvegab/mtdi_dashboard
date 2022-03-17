@@ -3222,7 +3222,7 @@ console.log(selectedChannelsArray);
                       />
                     </CardBody>
                     <CardFooter>
-                     <SalesCard channel={cR} vtex={vtex} linio={linioPie} magento={magento} mercadoLibre={mercadoLibre} exito={exito} ripley={ripley} shopify={shopify} paris={paris} wooCommerce={wooCommerce} chambas={chambas} listaTienda={listaTienda}></SalesCard>
+                     <SalesCard channel={cR} vtex={vtexPie} linio={linioPie} magento={magentoPie} mercadoLibre={mercadoPie} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie}></SalesCard>
                     </CardFooter>
                   </Card>
                 </Col>

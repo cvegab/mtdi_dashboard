@@ -101,7 +101,7 @@ const SalesCard = (props)=>{
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Exito')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -126,10 +126,10 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Ripley')&&<p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -154,11 +154,11 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p> }
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Shopify')&&  <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -183,11 +183,11 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Paris')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -212,11 +212,12 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+       
+        {channel.includes('Magento')&&<p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -241,11 +242,11 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('WooCommerce') &&<p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -270,11 +271,11 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Chambas')&&<p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -299,11 +300,11 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+         {channel.includes('ListaTienda')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -327,7 +328,7 @@ const SalesCard = (props)=>{
                 );
               })()}
             </p>
-          </p>
+          </p>}
         </div>
       </div>
     )
