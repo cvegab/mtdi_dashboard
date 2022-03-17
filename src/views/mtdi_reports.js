@@ -52,6 +52,7 @@ import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales
 import StackedGraphOrderCard from 'components/GraphComponent/stacked-graph-order-card';
 import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
 import PieChart from "components/GraphComponent/pie-chart";
+import StackedOrderGraph from "components/GraphComponent/Stacked-order-graph";
 registerLocale("es", es);
 
 const barChartData = {
@@ -2996,16 +2997,7 @@ console.log(selectedChannelsArray);
               <Row>
                 <Col md="6">
                   <Card className="card-chart">
-                    <CardHeader id="textNameTable">
-                      <strong>Órdenes por canal de venta</strong>
-                    </CardHeader>
-                    <br></br>
-                    <CardBody>
-                      <Bar
-                        data={stackedChartData}
-                        options={stackedChartData.options}
-                      />
-                    </CardBody>
+                    <StackedOrderGraph></StackedOrderGraph>
                     <CardFooter>
                       <StackedGraphOrderCard channel={cR} vtex={vtexOrders} linio={linioOrders} magento={magentoOrders} mercadoLibre={mercadoLibreOrders} exito={exitoOrders} ripley={ripleyOrders} shopify={shopifyOrders} paris={parisOrders} wooCommerce={wooCommerceOrders} chambas={chambasOrders} listaTienda={listaTiendaOrders}></StackedGraphOrderCard>
                     </CardFooter>
