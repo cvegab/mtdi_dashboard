@@ -26,8 +26,8 @@ import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 //Generate Report PDF
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 // reactstrap components
 import {
   Card,
@@ -46,10 +46,11 @@ import {
 import SplashScreen from "components/UI/splash-screen";
 import SalesCard from "components/GraphComponent/Sales-card";
 import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales-card";
-import StackedGraphOrderCard from 'components/GraphComponent/stacked-graph-order-card';
+import StackedGraphOrderCard from "components/GraphComponent/stacked-graph-order-card";
 import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
 import PieChart from "components/GraphComponent/pie-chart";
 import StackedOrderGraph from "components/GraphComponent/Stacked-order-graph";
+import StackedSalesGraph from "components/GraphComponent/stacked-sales-graph";
 registerLocale("es", es);
 
 const barChartData = {
@@ -121,7 +122,6 @@ const barChartData = {
   ],
 };
 
-
 const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
@@ -172,7 +172,7 @@ function MtdiReports() {
       },
     ],
   };
- 
+
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
@@ -194,18 +194,18 @@ function MtdiReports() {
     "Chambas",
     "ListaTienda",
   ]);
-    //PIE CHART STATES
-    const [linioPie, setlinioPie] = useState(0);
-    const [vtexPie, setvtexPie] = useState(0);
-    const [shopifyPie, setshopifyPie] = useState(0);
-    const [ripleyPie, setripleyPie] = useState(0);
-    const [magentoPie, setmagentoPie] = useState(0);
-    const [chambasPie, setchambasPie] = useState(0);
-    const [wooPie, setwooPie] = useState(0);
-    const [mercadoPie, setmercadoPie] = useState(0);
-    const [exitoPie, setexitoPie] = useState(0);
-    const [parisPie, setparisPie] = useState(0);
-    const [listaPie, setlistaPie] = useState(0);
+  //PIE CHART STATES
+  const [linioPie, setlinioPie] = useState(0);
+  const [vtexPie, setvtexPie] = useState(0);
+  const [shopifyPie, setshopifyPie] = useState(0);
+  const [ripleyPie, setripleyPie] = useState(0);
+  const [magentoPie, setmagentoPie] = useState(0);
+  const [chambasPie, setchambasPie] = useState(0);
+  const [wooPie, setwooPie] = useState(0);
+  const [mercadoPie, setmercadoPie] = useState(0);
+  const [exitoPie, setexitoPie] = useState(0);
+  const [parisPie, setparisPie] = useState(0);
+  const [listaPie, setlistaPie] = useState(0);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
@@ -269,7 +269,6 @@ function MtdiReports() {
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
- 
 
   //ORDERS QUANTITY STATES
   const [ripleyOrders, setripleyOrders] = useState(0);
@@ -297,7 +296,9 @@ function MtdiReports() {
   const [newMagentoMonthly, setnewMagentoMonthly] = useState([]);
   const [newMagentoSalesMonthly, setnewMagentoSalesMonthly] = useState([]);
   const [newWooCommerceMonthly, setnewWooCommerceMonthly] = useState([]);
-  const [newWooCommerceSalesMonthly, setnewWooCommerceSalesMonthly] = useState([]);
+  const [newWooCommerceSalesMonthly, setnewWooCommerceSalesMonthly] = useState(
+    []
+  );
   const [newShopifyMonthly, setnewShopifyMonthly] = useState([]);
   const [newShopifySalesMonthly, setnewShopifySalesMonthly] = useState([]);
   const [newMercadoOrdersMonthly, setnewMercadoOrdersMonthly] = useState([]);
@@ -308,7 +309,7 @@ function MtdiReports() {
   const [newListaOrders, setnewListaOrders] = useState([]);
   const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
   const [newListaSales, setnewListaSales] = useState([]);
- 
+
   useEffect(() => {
     // set initial value
     const mediaWatcher = window.matchMedia("(max-width: 767px)");
@@ -339,40 +340,38 @@ function MtdiReports() {
     fetchFilterData();
     getDateLabels();
     fetchResumenGraphDetails();
-    fetchStackedGraphForSales();
-   // fetchStackedGraphForOrders();
-   
+    //fetchStackedGraphForSales();
+    // fetchStackedGraphForOrders();
   }, []);
   useEffect(() => {
-    fetchResumenGraphDetails();  
-  fetchStackedGraphForSales();
-  //fetchStackedGraphForOrders();
+    fetchResumenGraphDetails();
+    // fetchStackedGraphForSales();
+    //fetchStackedGraphForOrders();
   }, [channelId]);
-   
+
   useEffect(() => {
     displaysalesChannelHandler();
   }, [store]);
 
   useEffect(() => {
     fetchGeneralData();
-    
-  }, [channels, channelId, cR,store]);
- 
+  }, [channels, channelId, cR, store]);
+
   // useEffect(() => {
   //   setStackedGraphForOrders();
   // }, [stackedDateLabel,newlinioMonthly,newVtexMonthly,newRipleyMonthly,newChambasMonthly,newMagentoMonthly,newWooCommerceMonthly,newShopifyMonthly,newMercadoOrdersMonthly,newParisOrders,newExtitoOrders,newListaOrders]);
-  useEffect(() => {
-    setStackedGraphForSales();
-  }, [stackedDateLabel,newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
- //FOR CLEANING UP STATES
+  // useEffect(() => {
+  //   setStackedGraphForSales();
+  // }, [stackedDateLabel,newlinioSalesMonthly,newVtexSalesMonthly,newRipleySalesMonthly,newChambasSalesMonthly,newMagentoSalesMonthly,newWooCommerceSalesMonthly,newShopifySalesMonthly,newMercadoSalesMonthly,newParisSales,newExitoSalesMonthly,newListaSales]);
+  //FOR CLEANING UP STATES
   useEffect(() => {
     return () => {
       setnewStackedData(null);
       setcR(null);
-    }
-}, []);
+    };
+  }, []);
 
-  const setStackedGraphForSales = ()=>{
+  const setStackedGraphForSales = () => {
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
 
@@ -383,7 +382,7 @@ function MtdiReports() {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data:newRipleySalesMonthly,
+          data: newRipleySalesMonthly,
           barThickness: 30,
         },
         {
@@ -410,7 +409,7 @@ function MtdiReports() {
           borderRadius: "20px",
           borderRadius: 6,
           stack: "2",
-          data:newMagentoSalesMonthly,
+          data: newMagentoSalesMonthly,
           barThickness: 30,
         },
         {
@@ -529,13 +528,13 @@ function MtdiReports() {
         },
       },
     };
-   setstackedSalesGraph(MONTLY_SALES_GRAPH);
-  } 
-  const fetchStackedGraphForSales = ()=> {
+    setstackedSalesGraph(MONTLY_SALES_GRAPH);
+  };
+  const fetchStackedGraphForSales = () => {
     console.log(cR);
-    let newChannelList = cR.map(item=>{
+    let newChannelList = cR.map((item) => {
       return item.channel;
-    })
+    });
     console.log(newChannelList);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -553,141 +552,153 @@ function MtdiReports() {
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
 
-  fetch(url, requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-         console.log(newChannelList);
-         if(newChannelList.length===0){
-           newChannelList = ['Vtex', 'Linio', 'MercadoLibre', 'Exito', 'Ripley', 'Shopify', 'Paris', 'Magento', 'Woocommerce', 'Chambas', 'ListaTienda'];
-         }
-        
-       // NEW LOGIC
+        console.log(newChannelList);
+        if (newChannelList.length === 0) {
+          newChannelList = [
+            "Vtex",
+            "Linio",
+            "MercadoLibre",
+            "Exito",
+            "Ripley",
+            "Shopify",
+            "Paris",
+            "Magento",
+            "Woocommerce",
+            "Chambas",
+            "ListaTienda",
+          ];
+        }
+
+        // NEW LOGIC
         let linio = [];
-        if(newChannelList.includes('Linio')){
-              linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-                    return item.Linio;
-                  });
-                   console.log(linio[0].Linio);
-                 setnewlinioSalesMonthly(linio[0].Linio);
-             }
-             if(!newChannelList.includes('Linio')){
-             setnewlinioSalesMonthly(0);
-             }
-          
-                let Vtex = [];
-       if(newChannelList.includes('Vtex')){
-        Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Vtex;
-            });
-             
-            setnewVtexSalesMonthly(Vtex[0].Vtex);
-       }
-       if(!newChannelList.includes('Vtex')){
-       setnewVtexSalesMonthly(0);
-       }
-       let ripley = [];
-       if(newChannelList.includes('Ripley')){
-        ripley = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Ripley;
-            });
-           
-           setnewRipleySalesMonthly(ripley[0].Ripley);
-       }
-       if(!newChannelList.includes('Ripley')){
-       setnewRipleySalesMonthly(0);
-       }
-      let chambas = [];
-      if(newChannelList.includes('Chambas')){
-        chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Chambas;
-            });
-             console.log(chambas[0].Chambas);
-           setnewChambasSalesMonthly(chambas[0].Chambas);
-       }
-       if(!newChannelList.includes('Chambas')){
-       setnewChambasSalesMonthly(0);
-       }
-       let magento = [];
-       if(newChannelList.includes('Magento')){
-        magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Magento;
-            });
-             console.log(magento[0].Magento);
-           setnewMagentoSalesMonthly(magento[0].Magento);
-       }
-       if(!newChannelList.includes('Magento')){
-      setnewMagentoSalesMonthly(0);
-       }
-       let woo = [];
-       if(newChannelList.includes('Woocommerce')){
-        woo = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Woocommerce;
-            });
-           
-           setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
-       }
-       if(!newChannelList.includes('Woocommerce')){
-     setnewWooCommerceSalesMonthly(0);
-       }
-       let shopify = [];
-       if(newChannelList.includes('Shopify')){
-       shopify = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Shopify;
-            });
+        if (newChannelList.includes("Linio")) {
+          linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Linio;
+          });
+          console.log(linio[0].Linio);
+          setnewlinioSalesMonthly(linio[0].Linio);
+        }
+        if (!newChannelList.includes("Linio")) {
+          setnewlinioSalesMonthly(0);
+        }
+
+        let Vtex = [];
+        if (newChannelList.includes("Vtex")) {
+          Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Vtex;
+          });
+
+          setnewVtexSalesMonthly(Vtex[0].Vtex);
+        }
+        if (!newChannelList.includes("Vtex")) {
+          setnewVtexSalesMonthly(0);
+        }
+        let ripley = [];
+        if (newChannelList.includes("Ripley")) {
+          ripley = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Ripley;
+          });
+
+          setnewRipleySalesMonthly(ripley[0].Ripley);
+        }
+        if (!newChannelList.includes("Ripley")) {
+          setnewRipleySalesMonthly(0);
+        }
+        let chambas = [];
+        if (newChannelList.includes("Chambas")) {
+          chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Chambas;
+          });
+          console.log(chambas[0].Chambas);
+          setnewChambasSalesMonthly(chambas[0].Chambas);
+        }
+        if (!newChannelList.includes("Chambas")) {
+          setnewChambasSalesMonthly(0);
+        }
+        let magento = [];
+        if (newChannelList.includes("Magento")) {
+          magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Magento;
+          });
+          console.log(magento[0].Magento);
+          setnewMagentoSalesMonthly(magento[0].Magento);
+        }
+        if (!newChannelList.includes("Magento")) {
+          setnewMagentoSalesMonthly(0);
+        }
+        let woo = [];
+        if (newChannelList.includes("Woocommerce")) {
+          woo = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Woocommerce;
+          });
+
+          setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
+        }
+        if (!newChannelList.includes("Woocommerce")) {
+          setnewWooCommerceSalesMonthly(0);
+        }
+        let shopify = [];
+        if (newChannelList.includes("Shopify")) {
+          shopify = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Shopify;
+          });
 
           setnewShopifySalesMonthly(shopify[0].Shopify);
-       }
-       if(!newChannelList.includes('Shopify')){
-     setnewShopifySalesMonthly(0);
-       }
-     let  mer=[];
-       if(newChannelList.includes('MercadoLibre')){
-       mer = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.MercadoLibre;
-            });
-             
-           setnewMercadoSalesMonthly(mer[0].MercadoLibre);
-       }
-       if(!newChannelList.includes('MercadoLibre')){
-       setnewMercadoSalesMonthly(0);
-       }    
-       let  pari=[];
-       if(newChannelList.includes('Paris')){
-       pari = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Paris;
-            });
-             
-           setnewParisSales(pari[0].Paris);
-       }
-       if(!newChannelList.includes('Paris')){
-      setnewParisSales(0);
-       }    
-       let  exi=[];
-       if(newChannelList.includes('Exito')){
-       exi = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.Exito;
-            });
-             
+        }
+        if (!newChannelList.includes("Shopify")) {
+          setnewShopifySalesMonthly(0);
+        }
+        let mer = [];
+        if (newChannelList.includes("MercadoLibre")) {
+          mer = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.MercadoLibre;
+          });
+
+          setnewMercadoSalesMonthly(mer[0].MercadoLibre);
+        }
+        if (!newChannelList.includes("MercadoLibre")) {
+          setnewMercadoSalesMonthly(0);
+        }
+        let pari = [];
+        if (newChannelList.includes("Paris")) {
+          pari = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Paris;
+          });
+
+          setnewParisSales(pari[0].Paris);
+        }
+        if (!newChannelList.includes("Paris")) {
+          setnewParisSales(0);
+        }
+        let exi = [];
+        if (newChannelList.includes("Exito")) {
+          exi = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.Exito;
+          });
+
           setnewExitoSalesMonthly(exi[0].Exito);
-       }
-       if(!newChannelList.includes('Exito')){
-     setnewExitoSalesMonthly(0);
-       }   
-       let  lista=[];
-       if(newChannelList.includes('ListaTienda')){
-       lista = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-              return item.ListaTienda;
-            });
-             
+        }
+        if (!newChannelList.includes("Exito")) {
+          setnewExitoSalesMonthly(0);
+        }
+        let lista = [];
+        if (newChannelList.includes("ListaTienda")) {
+          lista = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+            return item.ListaTienda;
+          });
+
           setnewListaSales(lista[0].ListaTienda);
-       }
-       if(!newChannelList.includes('ListaTienda')){
-    setnewListaSales(0);
-       } 
+        }
+        if (!newChannelList.includes("ListaTienda")) {
+          setnewListaSales(0);
+        }
       })
       .catch((error) => console.log("error", error));
-  }; 
+  };
   const getDateLabels = () => {
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
@@ -728,9 +739,8 @@ function MtdiReports() {
       }-${d.getFullYear()}`;
       return dateString;
     });
-    
+
     setstackedDateLabel(x);
-    
   };
   useEffect(() => {
     getDateLabels();
@@ -746,15 +756,27 @@ function MtdiReports() {
       setshowFilter(true);
     }
   }, [isMobileSizes]);
-  useEffect(() => { 
+  useEffect(() => {
     setResumenGraph();
     setSalesCardData();
   }, [newData]);
- 
+
   useEffect(() => {
- setpieChartGraph();
-  }, [linioPie,vtexPie,shopifyPie,ripleyPie,magentoPie,wooPie,chambasPie,mercadoPie,exitoPie,parisPie,listaPie])
-  const setpieChartGraph = ()=>{
+    setpieChartGraph();
+  }, [
+    linioPie,
+    vtexPie,
+    shopifyPie,
+    ripleyPie,
+    magentoPie,
+    wooPie,
+    chambasPie,
+    mercadoPie,
+    exitoPie,
+    parisPie,
+    listaPie,
+  ]);
+  const setpieChartGraph = () => {
     let PIE = {
       labels: [
         "Vtex",
@@ -790,18 +812,17 @@ function MtdiReports() {
           borderWidth: 0,
           barPercentage: 1.6,
           data: [
-          vtexPie,
-          linioPie,
-        mercadoPie,
-          exitoPie,
-          ripleyPie,
-          shopifyPie,
-         parisPie,
-          magentoPie,
-          wooPie,
-        chambasPie,
-        listaPie
-
+            vtexPie,
+            linioPie,
+            mercadoPie,
+            exitoPie,
+            ripleyPie,
+            shopifyPie,
+            parisPie,
+            magentoPie,
+            wooPie,
+            chambasPie,
+            listaPie,
           ],
         },
       ],
@@ -841,13 +862,12 @@ function MtdiReports() {
       },
     };
     setpieChartData(PIE);
-
-  }
-  const fetchPieChartDetails = ()=>{
+  };
+  const fetchPieChartDetails = () => {
     console.log(cR);
-    let newChannelList = cR.map(item=>{
+    let newChannelList = cR.map((item) => {
       return item.channel;
-    })
+    });
     console.log(newChannelList);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -869,149 +889,149 @@ function MtdiReports() {
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj.resume.stackedSalesGraphTotal);
-        if(newChannelList.includes('Linio')){
-        let linio;
-        linio = obj.resume.stackedSalesGraphTotal.filter((item) => {
-          return item.Linio;
-        });
-       
-        setlinioPie(linio[0].Linio);
-      } if(!newChannelList.includes('Linio')){
-        setlinioPie(0);
-      }
-      let vtex;
-      if(newChannelList.includes('Vtex')){
-       
-        vtex = obj.resume.stackedSalesGraphTotal.filter((item) => {
-          return item.Vtex;
-        });
-       
-        setvtexPie(vtex[0].Vtex);
-      } if(!newChannelList.includes('Vtex')){
-      setvtexPie(0);
-      }
-      let shopify;
-      if(newChannelList.includes('Shopify')){
-      shopify = obj.resume.stackedSalesGraphTotal.filter((item) => {
-             return item.Shopify;
-           });
-          
+        if (newChannelList.includes("Linio")) {
+          let linio;
+          linio = obj.resume.stackedSalesGraphTotal.filter((item) => {
+            return item.Linio;
+          });
+
+          setlinioPie(linio[0].Linio);
+        }
+        if (!newChannelList.includes("Linio")) {
+          setlinioPie(0);
+        }
+        let vtex;
+        if (newChannelList.includes("Vtex")) {
+          vtex = obj.resume.stackedSalesGraphTotal.filter((item) => {
+            return item.Vtex;
+          });
+
+          setvtexPie(vtex[0].Vtex);
+        }
+        if (!newChannelList.includes("Vtex")) {
+          setvtexPie(0);
+        }
+        let shopify;
+        if (newChannelList.includes("Shopify")) {
+          shopify = obj.resume.stackedSalesGraphTotal.filter((item) => {
+            return item.Shopify;
+          });
+
           setshopifyPie(shopify[0].Shopify);
-      }
-      if(!newChannelList.includes('Shopify')){
-      setshopifyPie(0);
-      }
-      let ripley;
-      if(newChannelList.includes('Ripley')){
-       ripley = obj.resume.stackedSalesGraphTotal.filter((item) => {
-             return item.Ripley;
-           });
-            
-           setripleyPie(ripley[0].Ripley);
-      }
-      if(!newChannelList.includes('Ripley')){
-     setripleyPie(0);
-      }
-      let magento;
-       if(newChannelList.includes('Magento')){
-        magento = obj.resume.stackedSalesGraphTotal.filter((item) => {
-              return item.Magento;
-            });
-             
-         setmagentoPie(magento[0].Magento);
-       }
-       if(!newChannelList.includes('Magento')){
-      setmagentoPie(0);
-       }
-       let woo;
-       if(newChannelList.includes('Woocommerce')){
-        woo = obj.resume.stackedSalesGraphTotal.filter((item) => {
-              return item.Woocommerce;
-            });
-            
-           setwooPie(woo[0].Woocommerce);
-       }
-       if(!newChannelList.includes('Woocommerce')){
-       setwooPie(0);
-       }
+        }
+        if (!newChannelList.includes("Shopify")) {
+          setshopifyPie(0);
+        }
+        let ripley;
+        if (newChannelList.includes("Ripley")) {
+          ripley = obj.resume.stackedSalesGraphTotal.filter((item) => {
+            return item.Ripley;
+          });
+
+          setripleyPie(ripley[0].Ripley);
+        }
+        if (!newChannelList.includes("Ripley")) {
+          setripleyPie(0);
+        }
+        let magento;
+        if (newChannelList.includes("Magento")) {
+          magento = obj.resume.stackedSalesGraphTotal.filter((item) => {
+            return item.Magento;
+          });
+
+          setmagentoPie(magento[0].Magento);
+        }
+        if (!newChannelList.includes("Magento")) {
+          setmagentoPie(0);
+        }
+        let woo;
+        if (newChannelList.includes("Woocommerce")) {
+          woo = obj.resume.stackedSalesGraphTotal.filter((item) => {
+            return item.Woocommerce;
+          });
+
+          setwooPie(woo[0].Woocommerce);
+        }
+        if (!newChannelList.includes("Woocommerce")) {
+          setwooPie(0);
+        }
       })
       .catch((error) => console.log("error", error));
-  }
-  const setSalesCardData = ()=>{
-   
-    const vtexSales = newData.filter(item=>{
-      return item.channel === 'Vtex';
+  };
+  const setSalesCardData = () => {
+    const vtexSales = newData.filter((item) => {
+      return item.channel === "Vtex";
     });
-    const vtexSalesValue = vtexSales.map(item=>{
+    const vtexSalesValue = vtexSales.map((item) => {
       return item.orderValue;
     });
     setvtexOrders(vtexSalesValue[0]);
-    const linioSales = newData.filter(item=>{
-      return item.channel === 'Linio';
+    const linioSales = newData.filter((item) => {
+      return item.channel === "Linio";
     });
-    const linioSalesValue = linioSales.map(item=>{
+    const linioSalesValue = linioSales.map((item) => {
       return item.orderValue;
     });
     setlinioOrders(linioSalesValue[0]);
-    const magentoSales = newData.filter(item=>{
-      return item.channel === 'Magento';
+    const magentoSales = newData.filter((item) => {
+      return item.channel === "Magento";
     });
-    const magentoSalesValue = magentoSales.map(item=>{
+    const magentoSalesValue = magentoSales.map((item) => {
       return item.orderValue;
     });
     setmagentoOrders(magentoSalesValue[0]);
-    const merSales = newData.filter(item=>{
-      return item.channel === 'MercadoLibre';
+    const merSales = newData.filter((item) => {
+      return item.channel === "MercadoLibre";
     });
-    const merSalesValue = merSales.map(item=>{
+    const merSalesValue = merSales.map((item) => {
       return item.orderValue;
     });
     setmercadoLibreOrders(merSalesValue[0]);
-    const exiSales = newData.filter(item=>{
-      return item.channel === 'Exito';
+    const exiSales = newData.filter((item) => {
+      return item.channel === "Exito";
     });
-    const exiSalesValue = exiSales.map(item=>{
+    const exiSalesValue = exiSales.map((item) => {
       return item.orderValue;
     });
     setexitoOrders(exiSalesValue[0]);
-    const ripSales = newData.filter(item=>{
-      return item.channel === 'Ripley';
+    const ripSales = newData.filter((item) => {
+      return item.channel === "Ripley";
     });
-    const ripSalesValue = ripSales.map(item=>{
+    const ripSalesValue = ripSales.map((item) => {
       return item.orderValue;
     });
-   setripleyOrders(ripSalesValue[0]);
-   const shopSales = newData.filter(item=>{
-    return item.channel === 'Shopify';
-  });
-  const shopSalesValue = shopSales.map(item=>{
-    return item.orderValue;
-  });
-setshopifyOrders(shopSalesValue[0]);
-const pariSales = newData.filter(item=>{
-  return item.channel === 'Paris';
-});
-const pariSalesValue = pariSales.map(item=>{
-  return item.orderValue;
-});
-setparisOrders(pariSalesValue[0]);
-const wooSales = newData.filter(item=>{
-  return item.channel === 'Paris';
-});
-const wooSalesValue = wooSales.map(item=>{
-  return item.orderValue;
-});
-setwooCommerceOrders(wooSalesValue[0]);
-const chambasSales = newData.filter(item=>{
-  return item.channel === 'Chambas';
-});
-const chambasSalesValue = chambasSales.map(item=>{
-  return item.orderValue;
-});
-setchambasOrders(chambasSalesValue[0]);
-  }
+    setripleyOrders(ripSalesValue[0]);
+    const shopSales = newData.filter((item) => {
+      return item.channel === "Shopify";
+    });
+    const shopSalesValue = shopSales.map((item) => {
+      return item.orderValue;
+    });
+    setshopifyOrders(shopSalesValue[0]);
+    const pariSales = newData.filter((item) => {
+      return item.channel === "Paris";
+    });
+    const pariSalesValue = pariSales.map((item) => {
+      return item.orderValue;
+    });
+    setparisOrders(pariSalesValue[0]);
+    const wooSales = newData.filter((item) => {
+      return item.channel === "Paris";
+    });
+    const wooSalesValue = wooSales.map((item) => {
+      return item.orderValue;
+    });
+    setwooCommerceOrders(wooSalesValue[0]);
+    const chambasSales = newData.filter((item) => {
+      return item.channel === "Chambas";
+    });
+    const chambasSalesValue = chambasSales.map((item) => {
+      return item.orderValue;
+    });
+    setchambasOrders(chambasSalesValue[0]);
+  };
   const setResumenGraph = () => {
-   console.log(newData);
+    console.log(newData);
     const labels = newData.map((item) => {
       return item.channel;
     });
@@ -1022,84 +1042,84 @@ setchambasOrders(chambasSalesValue[0]);
       return item.orderValue;
     });
     //SET PIE CHART HERE
-    const linioSales = newData.filter((item)=>{
-      return item.channel === 'Linio';
-    })
-    const linioSalesValue = linioSales.map((item)=>{
+    const linioSales = newData.filter((item) => {
+      return item.channel === "Linio";
+    });
+    const linioSalesValue = linioSales.map((item) => {
       return item.salesValue;
-    })
-   setlinioPie(linioSalesValue[0]);
-   const vtexSales = newData.filter((item)=>{
-    return item.channel === 'Vtex';
-  })
-  const vtexSalesValue = vtexSales.map((item)=>{
-    return item.salesValue;
-  })
- setvtexPie(vtexSalesValue[0]);
- const ripleySales = newData.filter((item)=>{
-  return item.channel === 'Ripley';
-})
-const ripleySalesValue = ripleySales.map((item)=>{
-  return item.salesValue;
-})
-setripleyPie(ripleySalesValue[0]);
-const shopifySales = newData.filter((item)=>{
-  return item.channel === 'Shopify';
-})
-const shopifySalesValue = shopifySales.map((item)=>{
-  return item.salesValue;
-})
-setshopifyPie(shopifySalesValue[0]);
-const magentoSales = newData.filter((item)=>{
-  return item.channel === 'Magento';
-})
-const magentoSalesValue = magentoSales.map((item)=>{
-  return item.salesValue;
-})
-setmagentoPie(magentoSalesValue[0]);
-const wooSales = newData.filter((item)=>{
-  return item.channel === 'Woocommerce';
-})
-const wooSalesValue = wooSales.map((item)=>{
-  return item.salesValue;
-})
-setwooPie(wooSalesValue[0]);
-const chambasSales = newData.filter((item)=>{
-  return item.channel === 'Chambas';
-})
-const chambasSalesValue = chambasSales.map((item)=>{
-  return item.salesValue;
-})
-setchambasPie(chambasSalesValue[0]);
-const merSales = newData.filter((item)=>{
-  return item.channel === 'MercadoLibre';
-})
-const merSalesValue = merSales.map((item)=>{
-  return item.salesValue;
-})
-setmercadoPie(merSalesValue[0]);
-const exiSales = newData.filter((item)=>{
-  return item.channel === 'Exito';
-})
-const exiSalesValue = exiSales.map((item)=>{
-  return item.salesValue;
-})
-setexitoPie(exiSalesValue[0]);
-const parisSales = newData.filter((item)=>{
-  return item.channel === 'Paris';
-})
-const parisSalesValue = parisSales.map((item)=>{
-  return item.salesValue;
-})
-setparisPie(parisSalesValue[0]);
-const listaSales = newData.filter((item)=>{
-  return item.channel === 'ListaTienda';
-})
-const listaSalesValue = listaSales.map((item)=>{
-  return item.salesValue;
-})
-setlistaPie(listaSalesValue[0]);
-    
+    });
+    setlinioPie(linioSalesValue[0]);
+    const vtexSales = newData.filter((item) => {
+      return item.channel === "Vtex";
+    });
+    const vtexSalesValue = vtexSales.map((item) => {
+      return item.salesValue;
+    });
+    setvtexPie(vtexSalesValue[0]);
+    const ripleySales = newData.filter((item) => {
+      return item.channel === "Ripley";
+    });
+    const ripleySalesValue = ripleySales.map((item) => {
+      return item.salesValue;
+    });
+    setripleyPie(ripleySalesValue[0]);
+    const shopifySales = newData.filter((item) => {
+      return item.channel === "Shopify";
+    });
+    const shopifySalesValue = shopifySales.map((item) => {
+      return item.salesValue;
+    });
+    setshopifyPie(shopifySalesValue[0]);
+    const magentoSales = newData.filter((item) => {
+      return item.channel === "Magento";
+    });
+    const magentoSalesValue = magentoSales.map((item) => {
+      return item.salesValue;
+    });
+    setmagentoPie(magentoSalesValue[0]);
+    const wooSales = newData.filter((item) => {
+      return item.channel === "Woocommerce";
+    });
+    const wooSalesValue = wooSales.map((item) => {
+      return item.salesValue;
+    });
+    setwooPie(wooSalesValue[0]);
+    const chambasSales = newData.filter((item) => {
+      return item.channel === "Chambas";
+    });
+    const chambasSalesValue = chambasSales.map((item) => {
+      return item.salesValue;
+    });
+    setchambasPie(chambasSalesValue[0]);
+    const merSales = newData.filter((item) => {
+      return item.channel === "MercadoLibre";
+    });
+    const merSalesValue = merSales.map((item) => {
+      return item.salesValue;
+    });
+    setmercadoPie(merSalesValue[0]);
+    const exiSales = newData.filter((item) => {
+      return item.channel === "Exito";
+    });
+    const exiSalesValue = exiSales.map((item) => {
+      return item.salesValue;
+    });
+    setexitoPie(exiSalesValue[0]);
+    const parisSales = newData.filter((item) => {
+      return item.channel === "Paris";
+    });
+    const parisSalesValue = parisSales.map((item) => {
+      return item.salesValue;
+    });
+    setparisPie(parisSalesValue[0]);
+    const listaSales = newData.filter((item) => {
+      return item.channel === "ListaTienda";
+    });
+    const listaSalesValue = listaSales.map((item) => {
+      return item.salesValue;
+    });
+    setlistaPie(listaSalesValue[0]);
+
     let MIXED = {
       labels: labels,
       datasets: [
@@ -1209,11 +1229,11 @@ setlistaPie(listaSalesValue[0]);
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj.resume.lineAndBarChart);
-       
+
         setnewData(obj.resume.lineAndBarChart);
-        
+
         console.log(newData);
-       
+
         const labels = newData.map((item) => {
           return item.channel;
         });
@@ -1223,8 +1243,8 @@ setlistaPie(listaSalesValue[0]);
         const orderValue = newData.map((item) => {
           return item.orderValue;
         });
-       
-      //DO NOT REMOVE THIS
+
+        //DO NOT REMOVE THIS
         let MIXED = {
           labels: labels,
           datasets: [
@@ -1253,7 +1273,7 @@ setlistaPie(listaSalesValue[0]);
 
           options: {
             responsive: true,
-           
+
             aspectRatio: 2,
             plugins: {
               legend: {
@@ -1281,14 +1301,13 @@ setlistaPie(listaSalesValue[0]);
                     }).format(number);
                     return totalValueFormatted;
                   },
-                  
                 },
                 grid: {
                   zeroLineColor: "transparent",
                   display: false,
                   drawBorder: false,
                   color: "#EBEBEBf",
-                  
+
                   lineWidth: 0,
                 },
               },
@@ -1305,7 +1324,6 @@ setlistaPie(listaSalesValue[0]);
                   },
                   padding: 20,
                   color: "#9f9f9f",
-                 
                 },
               },
             },
@@ -1319,7 +1337,7 @@ setlistaPie(listaSalesValue[0]);
   const fetchGeneralData = () => {
     console.log(cR);
     setredefinedChannel(cR);
-    
+
     const channelsId = cR.map((item) => {
       return item.value;
     });
@@ -1353,7 +1371,6 @@ setlistaPie(listaSalesValue[0]);
         let res1 = [];
 
         console.log(ChannelSelectedForDelete);
-       
 
         var totalIncomeArray = obj.detail.map((item) => {
           return item.total;
@@ -1466,14 +1483,12 @@ setlistaPie(listaSalesValue[0]);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
 
-       setTimeout(() => {
-        setisLoading(false);
-       }, 2000);
-        
+        setTimeout(() => {
+          setisLoading(false);
+        }, 2000);
       })
       .catch((error) => console.log("error", error));
   };
-
 
   const fetchFilterData = async () => {
     setisLoading(true);
@@ -1538,8 +1553,6 @@ setlistaPie(listaSalesValue[0]);
       .catch((error) => console.log("error", error));
   };
 
- 
-
   const changeDateHandler = (event) => {
     const selectedDate = event.toISOString().slice(0, 10);
 
@@ -1575,8 +1588,8 @@ setlistaPie(listaSalesValue[0]);
     });
 
     const selectedChannelsArray = selectedStoreData[0].channels;
-console.log(selectedChannelsArray);
-    
+    console.log(selectedChannelsArray);
+
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
@@ -1597,15 +1610,13 @@ console.log(selectedChannelsArray);
 
     let x = channelsId.join(",");
     console.log(filteredChannelArray);
-   if(filteredChannelArray.length!==0){
-     console.log('hi');
-    setcR(filteredChannelArray);
-    setchannelId(x);
-   }
-  
+    if (filteredChannelArray.length !== 0) {
+      console.log("hi");
+      setcR(filteredChannelArray);
+      setchannelId(x);
+    }
   };
   const handleDelete = (item) => {
-    
     console.log(mixedChartsalesData);
     setChannelSelectedForDelete(item);
     let x = cR.filter((i) => i !== item);
@@ -1615,25 +1626,22 @@ console.log(selectedChannelsArray);
     setshowFilter(!showFilter);
   };
 
-  // Function to generate a PDF Report 
+  // Function to generate a PDF Report
   const handleDownloadPdf = async () => {
-
     setisDownloadingReports(true);
     const element = printReport.current;
     const canvas = await html2canvas(element);
-    const data = canvas.toDataURL('image/png');
-    
+    const data = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF('p', 'in', 'legal', true);
+    const pdf = new jsPDF("p", "in", "legal", true);
     pdf.setFillColor(245);
     pdf.rect(0, 0, 210, 700, "F");
     const imgProperties = pdf.getImageProperties(data);
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = 
-      (imgProperties.height * pdfWidth) / imgProperties.width;
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
-    pdf.addImage(data, 'PNG', 0.5, 0, pdfWidth-1, pdfHeight-4);
-    pdf.save('InstanceReporte.pdf');
+    pdf.addImage(data, "PNG", 0.5, 0, pdfWidth - 1, pdfHeight - 4);
+    pdf.save("InstanceReporte.pdf");
     setisDownloadingReports(false);
   };
 
@@ -1969,70 +1977,69 @@ console.log(selectedChannelsArray);
           )}
           <br></br>
 
-      
-          <div id="generateReport" ref={printReport}>  
-          <div id="ReportInformationDesktop">
-            <Col
-              id="colReportDatosGenerales"
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1260px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
-              <p
-                id="textNameTable"
+          <div id="generateReport" ref={printReport}>
+            <div id="ReportInformationDesktop">
+              <Col
+                id="colReportDatosGenerales"
+                md="12"
                 style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
+                  backgroundColor: "white",
+                  width: "1260px",
+                  height: "156px",
+                  left: "118px",
+                  top: "669px",
+                  borderRadius: "12px",
                 }}
               >
-                Datos Generales
-              </p>
+                <p
+                  id="textNameTable"
+                  style={{
+                    color: "black",
+                    width: "450px",
+                    fontSize: "20px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    paddingTop: "20px",
+                  }}
+                >
+                  Datos Generales
+                </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* TOTAL INCOME */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG1} width="30px" />
-                      &nbsp; Total Ingresos
-                    </p>
+                <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                  {/* TOTAL INCOME */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconG1} width="30px" />
+                        &nbsp; Total Ingresos
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{
-                        fontSize: "20px",
-                        color: "#444B54",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {(() => {
-                        let number = totalIncome;
-                        let totalIncomeformatted = new Intl.NumberFormat(
-                          "es-CL",
-                          {
-                            style: "currency",
-                            currency: "CLP",
-                          }
-                        ).format(number);
-                        return (
-                          <div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                            {totalIncomeformatted}
-                            &nbsp;
-                            {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{
+                          fontSize: "20px",
+                          color: "#444B54",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {(() => {
+                          let number = totalIncome;
+                          let totalIncomeformatted = new Intl.NumberFormat(
+                            "es-CL",
+                            {
+                              style: "currency",
+                              currency: "CLP",
+                            }
+                          ).format(number);
+                          return (
+                            <div>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                              {totalIncomeformatted}
+                              &nbsp;
+                              {/* <span
                             id="spanTextInfoCard"
                             style={{
                               color: "#33D69F",
@@ -2042,39 +2049,39 @@ console.log(selectedChannelsArray);
                           >
                          +4.5%
                        </span> */}
-                          </div>
-                        );
-                      })()}
-                    </h5>
-                  </div>
-                  {/* DISPATCH COST */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG2} width="30px" />
-                      &nbsp;Costo Despacho
-                    </p>
+                            </div>
+                          );
+                        })()}
+                      </h5>
+                    </div>
+                    {/* DISPATCH COST */}
+                  </Col>
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconG2} width="30px" />
+                        &nbsp;Costo Despacho
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "20px", color: "#444B54" }}
-                    >
-                      {(() => {
-                        let number = dispatchCost;
-                        let formatted = new Intl.NumberFormat("es-CL", {
-                          style: "currency",
-                          currency: "CLP",
-                        }).format(number);
-                        return (
-                          <div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                            {formatted}
-                            &nbsp;
-                            {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "20px", color: "#444B54" }}
+                      >
+                        {(() => {
+                          let number = dispatchCost;
+                          let formatted = new Intl.NumberFormat("es-CL", {
+                            style: "currency",
+                            currency: "CLP",
+                          }).format(number);
+                          return (
+                            <div>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                              {formatted}
+                              &nbsp;
+                              {/* <span
                             id="spanTextInfoCard"
                             style={{
                               color: "#FF6059",
@@ -2084,38 +2091,38 @@ console.log(selectedChannelsArray);
                           >
                          -3%
                        </span> */}
-                          </div>
-                        );
-                      })()}
-                    </h5>
-                  </div>
-                </Col>
-                {/* GM */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG2} width="30px" />
-                      &nbsp;GM
-                    </p>
+                            </div>
+                          );
+                        })()}
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* GM */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconG2} width="30px" />
+                        &nbsp;GM
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      {(() => {
-                        let number = gm;
-                        let formatted = new Intl.NumberFormat("es-CL", {
-                          style: "currency",
-                          currency: "CLP",
-                        }).format(number);
-                        return (
-                          <div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
-                            &nbsp;
-                            {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        {(() => {
+                          let number = gm;
+                          let formatted = new Intl.NumberFormat("es-CL", {
+                            style: "currency",
+                            currency: "CLP",
+                          }).format(number);
+                          return (
+                            <div>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
+                              &nbsp;
+                              {/* <span
                             id="spanTextInfoCard"
                             style={{
                               color: "#FF6059",
@@ -2125,31 +2132,31 @@ console.log(selectedChannelsArray);
                           >
                          -6%
                        </span> */}
-                          </div>
-                        );
-                      })()}
-                    </h5>
-                  </div>
-                </Col>
-                {/* CONVERSION */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconG3} width="30px" />
-                      &nbsp;Conversión
-                    </p>
+                            </div>
+                          );
+                        })()}
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* CONVERSION */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconG3} width="30px" />
+                        &nbsp;Conversión
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      {/* $1.253.369 &nbsp; */}
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {conversion} &nbsp;
-                      {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        {/* $1.253.369 &nbsp; */}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {conversion} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#33D69F",
@@ -2159,59 +2166,59 @@ console.log(selectedChannelsArray);
                         >
                           +4.5%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* ORDER PROCESSING */}
-            <Col
-              id="colReportOrderProcessing"
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
-              <p
-                id="textNameTable"
+                      </h5>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+              <br></br>
+              <br></br>
+              {/* ORDER PROCESSING */}
+              <Col
+                id="colReportOrderProcessing"
+                md="12"
                 style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
+                  backgroundColor: "white",
+                  width: "1040px",
+                  height: "156px",
+                  left: "118px",
+                  top: "669px",
+                  borderRadius: "12px",
                 }}
               >
-                Procesamiento de pedidos
-              </p>
+                <p
+                  id="textNameTable"
+                  style={{
+                    color: "black",
+                    width: "450px",
+                    fontSize: "20px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    paddingTop: "20px",
+                  }}
+                >
+                  Procesamiento de pedidos
+                </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* ORDERS */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconPP1} width="30px" />
-                      &nbsp; Pedidos
-                    </p>
+                <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                  {/* ORDERS */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconPP1} width="30px" />
+                        &nbsp; Pedidos
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {totalOrders} &nbsp;
-                      {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {totalOrders} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#33D69F",
@@ -2221,27 +2228,27 @@ console.log(selectedChannelsArray);
                         >
                           +4.5%
                         </span> */}
-                    </h5>
-                  </div>
-                  {/* ORDERS CANCELLED */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconPP2} width="30px" />
-                      &nbsp; Cancelados
-                    </p>
+                      </h5>
+                    </div>
+                    {/* ORDERS CANCELLED */}
+                  </Col>
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconPP2} width="30px" />
+                        &nbsp; Cancelados
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-                      {totalCancelledOrders} &nbsp;
-                      {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                        {totalCancelledOrders} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#FF6059",
@@ -2251,27 +2258,27 @@ console.log(selectedChannelsArray);
                         >
                           -3%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-                {/* DTE SENT */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconPP3} width="30px" />
-                      &nbsp; DTE enviado
-                    </p>
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* DTE SENT */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconPP3} width="30px" />
+                        &nbsp; DTE enviado
+                      </p>
 
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {totalDte} &nbsp;
-                      {/* <span
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {totalDte} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#33D69F",
@@ -2281,32 +2288,32 @@ console.log(selectedChannelsArray);
                         >
                           +8%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-                {/* DELIVERED */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconPP4} width="30px" />
-                      &nbsp; Entregados
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;
-                      <Badge
-                        style={{ backgroundColor: "#06CBC1", color: "white" }}
-                        pill
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* DELIVERED */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
                       >
-                        Próximamente
-                      </Badge>
-                      &nbsp;
-                      {/* <span
+                        <img src={iconPP4} width="30px" />
+                        &nbsp; Entregados
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;
+                        <Badge
+                          style={{ backgroundColor: "#06CBC1", color: "white" }}
+                          pill
+                        >
+                          Próximamente
+                        </Badge>
+                        &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#33D69F",
@@ -2316,58 +2323,58 @@ console.log(selectedChannelsArray);
                         >
                           +12%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* ORDER FULFILLMENT */}
-            <Col
-              id="colReportOrderFulfillment"
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
-              <p
-                id="textNameTable"
+                      </h5>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+              <br></br>
+              <br></br>
+              {/* ORDER FULFILLMENT */}
+              <Col
+                id="colReportOrderFulfillment"
+                md="12"
                 style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
+                  backgroundColor: "white",
+                  width: "1040px",
+                  height: "156px",
+                  left: "118px",
+                  top: "669px",
+                  borderRadius: "12px",
                 }}
               >
-                Cumplimiento de pedidos
-              </p>
+                <p
+                  id="textNameTable"
+                  style={{
+                    color: "black",
+                    width: "450px",
+                    fontSize: "20px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    paddingTop: "20px",
+                  }}
+                >
+                  Cumplimiento de pedidos
+                </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* IN PROCESS */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconCP1} width="30px" />
-                      &nbsp; En Proceso
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {inProcess} &nbsp;
-                      {/* <span
+                <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                  {/* IN PROCESS */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconCP1} width="30px" />
+                        &nbsp; En Proceso
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {inProcess} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#33D69F",
@@ -2377,26 +2384,26 @@ console.log(selectedChannelsArray);
                         >
                           +4.5%
                         </span> */}
-                    </h5>
-                  </div>
-                  {/* PREPARATION */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconCP2} width="30px" />
-                      &nbsp; En Preparación
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation}{" "}
-                      &nbsp;
-                      {/* <span
+                      </h5>
+                    </div>
+                    {/* PREPARATION */}
+                  </Col>
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconCP2} width="30px" />
+                        &nbsp; En Preparación
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                        {inPreparation} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#FF6059",
@@ -2406,27 +2413,27 @@ console.log(selectedChannelsArray);
                         >
                           -3%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DISPATCH */}
-                <Col md="3">
-                  <div>
-                    <p
-                      id="textListoParaDespacho"
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconCP3} width="30px" />
-                      &nbsp; Listo para despacho
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {readyToShip} &nbsp;
-                      {/* <span
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* READY TO DISPATCH */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        id="textListoParaDespacho"
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconCP3} width="30px" />
+                        &nbsp; Listo para despacho
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {readyToShip} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#FF6059",
@@ -2436,26 +2443,26 @@ console.log(selectedChannelsArray);
                         >
                           -6%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DELIVER */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconCP4} width="30px" />
-                      &nbsp; Próximo a llegar
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay}{" "}
-                      &nbsp;
-                      {/* <span
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* READY TO DELIVER */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconCP4} width="30px" />
+                        &nbsp; Próximo a llegar
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {onTheWay} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#33D69F",
@@ -2465,58 +2472,58 @@ console.log(selectedChannelsArray);
                         >
                           +4.5%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <br></br>
-            <br></br>
-            {/* CLIENT EXPERIENCE */}
-            <Col
-              id="colReportClientExperience"
-              md="12"
-              style={{
-                backgroundColor: "white",
-                width: "1040px",
-                height: "156px",
-                left: "118px",
-                top: "669px",
-                borderRadius: "12px",
-              }}
-            >
-              <p
-                id="textNameTable"
+                      </h5>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+              <br></br>
+              <br></br>
+              {/* CLIENT EXPERIENCE */}
+              <Col
+                id="colReportClientExperience"
+                md="12"
                 style={{
-                  color: "black",
-                  width: "450px",
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  paddingTop: "20px",
+                  backgroundColor: "white",
+                  width: "1040px",
+                  height: "156px",
+                  left: "118px",
+                  top: "669px",
+                  borderRadius: "12px",
                 }}
               >
-                Experiencia del cliente
-              </p>
+                <p
+                  id="textNameTable"
+                  style={{
+                    color: "black",
+                    width: "450px",
+                    fontSize: "20px",
+                    fontWeight: "800",
+                    marginLeft: "1em",
+                    paddingTop: "20px",
+                  }}
+                >
+                  Experiencia del cliente
+                </p>
 
-              <Row style={{ padding: "10px", paddingLeft: "20px" }}>
-                {/* NPS */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconEC1} width="30px" />
-                      &nbsp; NPS
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps}{" "}
-                      &nbsp;
-                      {/* <span
+                <Row style={{ padding: "10px", paddingLeft: "20px" }}>
+                  {/* NPS */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconEC1} width="30px" />
+                        &nbsp; NPS
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {totalNps} &nbsp;
+                        {/* <span
     
                           id="spanTextInfoCard"
                           style={{
@@ -2527,26 +2534,26 @@ console.log(selectedChannelsArray);
                         >
                           +4.5%
                         </span>  */}
-                    </h5>
-                  </div>
-                  {/* REVIEWS */}
-                </Col>
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconEC2} width="30px" />
-                      &nbsp; Reviews
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews}{" "}
-                      &nbsp;
-                      {/* <span
+                      </h5>
+                    </div>
+                    {/* REVIEWS */}
+                  </Col>
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconEC2} width="30px" />
+                        &nbsp; Reviews
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {reviews} &nbsp;
+                        {/* <span
                           id="spanTextInfoCard"
                           style={{
                             color: "#FF6059",
@@ -2556,26 +2563,26 @@ console.log(selectedChannelsArray);
                         >
                           -3%
                         </span> */}
-                    </h5>
-                  </div>
-                </Col>
+                      </h5>
+                    </div>
+                  </Col>
 
-                {/* claims */}
-                <Col md="3">
-                  <div>
-                    <p
-                      className="titlesInfoCard"
-                      style={{ color: "#C4C4C4", fontWeight: "bold" }}
-                    >
-                      <img src={iconEC3} width="30px" />
-                      &nbsp; Reclamos
-                    </p>
-                    <h5
-                      className="textInfoCard"
-                      style={{ fontSize: "22px", color: "#444B54" }}
-                    >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalClaims} &nbsp;
-                      {/* <span
+                  {/* claims */}
+                  <Col md="3">
+                    <div>
+                      <p
+                        className="titlesInfoCard"
+                        style={{ color: "#C4C4C4", fontWeight: "bold" }}
+                      >
+                        <img src={iconEC3} width="30px" />
+                        &nbsp; Reclamos
+                      </p>
+                      <h5
+                        className="textInfoCard"
+                        style={{ fontSize: "22px", color: "#444B54" }}
+                      >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalClaims} &nbsp;
+                        {/* <span
                             id="spanTextInfoCard"
                             style={{
                               color: "red",
@@ -2585,11 +2592,11 @@ console.log(selectedChannelsArray);
                           >
                             -6%
                           </span> */}
-                    </h5>
-                  </div>
-                </Col>
-                {/* READY TO DELIVER */}
-                {/* <Col md="3">
+                      </h5>
+                    </div>
+                  </Col>
+                  {/* READY TO DELIVER */}
+                  {/* <Col md="3">
                   <div>
                     <p style={{ color: "#C4C4C4" }}>Proximo a llegar</p>
                     <h5 style={{ fontSize: "22px", color: "#444B54" }}>
@@ -2606,118 +2613,163 @@ console.log(selectedChannelsArray);
                     </h5>
                   </div>
                 </Col> */}
-              </Row>
-            </Col>
-          </div>
+                </Row>
+              </Col>
+            </div>
 
-          {/* REPORTS INFORMATION MOBILE VERSION */}
-          <div id="ReportInformationMobile">
-            <InformationCardsMobile
-              totalIncome={totalIncome}
-              dispatchCost={dispatchCost}
-              gm={gm}
-              conversion={conversion}
-              totalOrders={totalOrders}
-              totalCancelledOrders={totalCancelledOrders}
-              totalDte={totalDte}
-              inProcess={inProcess}
-              inPreparation={inPreparation}
-              readyToShip={readyToShip}
-              onTheWay={onTheWay}
-              reviews={reviews}
-              totalNps={totalNps}
-              totalClaims={totalClaims}
-            />
-          </div>
+            {/* REPORTS INFORMATION MOBILE VERSION */}
+            <div id="ReportInformationMobile">
+              <InformationCardsMobile
+                totalIncome={totalIncome}
+                dispatchCost={dispatchCost}
+                gm={gm}
+                conversion={conversion}
+                totalOrders={totalOrders}
+                totalCancelledOrders={totalCancelledOrders}
+                totalDte={totalDte}
+                inProcess={inProcess}
+                inPreparation={inPreparation}
+                readyToShip={readyToShip}
+                onTheWay={onTheWay}
+                reviews={reviews}
+                totalNps={totalNps}
+                totalClaims={totalClaims}
+              />
+            </div>
 
-          <br></br>
-          <br></br>
+            <br></br>
+            <br></br>
 
-          {/* GRAPHS */}
-          {!pageFullyLoaded && (
-            <div>
-              <Row>
-              <MixedAndPieChart mixedChartData={mixedChartData}></MixedAndPieChart>
-                <Col id="ColPieChart" lg="5" md="12" sm="12">
-                  <Card id="pieChartCard">
-                   <PieChart pieChartData={pieChartData}></PieChart>
-                    <CardFooter>
-                     <SalesCard channel={cR} vtex={vtexPie} linio={linioPie} magento={magentoPie} mercadoLibre={mercadoPie} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie}></SalesCard>
-                    </CardFooter>
-                  </Card>
-                </Col>
-              </Row>
-         
-              <Row>
-                <Col md="6">
-                  <Card className="card-chart">
-                    <StackedOrderGraph cR={cR} channelId={channelId} stackedDateLabel={stackedDateLabel} storeId={storeId}selectedDateTo={selectedDateTo}selectedDateFrom={selectedDateFrom}countryId={countryId}></StackedOrderGraph>
-                    <CardFooter>
-                      <StackedGraphOrderCard channel={cR} vtex={vtexOrders} linio={linioOrders} magento={magentoOrders} mercadoLibre={mercadoLibreOrders} exito={exitoOrders} ripley={ripleyOrders} shopify={shopifyOrders} paris={parisOrders} wooCommerce={wooCommerceOrders} chambas={chambasOrders} listaTienda={listaTiendaOrders}></StackedGraphOrderCard>
-                    </CardFooter>
-                  </Card>
-                </Col>
-
-                {StackedisLoading && <SplashScreen></SplashScreen>}
-                {!StackedisLoading && (
-                  <Col md="6">
-                    <Card className="card-chart">
-                      <CardHeader id="textNameTable">
-                        <strong>Ingresos por canal de venta</strong>
-                      </CardHeader>
-                      <br></br>
-                      <CardBody>
-                        <Bar
-                          data={stackedSalesGraph}
-                          options={stackedSalesGraph.options}
-                          //  options={barChartOptions}
-                        />
-                      </CardBody>
+            {/* GRAPHS */}
+            {!pageFullyLoaded && (
+              <div>
+                <Row>
+                  <MixedAndPieChart
+                    mixedChartData={mixedChartData}
+                  ></MixedAndPieChart>
+                  <Col id="ColPieChart" lg="5" md="12" sm="12">
+                    <Card id="pieChartCard">
+                      <PieChart pieChartData={pieChartData}></PieChart>
                       <CardFooter>
-                       <StackedGraphSalesCard channel={cR} vtex={vtex} linio={linioPie} magento={magentoPie} mercadoLibre={mercadoPie} exito={exitoPie} ripley={ripleyPie} shopify={shopifyPie} paris={parisPie} wooCommerce={wooPie} chambas={chambasPie} listaTienda={listaPie} ></StackedGraphSalesCard>
+                        <SalesCard
+                          channel={cR}
+                          vtex={vtexPie}
+                          linio={linioPie}
+                          magento={magentoPie}
+                          mercadoLibre={mercadoPie}
+                          exito={exitoPie}
+                          ripley={ripleyPie}
+                          shopify={shopifyPie}
+                          paris={parisPie}
+                          wooCommerce={wooPie}
+                          chambas={chambasPie}
+                          listaTienda={listaPie}
+                        ></SalesCard>
                       </CardFooter>
                     </Card>
                   </Col>
-                )}  
-              </Row>
-            </div>
-          )}
+                </Row>
+
+                <Row>
+                  <Col md="6">
+                    <Card className="card-chart">
+                      <StackedOrderGraph
+                        cR={cR}
+                        channelId={channelId}
+                        stackedDateLabel={stackedDateLabel}
+                        storeId={storeId}
+                        selectedDateTo={selectedDateTo}
+                        selectedDateFrom={selectedDateFrom}
+                        countryId={countryId}
+                      ></StackedOrderGraph>
+                      <CardFooter>
+                        <StackedGraphOrderCard
+                          channel={cR}
+                          vtex={vtexOrders}
+                          linio={linioOrders}
+                          magento={magentoOrders}
+                          mercadoLibre={mercadoLibreOrders}
+                          exito={exitoOrders}
+                          ripley={ripleyOrders}
+                          shopify={shopifyOrders}
+                          paris={parisOrders}
+                          wooCommerce={wooCommerceOrders}
+                          chambas={chambasOrders}
+                          listaTienda={listaTiendaOrders}
+                        ></StackedGraphOrderCard>
+                      </CardFooter>
+                    </Card>
+                  </Col>
+
+                  {StackedisLoading && <SplashScreen></SplashScreen>}
+                  {!StackedisLoading && (
+                    <Col md="6">
+                      <Card className="card-chart">
+                        <StackedSalesGraph
+                          cR={cR}
+                          channelId={channelId}
+                          stackedDateLabel={stackedDateLabel}
+                          storeId={storeId}
+                          selectedDateTo={selectedDateTo}
+                          selectedDateFrom={selectedDateFrom}
+                          countryId={countryId}
+                        ></StackedSalesGraph>
+                        <CardFooter>
+                          <StackedGraphSalesCard
+                            channel={cR}
+                            vtex={vtex}
+                            linio={linioPie}
+                            magento={magentoPie}
+                            mercadoLibre={mercadoPie}
+                            exito={exitoPie}
+                            ripley={ripleyPie}
+                            shopify={shopifyPie}
+                            paris={parisPie}
+                            wooCommerce={wooPie}
+                            chambas={chambasPie}
+                            listaTienda={listaPie}
+                          ></StackedGraphSalesCard>
+                        </CardFooter>
+                      </Card>
+                    </Col>
+                  )}
+                </Row>
+              </div>
+            )}
           </div>
-              <Row>
-                <div class="text-center" style={{ marginTop: "3em" }}>
-              
-                  {!isDownloadingReports && (
-                  <button
-                    
-                    id="bttnSubmit"
-                    className="bttnCompartirReporte"    
-                    style={{
-                      backgroundColor: "#1D308E",
-                      textAlign: "center",
-                      width: "296px",
-                      height: "64px",
-                      padding: "22px 81px",
-                      borderRadius: "33px",
-                      color: "#FFFFFF",
-                      marginLeft: "1em",
-                      textTransform: "none",
-                      fontWeight:"bold",
-                      border:"0",
-                      fontSize: "11px"
-                    }}
-                    onClick={handleDownloadPdf}
-                  >
+          <Row>
+            <div class="text-center" style={{ marginTop: "3em" }}>
+              {!isDownloadingReports && (
+                <button
+                  id="bttnSubmit"
+                  className="bttnCompartirReporte"
+                  style={{
+                    backgroundColor: "#1D308E",
+                    textAlign: "center",
+                    width: "296px",
+                    height: "64px",
+                    padding: "22px 81px",
+                    borderRadius: "33px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                    border: "0",
+                    fontSize: "11px",
+                  }}
+                  onClick={handleDownloadPdf}
+                >
                   <span className="btn-label">
-                    <img src={iconShareReport} width="19px"/>
+                    <img src={iconShareReport} width="19px" />
                   </span>
-                    &nbsp;Descargar Reporte &nbsp;
-                  </button>
-                )}
-                {isDownloadingReports && (
-                  <Button
+                  &nbsp;Descargar Reporte &nbsp;
+                </button>
+              )}
+              {isDownloadingReports && (
+                <Button
                   type="button"
                   id="bttnSubmit"
-                  className="bttnCompartirReporte"    
+                  className="bttnCompartirReporte"
                   style={{
                     backgroundColor: "#06cbc1",
                     textAlign: "center",
@@ -2728,28 +2780,26 @@ console.log(selectedChannelsArray);
                     color: "#FFFFFF",
                     marginLeft: "1em",
                     textTransform: "none",
-                    fontWeight:"bold",
-                    border:"0",
-                    fontSize: "11px"
+                    fontWeight: "bold",
+                    border: "0",
+                    fontSize: "11px",
                   }}
                   onClick={handleDownloadPdf}
                   disabled
-                  >
-                    <Spinner
-                      style={{ width: "0.7rem", height: "0.7rem" }}
-                      type="grow"
-                      color="light"
-                    />
-                    &nbsp; Descargando...
-                  </Button>
-                )}
-                
-                </div>
-              </Row>
-        
-        </div> 
+                >
+                  <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Descargando...
+                </Button>
+              )}
+            </div>
+          </Row>
+        </div>
       )}
-    </> 
+    </>
   );
 }
 
