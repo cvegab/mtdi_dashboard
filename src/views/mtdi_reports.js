@@ -41,74 +41,6 @@ import StackedSalesGraph from "components/GraphComponent/stacked-sales-graph";
 import ReportCards from "components/GraphComponent/report-cards";
 registerLocale("es", es);
 
-const barChartData = {
-  labels: [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-  ],
-  datasets: [
-    {
-      label: "Ripley",
-      backgroundColor: "#F10096",
-      borderRadius: "20px",
-      stack: "2",
-      borderRadius: 6,
-      data: [30, 50, 20, 40, 50, 30, 20, 110, 32, 12, 33, 89],
-    },
-    {
-      label: "Shopify",
-      backgroundColor: "#00B6CB",
-      stack: "2",
-      borderRadius: 6,
-      data: [10, 0, 5, 15, 0, 4, 8, 8, 32, 11, 33, 66],
-    },
-    {
-      label: "Mercadolibre",
-      backgroundColor: "#344FD5",
-      stack: "2",
-      borderRadius: 6,
-      data: [30, 50, 20, 40, 50, 30, 20, 110, 44, 55, 33, 13],
-    },
-    {
-      label: "CornerShop",
-      backgroundColor: "#5E35B1",
-      stack: "2",
-      borderRadius: 6,
-      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-    },
-    {
-      label: "Linio",
-      backgroundColor: "#97D456",
-      stack: "2",
-      borderRadius: 6,
-      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-    },
-    {
-      label: "Rappi",
-      backgroundColor: "#FFD88C",
-      stack: "2",
-      borderRadius: 6,
-      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-    },
-    {
-      label: "WooCommerce",
-      backgroundColor: "#FF6059",
-      borderRadius: 6,
-      stack: "2",
-      data: [80, 50, 10, 40, 60, 30, 20, 110, 33, 44, 12, 45],
-    },
-  ],
-};
 
 const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
@@ -200,8 +132,8 @@ function MtdiReports() {
   const [mixedChartOrdersData, setmixedChartOrdersData] = useState([]);
   const [ChannelSelectedForDelete, setChannelSelectedForDelete] =
     useState(undefined);
-  const [stackedChartData, setstackedChartData] = useState(barChartData);
-  const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
+  // const [stackedChartData, setstackedChartData] = useState(barChartData);
+  // const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([]);
   const [totalIncome, settotalIncome] = useState(0);
