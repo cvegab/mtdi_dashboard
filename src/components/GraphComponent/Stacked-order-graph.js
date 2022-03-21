@@ -1,4 +1,5 @@
 
+import SplashScreen from "components/UI/splash-screen";
 import React, { useEffect, useState } from "react";
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import {
@@ -107,6 +108,7 @@ const StackedOrderGraph = (props) => {
     const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
     const [newListaSales, setnewListaSales] = useState([]);
     const [stackedChartData, setstackedChartData] = useState(barChartData);
+    const [isLoading, setisLoading] = useState(false);
     useEffect(() => {
       fetchStackedGraphForOrders();  
     }, [])
@@ -128,6 +130,7 @@ const StackedOrderGraph = (props) => {
           return item.channel;
         })
         console.log(newChannelList);
+        setisLoading(true);
         var myHeaders = new Headers();
         myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
         myHeaders.append(
@@ -275,7 +278,8 @@ const StackedOrderGraph = (props) => {
            }
            if(!newChannelList.includes('ListaTienda')){
        setnewListaOrders(0);
-           }     
+           }  
+           setisLoading(false);   
           })
           .catch((error) => console.log("error", error));
       };
@@ -434,6 +438,7 @@ const StackedOrderGraph = (props) => {
     
   return (
     <React.Fragment>
+      {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
       <CardHeader id="textNameTable">
         <strong>Órdenes por canal de venta</strong>
       </CardHeader>
