@@ -6,15 +6,12 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "../assets/css/Charts.css";
 import "react-datepicker/dist/react-datepicker.css";
-import iconShareReport from "../assets/img/iconEnviarReporte.png";
 
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
 
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
-//Generate Report PDF
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
+
 // reactstrap components
 import {
   Card,
@@ -39,6 +36,7 @@ import PieChart from "components/GraphComponent/pie-chart";
 import StackedOrderGraph from "components/GraphComponent/Stacked-order-graph";
 import StackedSalesGraph from "components/GraphComponent/stacked-sales-graph";
 import ReportCards from "components/GraphComponent/report-cards";
+import DownloadReports from "components/GraphComponent/download-reports";
 registerLocale("es", es);
 
 
@@ -46,6 +44,8 @@ const data11 = [1, 8, 5, 9, 20, 10, 15];
 const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
 function MtdiReports() {
+  const printReport = React.useRef();
+
   let PIE_CHART_DATA = {
     labels: [1, 2, 3, 4],
     datasets: [
@@ -96,24 +96,9 @@ function MtdiReports() {
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
-  const [redefinedChannel, setredefinedChannel] = useState([]);
-  const [mixedGraphLabels, setmixedGraphLabels] = useState([]);
   const [pageFullyLoaded, setpageFullyLoaded] = useState(false);
-  const [mixedGraphChannels, setmixedGraphChannels] = useState([]);
   const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
-  const [deleteChannelArray, setdeleteChannelArray] = useState([
-    "Vtex",
-    "Linio",
-    "MercadoLibre",
-    "Exito",
-    "Ripley",
-    "Shopify",
-    "Paris",
-    "Magento",
-    "Woocommerce",
-    "Chambas",
-    "ListaTienda",
-  ]);
+ 
   //PIE CHART STATES
   const [linioPie, setlinioPie] = useState(0);
   const [vtexPie, setvtexPie] = useState(0);
@@ -132,8 +117,6 @@ function MtdiReports() {
   const [mixedChartOrdersData, setmixedChartOrdersData] = useState([]);
   const [ChannelSelectedForDelete, setChannelSelectedForDelete] =
     useState(undefined);
-  // const [stackedChartData, setstackedChartData] = useState(barChartData);
-  // const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([]);
   const [totalIncome, settotalIncome] = useState(0);
@@ -170,8 +153,7 @@ function MtdiReports() {
 
   const [fromDate, setfromDate] = useState(new Date());
   const [showFilter, setshowFilter] = useState(false);
-  const printReport = React.useRef();
-  const [isDownloadingReports, setisDownloadingReports] = useState(false);
+ 
   //SALES CHANNEL TOTAL SALES STATES
  
   const [cR, setcR] = useState([]);
@@ -794,9 +776,7 @@ function MtdiReports() {
   };
 
   const fetchGeneralData = () => {
-    console.log(cR);
-    setredefinedChannel(cR);
-
+    
     const channelsId = cR.map((item) => {
       return item.value;
     });
@@ -1085,31 +1065,11 @@ function MtdiReports() {
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
-
-  // Function to generate a PDF Report
-  const handleDownloadPdf = async () => {
-    setisDownloadingReports(true);
-    const element = printReport.current;
-    const canvas = await html2canvas(element);
-    const data = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF("p", "in", "legal", true);
-    pdf.setFillColor(245);
-    pdf.rect(0, 0, 210, 700, "F");
-    const imgProperties = pdf.getImageProperties(data);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-    pdf.addImage(data, "PNG", 0.5, 0, pdfWidth - 1, pdfHeight - 4);
-    pdf.save("InstanceReporte.pdf");
-    setisDownloadingReports(false);
-  };
   const reloadReportsHandler = () => {
     location.reload();
   };
   return (
     <>
-      {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (
@@ -1242,8 +1202,6 @@ function MtdiReports() {
                   <DatePicker
                     id="datepickerCalendar"
                     type="number"
-                    // selected={fromDate}
-                    // onChange={(date) => setfromDate(date)}
                     value={selectedDateFrom}
                     onChange={changeDateHandler}
                     style={{ width: 200, marginLeft: "1em" }}
@@ -1597,66 +1555,7 @@ function MtdiReports() {
               </div>
             )}
           </div>
-          <Row>
-            <div class="text-center" style={{ marginTop: "3em" }}>
-              {!isDownloadingReports && (
-                <button
-                  id="bttnSubmit"
-                  className="bttnCompartirReporte"
-                  style={{
-                    backgroundColor: "#1D308E",
-                    textAlign: "center",
-                    width: "296px",
-                    height: "64px",
-                    padding: "22px 81px",
-                    borderRadius: "33px",
-                    color: "#FFFFFF",
-                    marginLeft: "1em",
-                    textTransform: "none",
-                    fontWeight: "bold",
-                    border: "0",
-                    fontSize: "11px",
-                  }}
-                  onClick={handleDownloadPdf}
-                >
-                  <span className="btn-label">
-                    <img src={iconShareReport} width="19px" />
-                  </span>
-                  &nbsp;Descargar Reporte &nbsp;
-                </button>
-              )}
-              {isDownloadingReports && (
-                <Button
-                  type="button"
-                  id="bttnSubmit"
-                  className="bttnCompartirReporte"
-                  style={{
-                    backgroundColor: "#06cbc1",
-                    textAlign: "center",
-                    width: "296px",
-                    height: "64px",
-                    padding: "22px 81px",
-                    borderRadius: "33px",
-                    color: "#FFFFFF",
-                    marginLeft: "1em",
-                    textTransform: "none",
-                    fontWeight: "bold",
-                    border: "0",
-                    fontSize: "11px",
-                  }}
-                  onClick={handleDownloadPdf}
-                  disabled
-                >
-                  <Spinner
-                    style={{ width: "0.7rem", height: "0.7rem" }}
-                    type="grow"
-                    color="light"
-                  />
-                  &nbsp; Descargando...
-                </Button>
-              )}
-            </div>
-          </Row>
+        <DownloadReports  printReport={printReport}></DownloadReports>
         </div>
       )}
     </>

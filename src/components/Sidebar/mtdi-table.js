@@ -1524,7 +1524,6 @@ const MtdiTable = (props) => {
                 key={data.id_mtdi}
                 title="Instance Table"
                 icons={tableIcons}
-                title=""
                 data={data}
                 columns={columns}
                 options={{ columnsButton: true, sorting: true, search: true }}
