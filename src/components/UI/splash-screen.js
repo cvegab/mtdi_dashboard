@@ -1,7 +1,7 @@
 import React from "react";
 import spinnerGif from "../../assets/img/spinnerLogos.gif";
 import classes from './splash-screen.module.css';
-const SplashScreen = () => {
+const SplashScreen = (props) => {
   return (
     <React.Fragment>
         <div className={classes.backdrop}>
@@ -21,7 +21,8 @@ const SplashScreen = () => {
             width="300"
             alt="Cargando..."
           />
-          <p className={classes.message}>&nbsp;&nbsp;&nbsp;Cargando órdenes</p>
+           {/* órdenes */}
+          <p className={classes.message}>&nbsp;&nbsp;&nbsp;Cargando {props.message}</p>
      
           {/* <p style={{fontWeight: "bold", color: "#1D308E"}}>Cargando...</p>                   */}
          

@@ -1108,7 +1108,7 @@ function MtdiReports() {
   return (
     <>
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
-      {isLoading && <SplashScreen></SplashScreen>}
+      {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (
         <div className="content">
