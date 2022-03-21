@@ -1,5 +1,5 @@
 import { Select, MenuItem } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // react plugin used to create charts
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -23,11 +23,17 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
+import PruebaPDF from '../components/ChartComponents/PruebaPDF';
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 //Generate Report PDF
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
+// import '@progress/kendo-theme-material/dist/all.css';
+// import { Button } from '@progress/kendo-react-buttons';
+// import '@progress/kendo-theme-default/dist/all.css';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+
 
 
 
@@ -3186,6 +3192,19 @@ console.log(selectedChannelsArray);
     setisDownloadingReports(false);
   };
 
+  const pdfExportComponent = useRef(null);
+  const contentArea = useRef(null);
+
+  const handleExportWithComponent = (event) => {
+    // console.log('clikkkkk');
+    pdfExportComponent.current.save();
+  };
+
+  const handleExportWithMethod = (event) => {
+    // console.log('clikkkkk');
+    savePDF(contentArea.current, {paperSize: "auto"});
+  };
+
   return (
     <>
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
@@ -3521,7 +3540,13 @@ console.log(selectedChannelsArray);
           <br></br>
 
       
-          <div id="generateReport" ref={printReport}>  
+          <div id="generateReport" ref={printReport}> 
+        
+
+            <div id="contentAreaPrint" ref={contentArea}> 
+            
+
+       <PDFExport ref={pdfExportComponent} paperSize="auto">
           <div id="ReportInformationDesktop">
             <Col
               id="colReportDatosGenerales"
@@ -4160,6 +4185,7 @@ console.log(selectedChannelsArray);
               </Row>
             </Col>
           </div>
+         
 
           {/* REPORTS INFORMATION MOBILE VERSION */}
           <div id="ReportInformationMobile">
@@ -5077,10 +5103,22 @@ console.log(selectedChannelsArray);
 
           
             </div>
+          
           )}
+         
+          </PDFExport> 
+          </div>
+
+
           </div>
               <Row>
+
+
+
+
                 <div class="text-center" style={{ marginTop: "3em" }}>
+              <PruebaPDF />
+              <br/>
               
                   {!isDownloadingReports && (
                   <button
@@ -5140,7 +5178,9 @@ console.log(selectedChannelsArray);
                   </Button>
                 )}
                 
+                <Button onClick={handleExportWithComponent}> Probando descargar </Button>
                 </div>
+
               </Row>
         
         </div> 
