@@ -1074,6 +1074,7 @@ function MtdiReports() {
       setcR(filteredChannelArray);
       setchannelId(x);
     }
+    
   };
   const handleDelete = (item) => {
     console.log(mixedChartsalesData);
@@ -1413,7 +1414,7 @@ function MtdiReports() {
                     </button>
                   </div>
                 ))}
-                <button
+               {store!==''&& <button
                   style={{
                     display: "initial",
                     flexDirection: "column",
@@ -1430,7 +1431,25 @@ function MtdiReports() {
                   onClick={displaysalesChannelHandler}
                 >
                   +
-                </button>
+                </button>}
+                {store===''&& <button
+                  style={{
+                    display: "initial",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "5px",
+                    width: "40px",
+                    height: "30px",
+                    left: "1006px",
+                    top: "405px",
+                    background: "#DFE0E8",
+                    borderRadius: "17px",
+                    border: "none",
+                  }}
+                  onClick={fetchFilterData}
+                >
+                  +
+                </button>}
               </Col>
             </div>
           )}
