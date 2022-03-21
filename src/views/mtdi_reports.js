@@ -3188,8 +3188,8 @@ console.log(selectedChannelsArray);
 
   return (
     <>
-      {pageFullyLoaded && <SplashScreen></SplashScreen>}
-      {isLoading && <SplashScreen></SplashScreen>}
+      {pageFullyLoaded && <SplashScreen message='Reportes'></SplashScreen>}
+      {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (
         <div className="content">
