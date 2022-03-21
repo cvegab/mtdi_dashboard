@@ -1,3 +1,4 @@
+import SplashScreen from "components/UI/splash-screen";
 import React, { Fragment, useEffect, useState } from "react";
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import {
@@ -108,6 +109,7 @@ const StackedSalesGraph = (props) => {
   const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
   const [newListaSales, setnewListaSales] = useState([]);
   const [stackedSalesGraph, setstackedSalesGraph] = useState(barChartData);
+  const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
     fetchStackedGraphForSales();
   }, []);
@@ -132,6 +134,7 @@ const StackedSalesGraph = (props) => {
     newListaSales,
   ]);
   const fetchStackedGraphForSales = () => {
+    setisLoading(true);
     console.log(props.cR);
     let newChannelList = props.cR.map((item) => {
       return item.channel;
@@ -297,6 +300,7 @@ const StackedSalesGraph = (props) => {
         if (!newChannelList.includes("ListaTienda")) {
           setnewListaSales(0);
         }
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -461,6 +465,7 @@ const StackedSalesGraph = (props) => {
   };
   return (
     <Fragment>
+      {isLoading&&<SplashScreen message='Reportes'></SplashScreen>}
       <CardHeader id="textNameTable">
         <strong>Ingresos por canal de venta</strong>
       </CardHeader>
