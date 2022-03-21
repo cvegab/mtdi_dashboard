@@ -617,19 +617,22 @@ function MtdiReports() {
       ],
 
       options: {
+        
         plugins: {
           legend: {
             display: false,
           },
         },
+      
         scales: {
+         
           y: {
             gridLines: { drawBorder: false, lineWidth: 0 },
             ticks: {
               color: "#9f9f9f",
               // beginAtZero: true,
-              maxTicksLimit: 6,
-              fontSize: 40,
+              maxTicksLimit: 4,
+              fontSize: 30,
               // padding: 20,
               callback: function (data) {
                 let number = data;
@@ -653,12 +656,14 @@ function MtdiReports() {
               display: false,
               drawBorder: false,
               zeroLineColor: "transparent",
+        
+             
             },
             ticks: {
               font: {
                 size: 10,
               },
-              padding: 1,
+              padding: 10,
               color: "#9f9f9f",
             },
           },
