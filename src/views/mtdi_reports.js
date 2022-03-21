@@ -511,112 +511,100 @@ function MtdiReports() {
   const setStackedGraphForSales = ()=>{
     let MONTLY_SALES_GRAPH = {
       labels: stackedDateLabel,
-
       datasets: [
         {
           label: "Ripley",
           backgroundColor: "#FFD88C",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data:newRipleySalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Chambas",
           backgroundColor: "#EDA4D1",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newChambasSalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Linio",
           backgroundColor: "#F29A32",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newlinioSalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Magento",
           backgroundColor: "#FF6059",
-          borderRadius: "20px",
           borderRadius: 6,
           stack: "2",
           data:newMagentoSalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "ListaTienda",
           backgroundColor: "blue",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newListaSales,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "WooCommerce",
           backgroundColor: "purple",
-          borderRadius: "20px",
           borderRadius: 6,
-          barThickness: 30,
+          barThickness: 25,
           stack: "2",
           data: newWooCommerceSalesMonthly,
         },
         {
           label: "Paris",
           backgroundColor: "#00B6CB",
-          borderRadius: "20px",
           borderRadius: 6,
-          barThickness: 30,
           stack: "2",
           data: newParisSales,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Shopify",
           backgroundColor: "#97D456",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newShopifySalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Vtex",
           backgroundColor: "#F10096",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newVtexSalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Mercadolibre",
           backgroundColor: "yellow",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newMercadoSalesMonthly,
-          barThickness: 30,
+          barThickness: 25,
         },
         {
           label: "Exito",
           backgroundColor: "#E4C41B",
-          borderRadius: "20px",
           borderRadius: 6,
-          barThickness: 30,
+          barThickness: 25,
           stack: "2",
           data: newExitoSalesMonthly,
-          barThickness: 30,
+          
         },
       ],
 
       options: {
+
         plugins: {
           legend: {
             display: false,
@@ -628,9 +616,8 @@ function MtdiReports() {
             ticks: {
               color: "#9f9f9f",
               // beginAtZero: true,
-              maxTicksLimit: 6,
-              fontSize: 40,
-              // padding: 20,
+              maxTicksLimit: 5,
+             
               callback: function (data) {
                 let number = data;
                 let totalValueFormatted = new Intl.NumberFormat("es-CL", {
@@ -639,6 +626,9 @@ function MtdiReports() {
                 }).format(number);
                 return totalValueFormatted;
               },
+              font: {
+                size: 10,
+              }
             },
           },
           grid: {
@@ -658,7 +648,7 @@ function MtdiReports() {
               font: {
                 size: 10,
               },
-              padding: 1,
+              padding: 0,
               color: "#9f9f9f",
             },
           },
@@ -675,102 +665,89 @@ function MtdiReports() {
         {
           label: "Ripley",
           backgroundColor: "#FFD88C",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data:newRipleyMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Vtex",
           backgroundColor: "#F10096",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newVtexMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Shopify",
           backgroundColor: "#97D456",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newShopifyMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Magento",
           backgroundColor: "#FF6059",
-          borderRadius: "20px",
           borderRadius: 6,
           stack: "2",
           data:newMagentoMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Mercadolibre",
           backgroundColor: "yellow",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newMercadoOrdersMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Paris",
           backgroundColor: "#00B6CB",
-          borderRadius: "20px",
-          borderRadius: 6,
-          barThickness: 30,
           stack: "2",
+          borderRadius: 6,
           data: newParisOrders,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Exito",
           backgroundColor: "#E4C41B",
-          borderRadius: "20px",
           borderRadius: 6,
-          barThickness: 30,
           stack: "2",
           data: newExtitoOrders,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "Linio",
           backgroundColor: "#F29A32",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newlinioMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
        
         {
           label: "Chambas",
           backgroundColor: "#EDA4D1",
-          borderRadius: "20px",
           stack: "2",
-          borderRadius: 6,
+          borderRadius: 8,
           data: newChambasMonthly,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "ListaTienda",
           backgroundColor: "blue",
-          borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
           data: newListaOrders,
-          barThickness: 30,
+          barThickness: 28,
         },
         {
           label: "WooCommerce",
           backgroundColor: "purple",
-          borderRadius: "20px",
           borderRadius: 6,
-          barThickness: 30,
+          barThickness: 28,
           stack: "2",
           data: newWooCommerceMonthly,
         },
@@ -789,9 +766,11 @@ function MtdiReports() {
               color: "#9f9f9f",
               // beginAtZero: true,
               maxTicksLimit: 6,
-              fontSize: 100,
               // padding: 20,
+              font: {
+                size: 10,
             },
+            }
           },
           grid: {
             zeroLineColor: "transparent",
@@ -3188,8 +3167,8 @@ console.log(selectedChannelsArray);
 
   return (
     <>
-      {pageFullyLoaded && <SplashScreen></SplashScreen>}
-      {isLoading && <SplashScreen></SplashScreen>}
+      {pageFullyLoaded && <SplashScreen message='Reportes'></SplashScreen>}
+      {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (
         <div className="content">
