@@ -1104,7 +1104,9 @@ function MtdiReports() {
     pdf.save("InstanceReporte.pdf");
     setisDownloadingReports(false);
   };
-
+  const reloadReportsHandler = () => {
+    location.reload();
+  };
   return (
     <>
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
@@ -1379,6 +1381,7 @@ function MtdiReports() {
                 <Button
                   className="btn-round btn-icon fourthStepTour"
                   color="primary"
+                  onClick={reloadReportsHandler}
                 >
                   <i
                     className="nc-icon nc-refresh-69"
