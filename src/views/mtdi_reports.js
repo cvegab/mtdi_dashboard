@@ -1,14 +1,11 @@
 import { Select, MenuItem } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 // react plugin used to create charts
-import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "../assets/css/Charts.css";
 import "react-datepicker/dist/react-datepicker.css";
-
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
-
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 
@@ -94,7 +91,7 @@ function MtdiReports() {
     ],
   };
 
-  const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
+  
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
   const [pageFullyLoaded, setpageFullyLoaded] = useState(false);
@@ -113,9 +110,8 @@ function MtdiReports() {
   const [parisPie, setparisPie] = useState(0);
   const [listaPie, setlistaPie] = useState(0);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
-  const [BarLineGraphLabels, setBarLineGraphLabels] = useState([]);
   const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
-  const [mixedChartOrdersData, setmixedChartOrdersData] = useState([]);
+ 
   const [ChannelSelectedForDelete, setChannelSelectedForDelete] =
     useState(undefined);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
@@ -1030,10 +1026,6 @@ function MtdiReports() {
     fetchGeneralData();
   };
   const displaysalesChannelHandler = () => {
-    const channels = filteredChannelArray.map((item) => {
-      // return item.channel;
-      return item;
-    });
     const channelsId = filteredChannelArray.map((item) => {
       return item.value;
     });
