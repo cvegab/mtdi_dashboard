@@ -95,7 +95,7 @@ const ChartPie = (props) => {
                   <Card>
                     <CardHeader>
                       <CardTitle>
-                        <strong className="title-chartPie">Participación canal de venta</strong>
+                        <strong className="title-chartPie">{props.title}</strong>
                       </CardTitle>
                     </CardHeader>
                     <CardBody>
@@ -118,7 +118,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Vtex
+                            &nbsp;&nbsp;&nbsp;Vtex
                             {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
                             <p className="card-category">
                               {(() => {
@@ -147,7 +147,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Linio
+                            &nbsp;&nbsp;&nbsp;Linio
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -175,7 +175,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Mercadolibre
+                            &nbsp;&nbsp;&nbsp;Mercadolibre
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -203,7 +203,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Exito
+                            &nbsp;&nbsp;&nbsp;Exito
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -231,7 +231,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Ripley
+                            &nbsp;&nbsp;&nbsp;Ripley
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -260,7 +260,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Shopify
+                            &nbsp;&nbsp;&nbsp;Shopify
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -289,7 +289,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp; Paris
+                            &nbsp;&nbsp;&nbsp; Paris
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -318,7 +318,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp; Magento
+                            &nbsp;&nbsp;&nbsp; Magento
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -347,7 +347,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;WooCommerce
+                            &nbsp;&nbsp;&nbsp;WooCommerce
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -376,7 +376,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;Chambas
+                            &nbsp;&nbsp;&nbsp;Chambas
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;
@@ -405,7 +405,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;ListaTienda
+                            &nbsp;&nbsp;&nbsp;ListaTienda
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;

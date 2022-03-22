@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { PDFExport } from '@progress/kendo-react-pdf';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import {
   Card,
   CardHeader,
@@ -23,6 +23,7 @@ import MixedChart from 'views/MixedChart';
 
 const PDFReport = () => {
   const pdfExportComponent = React.useRef(null);
+  const container = React.useRef(null);
   return <div>
       <div className="example-config">
         <button 
@@ -40,53 +41,53 @@ const PDFReport = () => {
           border:"0",
           fontSize: "11px"
         }}
-        // className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" 
-        onClick={() => {
-        if (pdfExportComponent.current) {
-          pdfExportComponent.current.save();
-        }
-      }}>
+  
+      //   onClick={() => {
+      //   if (pdfExportComponent.current) {
+      //     pdfExportComponent.current.save();
+      //   }
+      // }}
+
+      onClick={() => {
+        let element = container.current || document.body;
+        savePDF(element, {
+          paperSize: "auto",
+          margin: 40,
+          fileName: "Reporte Instance"
+        });
+      }}
+      
+      >
           Descargar PDF
         </button>
       </div>
 
       <div style={{
       position: "absolute",
-      left: "-1000px",
+      left: "-2000px",
       top: 0
       }}>
-      <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent}>
+      <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte Instance">
+      <div ref={container}>
       
       <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
 
       
-       
-          <Col>
-            <ChartMixed
-              title="Resumen general de órdenes y ventas"
-              data=""
-              options=""
-            />  
-          </Col>
-        
-      
-        <Row> 
-          <Col md="6">
-            <div>
-              <ChartPie
-                title=""
+       <div>
+          <Row> 
+            <Col lg="6">
+              <ChartMixed
+                title="Resumen general de ordenes y ventas"
                 data=""
                 options=""
-                />
-            </div> 
-          </Col>
-        </Row>
-
-  
-     
-      <Row>
-        <Col md="12">
-        <CardReports 
+              />  
+            </Col>
+        
+      
+          <Col lg="6">
+          <br/>
+          
+            <CardReports 
               title="Datos generales"
               subtitle1="Total ingresos"
               value1="$720.000"
@@ -96,62 +97,83 @@ const PDFReport = () => {
               value3="$0"
               subtitle4="Conversión"
               value4="0"
-            />         
+            />    
+
+            <CardReports 
+              title="Cumplimiento de pedidos"
+              subtitle1="En Proceso"
+              value1="0"
+              subtitle2="En Preparación"
+              value2="20.000"
+              subtitle3="Listo para despacho"
+              value3="0"
+              subtitle4="Próximo a llegar"
+              value4="0" 
+            />     
+  
        
+          </Col>
+        </Row>
+      </div>
+  
+     
+      <Row>
+
+        <Col md="6">
         <CardReports 
-          title="Procesamiento de pedidos"
-          subtitle1="Pedidos"
-          value1="720.000"
-          subtitle2="Cancelados"
-          value2="20.000"
-          subtitle3="DTE enviado"
-          value3="0"
-          subtitle4="Entregados"
-          value4="0" 
-       />
-       <CardReports 
-          title="Cumplimiento de pedidos"
-          subtitle1="En Proceso"
-          value1="0"
-          subtitle2="En Preparación"
-          value2="20.000"
-          subtitle3="Listo para despacho"
-          value3="0"
-          subtitle4="Próximo a llegar"
-          value4="0" 
-       />
-      <CardReports 
-          title="Experiencia del cliente"
-          subtitle1="NPS"
-          value1="0"
-          subtitle2="Reviews"
-          value2="20.000"
-          subtitle3="Reclamos"
-          value3="0"
-          subtitle4=""
-          value4="" 
-       />
+              title="Procesamiento de pedidos"
+              subtitle1="Pedidos"
+              value1="720.000"
+              subtitle2="Cancelados"
+              value2="20.000"
+              subtitle3="DTE enviado"
+              value3="0"
+              subtitle4="Entregados"
+              value4="0" 
+            />
+     
+            <CardReports 
+              title="Experiencia del cliente"
+              subtitle1="NPS"
+              value1="0"
+              subtitle2="Reviews"
+              value2="20.000"
+              subtitle3="Reclamos"
+              value3="0"
+              subtitle4=""
+              value4="" 
+            />
+
         </Col>
-        <Col>
-          {/* <Col>
+        <Col md="6">
+        <ChartPie
+                title="Participacion canal de venta"
+                data=""
+                options=""
+                />
+        </Col>
+      </Row>
+
+      <Row>
+       
+           <Col md="6">
             <ChartBar 
-             title="Órdenes por canal de venta"
+             title="Ordenes por canal de venta"
              data=""
              options=""
             />
-          </Col> */}
-          {/* <Col>
+          </Col> 
+          <Col md="6">
             <ChartBar
              title="Ingresos por canal de venta"
              data=""
              options=""
             />
-          </Col>  */}
-        </Col> 
-      </Row>
-  
-      
+          </Col>  
           
+      </Row>
+         
+      </div>
         </PDFExport>
       </div>
     </div>;

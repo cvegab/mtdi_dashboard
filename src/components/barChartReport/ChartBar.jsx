@@ -13,6 +13,7 @@ import {
   Badge,
 } from "reactstrap";
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
+import './ChartBart.css';
 
 const stackedDateLabel = [
   "En",
@@ -37,7 +38,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -46,7 +47,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -55,7 +56,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -64,7 +65,7 @@ let ordersGraph = {
       borderRadius: "20px",
       borderRadius: 6,
       stack: "2",
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -73,7 +74,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -83,7 +84,7 @@ let ordersGraph = {
       borderRadius: 6,
       barThickness: 30,
       stack: "2",
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -93,7 +94,7 @@ let ordersGraph = {
       borderRadius: 6,
       barThickness: 30,
       stack: "2",
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -102,7 +103,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
    
@@ -112,7 +113,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -121,7 +122,7 @@ let ordersGraph = {
       borderRadius: "20px",
       stack: "2",
       borderRadius: 6,
-      data:["1200"],
+      data:["1200","2000","1500","1500"],
       barThickness: 30,
     },
     {
@@ -131,7 +132,7 @@ let ordersGraph = {
       borderRadius: 6,
       barThickness: 30,
       stack: "2",
-      data:["1200"],
+      data:["1200","2000","1500","1500","4000","1500","2720","3000"],
     },
   ],
   options: {
@@ -179,9 +180,7 @@ let ordersGraph = {
 
 const ChartBar = (props) => {
   return (
-    <div>
-              
-                
+    <div>      
                   <Card className="card-chart">
                     <CardHeader id="textNameTable">
                       <strong>{props.title}</strong>
@@ -189,13 +188,13 @@ const ChartBar = (props) => {
                     <br></br>
                     <CardBody>
                       <Bar
-                        data={ordersGraph.data}
+                        data={ordersGraph}
                         options={ordersGraph.options}
                       />
                     </CardBody>
                     <CardFooter>
-                      <div className="legend">
-                        <div className="infoLegend">
+                      <div >
+                        <div className="infoLegendReport">
                           <div>
                             <p className="titleTextLegend">
                               <i
@@ -204,9 +203,10 @@ const ChartBar = (props) => {
                                   color: "#FFD88C",
                                   backgroundColor: "#FFD88C",
                                   borderRadius: "3px",
+                                  marginLeft:"1em"
                                 }}
                               />
-                              &nbsp;Ripley
+                              &nbsp;&nbsp;&nbsp;Ripley
                               <p id="ordersGraphText" className="card-category">
                                 420 órdenes
                               </p>
@@ -222,7 +222,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;ListaTienda
+                              &nbsp;&nbsp;&nbsp;ListaTienda
                               <p id="ordersGraphText" className="card-category">
                                 420 órdenes
                               </p>
@@ -238,7 +238,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;Magento
+                              &nbsp;&nbsp;&nbsp;Magento
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -255,7 +255,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;Shopify
+                              &nbsp;&nbsp;&nbsp;Shopify
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -271,7 +271,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;Mercadolibre
+                              &nbsp;&nbsp;&nbsp;Mercadolibre
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -288,7 +288,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;Chambas
+                              &nbsp;&nbsp;&nbsp;Chambas
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -305,7 +305,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp; Linio
+                              &nbsp;&nbsp;&nbsp; Linio
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -322,7 +322,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp; Vtex
+                              &nbsp;&nbsp;&nbsp; Vtex
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -339,7 +339,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;WooCommerce
+                              &nbsp;&nbsp;&nbsp;WooCommerce
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -356,7 +356,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;Paris
+                              &nbsp;&nbsp;&nbsp;Paris
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
@@ -373,7 +373,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;Éxito
+                              &nbsp;&nbsp;&nbsp;Exito
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>
