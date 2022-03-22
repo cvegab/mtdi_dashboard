@@ -15,8 +15,13 @@ import {
   Badge,
 } from "reactstrap";
 import CardReports from 'components/CardReports/CardReports';
+import ChartMixed from 'components/MixedChartReport/ChartMixed';
+import ChartPie from 'components/pieChartReport/ChartPie.jsx';
+import ChartBar from 'components/barChartReport/ChartBar';
+import MixedChart from 'views/MixedChart';
 
-const PruebaPDF = () => {
+
+const PDFReport = () => {
   const pdfExportComponent = React.useRef(null);
   return <div>
       <div className="example-config">
@@ -49,16 +54,39 @@ const PruebaPDF = () => {
       position: "absolute",
       left: "-1000px",
       top: 0
-    }}>
-      <PDFExport paperSize="A4" margin="1cm" landscape="true" ref={pdfExportComponent}>
+      }}>
+      <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent}>
       
-      <h2>Reportes </h2>
+      <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
 
+      
+       
+          <Col>
+            <ChartMixed
+              title="Resumen general de órdenes y ventas"
+              data=""
+              options=""
+            />  
+          </Col>
+        
+      
+        <Row> 
+          <Col md="6">
+            <div>
+              <ChartPie
+                title=""
+                data=""
+                options=""
+                />
+            </div> 
+          </Col>
+        </Row>
+
+  
+     
       <Row>
-        <Col lg="6">
-          <Col lg="6">
-            <p>Acá va el gráfico Resumen general órdenes y ventas</p>
-            <CardReports 
+        <Col md="12">
+        <CardReports 
               title="Datos generales"
               subtitle1="Total ingresos"
               value1="$720.000"
@@ -69,29 +97,7 @@ const PruebaPDF = () => {
               subtitle4="Conversión"
               value4="0"
             />         
-          </Col>
-          <Col lg="6">
-            <CardReports 
-              title="Datos generales"
-              subtitle1="Total ingresos"
-              value1="$720.000"
-              subtitle2="Costo Despacho"
-              value2="$720.000"
-              subtitle3="GM"
-              value3="$0"
-              subtitle4="Conversión"
-              value4="0"
-            />            
-          </Col>
-        </Col>
-
-        <Col lg="6">
-          <p>Acá va Gráfico PIECHART</p>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col>
+       
         <CardReports 
           title="Procesamiento de pedidos"
           subtitle1="Pedidos"
@@ -127,13 +133,21 @@ const PruebaPDF = () => {
        />
         </Col>
         <Col>
-          <Col>
-            <p>Grafico resumen ordenes</p>
-          </Col>
-          <Col>
-            <p>Grafico resumen ventas</p>
-          </Col>
-        </Col>
+          {/* <Col>
+            <ChartBar 
+             title="Órdenes por canal de venta"
+             data=""
+             options=""
+            />
+          </Col> */}
+          {/* <Col>
+            <ChartBar
+             title="Ingresos por canal de venta"
+             data=""
+             options=""
+            />
+          </Col>  */}
+        </Col> 
       </Row>
   
       
@@ -143,4 +157,4 @@ const PruebaPDF = () => {
     </div>;
 };
 
-export default PruebaPDF;
+export default PDFReport;

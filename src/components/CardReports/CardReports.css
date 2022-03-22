@@ -1,4 +1,35 @@
 .card-report {
-  border: 1px solid #000;
-  margin-bottom: 1em;
+  border: 1px solid #373737;
+  margin-bottom: 2em;
+  border-radius: 22px;
+
+}
+
+.title-cardReport {
+  font-size: 12px !important;
+  font-weight: bold;
+  text-align: initial;
+  margin-left: 1em;
+  margin-top: 1em;
+  color: #373737;
+  width: 450px;
+}
+
+.subtitle-cardReport {
+  font-size: 10px !important;
+  font-weight: bold;
+  text-align: initial;
+  margin-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  color: #6e6c6c;
+}
+
+.value-cardReport {
+  font-size: 12px !important;
+  font-weight:500;
+  text-align: initial;
+  margin-left: 1em;
+  margin-top: 1em;
+  color: #6e6c6c;
 }

@@ -23,7 +23,7 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
-import PruebaPDF from '../components/ChartComponents/PruebaPDF';
+import PDFReport from '../components/PDFReport/PDFReport';
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 //Generate Report PDF
@@ -53,6 +53,10 @@ import {
 } from "reactstrap";
 
 import SplashScreen from "components/UI/splash-screen";
+import ChartMixed from "components/MixedChartReport/ChartMixed";
+import ChartPie from "components/pieChartReport/ChartPie";
+import ChartBar from "components/barChartReport/ChartBar";
+import CardReports from "components/CardReports/CardReports";
 
 registerLocale("es", es);
 
@@ -3207,6 +3211,8 @@ console.log(selectedChannelsArray);
 
   return (
     <>
+
+
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen></SplashScreen>}
 
@@ -3545,8 +3551,13 @@ console.log(selectedChannelsArray);
 
             <div id="contentAreaPrint" ref={contentArea}> 
             
+            {/* <ChartMixed /> */}
+            {/* <ChartPie /> */}
+            {/* <ChartBar /> */}
+       
+              
 
-       <PDFExport ref={pdfExportComponent} paperSize="auto">
+       {/* <PDFExport ref={pdfExportComponent} paperSize="auto"> */}
           <div id="ReportInformationDesktop">
             <Col
               id="colReportDatosGenerales"
@@ -5106,7 +5117,7 @@ console.log(selectedChannelsArray);
           
           )}
          
-          </PDFExport> 
+          {/* </PDFExport>  */}
           </div>
 
 
@@ -5117,7 +5128,7 @@ console.log(selectedChannelsArray);
 
 
                 <div class="text-center" style={{ marginTop: "3em" }}>
-              <PruebaPDF />
+              <PDFReport />
               <br/>
               
                   {!isDownloadingReports && (
@@ -5178,7 +5189,7 @@ console.log(selectedChannelsArray);
                   </Button>
                 )}
                 
-                <Button onClick={handleExportWithComponent}> Probando descargar </Button>
+                
                 </div>
 
               </Row>
