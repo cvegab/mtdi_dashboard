@@ -44,26 +44,7 @@ const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 function MtdiReports() {
   const printReport = React.useRef();
 
-  let PIE_CHART_DATA = {
-    labels: [1, 2, 3, 4],
-    datasets: [
-      {
-        label: "Emails",
-        pointRadius: 0,
-        pointHoverRadius: 0,
-        backgroundColor: [
-          "#344FD5",
-          "#06CBC1",
-          "#FFD88C",
-          "#FF6059",
-          "#FFFFFF",
-        ],
-        borderWidth: 0,
-        barPercentage: 1.6,
-        data: [542, 480, 430, 211],
-      },
-    ],
-  };
+  
   let MIXED_DATA = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
     datasets: [
@@ -283,108 +264,6 @@ function MtdiReports() {
     setSalesCardData();
   }, [newData]);
 
-  useEffect(() => {
-    setpieChartGraph();
-  }, [
-    linioPie,
-    vtexPie,
-    shopifyPie,
-    ripleyPie,
-    magentoPie,
-    wooPie,
-    chambasPie,
-    mercadoPie,
-    exitoPie,
-    parisPie,
-    listaPie,
-  ]);
-  const setpieChartGraph = () => {
-    let PIE = {
-      labels: [
-        "Vtex",
-        "Linio",
-        "Mercadolibre",
-        "Exito",
-        "Ripley",
-        "Shopify",
-        "Paris",
-        "Magento",
-        "WooCommerce",
-        "Chambas",
-        "ListaTienda",
-      ],
-      datasets: [
-        {
-          label: "Emails",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          backgroundColor: [
-            "#F10096",
-            "#F29A32",
-            "yellow",
-            "#E4C41B",
-            "#FFD88C",
-            "#97D456",
-            "#00B6CB",
-            "#FF6059",
-            "purple",
-            "#EDA4D1",
-            "blue",
-          ],
-          borderWidth: 0,
-          barPercentage: 1.6,
-          data: [
-            vtexPie,
-            linioPie,
-            mercadoPie,
-            exitoPie,
-            ripleyPie,
-            shopifyPie,
-            parisPie,
-            magentoPie,
-            wooPie,
-            chambasPie,
-            listaPie,
-          ],
-        },
-      ],
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-
-          tooltips: {
-            enabled: false,
-          },
-        },
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            ticks: {
-              display: false,
-            },
-            grid: {
-              drawBorder: false,
-              zeroLineColor: "transparent",
-              color: "rgba(255,255,255,0.05)",
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              color: "rgba(255,255,255,0.1)",
-              zeroLineColor: "transparent",
-            },
-            ticks: {
-              display: false,
-            },
-          },
-        },
-      },
-    };
-    setpieChartData(PIE);
-  };
   
   const setSalesCardData = () => {
     const vtexSales = newData.filter((item) => {
@@ -1362,7 +1241,7 @@ function MtdiReports() {
                   ></MixedAndPieChart>
                   <Col id="ColPieChart" lg="5" md="12" sm="12">
                     <Card id="pieChartCard">
-                      <PieChart pieChartData={pieChartData}></PieChart>
+                      <PieChart linioPie = {linioPie} vtexPie={vtexPie} shopifyPie={shopifyPie} ripleyPie={ripleyPie} magentoPie={magentoPie} wooPie={wooPie}  chambasPie={chambasPie} mercadoPie={mercadoPie} exitoPie={exitoPie} parisPie={parisPie} listaPie={listaPie}></PieChart>
                       <CardFooter>
                         <SalesCard
                           channel={cR}
