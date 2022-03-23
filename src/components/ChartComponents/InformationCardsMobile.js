@@ -15,6 +15,7 @@ import iconPP4 from "../../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../../assets/img/icons/Reports/iconEC3.png";
+import '../../assets/css/Charts.css';
 
 // reactstrap components
 import {
@@ -72,6 +73,7 @@ function InformationCardsMobile(props) {
                                   
                                    <td
                                     // className="text-left"
+                                    id="titleReportCardMobile"
                                     style={{
                                       fontSize: "10px",
                                       fontWeight: "bold",
@@ -85,8 +87,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -113,7 +116,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -131,8 +134,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                    <td
                                     // className="text-left"
+                                    id="titleReportCardMobile"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4",  
                                       marginTop: "-1px",
@@ -145,13 +149,15 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
                                       marginLeft: "1em",
-                                      width: "100px"
+                                      width: "100px",
+                                      marginTop: "2em"
                                     }}
                                   >
                                    {(() => {
@@ -173,7 +179,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#FF6059",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -190,9 +196,10 @@ function InformationCardsMobile(props) {
       
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4",  
                                       marginTop: "6px",
@@ -204,8 +211,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -231,7 +239,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#FF6059",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -247,9 +255,10 @@ function InformationCardsMobile(props) {
                                  
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       width:"23em",
@@ -262,8 +271,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -278,7 +288,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -321,8 +331,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                    <td
                                     className="text-left"
+                                    id="titleReportCardMobile"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       position: "absolute",
@@ -335,8 +346,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -352,7 +364,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -369,9 +381,10 @@ function InformationCardsMobile(props) {
                                  
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       position: "absolute",
@@ -384,8 +397,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -399,7 +413,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "red",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -416,9 +430,10 @@ function InformationCardsMobile(props) {
                                    
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       width:"23em",
@@ -431,8 +446,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -447,7 +463,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -464,9 +480,10 @@ function InformationCardsMobile(props) {
                                                            
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       width:"23em",
@@ -479,8 +496,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -496,7 +514,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -539,9 +557,10 @@ function InformationCardsMobile(props) {
                                    
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       position: "absolute",
@@ -554,8 +573,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -570,7 +590,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "red",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -587,9 +607,10 @@ function InformationCardsMobile(props) {
                                  
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       position: "absolute",
@@ -602,8 +623,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -619,7 +641,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "red",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -636,9 +658,10 @@ function InformationCardsMobile(props) {
                                     
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       width:"23em",
@@ -651,8 +674,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -666,7 +690,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -683,9 +707,10 @@ function InformationCardsMobile(props) {
                                     
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       width:"23em",
@@ -698,8 +723,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -713,7 +739,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -753,9 +779,10 @@ function InformationCardsMobile(props) {
                                    
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       position: "absolute",
@@ -767,9 +794,10 @@ function InformationCardsMobile(props) {
                                      &nbsp; NPS
                                   </td>
                                   <td
+                                    id="numberReportCardMobile"
                                     className="text-right"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -785,7 +813,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -801,9 +829,10 @@ function InformationCardsMobile(props) {
                                   <td>                                
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       fontWeight: "bold",
                                       color: "#C4C4C4", 
                                       position: "absolute",
@@ -815,9 +844,10 @@ function InformationCardsMobile(props) {
                                      &nbsp; Reviews
                                   </td>
                                   <td
+                                    id="numberReportCardMobile"
                                     className="text-right"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
@@ -831,7 +861,7 @@ function InformationCardsMobile(props) {
                                      <span
                                       style={{
                                         color: "#33D69F",
-                                        fontSize: "11px",
+                                        fontSize: "10px",
                                         fontWeight: "bold",
                                         textAlign: "left",
                                       }}
@@ -847,6 +877,7 @@ function InformationCardsMobile(props) {
                                   <td>                                                              
                                   </td>
                                    <td
+                                    id="titleReportCardMobile"
                                     className="text-left"
                                     style={{
                                       fontSize: "11px",
@@ -862,8 +893,9 @@ function InformationCardsMobile(props) {
                                   </td>
                                   <td
                                     className="text-right"
+                                    id="numberReportCardMobile"
                                     style={{ 
-                                      fontSize: "11px",
+                                      fontSize: "10px",
                                       color: "#444B54", 
                                       fontWeight: "bold",
                                       textAlign: "right",
