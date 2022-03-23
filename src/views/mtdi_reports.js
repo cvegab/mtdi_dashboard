@@ -24,6 +24,7 @@ import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
 import PDFReport from '../components/PDFReport/PDFReport';
+import shareReports from "components/modalComponents/shareReports";
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 //Generate Report PDF
@@ -5130,12 +5131,8 @@ console.log(selectedChannelsArray);
           </div>
               <Row>
 
-
-
-
                 <div class="text-center" style={{ marginTop: "3em" }}>
               
-
                 <button 
                  id="bttnSubmit"
                 //  className="bttnCompartirReporte" 
@@ -5217,6 +5214,8 @@ console.log(selectedChannelsArray);
                 </ModalBody>
                
               </Modal>         
+
+              <shareReports />
         
               <br/>
               

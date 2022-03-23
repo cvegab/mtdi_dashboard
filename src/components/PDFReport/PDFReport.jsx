@@ -67,7 +67,7 @@ const PDFReport = () => {
       left: "-2000px",
       top: 0
       }}>
-      <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte Instance">
+      <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
       <div ref={container}>
       
       <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
