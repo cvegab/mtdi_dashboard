@@ -48,7 +48,7 @@ const PDFReport = () => {
       //   }
       // }}
 
-      onClick={() => {
+        onClick={() => {
         let element = container.current || document.body;
         savePDF(element, {
           paperSize: "auto",
@@ -57,37 +57,33 @@ const PDFReport = () => {
         });
       }}
       
-      >
+       >
           Descargar PDF
         </button>
       </div>
 
-      <div style={{
+      <div 
+      id="reportPDFcontent"
+      style={{
       position: "absolute",
       left: "-2000px",
       top: 0
       }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
       <div ref={container}>
-      
-      <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
-
-      
-       <div>
-          <Row> 
-            <Col lg="6">
-              <ChartMixed
+      <table>
+        <tr>
+          <td>
+           <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
+            <ChartMixed
                 title="Resumen general de ordenes y ventas"
                 data=""
                 options=""
-              />  
-            </Col>
-        
-      
-          <Col lg="6">
-          <br/>
-          
-            <CardReports 
+             />  
+          </td>
+
+          <td>
+          <CardReports 
               title="Datos generales"
               subtitle1="Total ingresos"
               value1="$720.000"
@@ -110,17 +106,12 @@ const PDFReport = () => {
               subtitle4="Próximo a llegar"
               value4="0" 
             />     
-  
-       
-          </Col>
-        </Row>
-      </div>
-  
-     
-      <Row>
+          </td>
+        </tr>
 
-        <Col md="6">
-        <CardReports 
+        <tr>
+          <td>
+          <CardReports 
               title="Procesamiento de pedidos"
               subtitle1="Pedidos"
               value1="720.000"
@@ -144,35 +135,39 @@ const PDFReport = () => {
               value4="" 
             />
 
-        </Col>
-        <Col md="6">
-        <ChartPie
+          </td>
+
+          <td>
+              <ChartPie
                 title="Participacion canal de venta"
                 data=""
                 options=""
-                />
-        </Col>
-      </Row>
+              />
+          </td>
+        </tr>
 
-      <Row>
-       
-           <Col md="6">
-            <ChartBar 
+        <tr>
+          <td>
+          <ChartBar 
              title="Ordenes por canal de venta"
              data=""
              options=""
             />
-          </Col> 
-          <Col md="6">
-            <ChartBar
+          </td>
+
+          <td>
+          <ChartBar
              title="Ingresos por canal de venta"
              data=""
              options=""
             />
-          </Col>  
-          
-      </Row>
-         
+          </td>
+        </tr>
+
+
+      </table>
+
+ 
       </div>
         </PDFExport>
       </div>
