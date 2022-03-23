@@ -14,6 +14,7 @@ import {
     Badge,
   } from "reactstrap";
 const PieChart = (props)=>{
+  const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
     setpieChartGraph();
   }, [
