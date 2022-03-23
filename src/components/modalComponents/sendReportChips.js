@@ -4,6 +4,14 @@ import { Button } from "reactstrap";
 import "./chip.css";
 import sentEmail from "../../assets/img/emailSent.png";
 import SiIcon from "../../assets/img/si.png";
+import PDFReport from "components/PDFReport/PDFReport";
+import GenerateBase64Report from "./generate-base-64-report";
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import CardReports from 'components/CardReports/CardReports';
+import ChartMixed from 'components/MixedChartReport/ChartMixed';
+import ChartPie from 'components/pieChartReport/ChartPie.jsx';
+import ChartBar from 'components/barChartReport/ChartBar';
+import { drawDOM, exportPDF } from '@progress/kendo-drawing';
 export default class SendReportChips extends React.Component {
   state = {
     items: [],
@@ -12,6 +20,7 @@ export default class SendReportChips extends React.Component {
     emailState: [],
     emailError: null,
     emailSent: null,
+    downloadReport: false
   };
 
   handleKeyDown = (evt) => {
@@ -111,547 +120,24 @@ export default class SendReportChips extends React.Component {
     return /[\w\d\.-]+@[\w\d\.-]+\.(com|cl)+/.test(email);
   }
   parseEmail() {
-    let text = `  <!DOCTYPE html>
-    <html lang="es">
-    <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="Content-Type" content="text/html; charset-utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Instance - Pedido ingresado </title>
-      <style type="text/css">
-        body {
-          margin: 0;
-          background-color: #cccccc;
-        }
-        table {
-          border-spacing: 0;
-        }
-        td {
-          padding: 0;
-        }
-        img {
-          border: 0;
-        }
+      let base64Value='';
+      this.myRef = React.createRef();
+//    const container = this.ref=React.createRef();
+const container = this.myRef;
     
-        @media screen and (max-width: 425px) {
-          #textPedido {
-            text-align: left !important;
-            font-size: 17px !important;
-            text-align: center !important;
-          }
-          #imageDelivery {
-            margin:auto;
-            display:block;
-            text-align: center !important;
-            width:70%;
-          }
-          #clientLogo {
-            margin-left:3.5em;
-            display:block !important;
-            text-align: center !important;
-            width:70%;
-          }
-          #bttnBoleta {
-            padding: 10px 38px;
-          }
-          #icon1 {
-            width:20px !important;
-          }
-          #instanceLogo {
-            width: 80px !important;
-          }
-          #titleWarning {
-            margin-left:10px !important;
-          }
-          #textWarning {
-            margin-left: 8px !important;
-          }
-        }
-    
-        .wrapper {
-          width: 100%;
-          table-layout: fixed;
-          background-color: #f7f7f7;
-          padding-bottom: 60px;
-        }
-    
-        .main {
-          background-color: #ffffff;
-          margin: 0 auto;
-          width: 100%;
-          max-width: 600px;
-          border-spacing: 0;
-          font-family: sans-serif;
-          color: #4a4a4a;
-        }
-        .two-columns {
-          text-align: center;
-          font-size: 0;
-        }
-    
-        .two-columns .column {
-          width: 100%;
-          max-width: 300px;
-          display: inline-block;
-          vertical-align: top;
-        }
-        .button {
-          background-color: #1D308E;
-          border-radius: 17px;
-          text-decoration: none;
-          padding: 12px 100px;
-          font-weight: medium;
-          color:white;
-          font-size: 12px;
-          width: 700px !important;
-          height: 70px; 
-          text-decoration: none;
-    
-        }
-    
-        .button:hover {
-          background-color: #06CBC1;
-        }
-        
-        a:link :visited :hover :active{
-          color: white;
-          text-decoration: none;
-        }
-    
-        a:-webkit-any-link {
-          text-decoration: none;
-        }
-    
-        .two-columns.last {
-          padding: 10px 0;
-        }
-        .two-columns .padding {
-          padding:º0px;
-        }
-    
-        .two-columns .content {
-          font-size: 15px;
-          line-height: 20px;
-          text-align: left;
-        }
-    
-      </style>
-    </head>
-    <body>
-     
-    
-        <center class="wrapper">
-    
-          <table class="main" width="100%">
-    <!-- BLUE BORDER-->
-    <tr>
-      <td height="8" style="background-color: #1D308E;"></td>
-    </tr>
-    
-    <!-- LOGO INSTANCE SECTION-->
-    <tr>
-      <td>
-        <table width="100%">
-    
-    <tr>
-      <td class="column">
-    
-        <!-- <table class="column"> -->
-          <tr>
-            <!-- <td style="padding: 20px 60px; "> -->
-              <td style="text-align: center; padding: 8px 0 4px;">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" alt="Icon" id='icon1' title="Icon" width="20">
-              <br/>
-              <a href="http://www.instancelatam.com">
-                <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" alt="Logo-instance"  id="instanceLogo" title="Logo" width="100">
-              </a>
-            </td>
-          </tr>
-        <!-- </table> -->
-    
-      </td>
-    </tr>
-        </table>
-      </td>
-    </tr>
-    
-    <!-- BANNER SECTION-->
-    
-    <tr>
-      <td width="200" >
-        <tr>
-          <td class="two-columns last">
-    
-            <table class="column">
-              <tr>
-                <td class="padding" >
-    
-                  <table class="content">
-                    <tr>
-                      
-                      <td>
-                      <p
-                      id="textPedido"
-                      style="
-                       font-size: 26px;
-                       color:#1D308E;
-                       padding-left: 40px;
-                       line-height: 43px;
-                      ">
-                       <strong>
-
-                        ¡Tu boleta electrónica ha sido generada!
-
-                       </strong>
-                   </p>
-                        
-                      </td>
-                    </tr>
-                  </table>
-    
-                </td>
-              </tr>
-            </table>
-    
-            <table class="column">
-              <tr>
-                <td class="padding">
-                  <table class="content">
-                    <tr>
-                      <td>
-                      <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/image-delivery.png" alt="ImagenDelivery" alt="ImagenDelivery"  id="imageDelivery" width="90%">
-                        
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-    
-        </tr>
-      </td> 
-    </tr>
-            <!-- BLUE BORDER-->
-            <!-- <tr>
-              <td height="1" style="background-color: #1D308E"></td>
-            </tr>  -->
-    
-    
-    <!--TWO COLUMN SECTION -->
-    
-    <tr>
-      <td width="100%">
-        <tr>
-          <td class="two-columns last">
-    
-            <table class="column">
-              <tr>
-                <td class="padding">
-    
-                  <table class="content">
-                    <tr>
-                      <td>
-                        <a href="#"><img src="storeLogo" alt="Logo-Marca" title="Logo" id="clientLogo" width="100%" style="max-width: 100%"></a>
-                        
-                   
-                      </td>
-                    </tr>
-                  </table>
-    
-                </td>
-              </tr>
-            </table>
-    
-            <table class="column">
-              <tr>
-                <td class="padding">
-                  <table class="content">
-                    <tr>
-                      <td>
-    
-                        <p
-                        style="
-                          font-size:16px;
-                          margin-top:2em;
-                          color: #1D308E;
-                          font-weight: bold;
-                          padding: 0px 0px;   
-                        ">          
-                            ¡Hola, [nombre]!         
-                        </p>
-                
-                          <p
-                          style="padding: 0px 0px;
-                          line-height: 23px;
-                          font-size: 14px;
-                          margin-top: 1em;
-                          color: #1D308E;
-                          
-                           ">
-
-                           Gracias por tu compra. <br/>
-                           Haz click en el botón “Descargar boleta” a continuación para visualizar tu documento tributario electrónico.
-
-                          </p>
-                
-                        
-                
-                                  
-                       
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-    
-        </tr>
-      </td>
-    </tr>
-       
-    
-    <tr>
-      <td style="padding: 5px 0 58px;">
-        <table width="100%">
-    
-    
-          <tr>
-            <td style="text-align:center; padding: 15px">
-            
-
-              <a  style='color:white' href="dteLink" id="bttnBoleta" type=button class="button"> Descargar boleta </a>
-
-            
-            </td>
-        
-          </tr>
-        </table>
-      </td>
-    </tr>
-
-    <!-- WARNING SECTION -->
-<!-- <tr>
-  <td style="padding: 0px 20px 10px 10px;">
-    <table width="100%">
-
-      <tr>
-        <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
-          
-          <p id="titleWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 15px; margin-left:2.5em;"> RECUERDA </p>
-
-          <p  id="textWarning" style="text-align: left; font-weight: 700; line-height: 17px; font-size: 12px; margin-left:3em;"> Tu pedido será despachado en un máximo de 48 horas hábiles.</p>
-
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr> -->
-    
-    <!--FOOTER SECTION -->
-    
-    <tr>
-      <td style="background-color: #1D308E; color:#ffffff;" >
-      <table width="100%">
-    
-        <tr>
-          <td style="text-align: center; padding: 30px 20px;">
-            <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-help.png" alt="iconHelp" title="iconHelp" width="30">
-            <p style="padding: 0px; font-size:14px; letter-spacing: 0.5px;" > ¿Tienes alguna duda?</p>
-            <p style="padding: 8px; font-size: 12px; line-height: 30px; letter-spacing: 0.5px;"> Comunícate con nosotros a <a href="mailto:sacchile@instancelatam.com" style="color:#ffffff">sacchile@instancelatam.com</a></p>
-    
-            
-      
-          <!-- <tr> 
-          <td style="text-align: center; padding:0px 20px"> -->
-
-            <a style="text-decoration:none" href="http://www.instancelatam.com">
-              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px; text-decoration:none;">
-            </a>
-            <br/>
-      
-                <a style="text-decoration:none" href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30" style="text-decoration:none"> </a>
-                <a style="text-decoration:none" href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30" style="text-decoration:none"> </a>
-                <a style="text-decoration:none" href="mailto:sacchile@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30" style="text-decoration:none"> </a>
-
-              </td>
-            </tr> 
-    
-    <!-- 
-          </td>
-        </tr> -->
-    
-      </table>
-            
-      </td>
-    </tr>  
-          </table>
-        </center>
-      
-    </body>
-    </html>`;
-
-    if (this.props.purchaser.tienda === "Unilever") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-unilever.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Softys") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-softys.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Schneider Electric") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-schneider.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Afe") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-afe.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Alicorp") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-alicorp.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "CAROZZI FS") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-carozzi.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Babysec") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-babysec.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "I Am Not Plastic") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-imnotplastic.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Redlemon") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-redlemon.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "ELITE PROFESSIONAL") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-eliteprofessional.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "ELITE") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-elite.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "ENEX") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-enex.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Cotidian") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-cotidian.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "Chek") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-chek.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "p&g") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-p&g.png"
-        );
-      return finalEmailText;
-    }
-    if (this.props.purchaser.tienda === "SC Johnson") {
-      let finalEmailText = text
-        .replace("[nombre]", this.props.purchaser.comprador)
-        .replace("dteLink", this.props.purchaser.dte)
-        .replace(
-          "storeLogo",
-          "https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/logos-clientes/logo-scj.png"
-        );
-      return finalEmailText;
-    }
-  }
+      let element = container.current || document.body;
+      let gridElement = document.querySelector('.k-grid');
+      drawDOM(element, {
+        paperSize: "A4"
+      }).then(group => {
+        return exportPDF(group);
+      }).then(dataUri => {
+        console.log(dataUri.split(';base64,')[1]);
+        base64Value = dataUri.split(';base64,')[1];
+        return base64Value;
+      });
+ 
+}
 
   submitHandler = (event) => {
     if (this.isValid(this.state.value)) {
@@ -666,6 +152,7 @@ export default class SendReportChips extends React.Component {
     let error = null;
 
     event.preventDefault();
+   
 
     if (!this.isEmail(this.state.emailState)) {
       error = `${this.state.emailState} Debes ingresar un correo válido`;
@@ -688,6 +175,7 @@ export default class SendReportChips extends React.Component {
     let final = "" + x.toString() + "";
 
     const emailBody = this.parseEmail();
+    console.log(emailBody);
     fetch(
       "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/enviaremail",
       {
@@ -701,9 +189,9 @@ export default class SendReportChips extends React.Component {
           to: final,
           subject: "Envío de Documento Tributario Electrónico",
 
-        //   body: em,
-          filename: "instance Report",
-          file: "instanceReport.pdf",
+           body: '',
+          filename: "InstanceReport.pdf",
+          file: ''
         }),
       }
     ).then((response) => {
@@ -714,7 +202,15 @@ export default class SendReportChips extends React.Component {
   entendidoButtonHandler = () => {
     this.props.onhideModal();
   };
+  downloadPdfHandler = ()=>{
+      console.log('hi');
+      this.setState({downloadReport: true});
+  }
+  getBaseValue= (value)=>{
+console.log(this.props.getBaseValue);
+  }
   render() {
+     
     if (!this.state.emailSent) {
       return (
         <React.Fragment>
@@ -743,6 +239,7 @@ export default class SendReportChips extends React.Component {
               {this.state.emailError && (
                 <p className="error">{this.state.emailError}</p>
               )}
+              { this.state.downloadReport && <GenerateBase64Report baseValue={this.props.baseValue}></GenerateBase64Report> }
             </FormGroup>
             <FormGroup>
               <Label
@@ -794,6 +291,7 @@ export default class SendReportChips extends React.Component {
                   fontWeight: "bold",
                   border: "0",
                 }}
+                onClick={this.downloadPdfHandler}
               >
                 Enviar Correo &nbsp;
                 <span className="btn-label">
@@ -867,6 +365,121 @@ export default class SendReportChips extends React.Component {
               Entendido
             </button>
           </div>
+
+     {/* SEND REPORTS */}
+     return <div>
+      
+
+      <div 
+      id="reportPDFcontent"
+      style={{
+      position: "absolute",
+      left: "-2000px",
+      top: 0
+      }}>
+       {/* <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>  */}
+      <div ref={this.myRef}>
+      <table>
+        <tr>
+          <td>
+           <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
+            <ChartMixed
+                title="Resumen general de ordenes y ventas"
+                data=""
+                options=""
+             />  
+          </td>
+
+          <td>
+          <CardReports 
+              title="Datos generales"
+              subtitle1="Total ingresos"
+              value1="$720.000"
+              subtitle2="Costo Despacho"
+              value2="$720.000"
+              subtitle3="GM"
+              value3="$0"
+              subtitle4="Conversión"
+              value4="0"
+            />    
+
+            <CardReports 
+              title="Cumplimiento de pedidos"
+              subtitle1="En Proceso"
+              value1="0"
+              subtitle2="En Preparación"
+              value2="20.000"
+              subtitle3="Listo para despacho"
+              value3="0"
+              subtitle4="Próximo a llegar"
+              value4="0" 
+            />     
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+          <CardReports 
+              title="Procesamiento de pedidos"
+              subtitle1="Pedidos"
+              value1="720.000"
+              subtitle2="Cancelados"
+              value2="20.000"
+              subtitle3="DTE enviado"
+              value3="0"
+              subtitle4="Entregados"
+              value4="0" 
+            />
+     
+            <CardReports 
+              title="Experiencia del cliente"
+              subtitle1="NPS"
+              value1="0"
+              subtitle2="Reviews"
+              value2="20.000"
+              subtitle3="Reclamos"
+              value3="0"
+              subtitle4=""
+              value4="" 
+            />
+
+          </td>
+
+          <td>
+              <ChartPie
+                title="Participacion canal de venta"
+                data=""
+                options=""
+              />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+          <ChartBar 
+             title="Ordenes por canal de venta"
+             data=""
+             options=""
+            />
+          </td>
+
+          <td>
+          <ChartBar
+             title="Ingresos por canal de venta"
+             data=""
+             options=""
+            />
+          </td>
+        </tr>
+
+
+      </table>
+
+ 
+      </div>
+         {/* </PDFExport>  */}
+      </div>
+    </div>;
         </React.Fragment>
       );
     }

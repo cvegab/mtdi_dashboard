@@ -19,25 +19,30 @@ import ChartMixed from 'components/MixedChartReport/ChartMixed';
 import ChartPie from 'components/pieChartReport/ChartPie.jsx';
 import ChartBar from 'components/barChartReport/ChartBar';
 import { drawDOM, exportPDF } from '@progress/kendo-drawing';
-import MixedChart from 'views/MixedChart';
 
 
-const PDFReport = () => {
-  const pdfExportComponent = React.useRef(null);
-  const container = React.useRef(null);
-  const exportPDFWithMethod = () => {
-    let element = container.current || document.body;
-    let gridElement = document.querySelector('.k-grid');
-    drawDOM(element, {
-      paperSize: "A4"
-    }).then(group => {
-      return exportPDF(group);
-    }).then(dataUri => {
-      console.log(dataUri.split(';base64,')[1]);
-    });
-  };
-  return <div>
-      <div className="example-config">
+const GenerateBase64Report = ()=>{
+  let base64Value = '';
+    const pdfExportComponent = React.useRef(null);
+    const container = React.useRef(null);
+    const exportPDFWithMethod = (props) => {
+      let element = container.current || document.body;
+      let gridElement = document.querySelector('.k-grid');
+      drawDOM(element, {
+        paperSize: "A4"
+      }).then(group => {
+        return exportPDF(group);
+      }).then(dataUri => {
+        console.log(dataUri.split(';base64,')[1]);
+        base64Value = dataUri.split(';base64,')[1];
+        // props.base64val(base64Value);
+        // return base64Value;
+      // props.getBaseValue(39);
+      });
+    
+    }
+      return <div>
+      {/* <div className="example-config">
         <button 
         style={{
           backgroundColor: "#1D308E",
@@ -74,7 +79,7 @@ const PDFReport = () => {
        >
           Descargar PDF
         </button>
-      </div>
+      </div> */}
 
       <div 
       id="reportPDFcontent"
@@ -83,7 +88,7 @@ const PDFReport = () => {
       left: "-2000px",
       top: 0
       }}>
-      <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
+       <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'> 
       <div ref={container}>
       <table>
         <tr>
@@ -183,9 +188,9 @@ const PDFReport = () => {
 
  
       </div>
-        </PDFExport>
+         </PDFExport> 
       </div>
     </div>;
-};
 
-export default PDFReport;
+}
+export default GenerateBase64Report;
