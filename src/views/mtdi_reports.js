@@ -62,6 +62,7 @@ import ChartMixed from "components/MixedChartReport/ChartMixed";
 import ChartPie from "components/pieChartReport/ChartPie";
 import ChartBar from "components/barChartReport/ChartBar";
 import CardReports from "components/CardReports/CardReports";
+import SendReport from "components/modalComponents/send-report";
 
 registerLocale("es", es);
 
@@ -280,6 +281,7 @@ function MtdiReports() {
       },
     ],
   };
+  const [showModal, setshowModal] = useState(false);
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
@@ -3180,7 +3182,10 @@ console.log(selectedChannelsArray);
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
-
+  const showModalHandler = (row) => {
+    setshowModal(true);
+    setModal(false);
+  };
   // Function to generate a PDF Report 
   const handleDownloadPdf = async () => {
 
@@ -3215,11 +3220,14 @@ console.log(selectedChannelsArray);
     // console.log('clikkkkk');
     savePDF(contentArea.current, {paperSize: "auto"});
   };
+  const hideModalHandler = () => {
+    setshowModal(false);
+  };
 
   return (
     <>
 
-
+{showModal && <SendReport  onhideModal={hideModalHandler}></SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen></SplashScreen>}
 
@@ -5135,7 +5143,7 @@ console.log(selectedChannelsArray);
               
                 <button 
                  id="bttnSubmit"
-                //  className="bttnCompartirReporte" 
+                  //className="bttnCompartirReporte" 
                  style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",
@@ -5150,7 +5158,8 @@ console.log(selectedChannelsArray);
                   border:"0",
                   fontSize: "11px"
                 }}
-                onClick={toggle}
+                //  onClick={toggle}
+                 onClick={showModalHandler}
               > 
                 <span className="btn-label">
                   <img src={iconShareReport} width="19px"/>
@@ -5168,8 +5177,8 @@ console.log(selectedChannelsArray);
                 <p style={{fontSize:"24px", fontWeight:"bold", display:"flex", justifyContent:"center"}}>Compartir Reporte</p>
                 <br/>
                 <br/>
-                <div style={{display:"grid", justifyContent:"center"}}>
-                {/* <button
+                {/* <div style={{display:"grid", justifyContent:"center"}}>
+                <button
                   id="bttnSubmit"
                   style={{
                     backgroundColor: "#1D308E",
@@ -5187,7 +5196,7 @@ console.log(selectedChannelsArray);
                     marginBottom:"2em"
                   }}>
                   Descargar Reporte
-                </button> */}
+                </button>
                 <PDFReport />
                 <br/>
                 <button
@@ -5206,11 +5215,11 @@ console.log(selectedChannelsArray);
                     border:"0",
                     fontSize: "11px"
                   }}
-                
+                // onClick={showModalHandler}
                   >
                   <p style={{width:"150px"}}>Enviar por correo</p>
                 </button>
-                </div>
+                </div> */}
                 </ModalBody>
                
               </Modal>         
@@ -5219,7 +5228,7 @@ console.log(selectedChannelsArray);
         
               <br/>
               
-                  {/* {!isDownloadingReports && (
+                   {/* {!isDownloadingReports && (
                   <button
                     
                     id="bttnSubmit"
@@ -5274,9 +5283,9 @@ console.log(selectedChannelsArray);
                       color="light"
                     />
                     &nbsp; Descargando...
-                  </Button>
-                )} */}
-                
+                  </Button> */}
+                {/* )}  */}
+                 
                 
                 </div>
 
