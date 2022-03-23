@@ -50,11 +50,12 @@ const PDFReport = () => {
 
       onClick={() => {
         let element = container.current || document.body;
-        savePDF(element, {
+        const f=savePDF(element, {
           paperSize: "auto",
           margin: 40,
           fileName: "Reporte Instance"
         });
+        console.log(f);
       }}
       
       >

@@ -701,9 +701,9 @@ export default class SendReportChips extends React.Component {
           to: final,
           subject: "Envío de Documento Tributario Electrónico",
 
-          body: emailBody,
-          filename: "",
-          file: "",
+        //   body: em,
+          filename: "instance Report",
+          file: "instanceReport.pdf",
         }),
       }
     ).then((response) => {

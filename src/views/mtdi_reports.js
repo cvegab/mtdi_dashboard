@@ -5143,7 +5143,7 @@ console.log(selectedChannelsArray);
               
                 <button 
                  id="bttnSubmit"
-                //  className="bttnCompartirReporte" 
+                  //className="bttnCompartirReporte" 
                  style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",
@@ -5158,8 +5158,8 @@ console.log(selectedChannelsArray);
                   border:"0",
                   fontSize: "11px"
                 }}
-                // onClick={toggle}
-                onClick={showModalHandler}
+                //  onClick={toggle}
+                 onClick={showModalHandler}
               > 
                 <span className="btn-label">
                   <img src={iconShareReport} width="19px"/>
@@ -5177,8 +5177,8 @@ console.log(selectedChannelsArray);
                 <p style={{fontSize:"24px", fontWeight:"bold", display:"flex", justifyContent:"center"}}>Compartir Reporte</p>
                 <br/>
                 <br/>
-                <div style={{display:"grid", justifyContent:"center"}}>
-                {/* <button
+                {/* <div style={{display:"grid", justifyContent:"center"}}>
+                <button
                   id="bttnSubmit"
                   style={{
                     backgroundColor: "#1D308E",
@@ -5196,7 +5196,7 @@ console.log(selectedChannelsArray);
                     marginBottom:"2em"
                   }}>
                   Descargar Reporte
-                </button> */}
+                </button>
                 <PDFReport />
                 <br/>
                 <button
@@ -5215,11 +5215,11 @@ console.log(selectedChannelsArray);
                     border:"0",
                     fontSize: "11px"
                   }}
-                onClick={showModalHandler}
+                // onClick={showModalHandler}
                   >
                   <p style={{width:"150px"}}>Enviar por correo</p>
                 </button>
-                </div>
+                </div> */}
                 </ModalBody>
                
               </Modal>         
@@ -5228,7 +5228,7 @@ console.log(selectedChannelsArray);
         
               <br/>
               
-                  {/* {!isDownloadingReports && (
+                   {/* {!isDownloadingReports && (
                   <button
                     
                     id="bttnSubmit"
@@ -5283,9 +5283,9 @@ console.log(selectedChannelsArray);
                       color="light"
                     />
                     &nbsp; Descargando...
-                  </Button>
-                )} */}
-                
+                  </Button> */}
+                {/* )}  */}
+                 
                 
                 </div>
 
