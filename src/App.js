@@ -85,7 +85,7 @@ const App = () => {
       .catch((error) => console.log("error", error));
   }, []);
   if (userName === undefined && localStorage.getItem("name") === null) {
-    return (window.location.href = "https://pre-production.d36thtl3fmh3ww.amplifyapp.com/");
+    return (window.location.href = "https://www.instancelatam.com/");
   }
   return (
     <BrowserRouter>
@@ -94,7 +94,7 @@ const App = () => {
         {!isAuthenticated && localStorage.getItem("name") === null && (
           <Route
             component={() => {
-              window.location.href = "https://pre-production.d36thtl3fmh3ww.amplifyapp.com/";
+              window.location.href ="https://www.instancelatam.com/";
               return null;
             }}
           />
