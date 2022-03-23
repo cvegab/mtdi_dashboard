@@ -43,8 +43,6 @@ const data2 = [209, 3, 10, 5, 5, 9, 10, 10];
 
 function MtdiReports() {
   const printReport = React.useRef();
-
-  
   let MIXED_DATA = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
     datasets: [
@@ -70,14 +68,10 @@ function MtdiReports() {
         order: 0,
       },
     ],
-  };
-
-  
+  }; 
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
-  const [pageFullyLoaded, setpageFullyLoaded] = useState(false);
-  const [pieChartData, setpieChartData] = useState(PIE_CHART_DATA);
- 
+  
   //PIE CHART STATES
   const [linioPie, setlinioPie] = useState(0);
   const [vtexPie, setvtexPie] = useState(0);
@@ -92,7 +86,6 @@ function MtdiReports() {
   const [listaPie, setlistaPie] = useState(0);
   const [mixedChartData, setmixedChartData] = useState(MIXED_DATA);
   const [mixedChartsalesData, setmixedChartsalesData] = useState([]);
- 
   const [ChannelSelectedForDelete, setChannelSelectedForDelete] =
     useState(undefined);
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
@@ -126,10 +119,7 @@ function MtdiReports() {
     new Date().toISOString().slice(0, 10)
   );
   const [isLoading, setisLoading] = useState(false);
-  const [StackedisLoading, setStackedisLoading] = useState(false);
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
-
-  const [fromDate, setfromDate] = useState(new Date());
   const [showFilter, setshowFilter] = useState(false);
  
   //SALES CHANNEL TOTAL SALES STATES
@@ -152,9 +142,7 @@ function MtdiReports() {
   const [wooCommerceOrders, setwooCommerceOrders] = useState(0);
   const [chambasOrders, setchambasOrders] = useState(0);
   const [listaTiendaOrders, setlistaTiendaOrders] = useState(0);
-
   //MONTHLY SALES STATES
- 
   
   useEffect(() => {
     // set initial value
@@ -181,8 +169,6 @@ function MtdiReports() {
   }, []);
   useEffect(() => {
     fetchResumenGraphDetails();
-    // fetchStackedGraphForSales();
-    //fetchStackedGraphForOrders();
   }, [channelId]);
 
   useEffect(() => {
@@ -205,13 +191,10 @@ function MtdiReports() {
   const getDateLabels = () => {
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
-
     var result = [];
-
     if (endDate.isBefore(startDate)) {
       throw "End date must be greater than start date.";
     }
-
     while (startDate.isBefore(endDate)) {
       result.push(startDate.format("YYYY-MM-01"));
       startDate.add(1, "month");
@@ -231,8 +214,6 @@ function MtdiReports() {
       "Nov",
       "Dic",
     ];
-
-    const date = new Date("2021-08-01");
     const x = result.map((item) => {
       let d = new Date(item);
       d.setDate(1);
@@ -242,7 +223,6 @@ function MtdiReports() {
       }-${d.getFullYear()}`;
       return dateString;
     });
-
     setstackedDateLabel(x);
   };
   useEffect(() => {
@@ -253,7 +233,6 @@ function MtdiReports() {
       setfiltersClass("FiltersInMobile");
       setshowFilter(false);
     }
-
     if (!isMobileSizes) {
       setfiltersClass("FiltersInDesktop");
       setshowFilter(true);
@@ -264,7 +243,6 @@ function MtdiReports() {
     setSalesCardData();
   }, [newData]);
 
-  
   const setSalesCardData = () => {
     const vtexSales = newData.filter((item) => {
       return item.channel === "Vtex";
@@ -535,122 +513,18 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj.resume.lineAndBarChart);
-
         setnewData(obj.resume.lineAndBarChart);
-
-        console.log(newData);
-
-        const labels = newData.map((item) => {
-          return item.channel;
-        });
-        const salesValue = newData.map((item) => {
-          return item.salesValue;
-        });
-        const orderValue = newData.map((item) => {
-          return item.orderValue;
-        });
-
-        //DO NOT REMOVE THIS
-        let MIXED = {
-          labels: labels,
-          datasets: [
-            {
-              label: "Ventas",
-              data: salesValue,
-              backgroundColor: "#344FD5",
-              borderRadius: 5,
-              order: 1,
-            },
-            {
-              label: "Órdenes",
-              yAxisID: "Ordenes",
-
-              data: orderValue,
-              backgroundColor: "#06CBC1",
-              borderColor: "#06CBC1",
-              fill: false,
-              pointHoverRadius: 10,
-              pointHoverBorderWidth: 5,
-              type: "line",
-              order: 0,
-              color: "#9f9f9f",
-            },
-          ],
-
-          options: {
-            responsive: true,
-
-            aspectRatio: 2,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              grid: {
-                drawBorder: false,
-                display: false,
-                zeroLineColor: "transparent",
-              },
-              y: {
-                display: true,
-                position: "right",
-                ticks: {
-                  color: "#9f9f9f",
-                  beginAtZero: true,
-                  maxTicksLimit: 5,
-                  callback: function (data) {
-                    let number = data;
-                    let totalValueFormatted = new Intl.NumberFormat("es-CL", {
-                      style: "currency",
-                      currency: "CLP",
-                    }).format(number);
-                    return totalValueFormatted;
-                  },
-                },
-                grid: {
-                  zeroLineColor: "transparent",
-                  display: false,
-                  drawBorder: false,
-                  color: "#EBEBEBf",
-
-                  lineWidth: 0,
-                },
-              },
-
-              x: {
-                display: true,
-                grid: {
-                  display: false,
-                  drawBorder: false,
-                },
-                ticks: {
-                  font: {
-                    size: 10,
-                  },
-                  padding: 20,
-                  color: "#9f9f9f",
-                },
-              },
-            },
-          },
-        };
-        setmixedChartData(MIXED);
       })
       .catch((error) => console.log("error", error));
   };
 
-  const fetchGeneralData = () => {
-    
+  const fetchGeneralData = () => {  
     const channelsId = cR.map((item) => {
       return item.value;
     });
-
     let x = channelsId.join(",");
     console.log(x);
     setchannelId(x);
-
     console.log("hi i am fetching");
     setisLoading(true);
     var myHeaders = new Headers();
@@ -672,11 +546,7 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
-        let res1 = [];
-
         console.log(ChannelSelectedForDelete);
-
         var totalIncomeArray = obj.detail.map((item) => {
           return item.total;
         });
@@ -787,10 +657,7 @@ function MtdiReports() {
         setonTheWay(sumOfonTheway);
         settotalOrders(sumOfOrderQuantity);
         setreviews(sumOfreview);
-
-        setTimeout(() => {
-          setisLoading(false);
-        }, 2000);
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -817,7 +684,6 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(obj);
         let allChannelsArray = obj[4].stores.map((item) => {
           return item.channels;
         });
@@ -848,11 +714,7 @@ function MtdiReports() {
         });
 
         setchannels(salesChannelList);
-
-        let countryArray = [];
-
         setfilteredCountryData(obj);
-
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -949,8 +811,7 @@ function MtdiReports() {
                 border: "none",
                 fontSize: "12px",
               }}
-              onClick={showFiltersHandler}
-            >
+              onClick={showFiltersHandler}>
               <img src={iconFilterButton} width="15" />
               &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
             </button>
@@ -1233,7 +1094,7 @@ function MtdiReports() {
             <br></br>
 
             {/* GRAPHS */}
-            {!pageFullyLoaded && (
+           
               <div>
                 <Row>
                   <MixedAndPieChart
@@ -1292,7 +1153,7 @@ function MtdiReports() {
                       </CardFooter>
                     </Card>
                   </Col>
-                  {!StackedisLoading && (
+                
                     <Col md="6">
                       <Card className="card-chart">
                         <StackedSalesGraph
@@ -1322,16 +1183,16 @@ function MtdiReports() {
                         </CardFooter>
                       </Card>
                     </Col>
-                  )}
+                  
                 </Row>
               </div>
-            )}
+            )
           </div>
         <DownloadReports  printReport={printReport}></DownloadReports>
         </div>
       )}
     </>
   );
-}
+            }          
 
 export default MtdiReports;
