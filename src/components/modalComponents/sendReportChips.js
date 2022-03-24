@@ -161,6 +161,7 @@ export default class SendReportChips extends React.Component {
       this.setState({
         items: [...this.state.items, this.state.value],
         value: "",
+        error: null
       });
     }
 
@@ -430,9 +431,10 @@ console.log(this.props.getBaseValue);
                
               </button>
 
-              <PDFReport />
+             
             </div>
           </Form>
+          <PDFReport />
         </React.Fragment>
       );
     }
