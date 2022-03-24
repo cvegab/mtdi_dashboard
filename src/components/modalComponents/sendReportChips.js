@@ -4,6 +4,7 @@ import { Button } from "reactstrap";
 import "./chip.css";
 import sentEmail from "../../assets/img/emailSent.png";
 import SiIcon from "../../assets/img/si.png";
+import PDFReport from "components/PDFReport/PDFReport";
 export default class SendReportChips extends React.Component {
   state = {
     items: [],
@@ -719,7 +720,7 @@ export default class SendReportChips extends React.Component {
       return (
         <React.Fragment>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
-            Enviar documento tributario
+            Compartir Reporte
           </h3>
           <Form onSubmit={this.submitHandler}>
             <FormGroup>
@@ -793,36 +794,18 @@ export default class SendReportChips extends React.Component {
                   textTransform: "none",
                   fontWeight: "bold",
                   border: "0",
+                  marginBottom:"10px"
                 }}
               >
-                Enviar Correo &nbsp;
+             
+                Enviar Reporte &nbsp;
                 <span className="btn-label">
                   <i className="nc-icon nc-send" />
                 </span>
+               
               </button>
-              <button
-                id="bttnSubmit"
-                type="submit"
-                style={{
-                  backgroundColor: "#1D308E",
-                  textAlign: "center",
-                  color: "white",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
-                }}
-              >
-               Descargar pdf &nbsp;
-                <span className="btn-label">
-                  <i className="nc-icon nc-send" />
-                </span>
-              </button>
+
+              <PDFReport />
             </div>
           </Form>
         </React.Fragment>
