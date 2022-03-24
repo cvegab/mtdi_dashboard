@@ -22,6 +22,8 @@ import { drawDOM, exportPDF } from '@progress/kendo-drawing';
 
 
 const GenerateBase64Report = ()=>{
+  
+  const [bv, setbv] = React.useState('');
   let base64Value = '';
     const pdfExportComponent = React.useRef(null);
     const container = React.useRef(null);
@@ -35,13 +37,16 @@ const GenerateBase64Report = ()=>{
       }).then(dataUri => {
         console.log(dataUri.split(';base64,')[1]);
         base64Value = dataUri.split(';base64,')[1];
+        this.props.onParse(dataUri.split(';base64,')[1]);
         // props.base64val(base64Value);
         // return base64Value;
       // props.getBaseValue(39);
+     setbv(base64Value);
       });
     
     }
       return <div>
+        <p>{bv}</p>
       {/* <div className="example-config">
         <button 
         style={{
