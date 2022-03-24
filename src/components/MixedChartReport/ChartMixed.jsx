@@ -61,8 +61,8 @@ const mixedChart = {
 
 const ChartMixed = (props) => {
   return (
-    <div>
-                        <Card className="car-chart" id="mixedChartCustom">
+    <div style={{margin:"30px"}}>
+                      <Card className="car-chart" id="mixedChartCustom">
                       <CardHeader>
                       <CardTitle id="textNameTable">
                         <strong className="title-chartMixed">{props.title}</strong>

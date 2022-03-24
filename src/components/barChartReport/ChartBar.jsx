@@ -180,7 +180,7 @@ let ordersGraph = {
 
 const ChartBar = (props) => {
   return (
-    <div>      
+    <div style={{margin:"20px"}}>      
                   <Card className="card-chart">
                     <CardHeader id="textNameTable">
                       <strong>{props.title}</strong>
@@ -339,7 +339,7 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;&nbsp;&nbsp;WooCommerce
+                              &nbsp;&nbsp;WooCommerce
                               <p id="ordersGraphText" className="card-category">
                               420 órdenes
                               </p>

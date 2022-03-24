@@ -1,10 +1,11 @@
 import PDFReport from 'components/PDFReport/PDFReport'
-import React from 'react'
+import React, {useState} from 'react'
 import { Form, FormGroup, Label, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+
+const shareReports = () => {
 
 const [modal, setModal] = useState(false);
 const toggle = () => setModal(!modal);
-const shareReports = () => {
   return (
     <div>
             <button 

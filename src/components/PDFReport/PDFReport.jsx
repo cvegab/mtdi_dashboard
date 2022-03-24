@@ -19,6 +19,9 @@ import ChartMixed from 'components/MixedChartReport/ChartMixed';
 import ChartPie from 'components/pieChartReport/ChartPie.jsx';
 import ChartBar from 'components/barChartReport/ChartBar';
 import MixedChart from 'views/MixedChart';
+import iconInstance from '../../assets/img/icons/Reports/icon1.png';
+import "./PDFReport.css";
+
 
 
 const PDFReport = () => {
@@ -26,20 +29,22 @@ const PDFReport = () => {
   const container = React.useRef(null);
   return <div>
       <div className="example-config">
-        <button 
+        <button
+        className="downloadPDBttn" 
         style={{
-          backgroundColor: "#1D308E",
+          backgroundColor: "#FFFFFF",
           textAlign: "center",
-          width: "296px",
+          width: "400px",
           height: "64px",
           padding: "22px 81px",
           borderRadius: "33px",
-          color: "#FFFFFF",
+          color: "#1D308E",
           marginLeft: "1em",
           textTransform: "none",
           fontWeight:"bold",
           border:"0",
-          fontSize: "11px"
+          fontSize: "11px",
+          textDecoration: "underline"
         }}
   
       //   onClick={() => {
@@ -52,14 +57,14 @@ const PDFReport = () => {
         let element = container.current || document.body;
         const f=savePDF(element, {
           paperSize: "auto",
-          margin: 40,
-          fileName: "Reporte Instance"
+          margin: "0cm",
+          fileName: "Reporte General"
         });
         console.log(f);
       }}
       
        >
-          Descargar PDF
+          Descarga este Reporte como PDF
         </button>
       </div>
 
@@ -72,10 +77,13 @@ const PDFReport = () => {
       }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
       <div ref={container}>
-      <table>
+      <table className='backgroundReport'>
         <tr>
           <td>
-           <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
+            <br/>
+            <p className='titleReports'> 
+              <img src={iconInstance} width="40" /> Reporte General
+            </p>
             <ChartMixed
                 title="Resumen general de ordenes y ventas"
                 data=""
