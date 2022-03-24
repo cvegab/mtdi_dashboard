@@ -206,7 +206,7 @@ export default class SendReportChips extends React.Component {
 
         body: JSON.stringify({
           to: final,
-          subject: "Envío de Documento Tributario Electrónico",
+          subject: "Envío de Reporte General",
 
            body: '',
           filename: "InstanceReport.pdf",
@@ -451,7 +451,7 @@ console.log(this.props.getBaseValue);
             <img src={sentEmail} width="25%" />
           </div>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
-            Documento enviado con éxito
+            Reporte enviado con éxito
           </h3>
 
           <div class="text-center">
