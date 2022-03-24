@@ -31,6 +31,8 @@ export default class SendReportChips extends React.Component {
     base64Value:''
   };
 
+  
+
   handleKeyDown = (evt) => {
     if (
       ["Enter", "Tab", ","].includes(evt.key) ||
@@ -205,7 +207,7 @@ export default class SendReportChips extends React.Component {
 
         body: JSON.stringify({
           to: final,
-          subject: "Envío de Documento Tributario Electrónico",
+          subject: "Envío de Reporte",
 
            body: '',
           filename: "InstanceReport.pdf",
@@ -243,7 +245,7 @@ console.log(this.props.getBaseValue);
         <td>
          <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
           <ChartMixed
-              title="Resumen general de ordenes y ventas"
+              title="Resumen general de órdenes y ventas"
               data=""
               options=""
            />  
@@ -253,11 +255,11 @@ console.log(this.props.getBaseValue);
         <CardReports 
             title="Datos generales"
             subtitle1="Total ingresos"
-            value1="$720.000"
+            value1={this.props.totalIncomeformatted}
             subtitle2="Costo Despacho"
-            value2="$720.000"
+            value2={this.props.dispatchCost}
             subtitle3="GM"
-            value3="$0"
+            value3={this.props.gm}
             subtitle4="Conversión"
             value4="0"
           />    
@@ -265,13 +267,13 @@ console.log(this.props.getBaseValue);
           <CardReports 
             title="Cumplimiento de pedidos"
             subtitle1="En Proceso"
-            value1="0"
+            value1={this.props.inProcess}
             subtitle2="En Preparación"
-            value2="20.000"
+            value2={this.props.inPreparation}
             subtitle3="Listo para despacho"
-            value3="0"
+            value3={this.props.readyToShip}
             subtitle4="Próximo a llegar"
-            value4="0" 
+            value4={this.props.onTheWay} 
           />     
         </td>
       </tr>
@@ -281,11 +283,11 @@ console.log(this.props.getBaseValue);
         <CardReports 
             title="Procesamiento de pedidos"
             subtitle1="Pedidos"
-            value1="720.000"
+            value1={this.props.totalOrders}
             subtitle2="Cancelados"
-            value2="20.000"
+            value2={this.props.totalCancelledOrders}
             subtitle3="DTE enviado"
-            value3="0"
+            value3={this.props.totalDte}
             subtitle4="Entregados"
             value4="0" 
           />
@@ -293,11 +295,11 @@ console.log(this.props.getBaseValue);
           <CardReports 
             title="Experiencia del cliente"
             subtitle1="NPS"
-            value1="0"
+            value1={this.props.totalNps}
             subtitle2="Reviews"
-            value2="20.000"
+            value2={this.props.reviews}
             subtitle3="Reclamos"
-            value3="0"
+            value3={this.props.totalClaims}
             subtitle4=""
             value4="" 
           />
@@ -430,7 +432,22 @@ console.log(this.props.getBaseValue);
                
               </button>
 
-              <PDFReport />
+              <PDFReport 
+                totalIncomeformatted={this.props.totalIncomeformatted}
+                dispatchCost={this.props.dispatchCost}
+                gm={this.props.gm}
+                inProcess={this.props.inProcess}
+                inPreparation={this.props.inPreparation}
+                readyToShip={this.props.readyToShip}
+                onTheWay={this.props.onTheWay}
+                totalOrders={this.props.totalOrders}
+                totalCancelledOrders={this.props.totalCancelledOrders}
+                totalDte={this.props.totalDte}
+                totalNps={this.props.totalNps}
+                reviews={this.props.reviews}
+                totalClaims={this.props.totalClaims}
+                
+              />
             </div>
           </Form>
         </React.Fragment>
@@ -449,7 +466,7 @@ console.log(this.props.getBaseValue);
             <img src={sentEmail} width="25%" />
           </div>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
-            Documento enviado con éxito
+            Reporte enviado con éxito
           </h3>
 
           <div class="text-center">

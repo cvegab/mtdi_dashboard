@@ -328,6 +328,7 @@ function MtdiReports() {
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([]);
   const [totalIncome, settotalIncome] = useState(0);
+  const [totalIncomeFormatted, settotalIncomeFormatted] = useState(0);
   const [totalNps, settotalNps] = useState(0);
   const [totalClaims, settotalClaims] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
@@ -3224,10 +3225,37 @@ console.log(selectedChannelsArray);
     setshowModal(false);
   };
 
+  
   return (
     <>
 
-{showModal && <SendReport  onhideModal={hideModalHandler}></SendReport>}
+{showModal && <SendReport
+                totalIncomeformatted={totalIncome} 
+                dispatchCost={dispatchCost} 
+                gm={gm} 
+                inProcess={inProcess}
+                inPreparation={inPreparation}
+                readyToShip={readyToShip}
+                onhideModal={hideModalHandler}
+                onTheWay={onTheWay}
+                totalOrders={totalOrders}
+                totalCancelledOrders={totalCancelledOrders}
+                totalDte={totalDte}
+                totalNps={totalNps}
+                reviews={reviews}
+                totalClaims={totalClaims}
+                vtexPie={vtexPie}
+                linioPie={linioPie}
+                mercadoPie={mercadoPie}
+                exitoPie={exitoPie}
+                ripleyPie={ripleyPie}
+                shopifyPie={shopifyPie}
+                parisPie={parisPie}
+                magentoPie={magentoPie}
+                wooPie={wooPie}
+                chambasPie={chambasPie}
+                listaPie={listaPie}
+                ></SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen></SplashScreen>}
 
@@ -3622,17 +3650,18 @@ console.log(selectedChannelsArray);
                     >
                       {(() => {
                         let number = totalIncome;
-                        let totalIncomeformatted = new Intl.NumberFormat(
+                        let totalIncomeTemporal= new Intl.NumberFormat(
                           "es-CL",
                           {
                             style: "currency",
                             currency: "CLP",
                           }
                         ).format(number);
+                        
                         return (
                           <div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                            {totalIncomeformatted}
+                            {totalIncomeTemporal}
                             &nbsp;
                             {/* <span
                             id="spanTextInfoCard"
