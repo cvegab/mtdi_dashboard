@@ -137,14 +137,14 @@ export default class SendReportChips extends React.Component {
   this. mypdfExportComponent = React.createRef();
   // this.myRef = React.createRef();
 //    const container = this.ref=React.createRef();
-   const container = this.myRef.current||document.body;
+   const container = this.myRef;
   // let element = document.getElementById('#shiny');
   // console.log(element);
   // let gridElement = document.querySelector('.k-grid');
   // let element = this.myRef.current;
-  let element = this.textInput.current;
+  let element = document.querySelector('#spinz');
   await drawDOM(element, {
-    paperSize: "A4"
+    paperSize: "auto"
   }).then(group => {
     return exportPDF(group);
   }).then(dataUri => {
@@ -232,16 +232,17 @@ export default class SendReportChips extends React.Component {
 console.log(this.props.getBaseValue);
   }
   render() {
+    
     {this.state.downloadReport && <div 
     id="reportPDFcontent"
     style={{
     position: "absolute",
-    left: "-2000px",
+    left: '-2000px',
     top: 0
     }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={this.mypdfExportComponent} fileName="Reporte General" creator='Instance'>  
-    <div ref={this.textInput} id='shiny'>
-    <table>
+    <div  id='shiny'>
+    <table id='spinz'>
       <tr>
         <td>
          <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
@@ -339,7 +340,7 @@ console.log(this.props.getBaseValue);
 
 
     </div>
-        </PDFExport>  
+        </PDFExport >  
     </div>}
     if (!this.state.emailSent) {
       return (
