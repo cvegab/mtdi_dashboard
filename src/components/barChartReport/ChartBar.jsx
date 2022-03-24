@@ -180,9 +180,9 @@ let ordersGraph = {
 
 const ChartBar = (props) => {
   return (
-    <div style={{margin:"20px"}}>      
-                  <Card className="card-chart">
-                    <CardHeader id="textNameTable">
+    <div style={{margin:"20px", borderRadius:"30px"}}>      
+                  <Card id="cardChartBarReport" className="card-chart">
+                    <CardHeader className="textNameTableReport">
                       <strong>{props.title}</strong>
                     </CardHeader>
                     <br></br>
@@ -196,7 +196,7 @@ const ChartBar = (props) => {
                       <div >
                         <div className="infoLegendReport">
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -213,7 +213,7 @@ const ChartBar = (props) => {
                             </p>
                           </div>
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -229,7 +229,7 @@ const ChartBar = (props) => {
                             </p>
                           </div>
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -246,7 +246,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -262,7 +262,7 @@ const ChartBar = (props) => {
                             </p>
                           </div>
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -279,7 +279,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -296,7 +296,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -313,7 +313,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -330,7 +330,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -347,7 +347,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -364,7 +364,7 @@ const ChartBar = (props) => {
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{

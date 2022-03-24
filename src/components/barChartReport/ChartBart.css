@@ -1,6 +1,21 @@
+#cardChartBarReport {
+  border-radius: 50px;
+  box-shadow:inset;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
 .infoLegendReport {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   padding: 0em 1em 1em 2em;
+}
+
+.titleTextLegendReport {
+  font-size: 20px;
+}
+
+.textNameTableReport {
+  font-size: 40px;
+  color: #182773;
 }
