@@ -5224,7 +5224,6 @@ console.log(selectedChannelsArray);
                
               </Modal>         
 
-              <shareReports />
         
               <br/>
               

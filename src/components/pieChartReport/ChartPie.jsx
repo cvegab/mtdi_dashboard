@@ -91,7 +91,7 @@ const pieChart = {
 
 const ChartPie = (props) => {
   return (
-    <div>
+    <div style={{margin:"20px"}}>
                   <Card>
                     <CardHeader>
                       <CardTitle>
@@ -347,7 +347,7 @@ const ChartPie = (props) => {
                                 borderRadius: "3px",
                               }}
                             />
-                            &nbsp;&nbsp;&nbsp;WooCommerce
+                            &nbsp;&nbsp;WooCommerce
                             <p className="card-category">
                               {(() => {
                                 let number = 4500;

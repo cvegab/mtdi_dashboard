@@ -14,6 +14,12 @@ import ChartBar from 'components/barChartReport/ChartBar';
 import { drawDOM, exportPDF } from '@progress/kendo-drawing';
 import { getValueMap } from "@progress/kendo-react-dropdowns";
 export default class SendReportChips extends React.Component {
+  constructor(props) {
+    super(props);
+    // create a ref to store the textInput DOM element
+    this.textInput = React.createRef();
+    //
+  }
   state = {
     items: [],
     value: "",
@@ -129,12 +135,14 @@ export default class SendReportChips extends React.Component {
  exportPDFWithMethod = async() => {
   let base64Value='';
   this. mypdfExportComponent = React.createRef();
-  this.myRef = React.createRef();
+  // this.myRef = React.createRef();
 //    const container = this.ref=React.createRef();
-   const container = this.myRef||document.body;
-  let element = document.getElementById('#shiny');
-  console.log(element);
-  let gridElement = document.querySelector('.k-grid');
+   const container = this.myRef.current||document.body;
+  // let element = document.getElementById('#shiny');
+  // console.log(element);
+  // let gridElement = document.querySelector('.k-grid');
+  // let element = this.myRef.current;
+  let element = this.textInput.current;
   await drawDOM(element, {
     paperSize: "A4"
   }).then(group => {
@@ -232,7 +240,7 @@ console.log(this.props.getBaseValue);
     top: 0
     }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={this.mypdfExportComponent} fileName="Reporte General" creator='Instance'>  
-    <div ref={this.myRef} id='shiny'>
+    <div ref={this.textInput} id='shiny'>
     <table>
       <tr>
         <td>
@@ -337,7 +345,7 @@ console.log(this.props.getBaseValue);
       return (
         <React.Fragment>
           <h3 style={{ fontWeight: "700", size: "24px", textAlign: "center" }}>
-            Enviar documento tributario
+            Compartir Reporte
           </h3>
           <Form onSubmit={this.submitHandler}>
             <FormGroup>
@@ -413,37 +421,19 @@ console.log(this.props.getBaseValue);
                   textTransform: "none",
                   fontWeight: "bold",
                   border: "0",
+                  marginBottom:"10px"
                 }}
                 onClick={this.downloadPdfHandler}
               >
-                Enviar Correo &nbsp;
+             
+                Enviar Reporte &nbsp;
                 <span className="btn-label">
                   <i className="nc-icon nc-send" />
                 </span>
+               
               </button>
-              <button
-                id="bttnSubmit"
-                type="submit"
-                style={{
-                  backgroundColor: "#1D308E",
-                  textAlign: "center",
-                  color: "white",
-                  width: "296px",
-                  height: "64px",
-                  padding: "22px 81px",
-                  borderRadius: "33px",
-                  color: "#FFFFFF",
-                  marginLeft: "1em",
-                  textTransform: "none",
-                  fontWeight: "bold",
-                  border: "0",
-                }}
-              >
-               Descargar pdf &nbsp;
-                <span className="btn-label">
-                  <i className="nc-icon nc-send" />
-                </span>
-              </button>
+
+              <PDFReport />
             </div>
           </Form>
         </React.Fragment>
