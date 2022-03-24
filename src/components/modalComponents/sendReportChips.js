@@ -135,13 +135,9 @@ export default class SendReportChips extends React.Component {
  exportPDFWithMethod = async() => {
   let base64Value='';
   this. mypdfExportComponent = React.createRef();
-  // this.myRef = React.createRef();
-//    const container = this.ref=React.createRef();
+  
    const container = this.myRef;
-  // let element = document.getElementById('#shiny');
-  // console.log(element);
-  // let gridElement = document.querySelector('.k-grid');
-  // let element = this.myRef.current;
+  
   let element = document.querySelector('#spinz');
   await drawDOM(element, {
     paperSize: "auto"
