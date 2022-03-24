@@ -25,9 +25,21 @@ import "./PDFReport.css";
 
 
 const PDFReport = (props) => {
+ 
   const pdfExportComponent = React.useRef(null);
   const container = React.useRef(null);
-  return <div>
+  const exportPDFWithMethod = () => {
+    let element = container.current || document.body;
+    let gridElement = document.querySelector('.k-grid');
+    drawDOM(element, {
+      paperSize: "A4"
+    }).then(group => {
+      return exportPDF(group);
+    }).then(dataUri => {
+      console.log(dataUri.split(';base64,')[1]);
+    });
+  };
+  return ( <div>
       <div className="example-config">
         <button
         className="downloadPDBttn" 
@@ -71,12 +83,12 @@ const PDFReport = (props) => {
       id="reportPDFcontent"
       style={{
       position: "absolute",
-      left: "-3000px",
+     left: '-2000px',
       top: 0
       }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
-      <div id="printRefContainer" ref={container}>
-      <table className='backgroundReport'>
+      <div ref={container}>
+      <table className='backgroundReport' id='spinz'>
         <tr>
           <td>
             <br/>
@@ -209,7 +221,8 @@ const PDFReport = (props) => {
       </div>
         </PDFExport>
       </div>
-    </div>;
+    </div>
+  )
 };
 
 export default PDFReport;
