@@ -180,9 +180,9 @@ let ordersGraph = {
 
 const ChartBar = (props) => {
   return (
-    <div>      
-                  <Card className="card-chart">
-                    <CardHeader id="textNameTable">
+    <div style={{margin:"20px", borderRadius:"30px"}}>      
+                  <Card id="cardChartBarReport" className="card-chart">
+                    <CardHeader className="textNameTableReport">
                       <strong>{props.title}</strong>
                     </CardHeader>
                     <br></br>
@@ -196,7 +196,7 @@ const ChartBar = (props) => {
                       <div >
                         <div className="infoLegendReport">
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -207,13 +207,13 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Ripley
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                                 420 órdenes
                               </p>
                             </p>
                           </div>
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -223,13 +223,13 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;ListaTienda
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                                 420 órdenes
                               </p>
                             </p>
                           </div>
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -239,14 +239,14 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Magento
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -256,13 +256,13 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Shopify
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -272,14 +272,14 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Mercadolibre
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -289,14 +289,14 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Chambas
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -306,14 +306,14 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp; Linio
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -323,14 +323,14 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp; Vtex
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -339,15 +339,15 @@ const ChartBar = (props) => {
                                   borderRadius: "3px",
                                 }}
                               />
-                              &nbsp;&nbsp;&nbsp;WooCommerce
-                              <p id="ordersGraphText" className="card-category">
+                              &nbsp;&nbsp;WooCommerce
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -357,14 +357,14 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Paris
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
                           </div>
 
                           <div>
-                            <p className="titleTextLegend">
+                            <p className="titleTextLegendReport">
                               <i
                                 className="fa fa-circle"
                                 style={{
@@ -374,7 +374,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Exito
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>

@@ -2,6 +2,7 @@ import React from 'react';
 import './CardReports.css';
 import { Col, Row } from 'reactstrap';
 
+
 const CardReports = (props) => {
   return (
     <div className="card-report">

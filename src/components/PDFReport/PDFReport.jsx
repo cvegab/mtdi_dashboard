@@ -19,27 +19,32 @@ import ChartMixed from 'components/MixedChartReport/ChartMixed';
 import ChartPie from 'components/pieChartReport/ChartPie.jsx';
 import ChartBar from 'components/barChartReport/ChartBar';
 import MixedChart from 'views/MixedChart';
+import iconInstance from '../../assets/img/icons/Reports/icon1.png';
+import "./PDFReport.css";
 
 
-const PDFReport = () => {
+
+const PDFReport = (props) => {
   const pdfExportComponent = React.useRef(null);
   const container = React.useRef(null);
   return <div>
       <div className="example-config">
-        <button 
+        <button
+        className="downloadPDBttn" 
         style={{
-          backgroundColor: "#1D308E",
+          backgroundColor: "#FFFFFF",
           textAlign: "center",
-          width: "296px",
+          width: "400px",
           height: "64px",
           padding: "22px 81px",
           borderRadius: "33px",
-          color: "#FFFFFF",
+          color: "#1D308E",
           marginLeft: "1em",
           textTransform: "none",
           fontWeight:"bold",
           border:"0",
-          fontSize: "11px"
+          fontSize: "11px",
+          textDecoration: "underline"
         }}
   
       //   onClick={() => {
@@ -49,17 +54,17 @@ const PDFReport = () => {
       // }}
 
         onClick={() => {
-        let element = container.current || document.body;
+        let element = container.current;
         const f=savePDF(element, {
           paperSize: "auto",
-          margin: 40,
-          fileName: "Reporte Instance"
+          margin: "0cm",
+          fileName: "Reporte General"
         });
         console.log(f);
       }}
       
        >
-          Descargar PDF
+          Descarga este Reporte como PDF
         </button>
       </div>
 
@@ -67,20 +72,47 @@ const PDFReport = () => {
       id="reportPDFcontent"
       style={{
       position: "absolute",
-      left: "-2000px",
+      left: "-3000px",
       top: 0
       }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
       <div ref={container}>
-      <table>
+      <table className='backgroundReport'>
         <tr>
           <td>
-           <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
+            <br/>
+            <p className='titleReports'> 
+              <img src={iconInstance} width="60" /> Reporte General
+            </p>
             <ChartMixed
                 title="Resumen general de ordenes y ventas"
                 data=""
                 options=""
              />  
+
+            <CardReports 
+              title="Procesamiento de pedidos"
+              subtitle1="Pedidos"
+              value1="720.000"
+              subtitle2="Cancelados"
+              value2="20.000"
+              subtitle3="DTE enviado"
+              value3="0"
+              subtitle4="Entregados"
+              value4="0" 
+            />
+     
+            <CardReports 
+              title="Experiencia del cliente"
+              subtitle1="NPS"
+              value1="0"
+              subtitle2="Reviews"
+              value2="20.000"
+              subtitle3="Reclamos"
+              value3="0"
+              subtitle4=""
+              value4="" 
+            />
           </td>
 
           <td>
@@ -107,46 +139,18 @@ const PDFReport = () => {
               subtitle4="Próximo a llegar"
               value4="0" 
             />     
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-          <CardReports 
-              title="Procesamiento de pedidos"
-              subtitle1="Pedidos"
-              value1="720.000"
-              subtitle2="Cancelados"
-              value2="20.000"
-              subtitle3="DTE enviado"
-              value3="0"
-              subtitle4="Entregados"
-              value4="0" 
-            />
-     
-            <CardReports 
-              title="Experiencia del cliente"
-              subtitle1="NPS"
-              value1="0"
-              subtitle2="Reviews"
-              value2="20.000"
-              subtitle3="Reclamos"
-              value3="0"
-              subtitle4=""
-              value4="" 
-            />
-
-          </td>
-
-          <td>
+               
+        
               <ChartPie
                 title="Participacion canal de venta"
                 data=""
                 options=""
               />
+         
           </td>
         </tr>
 
+      
         <tr>
           <td>
           <ChartBar 
