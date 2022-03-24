@@ -24,7 +24,7 @@ import "./PDFReport.css";
 
 
 
-const PDFReport = () => {
+const PDFReport = (props) => {
   const pdfExportComponent = React.useRef(null);
   const container = React.useRef(null);
   return <div>
@@ -54,7 +54,7 @@ const PDFReport = () => {
       // }}
 
         onClick={() => {
-        let element = container.current || document.body;
+        let element = container.current;
         const f=savePDF(element, {
           paperSize: "auto",
           margin: "0cm",

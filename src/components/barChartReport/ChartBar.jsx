@@ -207,7 +207,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Ripley
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                                 420 órdenes
                               </p>
                             </p>
@@ -223,7 +223,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;ListaTienda
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                                 420 órdenes
                               </p>
                             </p>
@@ -239,7 +239,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Magento
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -256,7 +256,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Shopify
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -272,7 +272,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Mercadolibre
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -289,7 +289,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Chambas
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -306,7 +306,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp; Linio
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -323,7 +323,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp; Vtex
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -340,7 +340,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;WooCommerce
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -357,7 +357,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Paris
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>
@@ -374,7 +374,7 @@ const ChartBar = (props) => {
                                 }}
                               />
                               &nbsp;&nbsp;&nbsp;Exito
-                              <p id="ordersGraphText" className="card-category">
+                              <p id="ordersGraphText" className="numberTextLegendReport">
                               420 órdenes
                               </p>
                             </p>

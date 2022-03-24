@@ -3,7 +3,7 @@
   margin-bottom: 2em; 
   background: #FFFFFF;
   box-shadow: 0px 4px 60px rgba(122, 122, 122, 0.12);
-  border-radius: 17px;
+  border-radius: 30px;
   margin:20px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
@@ -27,7 +27,7 @@
   margin-left: 5px;
   margin-top: 1em;
   margin-bottom: 2em;
-  color: #1D308E;
+  color: #141e54;
 }
 
 .value-cardReport {
@@ -36,5 +36,5 @@
   text-align: initial;
   margin-left: 5px;
   margin-top: 1em;
-  color: #1D308E;
+  color: gray;
 }

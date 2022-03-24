@@ -92,10 +92,10 @@ const pieChart = {
 const ChartPie = (props) => {
   return (
     <div style={{margin:"20px"}}>
-                  <Card>
+                  <Card style={{borderRadius:"40px", height:"800px"}}>
                     <CardHeader>
                       <CardTitle>
-                        <strong className="title-chartPie">{props.title}</strong>
+                        <strong className="title-chartPieReport">{props.title}</strong>
                       </CardTitle>
                     </CardHeader>
                     <CardBody>
@@ -103,13 +103,13 @@ const ChartPie = (props) => {
                         // id="barChartCustom"
                         data={pieChart}
                         options={pieChart.options}
-                        // style={{ width: "300px" }}
+                        style={{ height: "200px"}}
                       />
                     </CardBody>
                     <CardFooter>
                       <div className="infoLegendPieChart">
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -128,7 +128,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -138,7 +138,7 @@ const ChartPie = (props) => {
                           </p>
                         </div>
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -156,7 +156,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -166,7 +166,7 @@ const ChartPie = (props) => {
                           </p>
                         </div>
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -184,7 +184,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {formatted}
                                   </p>
                                 );
@@ -194,7 +194,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -212,7 +212,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -222,7 +222,7 @@ const ChartPie = (props) => {
                           </p>
                         </div>
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -240,7 +240,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -251,7 +251,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -269,7 +269,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -280,7 +280,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -298,7 +298,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -309,7 +309,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -327,7 +327,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -338,7 +338,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -356,7 +356,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -367,7 +367,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -385,7 +385,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {" "}
                                     {formatted}
                                   </p>
@@ -396,7 +396,7 @@ const ChartPie = (props) => {
                         </div>
 
                         <div>
-                          <p className="titleTextLegend">
+                          <p className="titleTextLegendReport">
                             <i
                               className="fa fa-circle"
                               style={{
@@ -414,7 +414,7 @@ const ChartPie = (props) => {
                                   currency: "CLP",
                                 }).format(number);
                                 return (
-                                  <p className="numberTextLegend">
+                                  <p className="numberTextLegendReport">
                                     {formatted}
                                   </p>
                                 );
