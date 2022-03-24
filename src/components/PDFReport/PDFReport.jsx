@@ -75,7 +75,7 @@ const PDFReport = (props) => {
       top: 0
       }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={pdfExportComponent} fileName="Reporte General" creator='Instance'>
-      <div ref={container}>
+      <div id="printRefContainer" ref={container}>
       <table className='backgroundReport'>
         <tr>
           <td>
