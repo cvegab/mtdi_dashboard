@@ -1,5 +1,5 @@
-import { Select, MenuItem } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { Select, MenuItem, TextField } from "@material-ui/core";
+import React, { useEffect, useRef, useState } from "react";
 // react plugin used to create charts
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -23,11 +23,18 @@ import iconPP4 from "../assets/img/icons/Reports/iconPP4.png";
 import iconEC1 from "../assets/img/icons/Reports/iconEC1.png";
 import iconEC2 from "../assets/img/icons/Reports/iconEC2.png";
 import iconEC3 from "../assets/img/icons/Reports/iconEC3.png";
+import PDFReport from '../components/PDFReport/PDFReport';
+import shareReports from "components/modalComponents/shareReports";
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 //Generate Report PDF
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
+// import '@progress/kendo-theme-material/dist/all.css';
+// import { Button } from '@progress/kendo-react-buttons';
+// import '@progress/kendo-theme-default/dist/all.css';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+
 
 
 
@@ -44,9 +51,18 @@ import {
   Input,
   Spinner,
   Badge,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
 
 import SplashScreen from "components/UI/splash-screen";
+import ChartMixed from "components/MixedChartReport/ChartMixed";
+import ChartPie from "components/pieChartReport/ChartPie";
+import ChartBar from "components/barChartReport/ChartBar";
+import CardReports from "components/CardReports/CardReports";
+import SendReport from "components/modalComponents/send-report";
 
 registerLocale("es", es);
 
@@ -265,6 +281,7 @@ function MtdiReports() {
       },
     ],
   };
+  const [showModal, setshowModal] = useState(false);
   const [mixedGraphDatas, setmixedGraphDatas] = useState([]);
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
@@ -311,6 +328,7 @@ function MtdiReports() {
   const [stackedDateLabel, setstackedDateLabel] = useState([]);
   const [stackedDatevalues, setstackedDatevalues] = useState([]);
   const [totalIncome, settotalIncome] = useState(0);
+  const [totalIncomeFormatted, settotalIncomeFormatted] = useState(0);
   const [totalNps, settotalNps] = useState(0);
   const [totalClaims, settotalClaims] = useState(0);
   const [dispatchCost, setdispatchCost] = useState(0);
@@ -346,6 +364,8 @@ function MtdiReports() {
   const [showFilter, setshowFilter] = useState(false);
   const printReport = React.useRef();
   const [isDownloadingReports, setisDownloadingReports] = useState(false);
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
   //SALES CHANNEL TOTAL SALES STATES
   const [ripley, setripley] = useState(0);
   const [vtex, setvtex] = useState(0);
@@ -3142,7 +3162,10 @@ console.log(selectedChannelsArray);
   const showFiltersHandler = () => {
     setshowFilter(!showFilter);
   };
-
+  const showModalHandler = (row) => {
+    setshowModal(true);
+    setModal(false);
+  };
   // Function to generate a PDF Report 
   const handleDownloadPdf = async () => {
 
@@ -3165,10 +3188,95 @@ console.log(selectedChannelsArray);
     setisDownloadingReports(false);
   };
 
+  const pdfExportComponent = useRef(null);
+  const contentArea = useRef(null);
+
+  const handleExportWithComponent = (event) => {
+    // console.log('clikkkkk');
+    pdfExportComponent.current.save();
+  };
+
+  const handleExportWithMethod = (event) => {
+    // console.log('clikkkkk');
+    savePDF(contentArea.current, {paperSize: "auto"});
+  };
+  const hideModalHandler = () => {
+    setshowModal(false);
+  };
+
   return (
     <>
-      {pageFullyLoaded && <SplashScreen message='Reportes'></SplashScreen>}
-      {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
+
+{showModal && <SendReport
+                totalIncomeformatted={totalIncome} 
+                dispatchCost={dispatchCost} 
+                gm={gm} 
+                inProcess={inProcess}
+                inPreparation={inPreparation}
+                readyToShip={readyToShip}
+                onhideModal={hideModalHandler}
+                onTheWay={onTheWay}
+                totalOrders={totalOrders}
+                totalCancelledOrders={totalCancelledOrders}
+                totalDte={totalDte}
+                totalNps={totalNps}
+                reviews={reviews}
+                totalClaims={totalClaims}
+                vtexPie={vtexPie}
+                linioPie={linioPie}
+                mercadoPie={mercadoPie}
+                exitoPie={exitoPie}
+                ripleyPie={ripleyPie}
+                shopifyPie={shopifyPie}
+                parisPie={parisPie}
+                magentoPie={magentoPie}
+                wooPie={wooPie}
+                chambasPie={chambasPie}
+                listaPie={listaPie}
+              pieChartData={pieChartData}
+                pieChartOptions={pieChartData.options}
+                ripley={ripley}
+                vtex={vtex}
+                linio={linio}
+                mercadoLibre={mercadoLibre}
+                exito={exito}
+                paris={paris}
+                shopify={shopify}
+                wooCommerce={wooCommerce}
+                magento={magento}
+                chambas={chambas}
+                listaTienda={listaTienda}
+                barChartData={mixedChartData}
+                barChartOptions={mixedChartData.options}
+               SalesChart={stackedSalesGraph}
+              SalesChartOptions={stackedChartData.options}
+              newRipleySalesMonthly={newRipleySalesMonthly}
+              newVtexSalesMonthly={newVtexSalesMonthly}
+              newlinioSalesMonthly={newlinioSalesMonthly}
+              newMercadoSalesMonthly={newMercadoSalesMonthly}
+              newExitoSalesMonthly={newExitoSalesMonthly}
+              newParisSales={newParisSales}
+              newShopifySalesMonthly={newShopifySalesMonthly}
+              newWooCommerceSalesMonthly={newWooCommerceSalesMonthly}
+              newMagentoSalesMonthly={newMagentoSalesMonthly}
+              newChambasSalesMonthly={newChambasSalesMonthly}
+              newListaSales={newListaSales}
+              stackedDateLabel={stackedDateLabel}
+              newRipleyMonthly={newRipleyMonthly}
+              newVtexMonthly={newVtexMonthly}
+              newlinioMonthly={newlinioMonthly}
+              newMercadoOrdersMonthly={newMercadoOrdersMonthly}
+              newExtitoOrders={newExtitoOrders}
+              newParisOrders={newParisOrders}
+              newShopifyMonthly={newShopifyMonthly}
+              newMagentoMonthly={newMagentoMonthly}
+              newChambasMonthly={newChambasMonthly}
+              newListaOrders={newListaOrders}
+              newWooCommerceMonthly={newWooCommerceMonthly}
+                >
+                </SendReport>}
+      {pageFullyLoaded && <SplashScreen></SplashScreen>}
+      {isLoading && <SplashScreen></SplashScreen>}
 
       {!isLoading && (
         <div className="content">
@@ -3500,7 +3608,18 @@ console.log(selectedChannelsArray);
           <br></br>
 
       
-          <div id="generateReport" ref={printReport}>  
+          <div id="generateReport" ref={printReport}> 
+        
+
+            <div id="contentAreaPrint" ref={contentArea}> 
+            
+            {/* <ChartMixed /> */}
+            {/* <ChartPie /> */}
+            {/* <ChartBar /> */}
+       
+              
+
+       {/* <PDFExport ref={pdfExportComponent} paperSize="auto"> */}
           <div id="ReportInformationDesktop">
             <Col
               id="colReportDatosGenerales"
@@ -3550,17 +3669,18 @@ console.log(selectedChannelsArray);
                     >
                       {(() => {
                         let number = totalIncome;
-                        let totalIncomeformatted = new Intl.NumberFormat(
+                        let totalIncomeTemporal= new Intl.NumberFormat(
                           "es-CL",
                           {
                             style: "currency",
                             currency: "CLP",
                           }
                         ).format(number);
+                        
                         return (
                           <div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                            {totalIncomeformatted}
+                            {totalIncomeTemporal}
                             &nbsp;
                             {/* <span
                             id="spanTextInfoCard"
@@ -4139,6 +4259,7 @@ console.log(selectedChannelsArray);
               </Row>
             </Col>
           </div>
+         
 
           {/* REPORTS INFORMATION MOBILE VERSION */}
           <div id="ReportInformationMobile">
@@ -5056,12 +5177,105 @@ console.log(selectedChannelsArray);
 
           
             </div>
+          
           )}
+         
+        
+          </div>
+
+
           </div>
               <Row>
+
                 <div class="text-center" style={{ marginTop: "3em" }}>
               
-                  {!isDownloadingReports && (
+                <button 
+                 id="bttnSubmit"
+                  //className="bttnCompartirReporte" 
+                 style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0",
+                  fontSize: "11px"
+                }}
+                //  onClick={toggle}
+                 onClick={showModalHandler}
+              > 
+                <span className="btn-label">
+                  <img src={iconShareReport} width="19px"/>
+                </span>
+                    &nbsp;Compartir Reporte &nbsp;               
+              </button>
+              <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader>
+                  <div style={{display:"flex", justifyContent:"end"}}> 
+                    <button style={{background:"none",  position: "relative", marginLeft:"14em", color:"black", border:"none" }} onClick={toggle}>x</button> 
+                  </div>
+                </ModalHeader>
+                <ModalBody>
+                
+                <p style={{fontSize:"24px", fontWeight:"bold", display:"flex", justifyContent:"center"}}>Compartir Reporte</p>
+                <br/>
+                <br/>
+                {/* <div style={{display:"grid", justifyContent:"center"}}>
+                <button
+                  id="bttnSubmit"
+                  style={{
+                    backgroundColor: "#1D308E",
+                    textAlign: "center",
+                    width: "296px",
+                    height: "64px",
+                    padding: "22px 81px",
+                    borderRadius: "33px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    fontWeight:"bold",
+                    border:"0",
+                    fontSize: "11px",
+                    marginBottom:"2em"
+                  }}>
+                  Descargar Reporte
+                </button>
+                <PDFReport />
+                <br/>
+                <button
+                  id="bttnSubmit"
+                  style={{
+                    backgroundColor: "#1D308E",
+                    textAlign: "center",
+                    width: "296px",
+                    height: "64px",
+                    padding: "22px 81px",
+                    borderRadius: "33px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    fontWeight:"bold",
+                    border:"0",
+                    fontSize: "11px"
+                  }}
+                // onClick={showModalHandler}
+                  >
+                  <p style={{width:"150px"}}>Enviar por correo</p>
+                </button>
+                </div> */}
+                </ModalBody>
+               
+              </Modal>         
+
+        
+              <br/>
+              
+                   {/* {!isDownloadingReports && (
                   <button
                     
                     id="bttnSubmit"
@@ -5116,12 +5330,15 @@ console.log(selectedChannelsArray);
                       color="light"
                     />
                     &nbsp; Descargando...
-                  </Button>
-                )}
+                  </Button> */}
+                {/* )}  */}
+                 
                 
                 </div>
+
               </Row>
-        
+
+            
         </div> 
       )}
     </> 
