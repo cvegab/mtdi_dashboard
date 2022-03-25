@@ -433,7 +433,25 @@ console.log(this.props.getBaseValue);
                
               </button>
 
-              <PDFReport 
+              {/* <PDFReport 
+                totalIncomeformatted={this.props.totalIncomeformatted}
+                dispatchCost={this.props.dispatchCost}
+                gm={this.props.gm}
+                inProcess={this.props.inProcess}
+                inPreparation={this.props.inPreparation}
+                readyToShip={this.props.readyToShip}
+                onTheWay={this.props.onTheWay}
+                totalOrders={this.props.totalOrders}
+                totalCancelledOrders={this.props.totalCancelledOrders}
+                totalDte={this.props.totalDte}
+                totalNps={this.props.totalNps}
+                reviews={this.props.reviews}
+                totalClaims={this.props.totalClaims}
+                
+              /> */}
+            </div>
+          </Form>
+          <PDFReport 
                 totalIncomeformatted={this.props.totalIncomeformatted}
                 dispatchCost={this.props.dispatchCost}
                 gm={this.props.gm}
@@ -449,9 +467,6 @@ console.log(this.props.getBaseValue);
                 totalClaims={this.props.totalClaims}
                 
               />
-            </div>
-          </Form>
-          <PDFReport />
         </React.Fragment>
       );
     }
