@@ -73,8 +73,7 @@ const uploadFile = (e) => {
     // console.log(file);
     if (validateData('Falabella')) {
       const jsonFather = {
-        "id": 123,
-        "channel": 'Falabella',
+        "channel": 13,
       }
       const json = XLSX.utils.sheet_to_json(file);
       // console.log(json);
@@ -88,8 +87,7 @@ const uploadFile = (e) => {
   const sendRappiDataHandler = () => {
     if (validateData('Rappi')) {
       const jsonFather = {
-        "id": 123,
-        "channel": 'Rappi',
+        "channel": 15,
       } 
       const json = XLSX.utils.sheet_to_json(file);
       // console.log(json);
@@ -103,8 +101,7 @@ const uploadFile = (e) => {
   const sendCornershopDataHandler = () => {
     if (validateData('Cornershop')) {
       const jsonFather = {
-        "id":123,
-        "channel": 'Cornershop',
+        "channel": 14,
       }
       const json = XLSX.utils.sheet_to_json(file);
       // console.log(json);

@@ -41,7 +41,7 @@ function UserProfile() {
               <div className="image">
                 <img
                   alt="..."
-                  src={require("assets/img/bg/damir-bosnjak.jpg").default}
+                  // src={require("assets/img/bg/damir-bosnjak.jpg").default}
                 />
               </div>
               <CardBody>
