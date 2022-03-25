@@ -3248,6 +3248,19 @@ console.log(selectedChannelsArray);
                 listaTienda={listaTienda}
                 barChartData={mixedChartData}
                 barChartOptions={mixedChartData.options}
+                SalesChart={stackedSalesGraph}
+              SalesChartOptions={stackedChartData.options}
+              newRipleySalesMonthly={newRipleySalesMonthly}
+              newVtexSalesMonthly={newVtexSalesMonthly}
+              newlinioSalesMonthly={newlinioSalesMonthly}
+              newMercadoSalesMonthly={newMercadoSalesMonthly}
+              newExitoSalesMonthly={newExitoSalesMonthly}
+              newParisSales={newParisSales}
+              newShopifySalesMonthly={newShopifySalesMonthly}
+              newWooCommerceSalesMonthly={newWooCommerceSalesMonthly}
+              newMagentoSalesMonthly={newMagentoSalesMonthly}
+              newChambasSalesMonthly={newChambasSalesMonthly}
+              newListaSales={newListaSales}
                 >
                 </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
