@@ -18,6 +18,7 @@ import './ChartBart.css';
 
 
 const ChartBar = (props) => {
+  console.log(props);
   const stackedDateLabel = [
     "En",
     "Feb",
@@ -33,7 +34,7 @@ const ChartBar = (props) => {
     "Dic",
   ]
   let ordersGraph = {
-    labels: stackedDateLabel,
+    labels:props.stackedDateLabel,
     datasets: [
       {
         label: "Ripley",

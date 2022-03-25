@@ -201,9 +201,23 @@ const PDFReport = (props) => {
               <tr>
                 <td>
                   <ChartBar
+                  text='Ordenes'
                     title="Ordenes por canal de venta"
-                    data=""
-                    options=""
+                    data={props.SalesChart}
+                    options={props.SalesChartOptions}
+                   stackedDateLabel={props.stackedDateLabel}
+                    newRipley={props.newRipleyMonthly}
+                    newVtex={props.newVtexMonthly}
+                    newlinio={props.newlinioMonthly}
+                    newMercado={props.newMercadoOrdersMonthly}
+                    newExtito={props.newExtitoOrders}
+                    newParis={props.newParisOrders}
+                    newShopify={props.newShopifyMonthly}
+                   
+                    newMagento={props.newMagentoMonthly}
+                    newchambas={props.newChambasMonthly}
+                    newLista={props.newListaOrders}
+                    newWooCommerc={props.newWooCommerceMonthly}
                   />
                 </td>
 
@@ -234,6 +248,7 @@ const PDFReport = (props) => {
                     magento={props.magento}
                     chambas={props.chambas}
                     listaTienda={props.listaTienda}
+                    stackedDateLabel={props.stackedDateLabel}
                   />
                 </td>
               </tr>

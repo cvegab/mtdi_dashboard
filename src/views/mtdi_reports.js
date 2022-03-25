@@ -3248,7 +3248,7 @@ console.log(selectedChannelsArray);
                 listaTienda={listaTienda}
                 barChartData={mixedChartData}
                 barChartOptions={mixedChartData.options}
-                SalesChart={stackedSalesGraph}
+               SalesChart={stackedSalesGraph}
               SalesChartOptions={stackedChartData.options}
               newRipleySalesMonthly={newRipleySalesMonthly}
               newVtexSalesMonthly={newVtexSalesMonthly}
@@ -3261,6 +3261,18 @@ console.log(selectedChannelsArray);
               newMagentoSalesMonthly={newMagentoSalesMonthly}
               newChambasSalesMonthly={newChambasSalesMonthly}
               newListaSales={newListaSales}
+              stackedDateLabel={stackedDateLabel}
+              newRipleyMonthly={newRipleyMonthly}
+              newVtexMonthly={newVtexMonthly}
+              newlinioMonthly={newlinioMonthly}
+              newMercadoOrdersMonthly={newMercadoOrdersMonthly}
+              newExtitoOrders={newExtitoOrders}
+              newParisOrders={newParisOrders}
+              newShopifyMonthly={newShopifyMonthly}
+              newMagentoMonthly={newMagentoMonthly}
+              newChambasMonthly={newChambasMonthly}
+              newListaOrders={newListaOrders}
+              newWooCommerceMonthly={newWooCommerceMonthly}
                 >
                 </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
