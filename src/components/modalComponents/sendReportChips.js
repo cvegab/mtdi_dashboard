@@ -467,6 +467,17 @@ console.log(this.props.getBaseValue);
                 totalClaims={this.props.totalClaims}
                 pieChartData={this.props.pieChartData}
                 pieChartOptions={this.props.pieChartData.options}  
+                ripley={this.props.ripley}
+                vtex={this.props.vtex}
+                linio={this.props.linio}
+                mercadoLibre={this.props.mercadoLibre}
+                exito={this.props.exito}
+                paris={this.props.paris}
+                shopify={this.props.shopify}
+                wooCommerce={this.props.wooCommerce}
+                magento={this.props.magento}
+                chambas={this.props.chambas}
+                listaTienda={this.props.listaTienda}
               />
         </React.Fragment>
       );

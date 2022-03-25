@@ -17,6 +17,17 @@ import './ChartPie.css'
 
 
 const ChartPie = (props) => {
+  let ripley=props.ripley;
+ let vtex=props.vtex;
+  let linio=props.linio;
+  let mercadoLibre=props.mercadoLibre;
+  let exito=props.exito;
+  let paris=props.paris;
+  let shopify=props.shopify;
+  let wooCommerce=props.wooCommerce;
+  let magento=props.magento;
+  let chambas=props.chambas;
+  let listaTienda=props.listaTienda;
   const pieChart = {
     labels: [
       "Vtex",
@@ -124,7 +135,7 @@ const ChartPie = (props) => {
                             {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
                             <p className="card-category">
                               {(() => {
-                                let number = 1234;
+                                let number = vtex;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -152,7 +163,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;Linio
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = linio;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -180,7 +191,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;Mercadolibre
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = mercadoLibre;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -208,7 +219,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;Exito
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = exito;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -236,7 +247,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;Ripley
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = ripley;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -265,7 +276,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;Shopify
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = shopify;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -294,7 +305,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp; Paris
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = paris;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -323,7 +334,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp; Magento
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = magento;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -352,7 +363,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;WooCommerce
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = wooCommerce;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -381,7 +392,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;Chambas
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = chambas;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",
@@ -410,7 +421,7 @@ const ChartPie = (props) => {
                             &nbsp;&nbsp;&nbsp;ListaTienda
                             <p className="card-category">
                               {(() => {
-                                let number = 4500;
+                                let number = listaTienda;
                                 let formatted = new Intl.NumberFormat("es-CL", {
                                   style: "currency",
                                   currency: "CLP",

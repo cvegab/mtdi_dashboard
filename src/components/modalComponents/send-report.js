@@ -35,6 +35,17 @@ const SendReport = (props)=>{
           listaPie={props.listaPie}
           pieChartData={props.pieChartData}
           pieChartOptions={props.pieChartData.options}
+          ripley={props.ripley}
+          vtex={props.vtex}
+                linio={props.linio}
+                mercadoLibre={props.mercadoLibre}
+                exito={props.exito}
+                paris={props.paris}
+                shopify={props.shopify}
+                wooCommerce={props.wooCommerce}
+                magento={props.magento}
+                chambas={props.chambas}
+                listaTienda={props.listaTienda}
           >
           </SendReportChips>
         </Modal>

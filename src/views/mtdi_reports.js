@@ -3235,6 +3235,17 @@ console.log(selectedChannelsArray);
                 listaPie={listaPie}
               pieChartData={pieChartData}
                 pieChartOptions={pieChartData.options}
+                ripley={ripley}
+                vtex={vtex}
+                linio={linio}
+                mercadoLibre={mercadoLibre}
+                exito={exito}
+                paris={paris}
+                shopify={shopify}
+                wooCommerce={wooCommerce}
+                magento={magento}
+                chambas={chambas}
+                listaTienda={listaTienda}
                 >
                 </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
