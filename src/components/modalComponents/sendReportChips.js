@@ -31,7 +31,359 @@ export default class SendReportChips extends React.Component {
     base64Value:''
   };
 
+  bodyMail = `  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset-utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instance - Pedido ingresado </title>
+    <style type="text/css">
+      body {
+        margin: 0;
+        background-color: #cccccc;
+      }
+      table {
+        border-spacing: 0;
+      }
+      td {
+        padding: 0;
+      }
+      img {
+        border: 0;
+      }
   
+      @media screen and (max-width: 425px) {
+        #textPedido {
+          text-align: left !important;
+          font-size: 17px !important;
+          text-align: center !important;
+        }
+        #imageDelivery {
+          margin:auto;
+          display:block;
+          text-align: center !important;
+          width:70%;
+        }
+        #clientLogo {
+          margin-left:3.5em;
+          display:block !important;
+          text-align: center !important;
+          width:70%;
+        }
+        #bttnBoleta {
+          padding: 10px 38px;
+        }
+        #icon1 {
+          width:20px !important;
+        }
+        #instanceLogo {
+          width: 80px !important;
+        }
+        #titleWarning {
+          margin-left:10px !important;
+        }
+        #textWarning {
+          margin-left: 8px !important;
+        }
+      }
+  
+      .wrapper {
+        width: 100%;
+        table-layout: fixed;
+        background-color: #f7f7f7;
+        padding-bottom: 60px;
+      }
+  
+      .main {
+        background-color: #ffffff;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        border-spacing: 0;
+        font-family: sans-serif;
+        color: #4a4a4a;
+      }
+      .two-columns {
+        text-align: center;
+        font-size: 0;
+      }
+  
+      .two-columns .column {
+        width: 100%;
+        max-width: 300px;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .button {
+        background-color: #1D308E;
+        border-radius: 17px;
+        text-decoration: none;
+        padding: 12px 100px;
+        font-weight: medium;
+        color:white;
+        font-size: 12px;
+        width: 700px !important;
+        height: 70px; 
+        text-decoration: none;
+  
+      }
+  
+      .button:hover {
+        background-color: #06CBC1;
+      }
+      
+      a:link :visited :hover :active{
+        color: white;
+        text-decoration: none;
+      }
+  
+      a:-webkit-any-link {
+        text-decoration: none;
+      }
+  
+      .two-columns.last {
+        padding: 10px 0;
+      }
+      .two-columns .padding {
+        padding:º0px;
+      }
+  
+      .two-columns .content {
+        font-size: 15px;
+        line-height: 20px;
+        text-align: left;
+      }
+  
+    </style>
+  </head>
+  <body>
+   
+  
+      <center class="wrapper">
+  
+        <table class="main" width="100%">
+  <!-- BLUE BORDER-->
+  <tr>
+    <td height="8" style="background-color: #1D308E;"></td>
+  </tr>
+  
+  <!-- LOGO INSTANCE SECTION-->
+  <tr>
+    <td>
+      <table width="100%">
+  
+  <tr>
+    <td class="column">
+  
+      <!-- <table class="column"> -->
+        <tr>
+          <!-- <td style="padding: 20px 60px; "> -->
+            <td style="text-align: center; padding: 8px 0 4px;">
+            <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon1.png" alt="Icon" alt="Icon" id='icon1' title="Icon" width="20">
+            <br/>
+            <a href="http://www.instancelatam.com">
+              <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-azul.png" alt="Logo-instance" alt="Logo-instance"  id="instanceLogo" title="Logo" width="100">
+            </a>
+          </td>
+        </tr>
+      <!-- </table> -->
+  
+    </td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+  
+  <!-- BANNER SECTION-->
+  
+  <tr>
+    <td width="200" >
+      <tr>
+        <td class="two-columns last">
+  
+          <table class="column">
+            <tr>
+              <td class="padding" >
+  
+                <table class="content">
+                  <tr>
+                    
+                    <td>
+                
+                      
+                    </td>
+                  </tr>
+                </table>
+  
+              </td>
+            </tr>
+          </table>
+  
+          <table class="column">
+            <tr>
+              <td class="padding">
+                <table class="content">
+                  <tr>
+                    <td>
+                      
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+  
+      </tr>
+    </td> 
+  </tr>
+          <!-- BLUE BORDER-->
+          <!-- <tr>
+            <td height="1" style="background-color: #1D308E"></td>
+          </tr>  -->
+  
+  
+  <!--TWO COLUMN SECTION -->
+  
+  <tr>
+    <td width="100%">
+      <tr>
+        <td class="two-columns last">
+  
+          <table class="column">
+            <tr>
+              <td class="padding">
+  
+                <table class="content">
+                  <tr>
+                    <td>
+                    
+                    </td>
+                  </tr>
+                </table>
+  
+              </td>
+            </tr>
+          </table>
+  
+          <table class="column">
+            <tr>
+              <td class="padding">
+                <table class="content">
+                  <tr>
+                    <td>
+  
+                      <p
+                      style="
+                        font-size:16px;
+                        margin-top:2em;
+                        color: #1D308E;
+                        font-weight: bold;
+                        padding: 0px 0px;   
+                      ">          
+                          ¡Hola!         
+                      </p>
+              
+                        <p
+                        style="padding: 0px 0px;
+                        line-height: 23px;
+                        font-size: 14px;
+                        margin-top: 1em;
+                        color: #1D308E;
+                        
+                         ">
+
+                         Desde el equipo de Instance Latam queremos compartir contigo este Reporte general.
+                         Adjuntamos a continuación un PDF para que puedas visualizarlo.
+
+                        </p>
+              
+                      
+              
+                                
+                     
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+  
+      </tr>
+    </td>
+  </tr>
+     
+  
+  <tr>
+    <td style="padding: 5px 0 58px;">
+      <table width="100%">
+  
+  
+        <tr>
+          <td style="text-align:center; padding: 15px">
+          
+          </td>
+      
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- WARNING SECTION -->
+<!-- <tr>
+<td style="padding: 0px 20px 10px 10px;">
+  <table width="100%">
+
+    <tr>
+      <td style="background-color:  #F3F6F9; color:#1D308E; border-radius: 17px; width: 20px; height:20px;">
+        
+   
+    
+      </td>
+    </tr>
+  </table>
+</td>
+</tr> -->
+  
+  <!--FOOTER SECTION -->
+  
+  <tr>
+    <td style="background-color: #1D308E; color:#ffffff;" >
+    <table width="100%">
+  
+      <tr>
+        <td style="text-align: center; padding: 30px 20px;">
+          
+    
+        <!-- <tr> 
+        <td style="text-align: center; padding:0px 20px"> -->
+
+          <a style="text-decoration:none" href="http://www.instancelatam.com">
+            <img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/logo-white.png" alt="IconoInstance" title="LogoInstance" width="90" style="padding:18px; text-decoration:none;">
+          </a>
+          <br/>
+    
+              <a style="text-decoration:none" href="https://www.linkedin.com/company/instancelatam/"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-linkedin.png" alt="Linkedin" title="Linkedin" width="30" style="text-decoration:none"> </a>
+              <a style="text-decoration:none" href="http://www.instagram.com/instance_latam"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-instagram.png" alt="Instagram" title="Instagram" width="30" style="text-decoration:none"> </a>
+              <a style="text-decoration:none" href="mailto:sacchile@instancelatam.com"><img src="https://instancebucket.s3.amazonaws.com/imagenes/imagesHtmlDTE/img/icon-mail.png" alt="Correo" title="Correo" width="30" style="text-decoration:none"> </a>
+
+            </td>
+          </tr> 
+  
+  <!-- 
+        </td>
+      </tr> -->
+  
+    </table>
+          
+    </td>
+  </tr>  
+        </table>
+      </center>
+    
+  </body>
+  </html>`;
 
   handleKeyDown = (evt) => {
     if (
@@ -185,6 +537,7 @@ export default class SendReportChips extends React.Component {
       }
     }
 
+
     const x = [...this.state.items];
     x.push(this.state.emailState);
     if (this.isValid(this.state.value)) {
@@ -194,6 +547,7 @@ export default class SendReportChips extends React.Component {
     
     let final = "" + x.toString() + "";
 
+   
      const base64FileValue =  await this.parseEmail();
      console.log(base64FileValue);
     console.log(this.state.base64Value);
@@ -210,8 +564,8 @@ export default class SendReportChips extends React.Component {
           to: final,
           subject: "Envío de Reporte",
 
-           body: '',
-          filename: "InstanceReport.pdf",
+           body: this.bodyMail,      
+          filename: "ReporteGeneral.pdf",
           file: this.state.base64Value
         }),
       }
@@ -451,7 +805,9 @@ console.log(this.props.getBaseValue);
               /> */}
             </div>
           </Form>
-          <PDFReport 
+
+          <div class="text-center">
+            <PDFReport 
                 totalIncomeformatted={this.props.totalIncomeformatted}
                 dispatchCost={this.props.dispatchCost}
                 gm={this.props.gm}
@@ -506,6 +862,7 @@ console.log(this.props.getBaseValue);
                 chambas={this.props.chambas}
                 listaTienda={this.props.listaTienda}
               />
+          </div>
         </React.Fragment>
       );
     }
