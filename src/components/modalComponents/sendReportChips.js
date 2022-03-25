@@ -310,8 +310,8 @@ console.log(this.props.getBaseValue);
         <td>
             <ChartPie
               title="Participacion canal de venta"
-              data=""
-              options=""
+              pieChartData={this.props.pieChartData}
+              pieChartOptions={this.props.pieChartData.options}
             />
         </td>
       </tr>
@@ -465,7 +465,8 @@ console.log(this.props.getBaseValue);
                 totalNps={this.props.totalNps}
                 reviews={this.props.reviews}
                 totalClaims={this.props.totalClaims}
-                
+                pieChartData={this.props.pieChartData}
+                pieChartOptions={this.props.pieChartData.options}  
               />
         </React.Fragment>
       );

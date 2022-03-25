@@ -3233,6 +3233,8 @@ console.log(selectedChannelsArray);
                 wooPie={wooPie}
                 chambasPie={chambasPie}
                 listaPie={listaPie}
+              pieChartData={pieChartData}
+                pieChartOptions={pieChartData.options}
                 >
                 </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}

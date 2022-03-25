@@ -188,8 +188,8 @@ const PDFReport = (props) => {
         
               <ChartPie
                 title="Participacion canal de venta"
-                data=""
-                options=""
+                data={props.pieChartData}
+                options={props.pieChartData.options}
               />
          
           </td>

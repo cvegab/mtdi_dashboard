@@ -15,81 +15,83 @@ import {
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import './ChartPie.css'
 
-const pieChart = {
-  labels: [
-    "Vtex",
-    "Linio",
-    "Mercadolibre",
-    "Exito",
-    "Ripley",
-    "Shopify",
-    "Paris",
-    "Magento",
-    "WooCommerce",
-    "Chambas",
-    "ListaTienda",
-  ],
-  
-  datasets: [
-    {
-      label: "Emails",
-      pointRadius: 0,
-      pointHoverRadius: 0,
-      backgroundColor: [
-        "#F10096",
-        "#F29A32",
-        "yellow",
-        "#E4C41B",
-        "#FFD88C",
-        "#97D456",
-        "#00B6CB",
-        "#FF6059",
-        "purple",
-        "#EDA4D1",
-        "blue",
-      ],
-      borderWidth: 0,
-      barPercentage: 1.6,
-      data: [1200, 10020, 3000, 1240,5000,4500,1200,3000,120,2300,3000,4000,10000]
-    },
-  ],
-  options: {
-    plugins: {
-      legend: {
-        display: false,
-      },
-
-      tooltips: {
-        enabled: false,
-      },
-    },
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        ticks: {
-          display: false,
-        },
-        grid: {
-          drawBorder: false,
-          zeroLineColor: "transparent",
-          color: "rgba(255,255,255,0.05)",
-        },
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          color: "rgba(255,255,255,0.1)",
-          zeroLineColor: "transparent",
-        },
-        ticks: {
-          display: false,
-        },
-      },
-    },
-  },
-};
 
 const ChartPie = (props) => {
+  const pieChart = {
+    labels: [
+      "Vtex",
+      "Linio",
+      "Mercadolibre",
+      "Exito",
+      "Ripley",
+      "Shopify",
+      "Paris",
+      "Magento",
+      "WooCommerce",
+      "Chambas",
+      "ListaTienda",
+    ],
+    
+    datasets: [
+      {
+        label: "Emails",
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        backgroundColor: [
+          "#F10096",
+          "#F29A32",
+          "yellow",
+          "#E4C41B",
+          "#FFD88C",
+          "#97D456",
+          "#00B6CB",
+          "#FF6059",
+          "purple",
+          "#EDA4D1",
+          "blue",
+        ],
+        borderWidth: 0,
+        barPercentage: 1.6,
+        data: props.data.datasets[0].data
+      },
+    ],
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+  
+        tooltips: {
+          enabled: false,
+        },
+      },
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          ticks: {
+            display: false,
+          },
+          grid: {
+            drawBorder: false,
+            zeroLineColor: "transparent",
+            color: "rgba(255,255,255,0.05)",
+          },
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            color: "rgba(255,255,255,0.1)",
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            display: false,
+          },
+        },
+      },
+    },
+  };
+  
+  console.log(props.data.datasets[0].data);
   return (
     <div style={{margin:"20px"}}>
                   <Card style={{borderRadius:"40px", height:"800px"}}>

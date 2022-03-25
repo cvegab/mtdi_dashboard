@@ -33,6 +33,8 @@ const SendReport = (props)=>{
           wooPie={props.wooPie}
           chambasPie={props.chambasPie}
           listaPie={props.listaPie}
+          pieChartData={props.pieChartData}
+          pieChartOptions={props.pieChartData.options}
           >
           </SendReportChips>
         </Modal>
