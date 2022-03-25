@@ -3204,7 +3204,6 @@ console.log(selectedChannelsArray);
     setshowModal(false);
   };
 
-  
   return (
     <>
 
@@ -3234,7 +3233,8 @@ console.log(selectedChannelsArray);
                 wooPie={wooPie}
                 chambasPie={chambasPie}
                 listaPie={listaPie}
-                ></SendReport>}
+                >
+                </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
       {isLoading && <SplashScreen></SplashScreen>}
 
