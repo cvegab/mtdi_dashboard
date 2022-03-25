@@ -1,0 +1,16 @@
+.backgroundReport {
+  background-color: #f2f2f2;
+}
+
+.downloadPDFbttn:hover {
+color:aqua;
+}
+
+.titleReports {
+  margin-top: "1em";
+  font-size: 55px;
+  font-weight: bold;
+  color: #182773;
+  margin-bottom: 2em;
+ 
+}
