@@ -467,6 +467,8 @@ console.log(this.props.getBaseValue);
                 totalClaims={this.props.totalClaims}
                 pieChartData={this.props.pieChartData}
                 pieChartOptions={this.props.pieChartData.options}  
+                barChartData={this.props.barChartData}
+                barChartOptions={this.props.barChartOptions}
                 ripley={this.props.ripley}
                 vtex={this.props.vtex}
                 linio={this.props.linio}

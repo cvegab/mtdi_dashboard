@@ -3246,6 +3246,8 @@ console.log(selectedChannelsArray);
                 magento={magento}
                 chambas={chambas}
                 listaTienda={listaTienda}
+                barChartData={mixedChartData}
+                barChartOptions={mixedChartData.options}
                 >
                 </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}

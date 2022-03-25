@@ -17,49 +17,98 @@ import './ChartMixed.css';
 
 
 
-const mixedChart = {
-  data: {
-    datasets: [{
-        type: 'bar',
-        label: 'Ventas',
-        data: [1200, 10020, 3000, 1240,5000,4500,1200,3000,120,2300,3000,4000,10000],
+
+
+
+const ChartMixed = (props) => {
+  console.log(props.data.datasets[1].data);
+  let MIXED = {
+    labels: props.data.labels,
+    datasets: [
+      {
+        label: "Ventas",
+        data: props.data.datasets[0].data,
         backgroundColor: "#344FD5",
         borderRadius: 5,
-        order: 1,
-    }, {
-        type: 'line',
-        label: 'Órdenes',
-        data: [500, 150, 50, 2000,50, 5000, 1280, 1000,50, 250, 350, 5000,5500],
+        order: 0,
+      },
+      {
+        label: "Órdenes",
+        yAxisID: "Ordenes",
+
+        data: props.data.datasets[1].data,
         backgroundColor: "#06CBC1",
         borderColor: "#06CBC1",
         fill: false,
         pointHoverRadius: 10,
         pointHoverBorderWidth: 5,
         type: "line",
-        order: 0,
+        order:1,
         color: "#9f9f9f",
-    }],
-    labels: [
-      'Vtex',
-      'Linio',
-      'Magento',
-      'Shopify',
-      'Chambas',
-      'Prestashop',
-      'ListaTienda',
-      'Ripley',
-      'Paris',
-      'Woocommerce',
-      'Mercadolibre',
-      'Exito',
-      'Falabella'
-    ]
-  },
-};
+      },
+    ],
 
+    options: {
+      responsive: true,
+      // maintainAspectRatio: false,
+      aspectRatio: 2,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        grid: {
+          drawBorder: false,
+          display: false,
+          zeroLineColor: "transparent",
+        },
+        y: {
+          display: true,
+          position: "right",
+          ticks: {
+            color: "#9f9f9f",
+            beginAtZero: true,
+            maxTicksLimit: 5,
+            callback: function (data) {
+              let number = data;
+              let totalValueFormatted = new Intl.NumberFormat("es-CL", {
+                style: "currency",
+                currency: "CLP",
+              }).format(number);
+              return totalValueFormatted;
+            },
+            // padding: 100,
+          },
+          grid: {
+            zeroLineColor: "transparent",
+            display: false,
+            drawBorder: false,
+            color: "#EBEBEBf",
+            // borderDash: [8, 6],
+            lineWidth: 0,
+          },
+        },
 
-
-const ChartMixed = (props) => {
+        x: {
+          display: true,
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+          ticks: {
+            font: {
+              size: 10,
+            },
+            padding: 20,
+            color: "#9f9f9f",
+            //  color:"blue",
+          },
+        },
+      },
+    },
+  };
+  
   return (
     <div style={{margin:"30px"}}>
                       <Card className="card-chart" id="mixedChartCustom" style={{borderRadius:"40px"}}>
@@ -72,8 +121,8 @@ const ChartMixed = (props) => {
                     <CardBody>
                     
                       <Bar
-                        data={mixedChart.data}
-                        // options={mixedChart.options}
+                        data={MIXED}
+                         options={MIXED.options}
                         
                       />
                     </CardBody>

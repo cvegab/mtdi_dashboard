@@ -35,6 +35,8 @@ const SendReport = (props)=>{
           listaPie={props.listaPie}
           pieChartData={props.pieChartData}
           pieChartOptions={props.pieChartData.options}
+          barChartData={props.barChartData}
+          barChartOptions={props.barChartOptions}
           ripley={props.ripley}
           vtex={props.vtex}
                 linio={props.linio}

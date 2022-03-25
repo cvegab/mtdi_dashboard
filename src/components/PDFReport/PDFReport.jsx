@@ -97,8 +97,8 @@ const PDFReport = (props) => {
             </p>
             <ChartMixed
                 title="Resumen general de ordenes y ventas"
-                data=""
-                options=""
+                data={props.barChartData}
+                options={props.barChartOptions}
              />  
 
             <CardReports 
