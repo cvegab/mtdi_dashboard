@@ -1194,7 +1194,32 @@ function MtdiReports() {
               </div>
            
           </div>
-        <DownloadReports  printReport={printReport}></DownloadReports>
+        {/* <DownloadReports  printReport={printReport}></DownloadReports> */}
+        <button 
+                 id="bttnSubmit"
+                  //className="bttnCompartirReporte" 
+                 style={{
+                  backgroundColor: "#1D308E",
+                  textAlign: "center",
+                  width: "296px",
+                  height: "64px",
+                  padding: "22px 81px",
+                  borderRadius: "33px",
+                  color: "#FFFFFF",
+                  marginLeft: "1em",
+                  textTransform: "none",
+                  fontWeight:"bold",
+                  border:"0",
+                  fontSize: "11px"
+                }}
+                //  onClick={toggle}
+                 //onClick={showModalHandler}
+              > 
+                <span className="btn-label">
+                  <img src={iconShareReport} width="19px"/>
+                </span>
+                    &nbsp;Compartir Reporte &nbsp;               
+              </button>
         </div>
       )}
     </>
