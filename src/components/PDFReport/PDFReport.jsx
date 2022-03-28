@@ -247,16 +247,34 @@ const PDFReport = (props) => {
 
                 <td>
                   <ChartBar
-                   channel={props.channel}
-                    data={props.SalesChart}
-                    options={props.SalesChartOptions}
+                  
+                    
                     title="Ingresos por canal de venta"
-                    channelId={props.channelId}
                     stackedDateLabel={props.stackedDateLabel}
-                    storeId={props.storeId}
-                    selectedDateTo={props.selectedDateTo}
-                    selectedDateFrom={props.selectedDateFrom}
-                    countryId={props.countryId}
+                      
+                    newlinio={props.newlinioSalesMonthly}
+                    newVtex={props.newVtexSalesMonthly}
+                    newRipley={props.newRipleySalesMonthly}
+                    newChambas={props.newChambasSalesMonthly}
+                    newMagento={props.newMagentoSalesMonthly}
+                    newWooCommerce={props.newWooCommerceSalesMonthly}
+                    newShopify={props.newShopifySalesMonthly}
+                    newMercado={props.newMercadoSalesMonthly}
+                    newParis={props.newParisSales}
+                    newExito={props.newExitoSalesMonthly}
+                    newLista={props.newListaSales}
+                    //Card data
+                     ripley={props.ripleyPie}
+                    vtex={props.vtexPie}
+                    linio={props.linioPie}
+                    mercadoLibre={props.mercadoPie}
+                    exito={props.exitoPie}
+                    paris={props.parisPie}
+                    shopify={props.shopifyPie}
+                    wooCommerce={props.wooPie}
+                    magento={props.magentoPie}
+                    chambas={props.chambasPie}
+                    listaTienda={props.listaPie}
                     // newRipley={props.newRipleySalesMonthly}
                     // newVtex={props.newVtexSalesMonthly}
                     // newlinio={props.newlinioSalesMonthly}

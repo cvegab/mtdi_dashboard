@@ -315,7 +315,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newRipleySalesMonthly,
+          data: props.newRipleySalesMonthly,
           barThickness: 30,
         },
         {
@@ -324,7 +324,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newChambasSalesMonthly,
+          data: props.newChambasSalesMonthly,
           barThickness: 30,
         },
         {
@@ -333,7 +333,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newlinioSalesMonthly,
+          data: props.newlinioSalesMonthly,
           barThickness: 30,
         },
         {
@@ -342,7 +342,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           borderRadius: 6,
           stack: "2",
-          data: newMagentoSalesMonthly,
+          data: props.newMagentoSalesMonthly,
           barThickness: 30,
         },
         {
@@ -351,7 +351,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newListaSales,
+          data: props.newListaSales,
           barThickness: 30,
         },
         {
@@ -361,7 +361,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: 6,
           barThickness: 30,
           stack: "2",
-          data: newWooCommerceSalesMonthly,
+          data: props.newWooCommerceSalesMonthly,
         },
         {
           label: "Paris",
@@ -370,7 +370,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: 6,
           barThickness: 30,
           stack: "2",
-          data: newParisSales,
+          data: props.newParisSales,
           barThickness: 30,
         },
         {
@@ -379,7 +379,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newShopifySalesMonthly,
+          data: props.newShopifySalesMonthly,
           barThickness: 30,
         },
         {
@@ -388,7 +388,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newVtexSalesMonthly,
+          data: props.newVtexSalesMonthly,
           barThickness: 30,
         },
         {
@@ -397,7 +397,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: "20px",
           stack: "2",
           borderRadius: 6,
-          data: newMercadoSalesMonthly,
+          data: props.newMercadoSalesMonthly,
           barThickness: 30,
         },
         {
@@ -407,7 +407,7 @@ const StackedSalesGraph = (props) => {
           borderRadius: 6,
           barThickness: 30,
           stack: "2",
-          data: newExitoSalesMonthly,
+          data: props.newExitoSalesMonthly,
           barThickness: 30,
         },
       ],

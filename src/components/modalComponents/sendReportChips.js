@@ -826,12 +826,20 @@ console.log(this.props.getBaseValue);
                 mixedChartData={this.props.mixedChartData}
                 channel={this.props.channel}
                 linioPie = {this.props.linioPie} vtexPie={this.props.vtexPie} shopifyPie={this.props.shopifyPie} ripleyPie={this.props.ripleyPie} magentoPie={this.props.magentoPie} wooPie={this.props.wooPie}  chambasPie={this.props.chambasPie} mercadoPie={this.props.mercadoPie} exitoPie={this.props.exitoPie} parisPie={this.props.parisPie} listaPie={this.props.listaPie}
-                channelId={this.props.channelId}
+                //STACKED SALES CHART
                 stackedDateLabel={this.props.stackedDateLabel}
-                storeId={this.props.storeId}
-                selectedDateTo={this.props.selectedDateTo}
-                selectedDateFrom={this.props.selectedDateFrom}
-                countryId={this.props.countryId}
+                      
+               newlinioSalesMonthly={this.props.newlinioSalesMonthly}
+               newVtexSalesMonthly={this.props.newVtexSalesMonthly}
+               newRipleySalesMonthly={this.props.newRipleySalesMonthly}
+               newChambasSalesMonthly={this.props.newChambasSalesMonthly}
+               newMagentoSalesMonthly={this.props.newMagentoSalesMonthly}
+               newWooCommerceSalesMonthly={this.props.newWooCommerceSalesMonthly}
+               newShopifySalesMonthly={this.props.newShopifySalesMonthly}
+               newMercadoSalesMonthly={this.props.newMercadoSalesMonthly}
+               newParisSales={this.props.newParisSales}
+               newExitoSalesMonthly={this.props.newExitoSalesMonthly}
+               newListaSales={this.props.newListaSales}
               //   pieChartData={this.props.pieChartData}
               //   pieChartOptions={this.props.pieChartData.options}  
               //   barChartData={this.props.barChartData}

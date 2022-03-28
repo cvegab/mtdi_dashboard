@@ -226,8 +226,8 @@ function MtdiReports() {
 //FETCH STACKED GRAPH FOR SALES GRAPH
 const fetchStackedGraphForSales = () => {
   setisStackedGraphLoading(true);
-  console.log(props.cR);
-  let newChannelList = props.cR.map((item) => {
+ 
+  let newChannelList = cR.map((item) => {
     return item.channel;
   });
   console.log(newChannelList);
@@ -244,7 +244,7 @@ const fetchStackedGraphForSales = () => {
     redirect: "follow",
   };
 
-  let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${props.channelId}&store=${props.storeId}&dateFrom=${props.selectedDateFrom}&dateTo=${props.selectedDateTo}&country=${props.countryId}`;
+  let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
   console.log(url);
 
   fetch(url, requestOptions)
@@ -1030,12 +1030,22 @@ const fetchStackedGraphForSales = () => {
                 channel={cR}
                 linioPie = {linioPie} vtexPie={vtexPie} shopifyPie={shopifyPie} ripleyPie={ripleyPie} magentoPie={magentoPie} wooPie={wooPie}  chambasPie={chambasPie} mercadoPie={mercadoPie} exitoPie={exitoPie} parisPie={parisPie} listaPie={listaPie}
                 //Sales graph
-                channelId={channelId}
+                
                         stackedDateLabel={stackedDateLabel}
-                        storeId={storeId}
-                        selectedDateTo={selectedDateTo}
-                        selectedDateFrom={selectedDateFrom}
-                        countryId={countryId}
+                      
+                        newlinioSalesMonthly={newlinioSalesMonthly}
+                        newVtexSalesMonthly={newVtexSalesMonthly}
+                        newRipleySalesMonthly={newRipleySalesMonthly}
+                        newChambasSalesMonthly={newChambasSalesMonthly}
+                        newMagentoSalesMonthly={newMagentoSalesMonthly}
+                        newWooCommerceSalesMonthly={newWooCommerceSalesMonthly}
+                        newShopifySalesMonthly={newShopifySalesMonthly}
+                        newMercadoSalesMonthly={newMercadoSalesMonthly}
+                        newParisSales={newParisSales}
+                        newExitoSalesMonthly={newExitoSalesMonthly}
+                        newListaSales={newListaSales}
+  
+                        
                 >
                 </SendReport>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
