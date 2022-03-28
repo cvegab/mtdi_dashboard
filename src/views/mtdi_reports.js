@@ -1196,6 +1196,7 @@ function MtdiReports() {
            
           </div>
         {/* <DownloadReports  printReport={printReport}></DownloadReports> */}
+        <div class="text-center" style={{ marginTop: "3em" }}>
         <button 
                  id="bttnSubmit"
                   //className="bttnCompartirReporte" 
@@ -1221,6 +1222,7 @@ function MtdiReports() {
                 </span>
                     &nbsp;Compartir Reporte &nbsp;               
               </button>
+              </div>
         </div>
       )}
     </>
