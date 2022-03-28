@@ -3,8 +3,26 @@ import Chips from "./chips";
 import { Form, FormGroup, Label } from "reactstrap";
 import SendReportChips from "./sendReportChips";
 const SendReport = (props) => {
+  console.log(props);
   return (
     <Modal onhideModal={props.onhideModal}>
+     
+      <SendReportChips>
+      totalIncome={props.totalIncome}
+                dispatchCost={props.dispatchCost}
+                gm={props.gm}
+                conversion={props.conversion}
+                totalOrders={props.totalOrders}
+                totalCancelledOrders={props.totalCancelledOrders}
+                totalDte={props.totalDte}
+                inProcess={props.inProcess}
+                inPreparation={props.inPreparation}
+                readyToShip={props.readyToShip}
+                onTheWay={props.onTheWay}
+                reviews={props.reviews}
+                totalNps={props.totalNps}
+                totalClaims={props.totalClaims}
+      </SendReportChips>
       {/* <SendReportChips
         totalIncomeformatted={props.totalIncomeformatted}
         dispatchCost={props.dispatchCost}

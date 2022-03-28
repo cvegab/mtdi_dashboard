@@ -23,6 +23,7 @@ import iconInstance from "../../assets/img/icons/Reports/icon1.png";
 import "./PDFReport.css";
 
 const PDFReport = (props) => {
+  console.log(props);
   const pdfExportComponent = React.useRef(null);
   const container = React.useRef(null);
   const exportPDFWithMethod = () => {
@@ -101,12 +102,12 @@ const PDFReport = (props) => {
                   <p className="titleReports">
                     <img src={iconInstance} width="60" /> Reporte General
                   </p>
-                  <ChartMixed
+                  {/* <ChartMixed
                     title="Resumen general de ordenes y ventas"
-                    data={props.barChartData}
-                    options={props.barChartOptions}
-                  />
-
+                    // data={props.barChartData}
+                    // options={props.barChartOptions}
+                  /> */}
+ 
                   <CardReports
                     title="Procesamiento de pedidos"
                     subtitle1="Pedidos"
@@ -118,7 +119,7 @@ const PDFReport = (props) => {
                     // subtitle4="Entregados"
                     // value4="0"
                   />
-
+ 
                   <CardReports
                     title="Experiencia del cliente"
                     subtitle1="NPS"
@@ -134,7 +135,7 @@ const PDFReport = (props) => {
 
                 <td>
                   {(() => {
-                    let number = props.totalIncomeformatted;
+                    let number = props.totalIncome;
                     let totalIncomeTemporal = new Intl.NumberFormat("es-CL", {
                       style: "currency",
                       currency: "CLP",
@@ -179,7 +180,7 @@ const PDFReport = (props) => {
                     value4={props.onTheWay}
                   />
 
-                  <ChartPie
+                  {/* <ChartPie
                     title="Participacion canal de venta"
                     data={props.pieChartData}
                     options={props.pieChartData.options}
@@ -194,13 +195,13 @@ const PDFReport = (props) => {
                     magento={props.magento}
                     chambas={props.chambas}
                     listaTienda={props.listaTienda}
-                  />
+                  /> */}
                 </td>
               </tr>
 
               <tr>
                 <td>
-                  <ChartBar
+                  {/* <ChartBar
                   text='órdenes'
                     title="Ordenes por canal de venta"
                     data={props.SalesChart}
@@ -228,11 +229,11 @@ const PDFReport = (props) => {
                   magento={props.magentoOrders}
                   chambas={props.chambasOrders}
                   listaTienda={props.listaTiendaOrders}
-                  />
+                  /> */}
                 </td>
 
                 <td>
-                  <ChartBar
+                  {/* <ChartBar
                     data={props.SalesChart}
                     options={props.SalesChartOptions}
                     title="Ingresos por canal de venta"
@@ -259,7 +260,7 @@ const PDFReport = (props) => {
                     chambas={props.chambas}
                     listaTienda={props.listaTienda}
                     stackedDateLabel={props.stackedDateLabel}
-                  />
+                  /> */}
                 </td>
               </tr>
             </table>
