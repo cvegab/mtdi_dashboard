@@ -127,13 +127,13 @@ const ChartPie = (props) => {
                       </CardTitle>
                     </CardHeader>
                     <CardBody>
-                      {/* <Pie
+                      <Pie
                          id="barChartCustom"
                         data={PIE}
                         options={PIE.options}
                         style={{ height: "200px"}}
-                      /> */}
-                       <PieChart  id="barChartCustom" linioPie = {props.linioPie} vtexPie={props.vtexPie} shopifyPie={props.shopifyPie} ripleyPie={props.ripleyPie} magentoPie={props.magentoPie} wooPie={props.wooPie}  chambasPie={props.chambasPie} mercadoPie={props.mercadoPie} exitoPie={props.exitoPie} parisPie={props.parisPie} listaPie={props.listaPie}></PieChart>
+                      />
+                       {/* <PieChart linioPie = {props.linioPie} vtexPie={props.vtexPie} shopifyPie={props.shopifyPie} ripleyPie={props.ripleyPie} magentoPie={props.magentoPie} wooPie={props.wooPie}  chambasPie={props.chambasPie} mercadoPie={props.mercadoPie} exitoPie={props.exitoPie} parisPie={props.parisPie} listaPie={props.listaPie}></PieChart> */}
                     </CardBody>
                     <CardFooter>
                     <div className="infoLegendPieChart">
@@ -149,7 +149,7 @@ const ChartPie = (props) => {
             />
             &nbsp;Vtex
             {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number =vtex;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -177,7 +177,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;Linio
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number =linio;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -205,7 +205,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;Mercadolibre
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number =mercadoLibre;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -233,7 +233,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;Exito
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = exito;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -261,7 +261,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;Ripley
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = ripley;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -290,7 +290,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;Shopify
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = shopify;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -319,7 +319,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp; Paris
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = paris;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -378,7 +378,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;WooCommerce
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = wooCommerce;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -407,7 +407,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;Chambas
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = chambas;
                 let formatted = new Intl.NumberFormat("es-CL", {
@@ -436,7 +436,7 @@ const ChartPie = (props) => {
               }}
             />
             &nbsp;ListaTienda
-            <p className="card-category">
+            <p className="numberTextLegendReport">
               {(() => {
                 let number = listTienda;
                 let formatted = new Intl.NumberFormat("es-CL", {
