@@ -8,7 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
 const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
-
+import iconShareReport from "../assets/img/iconEnviarReporte.png";
+import iconNextReport from "../assets/img/iconArrowNext.png";
 // reactstrap components
 import {
   Card,
