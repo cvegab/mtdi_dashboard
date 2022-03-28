@@ -71,6 +71,16 @@ const SendReport = (props) => {
         chambas={props.chambas}
         listaTienda={props.listaTienda}
         stackedDateLabel={props.stackedDateLabel}
+        ripleyOrders={props.ripleyOrders}
+              vtexOrders={props.vtexOrders}
+            linioOrders={props.linioOrders}
+            mercadoLibreOrders={props.mercadoLibreOrders}
+            exitoOrders={props.exitoOrders}
+            parisOrders={props.parisOrders}
+            shopifyOrders={props.shopifyOrders}
+            magentoOrders={props.magentoOrders}
+            chambasOrders={props.chambasOrders}
+            listaTiendaOrders={props.listaTiendaOrders}
       ></SendReportChips>
     </Modal>
   );
