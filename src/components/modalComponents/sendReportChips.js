@@ -861,6 +861,16 @@ console.log(this.props.getBaseValue);
                 magento={this.props.magento}
                 chambas={this.props.chambas}
                 listaTienda={this.props.listaTienda}
+                ripleyOrders={this.props.ripleyOrders}
+                vtexOrders={this.props.vtexOrders}
+              linioOrders={this.props.linioOrders}
+              mercadoLibreOrders={this.props.mercadoLibreOrders}
+              exitoOrders={this.props.exitoOrders}
+              parisOrders={this.props.parisOrders}
+              shopifyOrders={this.props.shopifyOrders}
+              magentoOrders={this.props.magentoOrders}
+              chambasOrders={this.props.chambasOrders}
+              listaTiendaOrders={this.props.listaTiendaOrders}
               />
           </div>
         </React.Fragment>
