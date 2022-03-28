@@ -811,7 +811,20 @@ function MtdiReports() {
   return (
     <>
    
-    {showModal && <SendReport></SendReport>}
+    {showModal && <SendReport  onhideModal={hideModalHandler}  totalIncome={totalIncome}
+                dispatchCost={dispatchCost}
+                gm={gm}
+                conversion={conversion}
+                totalOrders={totalOrders}
+                totalCancelledOrders={totalCancelledOrders}
+                totalDte={totalDte}
+                inProcess={inProcess}
+                inPreparation={inPreparation}
+                readyToShip={readyToShip}
+                onTheWay={onTheWay}
+                reviews={reviews}
+                totalNps={totalNps}
+                totalClaims={totalClaims}></SendReport>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (
