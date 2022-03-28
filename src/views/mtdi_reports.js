@@ -78,7 +78,7 @@ function MtdiReports() {
   }; 
   const [newData, setnewData] = useState([]);
   const [newStackedData, setnewStackedData] = useState([]);
-  
+  const [showModal, setshowModal] = useState(false);
   //PIE CHART STATES
   const [linioPie, setlinioPie] = useState(0);
   const [vtexPie, setvtexPie] = useState(0);
@@ -801,10 +801,16 @@ function MtdiReports() {
   };
   const showModalHandler = (row) => {
     setshowModal(true);
-    setModal(false);
+   // setModal(false);
+  };
+  const hideModalHandler = (row) => {
+    setshowModal(false);
+    //setModal(false);
   };
   return (
     <>
+   
+    {showModal && <SendReport></SendReport>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (
