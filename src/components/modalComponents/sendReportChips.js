@@ -809,7 +809,7 @@ console.log(this.props.getBaseValue);
 
           <div class="text-center">
             <PDFReport 
-                // totalIncomeformatted={this.props.totalIncomeformatted}
+                totalIncome={this.props.totalIncome}
                 dispatchCost={this.props.dispatchCost}
                 gm={this.props.gm}
                 inProcess={this.props.inProcess}

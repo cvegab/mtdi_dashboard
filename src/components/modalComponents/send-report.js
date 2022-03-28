@@ -7,7 +7,7 @@ const SendReport = (props) => {
   return (
     <Modal onhideModal={props.onhideModal}>
      
-      <SendReportChips>
+      <SendReportChips
       totalIncome={props.totalIncome}
                 dispatchCost={props.dispatchCost}
                 gm={props.gm}
@@ -21,7 +21,7 @@ const SendReport = (props) => {
                 onTheWay={props.onTheWay}
                 reviews={props.reviews}
                 totalNps={props.totalNps}
-                totalClaims={props.totalClaims}
+                totalClaims={props.totalClaims}>
       </SendReportChips>
       {/* <SendReportChips
         totalIncomeformatted={props.totalIncomeformatted}
