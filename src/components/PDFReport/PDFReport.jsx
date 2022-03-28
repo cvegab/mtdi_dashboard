@@ -246,34 +246,41 @@ const PDFReport = (props) => {
                 </td>
 
                 <td>
-                  {/* <ChartBar
+                  <ChartBar
+                   channel={props.channel}
                     data={props.SalesChart}
                     options={props.SalesChartOptions}
                     title="Ingresos por canal de venta"
-                    newRipley={props.newRipleySalesMonthly}
-                    newVtex={props.newVtexSalesMonthly}
-                    newlinio={props.newlinioSalesMonthly}
-                    newMercado={props.newMercadoSalesMonthly}
-                    newExito={props.newExitoSalesMonthly}
-                    newParis={props.newParisSales}
-                    newShopify={props.newShopifySalesMonthly}
-                    newWooCommerc={props.newWooCommerceSalesMonthly}
-                    newMagento={props.newMagentoSalesMonthly}
-                    newChambas={props.newChambasSalesMonthly}
-                    newLista={props.newListaSales}
-                    ripley={props.ripley}
-                    vtex={props.vtex}
-                    linio={props.linio}
-                    mercadoLibre={props.mercadoLibre}
-                    exito={props.exito}
-                    paris={props.paris}
-                    shopify={props.shopify}
-                    wooCommerce={props.wooCommerce}
-                    magento={props.magento}
-                    chambas={props.chambas}
-                    listaTienda={props.listaTienda}
+                    channelId={props.channelId}
                     stackedDateLabel={props.stackedDateLabel}
-                  /> */}
+                    storeId={props.storeId}
+                    selectedDateTo={props.selectedDateTo}
+                    selectedDateFrom={props.selectedDateFrom}
+                    countryId={props.countryId}
+                    // newRipley={props.newRipleySalesMonthly}
+                    // newVtex={props.newVtexSalesMonthly}
+                    // newlinio={props.newlinioSalesMonthly}
+                    // newMercado={props.newMercadoSalesMonthly}
+                    // newExito={props.newExitoSalesMonthly}
+                    // newParis={props.newParisSales}
+                    // newShopify={props.newShopifySalesMonthly}
+                    // newWooCommerc={props.newWooCommerceSalesMonthly}
+                    // newMagento={props.newMagentoSalesMonthly}
+                    // newChambas={props.newChambasSalesMonthly}
+                    // newLista={props.newListaSales}
+                    // ripley={props.ripley}
+                    // vtex={props.vtex}
+                    // linio={props.linio}
+                    // mercadoLibre={props.mercadoLibre}
+                    // exito={props.exito}
+                    // paris={props.paris}
+                    // shopify={props.shopify}
+                    // wooCommerce={props.wooCommerce}
+                    // magento={props.magento}
+                    // chambas={props.chambas}
+                    // listaTienda={props.listaTienda}
+                    // stackedDateLabel={props.stackedDateLabel}
+                  />
                 </td>
               </tr>
             </table>

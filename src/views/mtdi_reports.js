@@ -151,7 +151,33 @@ function MtdiReports() {
   const [chambasOrders, setchambasOrders] = useState(0);
   const [listaTiendaOrders, setlistaTiendaOrders] = useState(0);
   //MONTHLY SALES STATES
-  
+  //SALES GRAPH STATES
+  const [newlinioMonthly, setnewlinioMonthly] = useState([]);
+  const [newlinioSalesMonthly, setnewlinioSalesMonthly] = useState([]);
+  const [newVtexMonthly, setnewVtexMonthly] = useState([]);
+  const [newVtexSalesMonthly, setnewVtexSalesMonthly] = useState([]);
+  const [newRipleyMonthly, setnewRipleyMonthly] = useState([]);
+  const [newRipleySalesMonthly, setnewRipleySalesMonthly] = useState([]);
+  const [newChambasMonthly, setnewChambasMonthly] = useState([]);
+  const [newChambasSalesMonthly, setnewChambasSalesMonthly] = useState([]);
+  const [newMagentoMonthly, setnewMagentoMonthly] = useState([]);
+  const [newMagentoSalesMonthly, setnewMagentoSalesMonthly] = useState([]);
+  const [newWooCommerceMonthly, setnewWooCommerceMonthly] = useState([]);
+  const [newWooCommerceSalesMonthly, setnewWooCommerceSalesMonthly] = useState(
+    []
+  );
+  const [newShopifyMonthly, setnewShopifyMonthly] = useState([]);
+  const [newShopifySalesMonthly, setnewShopifySalesMonthly] = useState([]);
+  const [newMercadoOrdersMonthly, setnewMercadoOrdersMonthly] = useState([]);
+  const [newMercadoSalesMonthly, setnewMercadoSalesMonthly] = useState([]);
+  const [newParisOrders, setnewParisOrders] = useState([]);
+  const [newParisSales, setnewParisSales] = useState([]);
+  const [newExtitoOrders, setnewExtitoOrders] = useState([]);
+  const [newListaOrders, setnewListaOrders] = useState([]);
+  const [newExitoSalesMonthly, setnewExitoSalesMonthly] = useState([]);
+  const [newListaSales, setnewListaSales] = useState([]);
+  const [stackedSalesGraph, setstackedSalesGraph] = useState({});
+  const [isStackedGraphLoading, setisStackedGraphLoading] = useState(false);
   useEffect(() => {
     // set initial value
     const mediaWatcher = window.matchMedia("(max-width: 767px)");
@@ -174,9 +200,11 @@ function MtdiReports() {
     fetchFilterData();
     getDateLabels();
     fetchResumenGraphDetails();
+    fetchStackedGraphForSales();
   }, []);
   useEffect(() => {
     fetchResumenGraphDetails();
+    fetchStackedGraphForSales();
   }, [channelId]);
 
   useEffect(() => {
@@ -195,7 +223,178 @@ function MtdiReports() {
       setcR(null);
     };
   }, []);
+//FETCH STACKED GRAPH FOR SALES GRAPH
+const fetchStackedGraphForSales = () => {
+  setisStackedGraphLoading(true);
+  console.log(props.cR);
+  let newChannelList = props.cR.map((item) => {
+    return item.channel;
+  });
+  console.log(newChannelList);
+  var myHeaders = new Headers();
+  myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+  myHeaders.append(
+    "Authorization",
+    "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+  );
 
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${props.channelId}&store=${props.storeId}&dateFrom=${props.selectedDateFrom}&dateTo=${props.selectedDateTo}&country=${props.countryId}`;
+  console.log(url);
+
+  fetch(url, requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      var obj = JSON.parse(result);
+      console.log(newChannelList);
+      if (newChannelList.length === 0) {
+        newChannelList = [
+          "Vtex",
+          "Linio",
+          "MercadoLibre",
+          "Exito",
+          "Ripley",
+          "Shopify",
+          "Paris",
+          "Magento",
+          "Woocommerce",
+          "Chambas",
+          "ListaTienda",
+        ];
+      }
+
+      // NEW LOGIC
+      let linio = [];
+      if (newChannelList.includes("Linio")) {
+        linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Linio;
+        });
+        console.log(linio[0].Linio);
+        setnewlinioSalesMonthly(linio[0].Linio);
+      }
+      if (!newChannelList.includes("Linio")) {
+        setnewlinioSalesMonthly(0);
+      }
+
+      let Vtex = [];
+      if (newChannelList.includes("Vtex")) {
+        Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Vtex;
+        });
+
+        setnewVtexSalesMonthly(Vtex[0].Vtex);
+      }
+      if (!newChannelList.includes("Vtex")) {
+        setnewVtexSalesMonthly(0);
+      }
+      let ripley = [];
+      if (newChannelList.includes("Ripley")) {
+        ripley = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Ripley;
+        });
+
+        setnewRipleySalesMonthly(ripley[0].Ripley);
+      }
+      if (!newChannelList.includes("Ripley")) {
+        setnewRipleySalesMonthly(0);
+      }
+      let chambas = [];
+      if (newChannelList.includes("Chambas")) {
+        chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Chambas;
+        });
+        console.log(chambas[0].Chambas);
+        setnewChambasSalesMonthly(chambas[0].Chambas);
+      }
+      if (!newChannelList.includes("Chambas")) {
+        setnewChambasSalesMonthly(0);
+      }
+      let magento = [];
+      if (newChannelList.includes("Magento")) {
+        magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Magento;
+        });
+        console.log(magento[0].Magento);
+        setnewMagentoSalesMonthly(magento[0].Magento);
+      }
+      if (!newChannelList.includes("Magento")) {
+        setnewMagentoSalesMonthly(0);
+      }
+      let woo = [];
+      if (newChannelList.includes("Woocommerce")) {
+        woo = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Woocommerce;
+        });
+
+        setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
+      }
+      if (!newChannelList.includes("Woocommerce")) {
+        setnewWooCommerceSalesMonthly(0);
+      }
+      let shopify = [];
+      if (newChannelList.includes("Shopify")) {
+        shopify = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Shopify;
+        });
+
+        setnewShopifySalesMonthly(shopify[0].Shopify);
+      }
+      if (!newChannelList.includes("Shopify")) {
+        setnewShopifySalesMonthly(0);
+      }
+      let mer = [];
+      if (newChannelList.includes("MercadoLibre")) {
+        mer = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.MercadoLibre;
+        });
+
+        setnewMercadoSalesMonthly(mer[0].MercadoLibre);
+      }
+      if (!newChannelList.includes("MercadoLibre")) {
+        setnewMercadoSalesMonthly(0);
+      }
+      let pari = [];
+      if (newChannelList.includes("Paris")) {
+        pari = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Paris;
+        });
+
+        setnewParisSales(pari[0].Paris);
+      }
+      if (!newChannelList.includes("Paris")) {
+        setnewParisSales(0);
+      }
+      let exi = [];
+      if (newChannelList.includes("Exito")) {
+        exi = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.Exito;
+        });
+
+        setnewExitoSalesMonthly(exi[0].Exito);
+      }
+      if (!newChannelList.includes("Exito")) {
+        setnewExitoSalesMonthly(0);
+      }
+      let lista = [];
+      if (newChannelList.includes("ListaTienda")) {
+        lista = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+          return item.ListaTienda;
+        });
+
+        setnewListaSales(lista[0].ListaTienda);
+      }
+      if (!newChannelList.includes("ListaTienda")) {
+        setnewListaSales(0);
+      }
+      setisStackedGraphLoading(false);
+    })
+    .catch((error) => console.log("error", error));
+};
   const getDateLabels = () => {
     var startDate = moment(selectedDateFrom);
     var endDate = moment(selectedDateTo);
@@ -829,7 +1028,15 @@ function MtdiReports() {
                 mixedChartData={mixedChartData}
                 //PIE CHART DATA
                 channel={cR}
-                linioPie = {linioPie} vtexPie={vtexPie} shopifyPie={shopifyPie} ripleyPie={ripleyPie} magentoPie={magentoPie} wooPie={wooPie}  chambasPie={chambasPie} mercadoPie={mercadoPie} exitoPie={exitoPie} parisPie={parisPie} listaPie={listaPie}>
+                linioPie = {linioPie} vtexPie={vtexPie} shopifyPie={shopifyPie} ripleyPie={ripleyPie} magentoPie={magentoPie} wooPie={wooPie}  chambasPie={chambasPie} mercadoPie={mercadoPie} exitoPie={exitoPie} parisPie={parisPie} listaPie={listaPie}
+                //Sales graph
+                channelId={channelId}
+                        stackedDateLabel={stackedDateLabel}
+                        storeId={storeId}
+                        selectedDateTo={selectedDateTo}
+                        selectedDateFrom={selectedDateFrom}
+                        countryId={countryId}
+                >
                 </SendReport>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
@@ -1201,6 +1408,18 @@ function MtdiReports() {
                           selectedDateTo={selectedDateTo}
                           selectedDateFrom={selectedDateFrom}
                           countryId={countryId}
+                          newlinioSalesMonthly= {newlinioSalesMonthly}
+                          newVtexSalesMonthly= {newVtexSalesMonthly}
+                          newRipleySalesMonthly={newRipleySalesMonthly}
+                          newChambasSalesMonthly={newChambasSalesMonthly} 
+                          newMagentoSalesMonthly= {newMagentoSalesMonthly}
+                          newWooCommerceSalesMonthly  ={newWooCommerceSalesMonthly}
+                          newShopifySalesMonthly= {newShopifySalesMonthly}
+                          newMercadoSalesMonthly={newMercadoSalesMonthly}
+                          newParisSales={newParisSales} 
+                         newExitoSalesMonthly={newExitoSalesMonthly}
+                         newListaSales={ newListaSales}
+                         setisStackedGraphLoading={setisStackedGraphLoading}
                         ></StackedSalesGraph>
                         <CardFooter>
                           <StackedGraphSalesCard

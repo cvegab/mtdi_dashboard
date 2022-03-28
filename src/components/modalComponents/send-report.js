@@ -27,6 +27,12 @@ const SendReport = (props) => {
                 //PIE CHART DATA
                 channel={props.channel}
                 linioPie = {props.linioPie} vtexPie={props.vtexPie} shopifyPie={props.shopifyPie} ripleyPie={props.ripleyPie} magentoPie={props.magentoPie} wooPie={props.wooPie}  chambasPie={props.chambasPie} mercadoPie={props.mercadoPie} exitoPie={props.exitoPie} parisPie={props.parisPie} listaPie={props.listaPie}
+                channelId={props.channelId}
+                        stackedDateLabel={props.stackedDateLabel}
+                        storeId={props.storeId}
+                        selectedDateTo={props.selectedDateTo}
+                        selectedDateFrom={props.selectedDateFrom}
+                        countryId={props.countryId}
                 >
       </SendReportChips>
       {/* <SendReportChips
