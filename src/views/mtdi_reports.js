@@ -799,6 +799,10 @@ function MtdiReports() {
   const reloadReportsHandler = () => {
     location.reload();
   };
+  const showModalHandler = (row) => {
+    setshowModal(true);
+    setModal(false);
+  };
   return (
     <>
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
@@ -1215,7 +1219,7 @@ function MtdiReports() {
                   fontSize: "11px"
                 }}
                 //  onClick={toggle}
-                 //onClick={showModalHandler}
+                 onClick={showModalHandler}
               > 
                 <span className="btn-label">
                   <img src={iconShareReport} width="19px"/>
