@@ -822,7 +822,10 @@ console.log(this.props.getBaseValue);
                 totalNps={this.props.totalNps}
                 reviews={this.props.reviews}
                 totalClaims={this.props.totalClaims}
+                //MIXED CHART DATA
                 mixedChartData={this.props.mixedChartData}
+                channel={this.props.channel}
+                linioPie = {this.props.linioPie} vtexPie={this.props.vtexPie} shopifyPie={this.props.shopifyPie} ripleyPie={this.props.ripleyPie} magentoPie={this.props.magentoPie} wooPie={this.props.wooPie}  chambasPie={this.props.chambasPie} mercadoPie={this.props.mercadoPie} exitoPie={this.props.exitoPie} parisPie={this.props.parisPie} listaPie={this.props.listaPie}
               //   pieChartData={this.props.pieChartData}
               //   pieChartOptions={this.props.pieChartData.options}  
               //   barChartData={this.props.barChartData}

@@ -825,7 +825,12 @@ function MtdiReports() {
                 reviews={reviews}
                 totalNps={totalNps}
                 totalClaims={totalClaims}
-                mixedChartData={mixedChartData}></SendReport>}
+                //mixed chart data
+                mixedChartData={mixedChartData}
+                //PIE CHART DATA
+                channel={cR}
+                linioPie = {linioPie} vtexPie={vtexPie} shopifyPie={shopifyPie} ripleyPie={ripleyPie} magentoPie={magentoPie} wooPie={wooPie}  chambasPie={chambasPie} mercadoPie={mercadoPie} exitoPie={exitoPie} parisPie={parisPie} listaPie={listaPie}>
+                </SendReport>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (

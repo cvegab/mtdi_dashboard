@@ -22,7 +22,12 @@ const SendReport = (props) => {
                 reviews={props.reviews}
                 totalNps={props.totalNps}
                 totalClaims={props.totalClaims}
-                mixedChartData={props.mixedChartData}>
+                //MIXED CHART DATA
+                mixedChartData={props.mixedChartData}
+                //PIE CHART DATA
+                channel={props.channel}
+                linioPie = {props.linioPie} vtexPie={props.vtexPie} shopifyPie={props.shopifyPie} ripleyPie={props.ripleyPie} magentoPie={props.magentoPie} wooPie={props.wooPie}  chambasPie={props.chambasPie} mercadoPie={props.mercadoPie} exitoPie={props.exitoPie} parisPie={props.parisPie} listaPie={props.listaPie}
+                >
       </SendReportChips>
       {/* <SendReportChips
         totalIncomeformatted={props.totalIncomeformatted}

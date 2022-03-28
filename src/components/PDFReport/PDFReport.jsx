@@ -108,7 +108,7 @@ const PDFReport = (props) => {
                     // options={props.barChartOptions}
                     mixedChartData={props.mixedChartData}
                   />
- 
+
                   <CardReports
                     title="Procesamiento de pedidos"
                     subtitle1="Pedidos"
@@ -120,7 +120,7 @@ const PDFReport = (props) => {
                     // subtitle4="Entregados"
                     // value4="0"
                   />
- 
+
                   <CardReports
                     title="Experiencia del cliente"
                     subtitle1="NPS"
@@ -181,22 +181,34 @@ const PDFReport = (props) => {
                     value4={props.onTheWay}
                   />
 
-                  {/* <ChartPie
+                  <ChartPie
                     title="Participacion canal de venta"
-                    data={props.pieChartData}
-                    options={props.pieChartData.options}
-                    ripley={props.ripley}
-                    vtex={props.vtex}
-                    linio={props.linio}
-                    mercadoLibre={props.mercadoLibre}
-                    exito={props.exito}
-                    paris={props.paris}
-                    shopify={props.shopify}
-                    wooCommerce={props.wooCommerce}
-                    magento={props.magento}
-                    chambas={props.chambas}
-                    listaTienda={props.listaTienda}
-                  /> */}
+                    channel={props.channel}
+                    linioPie={props.linioPie}
+                    vtexPie={props.vtexPie}
+                    shopifyPie={props.shopifyPie}
+                    ripleyPie={props.ripleyPie}
+                    magentoPie={props.magentoPie}
+                    wooPie={props.wooPie}
+                    chambasPie={props.chambasPie}
+                    mercadoPie={props.mercadoPie}
+                    exitoPie={props.exitoPie}
+                    parisPie={props.parisPie}
+                    listaPie={props.listaPie}
+                    // data={props.pieChartData}
+                    // options={props.pieChartData.options}
+                    // ripley={props.ripley}
+                    // vtex={props.vtex}
+                    // linio={props.linio}
+                    // mercadoLibre={props.mercadoLibre}
+                    // exito={props.exito}
+                    // paris={props.paris}
+                    // shopify={props.shopify}
+                    // wooCommerce={props.wooCommerce}
+                    // magento={props.magento}
+                    // chambas={props.chambas}
+                    // listaTienda={props.listaTienda}
+                  />
                 </td>
               </tr>
 
