@@ -222,7 +222,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Ripley
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                              {ripley} 
+                              {ripley} {props.text}
                               </p>
                             </p>
                           </div>
@@ -238,7 +238,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;ListaTienda
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                               {listaTienda}
+                               {listaTienda} {props.text}
                               </p>
                             </p>
                           </div>
@@ -254,7 +254,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Magento
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                             {magento}
+                             {magento} {props.text}
                               </p>
                             </p>
                           </div>
@@ -271,7 +271,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Shopify
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                             {shopify}
+                             {shopify} {props.text}
                               </p>
                             </p>
                           </div>
@@ -287,7 +287,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Mercadolibre
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                              {mercadoLibre}
+                              {mercadoLibre} {props.text}
                               </p>
                             </p>
                           </div>
@@ -304,7 +304,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Chambas
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                             {chambas}
+                             {chambas} {props.text}
                               </p>
                             </p>
                           </div>
@@ -321,7 +321,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp; Linio
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                             {linio} </p>
+                             {linio} {props.text} </p>
                             </p>
                           </div>
 
@@ -337,7 +337,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp; Vtex
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                            {vtex}
+                            {vtex} {props.text}
                               </p>
                             </p>
                           </div>
@@ -354,7 +354,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;WooCommerce
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                            {wooCommerce}
+                            {wooCommerce} {props.text}
                               </p>
                             </p>
                           </div>
@@ -371,7 +371,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Paris
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                            {paris}
+                            {paris} {props.text}
                               </p>
                             </p>
                           </div>
@@ -388,7 +388,7 @@ const ChartBar = (props) => {
                               />
                               &nbsp;&nbsp;&nbsp;Exito
                               <p id="ordersGraphText" className="numberTextLegendReport">
-                            {exito}
+                            {exito} {props.text}
                               </p>
                             </p>
                           </div>

@@ -3275,6 +3275,16 @@ console.log(selectedChannelsArray);
               newChambasMonthly={newChambasMonthly}
               newListaOrders={newListaOrders}
               newWooCommerceMonthly={newWooCommerceMonthly}
+              ripleyOrders={ripleyOrders}
+              vtexOrders={vtexOrders}
+            linioOrders={linioOrders}
+            mercadoLibreOrders={mercadoLibreOrders}
+            exitoOrders={exitoOrders}
+            parisOrders={parisOrders}
+            shopifyOrders={shopifyOrders}
+            magentoOrders={magentoOrders}
+            chambasOrders={chambasOrders}
+            listaTiendaOrders={listaTiendaOrders}
                 >
                 </SendReport>}
       {pageFullyLoaded && <SplashScreen></SplashScreen>}
