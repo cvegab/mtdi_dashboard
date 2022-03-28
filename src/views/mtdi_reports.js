@@ -35,6 +35,12 @@ import StackedSalesGraph from "components/GraphComponent/stacked-sales-graph";
 import ReportCards from "components/GraphComponent/report-cards";
 import DownloadReports from "components/GraphComponent/download-reports";
 import ViewCardReports from "components/GraphComponent/view-card-reports";
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
+// import '@progress/kendo-theme-material/dist/all.css';
+// import { Button } from '@progress/kendo-react-buttons';
+// import '@progress/kendo-theme-default/dist/all.css';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 registerLocale("es", es);
 
 
