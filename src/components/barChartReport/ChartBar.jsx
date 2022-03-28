@@ -182,17 +182,17 @@ const ChartBar = (props) => {
     },
   };
   // console.log(props);
-  // let ripley=props.ripley;
-  // let vtex=props.vtex;
-  //  let linio=props.linio;
-  //  let mercadoLibre=props.mercadoLibre;
-  //  let exito=props.exito;
-  //  let paris=props.paris;
-  //  let shopify=props.shopify;
-  //  let wooCommerce=props.wooCommerce;
-  //  let magento=props.magento;
-  //  let chambas=props.chambas;
-  //  let listaTienda=props.listaTienda;
+  let ripley=props.ripley;
+  let vtex=props.vtex;
+   let linio=props.linio;
+   let mercadoLibre=props.mercadoLibre;
+   let exito=props.exito;
+   let paris=props.paris;
+   let shopify=props.shopify;
+   let wooCommerce=props.wooCommerce;
+   let magento=props.magento;
+   let chambas=props.chambas;
+   let listaTienda=props.listaTienda;
   return (
     <div style={{margin:"20px", borderRadius:"30px"}}>      
                   <Card id="cardChartBarReport" className="card-chart">
