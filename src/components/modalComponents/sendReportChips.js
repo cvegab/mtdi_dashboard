@@ -822,6 +822,7 @@ console.log(this.props.getBaseValue);
                 totalNps={this.props.totalNps}
                 reviews={this.props.reviews}
                 totalClaims={this.props.totalClaims}
+                mixedChartData={this.props.mixedChartData}
               //   pieChartData={this.props.pieChartData}
               //   pieChartOptions={this.props.pieChartData.options}  
               //   barChartData={this.props.barChartData}

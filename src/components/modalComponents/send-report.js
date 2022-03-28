@@ -21,7 +21,8 @@ const SendReport = (props) => {
                 onTheWay={props.onTheWay}
                 reviews={props.reviews}
                 totalNps={props.totalNps}
-                totalClaims={props.totalClaims}>
+                totalClaims={props.totalClaims}
+                mixedChartData={props.mixedChartData}>
       </SendReportChips>
       {/* <SendReportChips
         totalIncomeformatted={props.totalIncomeformatted}

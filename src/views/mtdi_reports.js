@@ -824,7 +824,8 @@ function MtdiReports() {
                 onTheWay={onTheWay}
                 reviews={reviews}
                 totalNps={totalNps}
-                totalClaims={totalClaims}></SendReport>}
+                totalClaims={totalClaims}
+                mixedChartData={mixedChartData}></SendReport>}
       {isLoading && <SplashScreen message='Reportes'></SplashScreen>}
 
       {!isLoading && (

@@ -102,11 +102,12 @@ const PDFReport = (props) => {
                   <p className="titleReports">
                     <img src={iconInstance} width="60" /> Reporte General
                   </p>
-                  {/* <ChartMixed
+                  <ChartMixed
                     title="Resumen general de ordenes y ventas"
                     // data={props.barChartData}
                     // options={props.barChartOptions}
-                  /> */}
+                    mixedChartData={props.mixedChartData}
+                  />
  
                   <CardReports
                     title="Procesamiento de pedidos"
