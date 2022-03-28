@@ -39,6 +39,7 @@ import startTour from "../../assets/img/startTour.png";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import SplashScreen from "components/UI/splash-screen";
+import SaveAlt from '@material-ui/icons/SaveAlt';
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -48,7 +49,7 @@ const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
   PreviousPage: forwardRef((props, ref) => (
     <ChevronLeft {...props} ref={ref} />
   )),
@@ -1405,8 +1406,10 @@ const MtdiTable = (props) => {
             {isLoading && (
               <MaterialTable
                 // title=""
+               
                 options={{
                   search: false,
+                  exportButton: true
                 }}
                 title=""
                 icons={tableIcons}
@@ -1464,6 +1467,9 @@ const MtdiTable = (props) => {
             )}
             {data.length === 0 && !isLoading && (
               <MaterialTable
+              options={{
+                exportButton: true
+              }}
                 localization={{
                   body: {
                     emptyDataSourceMessage: (
@@ -1522,6 +1528,7 @@ const MtdiTable = (props) => {
             )}
             {data.length !== 0 && !isLoading && (
               <MaterialTable
+             
                 onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
                 localization={{
                   body: {
@@ -1575,7 +1582,7 @@ const MtdiTable = (props) => {
                 title=""
                 data={data}
                 columns={columns}
-                options={{ columnsButton: true, sorting: true, search: true }}
+                options={{ columnsButton: true, sorting: true, search: true,  exportButton: true }}
                 style={{ marginLeft: "1em", marginTop: "2em" }}
               />
             )}
