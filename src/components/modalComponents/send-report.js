@@ -5,7 +5,7 @@ import SendReportChips from "./sendReportChips";
 const SendReport = (props) => {
   return (
     <Modal onhideModal={props.onhideModal}>
-      <SendReportChips
+      {/* <SendReportChips
         totalIncomeformatted={props.totalIncomeformatted}
         dispatchCost={props.dispatchCost}
         gm={props.gm}
@@ -81,7 +81,7 @@ const SendReport = (props) => {
             magentoOrders={props.magentoOrders}
             chambasOrders={props.chambasOrders}
             listaTiendaOrders={props.listaTiendaOrders}
-      ></SendReportChips>
+      ></SendReportChips> */}
     </Modal>
   );
 };

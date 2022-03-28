@@ -10,6 +10,7 @@ const moment = require("moment");
 import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
 import iconShareReport from "../assets/img/iconEnviarReporte.png";
 import iconNextReport from "../assets/img/iconArrowNext.png";
+import SendReport from "components/modalComponents/send-report";
 // reactstrap components
 import {
   Card,
