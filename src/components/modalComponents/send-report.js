@@ -42,6 +42,18 @@ const SendReport = (props) => {
                newParisSales={props.newParisSales}
                newExitoSalesMonthly={props.newExitoSalesMonthly}
                newListaSales={props.newListaSales}
+               //STACKED ORDER GRAPH
+               newlinioMonthly={props.newlinioMonthly}
+          newVtexMonthly={props.newVtexMonthly}
+          newRipleyMonthly={props.newRipleyMonthly}
+          newChambasMonthly={props.newChambasMonthly}
+          newMagentoMonthly={props.newMagentoMonthly}
+          newWooCommerceMonthly={props.newWooCommerceMonthly}
+          newShopifyMonthly={props.newShopifyMonthly}
+          newMercadoOrdersMonthly={props.newMercadoOrdersMonthly}
+          newParisOrders={props.newParisOrders}
+          newExtitoOrders={props.newExtitoOrders}
+          newListaOrders={props.newListaOrders}
                 >
       </SendReportChips>
       {/* <SendReportChips

@@ -214,35 +214,47 @@ const PDFReport = (props) => {
 
               <tr>
                 <td>
-                  {/* <ChartBar
+                  <ChartBar
                   text='órdenes'
                     title="Ordenes por canal de venta"
-                    data={props.SalesChart}
-                    options={props.SalesChartOptions}
-                   stackedDateLabel={props.stackedDateLabel}
-                    newRipley={props.newRipleyMonthly}
-                    newVtex={props.newVtexMonthly}
+                    stackedDateLabel={props.stackedDateLabel}
                     newlinio={props.newlinioMonthly}
-                    newMercado={props.newMercadoOrdersMonthly}
-                    newExtito={props.newExtitoOrders}
-                    newParis={props.newParisOrders}
-                    newShopify={props.newShopifyMonthly}
+          newVtex={props.newVtexMonthly}
+          newRipley={props.newRipleyMonthly}
+          newChambas={props.newChambasMonthly}
+          newMagento={props.newMagentoMonthly}
+          newWooCommerce={props.newWooCommerceMonthly}
+          newShopify={props.newShopifyMonthly}
+          newMercado={props.newMercadoOrdersMonthly}
+          newParis={props.newParisOrders}
+          newExtito={props.newExtitoOrders}
+          newLista={props.newListaOrders}
+                  //   data={props.SalesChart}
+                  //   options={props.SalesChartOptions}
+                  //  stackedDateLabel={props.stackedDateLabel}
+                  //   newRipley={props.newRipleyMonthly}
+                  //   newVtex={props.newVtexMonthly}
+                  //   newlinio={props.newlinioMonthly}
+                  //   newMercado={props.newMercadoOrdersMonthly}
+                  //   newExtito={props.newExtitoOrders}
+                  //   newParis={props.newParisOrders}
+                  //   newShopify={props.newShopifyMonthly}
                    
-                    newMagento={props.newMagentoMonthly}
-                    newchambas={props.newChambasMonthly}
-                    newLista={props.newListaOrders}
-                    newWooCommerc={props.newWooCommerceMonthly}
-                    ripley={props.ripleyOrders}
-                    vtex={props.vtexOrders}
-                  linio={props.linioOrders}
-                  mercadoLibre={props.mercadoLibreOrders}
-                  exito={props.exitoOrders}
-                  paris={props.parisOrders}
-                  shopify={props.shopifyOrders}
-                  magento={props.magentoOrders}
-                  chambas={props.chambasOrders}
-                  listaTienda={props.listaTiendaOrders}
-                  /> */}
+                  //   newMagento={props.newMagentoMonthly}
+                  //   newchambas={props.newChambasMonthly}
+                  //   newLista={props.newListaOrders}
+                  //   newWooCommerc={props.newWooCommerceMonthly}
+                  //   ripley={props.ripleyOrders}
+                  //   vtex={props.vtexOrders}
+                  // linio={props.linioOrders}
+                  // mercadoLibre={props.mercadoLibreOrders}
+                  // exito={props.exitoOrders}
+                  // paris={props.parisOrders}
+                  // shopify={props.shopifyOrders}
+                  // magento={props.magentoOrders}
+                  // chambas={props.chambasOrders}
+                  // listaTienda={props.listaTiendaOrders}
+                  />
                 </td>
 
                 <td>

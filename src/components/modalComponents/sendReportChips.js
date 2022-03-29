@@ -683,8 +683,17 @@ console.log(this.props.getBaseValue);
         <td>
         <ChartBar 
            title="Ordenes por canal de venta"
-          //  data=""
-          //  options=""
+           newlinioMonthly={this.props.newlinioMonthly}
+           newVtexMonthly={this.props.newVtexMonthly}
+           newRipleyMonthly={this.props.newRipleyMonthly}
+           newChambasMonthly={this.props.newChambasMonthly}
+           newMagentoMonthly={this.props.newMagentoMonthly}
+           newWooCommerceMonthly={this.props.newWooCommerceMonthly}
+           newShopifyMonthly={this.props.newShopifyMonthly}
+           newMercadoOrdersMonthly={this.props.newMercadoOrdersMonthly}
+           newParisOrders={this.props.newParisOrders}
+           newExtitoOrders={this.props.newExtitoOrders}
+           newListaOrders={this.props.newListaOrders}
           />
         </td>
 
@@ -849,6 +858,18 @@ console.log(this.props.getBaseValue);
                newParisSales={this.props.newParisSales}
                newExitoSalesMonthly={this.props.newExitoSalesMonthly}
                newListaSales={this.props.newListaSales}
+               //STACKED ORDER GRAPH
+               newlinioMonthly={this.props.newlinioMonthly}
+               newVtexMonthly={this.props.newVtexMonthly}
+               newRipleyMonthly={this.props.newRipleyMonthly}
+               newChambasMonthly={this.props.newChambasMonthly}
+               newMagentoMonthly={this.props.newMagentoMonthly}
+               newWooCommerceMonthly={this.props.newWooCommerceMonthly}
+               newShopifyMonthly={this.props.newShopifyMonthly}
+               newMercadoOrdersMonthly={this.props.newMercadoOrdersMonthly}
+               newParisOrders={this.props.newParisOrders}
+               newExtitoOrders={this.props.newExtitoOrders}
+               newListaOrders={this.props.newListaOrders}
               //   pieChartData={this.props.pieChartData}
               //   pieChartOptions={this.props.pieChartData.options}  
               //   barChartData={this.props.barChartData}
