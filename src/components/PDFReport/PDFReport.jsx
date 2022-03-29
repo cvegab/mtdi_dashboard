@@ -229,6 +229,17 @@ const PDFReport = (props) => {
           newParis={props.newParisOrders}
           newExtito={props.newExtitoOrders}
           newLista={props.newListaOrders}
+          vtex={props.vtex}
+          linio={props.linio}
+          magento={props.magento}
+          mercadoLibre={props.mercadoLibre}
+          exito={props.exito}
+          ripley={props.ripley}
+          shopify={props.shopify}
+          paris={props.paris}
+          wooCommerce={props.wooCommerce}
+          chambas={props.chambas}
+          listaTienda={props.listaTienda}
                   //   data={props.SalesChart}
                   //   options={props.SalesChartOptions}
                   //  stackedDateLabel={props.stackedDateLabel}

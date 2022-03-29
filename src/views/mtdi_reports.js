@@ -1235,6 +1235,18 @@ function MtdiReports() {
           newParisOrders={newParisOrders}
           newExtitoOrders={newExtitoOrders}
           newListaOrders={newListaOrders}
+          //ORDER CARD DATA
+          vtex={vtexOrders}
+          linio={linioOrders}
+          magento={magentoOrders}
+          mercadoLibre={mercadoLibreOrders}
+          exito={exitoOrders}
+          ripley={ripleyOrders}
+          shopify={shopifyOrders}
+          paris={parisOrders}
+          wooCommerce={wooCommerceOrders}
+          chambas={chambasOrders}
+          listaTienda={listaTiendaOrders}
         ></SendReport>
       )}
       {isLoading && <SplashScreen message="Reportes"></SplashScreen>}

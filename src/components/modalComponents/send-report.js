@@ -54,6 +54,18 @@ const SendReport = (props) => {
           newParisOrders={props.newParisOrders}
           newExtitoOrders={props.newExtitoOrders}
           newListaOrders={props.newListaOrders}
+          //ORDER CARD
+          vtex={props.vtex}
+          linio={props.linio}
+          magento={props.magento}
+          mercadoLibre={props.mercadoLibre}
+          exito={props.exito}
+          ripley={props.ripley}
+          shopify={props.shopify}
+          paris={props.paris}
+          wooCommerce={props.wooCommerce}
+          chambas={props.chambas}
+          listaTienda={props.listaTienda}
                 >
       </SendReportChips>
       {/* <SendReportChips
