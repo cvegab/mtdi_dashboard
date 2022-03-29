@@ -18,6 +18,7 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+const XLSX = require('xlsx');
 import {
   Button,
   Col,
@@ -453,6 +454,7 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
+        console.log(result);
         var obj = JSON.parse(result);
 
         let countryArray = [];
@@ -517,7 +519,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+      console.log(typeof data);
 
       setData(data);
 
@@ -1020,6 +1022,17 @@ const MtdiTable = (props) => {
     console.log(event.target.value);
     setsearchOrderId(event.target.value);
   };
+ const DownloadFileHandler = ()=>{
+   console.log('Download file');
+   let binary_univers = data;
+   let binaryWS = XLSX.utils.json_to_sheet(binary_univers); 
+   // Create a new Workbook
+   var wb = XLSX.utils.book_new() 
+   // Name your sheet
+   XLSX.utils.book_append_sheet(wb, binaryWS, 'Binary values') 
+   // export your excel
+   XLSX.writeFile(wb, 'instance_orders.xlsx');
+ }
   return (
     <React.Fragment>
       {isLoading && <SplashScreen message='Órdenes' />}
@@ -1353,7 +1366,29 @@ const MtdiTable = (props) => {
             >
               Aplicar
             </Button>
-
+            {/* <input
+        type="file"
+        name="upload"
+        id="upload"
+        // onChange={readUploadFile}
+    /> */}
+     <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "46px",
+                fontWeight: "600",
+              }}
+              className="thirdStepTour"
+              onClick={DownloadFileHandler}
+            >
+             Download Excel 
+            </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
               color="primary"
