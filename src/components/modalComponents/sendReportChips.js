@@ -610,7 +610,7 @@ console.log(this.props.getBaseValue);
         <CardReports 
             title="Datos generales"
             subtitle1="Total ingresos"
-            value1={this.props.totalIncomeformatted}
+            value1={this.props.totalIncome}
             subtitle2="Costo Despacho"
             value2={this.props.dispatchCost}
             subtitle3="GM"
@@ -662,11 +662,20 @@ console.log(this.props.getBaseValue);
         </td>
 
         <td>
-            <ChartPie
-              title="Participacion canal de venta"
-              pieChartData={this.props.pieChartData}
-              pieChartOptions={this.props.pieChartData.options}
-            />
+        <ChartPie
+                    title="Participacion canal de venta"
+                    channel={this.props.channel}
+                    linioPie={this.props.linioPie}
+                    vtexPie={this.props.vtexPie}
+                    shopifyPie={this.props.shopifyPie}
+                    ripleyPie={this.props.ripleyPie}
+                    magentoPie={this.props.magentoPie}
+                    wooPie={this.props.wooPie}
+                    chambasPie={this.props.chambasPie}
+                    mercadoPie={this.props.mercadoPie}
+                    exitoPie={this.props.exitoPie}
+                    parisPie={this.props.parisPie}
+                    listaPie={this.props.listaPie}></ChartPie>
         </td>
       </tr>
 
@@ -674,16 +683,16 @@ console.log(this.props.getBaseValue);
         <td>
         <ChartBar 
            title="Ordenes por canal de venta"
-           data=""
-           options=""
+          //  data=""
+          //  options=""
           />
         </td>
 
         <td>
         <ChartBar
            title="Ingresos por canal de venta"
-           data=""
-           options=""
+          //  data=""
+          //  options=""
           />
         </td>
       </tr>

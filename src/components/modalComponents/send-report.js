@@ -8,6 +8,7 @@ const SendReport = (props) => {
     <Modal onhideModal={props.onhideModal}>
      
       <SendReportChips
+      onhideModal={props.onhideModal}
       totalIncome={props.totalIncome}
                 dispatchCost={props.dispatchCost}
                 gm={props.gm}
