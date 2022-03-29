@@ -595,7 +595,7 @@ console.log(this.props.getBaseValue);
     }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={this.mypdfExportComponent} fileName="Reporte General" creator='Instance'>  
     <div  id='shiny'>
-    <table id='spinz'>
+    <table  className="backgroundReport" id='spinz'>
       <tr>
         <td>
          <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
@@ -870,6 +870,18 @@ console.log(this.props.getBaseValue);
                newParisOrders={this.props.newParisOrders}
                newExtitoOrders={this.props.newExtitoOrders}
                newListaOrders={this.props.newListaOrders}
+               //ORDER CARD
+               vtex={this.props.vtex}
+          linio={this.props.linio}
+          magento={this.props.magento}
+          mercadoLibre={this.props.mercadoLibre}
+          exito={this.props.exito}
+          ripley={this.props.ripley}
+          shopify={this.props.shopify}
+          paris={this.props.paris}
+          wooCommerce={this.props.wooCommerce}
+          chambas={this.props.chambas}
+          listaTienda={this.props.listaTienda}
               //   pieChartData={this.props.pieChartData}
               //   pieChartOptions={this.props.pieChartData.options}  
               //   barChartData={this.props.barChartData}
