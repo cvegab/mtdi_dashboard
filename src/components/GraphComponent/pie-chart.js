@@ -1,4 +1,5 @@
 import React,{ useEffect, useState } from "react";
+import SplashScreen from "components/UI/splash-screen";
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import {
     Card,
@@ -141,6 +142,7 @@ const PieChart = (props)=>{
   
 return (
     <React.Fragment>
+      {props.isPieChartLoading && <SplashScreen></SplashScreen>}
     <CardHeader>
     <CardTitle id="textNameTable">
       <strong>Participación canal de venta</strong>
