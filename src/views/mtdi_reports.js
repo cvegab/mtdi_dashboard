@@ -5205,7 +5205,7 @@ console.log(selectedChannelsArray);
                  style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",
-                  width: "296px",
+                  width: "323px",
                   height: "64px",
                   padding: "22px 81px",
                   borderRadius: "33px",
@@ -5214,7 +5214,7 @@ console.log(selectedChannelsArray);
                   textTransform: "none",
                   fontWeight:"bold",
                   border:"0",
-                  fontSize: "11px"
+                  fontSize: "14px"
                 }}
                 //  onClick={toggle}
                  onClick={showModalHandler}

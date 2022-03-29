@@ -760,7 +760,7 @@ console.log(this.props.getBaseValue);
             </FormGroup>
             <div class="text-center">
               <button
-                id="bttnSubmit"
+                id="bttnSubmitSendReport"
                 type="submit"
                 style={{
                   backgroundColor: "#1D308E",
@@ -780,10 +780,12 @@ console.log(this.props.getBaseValue);
                 onClick={this.downloadPdfHandler}
               >
              
-                Enviar Reporte &nbsp;
+                <p className="textBttnSendReport">
+                  Enviar Reporte &nbsp;
                 <span className="btn-label">
                   <i className="nc-icon nc-send" />
                 </span>
+                </p>
                
               </button>
 

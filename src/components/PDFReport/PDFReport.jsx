@@ -74,7 +74,7 @@ const PDFReport = (props) => {
             console.log(f);
           }}
         >
-          Descarga este Reporte como PDF
+          <p className="textBttnDownloadReport">Descarga este Reporte como PDF</p>
         </button>
       </div>
 
