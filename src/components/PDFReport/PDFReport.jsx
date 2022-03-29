@@ -82,7 +82,7 @@ const PDFReport = (props) => {
         id="reportPDFcontent"
         style={{
           position: "absolute",
-          left: "-2000px",
+          left: "-3000px",
           top: 0,
         }}
       >
