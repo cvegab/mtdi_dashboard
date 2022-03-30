@@ -288,7 +288,7 @@ const ChartBar = (props) => {
                 </p>}
               </div>
               <div>
-                <p className="titleTextLegendReport">
+              {channel.includes('MercadoLibre') &&<p className="titleTextLegendReport">
                   <i
                     className="fa fa-circle"
                     style={{
@@ -301,7 +301,7 @@ const ChartBar = (props) => {
                   <p id="ordersGraphText" className="numberTextLegendReport">
                     {mercadoLibre} {props.text}
                   </p>
-                </p>
+                </p>}
               </div>
 
               <div>

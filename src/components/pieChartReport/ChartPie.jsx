@@ -468,6 +468,7 @@ import './ChartPie.css'
 
 
 const ChartPie = (props) => {
+  console.log(props);
   let channel = props.channel.map(item=>{
     return item.channel;
   })

@@ -404,6 +404,7 @@ export default class SendReportChips extends React.Component {
   };
 
   handleChange = (evt) => {
+    console.log(evt.target.value);
     this.setState({
       value: evt.target.value,
       error: null,
@@ -411,12 +412,15 @@ export default class SendReportChips extends React.Component {
   };
 
   handleEmailChange = (evt) => {
+  
     this.setState({
       emailState: evt.target.value,
+     //error: null
     });
   };
 
   checkEmail = (evt) => {
+    console.log(evt);
     let error = null;
 
     if (!this.isEmail(evt.target.value)) {
@@ -454,21 +458,32 @@ export default class SendReportChips extends React.Component {
   };
 
   isValid(email) {
+    let emailError = null;
     let error = null;
 
     if (this.isInList(email)) {
       error = `${email} Fue agregado correctamente`;
     }
+    if (this.isInList(email)) {
+      emailError = `${email} Fue agregado correctamente`;
+    }
 
     if (!this.isEmail(email)) {
       error = `${email} No es un correo válido`;
     }
+    if (!this.isEmail(email)) {
+      emailError = `${email} No es un correo válido`;
+    }
+    if(emailError){
+      this.setState({emailError, error: null});
+    }
 
     if (error) {
-      this.setState({ error });
+      this.setState({ error, emailError:null});
 
       return false;
     }
+    
 
     return true;
   }
@@ -509,21 +524,22 @@ export default class SendReportChips extends React.Component {
   console.log(value);
 }
    submitHandler = async(event) => {
-    
-   // this.parseEmail();
+    event.preventDefault();
+   this.parseEmail();
     if (this.isValid(this.state.value)) {
       this.setState({
         items: [...this.state.items, this.state.value],
         value: "",
-        error: null
+        error: null,
+        emailError: null
       });
     }
 
    // this.findRoutes;
    
-    let error = null;
+     let error = null;
 
-    event.preventDefault();
+   
    
 
     if (!this.isEmail(this.state.emailState)) {
@@ -765,7 +781,7 @@ console.log(this.props.getBaseValue);
               ))}
 
               <input
-                className={"input " + (this.state.error && " has-error")}
+                className={"input " + (this.state.emailError && " has-error")}
                 value={this.state.value}
                 placeholder="Escribe aquí el correo y presiona la tecla 'Enter'"
                 style={{ fontSize: "12px" }}
@@ -774,7 +790,7 @@ console.log(this.props.getBaseValue);
                 onPaste={this.handlePaste}
               />
 
-              {this.state.error && <p className="error">{this.state.error}</p>}
+              {!this.state.emailError && <p className="error">{this.state.emailError}</p>}
             </FormGroup>
             <div class="text-center">
               <button

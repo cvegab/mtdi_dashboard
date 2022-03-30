@@ -1,4 +1,8 @@
 const StackedGraphOrderCard = (props) => {
+  let channel = props.channel.map(item=>{
+    return item.channel;
+  })
+  console.log(channel);
   let vtex = props.vtex;
   let linio = props.linio;
   let magento = props.magento;
@@ -14,7 +18,7 @@ const StackedGraphOrderCard = (props) => {
     <div className="legend">
       <div className="infoLegend">
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Ripley') &&   <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -27,10 +31,10 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {ripley} órdenes
             </p>
-          </p>
+          </p>}
         </div>
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('ListaTienda') && <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -43,10 +47,10 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {listTienda} órdenes
             </p>
-          </p>
+          </p>}
         </div>
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Magento') && <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -59,11 +63,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {magento} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Shopify') && <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -76,10 +80,10 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {shopify} órdenes
             </p>
-          </p>
+          </p>}
         </div>
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('MercadoLibre') &&  <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -92,11 +96,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {mercadoLibre} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Chambas') && <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -109,11 +113,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {chambas} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Linio')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -126,11 +130,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {linio} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Vtex')&& <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -143,11 +147,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {vtex} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Woocommerce')&&  <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -160,11 +164,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {wooCommerce} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Paris')&&  <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -177,11 +181,11 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {paris} órdenes
             </p>
-          </p>
+          </p>}
         </div>
 
         <div>
-          <p className="titleTextLegend">
+        {channel.includes('Exito')&&  <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -194,7 +198,7 @@ const StackedGraphOrderCard = (props) => {
             <p id="ordersGraphText" className="card-category">
               {exito} órdenes
             </p>
-          </p>
+          </p>}
         </div>
       </div>
     </div>

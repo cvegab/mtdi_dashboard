@@ -1,4 +1,7 @@
 const StackedGraphSalesCard = (props)=>{
+  let channel = props.channel.map(item=>{
+    return item.channel;
+  })
   let vtex = props.vtex;
     let linio = props.linio;
     let magento = props.magento;
@@ -14,7 +17,7 @@ const StackedGraphSalesCard = (props)=>{
     <div className="legend">
     <div className="infoLegend">
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Ripley') &&  <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -37,10 +40,10 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('ListaTienda') &&   <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -63,10 +66,10 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Magento') && <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -89,11 +92,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Shopify') &&  <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -116,10 +119,10 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('MercadoLibre') &&  <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -142,11 +145,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Chambas') &&  <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -169,11 +172,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Linio')&&  <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -196,11 +199,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Vtex')&& <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -223,11 +226,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Woocommerce')&& <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -250,11 +253,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Paris')&& <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -266,7 +269,7 @@ const StackedGraphSalesCard = (props)=>{
           &nbsp;Paris
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = paris;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -277,11 +280,11 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
 
       <div>
-        <p className="titleTextLegend">
+      {channel.includes('Exito')&&  <p className="titleTextLegend">
           <i
             className="fa fa-circle"
             style={{
@@ -293,7 +296,7 @@ const StackedGraphSalesCard = (props)=>{
           &nbsp;Exito
           <p className="card-category">
             {(() => {
-              let number = 109090;
+              let number = exito;
               let formatted = new Intl.NumberFormat(
                 "es-CL",
                 {
@@ -304,7 +307,7 @@ const StackedGraphSalesCard = (props)=>{
               return <div> {formatted}</div>;
             })()}
           </p>
-        </p>
+        </p>}
       </div>
     </div>
   </div>
