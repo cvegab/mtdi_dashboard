@@ -492,7 +492,7 @@ export default class SendReportChips extends React.Component {
   
    const container = this.myRef;
   
-  let element = document.querySelector('#spinz');
+  let element = document.querySelector('.backgroundReport');
   await drawDOM(element, {
     paperSize: "auto"
   }).then(group => {
@@ -598,7 +598,7 @@ console.log(this.props.getBaseValue);
     <table  className="backgroundReport" id='spinz'>
       <tr>
         <td>
-         <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
+         <p className="titleReports" style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
           <ChartMixed
               title="Resumen general de órdenes y ventas"
               data=""

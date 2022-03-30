@@ -216,6 +216,7 @@ const PDFReport = (props) => {
                 <td>
                   <ChartBar
                   text='órdenes'
+                 
                     title="Ordenes por canal de venta"
                     stackedDateLabel={props.stackedDateLabel}
                     newlinio={props.newlinioMonthly}
@@ -240,6 +241,7 @@ const PDFReport = (props) => {
           wooCommerce={props.wooCommerce}
           chambas={props.chambas}
           listaTienda={props.listaTienda}
+          channel={props.channel}
                   //   data={props.SalesChart}
                   //   options={props.SalesChartOptions}
                   //  stackedDateLabel={props.stackedDateLabel}
@@ -298,6 +300,7 @@ const PDFReport = (props) => {
                     magento={props.magentoPie}
                     chambas={props.chambasPie}
                     listaTienda={props.listaPie}
+                    channel={props.channel}
                     // newRipley={props.newRipleySalesMonthly}
                     // newVtex={props.newVtexSalesMonthly}
                     // newlinio={props.newlinioSalesMonthly}
