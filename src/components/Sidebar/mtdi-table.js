@@ -18,6 +18,7 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+const XLSX = require('xlsx');
 import {
   Button,
   Col,
@@ -39,6 +40,7 @@ import startTour from "../../assets/img/startTour.png";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import SplashScreen from "components/UI/splash-screen";
+import SaveAlt from '@material-ui/icons/SaveAlt';
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -48,7 +50,7 @@ const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
   PreviousPage: forwardRef((props, ref) => (
     <ChevronLeft {...props} ref={ref} />
   )),
@@ -452,6 +454,7 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
+        console.log(result);
         var obj = JSON.parse(result);
 
         let countryArray = [];
@@ -516,7 +519,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+      console.log(typeof data);
 
       setData(data);
 
@@ -1019,6 +1022,17 @@ const MtdiTable = (props) => {
     console.log(event.target.value);
     setsearchOrderId(event.target.value);
   };
+ const DownloadFileHandler = ()=>{
+   console.log('Download file');
+   let binary_univers = data;
+   let binaryWS = XLSX.utils.json_to_sheet(binary_univers); 
+   // Create a new Workbook
+   var wb = XLSX.utils.book_new() 
+   // Name your sheet
+   XLSX.utils.book_append_sheet(wb, binaryWS, 'Binary values') 
+   // export your excel
+   XLSX.writeFile(wb, 'instance_orders.xlsx');
+ }
   return (
     <React.Fragment>
       {isLoading && <SplashScreen message='Órdenes' />}
@@ -1352,7 +1366,29 @@ const MtdiTable = (props) => {
             >
               Aplicar
             </Button>
-
+            {/* <input
+        type="file"
+        name="upload"
+        id="upload"
+        // onChange={readUploadFile}
+    /> */}
+     <Button
+              color="primary"
+              style={{
+                borderRadius: "22px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                letterSpacing: "1px",
+                width: "120px",
+                height: "46px",
+                fontWeight: "600",
+              }}
+              className="thirdStepTour"
+              onClick={DownloadFileHandler}
+            >
+             Download Excel 
+            </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
               color="primary"
@@ -1405,8 +1441,10 @@ const MtdiTable = (props) => {
             {isLoading && (
               <MaterialTable
                 // title=""
+               
                 options={{
                   search: false,
+                  exportButton: true
                 }}
                 title=""
                 icons={tableIcons}
@@ -1464,6 +1502,9 @@ const MtdiTable = (props) => {
             )}
             {data.length === 0 && !isLoading && (
               <MaterialTable
+              options={{
+                exportButton: true
+              }}
                 localization={{
                   body: {
                     emptyDataSourceMessage: (
@@ -1522,6 +1563,7 @@ const MtdiTable = (props) => {
             )}
             {data.length !== 0 && !isLoading && (
               <MaterialTable
+             
                 onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
                 localization={{
                   body: {
@@ -1577,7 +1619,7 @@ const MtdiTable = (props) => {
                 icons={tableIcons}
                 data={data}
                 columns={columns}
-                options={{ columnsButton: true, sorting: true, search: true }}
+                options={{ columnsButton: true, sorting: true, search: true,  exportButton: true }}
                 style={{ marginLeft: "1em", marginTop: "2em" }}
               />
             )}
