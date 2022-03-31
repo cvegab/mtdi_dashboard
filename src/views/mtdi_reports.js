@@ -179,6 +179,7 @@ function MtdiReports() {
   const [isStackedGraphLoading, setisStackedGraphLoading] = useState(false);
   const [isStackedOrdersGraph, setisStackedOrdersGraph] = useState(false);
   const [isPieChartLoading, setisPieChartLoading] = useState(false);
+  const [dateError, setdateError] = useState(null);
   useEffect(() => {
     // set initial value
     const mediaWatcher = window.matchMedia("(max-width: 767px)");
@@ -567,7 +568,8 @@ function MtdiReports() {
     var endDate = moment(selectedDateTo);
     var result = [];
     if (endDate.isBefore(startDate)) {
-      throw "End date must be greater than start date.";
+      //throw "End date must be greater than start date.";
+      setdateError('La fecha de término debe ser mayor que la fecha de inicio ');
     }
     while (startDate.isBefore(endDate)) {
       result.push(startDate.format("YYYY-MM-01"));
@@ -1287,7 +1289,7 @@ function MtdiReports() {
                       marginTop: "0px",
                     }}
                   >
-                    Fecha Inicio
+                    Fecha Inicio {dateError!== null && <span> <p style={{color:'red'}}>{dateError}</p></span>}
                   </h5>
 
                   <DatePicker
@@ -1300,7 +1302,7 @@ function MtdiReports() {
                     locale="es"
                   />
                 </label>
-
+               
                 <label>
                   <h5
                     id="fechaHasta"
