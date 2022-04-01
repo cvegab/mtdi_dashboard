@@ -570,6 +570,8 @@ function MtdiReports() {
     if (endDate.isBefore(startDate)) {
       //throw "End date must be greater than start date.";
       setdateError('La fecha de término debe ser mayor que la fecha de inicio ');
+    }else{
+      setdateError(null);
     }
     while (startDate.isBefore(endDate)) {
       result.push(startDate.format("YYYY-MM-01"));
