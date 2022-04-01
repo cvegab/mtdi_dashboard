@@ -150,7 +150,7 @@ return (
           </div>
         </Col>
         {/* GM */}
-        <Col md="3">
+        {/* <Col md="3">
           <div>
             <p
               className="titlesInfoCard"
@@ -174,22 +174,13 @@ return (
                   <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                     &nbsp;
-                    {/* <span
-                  id="spanTextInfoCard"
-                  style={{
-                    color: "#FF6059",
-                    fontSize: "10px",
-                    textAlign: "right",
-                  }}
-                >
-               -6%
-             </span> */}
+      
                   </div>
                 );
               })()}
             </h5>
           </div>
-        </Col>
+        </Col> */}
         {/* CONVERSION */}
         <Col md="3">
           <div>
@@ -424,8 +415,15 @@ return (
               className="textInfoCard"
               style={{ fontSize: "22px", color: "#444B54" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {props.inProcess} &nbsp;
+              {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {props.inProcess} &nbsp; */}
+             &nbsp;&nbsp;&nbsp;
+              <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -453,8 +451,15 @@ return (
               className="textInfoCard"
               style={{ fontSize: "22px", color: "#444B54" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              {props.inPreparation} &nbsp;
+              {/* &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+              {props.inPreparation} &nbsp; */}
+             &nbsp;&nbsp;&nbsp;
+              <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -474,7 +479,7 @@ return (
             <p
               id="textListoParaDespacho"
               className="titlesInfoCard"
-              style={{ color: "#C4C4C4", fontWeight: "bold" }}
+              style={{ color: "#C4C4C4", fontWeight: "bold", width:"200px" }}
             >
               <img src={iconCP3} width="30px" />
               &nbsp; Listo para despacho
@@ -483,8 +488,15 @@ return (
               className="textInfoCard"
               style={{ fontSize: "22px", color: "#444B54" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {props.readyToShip} &nbsp;
+              {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {props.readyToShip} &nbsp; */}
+             &nbsp;&nbsp;&nbsp;
+              <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -512,8 +524,15 @@ return (
               className="textInfoCard"
               style={{ fontSize: "22px", color: "#444B54" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {props.onTheWay} &nbsp;
+              {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {props.onTheWay} &nbsp; */}
+             &nbsp;&nbsp;&nbsp;
+              <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -573,8 +592,15 @@ return (
               className="textInfoCard"
               style={{ fontSize: "22px", color: "#444B54" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {props.totalNps} &nbsp;
+              {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {props.totalNps} &nbsp; */}
+             &nbsp;&nbsp;&nbsp;
+              <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
               {/* <span
 
                 id="spanTextInfoCard"
@@ -603,8 +629,15 @@ return (
               className="textInfoCard"
               style={{ fontSize: "22px", color: "#444B54" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {props.reviews} &nbsp;
+              {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {props.reviews} &nbsp; */}
+             &nbsp;&nbsp;&nbsp;
+              <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
               {/* <span
                 id="spanTextInfoCard"
                 style={{

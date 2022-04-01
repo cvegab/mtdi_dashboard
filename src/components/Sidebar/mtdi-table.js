@@ -1380,14 +1380,14 @@ const MtdiTable = (props) => {
                 marginLeft: "1em",
                 textTransform: "none",
                 letterSpacing: "1px",
-                width: "120px",
+                width: "150px",
                 height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-             Download Excel 
+             Descargar Excel 
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
