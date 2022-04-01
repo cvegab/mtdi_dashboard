@@ -3751,7 +3751,7 @@ console.log(selectedChannelsArray);
                   </div>
                 </Col>
                 {/* GM */}
-                <Col md="3">
+                {/* <Col md="3">
                   <div>
                     <p
                       className="titlesInfoCard"
@@ -3775,22 +3775,13 @@ console.log(selectedChannelsArray);
                           <div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {formatted}
                             &nbsp;
-                            {/* <span
-                            id="spanTextInfoCard"
-                            style={{
-                              color: "#FF6059",
-                              fontSize: "10px",
-                              textAlign: "right",
-                            }}
-                          >
-                         -6%
-                       </span> */}
+                        
                           </div>
                         );
                       })()}
                     </h5>
                   </div>
-                </Col>
+                </Col> */}
                 {/* CONVERSION */}
                 <Col md="3">
                   <div>
@@ -4025,8 +4016,16 @@ console.log(selectedChannelsArray);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {inProcess} &nbsp;
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {inProcess} &nbsp; */}
+                      &nbsp;&nbsp;&nbsp;
+                      <Badge
+                        style={{ backgroundColor: "#06CBC1", color: "white" }}
+                        pill
+                      >
+                        Próximamente
+                      </Badge>
+                      &nbsp;
                       {/* <span
                           id="spanTextInfoCard"
                           style={{
@@ -4054,7 +4053,15 @@ console.log(selectedChannelsArray);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation}{" "}
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{inPreparation}{" "}
+                      &nbsp; */}
+                      &nbsp;&nbsp;&nbsp;
+                      <Badge
+                        style={{ backgroundColor: "#06CBC1", color: "white" }}
+                        pill
+                      >
+                        Próximamente
+                      </Badge>
                       &nbsp;
                       {/* <span
                           id="spanTextInfoCard"
@@ -4084,8 +4091,16 @@ console.log(selectedChannelsArray);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {readyToShip} &nbsp;
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {readyToShip} &nbsp; */}
+                      &nbsp;&nbsp;&nbsp;
+                      <Badge
+                        style={{ backgroundColor: "#06CBC1", color: "white" }}
+                        pill
+                      >
+                        Próximamente
+                      </Badge>
+                      &nbsp;
                       {/* <span
                           id="spanTextInfoCard"
                           style={{
@@ -4113,7 +4128,15 @@ console.log(selectedChannelsArray);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay}{" "}
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{onTheWay}{" "}
+                      &nbsp; */}
+                                           &nbsp;&nbsp;&nbsp;
+                      <Badge
+                        style={{ backgroundColor: "#06CBC1", color: "white" }}
+                        pill
+                      >
+                        Próximamente
+                      </Badge>
                       &nbsp;
                       {/* <span
                           id="spanTextInfoCard"
@@ -4174,8 +4197,16 @@ console.log(selectedChannelsArray);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps}{" "}
-                      &nbsp;
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalNps}{" "}
+                      &nbsp; */}
+                     &nbsp;&nbsp;&nbsp;
+                      <Badge
+                        style={{ backgroundColor: "#06CBC1", color: "white" }}
+                        pill
+                      >
+                        Próximamente
+                      </Badge>
+                      &nbsp;                      
                       {/* <span
     
                           id="spanTextInfoCard"
@@ -4204,8 +4235,16 @@ console.log(selectedChannelsArray);
                       className="textInfoCard"
                       style={{ fontSize: "22px", color: "#444B54" }}
                     >
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews}{" "}
-                      &nbsp;
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reviews}{" "}
+                      &nbsp; */}
+                     &nbsp;&nbsp;&nbsp;
+                      <Badge
+                        style={{ backgroundColor: "#06CBC1", color: "white" }}
+                        pill
+                      >
+                        Próximamente
+                      </Badge>
+                      &nbsp;                    
                       {/* <span
                           id="spanTextInfoCard"
                           style={{
@@ -5205,7 +5244,7 @@ console.log(selectedChannelsArray);
                  style={{
                   backgroundColor: "#1D308E",
                   textAlign: "center",
-                  width: "296px",
+                  width: "323px",
                   height: "64px",
                   padding: "22px 81px",
                   borderRadius: "33px",
@@ -5214,7 +5253,7 @@ console.log(selectedChannelsArray);
                   textTransform: "none",
                   fontWeight:"bold",
                   border:"0",
-                  fontSize: "11px"
+                  fontSize: "14px"
                 }}
                 //  onClick={toggle}
                  onClick={showModalHandler}

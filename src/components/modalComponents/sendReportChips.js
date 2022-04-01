@@ -112,7 +112,7 @@ export default class SendReportChips extends React.Component {
   
       .two-columns .column {
         width: 100%;
-        max-width: 300px;
+        max-width: 400px;
         display: inline-block;
         vertical-align: top;
       }
@@ -295,7 +295,8 @@ export default class SendReportChips extends React.Component {
                          ">
 
                          Desde el equipo de Instance Latam queremos compartir contigo este Reporte general.
-                         Adjuntamos a continuación un PDF para que puedas visualizarlo.
+                         Adjuntamos a continuación un PDF donde podrás visualizarlo.
+                         ¡Que tengas buen día!
 
                         </p>
               
@@ -760,7 +761,7 @@ console.log(this.props.getBaseValue);
             </FormGroup>
             <div class="text-center">
               <button
-                id="bttnSubmit"
+                id="bttnSubmitSendReport"
                 type="submit"
                 style={{
                   backgroundColor: "#1D308E",
@@ -780,10 +781,12 @@ console.log(this.props.getBaseValue);
                 onClick={this.downloadPdfHandler}
               >
              
-                Enviar Reporte &nbsp;
+                <p className="textBttnSendReport">
+                  Enviar Reporte &nbsp;
                 <span className="btn-label">
                   <i className="nc-icon nc-send" />
                 </span>
+                </p>
                
               </button>
 

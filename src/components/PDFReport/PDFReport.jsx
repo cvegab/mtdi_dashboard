@@ -74,7 +74,7 @@ const PDFReport = (props) => {
             console.log(f);
           }}
         >
-          Descarga este Reporte como PDF
+          <p className="textBttnDownloadReport">Descarga este Reporte como PDF</p>
         </button>
       </div>
 
@@ -82,7 +82,7 @@ const PDFReport = (props) => {
         id="reportPDFcontent"
         style={{
           position: "absolute",
-          left: "-2000px",
+          left: "-3000px",
           top: 0,
         }}
       >
