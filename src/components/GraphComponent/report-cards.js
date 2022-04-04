@@ -3,10 +3,10 @@ import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import iconG1 from "../../assets/img/icons/Reports/iconG1.png";
 import iconG2 from "../../assets/img/icons/Reports/iconG2.png";
 import iconG3 from "../../assets/img/icons/Reports/iconG3.png";
-import iconCP1 from "../../assets/img/icons/Reports/iconCP1.png";
-import iconCP2 from "../../assets/img/icons/Reports/iconCP2.png";
-import iconCP3 from "../../assets/img/icons/Reports/iconCP3.png";
-import iconCP4 from "../../assets/img/icons/Reports/iconCP4.png";
+import iconCP1 from "../../assets/img/icons/Reports/icon2CP1.png";
+import iconCP2 from "../../assets/img/icons/Reports/icon2CP2.png";
+import iconCP3 from "../../assets/img/icons/Reports/icon2CP3.png";
+import iconCP4 from "../../assets/img/icons/Reports/icon2CP4.png";
 import iconPP1 from "../../assets/img/icons/Reports/iconPP1.png";
 import iconPP2 from "../../assets/img/icons/Reports/iconPP2.png";
 import iconPP3 from "../../assets/img/icons/Reports/iconPP3.png";
@@ -378,7 +378,7 @@ return (
       id="colReportOrderFulfillment"
       md="12"
       style={{
-        backgroundColor: "white",
+        backgroundColor: "rgb(255, 255, 255,0.68)",
         width: "1040px",
         height: "156px",
         left: "118px",
@@ -389,7 +389,7 @@ return (
       <p
         id="textNameTable"
         style={{
-          color: "black",
+          color: "rgb(196, 196, 196)",
           width: "450px",
           fontSize: "20px",
           fontWeight: "800",
@@ -397,7 +397,14 @@ return (
           paddingTop: "20px",
         }}
       >
-        Cumplimiento de pedidos
+        Cumplimiento de pedidos 
+        &nbsp; <Badge
+                style={{ backgroundColor: "#06CBC1", color: "white" }}
+                pill
+              >
+                Próximamente
+              </Badge>
+        
       </p>
 
       <Row style={{ padding: "10px", paddingLeft: "20px" }}>
@@ -417,13 +424,7 @@ return (
             >
               {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {props.inProcess} &nbsp; */}
-             &nbsp;&nbsp;&nbsp;
-              <Badge
-                style={{ backgroundColor: "#06CBC1", color: "white" }}
-                pill
-              >
-                Próximamente
-              </Badge>
+           
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -453,13 +454,7 @@ return (
             >
               {/* &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
               {props.inPreparation} &nbsp; */}
-             &nbsp;&nbsp;&nbsp;
-              <Badge
-                style={{ backgroundColor: "#06CBC1", color: "white" }}
-                pill
-              >
-                Próximamente
-              </Badge>
+           
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -490,13 +485,7 @@ return (
             >
               {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {props.readyToShip} &nbsp; */}
-             &nbsp;&nbsp;&nbsp;
-              <Badge
-                style={{ backgroundColor: "#06CBC1", color: "white" }}
-                pill
-              >
-                Próximamente
-              </Badge>
+           
               {/* <span
                 id="spanTextInfoCard"
                 style={{
@@ -526,13 +515,7 @@ return (
             >
               {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {props.onTheWay} &nbsp; */}
-             &nbsp;&nbsp;&nbsp;
-              <Badge
-                style={{ backgroundColor: "#06CBC1", color: "white" }}
-                pill
-              >
-                Próximamente
-              </Badge>
+        
               {/* <span
                 id="spanTextInfoCard"
                 style={{
