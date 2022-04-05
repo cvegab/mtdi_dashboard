@@ -1380,14 +1380,14 @@ const MtdiTable = (props) => {
                 marginLeft: "1em",
                 textTransform: "none",
                 letterSpacing: "1px",
-                width: "120px",
+                width: "150px",
                 height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-             Download Excel 
+             Descargar Excel 
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
@@ -1613,8 +1613,10 @@ const MtdiTable = (props) => {
                   },
                 }}
                 key={data.id_mtdi}
+                title="Instance Table"
                 icons={tableIcons}
                 title=""
+                icons={tableIcons}
                 data={data}
                 columns={columns}
                 options={{ columnsButton: true, sorting: true, search: true,  exportButton: true }}

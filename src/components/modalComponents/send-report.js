@@ -3,9 +3,72 @@ import Chips from "./chips";
 import { Form, FormGroup, Label } from "reactstrap";
 import SendReportChips from "./sendReportChips";
 const SendReport = (props) => {
+  console.log(props);
   return (
     <Modal onhideModal={props.onhideModal}>
+     
       <SendReportChips
+      onhideModal={props.onhideModal}
+      totalIncome={props.totalIncome}
+                dispatchCost={props.dispatchCost}
+                gm={props.gm}
+                conversion={props.conversion}
+                totalOrders={props.totalOrders}
+                totalCancelledOrders={props.totalCancelledOrders}
+                totalDte={props.totalDte}
+                inProcess={props.inProcess}
+                inPreparation={props.inPreparation}
+                readyToShip={props.readyToShip}
+                onTheWay={props.onTheWay}
+                reviews={props.reviews}
+                totalNps={props.totalNps}
+                totalClaims={props.totalClaims}
+                //MIXED CHART DATA
+                mixedChartData={props.mixedChartData}
+                //PIE CHART DATA
+                channel={props.channel}
+                linioPie = {props.linioPie} vtexPie={props.vtexPie} shopifyPie={props.shopifyPie} ripleyPie={props.ripleyPie} magentoPie={props.magentoPie} wooPie={props.wooPie}  chambasPie={props.chambasPie} mercadoPie={props.mercadoPie} exitoPie={props.exitoPie} parisPie={props.parisPie} listaPie={props.listaPie}
+               //STACKED SALES GRAPH
+               stackedDateLabel={props.stackedDateLabel}
+                      
+               newlinioSalesMonthly={props.newlinioSalesMonthly}
+               newVtexSalesMonthly={props.newVtexSalesMonthly}
+               newRipleySalesMonthly={props.newRipleySalesMonthly}
+               newChambasSalesMonthly={props.newChambasSalesMonthly}
+               newMagentoSalesMonthly={props.newMagentoSalesMonthly}
+               newWooCommerceSalesMonthly={props.newWooCommerceSalesMonthly}
+               newShopifySalesMonthly={props.newShopifySalesMonthly}
+               newMercadoSalesMonthly={props.newMercadoSalesMonthly}
+               newParisSales={props.newParisSales}
+               newExitoSalesMonthly={props.newExitoSalesMonthly}
+               newListaSales={props.newListaSales}
+               //STACKED ORDER GRAPH
+               newlinioMonthly={props.newlinioMonthly}
+          newVtexMonthly={props.newVtexMonthly}
+          newRipleyMonthly={props.newRipleyMonthly}
+          newChambasMonthly={props.newChambasMonthly}
+          newMagentoMonthly={props.newMagentoMonthly}
+          newWooCommerceMonthly={props.newWooCommerceMonthly}
+          newShopifyMonthly={props.newShopifyMonthly}
+          newMercadoOrdersMonthly={props.newMercadoOrdersMonthly}
+          newParisOrders={props.newParisOrders}
+          newExtitoOrders={props.newExtitoOrders}
+          newListaOrders={props.newListaOrders}
+          //ORDER CARD
+          vtex={props.vtex}
+          linio={props.linio}
+          magento={props.magento}
+          mercadoLibre={props.mercadoLibre}
+          exito={props.exito}
+          ripley={props.ripley}
+          shopify={props.shopify}
+          paris={props.paris}
+          wooCommerce={props.wooCommerce}
+          chambas={props.chambas}
+          listaTienda={props.listaTienda}
+                >
+      </SendReportChips>
+      {/* <SendReportChips
         totalIncomeformatted={props.totalIncomeformatted}
         dispatchCost={props.dispatchCost}
         gm={props.gm}
@@ -81,7 +144,7 @@ const SendReport = (props) => {
             magentoOrders={props.magentoOrders}
             chambasOrders={props.chambasOrders}
             listaTiendaOrders={props.listaTiendaOrders}
-      ></SendReportChips>
+      ></SendReportChips> */}
     </Modal>
   );
 };
