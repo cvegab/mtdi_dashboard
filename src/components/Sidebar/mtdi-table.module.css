@@ -1,8 +1,20 @@
 .cancelado {
   justify-content: center;
   align-items: center;
-  width: 85px;
+  width: 95px;
   height: 34px;
+  background: rgba(255, 96, 89, 0.1);
+  border-radius: 8px;
+  color: #ff6059;
+  left: 8px;
+  top: 8.5px;
+  padding: 8px;
+}
+.stockError {
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 38px;
   background: rgba(255, 96, 89, 0.1);
   border-radius: 8px;
   color: #ff6059;
@@ -87,7 +99,18 @@
   width: 34px;
   height: 34px;
 }
+.errorinStock{
+   background: #20CAA4;
+   Width: 13.48px;
+height: 13.48px;
+ 
 
+/* Top 
+2.27px
+Left 
+2.25px */
+
+}
 .showPdf {
   justify-content: center;
   padding: 8px;
