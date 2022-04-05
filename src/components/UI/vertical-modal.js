@@ -10,24 +10,27 @@ const Backdrop = (props) => {
 const ModalOverlay = (props) => {
   return (
     <div className={classes.modal}>
-      <ModalHeader>
-        <h2
-          style={{ color: "black" }}
-          style={{
+      
+     <header>
+        <h2  style={{
             textAlign: "right",
             color: "black",
             fontSize: "16px",
             cursor: "pointer",
-          }}
-          onClick={props.close}
+          }}onClick={props.close}
         >
-          x
+   
+          <span 
+          >x</span>
         </h2>
-      </ModalHeader>
+       
+        </header>
+<body>
 
-      <div className={classes.hea}>
         <p>{props.children}</p>
-      </div>
+    
+</body>
+     
     </div>
   );
 };

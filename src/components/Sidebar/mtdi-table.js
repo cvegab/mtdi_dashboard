@@ -44,6 +44,7 @@ import SplashScreen from "components/UI/splash-screen";
 import SaveAlt from '@material-ui/icons/SaveAlt';
 // import WmsModal from "components/modalComponents/wms-modal";
  import VerticalModal from "components/UI/vertical-modal.js";
+import WmsModal from "components/modalComponents/wms-modal";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -1090,8 +1091,9 @@ const hideWMSModalHandler = ()=>{
     //       onhideModal={hideWMSModalHandler}
           
     //     />
-    <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
-         
+    // <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
+         <WmsModal onhideModal={hideWMSModalHandler}
+         ></WmsModal>
       )}
 
       <div className="content .tenthStepTour">
