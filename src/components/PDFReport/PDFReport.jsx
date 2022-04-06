@@ -18,7 +18,7 @@ import CardReports from "components/CardReports/CardReports";
 import ChartMixed from "components/MixedChartReport/ChartMixed";
 import ChartPie from "components/pieChartReport/ChartPie.jsx";
 import ChartBar from "components/barChartReport/ChartBar";
-import MixedChart from "views/MixedChart";
+
 import iconInstance from "../../assets/img/icons/Reports/icon1.png";
 import "./PDFReport.css";
 

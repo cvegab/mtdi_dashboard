@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 // react plugin used to create charts
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
-import "../assets/css/Charts.css";
+
+import '../../assets/css/Charts.css';
 import "react-datepicker/dist/react-datepicker.css";
-import InformationCardsMobile from "components/ChartComponents/InformationCardsMobile";
+import InformationCardsMobile from "components/InformationCardsMobile/InformationCardsMobile";
 const moment = require("moment");
-import iconFilterButton from "../assets/img/icons/Reports/iconFilters.png";
-import iconShareReport from "../assets/img/iconEnviarReporte.png";
-import iconNextReport from "../assets/img/iconArrowNext.png";
+import iconFilterButton from "../../assets/img/icons/Reports/iconFilters.png";
+import iconShareReport from "../../assets/img/iconEnviarReporte.png";
+import iconNextReport from "../../assets/img/iconArrowNext.png";
 import SendReport from "components/modalComponents/send-report";
 // reactstrap components
 import {
@@ -27,16 +28,16 @@ import {
 } from "reactstrap";
 
 import SplashScreen from "components/UI/splash-screen";
-import SalesCard from "components/GraphComponent/Sales-card";
-import StackedGraphSalesCard from "components/GraphComponent/Stacked-graph-sales-card";
-import StackedGraphOrderCard from "components/GraphComponent/stacked-graph-order-card";
-import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
-import PieChart from "components/GraphComponent/pie-chart";
-import StackedOrderGraph from "components/GraphComponent/Stacked-order-graph";
-import StackedSalesGraph from "components/GraphComponent/stacked-sales-graph";
-import ReportCards from "components/GraphComponent/report-cards";
-import DownloadReports from "components/GraphComponent/download-reports";
-import ViewCardReports from "components/GraphComponent/view-card-reports";
+import SalesCard from "components/salesCard/Sales-card";
+import StackedGraphSalesCard from "components/stackedGraphSalesCard/Stacked-graph-sales-card";
+import StackedGraphOrderCard from "components/stackedGraphOrderCard/stacked-graph-order-card";
+import MixedAndPieChart from "components/MixedAndPieChart/mixed-and-pie-chart";
+import PieChart from "components/PieChart/pie-chart";
+import StackedOrderGraph from "components/StackedOrderGraph/Stacked-order-graph";
+import StackedSalesGraph from "components/stackedSalesGraph/stacked-sales-graph";
+import ReportCards from "components/reportCard/report-cards";
+import DownloadReports from "components/downloadReport/download-reports";
+import ViewCardReports from "components/viewCardReport/view-card-reports";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 // import '@progress/kendo-theme-material/dist/all.css';

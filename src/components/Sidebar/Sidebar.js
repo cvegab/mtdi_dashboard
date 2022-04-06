@@ -200,6 +200,7 @@ function Sidebar(props) {
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
+            
                 {`${firstName} ${lastName}`}
                 {/* Sofía Avatar */}
                 {/* <b className="caret" /> */}
