@@ -587,14 +587,14 @@
   }
 
   .titlesInfoCard {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
   .card .card-body {
     padding: 31px 15px 10px 15px;
   }
   
   .textInfoCard {
-    font-size: 20px !important;
+    font-size: 18px !important;
   }
   #barChartCustom {
     width: 480px !important;
@@ -610,7 +610,8 @@
   }
 
   #textListoParaDespacho {
-    font-size: 20px !important;
+    font-size: 16px !important;
+    width:220px !important;
   }
   .infoLegend {
     padding: 22px 15px 0px 30px !important;
@@ -634,6 +635,14 @@
     height: 550px !important;
     width: 492px !important;
   }
+  .textBttnSendReport {
+    margin-left: -4em !important;
+    font-size: 13px !important;
+  }
+  .textBttnDownloadReport {
+    margin-left: -2em !important;
+    font-size: 13px !important;
+  }
 }
 
 @media screen and (min-width:2560px) {
@@ -647,12 +656,12 @@
   }  
 
   .titlesInfoCard {
-    font-size: 30px !important;
+    font-size: 26px !important;
     width:330px !important;
   }
 
   #textListoParaDespacho {
-    font-size: 30px !important;
+    font-size: 26px !important;
     width: 380px !important;
   }
 
