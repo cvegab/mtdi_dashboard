@@ -1436,7 +1436,7 @@ const hideWMSModalHandler = ()=>{
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-             Download Excel 
+             Descargar Excel 
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
