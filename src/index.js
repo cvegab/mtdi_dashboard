@@ -10,6 +10,7 @@ import "assets/scss/paper-dashboard.scss?v=1.3.0";
 import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import App from "App";
+import ResetPassword from "views/Onboarding/ResetPassword/ResetPassword";
 
 
 
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route path="/onboarding" component={ResetPassword} />
       <Redirect to="/admin/dashboard" />
     </Switch>
   </BrowserRouter>,
