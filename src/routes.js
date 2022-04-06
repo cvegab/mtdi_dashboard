@@ -15,7 +15,17 @@ import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
 import MtdiReports from "views/mtdi_reports";
 
+
 const routes = [
+  // {
+  //   path: "/onboarding",
+  //   name: "onBoarding",
+  //   component: ResetPassword,
+  //   layout: "/admin",
+  // },
+  
+  
+  
   {
     path: "/dashboard",
     name: "Órdenes de compra",
