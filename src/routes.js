@@ -1,5 +1,5 @@
-import Logysto from "views/FormLogysto.js";
-import Charts from "views/Charts.js";
+import Logysto from "views/manualOrders/FormLogysto.js";
+// import Charts from "views/Charts.js";
 
 
 
@@ -10,10 +10,10 @@ import Charts from "views/Charts.js";
 
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
 
-import MtdiTable from "components/Sidebar/mtdi-table";
+import MtdiTable from "views/Orders/mtdi-table.js";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
-import MtdiReports from "views/mtdi_reports";
+import MtdiReports from "views/Dashboard/mtdi_reports";
 
 
 const routes = [
@@ -27,7 +27,7 @@ const routes = [
   
   
   {
-    path: "/dashboard",
+    path: "/orders",
     name: "Órdenes de compra",
     // mini: "RT",
     icon: "nc-icon nc-single-copy-04",
@@ -46,7 +46,7 @@ const routes = [
 
   // },
   {
-    path: "/reports",
+    path: "/dashboard",
     name: "Reportes",
     icon: "nc-icon nc-chart-bar-32",
     component: MtdiReports,

@@ -18,6 +18,7 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import wmsError from '../../assets/img/errorwms.png';
 const XLSX = require('xlsx');
 import {
   Button,
@@ -32,7 +33,6 @@ import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
-import CustomLoader from "./custom-filter-row";
 import spinnerGif from "../../assets/img/spinnerLogos.gif";
 import noDataImage from "../../assets/img/noDataImageBlue.png";
 import endTour from "../../assets/img/endTour.png";
@@ -41,6 +41,8 @@ import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import SplashScreen from "components/UI/splash-screen";
 import SaveAlt from '@material-ui/icons/SaveAlt';
+// import WmsModal from "components/modalComponents/wms-modal";
+ import VerticalModal from "components/UI/vertical-modal.js";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -87,6 +89,7 @@ const MtdiTable = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
+  const [showWMSModal, setshowWMSModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
   const [isLoadingIncrementPage, setisLoadingIncrementPage] = useState(false);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
@@ -519,7 +522,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(typeof data);
+      console.log(data);
 
       setData(data);
 
@@ -528,7 +531,12 @@ const MtdiTable = (props) => {
       console.log(error);
     }
   };
-
+const wmsModalHandler = ()=>{
+  setshowWMSModal(true);
+}
+const hideWMSModalHandler = ()=>{
+  setshowWMSModal(false);
+}
   const showModalHandler = (row) => {
     setshowModal(true);
   };
@@ -810,6 +818,39 @@ const MtdiTable = (props) => {
     //     fontSize: "12px",
     //   },
     // },
+      {
+      title: "Respuesta WMS",
+      // field: "respuesta_wms",
+      field:'',
+      render: () => {
+        
+          // return <span className={classes.stockError}>Error De Stock</span>
+          // ;
+          return (
+            <div>
+              <span className={classes.stockError}>Error De Stock </span>
+           
+               <span
+                style={{ marginLeft: "14px", cursor: "pointer" }}
+                // className={classes.errorinStock}
+              > 
+                <img
+                  src={wmsError}
+                  title="Enviar DTE"
+                  onClick={wmsModalHandler.bind(this, data)}
+                />
+              </span> 
+              </div>
+            
+              )
+       
+      },
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Estado WMS",
       field: "estado_wms",
@@ -892,24 +933,24 @@ const MtdiTable = (props) => {
     //     fontSize: "12px",
     //   },
     // },
-    // {
-    //   title: "Hub fulfillment",
-    //   field: "comprador",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
-    // {
-    //   title: "Courier",
-    //   field: "comprador",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Hub fulfillment",
+      field: "hub_fulfillment",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Courier",
+      field: "estado_courier",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Shipping ID",
       field: "shipping_id",
@@ -1042,6 +1083,14 @@ const MtdiTable = (props) => {
           data={data}
           purchaser={buyer}
         ></SendMail>
+      )}
+       {showWMSModal && (
+    //  <WmsModal
+    //       onhideModal={hideWMSModalHandler}
+          
+    //     />
+    <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
+         
       )}
 
       <div className="content .tenthStepTour">
@@ -1380,14 +1429,14 @@ const MtdiTable = (props) => {
                 marginLeft: "1em",
                 textTransform: "none",
                 letterSpacing: "1px",
-                width: "150px",
+                width: "120px",
                 height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-             Descargar Excel 
+             Download Excel 
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
@@ -1556,9 +1605,7 @@ const MtdiTable = (props) => {
                 icons={tableIcons}
                 columns={columns}
                 data={[]}
-                components={{
-                  Row: (props) => <CustomLoader {...props} />,
-                }}
+              
               ></MaterialTable>
             )}
             {data.length !== 0 && !isLoading && (
@@ -1613,10 +1660,8 @@ const MtdiTable = (props) => {
                   },
                 }}
                 key={data.id_mtdi}
-                title="Instance Table"
                 icons={tableIcons}
                 title=""
-                icons={tableIcons}
                 data={data}
                 columns={columns}
                 options={{ columnsButton: true, sorting: true, search: true,  exportButton: true }}

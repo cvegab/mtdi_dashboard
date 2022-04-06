@@ -15,7 +15,7 @@ import {
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import "./ChartMixed.css";
 // import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
-import MixedAndPieChart from "../../components/GraphComponent/mixed-and-pie-chart";
+import MixedAndPieChart from "../MixedAndPieChart/mixed-and-pie-chart";
 
 const ChartMixed = (props) => {
   console.log(props);

@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
-import sentEmail from "../assets/img/emailSent.png";
-import addProductsFailed from "../assets/img/adding-products-failed.png";
-import ImageError from "../assets/img/error-image.png";
-import ImageOrderPlaced from "../assets/img/order-placed.png";
+import sentEmail from "../../assets/img/emailSent.png";
+import addProductsFailed from "../../assets/img/adding-products-failed.png";
+import ImageError from "../../assets/img/error-image.png";
+import ImageOrderPlaced from "../../assets/img/order-placed.png";
 import { Select, MenuItem } from "@material-ui/core";
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -16,7 +16,7 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import { Spinner } from "reactstrap";
 import RoomIcon from "@material-ui/icons/Room";
 import ReactBSAlert from "react-bootstrap-sweetalert";
-import noDataImage from "../assets/img/noDataImageBlue.png";
+import noDataImage from "../../assets/img/noDataImageBlue.png";
 // import  * as XLSX from "xlsx";
 //buttonImages
 // import falabellaLogo from "../assets/img/logos/falabellaLogo.png";
