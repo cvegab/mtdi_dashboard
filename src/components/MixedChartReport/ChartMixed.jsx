@@ -13,37 +13,34 @@ import {
   Badge,
 } from "reactstrap";
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
-import './ChartMixed.css';
-
-
-
-
-
+import "./ChartMixed.css";
+// import MixedAndPieChart from "components/GraphComponent/mixed-and-pie-chart";
+import MixedAndPieChart from "../../components/GraphComponent/mixed-and-pie-chart";
 
 const ChartMixed = (props) => {
-  console.log(props.data.datasets[1].data);
+  console.log(props);
   let MIXED = {
-    labels: props.data.labels,
+    labels: props.mixedChartData.labels,
     datasets: [
       {
         label: "Ventas",
-        data: props.data.datasets[0].data,
+        data: props.mixedChartData.datasets[0].data,
         backgroundColor: "#344FD5",
         borderRadius: 5,
-        order: 0,
+        order: 1,
       },
       {
         label: "Órdenes",
         yAxisID: "Ordenes",
 
-        data: props.data.datasets[1].data,
+        data: props.mixedChartData.datasets[1].data,
         backgroundColor: "#06CBC1",
         borderColor: "#06CBC1",
         fill: false,
         pointHoverRadius: 10,
         pointHoverBorderWidth: 5,
         type: "line",
-        order:1,
+        order: 0,
         color: "#9f9f9f",
       },
     ],
@@ -108,29 +105,34 @@ const ChartMixed = (props) => {
       },
     },
   };
-  
   return (
-    <div style={{margin:"30px"}}>
-                      <Card className="card-chart" id="mixedChartCustom" style={{borderRadius:"40px"}}>
-                      <CardHeader>
-                      <CardTitle id="textNameTable">
-                        <strong className="title-chartMixed">{props.title}</strong>
-                      </CardTitle>
-                      <p className="card-category"> </p>
-                    </CardHeader>
-                    <CardBody>
-                    
-                      <Bar
-                        data={MIXED}
-                         options={MIXED.options}
-                        
-                      />
-                    </CardBody>
-                    <br></br>
-                    <br></br>
-                  </Card>
+    <div style={{ margin: "30px" }}>
+      <Card
+        className="card-chart"
+        id="mixedChartCustom"
+        style={{ borderRadius: "40px" }}
+      >
+        <CardHeader>
+          <CardTitle id="textNameTable">
+            <strong className="title-chartMixed">{props.title}</strong>
+          </CardTitle>
+          <p className="card-category"> </p>
+        </CardHeader>
+        <CardBody>
+          {/* <MixedAndPieChart
+            mixedChartData={props.mixedChartData}
+          ></MixedAndPieChart> */}
+           <Bar
+            data={MIXED}
+            options={MIXED.options}
+            style={{ width: "400px", height: "300px" }}
+          />
+        </CardBody>
+        <br></br>
+        <br></br>
+      </Card>
     </div>
-  )
-}
+  );
+};
 
-export default ChartMixed
+export default ChartMixed;
