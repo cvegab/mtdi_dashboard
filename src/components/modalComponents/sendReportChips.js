@@ -112,7 +112,7 @@ export default class SendReportChips extends React.Component {
   
       .two-columns .column {
         width: 100%;
-        max-width: 300px;
+        max-width: 400px;
         display: inline-block;
         vertical-align: top;
       }
@@ -295,7 +295,8 @@ export default class SendReportChips extends React.Component {
                          ">
 
                          Desde el equipo de Instance Latam queremos compartir contigo este Reporte general.
-                         Adjuntamos a continuación un PDF para que puedas visualizarlo.
+                         Adjuntamos a continuación un PDF donde podrás visualizarlo.
+                         ¡Que tengas buen día!
 
                         </p>
               
@@ -404,6 +405,7 @@ export default class SendReportChips extends React.Component {
   };
 
   handleChange = (evt) => {
+    console.log(evt.target.value);
     this.setState({
       value: evt.target.value,
       error: null,
@@ -411,12 +413,15 @@ export default class SendReportChips extends React.Component {
   };
 
   handleEmailChange = (evt) => {
+  
     this.setState({
       emailState: evt.target.value,
+     //error: null
     });
   };
 
   checkEmail = (evt) => {
+    console.log(evt);
     let error = null;
 
     if (!this.isEmail(evt.target.value)) {
@@ -454,21 +459,32 @@ export default class SendReportChips extends React.Component {
   };
 
   isValid(email) {
+    let emailError = null;
     let error = null;
 
     if (this.isInList(email)) {
       error = `${email} Fue agregado correctamente`;
     }
+    if (this.isInList(email)) {
+      emailError = `${email} Fue agregado correctamente`;
+    }
 
     if (!this.isEmail(email)) {
       error = `${email} No es un correo válido`;
     }
+    if (!this.isEmail(email)) {
+      emailError = `${email} No es un correo válido`;
+    }
+    if(emailError){
+      this.setState({emailError, error: null});
+    }
 
     if (error) {
-      this.setState({ error });
+      this.setState({ error, emailError:null});
 
       return false;
     }
+    
 
     return true;
   }
@@ -492,7 +508,7 @@ export default class SendReportChips extends React.Component {
   
    const container = this.myRef;
   
-  let element = document.querySelector('#spinz');
+  let element = document.querySelector('.backgroundReport');
   await drawDOM(element, {
     paperSize: "auto"
   }).then(group => {
@@ -509,21 +525,22 @@ export default class SendReportChips extends React.Component {
   console.log(value);
 }
    submitHandler = async(event) => {
-    
-   // this.parseEmail();
+    event.preventDefault();
+   this.parseEmail();
     if (this.isValid(this.state.value)) {
       this.setState({
         items: [...this.state.items, this.state.value],
         value: "",
-        error: null
+        error: null,
+        emailError: null
       });
     }
 
    // this.findRoutes;
    
-    let error = null;
+     let error = null;
 
-    event.preventDefault();
+   
    
 
     if (!this.isEmail(this.state.emailState)) {
@@ -595,10 +612,10 @@ console.log(this.props.getBaseValue);
     }}>
       <PDFExport paperSize="A4" margin="1cm"  ref={this.mypdfExportComponent} fileName="Reporte General" creator='Instance'>  
     <div  id='shiny'>
-    <table id='spinz'>
+    <table  className="backgroundReport" id='spinz'>
       <tr>
         <td>
-         <p style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
+         <p className="titleReports" style={{fontSize:"10px", fontSize:"bold", color: "#373737"}}>Instance · Reportes </p>
           <ChartMixed
               title="Resumen general de órdenes y ventas"
               data=""
@@ -610,7 +627,7 @@ console.log(this.props.getBaseValue);
         <CardReports 
             title="Datos generales"
             subtitle1="Total ingresos"
-            value1={this.props.totalIncomeformatted}
+            value1={this.props.totalIncome}
             subtitle2="Costo Despacho"
             value2={this.props.dispatchCost}
             subtitle3="GM"
@@ -662,11 +679,20 @@ console.log(this.props.getBaseValue);
         </td>
 
         <td>
-            <ChartPie
-              title="Participacion canal de venta"
-              pieChartData={this.props.pieChartData}
-              pieChartOptions={this.props.pieChartData.options}
-            />
+        <ChartPie
+                    title="Participacion canal de venta"
+                    channel={this.props.channel}
+                    linioPie={this.props.linioPie}
+                    vtexPie={this.props.vtexPie}
+                    shopifyPie={this.props.shopifyPie}
+                    ripleyPie={this.props.ripleyPie}
+                    magentoPie={this.props.magentoPie}
+                    wooPie={this.props.wooPie}
+                    chambasPie={this.props.chambasPie}
+                    mercadoPie={this.props.mercadoPie}
+                    exitoPie={this.props.exitoPie}
+                    parisPie={this.props.parisPie}
+                    listaPie={this.props.listaPie}></ChartPie>
         </td>
       </tr>
 
@@ -674,16 +700,25 @@ console.log(this.props.getBaseValue);
         <td>
         <ChartBar 
            title="Ordenes por canal de venta"
-           data=""
-           options=""
+           newlinioMonthly={this.props.newlinioMonthly}
+           newVtexMonthly={this.props.newVtexMonthly}
+           newRipleyMonthly={this.props.newRipleyMonthly}
+           newChambasMonthly={this.props.newChambasMonthly}
+           newMagentoMonthly={this.props.newMagentoMonthly}
+           newWooCommerceMonthly={this.props.newWooCommerceMonthly}
+           newShopifyMonthly={this.props.newShopifyMonthly}
+           newMercadoOrdersMonthly={this.props.newMercadoOrdersMonthly}
+           newParisOrders={this.props.newParisOrders}
+           newExtitoOrders={this.props.newExtitoOrders}
+           newListaOrders={this.props.newListaOrders}
           />
         </td>
 
         <td>
         <ChartBar
            title="Ingresos por canal de venta"
-           data=""
-           options=""
+          //  data=""
+          //  options=""
           />
         </td>
       </tr>
@@ -747,7 +782,7 @@ console.log(this.props.getBaseValue);
               ))}
 
               <input
-                className={"input " + (this.state.error && " has-error")}
+                className={"input " + (this.state.emailError && " has-error")}
                 value={this.state.value}
                 placeholder="Escribe aquí el correo y presiona la tecla 'Enter'"
                 style={{ fontSize: "12px" }}
@@ -756,11 +791,11 @@ console.log(this.props.getBaseValue);
                 onPaste={this.handlePaste}
               />
 
-              {this.state.error && <p className="error">{this.state.error}</p>}
+              {!this.state.emailError && <p className="error">{this.state.emailError}</p>}
             </FormGroup>
             <div class="text-center">
               <button
-                id="bttnSubmit"
+                id="bttnSubmitSendReport"
                 type="submit"
                 style={{
                   backgroundColor: "#1D308E",
@@ -780,27 +815,30 @@ console.log(this.props.getBaseValue);
                 onClick={this.downloadPdfHandler}
               >
              
-                Enviar Reporte &nbsp;
+                <p className="textBttnSendReport">
+                  Enviar Reporte &nbsp;
                 <span className="btn-label">
                   <i className="nc-icon nc-send" />
                 </span>
+                </p>
                
               </button>
 
               {/* <PDFReport 
-                totalIncomeformatted={this.props.totalIncomeformatted}
-                dispatchCost={this.props.dispatchCost}
-                gm={this.props.gm}
-                inProcess={this.props.inProcess}
-                inPreparation={this.props.inPreparation}
-                readyToShip={this.props.readyToShip}
-                onTheWay={this.props.onTheWay}
-                totalOrders={this.props.totalOrders}
-                totalCancelledOrders={this.props.totalCancelledOrders}
-                totalDte={this.props.totalDte}
-                totalNps={this.props.totalNps}
-                reviews={this.props.reviews}
-                totalClaims={this.props.totalClaims}
+                 totalIncome={this.props.totalIncome}
+                //  dispatchCost={props.dispatchCost}
+                //  gm={props.gm}
+                //  conversion={props.conversion}
+                //  totalOrders={props.totalOrders}
+                //  totalCancelledOrders={props.totalCancelledOrders}
+                //  totalDte={props.totalDte}
+                //  inProcess={props.inProcess}
+                //  inPreparation={props.inPreparation}
+                //  readyToShip={props.readyToShip}
+                //  onTheWay={props.onTheWay}
+                //  reviews={props.reviews}
+                //  totalNps={props.totalNps}
+                //  totalClaims={props.totalClaims}
                 
               /> */}
             </div>
@@ -808,7 +846,7 @@ console.log(this.props.getBaseValue);
 
           <div class="text-center">
             <PDFReport 
-                totalIncomeformatted={this.props.totalIncomeformatted}
+                totalIncome={this.props.totalIncome}
                 dispatchCost={this.props.dispatchCost}
                 gm={this.props.gm}
                 inProcess={this.props.inProcess}
@@ -821,56 +859,98 @@ console.log(this.props.getBaseValue);
                 totalNps={this.props.totalNps}
                 reviews={this.props.reviews}
                 totalClaims={this.props.totalClaims}
-                pieChartData={this.props.pieChartData}
-                pieChartOptions={this.props.pieChartData.options}  
-                barChartData={this.props.barChartData}
-                barChartOptions={this.props.barChartOptions}
-                SalesChart={this.props.SalesChart}
-                SalesChartOptions={this.props.SalesChartOptions}
-                newRipleySalesMonthly={this.props.newRipleySalesMonthly}
-                newVtexSalesMonthly={this.props.newVtexSalesMonthly}
-              newlinioSalesMonthly={this.props.newlinioSalesMonthly}
-              newMercadoSalesMonthly={this.props.newMercadoSalesMonthly}
-              newExitoSalesMonthly={this.props.newExitoSalesMonthly}
-              newParisSales={this.props.newParisSales}
-              newShopifySalesMonthly={this.props.newShopifySalesMonthly}
-              newWooCommerceSalesMonthly={this.props.newWooCommerceSalesMonthly}
-              newMagentoSalesMonthly={this.props.newMagentoSalesMonthly}
-              newChambasSalesMonthly={this.props.newChambasSalesMonthly}
-              newListaSales={this.props.newListaSales}
-              stackedDateLabel={this.props.stackedDateLabel}
-              newRipleyMonthly={this.props.newRipleyMonthly}
-              newVtexMonthly={this.props.newVtexMonthly}
-              newlinioMonthly={this.props.newlinioMonthly}
-              newMercadoOrdersMonthly={this.props.newMercadoOrdersMonthly}
-              newExtitoOrders={this.props.newExtitoOrders}
-              newParisOrders={this.props.newParisOrders}
-              newShopifyMonthly={this.props.newShopifyMonthly}
-              newMagentoMonthly={this.props.newMagentoMonthly}
-              newChambasMonthly={this.props.newChambasMonthly}
-              newListaOrders={this.props.newListaOrders}
-              newWooCommerceMonthly={this.props.newWooCommerceMonthly}
-                ripley={this.props.ripley}
-                vtex={this.props.vtex}
-                linio={this.props.linio}
-                mercadoLibre={this.props.mercadoLibre}
-                exito={this.props.exito}
-                paris={this.props.paris}
-                shopify={this.props.shopify}
-                wooCommerce={this.props.wooCommerce}
-                magento={this.props.magento}
-                chambas={this.props.chambas}
-                listaTienda={this.props.listaTienda}
-                ripleyOrders={this.props.ripleyOrders}
-                vtexOrders={this.props.vtexOrders}
-              linioOrders={this.props.linioOrders}
-              mercadoLibreOrders={this.props.mercadoLibreOrders}
-              exitoOrders={this.props.exitoOrders}
-              parisOrders={this.props.parisOrders}
-              shopifyOrders={this.props.shopifyOrders}
-              magentoOrders={this.props.magentoOrders}
-              chambasOrders={this.props.chambasOrders}
-              listaTiendaOrders={this.props.listaTiendaOrders}
+                //MIXED CHART DATA
+                mixedChartData={this.props.mixedChartData}
+                channel={this.props.channel}
+                linioPie = {this.props.linioPie} vtexPie={this.props.vtexPie} shopifyPie={this.props.shopifyPie} ripleyPie={this.props.ripleyPie} magentoPie={this.props.magentoPie} wooPie={this.props.wooPie}  chambasPie={this.props.chambasPie} mercadoPie={this.props.mercadoPie} exitoPie={this.props.exitoPie} parisPie={this.props.parisPie} listaPie={this.props.listaPie}
+                //STACKED SALES CHART
+                stackedDateLabel={this.props.stackedDateLabel}
+                      
+               newlinioSalesMonthly={this.props.newlinioSalesMonthly}
+               newVtexSalesMonthly={this.props.newVtexSalesMonthly}
+               newRipleySalesMonthly={this.props.newRipleySalesMonthly}
+               newChambasSalesMonthly={this.props.newChambasSalesMonthly}
+               newMagentoSalesMonthly={this.props.newMagentoSalesMonthly}
+               newWooCommerceSalesMonthly={this.props.newWooCommerceSalesMonthly}
+               newShopifySalesMonthly={this.props.newShopifySalesMonthly}
+               newMercadoSalesMonthly={this.props.newMercadoSalesMonthly}
+               newParisSales={this.props.newParisSales}
+               newExitoSalesMonthly={this.props.newExitoSalesMonthly}
+               newListaSales={this.props.newListaSales}
+               //STACKED ORDER GRAPH
+               newlinioMonthly={this.props.newlinioMonthly}
+               newVtexMonthly={this.props.newVtexMonthly}
+               newRipleyMonthly={this.props.newRipleyMonthly}
+               newChambasMonthly={this.props.newChambasMonthly}
+               newMagentoMonthly={this.props.newMagentoMonthly}
+               newWooCommerceMonthly={this.props.newWooCommerceMonthly}
+               newShopifyMonthly={this.props.newShopifyMonthly}
+               newMercadoOrdersMonthly={this.props.newMercadoOrdersMonthly}
+               newParisOrders={this.props.newParisOrders}
+               newExtitoOrders={this.props.newExtitoOrders}
+               newListaOrders={this.props.newListaOrders}
+               //ORDER CARD
+               vtex={this.props.vtex}
+          linio={this.props.linio}
+          magento={this.props.magento}
+          mercadoLibre={this.props.mercadoLibre}
+          exito={this.props.exito}
+          ripley={this.props.ripley}
+          shopify={this.props.shopify}
+          paris={this.props.paris}
+          wooCommerce={this.props.wooCommerce}
+          chambas={this.props.chambas}
+          listaTienda={this.props.listaTienda}
+              //   pieChartData={this.props.pieChartData}
+              //   pieChartOptions={this.props.pieChartData.options}  
+              //   barChartData={this.props.barChartData}
+              //   barChartOptions={this.props.barChartOptions}
+              //   SalesChart={this.props.SalesChart}
+              //   SalesChartOptions={this.props.SalesChartOptions}
+              //   newRipleySalesMonthly={this.props.newRipleySalesMonthly}
+              //   newVtexSalesMonthly={this.props.newVtexSalesMonthly}
+              // newlinioSalesMonthly={this.props.newlinioSalesMonthly}
+              // newMercadoSalesMonthly={this.props.newMercadoSalesMonthly}
+              // newExitoSalesMonthly={this.props.newExitoSalesMonthly}
+              // newParisSales={this.props.newParisSales}
+              // newShopifySalesMonthly={this.props.newShopifySalesMonthly}
+              // newWooCommerceSalesMonthly={this.props.newWooCommerceSalesMonthly}
+              // newMagentoSalesMonthly={this.props.newMagentoSalesMonthly}
+              // newChambasSalesMonthly={this.props.newChambasSalesMonthly}
+              // newListaSales={this.props.newListaSales}
+              // stackedDateLabel={this.props.stackedDateLabel}
+              // newRipleyMonthly={this.props.newRipleyMonthly}
+              // newVtexMonthly={this.props.newVtexMonthly}
+              // newlinioMonthly={this.props.newlinioMonthly}
+              // newMercadoOrdersMonthly={this.props.newMercadoOrdersMonthly}
+              // newExtitoOrders={this.props.newExtitoOrders}
+              // newParisOrders={this.props.newParisOrders}
+              // newShopifyMonthly={this.props.newShopifyMonthly}
+              // newMagentoMonthly={this.props.newMagentoMonthly}
+              // newChambasMonthly={this.props.newChambasMonthly}
+              // newListaOrders={this.props.newListaOrders}
+              // newWooCommerceMonthly={this.props.newWooCommerceMonthly}
+              //   ripley={this.props.ripley}
+              //   vtex={this.props.vtex}
+              //   linio={this.props.linio}
+              //   mercadoLibre={this.props.mercadoLibre}
+              //   exito={this.props.exito}
+              //   paris={this.props.paris}
+              //   shopify={this.props.shopify}
+              //   wooCommerce={this.props.wooCommerce}
+              //   magento={this.props.magento}
+              //   chambas={this.props.chambas}
+              //   listaTienda={this.props.listaTienda}
+              //   ripleyOrders={this.props.ripleyOrders}
+              //   vtexOrders={this.props.vtexOrders}
+              // linioOrders={this.props.linioOrders}
+              // mercadoLibreOrders={this.props.mercadoLibreOrders}
+              // exitoOrders={this.props.exitoOrders}
+              // parisOrders={this.props.parisOrders}
+              // shopifyOrders={this.props.shopifyOrders}
+              // magentoOrders={this.props.magentoOrders}
+              // chambasOrders={this.props.chambasOrders}
+              // listaTiendaOrders={this.props.listaTiendaOrders}
               />
           </div>
         </React.Fragment>

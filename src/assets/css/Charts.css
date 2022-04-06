@@ -11,9 +11,9 @@
 
   }
 
-.card {
+/* .card {
   box-shadow: unset !important;
-}
+} */
 
 #accordionFilterBttn {
   background-color: #f4f3ef !important;
@@ -116,7 +116,31 @@
   text-transform: lowercase !important;
 }
 
+/* Modal Compartir Reporte */
+.Modal_modal__4DXUe {
+  top:6vh !important;
+  /* left:25% !important; */
+}
+
 @media screen and (max-width:320px) { 
+
+  .textBttnSendReport {
+    width:120px;
+    font-size:12px !important;
+    margin-left:-3em !important;  
+  }
+  .textBttnDownloadReport {
+    width:200px;
+  }
+
+  .downloadPDBttn {
+    width:200px !important;
+    padding:0px !important;
+  }
+  #bttnSubmitSendReport {
+    width: 200px !important;
+    margin-left:0em !important;
+  }
 
   input[type="text"], input[type="number"] {
     width: 100px !important;
@@ -190,6 +214,25 @@
 
 @media screen and (min-width:321px) and (max-width:375px) { 
 
+  .textBttnSendReport {
+    width:120px;
+    font-size:12px !important;
+    margin-left:-3em !important;  
+  }
+  .textBttnDownloadReport {
+    width:200px;
+  }
+
+  .downloadPDBttn {
+    width:200px !important;
+    padding:0px !important;
+  }
+  #bttnSubmitSendReport {
+    width: 200px !important;
+    margin-left:0em !important;
+  }
+
+
   input[type="text"], input[type="number"] {
     width: 140px !important;
   }
@@ -253,6 +296,25 @@
 }
 
 @media screen and  (min-width: 376px) and (max-width:767px)  {
+  .textBttnSendReport {
+    width:120px;
+    font-size:12px !important;
+    margin-left:-3em !important;  
+  }
+  .textBttnDownloadReport {
+    width:250px;
+    font-size: 12px!important;
+  }
+
+  .downloadPDBttn {
+    width:200px !important;
+    padding:0px !important;
+    margin-left:-4em !important;
+  }
+  #bttnSubmitSendReport {
+    width: 200px !important;
+    margin-left:0em !important;
+  }
 
   #FiltersInDesktop {
     display: none;
@@ -330,6 +392,26 @@
 
 @media screen and (min-width:768px) {
 
+  .textBttnSendReport {
+    width:200px;
+    font-size:12px !important;
+    margin-left:-2em !important;  
+  }
+  .textBttnDownloadReport {
+    width:240px;
+    margin-left:0em;
+    font-size: 12px !important;
+  }
+
+  .downloadPDBttn {
+    width:200px !important;
+    padding:0px !important;
+  }
+  #bttnSubmitSendReport {
+    width: 250px !important;
+    margin-left:0em !important;
+  }
+
 
 
   input[type="text"], input[type="number"] {
@@ -405,7 +487,29 @@
 
 @media screen and (min-width:1024px) and (max-width:1439px) {
 
+  .textBttnSendReport {
+    width:150px;
+    font-size:14px !important;
+    margin-left:-2em !important;  
+  }
+  .textBttnDownloadReport {
+    width:250px;
+    margin-left:-2em;
+    font-size: 14px !important;
+  }
 
+  .downloadPDBttn {
+    width:200px !important;
+    padding:0px !important;
+  }
+  #bttnSubmitSendReport {
+    width: 250px !important;
+    margin-left:0em !important;
+  }
+
+  .Modal_modal__4DXUe {
+    left:27% !important;
+  }
   #colReportDatosGenerales,
   #colReportClientExperience,
   #colReportOrderProcessing,
@@ -483,14 +587,14 @@
   }
 
   .titlesInfoCard {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
   .card .card-body {
     padding: 31px 15px 10px 15px;
   }
   
   .textInfoCard {
-    font-size: 20px !important;
+    font-size: 18px !important;
   }
   #barChartCustom {
     width: 480px !important;
@@ -506,7 +610,8 @@
   }
 
   #textListoParaDespacho {
-    font-size: 20px !important;
+    font-size: 16px !important;
+    width:220px !important;
   }
   .infoLegend {
     padding: 22px 15px 0px 30px !important;
@@ -530,6 +635,14 @@
     height: 550px !important;
     width: 492px !important;
   }
+  .textBttnSendReport {
+    margin-left: -4em !important;
+    font-size: 13px !important;
+  }
+  .textBttnDownloadReport {
+    margin-left: -2em !important;
+    font-size: 13px !important;
+  }
 }
 
 @media screen and (min-width:2560px) {
@@ -543,12 +656,12 @@
   }  
 
   .titlesInfoCard {
-    font-size: 30px !important;
+    font-size: 26px !important;
     width:330px !important;
   }
 
   #textListoParaDespacho {
-    font-size: 30px !important;
+    font-size: 26px !important;
     width: 380px !important;
   }
 
