@@ -1,9 +1,12 @@
 import React from 'react'
+// import NavBar from '../../components/InstanceNavbar/Navbar'
+// import ResetPassword from 'components/ResetPassword/ResetPassword'
 
 const Onboarding = () => {
   return (
     <div>
-      On boarding
+     {/* <NavBar />
+     <ResetPassword /> */}
     </div>
   )
 }

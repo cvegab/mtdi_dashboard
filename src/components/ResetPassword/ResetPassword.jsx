@@ -1,4 +1,3 @@
-import NavBar from 'components/Navbars/InstanceNavbar/Navbar'
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap'
 import IconRectangle from '../../../assets/img/icons/Reports/iconRectangle.png'
@@ -10,7 +9,7 @@ import './ResetPassword.css'
 const ResetPassword = () => {
   return (
     <div>
-      <NavBar />
+      
       <div className="backgroundImage">
         <div className="container">
           <Container style={{display:"flex", justifyContent:"center", marginTop:"15em"}}>
@@ -87,4 +86,4 @@ const ResetPassword = () => {
   )
 }
 
-export default ResetPassword
+export default ResetPassword;
