@@ -10,6 +10,19 @@
   top: 8.5px;
   padding: 8px;
 }
+.syncroError{
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 38px;
+  background: rgba(253, 188, 64, 0.1);
+  font-size: 12px;
+  border-radius: 8px;
+  color: #232A38;
+  left: 8px;
+  top: 8.5px;
+  padding: 8px;
+}
 .integrated{
   justify-content: center;
   align-items: center;

@@ -864,7 +864,26 @@ const hideWMSModalHandler = ()=>{
         
           )
    }
-          
+   if (rowData.estado_wms === "") {
+    return (
+    <div>
+      <span className={classes.syncroError}>Error de Sincro </span>
+   
+       <span
+        style={{ marginLeft: "14px", cursor: "pointer" }}
+        
+      > 
+        {/* <img
+          src={wmsError}
+          title="Enviar DTE"
+          onClick={wmsModalHandler.bind(this, data)}
+        /> */}
+      </span> 
+      </div>
+      
+    
+      )
+}    
           // return (
           //   <div>
           //     <span className={classes.stockError}>Error De Stock </span>
