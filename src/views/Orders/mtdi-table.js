@@ -817,39 +817,39 @@ const hideWMSModalHandler = ()=>{
     //     fontSize: "12px",
     //   },
     // },
-      {
-      title: "Respuesta WMS",
-      // field: "respuesta_wms",
-      field:'',
-      render: () => {
+    //   {
+    //   title: "Respuesta WMS",
+    //   // field: "respuesta_wms",
+    //   field:'',
+    //   render: () => {
         
-          // return <span className={classes.stockError}>Error De Stock</span>
-          // ;
-          return (
-            <div>
-              <span className={classes.stockError}>Error De Stock </span>
+    //       // return <span className={classes.stockError}>Error De Stock</span>
+    //       // ;
+    //       return (
+    //         <div>
+    //           <span className={classes.stockError}>Error De Stock </span>
            
-               <span
-                style={{ marginLeft: "14px", cursor: "pointer" }}
-                // className={classes.errorinStock}
-              > 
-                <img
-                  src={wmsError}
-                  title="Enviar DTE"
-                  onClick={wmsModalHandler.bind(this, data)}
-                />
-              </span> 
-              </div>
+    //            <span
+    //             style={{ marginLeft: "14px", cursor: "pointer" }}
+    //             // className={classes.errorinStock}
+    //           > 
+    //             <img
+    //               src={wmsError}
+    //               title="Enviar DTE"
+    //               onClick={wmsModalHandler.bind(this, data)}
+    //             />
+    //           </span> 
+    //           </div>
             
-              )
+    //           )
        
-      },
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    //   },
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "Estado WMS",
       field: "estado_wms",
@@ -932,24 +932,24 @@ const hideWMSModalHandler = ()=>{
     //     fontSize: "12px",
     //   },
     // },
-    {
-      title: "Hub fulfillment",
-      field: "hub_fulfillment",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
-    {
-      title: "Courier",
-      field: "estado_courier",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Hub fulfillment",
+    //   field: "hub_fulfillment",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
+    // {
+    //   title: "Courier",
+    //   field: "estado_courier",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "Shipping ID",
       field: "shipping_id",
