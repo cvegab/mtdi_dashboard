@@ -18,8 +18,8 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-import wmsError from '../../assets/img/errorwms.png';
-const XLSX = require('xlsx');
+import wmsError from "../../assets/img/errorwms.png";
+const XLSX = require("xlsx");
 import {
   Button,
   Col,
@@ -28,6 +28,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Row,
 } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
@@ -40,9 +41,9 @@ import startTour from "../../assets/img/startTour.png";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import SplashScreen from "components/UI/splash-screen";
-import SaveAlt from '@material-ui/icons/SaveAlt';
+import SaveAlt from "@material-ui/icons/SaveAlt";
 // import WmsModal from "components/modalComponents/wms-modal";
- import VerticalModal from "components/UI/vertical-modal.js";
+import VerticalModal from "components/UI/vertical-modal.js";
 import WmsModal from "components/modalComponents/wms-modal";
 
 const tableIcons = {
@@ -532,12 +533,12 @@ const MtdiTable = (props) => {
       console.log(error);
     }
   };
-const wmsModalHandler = ()=>{
-  setshowWMSModal(true);
-}
-const hideWMSModalHandler = ()=>{
-  setshowWMSModal(false);
-}
+  const wmsModalHandler = () => {
+    setshowWMSModal(true);
+  };
+  const hideWMSModalHandler = () => {
+    setshowWMSModal(false);
+  };
   const showModalHandler = (row) => {
     setshowModal(true);
   };
@@ -635,6 +636,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "OpsId",
       field: "order_id",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -645,6 +647,8 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Fecha de Orden",
       field: "fecha_creacion",
+      width: '3.5%',
+    
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -654,6 +658,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Canal de Venta",
       field: "canal_de_venta",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -663,6 +668,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Tienda",
       field: "tienda",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -672,6 +678,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Cliente",
       field: "cliente",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -681,6 +688,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Tienda Oficial",
       field: "official_store",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -690,6 +698,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Orden de Compra",
       field: "order_id",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -699,6 +708,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "País",
       field: "pais",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -730,7 +740,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "DTE",
       field: "dte",
-
+      width: '3.5%',
       render: (rowData) => {
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
@@ -804,6 +814,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Bodega",
       field: "bodega",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -819,90 +830,74 @@ const hideWMSModalHandler = ()=>{
     //     fontSize: "12px",
     //   },
     // },
-      {
+    {
       title: "Respuesta WMS",
       // field: "estado_wms",
-      field:'estado_wms',
+      field: "estado_wms",
+      width: '3.5%',
       render: (rowData) => {
         if (rowData.estado_wms === "Pendiente") {
-            return (
+          return (
             <div>
               <span className={classes.stockError}>Error De Stock </span>
-           
-               <span
-                style={{ marginLeft: "14px", cursor: "pointer" }}
-                
-              > 
+
+              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
                 {/* <img
                   src={wmsError}
                   title="Enviar DTE"
                   onClick={wmsModalHandler.bind(this, data)}
                 /> */}
-              </span> 
-              </div>
-              
-            
-              )
-       }
-       if (rowData.estado_wms === "No Aplica") {
-        return (
-        <div>
-          <span className={classes.integrated}>Integrada a WMS </span>
-       
-           <span
-            style={{ marginLeft: "14px", cursor: "pointer" }}
-            
-          > 
-            {/* <img
+              </span>
+            </div>
+          );
+        }
+        if (rowData.estado_wms === "No Aplica") {
+          return (
+            <div>
+              <span className={classes.integrated}>Integrada a WMS </span>
+
+              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                {/* <img
               src={wmsError}
               title="Enviar DTE"
               onClick={wmsModalHandler.bind(this, data)}
             /> */}
-          </span> 
-          </div>
-          
-        
-          )
-   }
-   if (rowData.estado_wms === "") {
-    return (
-    <div>
-      <span className={classes.syncroError}>Error de Sincro </span>
-   
-       <span
-        style={{ marginLeft: "14px", cursor: "pointer" }}
-        
-      > 
-        {/* <img
+              </span>
+            </div>
+          );
+        }
+        if (rowData.estado_wms === "") {
+          return (
+            <div>
+              <span className={classes.syncroError}>Error de Sincro </span>
+
+              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                {/* <img
           src={wmsError}
           title="Enviar DTE"
           onClick={wmsModalHandler.bind(this, data)}
         /> */}
-      </span> 
-      </div>
-      
-    
-      )
-}    
-          // return (
-          //   <div>
-          //     <span className={classes.stockError}>Error De Stock </span>
-           
-          //      <span
-          //       style={{ marginLeft: "14px", cursor: "pointer" }}
-                
-          //     > 
-          //       {/* <img
-          //         src={wmsError}
-          //         title="Enviar DTE"
-          //         onClick={wmsModalHandler.bind(this, data)}
-          //       /> */}
-          //     </span> 
-          //     </div>
-              
-            
-          //     )
-         
+              </span>
+            </div>
+          );
+        }
+        // return (
+        //   <div>
+        //     <span className={classes.stockError}>Error De Stock </span>
+
+        //      <span
+        //       style={{ marginLeft: "14px", cursor: "pointer" }}
+
+        //     >
+        //       {/* <img
+        //         src={wmsError}
+        //         title="Enviar DTE"
+        //         onClick={wmsModalHandler.bind(this, data)}
+        //       /> */}
+        //     </span>
+        //     </div>
+
+        //     )
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -913,7 +908,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Estado WMS",
       field: "estado_wms",
-
+      width: '3.5%',
       render: (rowData) => {
         if (rowData.estado_wms === "Enviado") {
           return (
@@ -949,7 +944,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Total",
       field: "precio_sin_shipping",
-
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -959,6 +954,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Shipping",
       field: "valor_shipping",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -968,6 +964,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Estado OC",
       field: "estado_oc",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -995,6 +992,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Hub fulfillment",
       field: "hub_fulfillment",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1003,7 +1001,18 @@ const hideWMSModalHandler = ()=>{
     },
     {
       title: "Courier",
+      field: "courier",
+      width: '3.5%',
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Estado Courier",
       field: "estado_courier",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1013,6 +1022,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Shipping ID",
       field: "shipping_id",
+      width: '3.5%',
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1039,22 +1049,59 @@ const hideWMSModalHandler = ()=>{
     // },
     {
       title: "Comprador",
-      field: "comprador",
+      field: "comprador,rut",
+      width: '20%',
+      render: (rowData) => {
+        return(<div>
+      <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.comprador}</span>
+       {/* <span
+               style={{ marginLeft: "100%", cursor: "pointer", display:'inline' }}  
+                >
+                  <img   
+                    src={SiIcon}
+                    title="Enviar DTE"
+                    onClick={showModalHandler.bind(this, data)}
+                  />
+                </span> */}
+                <br/>
+                <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.rut}</span>
+              
+      
+          {/* <p style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.comprador}</p>
+          <p style={{color:'GrayText'}}>{rowData.rut}</p>
+          <img
+                  src={wmsError}
+                  title="Enviar DTE"
+                  onClick={wmsModalHandler.bind(this, data)}
+                /> */}
+      <span
+               style={{ marginLeft: "100%",marginTop:'70%', cursor: "pointer", display:'content' }}  
+                >
+                  <img   
+                    src={SiIcon}
+                    title="Enviar DTE"
+                    onClick={showModalHandler.bind(this, data)}
+                  />
+                </span> 
+        </div>)
+
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
         fontSize: "12px",
       },
     },
-    // {
-    //   title: "NPS",
-    //   field: "comprador",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "NPS",
+      field: "comprador",
+      width: '10%',
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     // {
     //   title: "Reviews",
     //   field: "comprador",
@@ -1122,20 +1169,20 @@ const hideWMSModalHandler = ()=>{
     console.log(event.target.value);
     setsearchOrderId(event.target.value);
   };
- const DownloadFileHandler = ()=>{
-   console.log('Download file');
-   let binary_univers = data;
-   let binaryWS = XLSX.utils.json_to_sheet(binary_univers); 
-   // Create a new Workbook
-   var wb = XLSX.utils.book_new() 
-   // Name your sheet
-   XLSX.utils.book_append_sheet(wb, binaryWS, 'Binary values') 
-   // export your excel
-   XLSX.writeFile(wb, 'instance_orders.xlsx');
- }
+  const DownloadFileHandler = () => {
+    console.log("Download file");
+    let binary_univers = data;
+    let binaryWS = XLSX.utils.json_to_sheet(binary_univers);
+    // Create a new Workbook
+    var wb = XLSX.utils.book_new();
+    // Name your sheet
+    XLSX.utils.book_append_sheet(wb, binaryWS, "Binary values");
+    // export your excel
+    XLSX.writeFile(wb, "instance_orders.xlsx");
+  };
   return (
     <React.Fragment>
-      {isLoading && <SplashScreen message='Órdenes' />}
+      {isLoading && <SplashScreen message="Órdenes" />}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -1143,14 +1190,13 @@ const hideWMSModalHandler = ()=>{
           purchaser={buyer}
         ></SendMail>
       )}
-       {showWMSModal && (
-    //  <WmsModal
-    //       onhideModal={hideWMSModalHandler}
-          
-    //     />
-    // <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
-         <WmsModal onhideModal={hideWMSModalHandler}
-         ></WmsModal>
+      {showWMSModal && (
+        //  <WmsModal
+        //       onhideModal={hideWMSModalHandler}
+
+        //     />
+        // <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
+        <WmsModal onhideModal={hideWMSModalHandler}></WmsModal>
       )}
 
       <div className="content .tenthStepTour">
@@ -1481,7 +1527,7 @@ const hideWMSModalHandler = ()=>{
         id="upload"
         // onChange={readUploadFile}
     /> */}
-     <Button
+            <Button
               color="primary"
               style={{
                 borderRadius: "22px",
@@ -1496,7 +1542,7 @@ const hideWMSModalHandler = ()=>{
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-             Download Excel 
+              Download Excel
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
@@ -1550,10 +1596,11 @@ const hideWMSModalHandler = ()=>{
             {isLoading && (
               <MaterialTable
                 // title=""
-               
+
                 options={{
                   search: false,
-                  exportButton: true
+                  exportButton: true,
+                  tableLayout: "fixed"
                 }}
                 title=""
                 icons={tableIcons}
@@ -1611,9 +1658,10 @@ const hideWMSModalHandler = ()=>{
             )}
             {data.length === 0 && !isLoading && (
               <MaterialTable
-              options={{
-                exportButton: true
-              }}
+                options={{
+                  exportButton: true,
+                  tableLayout: "fixed"
+                }}
                 localization={{
                   body: {
                     emptyDataSourceMessage: (
@@ -1670,7 +1718,6 @@ const hideWMSModalHandler = ()=>{
             )}
             {data.length !== 0 && !isLoading && (
               <MaterialTable
-             
                 onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
                 localization={{
                   body: {
@@ -1724,7 +1771,13 @@ const hideWMSModalHandler = ()=>{
                 title=""
                 data={data}
                 columns={columns}
-                options={{ columnsButton: true, sorting: true, search: true,  exportButton: true }}
+                options={{
+                  columnsButton: true,
+                  sorting: true,
+                  search: true,
+                  exportButton: true,
+                  tableLayout: "fixed"
+                }}
                 style={{ marginLeft: "1em", marginTop: "2em" }}
               />
             )}
