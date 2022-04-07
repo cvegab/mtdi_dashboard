@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import classes from "../Sidebar/mtdi-table.module.css";
+// import classes from "../../components/mtdiTable/mtdi-table.module.css";
 import { Select, MenuItem } from "@material-ui/core";
 import iconG1 from "../../assets/img/icons/Reports/iconG1.png";
 import iconG2 from "../../assets/img/icons/Reports/iconG2.png";

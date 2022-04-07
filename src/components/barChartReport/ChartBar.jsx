@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import { Line, Bar, Pie, Chart } from "react-chartjs-2";
 import "./ChartBart.css";
-import StackedSalesGraph from "../../components/GraphComponent/stacked-sales-graph";
+import StackedSalesGraph from "../stackedSalesGraph/stacked-sales-graph";
 
 const ChartBar = (props) => {
  

@@ -33,7 +33,6 @@ import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard";
-import CustomLoader from "./custom-filter-row";
 import spinnerGif from "../../assets/img/spinnerLogos.gif";
 import noDataImage from "../../assets/img/noDataImageBlue.png";
 import endTour from "../../assets/img/endTour.png";
@@ -1605,9 +1604,7 @@ const hideWMSModalHandler = ()=>{
                 icons={tableIcons}
                 columns={columns}
                 data={[]}
-                components={{
-                  Row: (props) => <CustomLoader {...props} />,
-                }}
+              
               ></MaterialTable>
             )}
             {data.length !== 0 && !isLoading && (

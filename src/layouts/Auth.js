@@ -58,7 +58,7 @@ function Pages() {
   };
   return (
     <>
-      <AuthNavbar />
+      {/* <AuthNavbar /> */}
       <div className="wrapper wrapper-full-page" ref={fullPages}>
         <div className="full-page section-image">
           <Switch>{getRoutes(routes)}</Switch>
