@@ -14,6 +14,7 @@ import MtdiTable from "views/Orders/mtdi-table.js";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
 import MtdiReports from "views/Dashboard/mtdi_reports";
+import CustomerMaintaniner from "views/CustomerMaintaniner/CustomerMaintaniner";
 
 
 const routes = [
@@ -34,17 +35,6 @@ const routes = [
     component: MtdiTable,
     layout: "/admin",
   },
-
- 
-
-  // {
-  //   path: "/charts",
-  //   name: "Reportes",
-  //   icon: "nc-icon nc-chart-bar-32",
-  //   component: Charts,
-  //   layout: "/admin",
-
-  // },
   {
     path: "/dashboard",
     name: "Reportes",
@@ -53,9 +43,16 @@ const routes = [
     layout: "/admin",
 
   },
+  {
+    path: "/customermaintaniner",
+    name: "Administrar Perfiles ",
+    icon: "nc-icon nc-single-02",
+    component: CustomerMaintaniner,
+    layout: "/admin",
 
+  },
   // {
-  //   path: "/logysto",
+  //   path: "/manualorders",
   //   name: "Ingreso manual OC",
   //   icon: "nc-icon nc-laptop",
   //   component: Logysto,
