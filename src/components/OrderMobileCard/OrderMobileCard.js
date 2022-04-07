@@ -3,7 +3,7 @@ import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
 import greyIcon from "../../assets/img/greyIcon.png";
-import classes from "../Sidebar/mtdi-table.module.css";
+import classes from '../../../src/views/Orders/mtdi-table.module.css'
 import SendMail from "components/modalComponents/sendMail";
 
 // reactstrap components
