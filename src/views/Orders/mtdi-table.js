@@ -821,30 +821,69 @@ const hideWMSModalHandler = ()=>{
     // },
       {
       title: "Respuesta WMS",
-      // field: "respuesta_wms",
-      field:'',
-      render: () => {
-        
-          // return <span className={classes.stockError}>Error De Stock</span>
-          // ;
-          return (
+      // field: "estado_wms",
+      field:'estado_wms',
+      render: (rowData) => {
+        if (rowData.estado_wms === "Pendiente") {
+            return (
             <div>
               <span className={classes.stockError}>Error De Stock </span>
            
                <span
                 style={{ marginLeft: "14px", cursor: "pointer" }}
-                // className={classes.errorinStock}
+                
               > 
-                <img
+                {/* <img
                   src={wmsError}
                   title="Enviar DTE"
                   onClick={wmsModalHandler.bind(this, data)}
-                />
+                /> */}
               </span> 
               </div>
+              
             
               )
+       }
+       if (rowData.estado_wms === "No Aplica") {
+        return (
+        <div>
+          <span className={classes.integrated}>Integrada a WMS </span>
        
+           <span
+            style={{ marginLeft: "14px", cursor: "pointer" }}
+            
+          > 
+            {/* <img
+              src={wmsError}
+              title="Enviar DTE"
+              onClick={wmsModalHandler.bind(this, data)}
+            /> */}
+          </span> 
+          </div>
+          
+        
+          )
+   }
+          
+          // return (
+          //   <div>
+          //     <span className={classes.stockError}>Error De Stock </span>
+           
+          //      <span
+          //       style={{ marginLeft: "14px", cursor: "pointer" }}
+                
+          //     > 
+          //       {/* <img
+          //         src={wmsError}
+          //         title="Enviar DTE"
+          //         onClick={wmsModalHandler.bind(this, data)}
+          //       /> */}
+          //     </span> 
+          //     </div>
+              
+            
+          //     )
+         
       },
       headerStyle: {
         backgroundColor: "#1D308E",
