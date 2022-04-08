@@ -45,6 +45,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 // import WmsModal from "components/modalComponents/wms-modal";
 import VerticalModal from "components/UI/vertical-modal.js";
 import WmsModal from "components/modalComponents/wms-modal";
+import ClientModal from "components/ClientModal/client-modal";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -92,6 +93,7 @@ const MtdiTable = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [showWMSModal, setshowWMSModal] = useState(false);
+  const [clientModal, setclientModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
   const [isLoadingIncrementPage, setisLoadingIncrementPage] = useState(false);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
@@ -539,6 +541,12 @@ const MtdiTable = (props) => {
   const hideWMSModalHandler = () => {
     setshowWMSModal(false);
   };
+  const clientModalHandler = ()=>{
+    setclientModal(true);
+  }
+  const hideClientModalHandler = ()=>{
+    setclientModal(false);
+  }
   const showModalHandler = (row) => {
     setshowModal(true);
   };
@@ -881,23 +889,6 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        // return (
-        //   <div>
-        //     <span className={classes.stockError}>Error De Stock </span>
-
-        //      <span
-        //       style={{ marginLeft: "14px", cursor: "pointer" }}
-
-        //     >
-        //       {/* <img
-        //         src={wmsError}
-        //         title="Enviar DTE"
-        //         onClick={wmsModalHandler.bind(this, data)}
-        //       /> */}
-        //     </span>
-        //     </div>
-
-        //     )
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -932,15 +923,15 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    // {
-    //   title: "Hub de pago",
-    //   field: "estado_pago",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Hub de pago",
+      field: "estado_pago",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Total",
       field: "precio_sin_shipping",
@@ -961,16 +952,16 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    {
-      title: "Estado OC",
-      field: "estado_oc",
-      width: '3.5%',
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Estado OC",
+    //   field: "estado_oc",
+    //   width: '3.5%',
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     // {
     //   title: "Pickeador",
     //   field: "comprador",
@@ -1050,39 +1041,28 @@ const MtdiTable = (props) => {
     {
       title: "Comprador",
       field: "comprador,rut",
-      width: '20%',
+      // width: '20%',
+      marginLeft:'50%',
       render: (rowData) => {
-        return(<div>
-      <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.comprador}</span>
-       {/* <span
-               style={{ marginLeft: "100%", cursor: "pointer", display:'inline' }}  
-                >
-                  <img   
-                    src={SiIcon}
-                    title="Enviar DTE"
-                    onClick={showModalHandler.bind(this, data)}
-                  />
-                </span> */}
+        return(<div style={{overflow:'hidden',whiteSpace:'nowrap',fontSize: '10px'}}>
+       {rowData.comprador}
+      {/* <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.comprador}</span> */}
+      
                 <br/>
                 <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.rut}</span>
               
-      
-          {/* <p style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.comprador}</p>
-          <p style={{color:'GrayText'}}>{rowData.rut}</p>
-          <img
-                  src={wmsError}
-                  title="Enviar DTE"
-                  onClick={wmsModalHandler.bind(this, data)}
-                /> */}
-      <span
-               style={{ marginLeft: "100%",marginTop:'70%', cursor: "pointer", display:'content' }}  
+              <span
+                  style={{ marginLeft: "40%", cursor: "pointer",width:'20%' }}
+                 
                 >
-                  <img   
+                  <img
                     src={SiIcon}
                     title="Enviar DTE"
-                    onClick={showModalHandler.bind(this, data)}
+                    onClick={clientModalHandler}
                   />
-                </span> 
+                </span>
+         
+      
         </div>)
 
       },
@@ -1092,6 +1072,7 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
+  
     {
       title: "NPS",
       field: "comprador",
@@ -1198,7 +1179,9 @@ const MtdiTable = (props) => {
         // <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
         <WmsModal onhideModal={hideWMSModalHandler}></WmsModal>
       )}
-
+  {clientModal && (
+   <ClientModal  onhideModal={hideClientModalHandler} purchaser={buyer}></ClientModal>
+      )}
       <div className="content .tenthStepTour">
         <div className="bttnTour">
           <Button
