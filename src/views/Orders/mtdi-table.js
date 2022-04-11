@@ -19,6 +19,8 @@ import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
 import Estado from "../../assets/img/Estado.png";
+import chileExpress from "../../assets/img/chile-express.png";
+import CorreosChile from  "../../assets/img/correos-chile.png";
 import wmsError from "../../assets/img/errorwms.png";
 const XLSX = require("xlsx");
 import {
@@ -985,7 +987,16 @@ const MtdiTable = (props) => {
     {
       title: "Hub fulfillment",
       field: "hub_fulfillment",
-      width: "13%",
+      width: "15%",
+      render: (rowData) => {
+        return (
+          <div>
+          <span style={{ whiteSpace: "nowrap"}}><img style={{paddingRight:'8px'}} src={chileExpress}/>
+           {rowData.hub_fulfillment}
+           </span> 
+          </div>
+        );
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -995,7 +1006,17 @@ const MtdiTable = (props) => {
     {
       title: "Courier",
       field: "courier",
-      width: "13%",
+      width: "15%",
+      render: (rowData) => {
+        return (
+          <div>
+          <span style={{ whiteSpace: "nowrap"}}><img style={{paddingRight:'8px'}} src={CorreosChile}/>
+           {rowData.hub_fulfillment}
+           </span> 
+          </div>
+        );
+      },
+     
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
