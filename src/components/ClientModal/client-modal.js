@@ -4,8 +4,7 @@ import mailButton from "../../assets/img/mailButton.png";
 import textMessage from "../../assets/img/textMessage.png";
 
 const ClientModal = (props) => {
-  console.log("client modal");
-  console.log(props);
+ 
   return (
     <Modal onhideModal={props.onhideModal}>
       <p style={{ textAlign: "center" }}>Orden {props.purchaser.order_id}</p>

@@ -1255,7 +1255,7 @@ const MtdiTable = (props) => {
         ></ClientModal>
       )}
        {showCourierModal && (
-  <CourierStatusModal></CourierStatusModal>
+  <CourierStatusModal onhideModal={hideCourierModalHandler}></CourierStatusModal>
       )}
       <div className="content .tenthStepTour">
         <div className="bttnTour">

@@ -1,11 +1,13 @@
 import HorizontalModal from "components/horizontalModal/horizontal-modal";
 
-const CourierStatusModal = ()=>{
+const CourierStatusModal = (props)=>{
 return(
-    <HorizontalModal>
-        <h1>
-            hellofjnejdg,rf.h;tjlljlyrjlykljkylkj;lyrjl;ykljkylkj;ykj;ykj;ykj'y;kj'yk'jky'kj'ykj'ykj'ykj'kyj'yj'ykj'ky'jy'
-        </h1>
+    <HorizontalModal onhideModal={props.onhideModal}>
+         <p style={{ textAlign: "center" }}>Orden 1534</p>
+         <h5 style={{ fontWeight: "700", size: "22px", textAlign: "center" }}>
+     Estado del courier
+      </h5>
+       
     </HorizontalModal>
 )
 }
