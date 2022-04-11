@@ -18,6 +18,7 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import Estado from "../../assets/img/Estado.png";
 import wmsError from "../../assets/img/errorwms.png";
 const XLSX = require("xlsx");
 import {
@@ -925,7 +926,7 @@ const MtdiTable = (props) => {
     },
     {
       title: "Hub de pago",
-      field: "estado_pago",
+      field: "hub",
       width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1065,7 +1066,7 @@ const MtdiTable = (props) => {
             >
               <img
                 style={{ float: "left" }}
-                src={SiIcon}
+                src={Estado}
                 title="Enviar DTE"
                 onClick={clientModalHandler}
               />
