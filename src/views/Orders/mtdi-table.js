@@ -541,12 +541,12 @@ const MtdiTable = (props) => {
   const hideWMSModalHandler = () => {
     setshowWMSModal(false);
   };
-  const clientModalHandler = ()=>{
+  const clientModalHandler = () => {
     setclientModal(true);
-  }
-  const hideClientModalHandler = ()=>{
+  };
+  const hideClientModalHandler = () => {
     setclientModal(false);
-  }
+  };
   const showModalHandler = (row) => {
     setshowModal(true);
   };
@@ -644,7 +644,7 @@ const MtdiTable = (props) => {
     {
       title: "OpsId",
       field: "order_id",
-      width: '3.5%',
+      width: "10%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -655,8 +655,8 @@ const MtdiTable = (props) => {
     {
       title: "Fecha de Orden",
       field: "fecha_creacion",
-      width: '3.5%',
-    
+      width: "13%",
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -666,7 +666,7 @@ const MtdiTable = (props) => {
     {
       title: "Canal de Venta",
       field: "canal_de_venta",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -676,7 +676,7 @@ const MtdiTable = (props) => {
     {
       title: "Tienda",
       field: "tienda",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -686,7 +686,7 @@ const MtdiTable = (props) => {
     {
       title: "Cliente",
       field: "cliente",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -696,7 +696,7 @@ const MtdiTable = (props) => {
     {
       title: "Tienda Oficial",
       field: "official_store",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -706,7 +706,7 @@ const MtdiTable = (props) => {
     {
       title: "Orden de Compra",
       field: "order_id",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -716,7 +716,7 @@ const MtdiTable = (props) => {
     {
       title: "País",
       field: "pais",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -748,7 +748,7 @@ const MtdiTable = (props) => {
     {
       title: "DTE",
       field: "dte",
-      width: '3.5%',
+      width: "13%",
       render: (rowData) => {
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
@@ -822,7 +822,7 @@ const MtdiTable = (props) => {
     {
       title: "Bodega",
       field: "bodega",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -842,7 +842,7 @@ const MtdiTable = (props) => {
       title: "Respuesta WMS",
       // field: "estado_wms",
       field: "estado_wms",
-      width: '3.5%',
+      width: "13%",
       render: (rowData) => {
         if (rowData.estado_wms === "Pendiente") {
           return (
@@ -899,7 +899,7 @@ const MtdiTable = (props) => {
     {
       title: "Estado WMS",
       field: "estado_wms",
-      width: '3.5%',
+      width: "13%",
       render: (rowData) => {
         if (rowData.estado_wms === "Enviado") {
           return (
@@ -926,6 +926,7 @@ const MtdiTable = (props) => {
     {
       title: "Hub de pago",
       field: "estado_pago",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -935,7 +936,7 @@ const MtdiTable = (props) => {
     {
       title: "Total",
       field: "precio_sin_shipping",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -945,7 +946,7 @@ const MtdiTable = (props) => {
     {
       title: "Shipping",
       field: "valor_shipping",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -983,7 +984,7 @@ const MtdiTable = (props) => {
     {
       title: "Hub fulfillment",
       field: "hub_fulfillment",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -993,7 +994,7 @@ const MtdiTable = (props) => {
     {
       title: "Courier",
       field: "courier",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1003,7 +1004,7 @@ const MtdiTable = (props) => {
     {
       title: "Estado Courier",
       field: "estado_courier",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1013,7 +1014,7 @@ const MtdiTable = (props) => {
     {
       title: "Shipping ID",
       field: "shipping_id",
-      width: '3.5%',
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1041,30 +1042,59 @@ const MtdiTable = (props) => {
     {
       title: "Comprador",
       field: "comprador,rut",
-      // width: '20%',
-      marginLeft:'50%',
+       width: '22%',
+    
       render: (rowData) => {
-        return(<div style={{overflow:'hidden',whiteSpace:'nowrap',fontSize: '10px'}}>
-       {rowData.comprador}
-      {/* <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.comprador}</span> */}
-      
-                <br/>
-                <span style={{overflow:'hidden',whiteSpace:'nowrap'}}>{rowData.rut}</span>
-              
-              <span
-                  style={{ marginLeft: "40%", cursor: "pointer",width:'20%' }}
-                 
-                >
-                  <img
-                    src={SiIcon}
-                    title="Enviar DTE"
-                    onClick={clientModalHandler}
-                  />
-                </span>
-         
-      
-        </div>)
+        return (
+          // <div
+          <div>
+            <span
+              style={{
+                width: "0%",
+                float: "left",
+                whiteSpace: "nowrap",
+                fontSize: "11px",
+              }}
+            >
+              {rowData.comprador}
+              <br />
+              {rowData.rut}
+            </span>
+            <span
+              style={{ width: "20%", float: "right", whiteSpace: "nowrap" }}
+            >
+              <img
+                style={{ float: "left" }}
+                src={SiIcon}
+                title="Enviar DTE"
+                onClick={clientModalHandler}
+              />
+            </span>
+          </div>
+          //   style={{
+          //     overflow: "hidden",
+          //     whiteSpace: "nowrap",
+          //     fontSize: "10px",
+          //   }}
+          // >
+          //   {rowData.comprador}
+          //   <br />
+          //   <span style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
+          //     {rowData.rut}
+          //   </span>
 
+          //   <span
+          //     style={{ marginLeft: "40%", cursor: "pointer", width: "20%" }}
+          //   >
+          //     <img
+          //       style={{ float: "left" }}
+          //       src={SiIcon}
+          //       title="Enviar DTE"
+          //       onClick={clientModalHandler}
+          //     />
+          //   </span>
+          // </div>
+        );
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1072,11 +1102,11 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-  
+
     {
       title: "NPS",
       field: "comprador",
-      width: '10%',
+      width: "10%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1179,8 +1209,11 @@ const MtdiTable = (props) => {
         // <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
         <WmsModal onhideModal={hideWMSModalHandler}></WmsModal>
       )}
-  {clientModal && (
-   <ClientModal  onhideModal={hideClientModalHandler} purchaser={buyer}></ClientModal>
+      {clientModal && (
+        <ClientModal
+          onhideModal={hideClientModalHandler}
+          purchaser={buyer}
+        ></ClientModal>
       )}
       <div className="content .tenthStepTour">
         <div className="bttnTour">
@@ -1583,7 +1616,7 @@ const MtdiTable = (props) => {
                 options={{
                   search: false,
                   exportButton: true,
-                  tableLayout: "fixed"
+                  tableLayout: "fixed",
                 }}
                 title=""
                 icons={tableIcons}
@@ -1643,7 +1676,7 @@ const MtdiTable = (props) => {
               <MaterialTable
                 options={{
                   exportButton: true,
-                  tableLayout: "fixed"
+                  tableLayout: "fixed",
                 }}
                 localization={{
                   body: {
@@ -1696,7 +1729,6 @@ const MtdiTable = (props) => {
                 icons={tableIcons}
                 columns={columns}
                 data={[]}
-              
               ></MaterialTable>
             )}
             {data.length !== 0 && !isLoading && (
@@ -1759,7 +1791,7 @@ const MtdiTable = (props) => {
                   sorting: true,
                   search: true,
                   exportButton: true,
-                  tableLayout: "fixed"
+                  tableLayout: "fixed",
                 }}
                 style={{ marginLeft: "1em", marginTop: "2em" }}
               />

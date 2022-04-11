@@ -249,9 +249,9 @@ input[type="number"] {
 
 
 
-.MuiTable-root {
+/* .MuiTable-root {
   display: block !important;
-}
+} */
 .form-control {
   background-color: white !important;
 }
