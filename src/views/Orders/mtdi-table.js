@@ -50,6 +50,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import VerticalModal from "components/UI/vertical-modal.js";
 import WmsModal from "components/modalComponents/wms-modal";
 import ClientModal from "components/ClientModal/client-modal";
+import CourierStatusModal from "components/courierStatusModal/courier-status-modal";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -97,6 +98,7 @@ const MtdiTable = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [showWMSModal, setshowWMSModal] = useState(false);
+  const [showCourierModal, setshowCourierModal] = useState(false);
   const [clientModal, setclientModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
   const [isLoadingIncrementPage, setisLoadingIncrementPage] = useState(false);
@@ -560,7 +562,12 @@ const MtdiTable = (props) => {
   const showPdfHandler = () => {
     window.open(buyer.dte);
   };
-
+  const displayCourierModalHandler = ()=>{
+    setshowCourierModal(true);
+  }
+  const hideCourierModalHandler = ()=>{
+    setshowCourierModal(false);
+  }
   const applyFiltersButtonhandler = async () => {
     let url = "";
     if (searchOrderId !== "") {
@@ -1032,7 +1039,7 @@ const MtdiTable = (props) => {
         return (
           <div>
           <span style={{ whiteSpace: "nowrap"}}>
-           {rowData.estado_courier} <img style={{paddingRight:'8px'}} src={CourierStatus}/>
+           {rowData.estado_courier} <img style={{paddingRight:'8px'}} src={CourierStatus} onClick={displayCourierModalHandler}/>
            </span> 
           </div>
         );
@@ -1246,6 +1253,9 @@ const MtdiTable = (props) => {
           onhideModal={hideClientModalHandler}
           purchaser={buyer}
         ></ClientModal>
+      )}
+       {showCourierModal && (
+  <CourierStatusModal></CourierStatusModal>
       )}
       <div className="content .tenthStepTour">
         <div className="bttnTour">
