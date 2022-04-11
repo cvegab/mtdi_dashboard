@@ -21,6 +21,7 @@ import showPdf from "../../assets/img/showPdf.png";
 import Estado from "../../assets/img/Estado.png";
 import chileExpress from "../../assets/img/chile-express.png";
 import CorreosChile from  "../../assets/img/correos-chile.png";
+import CourierStatus from  "../../assets/img/courierStatus.png";
 import wmsError from "../../assets/img/errorwms.png";
 const XLSX = require("xlsx");
 import {
@@ -1011,7 +1012,7 @@ const MtdiTable = (props) => {
         return (
           <div>
           <span style={{ whiteSpace: "nowrap"}}><img style={{paddingRight:'8px'}} src={CorreosChile}/>
-           {rowData.hub_fulfillment}
+           {rowData.courier}
            </span> 
           </div>
         );
@@ -1026,7 +1027,16 @@ const MtdiTable = (props) => {
     {
       title: "Estado Courier",
       field: "estado_courier",
-      width: "13%",
+      width: "15%",
+      render: (rowData) => {
+        return (
+          <div>
+          <span style={{ whiteSpace: "nowrap"}}>
+           {rowData.estado_courier} <img style={{paddingRight:'8px'}} src={CourierStatus}/>
+           </span> 
+          </div>
+        );
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
