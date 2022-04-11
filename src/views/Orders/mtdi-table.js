@@ -852,10 +852,10 @@ const MtdiTable = (props) => {
     {
       title: "Respuesta WMS",
       // field: "estado_wms",
-      field: "estado_wms",
+      field: "respuesta_wms",
       width: "13%",
       render: (rowData) => {
-        if (rowData.estado_wms === "Pendiente") {
+        if (rowData.respuesta_wms === "Error") {
           return (
             <div>
               <span className={classes.stockError}>Error De Stock </span>
@@ -870,10 +870,10 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        if (rowData.estado_wms === "No Aplica") {
+        if (rowData.respuesta_wms === "No enviado a WMS") {
           return (
             <div>
-              <span className={classes.integrated}>Integrada a WMS </span>
+              <span className={classes.integrated}>No enviado a WMS </span>
 
               <span style={{ marginLeft: "14px", cursor: "pointer" }}>
                 {/* <img
@@ -885,7 +885,7 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        if (rowData.estado_wms === "") {
+        if (rowData.respuesta_wms === "Enviado") {
           return (
             <div>
               <span className={classes.syncroError}>Error de Sincro </span>
