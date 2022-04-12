@@ -509,7 +509,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
-
+let url = '';
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -525,7 +525,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
+       url =  `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
         requestOptions
       );
       if (!response.ok) {
@@ -533,7 +533,7 @@ const MtdiTable = (props) => {
       }
       const data = await response.json();
       console.log(data);
-
+console.log(url);
       setData(data);
 
       setisLoading(false);
@@ -684,16 +684,16 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    {
-      title: "Tienda",
-      field: "tienda",
-      width: "13%",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Tienda",
+    //   field: "tienda",
+    //   width: "13%",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "Cliente",
       field: "cliente",
@@ -1621,11 +1621,11 @@ const MtdiTable = (props) => {
             <br />
             {!isLoading && (
               <div>
-                <OrderMobileCard
+                {/* <OrderMobileCard
                   data={data}
                   isLoading={isLoading}
                   purchaser={buyer}
-                ></OrderMobileCard>
+                ></OrderMobileCard> */}
               </div>
             )}
 
