@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import chileExpress from "../../assets/img/chile-express.png";
 import greyIcon from "../../assets/img/greyIcon.png";
-import classes from '../../../src/views/Orders/mtdi-table.module.css'
+import classes from "../../../src/views/Orders/mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 
 // reactstrap components
@@ -32,11 +33,10 @@ import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 function OrderMobileCard(props) {
-  
   const { data } = props;
   const { isLoading } = props;
-  
-  const [buyer, setbuyer] = useState('');  
+
+  const [buyer, setbuyer] = useState("");
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
   const [verticalTabs, setVerticalTabs] = React.useState("info");
   const [pageTabs, setPageTabs] = React.useState("homePages");
@@ -77,14 +77,14 @@ function OrderMobileCard(props) {
   const searchFilter = (event) => {
     setQuery(event.target.value);
   };
-  
+
   return (
     <>
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
-         data={data}
-         purchaser={buyer}
+          data={data}
+          purchaser={buyer}
         ></SendMail>
       )}
       {!isLoading && (
@@ -225,11 +225,20 @@ function OrderMobileCard(props) {
                                         {" "}
                                         Si &nbsp;
                                         <span
-                                       style={{ marginLeft: "14px", cursor: "pointer" }}
-                                       className={classes.si}
-                                     >
-                                        <img src={SiIcon} onClick={showModalHandler.bind(this, post)}/>
-                                     </span>
+                                          style={{
+                                            marginLeft: "14px",
+                                            cursor: "pointer",
+                                          }}
+                                          className={classes.si}
+                                        >
+                                          <img
+                                            src={SiIcon}
+                                            onClick={showModalHandler.bind(
+                                              this,
+                                              post
+                                            )}
+                                          />
+                                        </span>
                                         &nbsp;
                                         <span
                                           style={{ cursor: "pointer" }}
@@ -644,19 +653,36 @@ function OrderMobileCard(props) {
                       </tr> */}
 
                                 {/* HUB FULFILLMENT */}
-                                {/* <tr>
-                        <td/>
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                         Hub Fulfillment:
-                        </td>                   
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          Rodrigo Letelier
-                        </td>
-                        <td className="td-actions text-right">
-                          <br/>
-                          <br/>                
-                        </td>                  
-                      </tr> */}
+                                <tr>
+                                  <td />
+                                  <td
+                                    className="text-left"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Hub Fulfillment:
+                                  </td>
+                                  <td
+                                    className="text-left"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    {/* <img style={{ paddingRight: "8px" }} src={chileExpress} />
+                          {post.hub_fulfillment} */}
+                                    <span style={{ whiteSpace: "nowrap" }}>
+                                      <img
+                                        style={{ paddingRight: "8px" }}
+                                        src={chileExpress}
+                                      />
+                                      {post.hub_fulfillment}
+                                    </span>
+                                  </td>
+                                  <td className="td-actions text-right">
+                                    <br />
+                                    <br />
+                                  </td>
+                                </tr>
 
                                 {/* COURIER */}
                                 {/* <tr>

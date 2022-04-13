@@ -20,8 +20,8 @@ import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
 import Estado from "../../assets/img/Estado.png";
 import chileExpress from "../../assets/img/chile-express.png";
-import CorreosChile from  "../../assets/img/correos-chile.png";
-import CourierStatus from  "../../assets/img/courierStatus.png";
+import CorreosChile from "../../assets/img/correos-chile.png";
+import CourierStatus from "../../assets/img/courierStatus.png";
 import wmsError from "../../assets/img/errorwms.png";
 const XLSX = require("xlsx");
 import {
@@ -509,7 +509,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
-let url = '';
+    let url = "";
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -525,7 +525,7 @@ let url = '';
     };
     try {
       const response = await fetch(
-       url =  `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
+        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
         requestOptions
       );
       if (!response.ok) {
@@ -533,7 +533,7 @@ let url = '';
       }
       const data = await response.json();
       console.log(data);
-console.log(url);
+      console.log(url);
       setData(data);
 
       setisLoading(false);
@@ -562,12 +562,12 @@ console.log(url);
   const showPdfHandler = () => {
     window.open(buyer.dte);
   };
-  const displayCourierModalHandler = ()=>{
+  const displayCourierModalHandler = () => {
     setshowCourierModal(true);
-  }
-  const hideCourierModalHandler = ()=>{
+  };
+  const hideCourierModalHandler = () => {
     setshowCourierModal(false);
-  }
+  };
   const applyFiltersButtonhandler = async () => {
     let url = "";
     if (searchOrderId !== "") {
@@ -999,9 +999,10 @@ console.log(url);
       render: (rowData) => {
         return (
           <div>
-          <span style={{ whiteSpace: "nowrap"}}><img style={{paddingRight:'8px'}} src={chileExpress}/>
-           {rowData.hub_fulfillment}
-           </span> 
+            <span style={{ whiteSpace: "nowrap" }}>
+              <img style={{ paddingRight: "8px" }} src={chileExpress} />
+              {rowData.hub_fulfillment}
+            </span>
           </div>
         );
       },
@@ -1018,13 +1019,14 @@ console.log(url);
       render: (rowData) => {
         return (
           <div>
-          <span style={{ whiteSpace: "nowrap"}}><img style={{paddingRight:'8px'}} src={CorreosChile}/>
-           {rowData.courier}
-           </span> 
+            <span style={{ whiteSpace: "nowrap" }}>
+              <img style={{ paddingRight: "8px" }} src={CorreosChile} />
+              {rowData.courier}
+            </span>
           </div>
         );
       },
-     
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1038,9 +1040,14 @@ console.log(url);
       render: (rowData) => {
         return (
           <div>
-          <span style={{ whiteSpace: "nowrap"}}>
-           {rowData.estado_courier} <img style={{paddingRight:'8px'}} src={CourierStatus} onClick={displayCourierModalHandler}/>
-           </span> 
+            <span style={{ whiteSpace: "nowrap" }}>
+              {rowData.estado_courier}{" "}
+              <img
+                style={{ paddingRight: "8px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}
+              />
+            </span>
           </div>
         );
       },
@@ -1081,8 +1088,8 @@ console.log(url);
     {
       title: "Comprador",
       field: "comprador,rut",
-       width: '22%',
-    
+      width: "22%",
+
       render: (rowData) => {
         return (
           // <div
@@ -1254,8 +1261,11 @@ console.log(url);
           purchaser={buyer}
         ></ClientModal>
       )}
-       {showCourierModal && (
-  <CourierStatusModal onhideModal={hideCourierModalHandler}></CourierStatusModal>
+      {showCourierModal && (
+        <CourierStatusModal
+          onhideModal={hideCourierModalHandler}
+          purchaser={buyer}
+        ></CourierStatusModal>
       )}
       <div className="content .tenthStepTour">
         <div className="bttnTour">
@@ -1621,11 +1631,11 @@ console.log(url);
             <br />
             {!isLoading && (
               <div>
-                {/* <OrderMobileCard
+                <OrderMobileCard
                   data={data}
                   isLoading={isLoading}
                   purchaser={buyer}
-                ></OrderMobileCard> */}
+                ></OrderMobileCard>
               </div>
             )}
 
