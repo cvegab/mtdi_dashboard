@@ -6,7 +6,8 @@ import chileExpress from "../../assets/img/chile-express.png";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "../../../src/views/Orders/mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
-
+import CourierStatus from "../../assets/img/courierStatus.png";
+import CorreosChile from "../../assets/img/correos-chile.png";
 // reactstrap components
 import {
   Badge,
@@ -668,8 +669,6 @@ function OrderMobileCard(props) {
                                     className="text-left"
                                     style={{ fontSize: "12px" }}
                                   >
-                                    {/* <img style={{ paddingRight: "8px" }} src={chileExpress} />
-                          {post.hub_fulfillment} */}
                                     <span style={{ whiteSpace: "nowrap" }}>
                                       <img
                                         style={{ paddingRight: "8px" }}
@@ -685,21 +684,24 @@ function OrderMobileCard(props) {
                                 </tr>
 
                                 {/* COURIER */}
-                                {/* <tr>
+                                <tr>
                         <td/>      
                         <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
                           Courier: 
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          
+                        <span style={{ whiteSpace: "nowrap" }}>
+              <img style={{ paddingRight: "8px" }} src={CorreosChile} />
+              {post.courier}
+            </span>
                         </td>
                         <td className="td-actions text-right">
                             <br/>
                             <br/>
                         </td>
                        
-                      </tr> */}
+                      </tr>
 
                                 {/* SHIPPING ID */}
                                 <tr>
