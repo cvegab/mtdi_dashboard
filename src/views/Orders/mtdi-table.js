@@ -1040,14 +1040,40 @@ const MtdiTable = (props) => {
       render: (rowData) => {
         return (
           <div>
-            <span style={{ whiteSpace: "nowrap" }}>
-              {rowData.estado_courier}{" "}
+            {rowData.estado_courier === "No aplica" && (
+              <span style={{ whiteSpace: "nowrap" }}>No aplica</span>
+            )}
+             {rowData.estado_courier === "Creado" && (
+              <span style={{ whiteSpace: "nowrap" }}>Creado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
               <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+              {rowData.estado_courier === "Listo para despacho - Impreso" && (
+              <span style={{ whiteSpace: "nowrap" }}>Listo para despacho &nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+            {/* {rowData.estado_courier ==='Listo para despacho - Impreso' &&
+             <span style={{ whiteSpace: "nowrap" }}>
+              Listo para despacho{" "}
+            {rowData.estado_courier !== 'No aplica' &&  <img
                 style={{ paddingRight: "8px" }}
                 src={CourierStatus}
                 onClick={displayCourierModalHandler}
-              />
-            </span>
+              />}
+            </span> }
+           {rowData.estado_courier !=='Listo para despacho - Impreso'&& <span style={{ whiteSpace: "nowrap" }}>
+              {rowData.estado_courier}{" "}
+            {rowData.estado_courier !== 'No aplica' &&  <img
+                style={{ paddingRight: "8px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}
+              />}
+            </span>} */}
           </div>
         );
       },
