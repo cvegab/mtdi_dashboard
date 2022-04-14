@@ -998,14 +998,22 @@ const MtdiTable = (props) => {
       width: "15%",
       render: (rowData) => {
         return (
+        
           <div>
+            {rowData.hub_fulfillment !== 'Por definir' &&
             <span style={{ whiteSpace: "nowrap" }}>
             {rowData.hub_logo !== "No aplica" &&
-              <img style={{ paddingRight: "8px" }} src={rowData.hub_logo} />}
-              {rowData.courier}
+              <img style={{ paddingRight: "8px" }} src={rowData.hub_logo} width="40px" height="32px" />}
+            
               {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
               {rowData.hub_fulfillment}
-            </span>
+            </span>}
+            {rowData.hub_fulfillment === 'Por definir' &&
+            <span style={{ whiteSpace: "nowrap" }}>  {" "}
+          &nbsp;&nbsp;&nbsp;<span>    </span>
+              {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
+              {rowData.hub_fulfillment}
+            </span>}
           </div>
         );
       },
@@ -1024,7 +1032,7 @@ const MtdiTable = (props) => {
           <div>
             <span style={{ whiteSpace: "nowrap" }}>
               {rowData.courier_logo !== "No aplica" &&
-              <img style={{ paddingRight: "8px" }} src={rowData.courier_logo} />}
+              <img style={{ paddingRight: "8px"}} src={rowData.courier_logo} width="40px" height="32px"/>}
               {rowData.courier}
             </span>
           </div>

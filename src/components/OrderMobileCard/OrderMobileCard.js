@@ -755,7 +755,7 @@ function OrderMobileCard(props) {
                                   >
                                     <span style={{ whiteSpace: "nowrap" }}>
                                     {post.hub_logo !== "No aplica" &&
-              <img style={{ paddingRight: "8px" }} src={post.hub_logo} />}
+              <img style={{ paddingRight: "8px" }} src={post.hub_logo}width="40px" height="32px" />}
                                       {/* <img
                                         style={{ paddingRight: "8px" }}
                                         src={chileExpress}
@@ -788,7 +788,7 @@ function OrderMobileCard(props) {
                                   >
                                     <span style={{ whiteSpace: "nowrap" }}>
                                     {post.courier_logo !== "No aplica" &&
-              <img style={{ paddingRight: "8px" }} src={post.courier_logo} />}
+              <img style={{ paddingRight: "8px" }} src={post.courier_logo} width="40px" height="32px" />}
                                       {/* <img
                                         style={{ paddingRight: "8px" }}
                                         src={CorreosChile}
