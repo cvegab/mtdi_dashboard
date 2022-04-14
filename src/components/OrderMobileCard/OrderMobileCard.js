@@ -69,11 +69,11 @@ function OrderMobileCard(props) {
   };
   const showClientModalHandler = (props) => {
     setbuyer(props);
-setshowClientModal(true);
-  }
+    setshowClientModal(true);
+  };
   const hideClientModalHandler = (props) => {
     setshowClientModal(false);
-  }
+  };
   const hideModalHandler = () => {
     setshowModal(false);
   };
@@ -97,10 +97,12 @@ setshowClientModal(true);
           purchaser={buyer}
         ></SendMail>
       )}
-       {showClientModal && (
-       <ClientModal onhideModal={hideClientModalHandler}
-       data={data}
-       purchaser={buyer}></ClientModal>
+      {showClientModal && (
+        <ClientModal
+          onhideModal={hideClientModalHandler}
+          data={data}
+          purchaser={buyer}
+        ></ClientModal>
       )}
       {!isLoading && (
         <div className="content">
@@ -549,21 +551,28 @@ setshowClientModal(true);
                                 {/* HUB DE PAGO */}
 
                                 <tr>
-                        <td>
-                         
-                        </td>
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Hub de pago:
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          {post.hub}
-                        </td>
-                        <td className="td-actions text-right">
-                          <br/>
-                          <br/>
-                        </td>                    
-                      </tr>
+                                  <td></td>
+                                  <td
+                                    className="text-left"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Hub de pago:
+                                  </td>
+
+                                  <td
+                                    className="text-left"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    {post.hub}
+                                  </td>
+                                  <td className="td-actions text-right">
+                                    <br />
+                                    <br />
+                                  </td>
+                                </tr>
 
                                 {/* TOTAL */}
                                 <tr>
@@ -589,55 +598,68 @@ setshowClientModal(true);
                                     <br />
                                   </td>
                                 </tr>
-{/* RESPUESTA WMS */}
-<tr>
-                            <td />
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px", fontWeight: "bold" }}
-                            >
-                              Respuesta WMS:
-                            </td>
+                                {/* RESPUESTA WMS */}
+                                <tr>
+                                  <td />
+                                  <td
+                                    className="text-left"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Respuesta WMS:
+                                  </td>
 
-                            <td
-                              className="text-left"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {(() => {
-                                switch (post.respuesta_wms) {
-                                  case "Error":
-                                    return (
-                                      <div className={classes.stockError}style={{ whiteSpace: "nowrap" }}>
-                                        {" "}
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Error de stock
-                                      </div>
-                                    );
-                                  case "No enviado a WMS":
-                                    return (
-                                      <div className={classes.integratedMobile}>
-                                        &nbsp;No enviado a WMS
-                                      </div>
-                                    );
-                                  case "Enviado":
-                                    return (
-                                      <div className={classes.syncroError}>
-                                        &nbsp;&nbsp;Error de Sincro
-                                      </div>
-                                    );
-                                  default:
-                                    return (
-                                      <div className={classes.noAplica}>
-                                        &nbsp;&nbsp;No Aplica
-                                      </div>
-                                    );
-                                }
-                              })()}
-                            </td>
-                            <td className="td-actions text-right">
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
+                                  <td
+                                    className="text-left"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    {(() => {
+                                      switch (post.respuesta_wms) {
+                                        case "Error":
+                                          return (
+                                            <div
+                                              className={classes.stockError}
+                                              style={{ whiteSpace: "nowrap" }}
+                                            >
+                                              {" "}
+                                              &nbsp;&nbsp;&nbsp;&nbsp;Error de
+                                              stock
+                                            </div>
+                                          );
+                                        case "No enviado a WMS":
+                                          return (
+                                            <div
+                                              className={
+                                                classes.integratedMobile
+                                              }
+                                            >
+                                              &nbsp;No enviado a WMS
+                                            </div>
+                                          );
+                                        case "Enviado":
+                                          return (
+                                            <div
+                                              className={classes.syncroError}
+                                            >
+                                              &nbsp;&nbsp;Error de Sincro
+                                            </div>
+                                          );
+                                        default:
+                                          return (
+                                            <div className={classes.noAplica}>
+                                              &nbsp;&nbsp;No Aplica
+                                            </div>
+                                          );
+                                      }
+                                    })()}
+                                  </td>
+                                  <td className="td-actions text-right">
+                                    <br />
+                                    <br />
+                                  </td>
+                                </tr>
                                 {/* SHIPPING */}
                                 {/* <tr>
                         <td>
@@ -747,23 +769,34 @@ setshowClientModal(true);
 
                                 {/* COURIER */}
                                 <tr>
-                        <td/>      
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Courier: 
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                        <span style={{ whiteSpace: "nowrap" }}>
-              <img style={{ paddingRight: "8px" }} src={CorreosChile} />
-              {post.courier}
-            </span>
-                        </td>
-                        <td className="td-actions text-right">
-                            <br/>
-                            <br/>
-                        </td>
-                       
-                      </tr>
+                                  <td />
+                                  <td
+                                    className="text-left"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Courier:
+                                  </td>
+
+                                  <td
+                                    className="text-left"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    <span style={{ whiteSpace: "nowrap" }}>
+                                      <img
+                                        style={{ paddingRight: "8px" }}
+                                        src={CorreosChile}
+                                      />
+                                      {post.courier}
+                                    </span>
+                                  </td>
+                                  <td className="td-actions text-right">
+                                    <br />
+                                    <br />
+                                  </td>
+                                </tr>
 
                                 {/* SHIPPING ID */}
                                 <tr>
@@ -808,28 +841,36 @@ setshowClientModal(true);
                       </tr> */}
 
                                 {/* ESTADO DE COURIER */}
-                                {/* <tr>
-                        <td/>                                        
-                        <td className="text-left" style={{fontSize: "12px", fontWeight:"bold"}}>
-                          Estado Courier:
-                        </td>
-                      
-                        <td className="text-left" style={{fontSize: "12px"}}>
-                          Juan Pérez
-                        </td>
-                        <td className="td-actions text-right">
-                          <br/>
-                          <br/>
-                        </td>                  
-                      </tr> */}
+                                <tr>
+                                  <td />
+                                  <td
+                                    className="text-left"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Estado Courier:
+                                  </td>
+
+                                  <td
+                                    className="text-left"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    {post.estado_courier}
+                                  </td>
+                                  <td className="td-actions text-right">
+                                    <br />
+                                    <br />
+                                  </td>
+                                </tr>
 
                                 {/* COMPRADOR */}
                                 <tr>
                                   <td></td>
                                   <td
-                                    className="text-left"
+                                   
                                     style={{
-                                     
                                       fontSize: "12px",
                                       fontWeight: "bold",
                                     }}
@@ -838,19 +879,24 @@ setshowClientModal(true);
                                   </td>
 
                                   <td
-                                    className="text-left"
-                                    style={{ fontSize: "11px", whiteSpace: "nowrap", }}
+                                   
+                                    style={{
+                                      fontSize: "9px",
+                                      whiteSpace: "nowrap",
+                                    }}
                                   >
                                     {post.comprador}
-                                    <br/>
-                                    {post.rut} &nbsp; <img src={Estado}   onClick={showClientModalHandler.bind(
-                                              this,
-                                              post
-                                            )} />
+                                    <br />
+                                    {post.rut} &nbsp;{" "}
+                                    <img
+                                      src={Estado}
+                                      onClick={showClientModalHandler.bind(
+                                        this,
+                                        post
+                                      )}
+                                    />
                                   </td>
-                                  <td className="td-actions text-right">
-                               
-                                  </td>
+                                  <td className="td-actions text-right"></td>
                                 </tr>
 
                                 {/* NPS */}
