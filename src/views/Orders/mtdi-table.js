@@ -1057,6 +1057,27 @@ const MtdiTable = (props) => {
                 src={CourierStatus}
                 onClick={displayCourierModalHandler}/></span>
             )}
+             {rowData.estado_courier === "En Reparto"&& (
+              <span style={{ whiteSpace: "nowrap" }}>En Reparto &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+              {rowData.estado_courier === "En planta de origen" && (
+              <span style={{ whiteSpace: "nowrap" }}> En planta de origen &nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+             {rowData.estado_courier === "Entregado" && (
+              <span style={{ whiteSpace: "nowrap" }}> Entregado  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
             {/* {rowData.estado_courier ==='Listo para despacho - Impreso' &&
              <span style={{ whiteSpace: "nowrap" }}>
               Listo para despacho{" "}

@@ -534,7 +534,7 @@ function OrderMobileCard(props) {
 
                                 {/* HUB DE PAGO */}
 
-                                {/* <tr>
+                                <tr>
                         <td>
                          
                         </td>
@@ -543,13 +543,13 @@ function OrderMobileCard(props) {
                         </td>
                       
                         <td className="text-left" style={{fontSize: "12px"}}>
-                          Approved
+                          {post.hub}
                         </td>
                         <td className="td-actions text-right">
                           <br/>
                           <br/>
                         </td>                    
-                      </tr> */}
+                      </tr>
 
                                 {/* TOTAL */}
                                 <tr>
@@ -575,7 +575,55 @@ function OrderMobileCard(props) {
                                     <br />
                                   </td>
                                 </tr>
+{/* RESPUESTA WMS */}
+<tr>
+                            <td />
+                            <td
+                              className="text-left"
+                              style={{ fontSize: "12px", fontWeight: "bold" }}
+                            >
+                              Respuesta WMS:
+                            </td>
 
+                            <td
+                              className="text-left"
+                              style={{ fontSize: "12px" }}
+                            >
+                              {(() => {
+                                switch (post.respuesta_wms) {
+                                  case "Error":
+                                    return (
+                                      <div className={classes.stockError}style={{ whiteSpace: "nowrap" }}>
+                                        {" "}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Error de stock
+                                      </div>
+                                    );
+                                  case "No enviado a WMS":
+                                    return (
+                                      <div className={classes.integrated}>
+                                        &nbsp;&nbsp;No enviado a WMS
+                                      </div>
+                                    );
+                                  case "Enviado":
+                                    return (
+                                      <div className={classes.syncroError}>
+                                        &nbsp;&nbsp;Error de Sincro
+                                      </div>
+                                    );
+                                  default:
+                                    return (
+                                      <div className={classes.noAplica}>
+                                        &nbsp;&nbsp;No Aplica
+                                      </div>
+                                    );
+                                }
+                              })()}
+                            </td>
+                            <td className="td-actions text-right">
+                              <br />
+                              <br />
+                            </td>
+                          </tr>
                                 {/* SHIPPING */}
                                 {/* <tr>
                         <td>
