@@ -994,13 +994,16 @@ const MtdiTable = (props) => {
     // },
     {
       title: "Hub fulfillment",
-      field: "hub_fulfillment",
+      field: "hub_fulfillment,hub_logo",
       width: "15%",
       render: (rowData) => {
         return (
           <div>
             <span style={{ whiteSpace: "nowrap" }}>
-              <img style={{ paddingRight: "8px" }} src={chileExpress} />
+            {rowData.hub_logo !== "No aplica" &&
+              <img style={{ paddingRight: "8px" }} src={rowData.hub_logo} />}
+              {rowData.courier}
+              {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
               {rowData.hub_fulfillment}
             </span>
           </div>
@@ -1014,13 +1017,14 @@ const MtdiTable = (props) => {
     },
     {
       title: "Courier",
-      field: "courier",
+      field: "courier,courier_logo",
       width: "15%",
       render: (rowData) => {
         return (
           <div>
             <span style={{ whiteSpace: "nowrap" }}>
-              <img style={{ paddingRight: "8px" }} src={CorreosChile} />
+              {rowData.courier_logo !== "No aplica" &&
+              <img style={{ paddingRight: "8px" }} src={rowData.courier_logo} />}
               {rowData.courier}
             </span>
           </div>
@@ -1035,43 +1039,43 @@ const MtdiTable = (props) => {
     },
     {
       title: "Estado Courier",
-      field: "estado_courier",
+      field: "courier_status",
       width: "16%",
       render: (rowData) => {
         return (
           <div>
-            {rowData.estado_courier === "No aplica" && (
+            {rowData.courier_status === "No aplica" && (
               <span style={{ whiteSpace: "nowrap" }}>No aplica</span>
             )}
-             {rowData.estado_courier === "Creado" && (
+             {rowData.courier_status === "Creado" && (
               <span style={{ whiteSpace: "nowrap" }}>Creado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
               <img
                 style={{ paddingRight: "10px" }}
                 src={CourierStatus}
                 onClick={displayCourierModalHandler}/></span>
             )}
-              {rowData.estado_courier === "Listo para despacho - Impreso" && (
+              {rowData.courier_status === "Listo para despacho - Impreso" && (
               <span style={{ whiteSpace: "nowrap" }}>Listo para despacho &nbsp;
               <img
                 style={{ paddingRight: "10px" }}
                 src={CourierStatus}
                 onClick={displayCourierModalHandler}/></span>
             )}
-             {rowData.estado_courier === "En Reparto"&& (
+             {rowData.courier_status === "En Reparto"&& (
               <span style={{ whiteSpace: "nowrap" }}>En Reparto &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
               <img
                 style={{ paddingRight: "10px" }}
                 src={CourierStatus}
                 onClick={displayCourierModalHandler}/></span>
             )}
-              {rowData.estado_courier === "En planta de origen" && (
+              {rowData.courier_status === "En planta de origen" && (
               <span style={{ whiteSpace: "nowrap" }}> En planta de origen &nbsp;
               <img
                 style={{ paddingRight: "10px" }}
                 src={CourierStatus}
                 onClick={displayCourierModalHandler}/></span>
             )}
-             {rowData.estado_courier === "Entregado" && (
+             {rowData.courier_status === "Entregado" && (
               <span style={{ whiteSpace: "nowrap" }}> Entregado  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
               <img
                 style={{ paddingRight: "10px" }}

@@ -21,7 +21,7 @@ const CourierStatusModal = (props) => {
         Estado del courier
       </h5>
       {/* STEP 1 */}
-      {props.purchaser.estado_courier === "Creado" && (
+      {props.purchaser.courier_status === "Creado" && (
         <div class="container">
           <figure>
             <img
@@ -65,7 +65,7 @@ const CourierStatusModal = (props) => {
         </div>
       )}
       {/* STEP 2 */}
-      {props.purchaser.estado_courier === "Listo para despacho - Impreso" && (
+      {props.purchaser.courier_status === "Listo para despacho - Impreso" && (
         <div class="container">
           <figure>
             <img
@@ -109,7 +109,7 @@ const CourierStatusModal = (props) => {
         </div>
       )}
       {/* STEP 3 */}
-      {props.purchaser.estado_courier === "En Reparto" && (
+      {props.purchaser.courier_status === "En Reparto" && (
         <div class="container">
           <figure>
             <img
@@ -155,7 +155,7 @@ const CourierStatusModal = (props) => {
         </div>
       )}
       {/* STEP 4 */}
-      {props.purchaser.estado_courier === "En planta de origen" && (
+      {props.purchaser.courier_status=== "En planta de origen" && (
         <div class="container">
           <figure>
             <img
@@ -203,7 +203,7 @@ const CourierStatusModal = (props) => {
         </div>
       )}
       {/* STEP5 */}
-      {props.purchaser.estado_courier === "Entregado" && (
+      {props.purchaser.courier_status === "Entregado" && (
         <div class="container">
           <figure>
             <img
