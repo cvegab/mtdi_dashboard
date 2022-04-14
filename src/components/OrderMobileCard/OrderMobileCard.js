@@ -8,6 +8,7 @@ import classes from "../../../src/views/Orders/mtdi-table.module.css";
 import SendMail from "components/modalComponents/sendMail";
 import CourierStatus from "../../assets/img/courierStatus.png";
 import CorreosChile from "../../assets/img/correos-chile.png";
+import Estado from "../../assets/img/Estado.png";
 // reactstrap components
 import {
   Badge,
@@ -32,11 +33,12 @@ import {
 } from "reactstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
+import ClientModal from "components/ClientModal/client-modal";
 
 function OrderMobileCard(props) {
   const { data } = props;
   const { isLoading } = props;
-
+  const [showClientModal, setshowClientModal] = React.useState(false);
   const [buyer, setbuyer] = useState("");
   const [horizontalTabs, setHorizontalTabs] = React.useState("home");
   const [verticalTabs, setVerticalTabs] = React.useState("info");
@@ -65,6 +67,13 @@ function OrderMobileCard(props) {
     setbuyer(props);
     setshowModal(true);
   };
+  const showClientModalHandler = (props) => {
+    setbuyer(props);
+setshowClientModal(true);
+  }
+  const hideClientModalHandler = (props) => {
+    setshowClientModal(false);
+  }
   const hideModalHandler = () => {
     setshowModal(false);
   };
@@ -87,6 +96,11 @@ function OrderMobileCard(props) {
           data={data}
           purchaser={buyer}
         ></SendMail>
+      )}
+       {showClientModal && (
+       <ClientModal onhideModal={hideClientModalHandler}
+       data={data}
+       purchaser={buyer}></ClientModal>
       )}
       {!isLoading && (
         <div className="content">
@@ -600,8 +614,8 @@ function OrderMobileCard(props) {
                                     );
                                   case "No enviado a WMS":
                                     return (
-                                      <div className={classes.integrated}>
-                                        &nbsp;&nbsp;No enviado a WMS
+                                      <div className={classes.integratedMobile}>
+                                        &nbsp;No enviado a WMS
                                       </div>
                                     );
                                   case "Enviado":
@@ -815,6 +829,7 @@ function OrderMobileCard(props) {
                                   <td
                                     className="text-left"
                                     style={{
+                                     
                                       fontSize: "12px",
                                       fontWeight: "bold",
                                     }}
@@ -824,13 +839,17 @@ function OrderMobileCard(props) {
 
                                   <td
                                     className="text-left"
-                                    style={{ fontSize: "12px" }}
+                                    style={{ fontSize: "11px", whiteSpace: "nowrap", }}
                                   >
                                     {post.comprador}
+                                    <br/>
+                                    {post.rut} &nbsp; <img src={Estado}   onClick={showClientModalHandler.bind(
+                                              this,
+                                              post
+                                            )} />
                                   </td>
                                   <td className="td-actions text-right">
-                                    <br />
-                                    <br />
+                               
                                   </td>
                                 </tr>
 

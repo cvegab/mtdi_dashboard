@@ -655,7 +655,7 @@ const MtdiTable = (props) => {
     {
       title: "OpsId",
       field: "order_id",
-      width: "10%",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -707,7 +707,7 @@ const MtdiTable = (props) => {
     {
       title: "Tienda Oficial",
       field: "official_store",
-      width: "13%",
+      width: "15%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -853,7 +853,7 @@ const MtdiTable = (props) => {
       title: "Respuesta WMS",
       // field: "estado_wms",
       field: "respuesta_wms",
-      width: "13%",
+      width: "15%",
       render: (rowData) => {
         if (rowData.respuesta_wms === "Error") {
           return (
@@ -937,7 +937,7 @@ const MtdiTable = (props) => {
     {
       title: "Hub de pago",
       field: "hub",
-      width: "13%",
+      width: "15%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1036,7 +1036,7 @@ const MtdiTable = (props) => {
     {
       title: "Estado Courier",
       field: "estado_courier",
-      width: "15%",
+      width: "16%",
       render: (rowData) => {
         return (
           <div>
@@ -1135,7 +1135,7 @@ const MtdiTable = (props) => {
     {
       title: "Comprador",
       field: "comprador,rut",
-      width: "22%",
+      width: "20%",
 
       render: (rowData) => {
         return (
@@ -1146,7 +1146,7 @@ const MtdiTable = (props) => {
                 width: "0%",
                 float: "left",
                 whiteSpace: "nowrap",
-                fontSize: "11px",
+                fontSize: "12px",
               }}
             >
               {rowData.comprador}
@@ -1154,12 +1154,12 @@ const MtdiTable = (props) => {
               {rowData.rut}
             </span>
             <span
-              style={{ width: "20%", float: "right", whiteSpace: "nowrap" }}
+              style={{ width: "14%", float: "right", whiteSpace: "nowrap",left:'80px' }}
             >
               <img
                 style={{ float: "left" }}
                 src={Estado}
-                title="Enviar DTE"
+                title="Cliente Info"
                 onClick={clientModalHandler}
               />
             </span>
@@ -1196,16 +1196,16 @@ const MtdiTable = (props) => {
       },
     },
 
-    {
-      title: "NPS",
-      field: "comprador",
-      width: "10%",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "NPS",
+    //   field: "comprador",
+    //   width: "10%",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     // {
     //   title: "Reviews",
     //   field: "comprador",
