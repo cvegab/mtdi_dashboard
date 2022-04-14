@@ -7,21 +7,22 @@
     z-index: 10;
     background: rgba(0, 0, 0, 0.75);
 }
-  
-  .modal {
+
+.modal {
     /* position: fixed;
     top: 30vh;
     left: 10%;
     width: 80%;
     z-index: 100;
     overflow: hidden; */
-    overflow-y: scroll;
+   
   
     position: fixed;
-    top: 5vh;
-    left: 5%;
+   top: 150px;
+ 
+  right: 10ch;
     width: 70%;
-    height: 90%;
+    height: 50%;
     background-color: white;
     padding: 1rem;
     border-radius: 14px;
@@ -30,11 +31,11 @@
     animation: slide-down 300ms ease-out forwards;
   }
 
-  .customstyle {
+  /* .customstyle {
     width: 200px;
     height: 200px;
     background-color: blue;
-    }
+    } */
   
   .header {
     background: #4f005f;
@@ -74,7 +75,7 @@
   
   @media (min-width: 768px) {
     .modal {
-      left: calc(50% - 20rem);
-      width: 40rem;
+   
+     
     }
   }

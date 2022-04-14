@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import classes from "./vertical-modal.module.css";
+import classes from "./horizontal-modal.module.css";
 
 import ModalHeader from "react-bootstrap/ModalHeader";
 
@@ -9,7 +9,7 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   return (
-    <div className={classes.modal}>
+    <div className={classes.modal} >
       
      <header>
         <h2  style={{
@@ -35,7 +35,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-const VerticalModal = (props) => {
+const HorizontalModal = (props) => {
   return (
     <Fragment>
       <Backdrop close={props.onhideModal} />,
@@ -44,4 +44,4 @@ const VerticalModal = (props) => {
   );
 };
 
-export default VerticalModal;
+export default HorizontalModal;

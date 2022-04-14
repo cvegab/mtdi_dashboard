@@ -1,0 +1,13 @@
+figure {
+    display: inline-block;
+}
+
+figcaption {
+    text-align: left;
+    font-family: 'SF UI Display';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color:#D8D8D8;
+  
+}

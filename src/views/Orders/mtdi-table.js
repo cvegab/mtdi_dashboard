@@ -18,8 +18,12 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
-import wmsError from '../../assets/img/errorwms.png';
-const XLSX = require('xlsx');
+import Estado from "../../assets/img/Estado.png";
+import chileExpress from "../../assets/img/chile-express.png";
+import CorreosChile from "../../assets/img/correos-chile.png";
+import CourierStatus from "../../assets/img/courierStatus.png";
+import wmsError from "../../assets/img/errorwms.png";
+const XLSX = require("xlsx");
 import {
   Button,
   Col,
@@ -28,6 +32,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Row,
 } from "reactstrap";
 import greyIcon from "../../assets/img/greyIcon.png";
 import classes from "./mtdi-table.module.css";
@@ -40,9 +45,12 @@ import startTour from "../../assets/img/startTour.png";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import SplashScreen from "components/UI/splash-screen";
-import SaveAlt from '@material-ui/icons/SaveAlt';
+import SaveAlt from "@material-ui/icons/SaveAlt";
 // import WmsModal from "components/modalComponents/wms-modal";
- import VerticalModal from "components/UI/vertical-modal.js";
+import VerticalModal from "components/UI/vertical-modal.js";
+import WmsModal from "components/modalComponents/wms-modal";
+import ClientModal from "components/ClientModal/client-modal";
+import CourierStatusModal from "components/courierStatusModal/courier-status-modal";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -90,6 +98,8 @@ const MtdiTable = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [showModal, setshowModal] = useState(false);
   const [showWMSModal, setshowWMSModal] = useState(false);
+  const [showCourierModal, setshowCourierModal] = useState(false);
+  const [clientModal, setclientModal] = useState(false);
   const [isLoading, setisLoading] = useState(true);
   const [isLoadingIncrementPage, setisLoadingIncrementPage] = useState(false);
   const [filteredCountryData, setfilteredCountryData] = useState([]);
@@ -499,7 +509,7 @@ const MtdiTable = (props) => {
   const fetchOrderData = async () => {
     let countryValue = 3;
     setisLoading(true);
-
+    let url = "";
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -515,7 +525,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`,
+        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
         requestOptions
       );
       if (!response.ok) {
@@ -523,7 +533,7 @@ const MtdiTable = (props) => {
       }
       const data = await response.json();
       console.log(data);
-
+      console.log(url);
       setData(data);
 
       setisLoading(false);
@@ -531,12 +541,18 @@ const MtdiTable = (props) => {
       console.log(error);
     }
   };
-const wmsModalHandler = ()=>{
-  setshowWMSModal(true);
-}
-const hideWMSModalHandler = ()=>{
-  setshowWMSModal(false);
-}
+  const wmsModalHandler = () => {
+    setshowWMSModal(true);
+  };
+  const hideWMSModalHandler = () => {
+    setshowWMSModal(false);
+  };
+  const clientModalHandler = () => {
+    setclientModal(true);
+  };
+  const hideClientModalHandler = () => {
+    setclientModal(false);
+  };
   const showModalHandler = (row) => {
     setshowModal(true);
   };
@@ -546,7 +562,12 @@ const hideWMSModalHandler = ()=>{
   const showPdfHandler = () => {
     window.open(buyer.dte);
   };
-
+  const displayCourierModalHandler = () => {
+    setshowCourierModal(true);
+  };
+  const hideCourierModalHandler = () => {
+    setshowCourierModal(false);
+  };
   const applyFiltersButtonhandler = async () => {
     let url = '';
     if (searchOrderId !== "") {
@@ -633,6 +654,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "OpsId",
       field: "order_id",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -643,6 +665,8 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Fecha de Orden",
       field: "fecha_creacion",
+      width: "13%",
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -652,24 +676,27 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Canal de Venta",
       field: "canal_de_venta",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
         fontSize: "12px",
       },
     },
-    {
-      title: "Tienda",
-      field: "tienda",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Tienda",
+    //   field: "tienda",
+    //   width: "13%",
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     {
       title: "Cliente",
       field: "cliente",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -679,6 +706,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Tienda Oficial",
       field: "official_store",
+      width: "15%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -688,6 +716,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Orden de Compra",
       field: "order_id",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -697,6 +726,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "País",
       field: "pais",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -728,7 +758,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "DTE",
       field: "dte",
-
+      width: "13%",
       render: (rowData) => {
         if (rowData.dte != undefined) {
           if (rowData.dte === "") {
@@ -802,6 +832,7 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Bodega",
       field: "bodega",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -817,43 +848,68 @@ const hideWMSModalHandler = ()=>{
     //     fontSize: "12px",
     //   },
     // },
-    //   {
-    //   title: "Respuesta WMS",
-    //   // field: "respuesta_wms",
-    //   field:'',
-    //   render: () => {
-        
-    //       // return <span className={classes.stockError}>Error De Stock</span>
-    //       // ;
-    //       return (
-    //         <div>
-    //           <span className={classes.stockError}>Error De Stock </span>
-           
-    //            <span
-    //             style={{ marginLeft: "14px", cursor: "pointer" }}
-    //             // className={classes.errorinStock}
-    //           > 
-    //             <img
-    //               src={wmsError}
-    //               title="Enviar DTE"
-    //               onClick={wmsModalHandler.bind(this, data)}
-    //             />
-    //           </span> 
-    //           </div>
-            
-    //           )
-       
-    //   },
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Respuesta WMS",
+      // field: "estado_wms",
+      field: "respuesta_wms",
+      width: "15%",
+      render: (rowData) => {
+        if (rowData.respuesta_wms === "Error") {
+          return (
+            <div>
+              <span className={classes.stockError}>Error De Stock </span>
+
+              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                {/* <img
+                  src={wmsError}
+                  title="Enviar DTE"
+                  onClick={wmsModalHandler.bind(this, data)}
+                /> */}
+              </span>
+            </div>
+          );
+        }
+        if (rowData.respuesta_wms === "No enviado a WMS") {
+          return (
+            <div>
+              <span className={classes.integrated}>No enviado a WMS </span>
+
+              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                {/* <img
+              src={wmsError}
+              title="Enviar DTE"
+              onClick={wmsModalHandler.bind(this, data)}
+            /> */}
+              </span>
+            </div>
+          );
+        }
+        if (rowData.respuesta_wms === "Enviado") {
+          return (
+            <div>
+              <span className={classes.syncroError}>Error de Sincro </span>
+
+              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                {/* <img
+          src={wmsError}
+          title="Enviar DTE"
+          onClick={wmsModalHandler.bind(this, data)}
+        /> */}
+              </span>
+            </div>
+          );
+        }
+      },
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Estado WMS",
       field: "estado_wms",
-
+      width: "13%",
       render: (rowData) => {
         if (rowData.estado_wms === "Enviado") {
           return (
@@ -877,19 +933,20 @@ const hideWMSModalHandler = ()=>{
         fontSize: "12px",
       },
     },
-    // {
-    //   title: "Hub de pago",
-    //   field: "estado_pago",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Hub de pago",
+      field: "hub",
+      width: "15%",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Total",
       field: "precio_sin_shipping",
-
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -899,21 +956,23 @@ const hideWMSModalHandler = ()=>{
     {
       title: "Shipping",
       field: "valor_shipping",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
         fontSize: "12px",
       },
     },
-    {
-      title: "Estado OC",
-      field: "estado_oc",
-      headerStyle: {
-        backgroundColor: "#1D308E",
-        color: "#FFF",
-        fontSize: "12px",
-      },
-    },
+    // {
+    //   title: "Estado OC",
+    //   field: "estado_oc",
+    //   width: '3.5%',
+    //   headerStyle: {
+    //     backgroundColor: "#1D308E",
+    //     color: "#FFF",
+    //     fontSize: "12px",
+    //   },
+    // },
     // {
     //   title: "Pickeador",
     //   field: "comprador",
@@ -932,27 +991,134 @@ const hideWMSModalHandler = ()=>{
     //     fontSize: "12px",
     //   },
     // },
-    // {
-    //   title: "Hub fulfillment",
-    //   field: "hub_fulfillment",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
-    // {
-    //   title: "Courier",
-    //   field: "estado_courier",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Hub fulfillment",
+      field: "hub_fulfillment,hub_logo",
+      width: "15%",
+      render: (rowData) => {
+        return (
+        
+          <div>
+            {rowData.hub_fulfillment !== 'Por definir' &&
+            <span style={{ whiteSpace: "nowrap" }}>
+            {rowData.hub_logo !== "No aplica" &&
+              <img style={{ paddingRight: "8px" }} src={rowData.hub_logo} width="40px" height="32px" />}
+            
+              {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
+              {rowData.hub_fulfillment}
+            </span>}
+            {rowData.hub_fulfillment === 'Por definir' &&
+            <span style={{ whiteSpace: "nowrap" }}>  {" "}
+          &nbsp;&nbsp;&nbsp;<span>    </span>
+              {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
+              {rowData.hub_fulfillment}
+            </span>}
+          </div>
+        );
+      },
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Courier",
+      field: "courier,courier_logo",
+      width: "15%",
+      render: (rowData) => {
+        return (
+          <div>
+            <span style={{ whiteSpace: "nowrap" }}>
+              {rowData.courier_logo !== "No aplica" &&
+              <img style={{ paddingRight: "8px"}} src={rowData.courier_logo} width="40px" height="32px"/>}
+              {rowData.courier}
+            </span>
+          </div>
+        );
+      },
+
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
+    {
+      title: "Estado Courier",
+      field: "courier_status",
+      width: "16%",
+      render: (rowData) => {
+        return (
+          <div>
+            {rowData.courier_status === "No aplica" && (
+              <span style={{ whiteSpace: "nowrap" }}>No aplica</span>
+            )}
+             {rowData.courier_status === "Creado" && (
+              <span style={{ whiteSpace: "nowrap" }}>Creado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+              {rowData.courier_status === "Listo para despacho - Impreso" && (
+              <span style={{ whiteSpace: "nowrap" }}>Listo para despacho &nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+             {rowData.courier_status === "En Reparto"&& (
+              <span style={{ whiteSpace: "nowrap" }}>En Reparto &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+              {rowData.courier_status === "En planta de origen" && (
+              <span style={{ whiteSpace: "nowrap" }}> En planta de origen &nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+             {rowData.courier_status === "Entregado" && (
+              <span style={{ whiteSpace: "nowrap" }}> Entregado  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+              <img
+                style={{ paddingRight: "10px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}/></span>
+            )}
+            {/* {rowData.estado_courier ==='Listo para despacho - Impreso' &&
+             <span style={{ whiteSpace: "nowrap" }}>
+              Listo para despacho{" "}
+            {rowData.estado_courier !== 'No aplica' &&  <img
+                style={{ paddingRight: "8px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}
+              />}
+            </span> }
+           {rowData.estado_courier !=='Listo para despacho - Impreso'&& <span style={{ whiteSpace: "nowrap" }}>
+              {rowData.estado_courier}{" "}
+            {rowData.estado_courier !== 'No aplica' &&  <img
+                style={{ paddingRight: "8px" }}
+                src={CourierStatus}
+                onClick={displayCourierModalHandler}
+              />}
+            </span>} */}
+          </div>
+        );
+      },
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+    },
     {
       title: "Shipping ID",
       field: "shipping_id",
+      width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -979,16 +1145,72 @@ const hideWMSModalHandler = ()=>{
     // },
     {
       title: "Comprador",
-      field: "comprador",
+      field: "comprador,rut",
+      width: "20%",
+
+      render: (rowData) => {
+        return (
+          // <div
+          <div>
+            <span
+              style={{
+                width: "0%",
+                float: "left",
+                whiteSpace: "nowrap",
+                fontSize: "12px",
+              }}
+            >
+              {rowData.comprador}
+              <br />
+              {rowData.rut}
+            </span>
+            <span
+              style={{ width: "14%", float: "right", whiteSpace: "nowrap",left:'80px' }}
+            >
+              <img
+                style={{ float: "left" }}
+                src={Estado}
+                title="Cliente Info"
+                onClick={clientModalHandler}
+              />
+            </span>
+          </div>
+          //   style={{
+          //     overflow: "hidden",
+          //     whiteSpace: "nowrap",
+          //     fontSize: "10px",
+          //   }}
+          // >
+          //   {rowData.comprador}
+          //   <br />
+          //   <span style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
+          //     {rowData.rut}
+          //   </span>
+
+          //   <span
+          //     style={{ marginLeft: "40%", cursor: "pointer", width: "20%" }}
+          //   >
+          //     <img
+          //       style={{ float: "left" }}
+          //       src={SiIcon}
+          //       title="Enviar DTE"
+          //       onClick={clientModalHandler}
+          //     />
+          //   </span>
+          // </div>
+        );
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
         fontSize: "12px",
       },
     },
+
     // {
     //   title: "NPS",
     //   field: "comprador",
+    //   width: "10%",
     //   headerStyle: {
     //     backgroundColor: "#1D308E",
     //     color: "#FFF",
@@ -1062,20 +1284,20 @@ const hideWMSModalHandler = ()=>{
     console.log(event.target.value);
     setsearchOrderId(event.target.value);
   };
- const DownloadFileHandler = ()=>{
-   console.log('Download file');
-   let binary_univers = data;
-   let binaryWS = XLSX.utils.json_to_sheet(binary_univers); 
-   // Create a new Workbook
-   var wb = XLSX.utils.book_new() 
-   // Name your sheet
-   XLSX.utils.book_append_sheet(wb, binaryWS, 'Binary values') 
-   // export your excel
-   XLSX.writeFile(wb, 'instance_orders.xlsx');
- }
+  const DownloadFileHandler = () => {
+    console.log("Download file");
+    let binary_univers = data;
+    let binaryWS = XLSX.utils.json_to_sheet(binary_univers);
+    // Create a new Workbook
+    var wb = XLSX.utils.book_new();
+    // Name your sheet
+    XLSX.utils.book_append_sheet(wb, binaryWS, "Binary values");
+    // export your excel
+    XLSX.writeFile(wb, "instance_orders.xlsx");
+  };
   return (
     <React.Fragment>
-      {isLoading && <SplashScreen message='Órdenes' />}
+      {isLoading && <SplashScreen message="Órdenes" />}
       {showModal && (
         <SendMail
           onhideModal={hideModalHandler}
@@ -1083,15 +1305,26 @@ const hideWMSModalHandler = ()=>{
           purchaser={buyer}
         ></SendMail>
       )}
-       {showWMSModal && (
-    //  <WmsModal
-    //       onhideModal={hideWMSModalHandler}
-          
-    //     />
-    <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
-         
-      )}
+      {showWMSModal && (
+        //  <WmsModal
+        //       onhideModal={hideWMSModalHandler}
 
+        //     />
+        // <VerticalModal onhideModal={hideWMSModalHandler}></VerticalModal>
+        <WmsModal onhideModal={hideWMSModalHandler}></WmsModal>
+      )}
+      {clientModal && (
+        <ClientModal
+          onhideModal={hideClientModalHandler}
+          purchaser={buyer}
+        ></ClientModal>
+      )}
+      {showCourierModal && (
+        <CourierStatusModal
+          onhideModal={hideCourierModalHandler}
+          purchaser={buyer}
+        ></CourierStatusModal>
+      )}
       <div className="content .tenthStepTour">
         <div className="bttnTour">
           <Button
@@ -1420,7 +1653,7 @@ const hideWMSModalHandler = ()=>{
         id="upload"
         // onChange={readUploadFile}
     /> */}
-     <Button
+            <Button
               color="primary"
               style={{
                 borderRadius: "22px",
@@ -1435,7 +1668,7 @@ const hideWMSModalHandler = ()=>{
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-             Download Excel 
+              Download Excel
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
@@ -1489,10 +1722,11 @@ const hideWMSModalHandler = ()=>{
             {isLoading && (
               <MaterialTable
                 // title=""
-               
+
                 options={{
                   search: false,
-                  exportButton: true
+                  exportButton: true,
+                  tableLayout: "fixed",
                 }}
                 title=""
                 icons={tableIcons}
@@ -1550,9 +1784,10 @@ const hideWMSModalHandler = ()=>{
             )}
             {data.length === 0 && !isLoading && (
               <MaterialTable
-              options={{
-                exportButton: true
-              }}
+                options={{
+                  exportButton: true,
+                  tableLayout: "fixed",
+                }}
                 localization={{
                   body: {
                     emptyDataSourceMessage: (
@@ -1604,12 +1839,10 @@ const hideWMSModalHandler = ()=>{
                 icons={tableIcons}
                 columns={columns}
                 data={[]}
-              
               ></MaterialTable>
             )}
             {data.length !== 0 && !isLoading && (
               <MaterialTable
-             
                 onRowClick={(evt, selectedRow) => setbuyer(selectedRow)}
                 localization={{
                   body: {
@@ -1663,7 +1896,13 @@ const hideWMSModalHandler = ()=>{
                 title=""
                 data={data}
                 columns={columns}
-                options={{ columnsButton: true, sorting: true, search: true,  exportButton: true }}
+                options={{
+                  columnsButton: true,
+                  sorting: true,
+                  search: true,
+                  exportButton: true,
+                  tableLayout: "fixed",
+                }}
                 style={{ marginLeft: "1em", marginTop: "2em" }}
               />
             )}
