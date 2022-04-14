@@ -861,7 +861,7 @@ function OrderMobileCard(props) {
                                     className="text-left"
                                     style={{ fontSize: "12px" }}
                                   >
-                                    {post.estado_courier}
+                                    {post.courier_status}
                                   </td>
                                   <td className="td-actions text-right">
                                     <br />
