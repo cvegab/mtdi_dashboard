@@ -449,7 +449,7 @@ const MtdiTable = (props) => {
   }, []);
   const fetchFilterData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -462,7 +462,7 @@ const MtdiTable = (props) => {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())
@@ -511,7 +511,7 @@ const MtdiTable = (props) => {
     setisLoading(true);
     let url = "";
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -525,7 +525,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
+        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
         requestOptions
       );
       if (!response.ok) {
@@ -571,9 +571,9 @@ const MtdiTable = (props) => {
   const applyFiltersButtonhandler = async () => {
     let url = '';
     if (searchOrderId !== "") {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/order?orderNo=${searchOrderId}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/order?orderNo=${searchOrderId}`;
     } else {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     }
     setisLoading(true);
     setfiltersApplied(true);
@@ -581,7 +581,7 @@ const MtdiTable = (props) => {
     console.log(url);
 
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -621,11 +621,11 @@ const MtdiTable = (props) => {
   const incrementPageHandler = async () => {
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
