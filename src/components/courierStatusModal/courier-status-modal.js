@@ -28,39 +28,39 @@ const CourierStatusModal = (props) => {
               src={inPreparation}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={dispatchStep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "#D8D8D8;" }}>
+            {/* <figcaption style={{ color: "#D8D8D8;" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={inDispatchStep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
           <figure>
             <img
               src={arrivalStep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
           <figure>
             <img
               src={clientstep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
         </div>
       )}
@@ -72,39 +72,39 @@ const CourierStatusModal = (props) => {
               src={step2Prep}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step2readytodispatch}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "#D8D8D8;" }}>
+            {/* <figcaption style={{ color: "#D8D8D8;" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={inDispatchStep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
           <figure>
             <img
               src={arrivalStep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
           <figure>
             <img
               src={clientstep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
         </div>
       )}
@@ -116,41 +116,41 @@ const CourierStatusModal = (props) => {
               src={step2Prep}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step3ReadyToDispatch}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step3inDispatch}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Mañana a la 1:30 p.m
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={arrivalStep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
           <figure>
             <img
               src={clientstep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
         </div>
       )}
@@ -162,43 +162,43 @@ const CourierStatusModal = (props) => {
               src={step2Prep}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step3ReadyToDispatch}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step4InDispatch}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Mañana a la 1:30 p.m
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step4ArrivalReady}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Mañana a la 1:30 p.m
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={clientstep1}
               style={{ float: "left", marginRight: "40px" }}
             />
-            <figcaption>Mañana a la 1:30 p.m</figcaption>
+            {/* <figcaption>Mañana a la 1:30 p.m</figcaption> */}
           </figure>
         </div>
       )}
@@ -210,45 +210,45 @@ const CourierStatusModal = (props) => {
               src={step2Prep}
               style={{ float: "left", marginRight: "43px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step3ReadyToDispatch}
               style={{ float: "left", marginRight: "43px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Hoy a las 12:40pm
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step4InDispatch}
               style={{ float: "left", marginRight: "43px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Mañana a la 1:30 p.m
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step5ArrivalReady}
               style={{ float: "left", marginRight: "43px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Mañana a la 1:30 p.m
-            </figcaption>
+            </figcaption> */}
           </figure>
           <figure>
             <img
               src={step5Recieved}
               style={{ float: "left", marginRight: "43px" }}
             />
-            <figcaption style={{ color: "black" }}>
+            {/* <figcaption style={{ color: "black" }}>
               Mañana a la 1:30 p.m
-            </figcaption>
+            </figcaption> */}
           </figure>
         </div>
       )}

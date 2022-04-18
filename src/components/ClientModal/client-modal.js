@@ -29,16 +29,16 @@ const ClientModal = (props) => {
           marginLeft: "48%",
         }}
       ></hr>
-      <p style={{ fontWeight: "700", size: "22px", textAlign: "center" }}>
+      {/* <p style={{ fontWeight: "700", size: "22px", textAlign: "center" }}>
         Envia un mensaje a tu cliente mediante:
-      </p>
-      <div style={{ float: "left", marginRight: "20px" }}>
+      </p> */}
+      {/* <div style={{ float: "left", marginRight: "20px" }}>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <img style={{ padding: "20px" }} src={whatsApp} />
         <img style={{ padding: "20px" }} src={mailButton} />
         <img style={{ padding: "20px" }} src={textMessage} />
-      </div>
+      </div> */}
     </Modal>
   );
 };
