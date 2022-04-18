@@ -194,12 +194,13 @@ function Sidebar(props) {
           </div>
           <div className="info">
             <a
-              href="#profile"
+              href="/onboarding"
               data-toggle="collapse"
               aria-expanded={openAvatar}
               onClick={() => setOpenAvatar(!openAvatar)}
             >
               <a onClick={UserProfile} className="textProfile">
+            
                 {`${firstName} ${lastName}`}
                 {/* Sofía Avatar */}
                 {/* <b className="caret" /> */}
