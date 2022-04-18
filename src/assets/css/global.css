@@ -250,7 +250,7 @@ input[type="number"] {
 
 
 .MuiTable-root  {
-/* table-layout: auto !important; */
+table-layout: auto !important;
 }
 
 .form-control {
