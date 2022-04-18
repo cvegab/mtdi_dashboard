@@ -1167,7 +1167,7 @@ const MtdiTable = (props) => {
             </span>
             <span
               style={{ width: "14%", float: "right", whiteSpace: "nowrap",left:'80px' }}
-            >
+            >&nbsp;
               <img
                 style={{ float: "left" }}
                 src={Estado}
