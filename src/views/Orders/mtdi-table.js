@@ -884,10 +884,10 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        if (rowData.respuesta_wms === "Enviado") {
+        if (rowData.respuesta_wms.includes('XML cargado correctamente')) {
           return (
             <div>
-              <span className={classes.syncroError}>Error de Sincro </span>
+              <span className={classes.confirmado}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
               <span style={{ marginLeft: "14px", cursor: "pointer" }}>
                 {/* <img
