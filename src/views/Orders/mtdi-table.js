@@ -854,7 +854,7 @@ const MtdiTable = (props) => {
       field: "respuesta_wms",
       width: "15%",
       render: (rowData) => {
-        if (rowData.dte != undefined) {
+        if(rowData.respuesta_wms != undefined){
         if (rowData.respuesta_wms === "Error") {
           return (
             <div>
@@ -885,7 +885,7 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        if (rowData.respuesta_wms === "XML cargado correctamente(1). ()" || "XML cargado correctamente(1). (Productos sin stock en wms)") {
+        if (rowData.respuesta_wms.includes('XML cargado correctamente') ) {
           return (
             <div>
               <span className={classes.confirmado}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
