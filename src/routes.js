@@ -52,7 +52,7 @@ const routes = [
     component: MtdiReports,
     layout: "/admin",
 
-  },
+   },
 
   // {
   //   path: "/logysto",

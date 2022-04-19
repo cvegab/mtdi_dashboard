@@ -449,7 +449,7 @@ const MtdiTable = (props) => {
   }, []);
   const fetchFilterData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -462,7 +462,7 @@ const MtdiTable = (props) => {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())
@@ -511,7 +511,7 @@ const MtdiTable = (props) => {
     setisLoading(true);
     let url = "";
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -525,7 +525,7 @@ const MtdiTable = (props) => {
     };
     try {
       const response = await fetch(
-        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
+        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
         requestOptions
       );
       if (!response.ok) {
@@ -569,20 +569,19 @@ const MtdiTable = (props) => {
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
-    let url = "";
+    let url = '';
     if (searchOrderId !== "") {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/order?orderNo=${searchOrderId}`;
     } else {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     }
     setisLoading(true);
     setfiltersApplied(true);
-
-    // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     console.log(url);
 
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -622,11 +621,11 @@ const MtdiTable = (props) => {
   const incrementPageHandler = async () => {
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -885,10 +884,10 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        if (rowData.respuesta_wms === "Enviado") {
+        if (rowData.respuesta_wms === "XML cargado correctamente(1). ()" || "XML cargado correctamente(1). (Productos sin stock en wms)") {
           return (
             <div>
-              <span className={classes.syncroError}>Error de Sincro </span>
+              <span className={classes.confirmado}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 
               <span style={{ marginLeft: "14px", cursor: "pointer" }}>
                 {/* <img
@@ -997,6 +996,7 @@ const MtdiTable = (props) => {
       field: "hub_fulfillment,hub_logo",
       width: "15%",
       render: (rowData) => {
+        if(rowData.hub_fulfillment != undefined ){
         return (
         
           <div>
@@ -1016,6 +1016,7 @@ const MtdiTable = (props) => {
             </span>}
           </div>
         );
+        }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1028,6 +1029,7 @@ const MtdiTable = (props) => {
       field: "courier,courier_logo",
       width: "15%",
       render: (rowData) => {
+        if(rowData.courier != undefined ){
         return (
           <div>
             <span style={{ whiteSpace: "nowrap" }}>
@@ -1037,6 +1039,7 @@ const MtdiTable = (props) => {
             </span>
           </div>
         );
+        }
       },
 
       headerStyle: {
@@ -1150,9 +1153,12 @@ const MtdiTable = (props) => {
       width: "20%",
 
       render: (rowData) => {
+        if(rowData.comprador != undefined ){
         return (
           // <div
+         
           <div>
+            
             <span
               style={{
                 width: "0%",
@@ -1168,6 +1174,7 @@ const MtdiTable = (props) => {
             <span
               style={{ width: "14%", float: "right", whiteSpace: "nowrap",left:'80px' }}
             >&nbsp;
+           
               <img
                 style={{ float: "left" }}
                 src={Estado}
@@ -1200,6 +1207,7 @@ const MtdiTable = (props) => {
           //   </span>
           // </div>
         );
+            }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1662,14 +1670,14 @@ const MtdiTable = (props) => {
                 marginLeft: "1em",
                 textTransform: "none",
                 letterSpacing: "1px",
-                width: "120px",
+                // width: "120px",
                 height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-              Download Excel
+              Descargar Excel
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
