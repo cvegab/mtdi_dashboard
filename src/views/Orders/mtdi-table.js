@@ -884,7 +884,7 @@ const MtdiTable = (props) => {
             </div>
           );
         }
-        if (rowData.respuesta_wms.includes('XML cargado correctamente')) {
+        if (rowData.respuesta_wms === "XML cargado correctamente(1). ()" || "XML cargado correctamente(1). (Productos sin stock en wms)") {
           return (
             <div>
               <span className={classes.confirmado}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -996,6 +996,7 @@ const MtdiTable = (props) => {
       field: "hub_fulfillment,hub_logo",
       width: "15%",
       render: (rowData) => {
+        if(rowData.hub_fulfillment != undefined ){
         return (
         
           <div>
@@ -1015,6 +1016,7 @@ const MtdiTable = (props) => {
             </span>}
           </div>
         );
+        }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1027,6 +1029,7 @@ const MtdiTable = (props) => {
       field: "courier,courier_logo",
       width: "15%",
       render: (rowData) => {
+        if(rowData.courier != undefined ){
         return (
           <div>
             <span style={{ whiteSpace: "nowrap" }}>
@@ -1036,6 +1039,7 @@ const MtdiTable = (props) => {
             </span>
           </div>
         );
+        }
       },
 
       headerStyle: {
@@ -1149,9 +1153,12 @@ const MtdiTable = (props) => {
       width: "20%",
 
       render: (rowData) => {
+        if(rowData.comprador != undefined ){
         return (
           // <div
+         
           <div>
+            
             <span
               style={{
                 width: "0%",
@@ -1167,6 +1174,7 @@ const MtdiTable = (props) => {
             <span
               style={{ width: "14%", float: "right", whiteSpace: "nowrap",left:'80px' }}
             >&nbsp;
+           
               <img
                 style={{ float: "left" }}
                 src={Estado}
@@ -1199,6 +1207,7 @@ const MtdiTable = (props) => {
           //   </span>
           // </div>
         );
+            }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1661,14 +1670,14 @@ const MtdiTable = (props) => {
                 marginLeft: "1em",
                 textTransform: "none",
                 letterSpacing: "1px",
-                width: "120px",
+                // width: "120px",
                 height: "46px",
                 fontWeight: "600",
               }}
               className="thirdStepTour"
               onClick={DownloadFileHandler}
             >
-              Download Excel
+              Descargar Excel
             </Button>
             <Button
               className="btn-round btn-icon fourthStepTour"
