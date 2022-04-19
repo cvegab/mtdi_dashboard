@@ -854,6 +854,7 @@ const MtdiTable = (props) => {
       field: "respuesta_wms",
       width: "15%",
       render: (rowData) => {
+        if (rowData.dte != undefined) {
         if (rowData.respuesta_wms === "Error") {
           return (
             <div>
@@ -899,6 +900,7 @@ const MtdiTable = (props) => {
             </div>
           );
         }
+      }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
