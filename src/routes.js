@@ -53,6 +53,14 @@ const routes = [
     layout: "/admin",
 
    },
+   {
+    path: "/customermaintainer",
+    name: "Administrar Perfiles ",
+    icon: "nc-icon nc-single-02",
+    component: CustomerMaintaniner,
+    layout: "/admin",
+
+  },
 
   // {
   //   path: "/logysto",
