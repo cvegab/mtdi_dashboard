@@ -1,3 +1,4 @@
+import ProfileTableHandler from 'components/ProfileTableHandler/profile-table-handler';
 import React from 'react';
 // import ClientsTable from 'components/ClientsTable/ClientsTable';
 import { Container } from 'reactstrap';
@@ -41,6 +42,7 @@ const CustomerMaintainer = () => {
           <Container>
 
           {/* <ClientsTable/> */}
+      <ProfileTableHandler/>
 
           </Container>
 
