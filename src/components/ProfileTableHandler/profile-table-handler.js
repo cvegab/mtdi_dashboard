@@ -186,7 +186,7 @@ const ProfileTableHandler = () => {
                 style={{ marginLeft: "1em", marginTop: "2em" }}
                 // actions={[
                 //     {
-                //       icon: 'editClient',
+                //       icon: editProfile,
                 //       tooltip: 'Save User',
                 //       onClick: (event, rowData) => {
                 //         // Do save operation
