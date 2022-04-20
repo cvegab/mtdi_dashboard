@@ -14,6 +14,7 @@ import MtdiTable from "views/Orders/mtdi-table.js";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
 import MtdiReports from "views/Dashboard/mtdi_reports";
+import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 
 
 const routes = [
@@ -57,7 +58,7 @@ const routes = [
     path: "/customermaintainer",
     name: "Administrar Perfiles ",
     icon: "nc-icon nc-single-02",
-    component: CustomerMaintaniner,
+    component: CustomerMaintainer,
     layout: "/admin",
 
   },
