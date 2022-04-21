@@ -113,6 +113,7 @@ const ProfileTableHandler = () => {
   };
   const [profileInfo, setProfileInfo] = useState("");
   const [profileDetails, setprofileDetails] = useState({});
+  const [tableProfileData, settableProfileData] = useState([]);
   // const [name, setName] = useState("");
   // const [mail, setMail] = useState("");
   // const [store, setStore] = useState("");
@@ -123,10 +124,33 @@ const ProfileTableHandler = () => {
   const nameRef = useRef('');
   const emailRef = useRef('');
   const userType = useRef(1);
-  // useEffect(() => {
-  //  addProfileHandler();
-  // }, [profileDetails])
-  
+  useEffect(() => {
+fetchProfileDetails();
+  }, [])
+  const fetchProfileDetails=async()=>{   
+    try {
+      const response =  await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json');
+     
+      if (!response.ok) {
+        throw new Error();
+      }
+      const data = await response.json();
+    const loadedData=[];
+    for(const key in data){
+      loadedData.push({
+        id: key,
+        name: data[key].firts_name,
+        mail: data[key].email,
+        profile: data[key].profile,
+        countries: data[key].countries
+      })
+    }
+    console.log(loadedData); 
+     settableProfileData(loadedData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   //   const editClient = () => {
   //     console.log(profileInfo);
   //     setName('Pedro')
@@ -165,7 +189,7 @@ setShowModal(true);
           countries:[1,2],
           stores:[1,2,3]
         }
-      
+   setprofileDetails(profile);   
 
     try {
       const response = await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json',{
@@ -182,6 +206,7 @@ setShowModal(true);
       }
       const data = await response.json();
       console.log(data);
+      console.log(profileDetails);
      
     } catch (error) {
       console.log(error);
@@ -227,7 +252,7 @@ setShowModal(true);
     },
     {
       title: "Tipo de Usuario",
-      field: "store",
+      field: "profile",
       width: "13%",
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -315,7 +340,7 @@ setShowModal(true);
           onRowClick={(evt, selectedRow) => setProfileInfo(selectedRow)}
           icons={tableIcons}
           title=""
-          data={data}
+          data={tableProfileData}
           columns={columns}
           options={{
             columnsButton: true,
@@ -366,36 +391,7 @@ setShowModal(true);
             Crear nuevo usuario
           </h3>
 
-          {/* <FormGroup>
-            <label>Id:</label>
-            <input className="form-control" readOnly type="text" />
-          </FormGroup>
-
-          <FormGroup>
-            <label>Nombre:</label>
-            <input className="form-control" name="name" type="text" value={name} onChange={e=>setName(e.target.value)} />
-            <label>{name}</label>
-          </FormGroup>
-
-          <FormGroup>
-            <label>Correo electronico:</label>
-            <input className="form-control" name="mail" type="text" value={mail} onChange={e=>setMail(e.target.value)}  />
-          </FormGroup>
-
-          <FormGroup>
-            <label>Tienda:</label>
-            <input className="form-control" name="store" type="text" value={store} onChange={e=>setStore(e.target.value)} />
-          </FormGroup>
-
-          <FormGroup>
-            <label>Pais:</label>
-            <input className="form-control" name="country" type="text" value={country} onChange={e=>setCountry(e.target.value)}  />
-          </FormGroup>
-
-          <FormGroup>
-            <label>Selfservice:</label>
-            <input className="form-control" name="selfservice" type="text" value={selfservice} onChange={e=>setSelfservice(e.target.value)}  />
-          </FormGroup> */}
+        
           <Form>
             <FormGroup>
               <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
@@ -524,20 +520,12 @@ setShowModal(true);
                 onClick={addProfileHandler}
               >
                 Crear Usuario &nbsp;
-                {/* <span className="btn-label">
-                  <i className="nc-icon nc-send" />
-                </span> */}
+              
               </button>
             </div>
           </Form>
         </ModalBody>
-        {/* <ModalFooter>
-          {isNewUser ? (
-            <Button color="primary">Crear usuario</Button>
-          ) : (
-            <Button color="primary">Actualizar usuario </Button>
-          )}
-        </ModalFooter> */}
+      
       </Modal>
     </>
   );
