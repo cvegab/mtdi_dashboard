@@ -41,7 +41,7 @@ const CustomerMaintainer = () => {
 
           <Container>
 
-          {/* <ClientsTable/> */}
+        
       <ProfileTableHandler/>
 
           </Container>
