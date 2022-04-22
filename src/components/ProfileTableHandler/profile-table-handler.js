@@ -94,6 +94,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import { NoEncryption } from "@material-ui/icons";
 import EditProfileModal from "./edit-profile-modal";
 import NewUserProfileModal from "components/NewUserProfileModal/new-user-profile-modal";
+import DeleteProfileModal from "deleteProfileModal/delete-profile-modal";
 // import Switch from '@mui/material/Switch';
 const ProfileTableHandler = () => {
   const [showEditProfileModal, setshowEditProfileModal] = useState(false);
@@ -121,6 +122,7 @@ const ProfileTableHandler = () => {
   // const [country, setCountry] = useState("");
   // const [selfservice, setSelfservice] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setshowDeleteModal] = useState(false);
   // const [isNewUser, setIsNewUser] = useState(true);
   // const nameRef = useRef('');
   // const emailRef = useRef('');
@@ -152,21 +154,7 @@ fetchProfileDetails();
       console.log(error);
     }
   }
-  //   const editClient = () => {
-  //     console.log(profileInfo);
-  //     setName('Pedro')
-  //     setMail('pedrovidal@gmail.com')
-  //     setStore('Mercadolibre')
-  //     setCountry('Chile')
-  //     setSelfservice('Activado')
-  //     setShowModal(true)
-  //     setIsNewUser(false)
-  //     }
-
-
-  // const addClient = () => {
-  //   setShowModal(true);
-  // };
+  
   const addProfileDetails =()=>{
 setShowModal(true);
 
@@ -217,7 +205,12 @@ setShowModal(true);
   const editModalHandler = () => {
     setshowEditProfileModal(true);
   };
-
+const showDeleteModalHandler = ()=>{
+  setshowDeleteModal(true);
+}
+const hideDeleteModalHandler = ()=>{
+  setshowDeleteModal(false);
+}
   const columns = [
     {
       title: "Id",
@@ -300,7 +293,7 @@ setShowModal(true);
               </span>
               &nbsp;
               <span>
-                <img src={deleteProfile} />
+                <img src={deleteProfile} onClick={showDeleteModalHandler} />
               </span>
             </div>
           );
@@ -318,6 +311,9 @@ setShowModal(true);
   };
   return (
     <>
+    {
+      showDeleteModal && <DeleteProfileModal onhideModal={hideDeleteModalHandler} profileInfo={profileInfo}></DeleteProfileModal>
+    }
       {showEditProfileModal && (
         <EditProfileModal
           profileInfo={profileInfo}
