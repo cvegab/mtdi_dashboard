@@ -16,7 +16,7 @@ import {
   } from "reactstrap";
 const NewUserProfileModal = (props)=>{
     const [showModal, setShowModal] = useState(false);
-    const [profileDetails, setprofileDetails] = useState({});
+    const [profileDetails, setprofileDetails] = useState([]);
     const nameRef = useRef('');
     const emailRef = useRef('');
     const userType = useRef(1);

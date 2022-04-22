@@ -159,6 +159,7 @@ fetchProfileDetails();
 setShowModal(true);
 
   }
+
   // const submitProfileDetails = ()=>{
   //   const profile = {
   //     firts_name: nameRef.current.value,

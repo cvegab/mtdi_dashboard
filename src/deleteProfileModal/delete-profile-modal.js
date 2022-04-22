@@ -1,3 +1,4 @@
+import { LaptopWindows } from "@material-ui/icons";
 import Modal from "components/UI/Modal";
 import { useState } from "react";
 
@@ -31,6 +32,7 @@ const [hideBothModal, sethideBothModal] = useState(false);
     }
 const hideDeleteSuccessfulHandler = ()=>{
     props.onhideModal();
+    window.location.reload();
 }
 
 return (
