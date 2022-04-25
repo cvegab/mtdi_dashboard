@@ -69,26 +69,26 @@ setName(event.target.value);
 console.log(profile);
        setprofileDetails(profile);   
     
-      //   try {
-      //     const response = await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json',{
-      //     method: 'POST',
-      //     body: JSON.stringify(profile),
-      //     headers:{
-      //    'Content-Type': 'application/json'
-      //     }
-      //   }
-      // );
+        try {
+          const response = await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json',{
+          method: 'POST',
+          body: JSON.stringify(profile),
+          headers:{
+         'Content-Type': 'application/json'
+          }
+        }
+      );
          
-      //     if (!response.ok) {
-      //       throw new Error();
-      //     }
-      //     const data = await response.json();
-      //     console.log(data);
-      //     console.log(profileDetails);
-      //    window.location.reload();
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
+          if (!response.ok) {
+            throw new Error();
+          }
+          const data = await response.json();
+          console.log(data);
+          console.log(profileDetails);
+         window.location.reload();
+        } catch (error) {
+          console.log(error);
+        }
       };
  
 return(

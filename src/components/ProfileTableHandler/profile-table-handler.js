@@ -86,6 +86,7 @@ const ProfileTableHandler = () => {
           mail: data[key].email,
           profile: data[key].profile,
           countries: data[key].countries,
+          enabled: data[key].enabled,
         });
       }
       console.log(loadedData);
@@ -153,7 +154,7 @@ const ProfileTableHandler = () => {
     },
     {
       title: "Activo",
-      field: "store",
+      field: "enabled",
       width: "13%",
       render: (rowData) => {
         return (
@@ -162,7 +163,7 @@ const ProfileTableHandler = () => {
                     <FormCheck style={{width:'5em',height:'3em'}}
                         type="switch"
                         id="custom-switch"
-                      // checked={true}
+                       checked={rowData.enabled}
                         /> 
                    </FormGroup>
           </div>
