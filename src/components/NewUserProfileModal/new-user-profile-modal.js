@@ -14,6 +14,7 @@ import {
     Row,
     Input,
   } from "reactstrap";
+  import { FormCheck, FormControl, FormLabel, FormSelect} from 'react-bootstrap'
 const NewUserProfileModal = (props)=>{
   console.log(props.profileInfo);
   const editedName = 'baby'
@@ -28,6 +29,8 @@ const NewUserProfileModal = (props)=>{
     const nameRef = useRef('');
     const emailRef = useRef('');
     const userType = useRef(1);
+const [selfServiceType, setselfServiceType] = useState(false);
+    
    
   // if(props.profileInfo !== ''){
   //   const nameRef = useRef(props.profileInfo.name);
@@ -50,6 +53,9 @@ setName(event.target.value);
     }
     console.log(profile);
    }
+   const handleSwitchChange = (event)=>{
+     console.log(event.target.value);
+   }
     const addProfileHandler = async () => {
         const profile = {
               // firts_name: nameRef.current.value,
@@ -57,31 +63,32 @@ setName(event.target.value);
               email: emailRef.current.value,
               profile: userType.current.value,
               countries:[1,2],
-              stores:[1,2,3]
+              stores:[1,2,3],
+              enabled: selfServiceType
             }
-
+console.log(profile);
        setprofileDetails(profile);   
     
-        try {
-          const response = await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json',{
-          method: 'POST',
-          body: JSON.stringify(profile),
-          headers:{
-         'Content-Type': 'application/json'
-          }
-        }
-      );
+      //   try {
+      //     const response = await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json',{
+      //     method: 'POST',
+      //     body: JSON.stringify(profile),
+      //     headers:{
+      //    'Content-Type': 'application/json'
+      //     }
+      //   }
+      // );
          
-          if (!response.ok) {
-            throw new Error();
-          }
-          const data = await response.json();
-          console.log(data);
-          console.log(profileDetails);
-         window.location.reload();
-        } catch (error) {
-          console.log(error);
-        }
+      //     if (!response.ok) {
+      //       throw new Error();
+      //     }
+      //     const data = await response.json();
+      //     console.log(data);
+      //     console.log(profileDetails);
+      //    window.location.reload();
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
       };
  
 return(
@@ -214,7 +221,7 @@ return(
                 </FormGroup>
               </Col>
             </Row>
-            <div class="form-check form-switch">
+            {/* <div class="form-check form-switch">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -224,7 +231,25 @@ return(
               <label class="form-check-label" for="flexSwitchCheckDefault">
                 Default switch checkbox input
               </label>
-            </div>
+            </div> */}
+            
+             <FormGroup>
+             <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
+                 Activado:
+                  </Label>
+              
+                    <FormCheck style={{width:'5em',height:'3em'}}
+                        type="switch"
+                        id="custom-switch"
+                        // ref={selfServiceType}
+                      // checked={true}
+                      // value={selfServiceType}
+                      // onChange={(event)=>{setselfServiceType(!selfServiceType)}}
+                      // checked={handleSwitchChange}
+                      checked={selfServiceType}
+                      onChange={() => setselfServiceType(!selfServiceType)}
+                        /> 
+                   </FormGroup>
             {props.flag === 0 && 
             <div class="text-center">
               <button

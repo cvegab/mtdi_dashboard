@@ -162,7 +162,7 @@ const ProfileTableHandler = () => {
                     <FormCheck style={{width:'5em',height:'3em'}}
                         type="switch"
                         id="custom-switch"
-                      checked={true}
+                      // checked={true}
                         /> 
                    </FormGroup>
           </div>
