@@ -1,85 +1,23 @@
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MaterialTable from "material-table";
 
 import "./profile-table.css";
 // import '../ClientsTable/ClientsTable.css';
 import {
-  Table,
   Button,
   Container,
-  Modal,
-  ModalBody,
+  Modal, 
   ModalHeader,
-  FormGroup,
-  ModalFooter,
   Form,
-  Label,
-  Col,
-  Row,
-  Input,
+   FormGroup,
+  // FormCheck,
 } from "reactstrap";
+import { FormCheck, FormControl, FormLabel, FormSelect, ModalBody } from 'react-bootstrap'
+// import { Form, FormGroup } from 'reactstrap'
 import noIcon from "../../assets/img/no.png";
 import greyIcon from "../../assets/img/greyIcon.png";
 import editProfile from "../../assets/img/edit-profile.png";
 import deleteProfile from "../../assets/img/delete-profile.png";
-const data = [
-  {
-    id: 1,
-    name: "Harry Potter",
-    mail: "harry@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Activado",
-  },
-  {
-    id: 2,
-    name: "Rick Sanchez",
-    mail: "rsanc@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Activado",
-  },
-  {
-    id: 3,
-    name: "Bob the builder",
-    mail: "bob@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Desactivado",
-  },
-  {
-    id: 4,
-    name: "Gremlin",
-    mail: "greml@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Activado",
-  },
-  {
-    id: 5,
-    name: "Shrek",
-    mail: "shrek@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Desactivado",
-  },
-  {
-    id: 6,
-    name: "Daenarays targareyan",
-    mail: "Daena@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Activado",
-  },
-  {
-    id: 7,
-    name: "Kaleesi",
-    mail: "kaleesi@gmail.com",
-    store: "Mercadolibre",
-    country: "Chile",
-    selfservice: "Activado",
-  },
-];
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Search from "@material-ui/icons/Search";
@@ -128,90 +66,48 @@ const ProfileTableHandler = () => {
   // const emailRef = useRef('');
   // const userType = useRef(1);
   useEffect(() => {
-fetchProfileDetails();
-  }, [])
-  const fetchProfileDetails=async()=>{   
+    fetchProfileDetails();
+  }, []);
+  const fetchProfileDetails = async () => {
     try {
-      const response =  await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json');
-     
+      const response = await fetch(
+        "https://profile-table-default-rtdb.firebaseio.com/profile.json"
+      );
+
       if (!response.ok) {
         throw new Error();
       }
       const data = await response.json();
-    const loadedData=[];
-    for(const key in data){
-      loadedData.push({
-        id: key,
-        name: data[key].firts_name,
-        mail: data[key].email,
-        profile: data[key].profile,
-        countries: data[key].countries
-      })
-    }
-    console.log(loadedData); 
-     settableProfileData(loadedData);
+      const loadedData = [];
+      for (const key in data) {
+        loadedData.push({
+          id: key,
+          name: data[key].firts_name,
+          mail: data[key].email,
+          profile: data[key].profile,
+          countries: data[key].countries,
+        });
+      }
+      console.log(loadedData);
+      settableProfileData(loadedData);
     } catch (error) {
       console.log(error);
     }
-  }
-  
-  const addProfileDetails =()=>{
-setShowModal(true);
+  };
 
-  }
-
-  // const submitProfileDetails = ()=>{
-  //   const profile = {
-  //     firts_name: nameRef.current.value,
-  //     email: emailRef.current.value,
-  //     profile: userType.current.value,
-  //     countries:[1,2],
-  //     stores:[1,2,3]
-  //   }
-  //   setprofileDetails(profile);
-    
-  // }
-  // const addProfileHandler = async () => {
-  //   const profile = {
-  //         firts_name: nameRef.current.value,
-  //         email: emailRef.current.value,
-  //         profile: userType.current.value,
-  //         countries:[1,2],
-  //         stores:[1,2,3]
-  //       }
-  //  setprofileDetails(profile);   
-
-  //   try {
-  //     const response = await fetch('https://profile-table-default-rtdb.firebaseio.com/profile.json',{
-  //     method: 'POST',
-  //     body: JSON.stringify(profile),
-  //     headers:{
-  //    'Content-Type': 'application/json'
-  //     }
-  //   }
-  // );
-     
-  //     if (!response.ok) {
-  //       throw new Error();
-  //     }
-  //     const data = await response.json();
-  //     console.log(data);
-  //     console.log(profileDetails);
-     
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+  const addProfileDetails = () => {
+    setShowModal(true);
+  };
   const editModalHandler = () => {
+ 
     setshowEditProfileModal(true);
   };
-const showDeleteModalHandler = ()=>{
-  setshowDeleteModal(true);
-}
-const hideDeleteModalHandler = ()=>{
-  setshowDeleteModal(false);
-}
+  const showDeleteModalHandler = () => {
+    setshowDeleteModal(true);
+  };
+  const hideDeleteModalHandler = () => {
+    setshowDeleteModal(false);
+  };
   const columns = [
     {
       title: "Id",
@@ -261,17 +157,16 @@ const hideDeleteModalHandler = ()=>{
       width: "13%",
       render: (rowData) => {
         return (
-          <div class="custom-control custom-switch">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="customSwitch1"
-              checked
-            />
-            <label class="custom-control-label" for="customSwitch1">
-              Toggle this switch element
-            </label>
+          <div >
+            <FormGroup>
+                    <FormCheck style={{width:'5em',height:'3em'}}
+                        type="switch"
+                        id="custom-switch"
+                      checked={true}
+                        /> 
+                   </FormGroup>
           </div>
+         
         );
       },
       headerStyle: {
@@ -312,15 +207,42 @@ const hideDeleteModalHandler = ()=>{
   };
   return (
     <>
-    {
-      showDeleteModal && <DeleteProfileModal onhideModal={hideDeleteModalHandler} profileInfo={profileInfo}></DeleteProfileModal>
-    }
-      {showEditProfileModal && (
-        <EditProfileModal
+      {showDeleteModal && (
+        <DeleteProfileModal
+          onhideModal={hideDeleteModalHandler}
           profileInfo={profileInfo}
-          onhideModal={HideeditModalHandler}
-        ></EditProfileModal>
+        ></DeleteProfileModal>
       )}
+
+      {showEditProfileModal && 
+     <Modal isOpen={showEditProfileModal}>
+     <ModalHeader>
+       <div style={{ display: "flex", justifyContent: "end" }}>
+         <button
+           style={{
+             background: "none",
+             position: "relative",
+             marginLeft: "14em",
+             color: "black",
+             border: "none",
+           }}
+           onClick={() => setshowEditProfileModal(false)}
+         >
+           x
+         </button>
+       </div>
+     </ModalHeader>
+
+     <NewUserProfileModal flag={1} profileInfo={profileInfo}></NewUserProfileModal>
+   </Modal>
+        
+      }
+
+      {/* // <EditProfileModal
+        //   profileInfo={profileInfo}
+        //   onhideModal={HideeditModalHandler}
+        // ></EditProfileModal> */}
+
       <Container>
         <br />
         <Button
@@ -360,27 +282,28 @@ const hideDeleteModalHandler = ()=>{
         />
       </Container>
 
-      <Modal isOpen={showModal}>
-        <ModalHeader>
-          <div style={{ display: "flex", justifyContent: "end" }}>
-            <button
-              style={{
-                background: "none",
-                position: "relative",
-                marginLeft: "14em",
-                color: "black",
-                border: "none",
-              }}
-              onClick={() => setShowModal(false)}
-            >
-              x
-            </button>
-          </div>
-        </ModalHeader>
+      {showModal && !showEditProfileModal && (
+        <Modal isOpen={showModal}>
+          <ModalHeader>
+            <div style={{ display: "flex", justifyContent: "end" }}>
+              <button
+                style={{
+                  background: "none",
+                  position: "relative",
+                  marginLeft: "14em",
+                  color: "black",
+                  border: "none",
+                }}
+                onClick={() => setShowModal(false)}
+              >
+                x
+              </button>
+            </div>
+          </ModalHeader>
 
-    <NewUserProfileModal></NewUserProfileModal>
-      
-      </Modal>
+          <NewUserProfileModal flag={0} profileInfo=''></NewUserProfileModal>
+        </Modal>
+      )}
     </>
   );
 };
