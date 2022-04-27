@@ -230,12 +230,12 @@ const NewUserProfileModal = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col md={6}>
+          <Col md={12}>
             <FormGroup>
-              <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
+              <Label for="cliente" style={{ fontWeight: "600", size: "14px" }}>
                 Cliente
               </Label>
-              <select
+              {/* <select
                 class="form-select"
                 aria-label="Default select example"
                 style={{ borderRadius: "10px" }}
@@ -245,7 +245,8 @@ const NewUserProfileModal = (props) => {
                 <option value="2">Softys</option>
                 <option value="3">DeMaria</option>
                 <option value="4">Faber Castell</option>
-              </select>
+              </select> */}
+              
             </FormGroup>
           </Col>
         </Row>

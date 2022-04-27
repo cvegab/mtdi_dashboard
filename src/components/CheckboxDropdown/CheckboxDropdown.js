@@ -1,3 +1,4 @@
+import { OptionsStore } from '@progress/kendo-drawing';
 import React, { useState } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -22,21 +23,27 @@ const categoriesOptions = [
 
 
 
-const CheckboxDropdown = () => {
-
+const CheckboxDropdown = (props) => {
+console.log(props.defaultValue);
   const animatedComponents = makeAnimated();
+  const [selectState, setselectState] = useState();
+  const handleSelectChange = (event)=>{
+console.log(event);
+  }
 
   return (
     <div className="App">
     <Select
       id="select-checkbox-enterprise"
-      closeMenuOnSelect={false}
+      closeMenuOnSelect={true}
       components={animatedComponents}
-      defaultValue={[categoriesOptions[4], categoriesOptions[5]]}
+      // defaultValue={[categoriesOptions[4], categoriesOptions[5]]}
+       defaultValue={props.defaultValue}
       isMulti
-      options={categoriesOptions}
-      placeholder="Seleccione las categorías de su negocio"
-     
+      // options={categoriesOptions}
+      options={props.options}
+      placeholder={props.placeholder}
+     onChange={props.handleSelectChange}
     />
     </div>
   );
