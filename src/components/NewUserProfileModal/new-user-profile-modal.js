@@ -18,7 +18,11 @@ import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
 const NewUserProfileModal = (props) => {
   console.log(props.profileInfo);
-  const editedName = "baby";
+  const clientOptions = [
+    {value:1,label:'Faber castell'},
+    {value: 2,label:'Demaria'},
+    {value: 3, label:'Softys'}
+  ]
   const [showModal, setShowModal] = useState(false);
   const [profileDetails, setprofileDetails] = useState([]);
 
