@@ -29,7 +29,7 @@ const NewUserProfileModal = (props) => {
   const nameRef = useRef("");
   const emailRef = useRef("");
   const userType = useRef(1);
-  const [selfServiceType, setselfServiceType] = useState(false);
+  const [selfServiceType, setselfServiceType] = useState(props.profileInfo.enabled);
 
   const nameChangeHandler = (event) => {
     console.log(event);
