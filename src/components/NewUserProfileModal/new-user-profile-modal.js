@@ -29,7 +29,9 @@ const NewUserProfileModal = (props) => {
   const nameRef = useRef("");
   const emailRef = useRef("");
   const userType = useRef(1);
-  const [selfServiceType, setselfServiceType] = useState(props.profileInfo.enabled);
+  const [selfServiceType, setselfServiceType] = useState(
+    props.profileInfo.enabled
+  );
 
   const nameChangeHandler = (event) => {
     console.log(event);
@@ -60,19 +62,14 @@ const NewUserProfileModal = (props) => {
     );
     myHeaders.append("Content-Type", "text/plain");
 
-  
-
     var requestOptions = {
       method: "PUT",
       headers: myHeaders,
       body: JSON.stringify(profile),
       redirect: "follow",
     };
-let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${props.profileInfo.email}`
-    fetch(
-     url,
-      requestOptions
-    )
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${props.profileInfo.email}`;
+    fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -252,18 +249,7 @@ let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?u
             </FormGroup>
           </Col>
         </Row>
-        {/* <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckDefault"
-              />
-              <label class="form-check-label" for="flexSwitchCheckDefault">
-                Default switch checkbox input
-              </label>
-            </div> */}
-
+     
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
             Activado:
