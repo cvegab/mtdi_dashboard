@@ -15,6 +15,7 @@ import {
   Input,
 } from "reactstrap";
 import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
+import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
 const NewUserProfileModal = (props) => {
   console.log(props.profileInfo);
   const editedName = "baby";
@@ -235,6 +236,8 @@ const NewUserProfileModal = (props) => {
               <Label for="cliente" style={{ fontWeight: "600", size: "14px" }}>
                 Cliente
               </Label>
+              <CheckboxDropdown placeholder='Selccione un cliente' options={clientOptions} handleSelectChange={handleSelectChange} defaultValue={props.profileInfo.stores}></CheckboxDropdown>
+              
               {/* <select
                 class="form-select"
                 aria-label="Default select example"
