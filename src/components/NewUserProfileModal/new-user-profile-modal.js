@@ -140,7 +140,7 @@ return(
                 id="exampleEmail"
                 style={{ fontSize: "12px" }}
                 // value={editedName}
-                defaultValue={props.profileInfo.name}
+                defaultValue={props.profileInfo.first_name}
                 onChange={nameChangeHandler}
                 // ref={nameRef}
                 // value={props.profileInfo.name}
@@ -161,7 +161,7 @@ return(
               <input
                 className="input"
                 ref={emailRef}
-                defaultValue={props.profileInfo.mail}
+                defaultValue={props.profileInfo.email}
                 // value={props.profileInfo.mail}
                 // className={"input " + (this.state.error && " has-error")}
                 // value={this.state.value}
@@ -258,7 +258,7 @@ return(
                       // value={selfServiceType}
                       // onChange={(event)=>{setselfServiceType(!selfServiceType)}}
                       // checked={handleSwitchChange}
-                      checked={selfServiceType}
+                      checked={props.profileInfo.enabled}
                       onChange={() => setselfServiceType(!selfServiceType)}
                         /> 
                    </FormGroup>
