@@ -49,7 +49,7 @@ const NewUserProfileModal = (props) => {
       profile: userType.current.value,
       stores: [2, 3, 6],
       countries: [1],
-      enabled: true,
+      enabled: selfServiceType,
     };
     console.log(profile);
     var myHeaders = new Headers();
@@ -278,7 +278,7 @@ let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?u
             // value={selfServiceType}
             // onChange={(event)=>{setselfServiceType(!selfServiceType)}}
             // checked={handleSwitchChange}
-            checked={props.profileInfo.enabled}
+            defaultChecked={selfServiceType}
             onChange={() => setselfServiceType(!selfServiceType)}
           />
         </FormGroup>
