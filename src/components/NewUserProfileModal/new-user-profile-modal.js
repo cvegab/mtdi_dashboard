@@ -17,20 +17,20 @@ import {
 import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
 const NewUserProfileModal = (props) => {
-  console.log(props.profileInfo);
+  console.log(props.profileInfo.stores);
   const clientOptions = [
-    {value:1,label:'Faber castell'},
-    {value: 2,label:'Demaria'},
-    {value: 3, label:'Softys'}
-  ]
+     { value: 1, label: "Faber castell" },
+    { id: 2, name: "Demaria" },
+    // { value: 3, label: "Softys" },
+  ];
   const [showModal, setShowModal] = useState(false);
   const [profileDetails, setprofileDetails] = useState([]);
-
+  const [errorMessage, seterrorMessage] = useState("");
   const [name, setName] = useState(props.profileInfo.first_name);
-  const [mail, setMail] = useState("");
+
   const [stores, setstores] = useState(props.profileInfo.stores);
   const [country, setCountry] = useState("");
-  const [selfservice, setSelfservice] = useState("");
+
   const nameRef = useRef("");
   const emailRef = useRef("");
   const userType = useRef(1);
@@ -42,27 +42,19 @@ const NewUserProfileModal = (props) => {
     console.log(event);
     setName(event.target.value);
   };
-  const handleSelectChange = (event)=>{
+  const handleSelectChange = (event) => {
     console.log(event.current);
- 
-   setstores(event);
 
-   
-   }   
+    setstores(event);
+  };
   const editProfileHandler = () => {
     const profile = {
-      // firts_name: nameRef.current.value,
-      // firts_name: name,
-      // email: emailRef.current.value,
-      // profile: userType.current.value,
-      // countries:[1,2],
-      // stores:[1,2,3]
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
       profile: userType.current.value,
       stores: stores,
-      countries: [1],
+      countries: [{id:1,name:'Chile'}],
       enabled: selfServiceType,
     };
     console.log(profile);
@@ -83,7 +75,20 @@ const NewUserProfileModal = (props) => {
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${props.profileInfo.email}`;
     fetch(url, requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        if (result === '"Success!"') {
+          window.location.reload();
+        }
+        if (result === '"Invalid user"') {
+         seterrorMessage('the email cannot be changed')
+         setShowModal(false);
+        }
+        if (result === '"Elevation of privileges not possible, contact an administrator"') {
+          seterrorMessage('Elevation of privileges not possible, contact an administrator');
+         }
+        
+      })
       .catch((error) => console.log("error", error));
   };
   const handleSwitchChange = (event) => {
@@ -91,13 +96,6 @@ const NewUserProfileModal = (props) => {
   };
   const addProfileHandler = async () => {
     const profile = {
-      // firts_name: nameRef.current.value,
-      // firts_name: name,
-      // email: emailRef.current.value,
-      // profile: userType.current.value,
-      // countries:[1,2],
-      // stores:[1,2,3],
-      // enabled: selfServiceType
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
@@ -136,7 +134,7 @@ const NewUserProfileModal = (props) => {
   };
 
   return (
-    <ModalBody>
+     <ModalBody>
       {props.flag === 0 && (
         <h3
           style={{
@@ -232,11 +230,17 @@ const NewUserProfileModal = (props) => {
               <Label for="cliente" style={{ fontWeight: "600", size: "14px" }}>
                 Cliente
               </Label>
-              <CheckboxDropdown placeholder='Selccione un cliente' options={clientOptions} handleSelectChange={handleSelectChange} defaultValue={props.profileInfo.stores}></CheckboxDropdown>
+              <CheckboxDropdown
+                placeholder="Selccione un cliente"
+                options={clientOptions}
+                handleSelectChange={handleSelectChange}
+                // defaultValue={props.profileInfo.stores}
+                defaultValue={stores}
+              ></CheckboxDropdown>
             </FormGroup>
           </Col>
         </Row>
-     
+
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
             Activado:

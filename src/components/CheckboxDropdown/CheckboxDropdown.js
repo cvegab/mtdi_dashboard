@@ -26,7 +26,7 @@ const categoriesOptions = [
 const CheckboxDropdown = (props) => {
 console.log(props.defaultValue);
 let labels = props.options.map(label=>{
-  return label.label;
+  return label.name;
 })
 console.log(labels);
   const animatedComponents = makeAnimated();
