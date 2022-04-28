@@ -25,6 +25,10 @@ const categoriesOptions = [
 
 const CheckboxDropdown = (props) => {
 console.log(props.defaultValue);
+let labels = props.options.map(label=>{
+  return label.label;
+})
+console.log(labels);
   const animatedComponents = makeAnimated();
   const [selectState, setselectState] = useState();
   const handleSelectChange = (event)=>{

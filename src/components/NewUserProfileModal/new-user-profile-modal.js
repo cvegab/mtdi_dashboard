@@ -28,7 +28,7 @@ const NewUserProfileModal = (props) => {
 
   const [name, setName] = useState(props.profileInfo.first_name);
   const [mail, setMail] = useState("");
-  const [store, setStore] = useState("");
+  const [stores, setstores] = useState(props.profileInfo.stores);
   const [country, setCountry] = useState("");
   const [selfservice, setSelfservice] = useState("");
   const nameRef = useRef("");
@@ -42,6 +42,13 @@ const NewUserProfileModal = (props) => {
     console.log(event);
     setName(event.target.value);
   };
+  const handleSelectChange = (event)=>{
+    console.log(event.current);
+ 
+   setstores(event);
+
+   
+   }   
   const editProfileHandler = () => {
     const profile = {
       // firts_name: nameRef.current.value,
@@ -54,7 +61,7 @@ const NewUserProfileModal = (props) => {
       last_name: " ",
       email: emailRef.current.value,
       profile: userType.current.value,
-      stores: [2, 3, 6],
+      stores: stores,
       countries: [1],
       enabled: selfServiceType,
     };
@@ -95,7 +102,7 @@ const NewUserProfileModal = (props) => {
       last_name: " ",
       email: emailRef.current.value,
       profile: userType.current.value,
-      stores: [2, 3, 6],
+      stores: stores,
       countries: [1],
       enabled: selfServiceType,
     };
