@@ -1,21 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import MaterialTable from "material-table";
-
+import SplashScreen from "components/UI/splash-screen";
 import "./profile-table.css";
 // import '../ClientsTable/ClientsTable.css';
 import {
   Button,
   Container,
-  Modal, 
+  Modal,
   ModalHeader,
   Form,
-   FormGroup,
+  FormGroup,
   // FormCheck,
 } from "reactstrap";
-import { FormCheck, FormControl, FormLabel, FormSelect, ModalBody } from 'react-bootstrap'
+import {
+  FormCheck,
+  FormControl,
+  FormLabel,
+  FormSelect,
+  ModalBody,
+} from "react-bootstrap";
 // import { Form, FormGroup } from 'reactstrap'
-import noIcon from "../../assets/img/no.png";
-import greyIcon from "../../assets/img/greyIcon.png";
 import editProfile from "../../assets/img/edit-profile.png";
 import deleteProfile from "../../assets/img/delete-profile.png";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -27,13 +31,9 @@ import { forwardRef } from "react";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
-import { Select, MenuItem } from "@material-ui/core";
 import SaveAlt from "@material-ui/icons/SaveAlt";
-import { NoEncryption } from "@material-ui/icons";
-import EditProfileModal from "./edit-profile-modal";
 import NewUserProfileModal from "components/NewUserProfileModal/new-user-profile-modal";
 import DeleteProfileModal from "deleteProfileModal/delete-profile-modal";
-// import Switch from '@mui/material/Switch';
 const ProfileTableHandler = () => {
   const [showEditProfileModal, setshowEditProfileModal] = useState(false);
   const tableIcons = {
@@ -52,37 +52,32 @@ const ProfileTableHandler = () => {
     )),
   };
   const [profileInfo, setProfileInfo] = useState("");
-  const [profileDetails, setprofileDetails] = useState({});
+  const [isLoading, setisLoading] = useState(false);
   const [tableProfileData, settableProfileData] = useState([]);
-  // const [name, setName] = useState("");
-  // const [mail, setMail] = useState("");
-  // const [store, setStore] = useState("");
-  // const [country, setCountry] = useState("");
-  // const [selfservice, setSelfservice] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setshowDeleteModal] = useState(false);
-  // const [isNewUser, setIsNewUser] = useState(true);
-  // const nameRef = useRef('');
-  // const emailRef = useRef('');
-  // const userType = useRef(1);
   useEffect(() => {
     fetchProfileDetails();
   }, []);
   const fetchProfileDetails = async () => {
+    setisLoading(true);
     var myHeaders = new Headers();
-myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
-myHeaders.append("Authorization", "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
 
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=test@test.cl",requestOptions
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=test@test.cl",
+        requestOptions
       );
 
       if (!response.ok) {
@@ -90,19 +85,8 @@ var requestOptions = {
       }
       const data = await response.json();
       console.log(data);
-      // const loadedData = [];
-      // for (const key in data) {
-      //   loadedData.push({
-      //     id: key,
-      //     name: data[key].firts_name,
-      //     mail: data[key].email,
-      //     profile: data[key].profile,
-      //     countries: data[key].countries,
-      //     enabled: data[key].enabled,
-      //   });
-      // }
-      // console.log(loadedData);
       settableProfileData(data);
+      setisLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -112,7 +96,6 @@ var requestOptions = {
     setShowModal(true);
   };
   const editModalHandler = () => {
- 
     setshowEditProfileModal(true);
   };
   const showDeleteModalHandler = () => {
@@ -160,29 +143,14 @@ var requestOptions = {
       width: "13%",
       render: (rowData) => {
         if (rowData != undefined) {
-          if(rowData.profile === 1){
-            return (
-         
-              <div>
-              Administrador
-              </div>
-            );
+          if (rowData.profile === 1) {
+            return <div>Administrador</div>;
           }
-          if(rowData.profile === 2){
-            return (
-         
-              <div>
-             KAM
-              </div>
-            );
+          if (rowData.profile === 2) {
+            return <div>KAM</div>;
           }
-          if(rowData.profile === 3){
-            return (
-         
-              <div>
-             Cliente
-              </div>
-            );
+          if (rowData.profile === 3) {
+            return <div>Cliente</div>;
           }
         }
       },
@@ -198,16 +166,16 @@ var requestOptions = {
       width: "13%",
       render: (rowData) => {
         return (
-          <div >
+          <div>
             <FormGroup>
-                    <FormCheck style={{width:'5em',height:'3em'}}
-                        type="switch"
-                        id="custom-switch"
-                       checked={rowData.enabled}
-                        /> 
-                   </FormGroup>
+              <FormCheck
+                style={{ width: "5em", height: "3em" }}
+                type="switch"
+                id="custom-switch"
+                checked={rowData.enabled}
+              />
+            </FormGroup>
           </div>
-         
         );
       },
       headerStyle: {
@@ -229,9 +197,9 @@ var requestOptions = {
                 <img src={editProfile} onClick={editModalHandler} />
               </span>
               &nbsp;
-              <span>
+              {/* <span>
                 <img src={deleteProfile} onClick={showDeleteModalHandler} />
-              </span>
+              </span> */}
             </div>
           );
         }
@@ -248,6 +216,8 @@ var requestOptions = {
   };
   return (
     <>
+    
+    {isLoading && <SplashScreen></SplashScreen>}
       {showDeleteModal && (
         <DeleteProfileModal
           onhideModal={hideDeleteModalHandler}
@@ -255,29 +225,31 @@ var requestOptions = {
         ></DeleteProfileModal>
       )}
 
-      {showEditProfileModal && 
-     <Modal isOpen={showEditProfileModal}>
-     <ModalHeader>
-       <div style={{ display: "flex", justifyContent: "end" }}>
-         <button
-           style={{
-             background: "none",
-             position: "relative",
-             marginLeft: "14em",
-             color: "black",
-             border: "none",
-           }}
-           onClick={() => setshowEditProfileModal(false)}
-         >
-           x
-         </button>
-       </div>
-     </ModalHeader>
+      {showEditProfileModal && (
+        <Modal isOpen={showEditProfileModal}>
+          <ModalHeader>
+            <div style={{ display: "flex", justifyContent: "end" }}>
+              <button
+                style={{
+                  background: "none",
+                  position: "relative",
+                  marginLeft: "14em",
+                  color: "black",
+                  border: "none",
+                }}
+                onClick={() => setshowEditProfileModal(false)}
+              >
+                x
+              </button>
+            </div>
+          </ModalHeader>
 
-     <NewUserProfileModal flag={1} profileInfo={profileInfo}></NewUserProfileModal>
-   </Modal>
-        
-      }
+          <NewUserProfileModal
+            flag={1}
+            profileInfo={profileInfo}
+          ></NewUserProfileModal>
+        </Modal>
+      )}
 
       {/* // <EditProfileModal
         //   profileInfo={profileInfo}
@@ -311,15 +283,6 @@ var requestOptions = {
             tableLayout: "fixed",
           }}
           style={{ marginLeft: "1em", marginTop: "2em" }}
-          // actions={[
-          //     {
-          //       icon: editProfile,
-          //       tooltip: 'Save User',
-          //       onClick: (event, rowData) => {
-          //         // Do save operation
-          //       }
-          //     }
-          //   ]}
         />
       </Container>
 
@@ -342,7 +305,7 @@ var requestOptions = {
             </div>
           </ModalHeader>
 
-          <NewUserProfileModal flag={0} profileInfo=''></NewUserProfileModal>
+          <NewUserProfileModal flag={0} profileInfo=""></NewUserProfileModal>
         </Modal>
       )}
     </>

@@ -174,12 +174,6 @@ const NewUserProfileModal = (props) => {
             // value={editedName}
             defaultValue={props.profileInfo.first_name}
             onChange={nameChangeHandler}
-            // ref={nameRef}
-            // value={props.profileInfo.name}
-            // placeholder="Ingresa un correo"
-            // value={this.state.emailState}
-            // onChange={this.handleEmailChange}
-            // onBlur={this.checkEmail}
           />
         </FormGroup>
         <FormGroup>
@@ -191,14 +185,6 @@ const NewUserProfileModal = (props) => {
             className="input"
             ref={emailRef}
             defaultValue={props.profileInfo.email}
-            // value={props.profileInfo.mail}
-            // className={"input " + (this.state.error && " has-error")}
-            // value={this.state.value}
-            // placeholder="Escribe aquí el correo y presiona la tecla 'Enter'"
-            // style={{ fontSize: "12px" }}
-            // onKeyDown={this.handleKeyDown}
-            // onChange={this.handleChange}
-            // onPaste={this.handlePaste}
           />
         </FormGroup>
         <Row>
@@ -212,7 +198,6 @@ const NewUserProfileModal = (props) => {
                 aria-label="Default select example"
                 style={{ borderRadius: "10px" }}
                 ref={userType}
-                // value={props.profileInfo.profile}
                 defaultValue={props.profileInfo.profile}
               >
                 <option selected>Selcciona un tipo de usuario</option>
@@ -248,19 +233,6 @@ const NewUserProfileModal = (props) => {
                 Cliente
               </Label>
               <CheckboxDropdown placeholder='Selccione un cliente' options={clientOptions} handleSelectChange={handleSelectChange} defaultValue={props.profileInfo.stores}></CheckboxDropdown>
-              
-              {/* <select
-                class="form-select"
-                aria-label="Default select example"
-                style={{ borderRadius: "10px" }}
-              >
-                <option selected>Selccione un cliente</option>
-                <option value="1">Unilever</option>
-                <option value="2">Softys</option>
-                <option value="3">DeMaria</option>
-                <option value="4">Faber Castell</option>
-              </select> */}
-              
             </FormGroup>
           </Col>
         </Row>
