@@ -17,10 +17,10 @@ import {
 import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
 const NewUserProfileModal = (props) => {
-  console.log(props.profileInfo.stores);
+  console.log(props.profileInfo);
   const clientOptions = [
-     { value: 1, label: "Faber castell" },
-    { id: 2, name: "Demaria" },
+    //  { id: 1, label: "Faber castell" },
+    { id: 2, name: "Demaria"},
     // { value: 3, label: "Softys" },
   ];
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +28,8 @@ const NewUserProfileModal = (props) => {
   const [errorMessage, seterrorMessage] = useState("");
   const [name, setName] = useState(props.profileInfo.first_name);
 
-  const [stores, setstores] = useState(props.profileInfo.stores);
+  // const [stores, setstores] = useState(props.profileInfo.stores);
+  const [stores, setstores] = useState([]);
   const [country, setCountry] = useState("");
 
   const nameRef = useRef("");
@@ -43,9 +44,13 @@ const NewUserProfileModal = (props) => {
     setName(event.target.value);
   };
   const handleSelectChange = (event) => {
-    console.log(event.current);
-
-    setstores(event);
+    console.log(event);
+    let selectedStore=event;
+    const selectedStoreId = selectedStore.map((item)=>{
+      return item.id;
+    })
+   console.log(selectedStoreId);
+   setstores(selectedStoreId);
   };
   const editProfileHandler = () => {
     const profile = {
@@ -54,7 +59,7 @@ const NewUserProfileModal = (props) => {
       email: emailRef.current.value,
       profile: userType.current.value,
       stores: stores,
-      countries: [{id:1,name:'Chile'}],
+      countries:[1],
       enabled: selfServiceType,
     };
     console.log(profile);
@@ -235,7 +240,7 @@ const NewUserProfileModal = (props) => {
                 options={clientOptions}
                 handleSelectChange={handleSelectChange}
                 // defaultValue={props.profileInfo.stores}
-                defaultValue={stores}
+                defaultValue={props.profileInfo.stores}
               ></CheckboxDropdown>
             </FormGroup>
           </Col>

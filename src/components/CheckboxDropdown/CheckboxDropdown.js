@@ -25,10 +25,10 @@ const categoriesOptions = [
 
 const CheckboxDropdown = (props) => {
 console.log(props.defaultValue);
-let labels = props.options.map(label=>{
-  return label.name;
-})
-console.log(labels);
+// let labels = props.defaultValue.map(label=>{
+//   return label.id;
+// })
+// console.log(labels);
   const animatedComponents = makeAnimated();
   const [selectState, setselectState] = useState();
   const handleSelectChange = (event)=>{
@@ -39,10 +39,13 @@ console.log(event);
     <div className="App">
     <Select
       id="select-checkbox-enterprise"
+      getOptionValue={option => option.id}
+      getOptionLabel={option => option.name}
       closeMenuOnSelect={true}
       components={animatedComponents}
       // defaultValue={[categoriesOptions[4], categoriesOptions[5]]}
-       defaultValue={props.defaultValue}
+        defaultValue={props.defaultValue}
+      // defaultValue={labels}
       isMulti
       // options={categoriesOptions}
       options={props.options}
