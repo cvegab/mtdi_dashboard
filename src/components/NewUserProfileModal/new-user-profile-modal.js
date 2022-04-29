@@ -45,23 +45,25 @@ const NewUserProfileModal = (props) => {
       .then((result) => {
         var obj = JSON.parse(result);
         console.log(obj);
+        let countriesArray =  obj.filter((item) => {
+        return item.value!==0;
+        });
+        console.log(countriesArray);
+        let selectedCountry = countriesArray.map((item) => {
+          return [{ id: item.value, name: item.country }];
+        });
+        let allSelectedCountry = [].concat.apply([], selectedCountry);
+        console.log(allSelectedCountry);
+        setcountryOptions(allSelectedCountry);
+        console.log(selectedCountry);
         let allChannelsArray = obj[4].stores.map((item) => {
           return [{ id: item.value, name: item.store }];
         });
-        console.log(allChannelsArray);
+      
         var flattened = [].concat.apply([], allChannelsArray);
-        console.log(flattened);
+       
         setclientOptions(flattened);
-        var resArr = [];
-        flattened.filter(function (item) {
-          var i = resArr.findIndex(
-            (x) => x.channel == item.channel && x.value == item.value
-          );
-          if (i <= -1) {
-            resArr.push(item);
-          }
-          return null;
-        });
+       
       })
       .catch((error) => console.log("error", error));
   };
@@ -75,9 +77,10 @@ const NewUserProfileModal = (props) => {
   const [errorMessage, seterrorMessage] = useState("");
   const [name, setName] = useState(props.profileInfo.first_name);
   const [clientOptions, setclientOptions] = useState([]);
+  const [countryOptions, setcountryOptions] = useState([]);
   // const [stores, setstores] = useState(props.profileInfo.stores);
   const [stores, setstores] = useState([]);
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState('');
 
   const nameRef = useRef("");
   const emailRef = useRef("");
@@ -105,7 +108,7 @@ const NewUserProfileModal = (props) => {
       email: emailRef.current.value,
       profile: userType.current.value,
       stores: stores,
-      countries: [1],
+      countries: country,
       enabled: selfServiceType,
     };
     console.log(profile);
@@ -146,8 +149,13 @@ const NewUserProfileModal = (props) => {
       })
       .catch((error) => console.log("error", error));
   };
-  const handleSwitchChange = (event) => {
-    console.log(event.target.value);
+  const handleSelectCountryChange = (event) => {
+    let selectedCountry = event;
+    const selectedCountryId = selectedCountry.map((item) => {
+      return item.id;
+    });
+    console.log(selectedCountryId);
+    setCountry(selectedCountryId);
   };
   const addProfileHandler = async () => {
     const profile = {
@@ -156,7 +164,7 @@ const NewUserProfileModal = (props) => {
       email: emailRef.current.value,
       profile: userType.current.value,
       stores: stores,
-      countries: [1],
+      countries: country,
       enabled: selfServiceType,
     };
     console.log(profile);
@@ -265,7 +273,14 @@ const NewUserProfileModal = (props) => {
               <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
                 Pais
               </Label>
-              <select
+              <CheckboxDropdown
+                placeholder="Selccione un pais"
+                options={countryOptions}
+                handleSelectChange={handleSelectCountryChange}
+                // defaultValue={props.profileInfo.stores}
+                defaultValue={props.profileInfo.countries}
+              ></CheckboxDropdown>
+              {/* <select
                 class="form-select"
                 aria-label="Default select example"
                 style={{ borderRadius: "10px" }}
@@ -275,7 +290,7 @@ const NewUserProfileModal = (props) => {
                 <option value="2">Mexico</option>
                 <option value="3">Peru</option>
                 <option value="4">Colombia</option>
-              </select>
+              </select> */}
             </FormGroup>
           </Col>
         </Row>
