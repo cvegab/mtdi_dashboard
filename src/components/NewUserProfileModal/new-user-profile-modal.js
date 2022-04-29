@@ -17,17 +17,64 @@ import {
 import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
 const NewUserProfileModal = (props) => {
+  useEffect(() => {
+    fetchFilterData();
+  }, []);
+
   console.log(props.profileInfo);
-  const clientOptions = [
-    //  { id: 1, label: "Faber castell" },
-    { id: 2, name: "Demaria"},
-    // { value: 3, label: "Softys" },
-  ];
+  const fetchFilterData = async () => {
+    // setisLoading(true);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        var obj = JSON.parse(result);
+        console.log(obj);
+        let allChannelsArray = obj[4].stores.map((item) => {
+          return [{ id: item.value, name: item.store }];
+        });
+        console.log(allChannelsArray);
+        var flattened = [].concat.apply([], allChannelsArray);
+        console.log(flattened);
+        setclientOptions(flattened);
+        var resArr = [];
+        flattened.filter(function (item) {
+          var i = resArr.findIndex(
+            (x) => x.channel == item.channel && x.value == item.value
+          );
+          if (i <= -1) {
+            resArr.push(item);
+          }
+          return null;
+        });
+      })
+      .catch((error) => console.log("error", error));
+  };
+  // const clientOptions = [
+  //   //  { id: 1, label: "Faber castell" },
+  //   { id: 2, name: "Demaria" },
+  //   // { value: 3, label: "Softys" },
+  // ];
   const [showModal, setShowModal] = useState(false);
   const [profileDetails, setprofileDetails] = useState([]);
   const [errorMessage, seterrorMessage] = useState("");
   const [name, setName] = useState(props.profileInfo.first_name);
-
+  const [clientOptions, setclientOptions] = useState([]);
   // const [stores, setstores] = useState(props.profileInfo.stores);
   const [stores, setstores] = useState([]);
   const [country, setCountry] = useState("");
@@ -40,17 +87,16 @@ const NewUserProfileModal = (props) => {
   );
 
   const nameChangeHandler = (event) => {
-    console.log(event);
     setName(event.target.value);
   };
   const handleSelectChange = (event) => {
     console.log(event);
-    let selectedStore=event;
-    const selectedStoreId = selectedStore.map((item)=>{
+    let selectedStore = event;
+    const selectedStoreId = selectedStore.map((item) => {
       return item.id;
-    })
-   console.log(selectedStoreId);
-   setstores(selectedStoreId);
+    });
+    console.log(selectedStoreId);
+    setstores(selectedStoreId);
   };
   const editProfileHandler = () => {
     const profile = {
@@ -59,7 +105,7 @@ const NewUserProfileModal = (props) => {
       email: emailRef.current.value,
       profile: userType.current.value,
       stores: stores,
-      countries:[1],
+      countries: [1],
       enabled: selfServiceType,
     };
     console.log(profile);
@@ -86,13 +132,17 @@ const NewUserProfileModal = (props) => {
           window.location.reload();
         }
         if (result === '"Invalid user"') {
-         seterrorMessage('the email cannot be changed')
-         setShowModal(false);
+          seterrorMessage("the email cannot be changed");
+          setShowModal(false);
         }
-        if (result === '"Elevation of privileges not possible, contact an administrator"') {
-          seterrorMessage('Elevation of privileges not possible, contact an administrator');
-         }
-        
+        if (
+          result ===
+          '"Elevation of privileges not possible, contact an administrator"'
+        ) {
+          seterrorMessage(
+            "Elevation of privileges not possible, contact an administrator"
+          );
+        }
       })
       .catch((error) => console.log("error", error));
   };
@@ -139,7 +189,7 @@ const NewUserProfileModal = (props) => {
   };
 
   return (
-     <ModalBody>
+    <ModalBody>
       {props.flag === 0 && (
         <h3
           style={{
