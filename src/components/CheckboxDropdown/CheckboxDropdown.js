@@ -36,6 +36,7 @@ const CheckboxDropdown = () => {
       isMulti
       options={categoriesOptions}
       placeholder="Seleccione las categorías de su negocio"
+      
      
     />
     </div>

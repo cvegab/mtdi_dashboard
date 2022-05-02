@@ -53,6 +53,7 @@ const NewEntrepriseProfileModal = () => {
                     <FormCheck 
                         type="switch"
                         id="custom-switch"
+                        
                         /> Selfservice
                     </FormGroup>
 
