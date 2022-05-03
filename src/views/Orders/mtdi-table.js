@@ -51,6 +51,7 @@ import VerticalModal from "components/UI/vertical-modal.js";
 import WmsModal from "components/modalComponents/wms-modal";
 import ClientModal from "components/ClientModal/client-modal";
 import CourierStatusModal from "components/courierStatusModal/courier-status-modal";
+import BallotDetailModal from "components/BallotDetailModal/BallotDetailModal";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -81,6 +82,8 @@ const MtdiTable = (props) => {
   const [isTourOpen, setIsTourOpen] = useState(true);
   const accentColor = "#5cb7b7";
   const toggle = () => setIsTourOpen(!isTourOpen);
+  const [modalBallotDetails, setModalBallotDetails] = useState(false);
+  const toggle2 = () => setModalBallotDetails(!modalBallotDetails);
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
   const d = new Date();
@@ -662,6 +665,30 @@ const MtdiTable = (props) => {
         borderRadius: "20px 0px 0px 20px",
       },
     },
+    {
+      title: "Detalle",
+      field: "order_id",
+      width: "13%",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+      render: (rowData) =>{
+      
+          return ( <div> 
+                          <span
+                  style={{ cursor: "pointer" }}
+                  title="Mostrar DTE"
+                  className={classes.showPdf}
+                >
+                  {/* <a href={rowData.dte} target="_blank"> */}
+                    <img src={showPdf}  onClick={toggle2} />
+                </span>
+          </div> )
+       
+     }
+   },
     {
       title: "Fecha de Orden",
       field: "fecha_creacion",
@@ -1978,6 +2005,55 @@ const MtdiTable = (props) => {
           onAfterOpen={disableBody}
           onBeforeClose={enableBody}
         />
+
+       {/* Ballot Detail Modal  */}
+
+        <Modal isOpen={modalBallotDetails} toggle={toggle2} size="lg">
+          <ModalHeader>
+            <div style={{display:"flex", justifyContent:"end"}}> 
+              <button 
+                style={{
+                  background:"none",
+                  position: "relative", 
+                  marginLeft:"14em", 
+                  color:"black", 
+                  border:"none" 
+                }} 
+                onClick={toggle2}
+              >
+                x
+              </button> 
+            </div>
+          </ModalHeader>
+          <BallotDetailModal/>
+
+          
+          <div class="text-center">
+                <button
+                    id="bttnSubmit"
+                    type="submit"
+                    style={{
+                    backgroundColor: "#1D308E",
+                    textAlign: "center",
+                    color: "white",
+                    width: "296px",
+                    height: "64px",
+                    padding: "22px 81px",
+                    borderRadius: "33px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                    border: "0",
+                    marginTop:"1em"
+                    }} 
+                    onClick={toggle2}
+                >
+                    Cerrar
+                </button>
+            </div>
+            <br/>
+        </Modal>
       </div>
     </React.Fragment>
   );
