@@ -89,7 +89,7 @@ const NewUserProfileModal = (props) => {
     setName(event.target.value);
   };
   const handleSelectChange = (event) => {
-    console.log(event);
+   
     let selectedStore = event;
     const selectedStoreId = selectedStore.map((item) => {
       return item.id;
@@ -150,7 +150,7 @@ const NewUserProfileModal = (props) => {
     const selectedCountryId = selectedCountry.map((item) => {
       return item.id;
     });
-    console.log(selectedCountryId);
+   
     setCountry(selectedCountryId);
   };
   const addProfileHandler = async () => {
