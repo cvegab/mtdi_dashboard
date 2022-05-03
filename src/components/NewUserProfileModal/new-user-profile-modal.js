@@ -67,11 +67,7 @@ const NewUserProfileModal = (props) => {
       })
       .catch((error) => console.log("error", error));
   };
-  // const clientOptions = [
-  //   //  { id: 1, label: "Faber castell" },
-  //   { id: 2, name: "Demaria" },
-  //   // { value: 3, label: "Softys" },
-  // ];
+ 
   const [showModal, setShowModal] = useState(false);
   const [profileDetails, setprofileDetails] = useState([]);
   const [errorMessage, seterrorMessage] = useState("");
@@ -192,7 +188,13 @@ const NewUserProfileModal = (props) => {
       requestOptions
     )
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) =>{
+        console.log(result);
+        if (result === '"Success!"') {
+          window.location.reload();
+        }
+       
+      } )
       .catch((error) => console.log("error", error));
   };
 
@@ -228,7 +230,7 @@ const NewUserProfileModal = (props) => {
           </Label>
           <input
             className="input"
-            type="email"
+            type="name"
             name="email"
             id="exampleEmail"
             style={{ fontSize: "12px" }}
@@ -245,6 +247,7 @@ const NewUserProfileModal = (props) => {
           <input
             className="input"
             ref={emailRef}
+            type="email"
             defaultValue={props.profileInfo.email}
           />
         </FormGroup>
@@ -280,17 +283,7 @@ const NewUserProfileModal = (props) => {
                 // defaultValue={props.profileInfo.stores}
                 defaultValue={props.profileInfo.countries}
               ></CheckboxDropdown>
-              {/* <select
-                class="form-select"
-                aria-label="Default select example"
-                style={{ borderRadius: "10px" }}
-              >
-                <option selected>Selccione un pais</option>
-                <option value="1">Chile</option>
-                <option value="2">Mexico</option>
-                <option value="3">Peru</option>
-                <option value="4">Colombia</option>
-              </select> */}
+           
             </FormGroup>
           </Col>
         </Row>
