@@ -23,7 +23,7 @@ const NewUserProfileModal = (props) => {
 
   console.log(props.profileInfo);
   const fetchFilterData = async () => {
-    // setisLoading(true);
+   
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
