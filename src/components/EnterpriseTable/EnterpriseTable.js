@@ -26,8 +26,8 @@ import EnterpriseTaxDataModal from "components/EnterpriseTaxDataModal/Enterprise
 import EnterpriseCustomizeModal from "components/EnterpriseCustomizeModal/EnterpriseCustomizeModal";
 import EnterpriseCategoriesModal from "components/EnterpriseCategoriesModal/EnterpriseCategoriesModal";
 import EnterpriseRemoveAccountModal from "components/EnterpriseRemoveAccountModal/EnterpriseRemoveAcctoundModal";
-import { db } from '../../util/firebase.js';
-import { collection, getDocs } from 'firebase/firestore';
+// import { db } from '../../util/firebase.js';
+// import { collection, getDocs } from 'firebase/firestore';
 
 
 
@@ -49,7 +49,7 @@ const tableIcons = {
 const EnterpriseTable = () => {
 
 const [users, setUsers] = useState([]);
-const usersCollectionRef = collection(db, "enterpriseUsers");
+// const usersCollectionRef = collection(db, "enterpriseUsers");
 const [modalNewEnterprise, setModalNewEnterpise] = useState(false);
 const toggle = () => setModalNewEnterpise(!modalNewEnterprise);
 const [modalTaxData, setModalTaxData] = useState(false);
@@ -61,15 +61,15 @@ const toggle4 = () => setModalEnterpriseCategories(!modalEnterpriseCategories);
 const [modalRemoveAccount, setModalRemoveAccount] = useState(false);
 const toggle5 = () => setModalRemoveAccount(!modalRemoveAccount);
 
- useEffect(() => {
-  const getUsers = async () => {
-    const data = await getDocs(usersCollectionRef);
+//  useEffect(() => {
+//   const getUsers = async () => {
+//     const data = await getDocs(usersCollectionRef);
     // setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id })));
-   console.log(data);
-  };
+//    console.log(data);
+//   };
 
-  getUsers();
- }, []);
+//   getUsers();
+//  }, []);
 
 const data = [
   {

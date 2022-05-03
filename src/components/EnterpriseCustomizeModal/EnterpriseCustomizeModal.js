@@ -13,7 +13,7 @@ const EnterpriseCustomizeModal = () => {
     const [logo, setLogo] = React.useState('');
     const [banner, setBanner] = React.useState('');
     const [text, setText] = React.useState("En Softys estamos felices de poder ayudarte. A continuación recibe tu boleta");
-    const [color, setColor] = React.useState('#563d7c');
+    const [color, setColor] = React.useState('#1D308E');
 
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -55,34 +55,45 @@ const EnterpriseCustomizeModal = () => {
                 />
                 <Row>
                 <Col>
-                <div>{logo} </div>
+                <div className="input-logo">{logo} </div>
                 </Col>
                   <Col>
-                  <label for="file"> <img src={iconUploadImage} alt="UploadImage" width="100%" /> </label>
+                  <label for="file"> <img src={iconUploadImage} style={{cursor:"pointer"}} alt="UploadImage" width="100%" /> </label>
                   </Col>
                   
                 </Row>
                 
-                
-                    
-            <br/>
-                <FormLabel  className="textFormLabel"> Banner </FormLabel>
+                <br/>
+                <FormLabel className="textFormLabel" > Banner </FormLabel>
                 <br/>
                 {/* <button type="submit">Subir archivo</button> */}
-                <input
-                    type="file" 
-                    accept="image/"
-                    name="banner"
-                    value={banner}
-                    onChange={(event) => setBanner(event.target.value)}    
-                    style={{marginBottom:'2em'}}
-                 ></input>
+                <input 
+                  type="file" 
+                  id="file"
+                  accept="image/*"
+                  name="banner"
+                  value={banner}
+                  onChange={(event) => setBanner(event.target.value)}    
+                  style={{marginBottom:'2em', display:'none'}}
+                  title="Sube aquí tu Banner corporativo en formato PNG"
+                />
+                <Row>
+                <Col>
+                <div className="input-logo">{banner} </div>
+                </Col>
+                  <Col>
+                  <label for="file"> <img src={iconUploadImage} style={{cursor:"pointer"}} alt="UploadBanner" width="100%" /> </label>
+                  </Col>
+                  
+                </Row>
             
             <br/>
            
                 <FormLabel  className="textFormLabel"> Color personalizado </FormLabel>
               
-                  <FormControl 
+              <Row>
+                <Col>
+                <FormControl 
                     type="color" 
                     class="form-control form-control-color" 
                     name="color"
@@ -92,8 +103,13 @@ const EnterpriseCustomizeModal = () => {
                     style={{marginBottom:'2em'}} 
 
                   />
-                    
-         
+                </Col>
+                <Col>
+                <div className="input-color">{color} </div>
+                </Col>
+
+              </Row>
+   
 
             <br/>
             
@@ -103,7 +119,9 @@ const EnterpriseCustomizeModal = () => {
                     rows={6}
                     placeholder="Ingrese aquí el texto personalizado que tendrá su correo"
                     name="text"
-                    value={text}            
+                    id="input-text"
+                    value={text}   
+                          
                     onChange={(event) => setText(event.target.value)}   
                 />
             

@@ -51,4 +51,40 @@
     border-left: inherit;
     border-radius: 0 0.25rem 0.25rem 0;
   }
+
+  .input-logo {
+    border-radius: 17px;
+    border: 1px solid white;
+    color: black;
+    width: 500px;
+    height: 46px;
+    padding-left: 10px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2px;
+    box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  }
+  
+  .input-color {
+    border-radius: 17px;
+    border: 1px solid white;
+    color: black;
+    width:390px;
+    height: 46px;
+    margin-right:200px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2px;
+    box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  }
+  
+  #input-text{
+   
+    border-radius: 17px;
+    border: 1px solid white;
+    color: black;
+    box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+  }
   

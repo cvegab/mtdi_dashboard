@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FormCheck, FormControl, FormLabel, FormSelect, ModalBody, Row } from 'react-bootstrap'
 import { Col, Form, FormGroup } from 'reactstrap'
+import './EnterpriseTaxDataModal.css'
 
 const EnterpriseTaxDataModal = () => {
 
@@ -32,26 +33,27 @@ const EnterpriseTaxDataModal = () => {
           Datos tributarios
            
         </p>
-
+          
         <Form onSubmit={handleSubmit} >
         {/* <fieldset disabled={ editMode ? false : true}> */}
           <Row>
           <Col>
         
-                <FormLabel> Razón Social </FormLabel>
+                <FormLabel style={{fontWeight: "bold"}}> Razón Social </FormLabel>
                 <FormControl
-                    type="text"
+                    type="text"  
                     value={corporateName}
                     name="corporateName"
                     onChange={(e) => setCorporateName(e.target.value)}
                     placeholder="Ingrese aquí Razón Social"
                   
                 />
-           
+          
           </Col>
+          
           <Col>
            
-                <FormLabel> Rut Empresa </FormLabel>
+                <FormLabel style={{fontWeight: "bold"}}> Rut Empresa </FormLabel>
                 <FormControl
                     type="text"
                     value={rut}
@@ -65,7 +67,7 @@ const EnterpriseTaxDataModal = () => {
 
             <br/>
            
-            <FormLabel> Dirección de facturación </FormLabel>
+            <FormLabel style={{fontWeight: "bold"}}> Dirección de facturación </FormLabel>
                 <FormControl
                     type="text"
                     placeholder="Ingrese aquí dirección"
@@ -78,7 +80,7 @@ const EnterpriseTaxDataModal = () => {
             <Row>
           <Col>
          
-                <FormLabel> Nombre del representante comercial</FormLabel>
+                <FormLabel style={{fontWeight: "bold"}}> Nombre del representante comercial</FormLabel>
                 <FormControl
                     type="text"
                     value={name}
@@ -90,7 +92,7 @@ const EnterpriseTaxDataModal = () => {
           </Col>
           <Col>
            
-                <FormLabel> Teléfono del repesentante comercial </FormLabel>
+                <FormLabel style={{fontWeight: "bold"}}> Teléfono del repesentante comercial </FormLabel>
                 <FormControl
                     type="number"
                     value={phone}
@@ -103,11 +105,12 @@ const EnterpriseTaxDataModal = () => {
           </Row>
           
           <br/>
-            <FormLabel>Correo del representante comercial </FormLabel>
+            <FormLabel style={{fontWeight: "bold"}}>Mail del representante comercial </FormLabel>
             <FormControl
-                    type="email"
+                    type="mail"
                     value={mail}
                     name="mail"
+                    id="mail-form-tax-data"
                     onChange={(e) => setMail(e.target.value)}
                     placeholder="Ingrese aquí Razón Social"
                 />
