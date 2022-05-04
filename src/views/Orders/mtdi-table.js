@@ -2025,7 +2025,7 @@ const MtdiTable = (props) => {
               </button> 
             </div>
           </ModalHeader>
-          <BallotDetailModal/>
+          <BallotDetailModal purchaser={buyer} />
 
           
           <div class="text-center">
