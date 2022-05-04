@@ -127,7 +127,7 @@ const BallotDetailTable = (props) => {
             },
             pagination: {
               labelRowsSelect: "líneas",
-              labelDisplayedRows: "{from}-{to} cuentas de {count}",
+              labelDisplayedRows: "{from}-{to} productos de {count}",
               firstTooltip: "Ir a la primera página",
               previousTooltip: "Página anterior",
               nextTooltip: "Próxima página",
