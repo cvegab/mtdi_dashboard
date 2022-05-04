@@ -120,14 +120,14 @@ const BallotDetailTable = (props) => {
               ),
             },
             toolbar: {
-              searchTooltip: "Buscar cuenta específica",
+              searchTooltip: "Buscar producto específica",
               searchPlaceholder: "Buscar",
               showColumnsTitle: "Mostrar opciones de columnas",
               addRemoveColumns: "Agregar o Eliminar Columnas",
             },
             pagination: {
               labelRowsSelect: "líneas",
-              labelDisplayedRows: "{from}-{to} cuentas de {count}",
+              labelDisplayedRows: "{from}-{to} productos de {count}",
               firstTooltip: "Ir a la primera página",
               previousTooltip: "Página anterior",
               nextTooltip: "Próxima página",
