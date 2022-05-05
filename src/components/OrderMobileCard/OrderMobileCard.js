@@ -80,9 +80,9 @@ function OrderMobileCard(props) {
   const showPdfHandler = () => {
     window.open(buyer.dte);
   };
-  const X = props.data.filter((rt) => {
-    return rt.tienda === "Unilever";
-  });
+  // const X = props.data.filter((rt) => {
+  //   return rt.tienda === "Unilever";
+  // });
 
   const searchFilter = (event) => {
     setQuery(event.target.value);
