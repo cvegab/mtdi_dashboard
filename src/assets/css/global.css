@@ -367,7 +367,11 @@ touch-action: manipulation;
   color: #2d2323 !important;
   border-radius: 22px !important;
 }
-
+.form-switch .form-check-input {
+  width: 5em !important;
+ height: 3em;
+  
+}
 .mask {
   border-radius: 22px !important;
 }
