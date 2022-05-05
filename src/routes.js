@@ -55,22 +55,22 @@ const routes = [
     layout: "/admin",
 
    },
-   {
-    path: "/customermaintainer",
-    name: "Administrar Perfiles ",
-    icon: "nc-icon nc-single-02",
-    component: CustomerMaintainer,
-    layout: "/admin",
+  //  {
+  //   path: "/customermaintainer",
+  //   name: "Administrar Perfiles ",
+  //   icon: "nc-icon nc-single-02",
+  //   component: CustomerMaintainer,
+  //   layout: "/admin",
 
-  },
-  {
-    path: "/enterprisemanage",
-    name: "Administrar Empresas",
-    icon: "nc-icon nc-single-02",
-    component: EnterpriseManage,
-    layout: "/admin",
+  // },
+  // {
+  //   path: "/enterprisemanage",
+  //   name: "Administrar Empresas",
+  //   icon: "nc-icon nc-single-02",
+  //   component: EnterpriseManage,
+  //   layout: "/admin",
 
-   },
+  //  },
 
   // {
   //   path: "/logysto",
