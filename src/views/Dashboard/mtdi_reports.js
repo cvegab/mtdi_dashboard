@@ -272,7 +272,7 @@ function MtdiReports() {
           linio = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Linio;
           });
-          console.log(linio[0].Linio);
+          // console.log(linio[0].Linio);
           setnewlinioMonthly(linio[0].Linio);
         }
         if (!newChannelList.includes("Linio")) {
@@ -283,7 +283,7 @@ function MtdiReports() {
           Vtex = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Vtex;
           });
-          console.log(Vtex[0].Vtex);
+          // console.log(Vtex[0].Vtex);
           setnewVtexMonthly(Vtex[0].Vtex);
         }
         if (!newChannelList.includes("Vtex")) {
@@ -294,7 +294,7 @@ function MtdiReports() {
           ripley = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Ripley;
           });
-          console.log(ripley[0].Ripley);
+          // console.log(ripley[0].Ripley);
           setnewRipleyMonthly(ripley[0].Ripley);
         }
         if (!newChannelList.includes("Ripley")) {
@@ -305,7 +305,7 @@ function MtdiReports() {
           chambas = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Chambas;
           });
-          console.log(chambas[0].Chambas);
+          // console.log(chambas[0].Chambas);
           setnewChambasMonthly(chambas[0].Chambas);
         }
         if (!newChannelList.includes("Chambas")) {
@@ -316,7 +316,7 @@ function MtdiReports() {
           magento = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Magento;
           });
-          console.log(magento[0].Magento);
+          // console.log(magento[0].Magento);
           setnewMagentoMonthly(magento[0].Magento);
         }
         if (!newChannelList.includes("Magento")) {
@@ -327,7 +327,7 @@ function MtdiReports() {
           woo = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Woocommerce;
           });
-          console.log(woo[0].Woocommerce);
+          // console.log(woo[0].Woocommerce);
           setnewWooCommerceMonthly(woo[0].Woocommerce);
         }
         if (!newChannelList.includes("Woocommerce")) {
@@ -338,7 +338,7 @@ function MtdiReports() {
           shopify = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
             return item.Shopify;
           });
-          console.log(shopify[0].Shopify);
+          // console.log(shopify[0].Shopify);
           setnewShopifyMonthly(shopify[0].Shopify);
         }
         if (!newChannelList.includes("Shopify")) {
@@ -399,7 +399,7 @@ function MtdiReports() {
     let newChannelList = cR.map((item) => {
       return item.channel;
     });
-    console.log(newChannelList);
+    // console.log(newChannelList);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -414,13 +414,13 @@ function MtdiReports() {
     };
 
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
+    // console.log(url);
 
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(newChannelList);
+        // console.log(newChannelList);
         if (newChannelList.length === 0) {
           newChannelList = [
             "Vtex",
@@ -443,7 +443,7 @@ function MtdiReports() {
           linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
             return item.Linio;
           });
-          console.log(linio[0].Linio);
+          // console.log(linio[0].Linio);
           setnewlinioSalesMonthly(linio[0].Linio);
         }
         if (!newChannelList.includes("Linio")) {
@@ -477,7 +477,7 @@ function MtdiReports() {
           chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
             return item.Chambas;
           });
-          console.log(chambas[0].Chambas);
+          // console.log(chambas[0].Chambas);
           setnewChambasSalesMonthly(chambas[0].Chambas);
         }
         if (!newChannelList.includes("Chambas")) {
@@ -488,7 +488,7 @@ function MtdiReports() {
           magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
             return item.Magento;
           });
-          console.log(magento[0].Magento);
+          // console.log(magento[0].Magento);
           setnewMagentoSalesMonthly(magento[0].Magento);
         }
         if (!newChannelList.includes("Magento")) {
@@ -695,7 +695,7 @@ function MtdiReports() {
     setchambasOrders(chambasSalesValue[0]);
   };
   const setResumenGraph = () => {
-    console.log(newData);
+    // console.log(newData);
     const labels = newData.map((item) => {
       return item.channel;
     });
@@ -904,9 +904,9 @@ function MtdiReports() {
       return item.value;
     });
     let x = channelsId.join(",");
-    console.log(x);
+    // console.log(x);
     setchannelId(x);
-    console.log("hi i am fetching");
+    // console.log("hi i am fetching");
     setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
@@ -922,12 +922,12 @@ function MtdiReports() {
     };
     //2021-12-01
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
+   
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(ChannelSelectedForDelete);
+        // console.log(ChannelSelectedForDelete);
         var totalIncomeArray = obj.detail.map((item) => {
           return item.total;
         });
@@ -1136,7 +1136,7 @@ function MtdiReports() {
     });
 
     const selectedChannelsArray = selectedStoreData[0].channels;
-    console.log(selectedChannelsArray);
+    // console.log(selectedChannelsArray);
 
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
@@ -1153,15 +1153,15 @@ function MtdiReports() {
     });
 
     let x = channelsId.join(",");
-    console.log(filteredChannelArray);
+    // console.log(filteredChannelArray);
     if (filteredChannelArray.length !== 0) {
-      console.log("hi");
+     
       setcR(filteredChannelArray);
       setchannelId(x);
     }
   };
   const handleDelete = (item) => {
-    console.log(mixedChartsalesData);
+    // console.log(mixedChartsalesData);
     setChannelSelectedForDelete(item);
     let x = cR.filter((i) => i !== item);
     setcR(x);

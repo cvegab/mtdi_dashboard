@@ -1,23 +1,24 @@
-const SalesCard = (props)=>{
-  let channel = props.channel.map(item=>{
+const SalesCard = (props) => {
+  let channel = props.channel.map((item) => {
     return item.channel;
-  })
-  console.log(channel);
-    let vtex = props.vtex;
-    let linio = props.linio;
-    let magento = props.magento;
-    let mercadoLibre = props.mercadoLibre;
-    let exito = props.exito;
-    let ripley = props.ripley;
-    let shopify = props.shopify;
-    let paris = props.paris;
-    let wooCommerce = props.wooCommerce;
-    let chambas = props.chambas;
-    let listTienda = props.listaTienda;
-    return(
-        <div className="infoLegendPieChart">
-        <div>
-         {channel.includes('Vtex') && <p className="titleTextLegend">
+  });
+  // console.log(channel);
+  let vtex = props.vtex;
+  let linio = props.linio;
+  let magento = props.magento;
+  let mercadoLibre = props.mercadoLibre;
+  let exito = props.exito;
+  let ripley = props.ripley;
+  let shopify = props.shopify;
+  let paris = props.paris;
+  let wooCommerce = props.wooCommerce;
+  let chambas = props.chambas;
+  let listTienda = props.listaTienda;
+  return (
+    <div className="infoLegendPieChart">
+      <div>
+        {channel.includes("Vtex") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -30,23 +31,20 @@ const SalesCard = (props)=>{
             {/* ["#344FD5", "#06CBC1","#F10096","#FF6059","#FFD88C","#00B6CB","#00B6CC","#97D456","#FF6059",'yellow','red'], */}
             <p className="card-category">
               {(() => {
-                let number =vtex;
+                let number = vtex;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
-        <div>
-         {channel.includes('Linio')&& <p className="titleTextLegend">
+          </p>
+        )}
+      </div>
+      <div>
+        {channel.includes("Linio") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -58,23 +56,20 @@ const SalesCard = (props)=>{
             &nbsp;Linio
             <p className="card-category">
               {(() => {
-                let number =linio;
+                let number = linio;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
-        <div>
-         {channel.includes('MercadoLibre')&& <p className="titleTextLegend">
+          </p>
+        )}
+      </div>
+      <div>
+        {channel.includes("MercadoLibre") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -86,23 +81,21 @@ const SalesCard = (props)=>{
             &nbsp;Mercadolibre
             <p className="card-category">
               {(() => {
-                let number =mercadoLibre;
+                let number = mercadoLibre;
                 let formatted = new Intl.NumberFormat("es-CL", {
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend">{formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-        {channel.includes('Exito')&& <p className="titleTextLegend">
+      <div>
+        {channel.includes("Exito") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -119,18 +112,15 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
-        <div>
-        {channel.includes('Ripley')&&<p className="titleTextLegend">
+          </p>
+        )}
+      </div>
+      <div>
+        {channel.includes("Ripley") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -147,19 +137,16 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p> }
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-        {channel.includes('Shopify')&&  <p className="titleTextLegend">
+      <div>
+        {channel.includes("Shopify") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -176,19 +163,16 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-        {channel.includes('Paris')&& <p className="titleTextLegend">
+      <div>
+        {channel.includes("Paris") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -205,20 +189,16 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-       
-        {channel.includes('Magento')&&<p className="titleTextLegend">
+      <div>
+        {channel.includes("Magento") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -235,19 +215,16 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-        {channel.includes('Woocommerce') &&<p className="titleTextLegend">
+      <div>
+        {channel.includes("Woocommerce") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -264,19 +241,16 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-        {channel.includes('Chambas')&&<p className="titleTextLegend">
+      <div>
+        {channel.includes("Chambas") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -293,19 +267,16 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {" "}
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend"> {formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
+      </div>
 
-        <div>
-         {channel.includes('ListaTienda')&& <p className="titleTextLegend">
+      <div>
+        {channel.includes("ListaTienda") && (
+          <p className="titleTextLegend">
             <i
               className="fa fa-circle"
               style={{
@@ -322,16 +293,13 @@ const SalesCard = (props)=>{
                   style: "currency",
                   currency: "CLP",
                 }).format(number);
-                return (
-                  <p className="numberTextLegend">
-                    {formatted}
-                  </p>
-                );
+                return <p className="numberTextLegend">{formatted}</p>;
               })()}
             </p>
-          </p>}
-        </div>
+          </p>
+        )}
       </div>
-    )
-}
+    </div>
+  );
+};
 export default SalesCard;
