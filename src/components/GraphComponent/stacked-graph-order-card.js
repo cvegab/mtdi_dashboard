@@ -2,7 +2,7 @@ const StackedGraphOrderCard = (props) => {
   let channel = props.channel.map(item=>{
     return item.channel;
   })
-  console.log(channel);
+
   let vtex = props.vtex;
   let linio = props.linio;
   let magento = props.magento;
