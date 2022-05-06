@@ -470,7 +470,7 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         var obj = JSON.parse(result);
 
         let countryArray = [];
@@ -535,8 +535,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
-      console.log(url);
+     
       setData(data);
 
       setisLoading(false);
@@ -581,10 +580,10 @@ const MtdiTable = (props) => {
     setisLoading(true);
     setfiltersApplied(true);
     // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
-    console.log(url);
+   
 
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -602,7 +601,7 @@ const MtdiTable = (props) => {
         throw new Error();
       }
       const data = await response.json();
-      console.log(data);
+      
       //CONDITION FOR THE FILTER BY ORDER ID
       if (data.length === 0) {
         setData([]);
@@ -1275,7 +1274,7 @@ const MtdiTable = (props) => {
         return item;
       }
     });
-    console.log(val);
+   
     setcountryId(val[0].value);
     setfilteredStoreData(val[0].stores);
   };
@@ -1319,11 +1318,11 @@ const MtdiTable = (props) => {
     location.reload();
   };
   const searchOrderIdHandler = (event) => {
-    console.log(event.target.value);
+  
     setsearchOrderId(event.target.value);
   };
   const DownloadFileHandler = () => {
-    console.log("Download file");
+   
     let binary_univers = data;
     let binaryWS = XLSX.utils.json_to_sheet(binary_univers);
     // Create a new Workbook
