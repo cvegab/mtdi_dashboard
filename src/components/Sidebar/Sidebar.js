@@ -161,7 +161,7 @@ function Sidebar(props) {
     localStorage.removeItem("password");
     localStorage.removeItem("first");
     localStorage.removeItem("last");
-    window.location.replace("https://pre-production.d36thtl3fmh3ww.amplifyapp.com/login");
+    window.location.replace("https://main.instancelatam.com/login");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
   };
   return (
