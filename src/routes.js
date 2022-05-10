@@ -16,6 +16,7 @@ import iconReportes from "assets/img/icons-reportes.png";
 import MtdiReports from "views/Dashboard/mtdi_reports";
 import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 import EnterpriseManage from "views/EnterpriseManage/EnterpriseManage"
+import DataStudio from "views/dataStudio/data-studio";
 
 
 const routes = [
@@ -56,21 +57,29 @@ const routes = [
 
    },
    {
-    path: "/customermaintainer",
-    name: "Administrar Perfiles ",
-    icon: "nc-icon nc-single-02",
-    component: CustomerMaintainer,
-    layout: "/admin",
-
-  },
-  {
-    path: "/enterprisemanage",
-    name: "Administrar Empresas",
-    icon: "nc-icon nc-single-02",
-    component: EnterpriseManage,
+    path: "/datastudio",
+    name: "Data-studio",
+    icon: "nc-icon nc-chart-bar-32",
+    component: DataStudio,
     layout: "/admin",
 
    },
+  //  {
+  //   path: "/customermaintainer",
+  //   name: "Administrar Perfiles ",
+  //   icon: "nc-icon nc-single-02",
+  //   component: CustomerMaintainer,
+  //   layout: "/admin",
+
+  // },
+  // {
+  //   path: "/enterprisemanage",
+  //   name: "Administrar Empresas",
+  //   icon: "nc-icon nc-single-02",
+  //   component: EnterpriseManage,
+  //   layout: "/admin",
+
+  //  },
 
   // {
   //   path: "/logysto",
