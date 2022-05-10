@@ -16,6 +16,7 @@ import iconReportes from "assets/img/icons-reportes.png";
 import MtdiReports from "views/Dashboard/mtdi_reports";
 import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 import EnterpriseManage from "views/EnterpriseManage/EnterpriseManage"
+import DataStudio from "views/dataStudio/data-studio";
 
 
 const routes = [
@@ -52,6 +53,14 @@ const routes = [
     name: "Reportes",
     icon: "nc-icon nc-chart-bar-32",
     component: MtdiReports,
+    layout: "/admin",
+
+   },
+   {
+    path: "/datastudio",
+    name: "Data-studio",
+    icon: "nc-icon nc-chart-bar-32",
+    component: DataStudio,
     layout: "/admin",
 
    },
