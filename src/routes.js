@@ -38,14 +38,7 @@ const routes = [
     layout: "/admin",
   },
 
-  {
-    path: "/datastudio",
-    name: "Dashboard",
-    icon: "nc-icon nc-chart-bar-32",
-    component: DataStudio,
-    layout: "/admin",
-
-   },
+ 
 
   // {
   //   path: "/charts",
@@ -57,9 +50,17 @@ const routes = [
   // },
   {
     path: "/dashboard",
-    name: "Indicadores",
+    name: "Dashboard",
     icon: "nc-icon nc-chart-bar-32",
     component: MtdiReports,
+    layout: "/admin",
+
+   },
+   {
+    path: "/indicadores",
+    name: "Indicadores",
+    icon: "nc-icon nc-chart-bar-32",
+    component: DataStudio,
     layout: "/admin",
 
    },
