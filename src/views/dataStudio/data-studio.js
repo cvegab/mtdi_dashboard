@@ -107,12 +107,12 @@ const DataStudio = () => {
       }
     });
     console.log(val[0].stores);
-    // setcountryId(val[0].value);
+  
     setfilteredStoreData(val[0].stores);
   };
   const handleStoreChange = (event) => {
     setstore(event.target.value);
-    //Get storeId from filteredStoreData
+  
     const val = filteredStoreData.filter(function (item) {
       if (item.store === event.target.value) {
         return item;
