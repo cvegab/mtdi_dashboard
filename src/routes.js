@@ -40,7 +40,7 @@ const routes = [
 
   {
     path: "/datastudio",
-    name: "Data-studio",
+    name: "Dashboard",
     icon: "nc-icon nc-chart-bar-32",
     component: DataStudio,
     layout: "/admin",
@@ -57,7 +57,7 @@ const routes = [
   // },
   {
     path: "/dashboard",
-    name: "Reportes",
+    name: "Indicadores",
     icon: "nc-icon nc-chart-bar-32",
     component: MtdiReports,
     layout: "/admin",

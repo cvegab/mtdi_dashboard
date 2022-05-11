@@ -1,6 +1,6 @@
 const DataStudio = () => {
   return (
-    <div style={{ backgroundColor: "white",width:'100%',height:'100%' }}>
+    <div style={{ backgroundColor: "white",width:'100%',height:'100vh' }}>
       <iframe
         src="https://datastudio.google.com/embed/reporting/6caf6c50-7e30-4d78-86aa-f88eb122cb4d/page/RkYTC"
         style={{
