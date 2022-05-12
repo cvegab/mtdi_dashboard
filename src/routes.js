@@ -30,7 +30,14 @@ const routes = [
     layout: "/admin",
   },
 
- 
+  {
+    path: "/indicadores",
+    name: "Indicadores",
+    icon: "nc-icon nc-spaceship",
+    component: DataStudio,
+    layout: "/admin",
+
+   },
 
   // {
   //   path: "/charts",
@@ -48,14 +55,7 @@ const routes = [
     layout: "/admin",
 
    },
-   {
-    path: "/indicadores",
-    name: "Indicadores",
-    icon: "nc-icon nc-spaceship",
-    component: DataStudio,
-    layout: "/admin",
 
-   },
    {
     path: "/customermaintainer",
     name: "Administrar Perfiles ",
@@ -72,7 +72,6 @@ const routes = [
   //   layout: "/admin",
   // }
   //  },
-
   // {
   //   path: "/logysto",
   //   name: "Ingreso manual OC",
