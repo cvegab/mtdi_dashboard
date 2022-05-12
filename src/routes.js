@@ -1,15 +1,7 @@
 import Logysto from "views/manualOrders/FormLogysto.js";
 // import Charts from "views/Charts.js";
 
-
-
-
-
-
-
-
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
-
 import MtdiTable from "views/Orders/mtdi-table.js";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
@@ -59,7 +51,7 @@ const routes = [
    {
     path: "/indicadores",
     name: "Indicadores",
-    icon: "nc-icon nc-chart-bar-32",
+    icon: "nc-icon nc-spaceship",
     component: DataStudio,
     layout: "/admin",
 
@@ -67,7 +59,7 @@ const routes = [
    {
     path: "/customermaintainer",
     name: "Administrar Perfiles ",
-    icon: "nc-icon nc-single-02",
+    icon: "nc-icon nc-badge",
     component: CustomerMaintainer,
     layout: "/admin",
 
@@ -75,7 +67,7 @@ const routes = [
   {
     path: "/enterprisemanage",
     name: "Administrar Empresas",
-    icon: "nc-icon nc-single-02",
+    icon: "nc-icon nc-vector",
     component: EnterpriseManage,
     layout: "/admin",
 
