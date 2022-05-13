@@ -106,7 +106,7 @@ const DataStudio = () => {
   const [storeId, setstoreId] = useState(0);
   const [iframeArray, setiframeArray] = useState([]);
   const [iframeUrl, setiframeUrl] = useState(
-    "https://datastudio.google.com/embed/reporting/6caf6c50-7e30-4d78-86aa-f88eb122cb4d/page/RkYTC"
+    "https://datastudio.google.com/embed/reporting/206e8151-91f8-4aa8-ab1c-648dac4f837f/page/RkYTC"
   );
   useEffect(() => {
     fetchFilterData();
