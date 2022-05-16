@@ -2,6 +2,7 @@
 import React from 'react'
 import { FormCheck, FormControl, FormLabel, FormSelect, ModalBody } from 'react-bootstrap'
 import { Form, FormGroup } from 'reactstrap'
+import './NewEnterpriseProfileModal.css'
 
 const NewEntrepriseProfileModal = () => {
   return (
@@ -24,6 +25,7 @@ const NewEntrepriseProfileModal = () => {
                     <FormGroup>
                         <FormLabel> Razón Social </FormLabel>
                         <FormControl
+                            id="form-control-create-enterprise"
                             type="email"
                             placeholder="Ingrese aquí un nombre"
                             autofocus
@@ -33,6 +35,7 @@ const NewEntrepriseProfileModal = () => {
                     <FormGroup>
                     <FormLabel> Correo electrónico representante </FormLabel>
                         <FormControl
+                            id="form-control-create-enterprise"
                             type="email"
                             placeholder="Ingrese aquí un correo electrónico"
                             
@@ -41,7 +44,8 @@ const NewEntrepriseProfileModal = () => {
                     <br/>
                     <FormGroup>
                     <FormLabel>País </FormLabel>
-                        <FormSelect>
+                        <FormSelect
+                        id="form-control-create-enterprise">
                             <option>Seleccione un país</option>
                             <option>Chile</option>
                             <option>México</option>
