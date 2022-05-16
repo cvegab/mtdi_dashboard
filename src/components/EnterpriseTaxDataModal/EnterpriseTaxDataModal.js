@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormCheck, FormControl, FormLabel, FormSelect, ModalBody, Row } from 'react-bootstrap'
 import { Col, Form, FormGroup } from 'reactstrap'
+import './EnterpriseTaxDataModal.css'
 
 const EnterpriseTaxDataModal = () => {
+
+  // const [editMode, setEditMode] = useState(false);
+  const [corporateName, setCorporateName] = useState('Softys');
+  const [rut, setRut] = useState('76.002.395-2');
+  const [address, setAddress] = useState('Américo Vespucio 1235');
+  const [name, SetName] = useState('Tennynson Vásquez');
+  const [phone, setPhone] = useState ('963104957');
+  const [mail, setMail] = useState ('tv@instancelatam.com');
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(corporateName, rut, address, name, phone, mail);
+  };
+  
   return (
     <div>
     <ModalBody>
@@ -15,77 +30,94 @@ const EnterpriseTaxDataModal = () => {
             marginBottom:"2em"
           }}
         >
-            Datos tributarios
+          Datos tributarios
+           
         </p>
-
-        <Form >
-        <fieldset disabled>
+          
+        <Form onSubmit={handleSubmit} >
+        {/* <fieldset disabled={ editMode ? false : true}> */}
           <Row>
           <Col>
-          <FormGroup>
-                <FormLabel> Razón Social </FormLabel>
+        
+                <FormLabel style={{fontWeight: "bold"}}> Razón Social </FormLabel>
                 <FormControl
-                    type="email"
-                    value="Softys"
+                    type="text"  
+                    value={corporateName}
+                    name="corporateName"
+                    onChange={(e) => setCorporateName(e.target.value)}
                     placeholder="Ingrese aquí Razón Social"
+                  
                 />
-            </FormGroup>
+          
           </Col>
+          
           <Col>
-            <FormGroup>
-                <FormLabel> Rut Empresa </FormLabel>
+           
+                <FormLabel style={{fontWeight: "bold"}}> Rut Empresa </FormLabel>
                 <FormControl
-                    type="email"
-                    value="76.002.395-2"
+                    type="text"
+                    value={rut}
+                    name="rut"
+                    onChange={(e) => setRut(e.target.value)}
                     placeholder="Ingrese aquí el rut de la empresa"
                 />
-            </FormGroup>
+          
           </Col>
           </Row>
 
             <br/>
-            <FormGroup>
-            <FormLabel> Dirección de facturación </FormLabel>
+           
+            <FormLabel style={{fontWeight: "bold"}}> Dirección de facturación </FormLabel>
                 <FormControl
-                    type="email"
+                    type="text"
                     placeholder="Ingrese aquí dirección"
-                    value="Américo Vespucio 1556, Las Condes"            
+                    value={address}
+                    name="address"
+                    onChange={(e) => setAddress(e.target.value)}       
                 />
-            </FormGroup>
+           
             <br/>
             <Row>
           <Col>
-          <FormGroup>
-                <FormLabel> Nombre del representante comercial</FormLabel>
+         
+                <FormLabel style={{fontWeight: "bold"}}> Nombre del representante comercial</FormLabel>
                 <FormControl
-                    type="email"
-                    value="Tennynson Vásquez"
+                    type="text"
+                    value={name}
+                    name="name"
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Ingrese aquí Razón Social"
                 />
-            </FormGroup>
+           
           </Col>
           <Col>
-            <FormGroup>
-                <FormLabel> Teléfono del repesentante comercial </FormLabel>
+           
+                <FormLabel style={{fontWeight: "bold"}}> Teléfono del repesentante comercial </FormLabel>
                 <FormControl
-                    type="phone"
-                    value="963104957"
+                    type="number"
+                    value={phone}
+                    name="phone"
+                    onChange={(e) => setPhone(e.target.value)}
                     placeholder="Ingrese aquí el rut de la empresa"
                 />
-            </FormGroup>
+           
           </Col>
           </Row>
-            <FormGroup>
-            <FormLabel>Correo del representante comercial </FormLabel>
+          
+          <br/>
+            <FormLabel style={{fontWeight: "bold"}}>Mail del representante comercial </FormLabel>
             <FormControl
-                    type="email"
-                    value="tv@instancelatam.com"
+                    type="mail"
+                    value={mail}
+                    name="mail"
+                    id="mail-form-tax-data"
+                    onChange={(e) => setMail(e.target.value)}
                     placeholder="Ingrese aquí Razón Social"
                 />
-            </FormGroup>
+           
             <br/>
 
-            </fieldset>
+            {/* </fieldset> */}
 
 
 
@@ -107,11 +139,13 @@ const EnterpriseTaxDataModal = () => {
           fontWeight: "bold",
           border: "0",
         }}
+        // onClick={(e) => e.preventDefault(setEditMode(true))}
       >
-        Editar Datos &nbsp;
-        
+        Guardar cambios
+       
       </button>
     </div>
+
   </Form>
 </ModalBody>
 </div>

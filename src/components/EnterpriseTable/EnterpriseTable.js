@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { forwardRef } from "react";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ViewColumn from "@material-ui/icons/ViewColumn";
@@ -17,14 +17,18 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import { Button, Modal,ModalHeader } from "reactstrap";
 import iconNo from "../../assets/img/icons/iconNo.png";
 import iconGoto from "../../assets/img/icons/iconOpen.png";
-import iconSeeMore from "../../assets/img/icons/iconEye.png";
+import iconEdit from "../../assets/img/icons/iconEdit.png";
 import iconRemoveAccount from "../../assets/img/icons/iconRemoveAccount.png";
-// import { ModalBody, ModalHeader } from "react-bootstrap";
+import {  FormCheck } from "react-bootstrap";
+import {  FormGroup, ModalHeader } from 'reactstrap';
 import NewEntrepriseProfileModal from "components/NewEnterpriseProfileModal/NewEntrepriseProfileModal";
 import EnterpriseTaxDataModal from "components/EnterpriseTaxDataModal/EnterpriseTaxDataModal";
 import EnterpriseCustomizeModal from "components/EnterpriseCustomizeModal/EnterpriseCustomizeModal";
 import EnterpriseCategoriesModal from "components/EnterpriseCategoriesModal/EnterpriseCategoriesModal";
 import EnterpriseRemoveAccountModal from "components/EnterpriseRemoveAccountModal/EnterpriseRemoveAcctoundModal";
+// import { db } from '../../util/firebase.js';
+// import { collection, getDocs } from 'firebase/firestore';
+
 
 
 
@@ -44,7 +48,8 @@ const tableIcons = {
 
 const EnterpriseTable = () => {
 
-  
+const [users, setUsers] = useState([]);
+// const usersCollectionRef = collection(db, "enterpriseUsers");
 const [modalNewEnterprise, setModalNewEnterpise] = useState(false);
 const toggle = () => setModalNewEnterpise(!modalNewEnterprise);
 const [modalTaxData, setModalTaxData] = useState(false);
@@ -56,15 +61,23 @@ const toggle4 = () => setModalEnterpriseCategories(!modalEnterpriseCategories);
 const [modalRemoveAccount, setModalRemoveAccount] = useState(false);
 const toggle5 = () => setModalRemoveAccount(!modalRemoveAccount);
 
- 
+//  useEffect(() => {
+//   const getUsers = async () => {
+//     const data = await getDocs(usersCollectionRef);
+    // setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id })));
+//    console.log(data);
+//   };
+
+//   getUsers();
+//  }, []);
 
 const data = [
   {
     order_id: '0001',
-    razon_social: 'Softys',
-    mail: 'tv@ginstancelatam.com',
+    corporate_name: 'Softys',
+    mail: 'tv@instancelatam.com',
     country: 'Chile',
-    selfservice: 'No',
+    selfservice: 'Si',
     onboarding: 'No',
     datas: 'datos',
     categories: 'datos',
@@ -86,7 +99,7 @@ const columns = [
       },
       {
         title: "Razón Social",
-        field: "razon_social",
+        field: "corporate_name",
         width: "13%",
   
         headerStyle: {
@@ -127,6 +140,31 @@ const columns = [
           color: "#FFF",
           fontSize: "12px",
         },
+        render: (data) => {
+      
+           if (data.selfservice === "Si") {
+             return <div>
+             <FormGroup>
+               <FormCheck
+                 type="switch"
+                 id="custom-switch"
+                  checked
+               />
+             </FormGroup>
+           </div>
+           } 
+           if (data.selfservice === "No") {
+            return <div>
+            <FormGroup>
+              <FormCheck
+                type="switch"
+                id="custom-switch"
+              />
+            </FormGroup>
+          </div>
+           }
+          
+        }
       },
       {
         title: "Onboarding",
@@ -151,7 +189,7 @@ const columns = [
       }, 
       {
         title: "Datos tributarios",
-        field: "datas",
+        field: "general_information",
         width: "13%",
   
         headerStyle: {
@@ -161,7 +199,7 @@ const columns = [
         },
         render: (data) => {
           if (data.datas === "datos") {
-            return <button style={{border:"none", backgroundColor:"white"}}  onClick={toggle2}>&nbsp;&nbsp;<img src={iconSeeMore} style={{marginLeft:"1em"}} width="50%" /></button>;
+            return <button style={{border:"none", backgroundColor:"white"}}  onClick={toggle2}>&nbsp;&nbsp;<img src={iconEdit} style={{marginLeft:"1em"}} width="50%" /></button>;
           }
           if (data.datas === "No") {
             return <div>&nbsp;&nbsp;<img src={iconNo} style={{marginLeft:"1em"}} width="40%" /> </div>;
@@ -180,11 +218,8 @@ const columns = [
           fontSize: "12px",
         },
         render: (data) => {
-          if (data.customize === "datos") {
-            return <button style={{border:"none", backgroundColor:"white"}}  onClick={toggle3}>&nbsp;&nbsp;<img src={iconSeeMore} style={{marginLeft:"1em"}} width="50%" /></button>;
-          }
-          if (data.customize === "No") {
-            return <div>&nbsp;&nbsp;<img src={iconNo} style={{marginLeft:"1em"}} width="40%" /> </div>;
+          {
+            return <button style={{border:"none", backgroundColor:"white"}}  onClick={toggle3}>&nbsp;&nbsp;<img src={iconEdit} style={{marginLeft:"1em"}} width="50%" /></button>;
           }
       
         },
@@ -201,7 +236,7 @@ const columns = [
         },
         render: (data) => {
           if (data.categories === "datos") {
-            return <button style={{border:"none", backgroundColor:"white"}}  onClick={toggle4}>&nbsp;&nbsp;<img src={iconSeeMore} style={{marginLeft:"1em"}} width="50%" /></button>;
+            return <button style={{border:"none", backgroundColor:"white"}}  onClick={toggle4}>&nbsp;&nbsp;<img src={iconEdit} style={{marginLeft:"1em"}} width="50%" /></button>;
           }
           if (data.categories === "No") {
             return <div>&nbsp;&nbsp;<img src={iconNo} style={{marginLeft:"1em"}} width="40%" /> </div>;
@@ -236,7 +271,19 @@ const columns = [
 
 
   return (
+      
+
     <div>
+
+{/* {users.map((user) => {
+      return (
+        <div>
+          {""}
+          <h1>Name: {user.corporate_name} </h1>
+          <h1>Name: {user.country} </h1>
+        </div>
+      )
+    })} */}
     <div style={{display:'flex', justifyContent: 'right'}}>
         <Button
             color="primary"
