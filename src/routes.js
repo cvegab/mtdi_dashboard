@@ -1,20 +1,14 @@
 import Logysto from "views/manualOrders/FormLogysto.js";
 // import Charts from "views/Charts.js";
 
-
-
-
-
-
-
-
 import OrderMobileCard from "components/OrderMobileCard/OrderMobileCard.js";
-
 import MtdiTable from "views/Orders/mtdi-table.js";
 import iconOrdenes from "assets/img/icons-ordenes.png";
 import iconReportes from "assets/img/icons-reportes.png";
 import MtdiReports from "views/Dashboard/mtdi_reports";
+import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 import EnterpriseManage from "views/EnterpriseManage/EnterpriseManage"
+import DataStudio from "views/dataStudio/data-studio";
 
 
 const routes = [
@@ -37,7 +31,14 @@ const routes = [
   },
 
  
+  {
+    path: "/indicadores",
+    name: "Indicadores",
+    icon: "nc-icon nc-spaceship",
+    component: DataStudio,
+    layout: "/admin",
 
+   },
   // {
   //   path: "/charts",
   //   name: "Reportes",
@@ -48,13 +49,22 @@ const routes = [
   // },
   {
     path: "/dashboard",
-    name: "Reportes",
+    name: "Dashboard",
     icon: "nc-icon nc-chart-bar-32",
     component: MtdiReports,
     layout: "/admin",
 
    },
+
    {
+    path: "/customermaintainer",
+    name: "Administrar Perfiles ",
+    icon: "nc-icon nc-badge",
+    component: CustomerMaintainer,
+    layout: "/admin",
+
+  },
+  {
     path: "/enterprisemanage",
     name: "Administrar Empresas",
     icon: "nc-icon nc-vector",

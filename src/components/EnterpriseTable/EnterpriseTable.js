@@ -14,7 +14,7 @@ import "../../assets/css/global.css";
 const XLSX = require("xlsx");
 import noDataImage from "../../assets/img/noDataImageBlue.png";
 import SaveAlt from "@material-ui/icons/SaveAlt";
-import { Button, Modal } from "reactstrap";
+import { Button, Modal,ModalHeader } from "reactstrap";
 import iconNo from "../../assets/img/icons/iconNo.png";
 import iconGoto from "../../assets/img/icons/iconOpen.png";
 import iconEdit from "../../assets/img/icons/iconEdit.png";
