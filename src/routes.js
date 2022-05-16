@@ -57,7 +57,7 @@ const routes = [
    {
     path: "/enterprisemanage",
     name: "Administrar Empresas",
-    icon: "nc-icon nc-single-02",
+    icon: "nc-icon nc-vector",
     component: EnterpriseManage,
     layout: "/admin",
 
