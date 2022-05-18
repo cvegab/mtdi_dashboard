@@ -20,7 +20,7 @@ import iconGoto from "../../assets/img/icons/iconOpen.png";
 import iconEdit from "../../assets/img/icons/iconEdit.png";
 import iconRemoveAccount from "../../assets/img/icons/iconRemoveAccount.png";
 import {  FormCheck } from "react-bootstrap";
-import {  FormGroup, ModalHeader } from 'reactstrap';
+import {  FormGroup} from 'reactstrap';
 import NewEntrepriseProfileModal from "components/NewEnterpriseProfileModal/NewEntrepriseProfileModal";
 import EnterpriseTaxDataModal from "components/EnterpriseTaxDataModal/EnterpriseTaxDataModal";
 import EnterpriseCustomizeModal from "components/EnterpriseCustomizeModal/EnterpriseCustomizeModal";
