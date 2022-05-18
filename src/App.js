@@ -5,6 +5,7 @@ const App = () => {
   const [isAuthenticated, setisAuthenticated] = useState(true);
   const [fn, setfn] = useState(localStorage.getItem('first'));
   const [ln, setln] = useState(localStorage.getItem('last'));
+
   const [dark, setDark] = React.useState(
     localStorage.getItem('first') !== null
   );
@@ -19,8 +20,10 @@ const App = () => {
     search.indexOf("?") + 1,
     search.lastIndexOf("&")
   );
-
+console.log(nameSubString);
+let email = nameSubString;
   let userName = nameSubString.split("=")[1];
+  console.log(userName);
   // React.useEffect(() => {
     
   //   window.addEventListener('storage', () => {
@@ -90,7 +93,7 @@ const App = () => {
       .then((response) => response.text())
       .then((result) => {
         const obj = JSON.parse(result);
-
+console.log(obj);
         if (obj.first_name !== undefined) {
           localStorage.setItem("first", obj.first_name);
          setfn(localStorage.setItem("first", obj.first_name));
