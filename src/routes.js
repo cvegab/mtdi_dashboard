@@ -10,7 +10,7 @@ import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 import EnterpriseManage from "views/EnterpriseManage/EnterpriseManage"
 import DataStudio from "views/dataStudio/data-studio";
 
-
+ 
 const routes = [
   // {
   //   path: "/onboarding",
