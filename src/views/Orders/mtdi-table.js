@@ -450,6 +450,12 @@ const MtdiTable = (props) => {
   useEffect(() => {
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
+    if(localStorage.getItem("ut")==='1'){
+      setstoreId(0);
+    }
+    if(localStorage.getItem("ut")==='2'){
+      setstoreId(1,2,3);
+    }
     fetchOrderData();
    
     fetchFilterData();
@@ -476,7 +482,7 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+       
         var obj = JSON.parse(result);
 
         let countryArray = [];
@@ -544,9 +550,23 @@ const MtdiTable = (props) => {
       redirect: "follow",
       headers: myHeaders,
     };
+    let rolesUrl='';
+    if(localStorage.getItem("ut")==='1'){
+       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+    }
+    if(localStorage.getItem("ut")==='2'){
+      const kamstore = localStorage.getItem("st");
+      console.log(kamstore);
+      var b = kamstore.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      console.log(b);
+      let storeId=b;
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+   }
     try {
       const response = await fetch(
-        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
+        (url = rolesUrl),
         requestOptions
       );
       if (!response.ok) {
