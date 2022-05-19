@@ -25,15 +25,7 @@ const App = () => {
   let email = nameSubString;
   let userName = nameSubString.split("=")[1];
   console.log(userName);
-  // React.useEffect(() => {
-
-  //   window.addEventListener('storage', () => {
-  //     const name = localStorage.getItem('first');
-  //     console.log(name);
-  //     setfn(name);
-  //   });
-
-  //   }, [])
+ 
   const getUserType = async () => {
     console.log("hi");
     var myHeaders = new Headers();
@@ -113,18 +105,26 @@ const App = () => {
       .then((result) => {
         const obj = JSON.parse(result);
         console.log(obj);
-      
-        if (obj.first_name !== undefined) {
-          localStorage.setItem("first", obj.first_name);
-          setfn(localStorage.setItem("first", obj.first_name));
-          localStorage.setItem("dtm", userName);
-          setmail(localStorage.setItem("dtm", userName));
+      console.log(obj.user.first_name);
+        if (obj.user.first_name !== undefined) {
+          localStorage.setItem("first", obj.user.first_name);
+          setfn(localStorage.setItem("first", obj.user.first_name));
+          // localStorage.setItem("dtm", userName);
+          // setmail(localStorage.setItem("dtm", userName));
         }
-        if (obj.last_name !== undefined) {
-          localStorage.setItem("last", obj.last_name);
-          setln(localStorage.setItem("last", obj.last_name));
-          localStorage.setItem("dtm", userName);
-          setmail(localStorage.setItem("dtm", userName));
+        if (obj.user.last_name !== undefined) {
+          localStorage.setItem("last", obj.user.last_name);
+          setln(localStorage.setItem("last", obj.user.last_name));
+          // localStorage.setItem("dtm", userName);
+          // setmail(localStorage.setItem("dtm", userName));
+        }
+        if(obj.user.email !== undefined){
+          localStorage.setItem("dtm", obj.user.email);
+           //setmail(localStorage.setItem("dtm", obj.user.email));
+        }
+        if(obj.user.profile !== undefined){
+          localStorage.setItem("ut", obj.user.profile);
+          // setmail(localStorage.setItem("ut", obj.user.profile));
         }
         if (
           obj.message === "Autorizado" ||
@@ -136,7 +136,7 @@ const App = () => {
             "password",
             "SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ="
           );
-          localStorage.setItem("dtm", userName);
+          //localStorage.setItem("dtm", userName);
         } else {
           setisAuthenticated(false);
         }
