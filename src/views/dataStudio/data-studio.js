@@ -120,9 +120,30 @@ const DataStudio = () => {
         return item;
       }
     });
-    console.log(val[0].stores);
-
-    setfilteredStoreData(val[0].stores);
+   console.log(val[0]);
+   if (localStorage.getItem("ut") === '2') {
+    const kamstore = localStorage.getItem("st");
+    console.log(kamstore);
+    var b = kamstore.split(",").map(function (item) {
+      return parseInt(item, 10);
+    });
+    console.log(b);
+    let finalKamStore = [];
+    for (let i = 0; i <= b.length - 1; i++) {
+      let x = val[0].stores.filter((item) => {
+        return item.value === b[i];
+      });
+      finalKamStore.push(x);
+    }
+    var flattened = [].concat.apply([], finalKamStore);
+    console.log(flattened);
+    setfilteredStoreData(flattened);
+    console.log(finalKamStore);
+  }
+if(localStorage.getItem("ut")==="1"){
+setfilteredStoreData(val[0].stores);
+}
+    //setfilteredStoreData(val[0].stores);
   };
   const handleStoreChange = (event) => {
     setstore(event.target.value);
@@ -188,12 +209,21 @@ const DataStudio = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+       
         var obj = JSON.parse(result);
-
-        let countryArray = [];
-
-        setfilteredCountryData(obj);
+        if (localStorage.getItem("ut") === "2") {
+          let kamCountryArray = localStorage.getItem("ct");
+          console.log(kamCountryArray);
+          const kamCountry = obj.filter((item) => {
+            return item.value === Number(kamCountryArray);
+          });
+          console.log(kamCountry);
+          setfilteredCountryData(kamCountry);
+        }
+        if(localStorage.getItem("ut")==="1"){
+          setfilteredCountryData(obj);
+        }
+       
         // setfilteredStoreData(y[0].stores);
       })
       .catch((error) => console.log("error", error));
