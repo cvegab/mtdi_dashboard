@@ -9,6 +9,7 @@ import MtdiReports from "views/Dashboard/mtdi_reports";
 import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 import EnterpriseManage from "views/EnterpriseManage/EnterpriseManage"
 import DataStudio from "views/dataStudio/data-studio";
+import IntegrationBI from "views/IntegrationBI/IntegrationBI";
 
 
 const routes = [
@@ -36,6 +37,14 @@ const routes = [
     name: "Indicadores",
     icon: "nc-icon nc-spaceship",
     component: DataStudio,
+    layout: "/admin",
+
+   },
+   {
+    path: "/integracion-bi",
+    name: "Integración BI",
+    icon: "nc-icon nc-cloud-upload-94",
+    component: IntegrationBI,
     layout: "/admin",
 
    },

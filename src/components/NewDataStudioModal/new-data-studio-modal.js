@@ -208,7 +208,7 @@ const NewUserProfileModal = (props) => {
             textAlign: "center",
           }}
         >
-          Crear nuevo usuario
+          Integrar Nuevo BI
         </h3>
       )}
       {props.flag === 1 && (
@@ -219,43 +219,18 @@ const NewUserProfileModal = (props) => {
             textAlign: "center",
           }}
         >
-          Editar Usario
+          Editar Data Studio
         </h3>
       )}
 
       <Form>
-        <FormGroup>
-          <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
-            Nombre:
-          </Label>
-          <input
-            className="input"
-            type="name"
-            name="email"
-            id="exampleEmail"
-            style={{ fontSize: "12px" }}
-            // value={editedName}
-            defaultValue={props.profileInfo.first_name}
-            onChange={nameChangeHandler}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
-            Correo Electrónico:
-          </Label>
 
-          <input
-            className="input"
-            ref={emailRef}
-            type="email"
-            defaultValue={props.profileInfo.email}
-          />
-        </FormGroup>
         <Row>
-          <Col md={6}>
+          <Col >
+          
             <FormGroup>
               <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
-                Usuario
+                Tienda
               </Label>
               <select
                 class="form-select"
@@ -270,58 +245,22 @@ const NewUserProfileModal = (props) => {
                 <option value={3}>Cliente</option>
               </select>
             </FormGroup>
-          </Col>
-          <Col md={6}>
+            <br/>
             <FormGroup>
-              <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
-                País
+              <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
+                Link
               </Label>
-              <CheckboxDropdown
-                placeholder="Selccione un pais"
-                options={countryOptions}
-                handleSelectChange={handleSelectCountryChange}
-                // defaultValue={props.profileInfo.stores}
-                defaultValue={props.profileInfo.countries}
-              ></CheckboxDropdown>
-           
+              <input
+                className="input"
+                ref={emailRef}
+                type="email"
+                defaultValue={props.profileInfo.email}
+              />
             </FormGroup>
           </Col>
         </Row>
-        <Row>
-          <Col md={12}>
-            <FormGroup>
-              <Label for="cliente" style={{ fontWeight: "600", size: "14px" }}>
-                Cliente
-              </Label>
-              <CheckboxDropdown
-                placeholder="Selccione un cliente"
-                options={clientOptions}
-                handleSelectChange={handleSelectChange}
-                // defaultValue={props.profileInfo.stores}
-                defaultValue={props.profileInfo.stores}
-              ></CheckboxDropdown>
-            </FormGroup>
-          </Col>
-        </Row>
+        <br/>
 
-        <FormGroup>
-          <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
-            Activado:
-          </Label>
-
-          <FormCheck
-            style={{ width: "5em", height: "3em" }}
-            type="switch"
-            id="custom-switch"
-            // ref={selfServiceType}
-            // checked={true}
-            // value={selfServiceType}
-            // onChange={(event)=>{setselfServiceType(!selfServiceType)}}
-            // checked={handleSwitchChange}
-            defaultChecked={selfServiceType}
-            onChange={() => setselfServiceType(!selfServiceType)}
-          />
-        </FormGroup>
         {props.flag === 0 && (
           <div class="text-center">
             <button
@@ -343,7 +282,7 @@ const NewUserProfileModal = (props) => {
               }}
               onClick={addProfileHandler}
             >
-              Crear Usuario &nbsp;
+              Crear DataStudio &nbsp;
             </button>
           </div>
         )}
@@ -356,7 +295,7 @@ const NewUserProfileModal = (props) => {
                 backgroundColor: "#1D308E",
                 textAlign: "center",
                 color: "white",
-                width: "296px",
+                width: "300px",
                 height: "64px",
                 padding: "22px 81px",
                 borderRadius: "33px",
@@ -368,7 +307,7 @@ const NewUserProfileModal = (props) => {
               }}
               onClick={editProfileHandler}
             >
-              Editar Usuario &nbsp;
+              Editar DataStudio
             </button>
           </div>
         )}
