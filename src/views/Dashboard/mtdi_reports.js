@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 
-import '../../assets/css/Charts.css';
+import "../../assets/css/Charts.css";
 import "react-datepicker/dist/react-datepicker.css";
 import InformationCardsMobile from "components/InformationCardsMobile/InformationCardsMobile";
 const moment = require("moment");
@@ -570,8 +570,10 @@ function MtdiReports() {
     var result = [];
     if (endDate.isBefore(startDate)) {
       //throw "End date must be greater than start date.";
-      setdateError('La fecha de término debe ser mayor que la fecha de inicio ');
-    }else{
+      setdateError(
+        "La fecha de término debe ser mayor que la fecha de inicio "
+      );
+    } else {
       setdateError(null);
     }
     while (startDate.isBefore(endDate)) {
@@ -1095,7 +1097,19 @@ function MtdiReports() {
         });
 
         setchannels(salesChannelList);
-        setfilteredCountryData(obj);
+        if (localStorage.getItem("ut") === "2") {
+          let kamCountryArray = localStorage.getItem("ct");
+          console.log(kamCountryArray);
+          const kamCountry = obj.filter((item) => {
+            return item.value === Number(kamCountryArray);
+          });
+          console.log(kamCountry);
+          setfilteredCountryData(kamCountry);
+        }
+        if (localStorage.getItem("ut") === "1") {
+          setfilteredCountryData(obj);
+        }
+        //setfilteredCountryData(obj);
         setisLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -1120,7 +1134,29 @@ function MtdiReports() {
       }
     });
     setcountryId(val[0].value);
-    setfilteredStoreData(val[0].stores);
+    if (localStorage.getItem("ut") === "2") {
+      const kamstore = localStorage.getItem("st");
+      console.log(kamstore);
+      var b = kamstore.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      console.log(b);
+      let finalKamStore = [];
+      for (let i = 0; i <= b.length - 1; i++) {
+        let x = val[0].stores.filter((item) => {
+          return item.value === b[i];
+        });
+        finalKamStore.push(x);
+      }
+      var flattened = [].concat.apply([], finalKamStore);
+      console.log(flattened);
+      setfilteredStoreData(flattened);
+      console.log(finalKamStore);
+    }
+    if (localStorage.getItem("ut") === "1") {
+      setfilteredStoreData(val[0].stores);
+    }
+    //setfilteredStoreData(val[0].stores);
   };
   const handleStoreChange = (event) => {
     setstore(event.target.value);
@@ -1292,7 +1328,13 @@ function MtdiReports() {
                       marginTop: "0px",
                     }}
                   >
-                    Fecha Inicio {dateError!== null && <span> <p style={{color:'red'}}>{dateError}</p></span>}
+                    Fecha Inicio{" "}
+                    {dateError !== null && (
+                      <span>
+                        {" "}
+                        <p style={{ color: "red" }}>{dateError}</p>
+                      </span>
+                    )}
                   </h5>
 
                   <DatePicker
@@ -1305,7 +1347,7 @@ function MtdiReports() {
                     locale="es"
                   />
                 </label>
-               
+
                 <label>
                   <h5
                     id="fechaHasta"
