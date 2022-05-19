@@ -446,71 +446,12 @@ const MtdiTable = (props) => {
       },
     ];
   }
-  const fetchUserType = async () => {
-    console.log("USER TYPE");
-    const kamCountries = localStorage.getItem("ct");
-    console.log(kamCountries);
-    // console.log(loggedInUser);
-    // var myHeaders = new Headers();
-    // myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
-    // myHeaders.append(
-    //   "Authorization",
-    //   "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
-    // );
-
-    // var requestOptions = {
-    //   method: "GET",
-    //   headers: myHeaders,
-    //   redirect: "follow",
-    // };
-
-    // try {
-    //   const response = await fetch(
-    //     "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=test@test.cl",
-    //     requestOptions
-    //   );
-
-    //   if (!response.ok) {
-    //     throw new Error();
-    //   }
-    //   const data = await response.json();
-    //   console.log(data);
-    //   console.log(localStorage.getItem("dtm"));
-
-    //   const userTypeArray = data.filter((item) => {
-    //     return item.email === localStorage.getItem("dtm");
-    //   });
-    //  console.log(userTypeArray);
-    //   const uSercountries = userTypeArray.map((item) => {
-    //     return item.countries;
-    //   });
-
-    //   console.log(uSercountries[0]);
-    //   setfilteredCountryData(uSercountries[0]);
-
-    //   console.log(profile);
-    //   if (profile.includes(2)) {
-    //     setuserType("KAM");
-    //   }
-    //   if (profile.includes(1)) {
-    //     setuserType("Administrator");
-    //   }
-    //   if (profile.includes(3)) {
-    //     setuserType("KAM");
-    //   }
-    //   console.log(userType);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
+ 
   useEffect(() => {
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
     fetchOrderData();
-    if (localStorage.getItem("ut") === "2") {
-      fetchUserType();
-    }
-
+   
     fetchFilterData();
 
     //fetchFilterData();
