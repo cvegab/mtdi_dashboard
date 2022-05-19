@@ -497,8 +497,11 @@ const fetchUserType = async()=>{
 }
   useEffect(() => {
     // setfirstName(localStorage.getItem("first"));
-    fetchUserType();
+ 
     fetchOrderData();
+    if(localStorage.getItem("ut")===2){
+      fetchUserType();
+    }
     fetchFilterData();
   
   }, []);
