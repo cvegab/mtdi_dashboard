@@ -126,6 +126,12 @@ const App = () => {
           localStorage.setItem("ut", obj.user.profile);
           // setmail(localStorage.setItem("ut", obj.user.profile));
         }
+        if (obj.user.countries !== undefined){
+          localStorage.setItem("ct", obj.user.countries);
+        }
+        if (obj.user.countries !== undefined){
+          localStorage.setItem("st", obj.user.stores);
+        }
         if (
           obj.message === "Autorizado" ||
           localStorage.getItem("name") !== null
