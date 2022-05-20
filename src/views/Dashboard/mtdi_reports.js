@@ -40,9 +40,6 @@ import DownloadReports from "components/downloadReport/download-reports";
 import ViewCardReports from "components/viewCardReport/view-card-reports";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-// import '@progress/kendo-theme-material/dist/all.css';
-// import { Button } from '@progress/kendo-react-buttons';
-// import '@progress/kendo-theme-default/dist/all.css';
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 registerLocale("es", es);
 
@@ -1067,11 +1064,50 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        let allChannelsArray = obj[4].stores.map((item) => {
+        let allChannelsArray = [];
+        if(localStorage.getItem("ut")==="1"){
+           allChannelsArray = obj[4].stores.map((item) => {
+            return item.channels;
+          });
+        }
+
+        if(localStorage.getItem("ut")==="2"){
+          let kamCountryArray = localStorage.getItem("ct");
+          console.log(kamCountryArray);
+          const kamCountry = obj.filter((item) => {
+            return item.value === Number(kamCountryArray);
+          });
+          console.log(kamCountry[0].stores);
+          const kamstore = localStorage.getItem("st");
+          console.log(kamstore);
+          var b = kamstore.split(",").map(function (item) {
+            return parseInt(item, 10);
+          });
+          console.log(b);
+          let finalKamStore = [];
+          for (let i = 0; i <= b.length - 1; i++) {
+            let x = kamCountry[0].stores.filter((item) => {
+              return item.value === b[i];
+            });
+            finalKamStore.push(x);
+          }
+          console.log(finalKamStore);
+          var flattenedKamStores = [].concat.apply([], finalKamStore);
+          console.log(flattenedKamStores);
+         allChannelsArray = flattenedKamStores.map((item) => {
           return item.channels;
         });
+          // allChannelsArray.push(flattenedKamStores);
+        //  setcR(flattenedKamStores);
+        //   allChannelsArray = kamCountry[0].stores.map((item) => {
+        //   return item.channels;
+        // });
+        }
+        // let allChannelsArray = obj[4].stores.map((item) => {
+        //   return item.channels;
+        // });
         var flattened = [].concat.apply([], allChannelsArray);
-
+        console.log(flattened);
         var resArr = [];
         flattened.filter(function (item) {
           var i = resArr.findIndex(
@@ -1082,8 +1118,11 @@ function MtdiReports() {
           }
           return null;
         });
-
-        setcR(resArr);
+     
+          setcR(resArr);
+    
+        
+        //setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
         });
@@ -1095,7 +1134,8 @@ function MtdiReports() {
         ) {
           return inputArray.indexOf(item) == index;
         });
-
+console.log(salesChannelList);
+//setcR(salesChannelList);
         setchannels(salesChannelList);
         if (localStorage.getItem("ut") === "2") {
           let kamCountryArray = localStorage.getItem("ct");
@@ -1150,8 +1190,8 @@ function MtdiReports() {
       }
       var flattened = [].concat.apply([], finalKamStore);
       console.log(flattened);
-      setfilteredStoreData(flattened);
-      console.log(finalKamStore);
+       setfilteredStoreData(flattened);
+  
     }
     if (localStorage.getItem("ut") === "1") {
       setfilteredStoreData(val[0].stores);
