@@ -127,6 +127,7 @@ function MtdiReports() {
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
   const [showFilter, setshowFilter] = useState(false);
   const [salesGraphData, setsalesGraphData] = useState([]);
+  const [ordersGraphData, setordersGraphData] = useState([]);
   //SALES CHANNEL TOTAL SALES STATES
 
   const [cR, setcR] = useState([]);
@@ -219,7 +220,9 @@ function MtdiReports() {
   useEffect(() => {
     setSalesGraphValues();
   }, [salesGraphData]);
-
+  useEffect(() => {
+   setOrdersGraphValues();
+  }, [ordersGraphData]);
   //FOR CLEANING UP STATES
   useEffect(() => {
     return () => {
@@ -227,6 +230,7 @@ function MtdiReports() {
       setcR(null);
     };
   }, []);
+ 
   //THIS FUNCTION IS USED TO SET THE INITIAL VALUE(FIRST RENDER) OF THE STACKED SALES GRAPH.WHEN THE Cr IS ACCESSED FROM THE ASYNC FUNCTION IT RETURNS NULL..THIS FUNCTION IS TO FIX THAT PROBLEM
   const setSalesGraphValues = () => {
     console.log(salesGraphData);
@@ -285,13 +289,12 @@ function MtdiReports() {
     }
     let ripley = [];
     if (newChannelList.includes("Ripley")) {
-      ripley =salesGraphData.filter((item) => {
+      ripley = salesGraphData.filter((item) => {
         return item.Ripley;
       });
-if(ripley.length!==0){
-  setnewRipleySalesMonthly(ripley[0].Ripley);
-}
-     
+      if (ripley.length !== 0) {
+        setnewRipleySalesMonthly(ripley[0].Ripley);
+      }
     }
     if (!newChannelList.includes("Ripley")) {
       setnewRipleySalesMonthly(0);
@@ -301,10 +304,9 @@ if(ripley.length!==0){
       chambas = salesGraphData.filter((item) => {
         return item.Chambas;
       });
-    if(chambas.length!==0){
-      setnewChambasSalesMonthly(chambas[0].Chambas);
-    }
-     
+      if (chambas.length !== 0) {
+        setnewChambasSalesMonthly(chambas[0].Chambas);
+      }
     }
     if (!newChannelList.includes("Chambas")) {
       setnewChambasSalesMonthly(0);
@@ -314,10 +316,9 @@ if(ripley.length!==0){
       magento = salesGraphData.filter((item) => {
         return item.Magento;
       });
-     if(magento.length!==0){
-      setnewMagentoSalesMonthly(magento[0].Magento);
-     }
-    
+      if (magento.length !== 0) {
+        setnewMagentoSalesMonthly(magento[0].Magento);
+      }
     }
     if (!newChannelList.includes("Magento")) {
       setnewMagentoSalesMonthly(0);
@@ -327,23 +328,21 @@ if(ripley.length!==0){
       woo = salesGraphData.filter((item) => {
         return item.Woocommerce;
       });
-if(woo.length!==0){
-  setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
-}
-      
+      if (woo.length !== 0) {
+        setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
+      }
     }
     if (!newChannelList.includes("Woocommerce")) {
       setnewWooCommerceSalesMonthly(0);
     }
     let shopify = [];
     if (newChannelList.includes("Shopify")) {
-      shopify =salesGraphData.filter((item) => {
+      shopify = salesGraphData.filter((item) => {
         return item.Shopify;
       });
-if(shopify.length!==0){
-  setnewShopifySalesMonthly(shopify[0].Shopify);
-}
-    
+      if (shopify.length !== 0) {
+        setnewShopifySalesMonthly(shopify[0].Shopify);
+      }
     }
     if (!newChannelList.includes("Shopify")) {
       setnewShopifySalesMonthly(0);
@@ -353,10 +352,9 @@ if(shopify.length!==0){
       mer = salesGraphData.filter((item) => {
         return item.MercadoLibre;
       });
-if(mer.length!==0){
-  setnewMercadoSalesMonthly(mer[0].MercadoLibre);
-}
-    
+      if (mer.length !== 0) {
+        setnewMercadoSalesMonthly(mer[0].MercadoLibre);
+      }
     }
     if (!newChannelList.includes("MercadoLibre")) {
       setnewMercadoSalesMonthly(0);
@@ -366,10 +364,9 @@ if(mer.length!==0){
       pari = salesGraphData.filter((item) => {
         return item.Paris;
       });
-if(pari.length!==0){
-  setnewParisSales(pari[0].Paris);
-}
-     
+      if (pari.length !== 0) {
+        setnewParisSales(pari[0].Paris);
+      }
     }
     if (!newChannelList.includes("Paris")) {
       setnewParisSales(0);
@@ -379,10 +376,9 @@ if(pari.length!==0){
       exi = salesGraphData.filter((item) => {
         return item.Exito;
       });
-if(exi.length!==0){
-  setnewExitoSalesMonthly(exi[0].Exito);
-}
-   
+      if (exi.length !== 0) {
+        setnewExitoSalesMonthly(exi[0].Exito);
+      }
     }
     if (!newChannelList.includes("Exito")) {
       setnewExitoSalesMonthly(0);
@@ -392,10 +388,9 @@ if(exi.length!==0){
       lista = salesGraphData.filter((item) => {
         return item.ListaTienda;
       });
-if(lista.length!==0){
-  setnewListaSales(lista[0].ListaTienda);
-}
-      
+      if (lista.length !== 0) {
+        setnewListaSales(lista[0].ListaTienda);
+      }
     }
     if (!newChannelList.includes("ListaTienda")) {
       setnewListaSales(0);
@@ -405,9 +400,9 @@ if(lista.length!==0){
   //FETCH STACKED GRAPH FOR ORDERS GRAPH
   const fetchStackedGraphForOrders = () => {
     setisStackedOrdersGraph(true);
-    let newChannelList = cR.map((item) => {
-      return item.channel;
-    });
+    // let newChannelList = cR.map((item) => {
+    //   return item.channel;
+    // });
     setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -427,146 +422,319 @@ if(lista.length!==0){
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        if (newChannelList.length === 0) {
-          newChannelList = [
-            "Vtex",
-            "Linio",
-            "MercadoLibre",
-            "Exito",
-            "Ripley",
-            "Shopify",
-            "Paris",
-            "Magento",
-            "Woocommerce",
-            "Chambas",
-            "ListaTienda",
-          ];
-        }
-        let linio = [];
-        if (newChannelList.includes("Linio")) {
-          linio = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Linio;
-          });
-          console.log(linio[0].Linio);
-          setnewlinioMonthly(linio[0].Linio);
-        }
-        if (!newChannelList.includes("Linio")) {
-          setnewlinioMonthly(0);
-        }
-        let Vtex = [];
-        if (newChannelList.includes("Vtex")) {
-          Vtex = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Vtex;
-          });
-          console.log(Vtex[0].Vtex);
-          setnewVtexMonthly(Vtex[0].Vtex);
-        }
-        if (!newChannelList.includes("Vtex")) {
-          setnewVtexMonthly(0);
-        }
-        let ripley = [];
-        if (newChannelList.includes("Ripley")) {
-          ripley = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Ripley;
-          });
-          console.log(ripley[0].Ripley);
-          setnewRipleyMonthly(ripley[0].Ripley);
-        }
-        if (!newChannelList.includes("Ripley")) {
-          setnewRipleyMonthly(0);
-        }
-        let chambas = [];
-        if (newChannelList.includes("Chambas")) {
-          chambas = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Chambas;
-          });
-          console.log(chambas[0].Chambas);
-          setnewChambasMonthly(chambas[0].Chambas);
-        }
-        if (!newChannelList.includes("Chambas")) {
-          setnewChambasMonthly(0);
-        }
-        let magento = [];
-        if (newChannelList.includes("Magento")) {
-          magento = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Magento;
-          });
-          console.log(magento[0].Magento);
-          setnewMagentoMonthly(magento[0].Magento);
-        }
-        if (!newChannelList.includes("Magento")) {
-          setnewMagentoMonthly(0);
-        }
-        let woo = [];
-        if (newChannelList.includes("Woocommerce")) {
-          woo = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Woocommerce;
-          });
-          console.log(woo[0].Woocommerce);
-          setnewWooCommerceMonthly(woo[0].Woocommerce);
-        }
-        if (!newChannelList.includes("Woocommerce")) {
-          setnewWooCommerceMonthly(0);
-        }
-        let shopify = [];
-        if (newChannelList.includes("Shopify")) {
-          shopify = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Shopify;
-          });
-          console.log(shopify[0].Shopify);
-          setnewShopifyMonthly(shopify[0].Shopify);
-        }
-        if (!newChannelList.includes("Shopify")) {
-          setnewShopifyMonthly(0);
-        }
-        let mer = [];
-        if (newChannelList.includes("MercadoLibre")) {
-          mer = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.MercadoLibre;
-          });
+        setordersGraphData(obj.resume.stackedOrderQtyGraphByMonth);
+        // if (newChannelList.length === 0) {
+        //   newChannelList = [
+        //     "Vtex",
+        //     "Linio",
+        //     "MercadoLibre",
+        //     "Exito",
+        //     "Ripley",
+        //     "Shopify",
+        //     "Paris",
+        //     "Magento",
+        //     "Woocommerce",
+        //     "Chambas",
+        //     "ListaTienda",
+        //   ];
+        // }
+        // let linio = [];
+        // if (newChannelList.includes("Linio")) {
+        //   linio = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Linio;
+        //   });
+        //   console.log(linio[0].Linio);
+        //   setnewlinioMonthly(linio[0].Linio);
+        // }
+        // if (!newChannelList.includes("Linio")) {
+        //   setnewlinioMonthly(0);
+        // }
+        // let Vtex = [];
+        // if (newChannelList.includes("Vtex")) {
+        //   Vtex = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Vtex;
+        //   });
+        //   console.log(Vtex[0].Vtex);
+        //   setnewVtexMonthly(Vtex[0].Vtex);
+        // }
+        // if (!newChannelList.includes("Vtex")) {
+        //   setnewVtexMonthly(0);
+        // }
+        // let ripley = [];
+        // if (newChannelList.includes("Ripley")) {
+        //   ripley = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Ripley;
+        //   });
+        //   console.log(ripley[0].Ripley);
+        //   setnewRipleyMonthly(ripley[0].Ripley);
+        // }
+        // if (!newChannelList.includes("Ripley")) {
+        //   setnewRipleyMonthly(0);
+        // }
+        // let chambas = [];
+        // if (newChannelList.includes("Chambas")) {
+        //   chambas = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Chambas;
+        //   });
+        //   console.log(chambas[0].Chambas);
+        //   setnewChambasMonthly(chambas[0].Chambas);
+        // }
+        // if (!newChannelList.includes("Chambas")) {
+        //   setnewChambasMonthly(0);
+        // }
+        // let magento = [];
+        // if (newChannelList.includes("Magento")) {
+        //   magento = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Magento;
+        //   });
+        //   console.log(magento[0].Magento);
+        //   setnewMagentoMonthly(magento[0].Magento);
+        // }
+        // if (!newChannelList.includes("Magento")) {
+        //   setnewMagentoMonthly(0);
+        // }
+        // let woo = [];
+        // if (newChannelList.includes("Woocommerce")) {
+        //   woo = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Woocommerce;
+        //   });
+        //   console.log(woo[0].Woocommerce);
+        //   setnewWooCommerceMonthly(woo[0].Woocommerce);
+        // }
+        // if (!newChannelList.includes("Woocommerce")) {
+        //   setnewWooCommerceMonthly(0);
+        // }
+        // let shopify = [];
+        // if (newChannelList.includes("Shopify")) {
+        //   shopify = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Shopify;
+        //   });
+        //   console.log(shopify[0].Shopify);
+        //   setnewShopifyMonthly(shopify[0].Shopify);
+        // }
+        // if (!newChannelList.includes("Shopify")) {
+        //   setnewShopifyMonthly(0);
+        // }
+        // let mer = [];
+        // if (newChannelList.includes("MercadoLibre")) {
+        //   mer = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.MercadoLibre;
+        //   });
 
-          setnewMercadoOrdersMonthly(mer[0].MercadoLibre);
-        }
-        if (!newChannelList.includes("MercadoLibre")) {
-          setnewMercadoOrdersMonthly(0);
-        }
-        let pari = [];
-        if (newChannelList.includes("Paris")) {
-          pari = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Paris;
-          });
+        //   setnewMercadoOrdersMonthly(mer[0].MercadoLibre);
+        // }
+        // if (!newChannelList.includes("MercadoLibre")) {
+        //   setnewMercadoOrdersMonthly(0);
+        // }
+        // let pari = [];
+        // if (newChannelList.includes("Paris")) {
+        //   pari = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Paris;
+        //   });
 
-          setnewParisOrders(pari[0].Paris);
-        }
-        if (!newChannelList.includes("Paris")) {
-          setnewParisOrders(0);
-        }
-        let exi = [];
-        if (newChannelList.includes("Exito")) {
-          exi = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.Exito;
-          });
+        //   setnewParisOrders(pari[0].Paris);
+        // }
+        // if (!newChannelList.includes("Paris")) {
+        //   setnewParisOrders(0);
+        // }
+        // let exi = [];
+        // if (newChannelList.includes("Exito")) {
+        //   exi = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.Exito;
+        //   });
 
-          setnewExtitoOrders(exi[0].Exito);
-        }
-        if (!newChannelList.includes("Exito")) {
-          setnewExtitoOrders(0);
-        }
-        let lista = [];
-        if (newChannelList.includes("ListaTienda")) {
-          lista = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
-            return item.ListaTienda;
-          });
+        //   setnewExtitoOrders(exi[0].Exito);
+        // }
+        // if (!newChannelList.includes("Exito")) {
+        //   setnewExtitoOrders(0);
+        // }
+        // let lista = [];
+        // if (newChannelList.includes("ListaTienda")) {
+        //   lista = obj.resume.stackedOrderQtyGraphByMonth.filter((item) => {
+        //     return item.ListaTienda;
+        //   });
 
-          setnewListaOrders(lista[0].ListaTienda);
-        }
-        if (!newChannelList.includes("ListaTienda")) {
-          setnewListaOrders(0);
-        }
+        //   setnewListaOrders(lista[0].ListaTienda);
+        // }
+        // if (!newChannelList.includes("ListaTienda")) {
+        //   setnewListaOrders(0);
+        // }
         setisStackedOrdersGraph(false);
       })
       .catch((error) => console.log("error", error));
   };
+
+  const setOrdersGraphValues = ()=>{
+    setisStackedGraphLoading(true);
+console.log(ordersGraphData);
+let newChannelList = cR.map((item) => {
+  return item.channel;
+});
+  if (newChannelList.length === 0) {
+    newChannelList = [
+      "Vtex",
+      "Linio",
+      "MercadoLibre",
+      "Exito",
+      "Ripley",
+      "Shopify",
+      "Paris",
+      "Magento",
+      "Woocommerce",
+      "Chambas",
+      "ListaTienda",
+    ];
+  }
+  let linio = [];
+  if (newChannelList.includes("Linio")) {
+    linio = ordersGraphData.filter((item) => {
+      return item.Linio;
+    });
+  if(linio.length!==0){
+    setnewlinioMonthly(linio[0].Linio);
+  }
+    
+  }
+  if (!newChannelList.includes("Linio")) {
+    setnewlinioMonthly(0);
+  }
+  let Vtex = [];
+  if (newChannelList.includes("Vtex")) {
+    Vtex = ordersGraphData.filter((item) => {
+      return item.Vtex;
+    });
+   if(Vtex.length!==0){
+    setnewVtexMonthly(Vtex[0].Vtex);
+   }
+   
+  }
+  if (!newChannelList.includes("Vtex")) {
+    setnewVtexMonthly(0);
+  }
+  let ripley = [];
+  if (newChannelList.includes("Ripley")) {
+    ripley = ordersGraphData.filter((item) => {
+      return item.Ripley;
+    });
+    if(ripley.length!==0){
+      setnewRipleyMonthly(ripley[0].Ripley);
+    }
+    
+    
+  }
+  if (!newChannelList.includes("Ripley")) {
+    setnewRipleyMonthly(0);
+  }
+  let chambas = [];
+  if (newChannelList.includes("Chambas")) {
+    chambas = ordersGraphData.filter((item) => {
+      return item.Chambas;
+    });
+    if(chambas.length!==0){
+    
+      setnewChambasMonthly(chambas[0].Chambas);
+    }
+   
+  }
+  if (!newChannelList.includes("Chambas")) {
+    setnewChambasMonthly(0);
+  }
+  let magento = [];
+  if (newChannelList.includes("Magento")) {
+    magento = ordersGraphData.filter((item) => {
+      return item.Magento;
+    });
+   if(magento.length!=0){
+    setnewMagentoMonthly(magento[0].Magento);
+   }
+   
+  }
+  if (!newChannelList.includes("Magento")) {
+    setnewMagentoMonthly(0);
+  }
+  let woo = [];
+  if (newChannelList.includes("Woocommerce")) {
+    woo = ordersGraphData.filter((item) => {
+      return item.Woocommerce;
+    });
+    if(woo.length!==0){
+     
+      setnewWooCommerceMonthly(woo[0].Woocommerce);
+    }
+   
+  }
+  if (!newChannelList.includes("Woocommerce")) {
+    setnewWooCommerceMonthly(0);
+  }
+  let shopify = [];
+  if (newChannelList.includes("Shopify")) {
+    shopify = ordersGraphData.filter((item) => {
+      return item.Shopify;
+    });
+    if(shopify.length!==0){
+      
+      setnewShopifyMonthly(shopify[0].Shopify);
+    }
+    
+  }
+  if (!newChannelList.includes("Shopify")) {
+    setnewShopifyMonthly(0);
+  }
+  let mer = [];
+  if (newChannelList.includes("MercadoLibre")) {
+    mer = ordersGraphData.filter((item) => {
+      return item.MercadoLibre;
+    });
+if(mer.length!==0){
+  setnewMercadoOrdersMonthly(mer[0].MercadoLibre);
+}
+    
+  }
+  if (!newChannelList.includes("MercadoLibre")) {
+    setnewMercadoOrdersMonthly(0);
+  }
+  let pari = [];
+  if (newChannelList.includes("Paris")) {
+    pari = ordersGraphData.filter((item) => {
+      return item.Paris;
+    });
+if(pari.length!==0){
+  setnewParisOrders(pari[0].Paris);
+}
+   
+  }
+  if (!newChannelList.includes("Paris")) {
+    setnewParisOrders(0);
+  }
+  let exi = [];
+  if (newChannelList.includes("Exito")) {
+    exi = ordersGraphData.filter((item) => {
+      return item.Exito;
+    });
+if(exi.length!==0){
+  setnewExtitoOrders(exi[0].Exito);
+}
+    
+  }
+  if (!newChannelList.includes("Exito")) {
+    setnewExtitoOrders(0);
+  }
+  let lista = [];
+  if (newChannelList.includes("ListaTienda")) {
+    lista = ordersGraphData.filter((item) => {
+      return item.ListaTienda;
+    });
+if(lista.length!==0){
+  setnewListaOrders(lista[0].ListaTienda);
+}
+    
+  }
+  if (!newChannelList.includes("ListaTienda")) {
+    setnewListaOrders(0);
+  }
+  setisStackedOrdersGraph(false);
+  setisStackedGraphLoading(false);
+  }
   //FETCH STACKED GRAPH FOR SALES GRAPH
   const fetchStackedGraphForSales = () => {
     setisStackedGraphLoading(true);
