@@ -126,11 +126,11 @@ function MtdiReports() {
   const [isLoading, setisLoading] = useState(false);
   const [totalCancelledOrders, settotalCancelledOrders] = useState(0);
   const [showFilter, setshowFilter] = useState(false);
-
+  const [salesGraphData, setsalesGraphData] = useState([]);
   //SALES CHANNEL TOTAL SALES STATES
 
   const [cR, setcR] = useState([]);
-
+  const [initialChannelSalesGraph, setinitialChannelSalesGraph] = useState([]);
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
   const [isMobileSizes, setIsMobileSized] = useState(false);
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
@@ -216,6 +216,9 @@ function MtdiReports() {
   useEffect(() => {
     fetchGeneralData();
   }, [channels, channelId, cR, store]);
+  useEffect(() => {
+    setSalesGraphValues();
+  }, [salesGraphData]);
 
   //FOR CLEANING UP STATES
   useEffect(() => {
@@ -224,6 +227,181 @@ function MtdiReports() {
       setcR(null);
     };
   }, []);
+  //THIS FUNCTION IS USED TO SET THE INITIAL VALUE(FIRST RENDER) OF THE STACKED SALES GRAPH.WHEN THE Cr IS ACCESSED FROM THE ASYNC FUNCTION IT RETURNS NULL..THIS FUNCTION IS TO FIX THAT PROBLEM
+  const setSalesGraphValues = () => {
+    console.log(salesGraphData);
+    console.log(cR);
+    let newChannelList = cR.map((item) => {
+      return item.channel;
+    });
+    console.log(newChannelList);
+    console.log(initialChannelSalesGraph);
+    if (newChannelList.length === 0) {
+      console.log(cR);
+      newChannelList = [
+        "Vtex",
+        "Linio",
+        "MercadoLibre",
+        "Exito",
+        "Ripley",
+        "Shopify",
+        "Paris",
+        "Magento",
+        "Woocommerce",
+        "Chambas",
+        "ListaTienda",
+      ];
+    }
+
+    // NEW LOGIC
+    let linio = [];
+    if (newChannelList.includes("Linio")) {
+      linio = salesGraphData.filter((item) => {
+        return item.Linio;
+      });
+
+      console.log(linio);
+      if (linio.length !== 0) {
+        setnewlinioSalesMonthly(linio[0].Linio);
+      }
+      // console.log(linio[0].Linio);
+      //setnewlinioSalesMonthly(linio[0].Linio);
+    }
+    if (!newChannelList.includes("Linio")) {
+      setnewlinioSalesMonthly(0);
+    }
+
+    let Vtex = [];
+    if (newChannelList.includes("Vtex")) {
+      Vtex = salesGraphData.filter((item) => {
+        return item.Vtex;
+      });
+      if (Vtex.length !== 0) {
+        setnewVtexSalesMonthly(Vtex[0].Vtex);
+      }
+    }
+    if (!newChannelList.includes("Vtex")) {
+      setnewVtexSalesMonthly(0);
+    }
+    let ripley = [];
+    if (newChannelList.includes("Ripley")) {
+      ripley =salesGraphData.filter((item) => {
+        return item.Ripley;
+      });
+if(ripley.length!==0){
+  setnewRipleySalesMonthly(ripley[0].Ripley);
+}
+     
+    }
+    if (!newChannelList.includes("Ripley")) {
+      setnewRipleySalesMonthly(0);
+    }
+    let chambas = [];
+    if (newChannelList.includes("Chambas")) {
+      chambas = salesGraphData.filter((item) => {
+        return item.Chambas;
+      });
+    if(chambas.length!==0){
+      setnewChambasSalesMonthly(chambas[0].Chambas);
+    }
+     
+    }
+    if (!newChannelList.includes("Chambas")) {
+      setnewChambasSalesMonthly(0);
+    }
+    let magento = [];
+    if (newChannelList.includes("Magento")) {
+      magento = salesGraphData.filter((item) => {
+        return item.Magento;
+      });
+     if(magento.length!==0){
+      setnewMagentoSalesMonthly(magento[0].Magento);
+     }
+    
+    }
+    if (!newChannelList.includes("Magento")) {
+      setnewMagentoSalesMonthly(0);
+    }
+    let woo = [];
+    if (newChannelList.includes("Woocommerce")) {
+      woo = salesGraphData.filter((item) => {
+        return item.Woocommerce;
+      });
+if(woo.length!==0){
+  setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
+}
+      
+    }
+    if (!newChannelList.includes("Woocommerce")) {
+      setnewWooCommerceSalesMonthly(0);
+    }
+    let shopify = [];
+    if (newChannelList.includes("Shopify")) {
+      shopify =salesGraphData.filter((item) => {
+        return item.Shopify;
+      });
+if(shopify.length!==0){
+  setnewShopifySalesMonthly(shopify[0].Shopify);
+}
+    
+    }
+    if (!newChannelList.includes("Shopify")) {
+      setnewShopifySalesMonthly(0);
+    }
+    let mer = [];
+    if (newChannelList.includes("MercadoLibre")) {
+      mer = salesGraphData.filter((item) => {
+        return item.MercadoLibre;
+      });
+if(mer.length!==0){
+  setnewMercadoSalesMonthly(mer[0].MercadoLibre);
+}
+    
+    }
+    if (!newChannelList.includes("MercadoLibre")) {
+      setnewMercadoSalesMonthly(0);
+    }
+    let pari = [];
+    if (newChannelList.includes("Paris")) {
+      pari = salesGraphData.filter((item) => {
+        return item.Paris;
+      });
+if(pari.length!==0){
+  setnewParisSales(pari[0].Paris);
+}
+     
+    }
+    if (!newChannelList.includes("Paris")) {
+      setnewParisSales(0);
+    }
+    let exi = [];
+    if (newChannelList.includes("Exito")) {
+      exi = salesGraphData.filter((item) => {
+        return item.Exito;
+      });
+if(exi.length!==0){
+  setnewExitoSalesMonthly(exi[0].Exito);
+}
+   
+    }
+    if (!newChannelList.includes("Exito")) {
+      setnewExitoSalesMonthly(0);
+    }
+    let lista = [];
+    if (newChannelList.includes("ListaTienda")) {
+      lista = salesGraphData.filter((item) => {
+        return item.ListaTienda;
+      });
+if(lista.length!==0){
+  setnewListaSales(lista[0].ListaTienda);
+}
+      
+    }
+    if (!newChannelList.includes("ListaTienda")) {
+      setnewListaSales(0);
+    }
+    setisStackedGraphLoading(false);
+  };
   //FETCH STACKED GRAPH FOR ORDERS GRAPH
   const fetchStackedGraphForOrders = () => {
     setisStackedOrdersGraph(true);
@@ -417,146 +595,149 @@ function MtdiReports() {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        console.log(newChannelList);
-        if (newChannelList.length === 0) {
-          newChannelList = [
-            "Vtex",
-            "Linio",
-            "MercadoLibre",
-            "Exito",
-            "Ripley",
-            "Shopify",
-            "Paris",
-            "Magento",
-            "Woocommerce",
-            "Chambas",
-            "ListaTienda",
-          ];
-        }
+        setsalesGraphData(obj.resume.stackedSalesGraphByMonth);
+        // console.log(newChannelList);
+        // console.log(initialChannelSalesGraph);
+        // if (newChannelList.length === 0) {
+        //   console.log(cR);
+        //   newChannelList = [
+        //     "Vtex",
+        //     "Linio",
+        //     "MercadoLibre",
+        //     "Exito",
+        //     "Ripley",
+        //     "Shopify",
+        //     "Paris",
+        //     "Magento",
+        //     "Woocommerce",
+        //     "Chambas",
+        //     "ListaTienda",
+        //   ];
+        // }
 
-        // NEW LOGIC
-        let linio = [];
-        if (newChannelList.includes("Linio")) {
-          linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Linio;
-          });
-          console.log(linio[0].Linio);
-          setnewlinioSalesMonthly(linio[0].Linio);
-        }
-        if (!newChannelList.includes("Linio")) {
-          setnewlinioSalesMonthly(0);
-        }
+        // // NEW LOGIC
+        // let linio = [];
+        // if (newChannelList.includes("Linio")) {
+        //   linio = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Linio;
+        //   });
+        //   console.log(linio[0].Linio);
+        //   setnewlinioSalesMonthly(linio[0].Linio);
+        // }
+        // if (!newChannelList.includes("Linio")) {
+        //   setnewlinioSalesMonthly(0);
+        // }
 
-        let Vtex = [];
-        if (newChannelList.includes("Vtex")) {
-          Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Vtex;
-          });
+        // let Vtex = [];
+        // if (newChannelList.includes("Vtex")) {
+        //   Vtex = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Vtex;
+        //   });
 
-          setnewVtexSalesMonthly(Vtex[0].Vtex);
-        }
-        if (!newChannelList.includes("Vtex")) {
-          setnewVtexSalesMonthly(0);
-        }
-        let ripley = [];
-        if (newChannelList.includes("Ripley")) {
-          ripley = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Ripley;
-          });
+        //   setnewVtexSalesMonthly(Vtex[0].Vtex);
+        // }
+        // if (!newChannelList.includes("Vtex")) {
+        //   setnewVtexSalesMonthly(0);
+        // }
+        // let ripley = [];
+        // if (newChannelList.includes("Ripley")) {
+        //   ripley = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Ripley;
+        //   });
 
-          setnewRipleySalesMonthly(ripley[0].Ripley);
-        }
-        if (!newChannelList.includes("Ripley")) {
-          setnewRipleySalesMonthly(0);
-        }
-        let chambas = [];
-        if (newChannelList.includes("Chambas")) {
-          chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Chambas;
-          });
-          console.log(chambas[0].Chambas);
-          setnewChambasSalesMonthly(chambas[0].Chambas);
-        }
-        if (!newChannelList.includes("Chambas")) {
-          setnewChambasSalesMonthly(0);
-        }
-        let magento = [];
-        if (newChannelList.includes("Magento")) {
-          magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Magento;
-          });
-          console.log(magento[0].Magento);
-          setnewMagentoSalesMonthly(magento[0].Magento);
-        }
-        if (!newChannelList.includes("Magento")) {
-          setnewMagentoSalesMonthly(0);
-        }
-        let woo = [];
-        if (newChannelList.includes("Woocommerce")) {
-          woo = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Woocommerce;
-          });
+        //   setnewRipleySalesMonthly(ripley[0].Ripley);
+        // }
+        // if (!newChannelList.includes("Ripley")) {
+        //   setnewRipleySalesMonthly(0);
+        // }
+        // let chambas = [];
+        // if (newChannelList.includes("Chambas")) {
+        //   chambas = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Chambas;
+        //   });
+        //   console.log(chambas[0].Chambas);
+        //   setnewChambasSalesMonthly(chambas[0].Chambas);
+        // }
+        // if (!newChannelList.includes("Chambas")) {
+        //   setnewChambasSalesMonthly(0);
+        // }
+        // let magento = [];
+        // if (newChannelList.includes("Magento")) {
+        //   magento = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Magento;
+        //   });
+        //   console.log(magento[0].Magento);
+        //   setnewMagentoSalesMonthly(magento[0].Magento);
+        // }
+        // if (!newChannelList.includes("Magento")) {
+        //   setnewMagentoSalesMonthly(0);
+        // }
+        // let woo = [];
+        // if (newChannelList.includes("Woocommerce")) {
+        //   woo = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Woocommerce;
+        //   });
 
-          setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
-        }
-        if (!newChannelList.includes("Woocommerce")) {
-          setnewWooCommerceSalesMonthly(0);
-        }
-        let shopify = [];
-        if (newChannelList.includes("Shopify")) {
-          shopify = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Shopify;
-          });
+        //   setnewWooCommerceSalesMonthly(woo[0].Woocommerce);
+        // }
+        // if (!newChannelList.includes("Woocommerce")) {
+        //   setnewWooCommerceSalesMonthly(0);
+        // }
+        // let shopify = [];
+        // if (newChannelList.includes("Shopify")) {
+        //   shopify = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Shopify;
+        //   });
 
-          setnewShopifySalesMonthly(shopify[0].Shopify);
-        }
-        if (!newChannelList.includes("Shopify")) {
-          setnewShopifySalesMonthly(0);
-        }
-        let mer = [];
-        if (newChannelList.includes("MercadoLibre")) {
-          mer = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.MercadoLibre;
-          });
+        //   setnewShopifySalesMonthly(shopify[0].Shopify);
+        // }
+        // if (!newChannelList.includes("Shopify")) {
+        //   setnewShopifySalesMonthly(0);
+        // }
+        // let mer = [];
+        // if (newChannelList.includes("MercadoLibre")) {
+        //   mer = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.MercadoLibre;
+        //   });
 
-          setnewMercadoSalesMonthly(mer[0].MercadoLibre);
-        }
-        if (!newChannelList.includes("MercadoLibre")) {
-          setnewMercadoSalesMonthly(0);
-        }
-        let pari = [];
-        if (newChannelList.includes("Paris")) {
-          pari = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Paris;
-          });
+        //   setnewMercadoSalesMonthly(mer[0].MercadoLibre);
+        // }
+        // if (!newChannelList.includes("MercadoLibre")) {
+        //   setnewMercadoSalesMonthly(0);
+        // }
+        // let pari = [];
+        // if (newChannelList.includes("Paris")) {
+        //   pari = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Paris;
+        //   });
 
-          setnewParisSales(pari[0].Paris);
-        }
-        if (!newChannelList.includes("Paris")) {
-          setnewParisSales(0);
-        }
-        let exi = [];
-        if (newChannelList.includes("Exito")) {
-          exi = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.Exito;
-          });
+        //   setnewParisSales(pari[0].Paris);
+        // }
+        // if (!newChannelList.includes("Paris")) {
+        //   setnewParisSales(0);
+        // }
+        // let exi = [];
+        // if (newChannelList.includes("Exito")) {
+        //   exi = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.Exito;
+        //   });
 
-          setnewExitoSalesMonthly(exi[0].Exito);
-        }
-        if (!newChannelList.includes("Exito")) {
-          setnewExitoSalesMonthly(0);
-        }
-        let lista = [];
-        if (newChannelList.includes("ListaTienda")) {
-          lista = obj.resume.stackedSalesGraphByMonth.filter((item) => {
-            return item.ListaTienda;
-          });
+        //   setnewExitoSalesMonthly(exi[0].Exito);
+        // }
+        // if (!newChannelList.includes("Exito")) {
+        //   setnewExitoSalesMonthly(0);
+        // }
+        // let lista = [];
+        // if (newChannelList.includes("ListaTienda")) {
+        //   lista = obj.resume.stackedSalesGraphByMonth.filter((item) => {
+        //     return item.ListaTienda;
+        //   });
 
-          setnewListaSales(lista[0].ListaTienda);
-        }
-        if (!newChannelList.includes("ListaTienda")) {
-          setnewListaSales(0);
-        }
+        //   setnewListaSales(lista[0].ListaTienda);
+        // }
+        // if (!newChannelList.includes("ListaTienda")) {
+        //   setnewListaSales(0);
+        // }
         setisStackedGraphLoading(false);
       })
       .catch((error) => console.log("error", error));
@@ -695,6 +876,7 @@ function MtdiReports() {
   };
   const setResumenGraph = () => {
     console.log(newData);
+    console.log(cR);
     const labels = newData.map((item) => {
       return item.channel;
     });
@@ -886,12 +1068,13 @@ function MtdiReports() {
       redirect: "follow",
     };
 
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=0&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
+        console.log(obj);
         setnewData(obj.resume.lineAndBarChart);
         setisPieChartLoading(false);
       })
@@ -1065,13 +1248,13 @@ function MtdiReports() {
       .then((result) => {
         var obj = JSON.parse(result);
         let allChannelsArray = [];
-        if(localStorage.getItem("ut")==="1"){
-           allChannelsArray = obj[4].stores.map((item) => {
+        if (localStorage.getItem("ut") === "1") {
+          allChannelsArray = obj[4].stores.map((item) => {
             return item.channels;
           });
         }
 
-        if(localStorage.getItem("ut")==="2"){
+        if (localStorage.getItem("ut") === "2") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
@@ -1094,14 +1277,14 @@ function MtdiReports() {
           console.log(finalKamStore);
           var flattenedKamStores = [].concat.apply([], finalKamStore);
           console.log(flattenedKamStores);
-         allChannelsArray = flattenedKamStores.map((item) => {
-          return item.channels;
-        });
+          allChannelsArray = flattenedKamStores.map((item) => {
+            return item.channels;
+          });
           // allChannelsArray.push(flattenedKamStores);
-        //  setcR(flattenedKamStores);
-        //   allChannelsArray = kamCountry[0].stores.map((item) => {
-        //   return item.channels;
-        // });
+          //  setcR(flattenedKamStores);
+          //   allChannelsArray = kamCountry[0].stores.map((item) => {
+          //   return item.channels;
+          // });
         }
         // let allChannelsArray = obj[4].stores.map((item) => {
         //   return item.channels;
@@ -1118,10 +1301,10 @@ function MtdiReports() {
           }
           return null;
         });
-     
-          setcR(resArr);
-    
-        
+
+        setcR(resArr);
+        //setinitialChannelSalesGraph(resArr);
+
         //setcR(resArr);
         let allSalesChannels = flattened.map((item) => {
           return item.channel;
@@ -1134,8 +1317,8 @@ function MtdiReports() {
         ) {
           return inputArray.indexOf(item) == index;
         });
-console.log(salesChannelList);
-//setcR(salesChannelList);
+        console.log(salesChannelList);
+        //setcR(salesChannelList);
         setchannels(salesChannelList);
         if (localStorage.getItem("ut") === "2") {
           let kamCountryArray = localStorage.getItem("ct");
@@ -1190,8 +1373,7 @@ console.log(salesChannelList);
       }
       var flattened = [].concat.apply([], finalKamStore);
       console.log(flattened);
-       setfilteredStoreData(flattened);
-  
+      setfilteredStoreData(flattened);
     }
     if (localStorage.getItem("ut") === "1") {
       setfilteredStoreData(val[0].stores);
@@ -1232,7 +1414,7 @@ console.log(salesChannelList);
     console.log(filteredChannelArray);
     if (filteredChannelArray.length !== 0) {
       console.log("hi");
-      setcR(filteredChannelArray);
+      // setcR(filteredChannelArray);
       setchannelId(x);
     }
   };
@@ -1240,6 +1422,7 @@ console.log(salesChannelList);
     console.log(mixedChartsalesData);
     setChannelSelectedForDelete(item);
     let x = cR.filter((i) => i !== item);
+
     setcR(x);
   };
   const showFiltersHandler = () => {
