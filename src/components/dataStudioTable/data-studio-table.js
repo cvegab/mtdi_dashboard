@@ -2,24 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import MaterialTable from "material-table";
 import SplashScreen from "components/UI/splash-screen";
 import "./data-studio-table.css";
-// import '../ClientsTable/ClientsTable.css';
 import {
   Button,
   Container,
   Modal,
   ModalHeader,
-  Form,
-  FormGroup,
-  // FormCheck,
 } from "reactstrap";
-import {
-  FormCheck,
-  FormControl,
-  FormLabel,
-  FormSelect,
-  ModalBody,
-} from "react-bootstrap";
-// import { Form, FormGroup } from 'reactstrap'
+
 import editProfile from "../../assets/img/edit-profile.png";
 import deleteProfile from "../../assets/img/delete-profile.png";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
@@ -32,7 +21,8 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
 import SaveAlt from "@material-ui/icons/SaveAlt";
-import NewUserProfileModal from "components/NewDataStudioModal/new-data-studio-modal";
+import NewDataStudioModal from "components/NewDataStudioModal/new-data-studio-modal";
+import EditDataStudioModal from "components/EditDataStudioModal/EditDataStudioModal";
 import DeleteProfileModal from "deleteProfileModal/delete-profile-modal";
 
 const DataStudioTableHandler = () => {
@@ -52,11 +42,11 @@ const DataStudioTableHandler = () => {
       <ChevronLeft {...props} ref={ref} />
     )),
   };
-  const [profileInfo, setProfileInfo] = useState("");
+  const [dataTiendaInfo, setDataTiendaInfo] = useState("");
   const [isLoading, setisLoading] = useState(false);
-  const [tableProfileData, settableProfileData] = useState([]);
+  const [tableDataStudio, settableDataStudio] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [showDeleteModal, setshowDeleteModal] = useState(false);
+  
   useEffect(() => {
     fetchProfileDetails();
   }, []);
@@ -86,14 +76,14 @@ const DataStudioTableHandler = () => {
       }
       const data = await response.json();
       console.log(data);
-      settableProfileData(data);
+      settableDataStudio(data);
       setisLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const addProfileDetails = () => {
+  const addNewDataStudio = () => {
     setShowModal(true);
   };
   const editModalHandler = () => {
@@ -108,45 +98,9 @@ const DataStudioTableHandler = () => {
   const columns = [
     {
       title: "Tienda",
-      field: "id",
+      field: "tienda",
       width: "13%",
-      render: (rowData) => {
-        if (rowData != undefined) {
-          if (rowData.id === 1) {
-            return <div>Softys Colombia</div>;
-          }
-          if (rowData.id === 2) {
-            return <div>Demaría</div>;
-          }
-          if (rowData.id === 3) {
-            return <div>Unilever</div>;
-          }
-          if (rowData.id === 4) {
-            return <div>Faber Castell</div>;
-          }
-          if (rowData.id === 5) {
-            return <div>Mercado Carozzi</div>;
-          }
-          if (rowData.id === 6) {
-            return <div>SC Johnson</div>;
-          }
-          if (rowData.id === 7) {
-            return <div>Softys Televenta</div>;
-          }
-          if (rowData.id === 8) {
-            return <div>CCU</div>;
-          }
-          if (rowData.id === 9) {
-            return <div>Softys</div>;
-          }
-          if (rowData.id === 10) {
-            return <div>Enex</div>;
-          }
-          if (rowData.id === 11) {
-            return <div>Carozzi Fs</div>;
-          }
-        }
-      },
+
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -200,13 +154,7 @@ const DataStudioTableHandler = () => {
   return (
     <>
     
-    {isLoading && <SplashScreen></SplashScreen>}
-      {showDeleteModal && (
-        <DeleteProfileModal
-          onhideModal={hideDeleteModalHandler}
-          profileInfo={profileInfo}
-        ></DeleteProfileModal>
-      )}
+
 
       {showEditProfileModal && (
         <Modal isOpen={showEditProfileModal}>
@@ -227,10 +175,10 @@ const DataStudioTableHandler = () => {
             </div>
           </ModalHeader>
 
-          <NewUserProfileModal
-            flag={1}
-            profileInfo={profileInfo}
-          ></NewUserProfileModal>
+          <EditDataStudioModal
+            
+            dataTiendaInfo={dataTiendaInfo}
+          ></EditDataStudioModal>
         </Modal>
       )}
 
@@ -243,7 +191,7 @@ const DataStudioTableHandler = () => {
         <br />
         <Button
           color="primary"
-          onClick={addProfileDetails}
+          onClick={addNewDataStudio}
           style={{ float: "right", padding: "16px" }}
         >
           {" "}
@@ -253,10 +201,10 @@ const DataStudioTableHandler = () => {
         <br />
         <br />
         <MaterialTable
-          onRowClick={(evt, selectedRow) => setProfileInfo(selectedRow)}
+          onRowClick={(evt, selectedRow) => setDataTiendaInfo(selectedRow)}
           icons={tableIcons}
           title=""
-          data={tableProfileData}
+          data={tableDataStudio}
           columns={columns}
           options={{
             columnsButton: true,
@@ -288,7 +236,7 @@ const DataStudioTableHandler = () => {
             </div>
           </ModalHeader>
 
-          <NewUserProfileModal flag={0} profileInfo=""></NewUserProfileModal>
+          <NewDataStudioModal flag={0} dataTiendaInfo=""></NewDataStudioModal>
         </Modal>
       )}
     </>

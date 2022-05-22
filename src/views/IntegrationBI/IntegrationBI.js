@@ -37,10 +37,7 @@ const IntegrationBI = () => {
           </p>
 
           <Container>
-
-        <DataStudioTable/>
-     
-
+            <DataStudioTable/>
           </Container>
 
 
