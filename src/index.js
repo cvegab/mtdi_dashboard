@@ -16,14 +16,14 @@ import App from "App";
 
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect to="/admin/dashboard" />
-    </Switch>
-  </BrowserRouter>,
-    // <App />,
+  // <BrowserRouter>
+  //   <Switch>
+  //     <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+  //     <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+  //     <Redirect to="/admin/dashboard" />
+  //   </Switch>
+  // </BrowserRouter>,
+     <App />,
 
   document.getElementById("root")
 );

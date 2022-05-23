@@ -112,6 +112,8 @@ const MtdiTable = (props) => {
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
   const [searchOrderId, setsearchOrderId] = useState("");
+  const [userType, setuserType] = useState("");
+  const [kamCountries, setkamCountries] = useState("");
   var stepsDesk = [];
   var a = navigator.userAgent;
   var agents = new Array(
@@ -444,11 +446,21 @@ const MtdiTable = (props) => {
       },
     ];
   }
-
+ 
   useEffect(() => {
     // setfirstName(localStorage.getItem("first"));
+    console.log(localStorage.getItem("ut"));
+    if(localStorage.getItem("ut")==='1'){
+      setstoreId(0);
+    }
+    if(localStorage.getItem("ut")==='2'){
+      setstoreId(1,2,3);
+    }
     fetchOrderData();
+   
     fetchFilterData();
+
+    //fetchFilterData();
   }, []);
   const fetchFilterData = async () => {
     var myHeaders = new Headers();
@@ -470,12 +482,33 @@ const MtdiTable = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+       
         var obj = JSON.parse(result);
 
         let countryArray = [];
-
-        setfilteredCountryData(obj);
+        console.log(obj);
+        if (localStorage.getItem("ut") === "2") {
+          let kamCountryArray = localStorage.getItem("ct");
+          console.log(kamCountryArray);
+          const kamCountry = obj.filter((item) => {
+            return item.value === Number(kamCountryArray);
+          });
+          console.log(kamCountry);
+          setfilteredCountryData(kamCountry);
+        }
+        if (localStorage.getItem("ut") === "3") {
+          let clientCountryArray = localStorage.getItem("ct");
+          console.log(clientCountryArray);
+          const clientCountry = obj.filter((item) => {
+            return item.value === Number(clientCountryArray);
+          });
+          console.log(clientCountry);
+          setfilteredCountryData(clientCountry);
+        }
+        if(localStorage.getItem("ut")==="1"){
+          setfilteredCountryData(obj);
+        }
+        // setfilteredCountryData(obj);
         // setfilteredStoreData(y[0].stores);
       })
       .catch((error) => console.log("error", error));
@@ -526,9 +559,33 @@ const MtdiTable = (props) => {
       redirect: "follow",
       headers: myHeaders,
     };
+    let rolesUrl='';
+    if(localStorage.getItem("ut")==='1'){
+       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+    }
+    if(localStorage.getItem("ut")==='2'){
+      const kamstore = localStorage.getItem("st");
+      console.log(kamstore);
+      var b = kamstore.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      console.log(b);
+      let storeId=b;
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+   }
+   if(localStorage.getItem("ut")==='3'){
+    const Clientstore = localStorage.getItem("st");
+    console.log(Clientstore);
+    var b = Clientstore.split(",").map(function (item) {
+      return parseInt(item, 10);
+    });
+    console.log(b);
+    let storeId=b;
+    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+ }
     try {
       const response = await fetch(
-        (url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`),
+        (url = rolesUrl),
         requestOptions
       );
       if (!response.ok) {
@@ -572,7 +629,7 @@ const MtdiTable = (props) => {
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
-    let url = '';
+    let url = "";
     if (searchOrderId !== "") {
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`;
     } else {
@@ -674,21 +731,21 @@ const MtdiTable = (props) => {
         color: "#FFF",
         fontSize: "12px",
       },
-      render: (rowData) =>{
-      
-          return ( <div> 
-                          <span
-                  style={{ cursor: "pointer" }}
-                  title="Mostrar DTE"
-                  className={classes.showPdf}
-                >
-                  {/* <a href={rowData.dte} target="_blank"> */}
-                    <img src={showPdf}  onClick={toggle2} />
-                </span>
-          </div> )
-       
-     }
-   },
+      render: (rowData) => {
+        return (
+          <div>
+            <span
+              style={{ cursor: "pointer" }}
+              title="Mostrar DTE"
+              className={classes.showPdf}
+            >
+              {/* <a href={rowData.dte} target="_blank"> */}
+              <img src={showPdf} onClick={toggle2} />
+            </span>
+          </div>
+        );
+      },
+    },
     {
       title: "Fecha de Orden",
       field: "fecha_creacion",
@@ -881,53 +938,55 @@ const MtdiTable = (props) => {
       field: "respuesta_wms",
       width: "15%",
       render: (rowData) => {
-        if(rowData.respuesta_wms != undefined){
-        if (rowData.respuesta_wms === "Error") {
-          return (
-            <div>
-              <span className={classes.stockError}>Error De Stock </span>
+        if (rowData.respuesta_wms != undefined) {
+          if (rowData.respuesta_wms === "Error") {
+            return (
+              <div>
+                <span className={classes.stockError}>Error De Stock </span>
 
-              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
-                {/* <img
+                <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                  {/* <img
                   src={wmsError}
                   title="Enviar DTE"
                   onClick={wmsModalHandler.bind(this, data)}
                 /> */}
-              </span>
-            </div>
-          );
-        }
-        if (rowData.respuesta_wms === "No enviado a WMS") {
-          return (
-            <div>
-              <span className={classes.integrated}>No enviado a WMS </span>
+                </span>
+              </div>
+            );
+          }
+          if (rowData.respuesta_wms === "No enviado a WMS") {
+            return (
+              <div>
+                <span className={classes.integrated}>No enviado a WMS </span>
 
-              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
-                {/* <img
+                <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                  {/* <img
               src={wmsError}
               title="Enviar DTE"
               onClick={wmsModalHandler.bind(this, data)}
             /> */}
-              </span>
-            </div>
-          );
-        }
-        if (rowData.respuesta_wms.includes('XML cargado correctamente') ) {
-          return (
-            <div>
-              <span className={classes.confirmado}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </span>
+              </div>
+            );
+          }
+          if (rowData.respuesta_wms.includes("XML cargado correctamente")) {
+            return (
+              <div>
+                <span className={classes.confirmado}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
 
-              <span style={{ marginLeft: "14px", cursor: "pointer" }}>
-                {/* <img
+                <span style={{ marginLeft: "14px", cursor: "pointer" }}>
+                  {/* <img
           src={wmsError}
           title="Enviar DTE"
           onClick={wmsModalHandler.bind(this, data)}
         /> */}
-              </span>
-            </div>
-          );
+                </span>
+              </div>
+            );
+          }
         }
-      }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1025,26 +1084,34 @@ const MtdiTable = (props) => {
       field: "hub_fulfillment,hub_logo",
       width: "15%",
       render: (rowData) => {
-        if(rowData.hub_fulfillment != undefined ){
-        return (
-        
-          <div>
-            {rowData.hub_fulfillment !== 'Por definir' &&
-            <span style={{ whiteSpace: "nowrap" }}>
-            {rowData.hub_logo !== "No aplica" &&
-              <img style={{ paddingRight: "8px" }} src={rowData.hub_logo} width="40px" height="32px" />}
-            
-              {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
-              {rowData.hub_fulfillment}
-            </span>}
-            {rowData.hub_fulfillment === 'Por definir' &&
-            <span style={{ whiteSpace: "nowrap" }}>  {" "}
-          &nbsp;&nbsp;&nbsp;<span>    </span>
-              {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
-              {rowData.hub_fulfillment}
-            </span>}
-          </div>
-        );
+        if (rowData.hub_fulfillment != undefined) {
+          return (
+            <div>
+              {rowData.hub_fulfillment !== "Por definir" && (
+                <span style={{ whiteSpace: "nowrap" }}>
+                  {rowData.hub_logo !== "No aplica" && (
+                    <img
+                      style={{ paddingRight: "8px" }}
+                      src={rowData.hub_logo}
+                      width="40px"
+                      height="32px"
+                    />
+                  )}
+
+                  {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
+                  {rowData.hub_fulfillment}
+                </span>
+              )}
+              {rowData.hub_fulfillment === "Por definir" && (
+                <span style={{ whiteSpace: "nowrap" }}>
+                  {" "}
+                  &nbsp;&nbsp;&nbsp;<span> </span>
+                  {/* <img style={{ paddingRight: "8px" }} src={chileExpress} /> */}
+                  {rowData.hub_fulfillment}
+                </span>
+              )}
+            </div>
+          );
         }
       },
       headerStyle: {
@@ -1058,16 +1125,22 @@ const MtdiTable = (props) => {
       field: "courier,courier_logo",
       width: "15%",
       render: (rowData) => {
-        if(rowData.courier != undefined ){
-        return (
-          <div>
-            <span style={{ whiteSpace: "nowrap" }}>
-              {rowData.courier_logo !== "No aplica" &&
-              <img style={{ paddingRight: "8px"}} src={rowData.courier_logo} width="40px" height="32px"/>}
-              {rowData.courier}
-            </span>
-          </div>
-        );
+        if (rowData.courier != undefined) {
+          return (
+            <div>
+              <span style={{ whiteSpace: "nowrap" }}>
+                {rowData.courier_logo !== "No aplica" && (
+                  <img
+                    style={{ paddingRight: "8px" }}
+                    src={rowData.courier_logo}
+                    width="40px"
+                    height="32px"
+                  />
+                )}
+                {rowData.courier}
+              </span>
+            </div>
+          );
         }
       },
 
@@ -1087,40 +1160,60 @@ const MtdiTable = (props) => {
             {rowData.courier_status === "No aplica" && (
               <span style={{ whiteSpace: "nowrap" }}>No aplica</span>
             )}
-             {rowData.courier_status === "Creado" && (
-              <span style={{ whiteSpace: "nowrap" }}>Creado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-              <img
-                style={{ paddingRight: "10px" }}
-                src={CourierStatus}
-                onClick={displayCourierModalHandler}/></span>
+            {rowData.courier_status === "Creado" && (
+              <span style={{ whiteSpace: "nowrap" }}>
+                Creado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                <img
+                  style={{ paddingRight: "10px" }}
+                  src={CourierStatus}
+                  onClick={displayCourierModalHandler}
+                />
+              </span>
             )}
-              {rowData.courier_status === "Listo para despacho - Impreso" && (
-              <span style={{ whiteSpace: "nowrap" }}>Listo para despacho &nbsp;
-              <img
-                style={{ paddingRight: "10px" }}
-                src={CourierStatus}
-                onClick={displayCourierModalHandler}/></span>
+            {rowData.courier_status === "Listo para despacho - Impreso" && (
+              <span style={{ whiteSpace: "nowrap" }}>
+                Listo para despacho &nbsp;
+                <img
+                  style={{ paddingRight: "10px" }}
+                  src={CourierStatus}
+                  onClick={displayCourierModalHandler}
+                />
+              </span>
             )}
-             {rowData.courier_status === "En Reparto"&& (
-              <span style={{ whiteSpace: "nowrap" }}>En Reparto &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-              <img
-                style={{ paddingRight: "10px" }}
-                src={CourierStatus}
-                onClick={displayCourierModalHandler}/></span>
+            {rowData.courier_status === "En Reparto" && (
+              <span style={{ whiteSpace: "nowrap" }}>
+                En Reparto &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;&nbsp;
+                <img
+                  style={{ paddingRight: "10px" }}
+                  src={CourierStatus}
+                  onClick={displayCourierModalHandler}
+                />
+              </span>
             )}
-              {rowData.courier_status === "En planta de origen" && (
-              <span style={{ whiteSpace: "nowrap" }}> En planta de origen &nbsp;
-              <img
-                style={{ paddingRight: "10px" }}
-                src={CourierStatus}
-                onClick={displayCourierModalHandler}/></span>
+            {rowData.courier_status === "En planta de origen" && (
+              <span style={{ whiteSpace: "nowrap" }}>
+                {" "}
+                En planta de origen &nbsp;
+                <img
+                  style={{ paddingRight: "10px" }}
+                  src={CourierStatus}
+                  onClick={displayCourierModalHandler}
+                />
+              </span>
             )}
-             {rowData.courier_status === "Entregado" && (
-              <span style={{ whiteSpace: "nowrap" }}> Entregado  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-              <img
-                style={{ paddingRight: "10px" }}
-                src={CourierStatus}
-                onClick={displayCourierModalHandler}/></span>
+            {rowData.courier_status === "Entregado" && (
+              <span style={{ whiteSpace: "nowrap" }}>
+                {" "}
+                Entregado &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;&nbsp;
+                <img
+                  style={{ paddingRight: "10px" }}
+                  src={CourierStatus}
+                  onClick={displayCourierModalHandler}
+                />
+              </span>
             )}
             {/* {rowData.estado_courier ==='Listo para despacho - Impreso' &&
              <span style={{ whiteSpace: "nowrap" }}>
@@ -1182,61 +1275,65 @@ const MtdiTable = (props) => {
       width: "20%",
 
       render: (rowData) => {
-        if(rowData.comprador != undefined ){
-        return (
-          // <div
-         
-          <div>
-            
-            <span
-              style={{
-                width: "0%",
-                float: "left",
-                whiteSpace: "nowrap",
-                fontSize: "12px",
-              }}
-            >
-              {rowData.comprador}
-              <br />
-              {rowData.rut}
-            </span>
-            <span
-              style={{ width: "14%", float: "right", whiteSpace: "nowrap",left:'80px' }}
-            >&nbsp;
-           
-              <img
-                style={{ float: "left" }}
-                src={Estado}
-                title="Cliente Info"
-                onClick={clientModalHandler}
-              />
-            </span>
-          </div>
-          //   style={{
-          //     overflow: "hidden",
-          //     whiteSpace: "nowrap",
-          //     fontSize: "10px",
-          //   }}
-          // >
-          //   {rowData.comprador}
-          //   <br />
-          //   <span style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
-          //     {rowData.rut}
-          //   </span>
+        if (rowData.comprador != undefined) {
+          return (
+            // <div
 
-          //   <span
-          //     style={{ marginLeft: "40%", cursor: "pointer", width: "20%" }}
-          //   >
-          //     <img
-          //       style={{ float: "left" }}
-          //       src={SiIcon}
-          //       title="Enviar DTE"
-          //       onClick={clientModalHandler}
-          //     />
-          //   </span>
-          // </div>
-        );
-            }
+            <div>
+              <span
+                style={{
+                  width: "0%",
+                  float: "left",
+                  whiteSpace: "nowrap",
+                  fontSize: "12px",
+                }}
+              >
+                {rowData.comprador}
+                <br />
+                {rowData.rut}
+              </span>
+              <span
+                style={{
+                  width: "14%",
+                  float: "right",
+                  whiteSpace: "nowrap",
+                  left: "80px",
+                }}
+              >
+                &nbsp;
+                <img
+                  style={{ float: "left" }}
+                  src={Estado}
+                  title="Cliente Info"
+                  onClick={clientModalHandler}
+                />
+              </span>
+            </div>
+            //   style={{
+            //     overflow: "hidden",
+            //     whiteSpace: "nowrap",
+            //     fontSize: "10px",
+            //   }}
+            // >
+            //   {rowData.comprador}
+            //   <br />
+            //   <span style={{ overflow: "hidden", whiteSpace: "nowrap" }}>
+            //     {rowData.rut}
+            //   </span>
+
+            //   <span
+            //     style={{ marginLeft: "40%", cursor: "pointer", width: "20%" }}
+            //   >
+            //     <img
+            //       style={{ float: "left" }}
+            //       src={SiIcon}
+            //       title="Enviar DTE"
+            //       onClick={clientModalHandler}
+            //     />
+            //   </span>
+            // </div>
+          );
+        }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1275,11 +1372,51 @@ const MtdiTable = (props) => {
         return item;
       }
     });
-    console.log(val);
     setcountryId(val[0].value);
-    setfilteredStoreData(val[0].stores);
+    if (localStorage.getItem("ut") === '2') {
+      const kamstore = localStorage.getItem("st");
+      console.log(kamstore);
+      var b = kamstore.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      console.log(b);
+      let finalKamStore = [];
+      for (let i = 0; i <= b.length - 1; i++) {
+        let x = val[0].stores.filter((item) => {
+          return item.value === b[i];
+        });
+        finalKamStore.push(x);
+      }
+      var flattened = [].concat.apply([], finalKamStore);
+      console.log(flattened);
+      setfilteredStoreData(flattened);
+      console.log(finalKamStore);
+    }
+if(localStorage.getItem("ut")==="1"){
+  setfilteredStoreData(val[0].stores);
+}
+if (localStorage.getItem("ut") === '3') {
+  const clientstore = localStorage.getItem("st");
+  console.log(clientstore);
+  var b = clientstore.split(",").map(function (item) {
+    return parseInt(item, 10);
+  });
+  console.log(b);
+  let finalclientStore = [];
+  for (let i = 0; i <= b.length - 1; i++) {
+    let x = val[0].stores.filter((item) => {
+      return item.value === b[i];
+    });
+    finalclientStore.push(x);
+  }
+  var flattened = [].concat.apply([], finalclientStore);
+  console.log(flattened);
+  setfilteredStoreData(flattened);
+  console.log(finalclientStore);
+}
+   
   };
-
+  
   const handleStoreChange = (event) => {
     setstore(event.target.value);
     //Get storeId from filteredStoreData
@@ -1421,6 +1558,7 @@ const MtdiTable = (props) => {
               >
                 País
               </h5>
+
               <Select
                 labelId="select-country"
                 id="select-country"
@@ -1439,11 +1577,6 @@ const MtdiTable = (props) => {
                 placeholder="&nbsp;&nbsp; Seleccione un país"
                 onChange={handleCountryChange}
               >
-                {/* {Array.from(new Set(data.map((obj) => obj.pais))).map(
-                (period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                }
-              )} */}
                 {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
                   (period) => {
                     return (
@@ -2006,53 +2139,52 @@ const MtdiTable = (props) => {
           onBeforeClose={enableBody}
         />
 
-       {/* Ballot Detail Modal  */}
+        {/* Ballot Detail Modal  */}
 
         <Modal isOpen={modalBallotDetails} toggle={toggle2} size="lg">
           <ModalHeader>
-            <div style={{display:"flex", justifyContent:"end"}}> 
-              <button 
+            <div style={{ display: "flex", justifyContent: "end" }}>
+              <button
                 style={{
-                  background:"none",
-                  position: "relative", 
-                  marginLeft:"14em", 
-                  color:"black", 
-                  border:"none" 
-                }} 
+                  background: "none",
+                  position: "relative",
+                  marginLeft: "14em",
+                  color: "black",
+                  border: "none",
+                }}
                 onClick={toggle2}
               >
                 x
-              </button> 
+              </button>
             </div>
           </ModalHeader>
           <BallotDetailModal purchaser={buyer} />
 
-          
           <div class="text-center">
-                <button
-                    id="bttnSubmit"
-                    type="submit"
-                    style={{
-                    backgroundColor: "#1D308E",
-                    textAlign: "center",
-                    color: "white",
-                    width: "296px",
-                    height: "64px",
-                    padding: "22px 81px",
-                    borderRadius: "33px",
-                    color: "#FFFFFF",
-                    marginLeft: "1em",
-                    textTransform: "none",
-                    fontWeight: "bold",
-                    border: "0",
-                    marginTop:"1em"
-                    }} 
-                    onClick={toggle2}
-                >
-                    Cerrar
-                </button>
-            </div>
-            <br/>
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#1D308E",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+                marginTop: "1em",
+              }}
+              onClick={toggle2}
+            >
+              Cerrar
+            </button>
+          </div>
+          <br />
         </Modal>
       </div>
     </React.Fragment>
