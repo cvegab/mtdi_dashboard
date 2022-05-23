@@ -1422,7 +1422,7 @@ if(lista.length!==0){
           });
         }
 
-        if (localStorage.getItem("ut") === "2" || "3") {
+        if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
@@ -1465,7 +1465,7 @@ if(lista.length!==0){
           }
           return null;
         });
-
+console.log(resArr);
         setcR(resArr);
         //setinitialChannelSalesGraph(resArr);
 
@@ -1484,7 +1484,7 @@ if(lista.length!==0){
         console.log(salesChannelList);
         //setcR(salesChannelList);
         setchannels(salesChannelList);
-        if (localStorage.getItem("ut") === "2"||"3") {
+        if (localStorage.getItem("ut") === "2"||localStorage.getItem("ut") === "3") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
@@ -1521,7 +1521,7 @@ if(lista.length!==0){
       }
     });
     setcountryId(val[0].value);
-    if (localStorage.getItem("ut") === "2"||"3") {
+    if (localStorage.getItem("ut") === "2"||localStorage.getItem("ut") === "3") {
       const kamstore = localStorage.getItem("st");
       console.log(kamstore);
       var b = kamstore.split(",").map(function (item) {
@@ -1558,11 +1558,12 @@ if(lista.length!==0){
     });
 
     const selectedChannelsArray = selectedStoreData[0].channels;
-    console.log(selectedChannelsArray);
+  
 
     const selectedChannels = selectedChannelsArray.map((item) => {
       return item;
     });
+ 
     setfilteredChannelArray(selectedChannels);
     displaysalesChannelHandler();
   };
@@ -1578,7 +1579,7 @@ if(lista.length!==0){
     console.log(filteredChannelArray);
     if (filteredChannelArray.length !== 0) {
       console.log("hi");
-      // setcR(filteredChannelArray);
+       setcR(filteredChannelArray);
       setchannelId(x);
     }
   };

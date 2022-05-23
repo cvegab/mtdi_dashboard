@@ -121,7 +121,7 @@ const DataStudio = () => {
       }
     });
     console.log(val[0]);
-    if (localStorage.getItem("ut") === "2" || "3") {
+    if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
       const kamstore = localStorage.getItem("st");
       console.log(kamstore);
       var b = kamstore.split(",").map(function (item) {
@@ -204,10 +204,12 @@ const DataStudio = () => {
     };
     let url = "";
     if (localStorage.getItem("ut") === "1") {
-      
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=2`;
+      console.log('HI USER')
+      const ID= 2;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${ID}`;
     }
-    if (localStorage.getItem("ut") === "2" || "3") {
+    if (localStorage.getItem("ut") === "2") {
+      console.log("oh noo");
       let userStoreId = localStorage.getItem("st");
       var b = userStoreId.split(",").map(function (item) {
         return parseInt(item, 10);
@@ -216,6 +218,17 @@ const DataStudio = () => {
       console.log(parseduserStoreId);
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${parseduserStoreId}`;
     }
+    if (localStorage.getItem("ut") === "3") {
+      console.log("oh noo");
+      let userStoreId = localStorage.getItem("st");
+      var b = userStoreId.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      let parseduserStoreId = b[0];
+      console.log(parseduserStoreId);
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${parseduserStoreId}`;
+    }
+    console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -249,7 +262,7 @@ const DataStudio = () => {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
-        if (localStorage.getItem("ut") === "2" || "3") {
+        if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
