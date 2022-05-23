@@ -1521,7 +1521,7 @@ if(lista.length!==0){
       }
     });
     setcountryId(val[0].value);
-    if (localStorage.getItem("ut") === "2") {
+    if (localStorage.getItem("ut") === "2"||"3") {
       const kamstore = localStorage.getItem("st");
       console.log(kamstore);
       var b = kamstore.split(",").map(function (item) {
