@@ -496,6 +496,15 @@ const MtdiTable = (props) => {
           console.log(kamCountry);
           setfilteredCountryData(kamCountry);
         }
+        if (localStorage.getItem("ut") === "3") {
+          let clientCountryArray = localStorage.getItem("ct");
+          console.log(clientCountryArray);
+          const clientCountry = obj.filter((item) => {
+            return item.value === Number(clientCountryArray);
+          });
+          console.log(clientCountry);
+          setfilteredCountryData(clientCountry);
+        }
         if(localStorage.getItem("ut")==="1"){
           setfilteredCountryData(obj);
         }
