@@ -1422,7 +1422,7 @@ if(lista.length!==0){
           });
         }
 
-        if (localStorage.getItem("ut") === "2") {
+        if (localStorage.getItem("ut") === "2" || "3") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
@@ -1448,11 +1448,7 @@ if(lista.length!==0){
           allChannelsArray = flattenedKamStores.map((item) => {
             return item.channels;
           });
-          // allChannelsArray.push(flattenedKamStores);
-          //  setcR(flattenedKamStores);
-          //   allChannelsArray = kamCountry[0].stores.map((item) => {
-          //   return item.channels;
-          // });
+      
         }
         // let allChannelsArray = obj[4].stores.map((item) => {
         //   return item.channels;
@@ -1488,7 +1484,7 @@ if(lista.length!==0){
         console.log(salesChannelList);
         //setcR(salesChannelList);
         setchannels(salesChannelList);
-        if (localStorage.getItem("ut") === "2") {
+        if (localStorage.getItem("ut") === "2"||"3") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
