@@ -106,7 +106,7 @@ const DataStudio = () => {
   const [storeId, setstoreId] = useState(0);
   const [iframeArray, setiframeArray] = useState([]);
   const [iframeUrl, setiframeUrl] = useState(
-    "https://datastudio.google.com/embed/reporting/206e8151-91f8-4aa8-ab1c-648dac4f837f/page/RkYTC"
+    // "https://datastudio.google.com/embed/reporting/206e8151-91f8-4aa8-ab1c-648dac4f837f/page/RkYTC"
   );
   useEffect(() => {
     fetchFilterData();
@@ -121,7 +121,7 @@ const DataStudio = () => {
       }
     });
    console.log(val[0]);
-   if (localStorage.getItem("ut") === '2') {
+   if (localStorage.getItem("ut") === '2'||'3') {
     const kamstore = localStorage.getItem("st");
     console.log(kamstore);
     var b = kamstore.split(",").map(function (item) {
@@ -158,11 +158,44 @@ setfilteredStoreData(val[0].stores);
   };
   const applyIframes = () => {
     console.log(storeId);
-    const selectedIframe = iframeArray.filter((item) => {
-      return storeId === item.id;
-    });
-    console.log(selectedIframe[0].datastudio_iframe);
-    setiframeUrl(selectedIframe[0].datastudio_iframe);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+  let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${storeId}`;
+    // if(localStorage.getItem("ut")==='1'){
+    //   url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=2`
+    // }
+    // if(localStorage.getItem("ut")==='2'||'3'){
+    //   url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=3`
+    // }
+    fetch(
+      url,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        let ob = JSON.parse(result);
+        console.log(ob.datastudio_iframe);
+        setiframeUrl(ob.datastudio_iframe);
+       // console.log(JSON.parse(result[0].datastudio_iframe));
+        //setiframeArray(JSON.parse(result));
+      })
+      .catch((error) => console.log("error", error));
+    // const selectedIframe = iframeArray.filter((item) => {
+    //   return storeId === item.id;
+    // });
+    // console.log(selectedIframe[0].datastudio_iframe);
+    // setiframeUrl(selectedIframe[0].datastudio_iframe);
   };
   const fetchIframes = () => {
     var myHeaders = new Headers();
@@ -177,15 +210,25 @@ setfilteredStoreData(val[0].stores);
       headers: myHeaders,
       redirect: "follow",
     };
-
+  let url = '';
+    if(localStorage.getItem("ut")==='1'){
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=2`
+    }
+    if(localStorage.getItem("ut")==='2'||'3'){
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=3`
+    }
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=0",
+      url,
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(JSON.parse(result));
-        setiframeArray(JSON.parse(result));
+        console.log(result);
+        let ob = JSON.parse(result);
+        console.log(ob.datastudio_iframe);
+        setiframeUrl(ob.datastudio_iframe);
+       // console.log(JSON.parse(result[0].datastudio_iframe));
+        //setiframeArray(JSON.parse(result));
       })
       .catch((error) => console.log("error", error));
   };
@@ -211,7 +254,7 @@ setfilteredStoreData(val[0].stores);
       .then((result) => {
        
         var obj = JSON.parse(result);
-        if (localStorage.getItem("ut") === "2") {
+        if (localStorage.getItem("ut") === "2"||"3") {
           let kamCountryArray = localStorage.getItem("ct");
           console.log(kamCountryArray);
           const kamCountry = obj.filter((item) => {
