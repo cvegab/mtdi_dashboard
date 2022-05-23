@@ -564,6 +564,16 @@ const MtdiTable = (props) => {
       let storeId=b;
       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
    }
+   if(localStorage.getItem("ut")==='3'){
+    const Clientstore = localStorage.getItem("st");
+    console.log(Clientstore);
+    var b = Clientstore.split(",").map(function (item) {
+      return parseInt(item, 10);
+    });
+    console.log(b);
+    let storeId=b;
+    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+ }
     try {
       const response = await fetch(
         (url = rolesUrl),
