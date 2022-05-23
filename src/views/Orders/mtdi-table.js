@@ -1395,12 +1395,28 @@ const MtdiTable = (props) => {
 if(localStorage.getItem("ut")==="1"){
   setfilteredStoreData(val[0].stores);
 }
+if (localStorage.getItem("ut") === '3') {
+  const clientstore = localStorage.getItem("st");
+  console.log(clientstore);
+  var b = clientstore.split(",").map(function (item) {
+    return parseInt(item, 10);
+  });
+  console.log(b);
+  let finalclientStore = [];
+  for (let i = 0; i <= b.length - 1; i++) {
+    let x = val[0].stores.filter((item) => {
+      return item.value === b[i];
+    });
+    finalclientStore.push(x);
+  }
+  var flattened = [].concat.apply([], finalclientStore);
+  console.log(flattened);
+  setfilteredStoreData(flattened);
+  console.log(finalclientStore);
+}
    
   };
-  const handleKamCountryChange = (event) => {
-    console.log(event.target.value);
-    setcountry(event.target.value);
-  };
+  
   const handleStoreChange = (event) => {
     setstore(event.target.value);
     //Get storeId from filteredStoreData
