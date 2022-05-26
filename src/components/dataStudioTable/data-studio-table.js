@@ -176,7 +176,6 @@ const DataStudioTableHandler = () => {
           </ModalHeader>
 
           <EditDataStudioModal
-            
             dataTiendaInfo={dataTiendaInfo}
           ></EditDataStudioModal>
         </Modal>
@@ -236,7 +235,7 @@ const DataStudioTableHandler = () => {
             </div>
           </ModalHeader>
 
-          <NewDataStudioModal flag={0} dataTiendaInfo=""></NewDataStudioModal>
+          <NewDataStudioModal />
         </Modal>
       )}
     </>
