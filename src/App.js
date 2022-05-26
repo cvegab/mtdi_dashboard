@@ -106,7 +106,7 @@ const App = () => {
         const obj = JSON.parse(result);
         console.log(obj);
       console.log(obj.user.first_name);
-        if (obj.first_name !== undefined) {
+        if (obj.user.first_name !== undefined) {
           localStorage.setItem("first", obj.user.first_name);
           setfn(localStorage.setItem("first", obj.user.first_name));
           // localStorage.setItem("dtm", userName);
