@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Select, MenuItem } from "@material-ui/core";
+import { Select, MenuItem, unstable_createMuiStrictModeTheme } from "@material-ui/core";
 import {
   Button,
   Col,
@@ -105,9 +105,9 @@ const DataStudio = () => {
   const [filteredStoreData, setfilteredStoreData] = useState([]);
   const [storeId, setstoreId] = useState(0);
   const [iframeArray, setiframeArray] = useState([]);
-  const [iframeUrl, setiframeUrl] = useState(
-    "https://datastudio.google.com/embed/reporting/206e8151-91f8-4aa8-ab1c-648dac4f837f/page/RkYTC"
-  );
+  const [iframeUrl, setiframeUrl] =
+    useState();
+    // "https://datastudio.google.com/embed/reporting/206e8151-91f8-4aa8-ab1c-648dac4f837f/page/RkYTC"
   useEffect(() => {
     fetchFilterData();
     fetchIframes();
@@ -120,9 +120,30 @@ const DataStudio = () => {
         return item;
       }
     });
-    console.log(val[0].stores);
-
-    setfilteredStoreData(val[0].stores);
+    console.log(val[0]);
+    if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
+      const kamstore = localStorage.getItem("st");
+      console.log(kamstore);
+      var b = kamstore.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      console.log(b);
+      let finalKamStore = [];
+      for (let i = 0; i <= b.length - 1; i++) {
+        let x = val[0].stores.filter((item) => {
+          return item.value === b[i];
+        });
+        finalKamStore.push(x);
+      }
+      var flattened = [].concat.apply([], finalKamStore);
+      console.log(flattened);
+      setfilteredStoreData(flattened);
+      console.log(finalKamStore);
+    }
+    if (localStorage.getItem("ut") === "1") {
+      setfilteredStoreData(val[0].stores);
+    }
+    //setfilteredStoreData(val[0].stores);
   };
   const handleStoreChange = (event) => {
     setstore(event.target.value);
@@ -137,11 +158,36 @@ const DataStudio = () => {
   };
   const applyIframes = () => {
     console.log(storeId);
-    const selectedIframe = iframeArray.filter((item) => {
-      return storeId === item.id;
-    });
-    console.log(selectedIframe[0].datastudio_iframe);
-    setiframeUrl(selectedIframe[0].datastudio_iframe);
+    var myHeaders = new Headers();
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append(
+      "Authorization",
+      "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${storeId}`;
+
+    fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        let ob = JSON.parse(result);
+        console.log(ob.datastudio_iframe);
+        setiframeUrl(ob.datastudio_iframe);
+        // console.log(JSON.parse(result[0].datastudio_iframe));
+        //setiframeArray(JSON.parse(result));
+      })
+      .catch((error) => console.log("error", error));
+    // const selectedIframe = iframeArray.filter((item) => {
+    //   return storeId === item.id;
+    // });
+    // console.log(selectedIframe[0].datastudio_iframe);
+    // setiframeUrl(selectedIframe[0].datastudio_iframe);
   };
   const fetchIframes = () => {
     var myHeaders = new Headers();
@@ -156,15 +202,42 @@ const DataStudio = () => {
       headers: myHeaders,
       redirect: "follow",
     };
-
-    fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=0",
-      requestOptions
-    )
+    let url = "";
+    if (localStorage.getItem("ut") === "1") {
+      console.log('HI USER')
+      const ID= 2;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${ID}`;
+    }
+    if (localStorage.getItem("ut") === "2") {
+      console.log("oh noo");
+      let userStoreId = localStorage.getItem("st");
+      var b = userStoreId.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      let parseduserStoreId = b[0];
+      console.log(parseduserStoreId);
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${parseduserStoreId}`;
+    }
+    if (localStorage.getItem("ut") === "3") {
+      console.log("oh noo");
+      let userStoreId = localStorage.getItem("st");
+      var b = userStoreId.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      let parseduserStoreId = b[0];
+      console.log(parseduserStoreId);
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${parseduserStoreId}`;
+    }
+    console.log(url);
+    fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(JSON.parse(result));
-        setiframeArray(JSON.parse(result));
+        console.log(result);
+        let ob = JSON.parse(result);
+        console.log(ob.datastudio_iframe);
+        setiframeUrl(ob.datastudio_iframe);
+        // console.log(JSON.parse(result[0].datastudio_iframe));
+        //setiframeArray(JSON.parse(result));
       })
       .catch((error) => console.log("error", error));
   };
@@ -188,12 +261,20 @@ const DataStudio = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         var obj = JSON.parse(result);
+        if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
+          let kamCountryArray = localStorage.getItem("ct");
+          console.log(kamCountryArray);
+          const kamCountry = obj.filter((item) => {
+            return item.value === Number(kamCountryArray);
+          });
+          console.log(kamCountry);
+          setfilteredCountryData(kamCountry);
+        }
+        if (localStorage.getItem("ut") === "1") {
+          setfilteredCountryData(obj);
+        }
 
-        let countryArray = [];
-
-        setfilteredCountryData(obj);
         // setfilteredStoreData(y[0].stores);
       })
       .catch((error) => console.log("error", error));

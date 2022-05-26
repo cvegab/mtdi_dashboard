@@ -162,6 +162,9 @@ function Sidebar(props) {
     localStorage.removeItem("first");
     localStorage.removeItem("last");
     window.location.replace("https://pre-production.d36thtl3fmh3ww.amplifyapp.com/login");
+    localStorage.removeItem("dtm");
+    localStorage.removeItem("ut");
+    // window.location.replace("https://dev.instancelatam.com/");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
   };
   return (

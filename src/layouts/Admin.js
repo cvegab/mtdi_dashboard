@@ -25,6 +25,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 
 import routes from "routes.js";
+import kamRoutes from "kamRoutes";
 
 var ps;
 
@@ -56,22 +57,44 @@ function Admin(props) {
     mainPanel.current.scrollTop = 0;
   }, [location]);
   const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.collapse) {
-        return getRoutes(prop.views);
-      }
-      if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
-      } else {
-        return null;
-      }
-    });
+    console.log(props.userType);
+    if(props.userType === 'KAM'){
+      return kamRoutes.map((prop, key) => {
+        if (prop.collapse) {
+          return getRoutes(prop.views);
+        }
+        if (prop.layout === "/admin") {
+          return (
+            <Route
+              path={prop.layout + prop.path}
+              component={prop.component}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      });
+    }
+    if(props.userType === 'Administrator'){
+      return routes.map((prop, key) => {
+        if (prop.collapse) {
+          return getRoutes(prop.views);
+        }
+        if (prop.layout === "/admin") {
+          return (
+            <Route
+              path={prop.layout + prop.path}
+              component={prop.component}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      });
+    }
+   
   };
   const handleActiveClick = (color) => {
     setActiveColor(color);
@@ -90,15 +113,29 @@ function Admin(props) {
   };
   return (
     <div className="wrapper">
-      <Sidebar
+      {props.userType ==='KAM' &&    <Sidebar
+        {...props}
+        routes={kamRoutes}
+        bgColor='white'
+        activeColor='white'
+      />}
+       {props.userType ==='Administrator' &&    <Sidebar
         {...props}
         routes={routes}
         bgColor='white'
         activeColor='white'
-      />
+      />}
+   {/* <Sidebar
+        {...props}
+        routes={routes}
+        bgColor='white'
+        activeColor='white'
+      /> */}
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} handleMiniClick={handleMiniClick} />
-        <Switch>{getRoutes(routes)}</Switch>
+        {/* <Switch>{getRoutes(routes)}</Switch> */}
+       {props.userType === 'KAM' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
+        {props.userType === 'Administrator' &&  <Switch>{getRoutes(routes)}</Switch>}
         {
           // we don't want the Footer to be rendered on full screen maps page
           props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
