@@ -581,7 +581,7 @@ const MtdiTable = (props) => {
         return parseInt(item, 10);
       });
       console.log(b);
-      let storeId=b;
+      //let storeId=b;
       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
    }
    if(localStorage.getItem("ut")==='3'){
@@ -591,7 +591,7 @@ const MtdiTable = (props) => {
       return parseInt(item, 10);
     });
     console.log(b);
-    let storeId=b;
+    //let storeId=b;
     rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
  }
     try {
@@ -858,7 +858,8 @@ const MtdiTable = (props) => {
       field: "dte",
       width: "13%",
       render: (rowData) => {
-        if (rowData.dte != undefined) {
+        console.log(rowData.dte)
+        if (rowData.dte !== undefined) {
           if (rowData.dte === "") {
             return (
               <div>
