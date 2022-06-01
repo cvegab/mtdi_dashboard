@@ -71,6 +71,7 @@ registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [filtersApplied, setfiltersApplied] = useState(false);
+  const [userEmailApi, setuserEmailApi] = useState('');
   const [data, setData] = useState([]);
   const [pageCount, setpageCount] = useState(2);
   const [country, setcountry] = useState("");
@@ -446,8 +447,13 @@ const MtdiTable = (props) => {
       },
     ];
   }
- 
+ const fetchUserEmail = ()=>{
+   const userEmail = localStorage.getItem("dtm");
+   console.log(userEmail);
+   setuserEmailApi(userEmail);
+ }
   useEffect(() => {
+    fetchUserEmail();
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
     if(localStorage.getItem("ut")==='1'){
@@ -463,6 +469,8 @@ const MtdiTable = (props) => {
     //fetchFilterData();
   }, []);
   const fetchFilterData = async () => {
+    const userEmail=localStorage.getItem("dtm");
+  
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -543,6 +551,9 @@ const MtdiTable = (props) => {
   }, [endDate]);
 
   const fetchOrderData = async () => {
+    console.log(userEmailApi);
+    const userEmail=localStorage.getItem("dtm");
+    console.log(userEmail);
     let countryValue = 3;
     setisLoading(true);
     let url = "";
@@ -561,7 +572,7 @@ const MtdiTable = (props) => {
     };
     let rolesUrl='';
     if(localStorage.getItem("ut")==='1'){
-       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
     }
     if(localStorage.getItem("ut")==='2'){
       const kamstore = localStorage.getItem("st");
@@ -571,7 +582,7 @@ const MtdiTable = (props) => {
       });
       console.log(b);
       let storeId=b;
-      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
    }
    if(localStorage.getItem("ut")==='3'){
     const Clientstore = localStorage.getItem("st");
@@ -581,7 +592,7 @@ const MtdiTable = (props) => {
     });
     console.log(b);
     let storeId=b;
-    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
  }
     try {
       const response = await fetch(
@@ -629,11 +640,13 @@ const MtdiTable = (props) => {
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
+    const userEmail=localStorage.getItem("dtm");
+    console.log(userEmailApi);
     let url = "";
     if (searchOrderId !== "") {
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`;
     } else {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmailApi}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     }
     setisLoading(true);
     setfiltersApplied(true);
@@ -679,9 +692,10 @@ const MtdiTable = (props) => {
   };
 
   const incrementPageHandler = async () => {
+    const userEmail=localStorage.getItem("dtm");
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=${userEmail}&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     var myHeaders = new Headers();

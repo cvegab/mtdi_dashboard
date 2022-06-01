@@ -43,7 +43,7 @@ const App = () => {
 
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=test@test.cl",
+        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=sofiavatar@chambas.cl&zeek",
         requestOptions
       );
 
@@ -105,7 +105,7 @@ const App = () => {
       .then((result) => {
         const obj = JSON.parse(result);
         console.log(obj);
-      console.log(obj.user.first_name);
+     // console.log(obj.user.first_name);
         if (obj.user.first_name !== undefined) {
           localStorage.setItem("first", obj.user.first_name);
           setfn(localStorage.setItem("first", obj.user.first_name));
