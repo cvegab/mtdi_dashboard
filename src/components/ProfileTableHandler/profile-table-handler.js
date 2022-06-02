@@ -60,6 +60,7 @@ const ProfileTableHandler = () => {
     fetchProfileDetails();
   }, []);
   const fetchProfileDetails = async () => {
+    const userEmail=localStorage.getItem("dtm");
     setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
@@ -76,7 +77,7 @@ const ProfileTableHandler = () => {
 
     try {
       const response = await fetch(
-        "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=test@test.cl",
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/users?user=${userEmail}`,
         requestOptions
       );
 

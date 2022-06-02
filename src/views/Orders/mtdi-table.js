@@ -71,6 +71,7 @@ registerLocale("es", es);
 
 const MtdiTable = (props) => {
   const [filtersApplied, setfiltersApplied] = useState(false);
+  const [userEmailApi, setuserEmailApi] = useState('');
   const [data, setData] = useState([]);
   const [pageCount, setpageCount] = useState(2);
   const [country, setcountry] = useState("");
@@ -446,8 +447,13 @@ const MtdiTable = (props) => {
       },
     ];
   }
- 
+ const fetchUserEmail = ()=>{
+   const userEmail = localStorage.getItem("dtm");
+   console.log(userEmail);
+   setuserEmailApi(userEmail);
+ }
   useEffect(() => {
+    fetchUserEmail();
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
     if(localStorage.getItem("ut")==='1'){
@@ -463,6 +469,8 @@ const MtdiTable = (props) => {
     //fetchFilterData();
   }, []);
   const fetchFilterData = async () => {
+    const userEmail=localStorage.getItem("dtm");
+  
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
@@ -543,11 +551,14 @@ const MtdiTable = (props) => {
   }, [endDate]);
 
   const fetchOrderData = async () => {
+    console.log(userEmailApi);
+    const userEmail=localStorage.getItem("dtm");
+    console.log(userEmail);
     let countryValue = 3;
     setisLoading(true);
     let url = "";
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -561,7 +572,7 @@ const MtdiTable = (props) => {
     };
     let rolesUrl='';
     if(localStorage.getItem("ut")==='1'){
-       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
     }
     if(localStorage.getItem("ut")==='2'){
       const kamstore = localStorage.getItem("st");
@@ -570,8 +581,8 @@ const MtdiTable = (props) => {
         return parseInt(item, 10);
       });
       console.log(b);
-      let storeId=b;
-      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+      //let storeId=b;
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
    }
    if(localStorage.getItem("ut")==='3'){
     const Clientstore = localStorage.getItem("st");
@@ -580,8 +591,8 @@ const MtdiTable = (props) => {
       return parseInt(item, 10);
     });
     console.log(b);
-    let storeId=b;
-    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+    //let storeId=b;
+    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
  }
     try {
       const response = await fetch(
@@ -629,11 +640,13 @@ const MtdiTable = (props) => {
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
+    const userEmail=localStorage.getItem("dtm");
+    console.log(userEmailApi);
     let url = "";
     if (searchOrderId !== "") {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/order?orderNo=${searchOrderId}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`;
     } else {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     }
     setisLoading(true);
     setfiltersApplied(true);
@@ -641,7 +654,7 @@ const MtdiTable = (props) => {
     console.log(url);
 
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -679,13 +692,14 @@ const MtdiTable = (props) => {
   };
 
   const incrementPageHandler = async () => {
+    const userEmail=localStorage.getItem("dtm");
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/orders?qty=50&user=${userEmail}&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
       .toISOString()
       .slice(0, 10)}`;
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -844,7 +858,8 @@ const MtdiTable = (props) => {
       field: "dte",
       width: "13%",
       render: (rowData) => {
-        if (rowData.dte != undefined) {
+        console.log(rowData.dte)
+        if (rowData.dte !== undefined) {
           if (rowData.dte === "") {
             return (
               <div>
