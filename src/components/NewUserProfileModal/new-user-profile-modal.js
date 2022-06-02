@@ -165,7 +165,8 @@ const NewUserProfileModal = (props) => {
     };
     console.log(profile);
     setprofileDetails(profile);
-
+    const userEmail = localStorage.getItem("dtm");
+    console.log(userEmail);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -184,14 +185,14 @@ const NewUserProfileModal = (props) => {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=test@test.cl",
+      `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=sofiavatar@chambas.cl`,
       requestOptions
     )
       .then((response) => response.text())
       .then((result) =>{
         console.log(result);
         if (result === '"Success!"') {
-          window.location.reload();
+         // window.location.reload();
         }
        
       } )
@@ -223,7 +224,7 @@ const NewUserProfileModal = (props) => {
         </h3>
       )}
 
-      <Form>
+      <Form >
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
             Nombre:
@@ -231,7 +232,7 @@ const NewUserProfileModal = (props) => {
           <input
             className="input"
             type="name"
-            name="email"
+            name="name"
             id="exampleEmail"
             style={{ fontSize: "12px" }}
             // value={editedName}
