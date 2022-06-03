@@ -25,7 +25,7 @@ const NewUserProfileModal = (props) => {
   const fetchFilterData = async () => {
    
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -38,7 +38,7 @@ const NewUserProfileModal = (props) => {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())
@@ -109,7 +109,7 @@ const NewUserProfileModal = (props) => {
     };
     console.log(profile);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -122,7 +122,7 @@ const NewUserProfileModal = (props) => {
       body: JSON.stringify(profile),
       redirect: "follow",
     };
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${props.profileInfo.email}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/user?user=${props.profileInfo.email}`;
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -169,7 +169,7 @@ const NewUserProfileModal = (props) => {
     const userEmail = localStorage.getItem("dtm");
     console.log(userEmail);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -186,7 +186,7 @@ console.log(JSON.stringify(profile));
     };
 
     fetch(
-      `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=sofiavatar@chambas.cl`,
+      `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/user?user=sofiavatar@chambas.cl`,
       requestOptions
     )
       .then((response) => response.text())
