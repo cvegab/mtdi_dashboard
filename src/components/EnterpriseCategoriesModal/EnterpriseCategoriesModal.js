@@ -1,9 +1,12 @@
 import CheckboxDropdown from 'components/CheckboxDropdown/CheckboxDropdown'
-import React from 'react'
-import { FormCheck, FormControl, FormLabel, FormInput, ModalBody, Row, FormSelect } from 'react-bootstrap'
-import { Col, Form, FormGroup } from 'reactstrap'
+import React, { useState} from 'react'
+import {  ModalBody } from 'react-bootstrap'
+import { Form } from 'reactstrap'
 
-const EnterpriseCategoriesModal = () => {
+const EnterpriseCategoriesModal = (props) => {
+
+  // const [editMode, setEditMode] = useState(false);
+  
   return (
     <div>
     <ModalBody>
@@ -21,7 +24,7 @@ const EnterpriseCategoriesModal = () => {
         <Form >
           
           <div>
-            <CheckboxDropdown ></CheckboxDropdown>
+            <CheckboxDropdown /> 
             <br/><br/>
           </div>
 
@@ -44,8 +47,9 @@ const EnterpriseCategoriesModal = () => {
           fontWeight: "bold",
           border: "0",
         }}
+        //  onClick={(e) => e.preventDefault(setEditMode(true))}
       >
-        Editar Datos &nbsp;
+        Guardar cambios
         
       </button>
     </div>
