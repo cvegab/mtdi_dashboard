@@ -10,7 +10,7 @@ import CustomerMaintainer from "views/CustomerMaintainer/customer-maintainer";
 import EnterpriseManage from "views/EnterpriseManage/EnterpriseManage"
 import DataStudio from "views/dataStudio/data-studio";
 
-
+ 
 const routes = [
   // {
   //   path: "/onboarding",
@@ -30,6 +30,7 @@ const routes = [
     layout: "/admin",
   },
 
+ 
   {
     path: "/indicadores",
     name: "Indicadores",
@@ -38,7 +39,6 @@ const routes = [
     layout: "/admin",
 
    },
-
   // {
   //   path: "/charts",
   //   name: "Reportes",
@@ -55,15 +55,15 @@ const routes = [
     layout: "/admin",
 
    },
-  
-  //  {
-  //   path: "/customermaintainer",
-  //   name: "Administrar Perfiles ",
-  //   icon: "nc-icon nc-badge",
-  //   component: CustomerMaintainer,
-  //   layout: "/admin",
 
-  // },
+   {
+    path: "/customermaintainer",
+    name: "Administrar Perfiles ",
+    icon: "nc-icon nc-badge",
+    component: CustomerMaintainer,
+    layout: "/admin",
+
+  },
   // {
   //   path: "/enterprisemanage",
   //   name: "Administrar Empresas",
@@ -72,7 +72,6 @@ const routes = [
   //   layout: "/admin",
   // }
   //  },
-
   // {
   //   path: "/logysto",
   //   name: "Ingreso manual OC",
