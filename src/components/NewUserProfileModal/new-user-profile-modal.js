@@ -153,7 +153,8 @@ const NewUserProfileModal = (props) => {
    
     setCountry(selectedCountryId);
   };
-  const addProfileHandler = async () => {
+  const addProfileHandler = async (event) => {
+    event.preventDefault();
     const profile = {
       first_name: name,
       last_name: " ",
@@ -176,7 +177,7 @@ const NewUserProfileModal = (props) => {
     myHeaders.append("Content-Type", "text/plain");
 
     var raw = profile;
-
+console.log(JSON.stringify(profile));
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -192,7 +193,7 @@ const NewUserProfileModal = (props) => {
       .then((result) =>{
         console.log(result);
         if (result === '"Success!"') {
-         // window.location.reload();
+          window.location.reload();
         }
        
       } )
@@ -232,7 +233,7 @@ const NewUserProfileModal = (props) => {
           <input
             className="input"
             type="name"
-            name="name"
+           // name="name"
             id="exampleEmail"
             style={{ fontSize: "12px" }}
             // value={editedName}
