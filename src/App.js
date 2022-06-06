@@ -172,7 +172,7 @@ const App = () => {
                 {...props}
                 name={fn}
                 lastName={ln}
-                userType={userType}
+                userType={localStorage.getItem("ut")}
               />
             )}
           />
@@ -185,7 +185,8 @@ const App = () => {
                 {...props}
                 name={fn}
                 lastName={ln}
-                userType={userType}
+                // userType={userType}
+                userType={localStorage.getItem("ut")}
               />
             )}
           />
