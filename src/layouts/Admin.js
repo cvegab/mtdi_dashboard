@@ -58,7 +58,7 @@ function Admin(props) {
   }, [location]);
   const getRoutes = (routes) => {
     console.log(props.userType);
-    if(props.userType === 'KAM'){
+    if(props.userType === '2'){
       return kamRoutes.map((prop, key) => {
         if (prop.collapse) {
           return getRoutes(prop.views);
@@ -76,7 +76,7 @@ function Admin(props) {
         }
       });
     }
-    if(props.userType === 'Administrator'){
+    if(props.userType === '1'){
       return routes.map((prop, key) => {
         if (prop.collapse) {
           return getRoutes(prop.views);
@@ -113,13 +113,13 @@ function Admin(props) {
   };
   return (
     <div className="wrapper">
-      {props.userType ==='KAM' &&    <Sidebar
+      {props.userType ==='2' &&    <Sidebar
         {...props}
         routes={kamRoutes}
         bgColor='white'
         activeColor='white'
       />}
-       {props.userType ==='Administrator' &&    <Sidebar
+       {props.userType ==='1' &&    <Sidebar
         {...props}
         routes={routes}
         bgColor='white'
@@ -134,8 +134,8 @@ function Admin(props) {
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} handleMiniClick={handleMiniClick} />
         {/* <Switch>{getRoutes(routes)}</Switch> */}
-       {props.userType === 'KAM' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
-        {props.userType === 'Administrator' &&  <Switch>{getRoutes(routes)}</Switch>}
+       {props.userType === '2' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
+        {props.userType === '1' &&  <Switch>{getRoutes(routes)}</Switch>}
         {
           // we don't want the Footer to be rendered on full screen maps page
           props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
