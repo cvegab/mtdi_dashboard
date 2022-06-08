@@ -645,7 +645,7 @@ const MtdiTable = (props) => {
     if (searchOrderId !== "") {
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/order?orderNo=${searchOrderId}`;
     } else {
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     }
     setisLoading(true);
     setfiltersApplied(true);
