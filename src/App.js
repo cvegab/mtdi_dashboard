@@ -78,7 +78,7 @@ const App = () => {
   console.log(fn);
   useEffect(() => {
     console.log("hello");
-    getUserType();
+   // getUserType();
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -124,6 +124,7 @@ const App = () => {
         }
         if(obj.user.profile !== undefined){
           localStorage.setItem("ut", obj.user.profile);
+          setuserType(obj.user.profile);
           // setmail(localStorage.setItem("ut", obj.user.profile));
         }
         if (obj.user.countries !== undefined){
@@ -148,7 +149,7 @@ const App = () => {
         }
       })
       .catch((error) => console.log("error", error));
-  }, []);
+  }, [userType]);
   if (userName === undefined && localStorage.getItem("name") === null) {
     return (window.location.href = "https://main.instancelatam.com/login");
   }
