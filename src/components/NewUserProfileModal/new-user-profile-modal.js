@@ -21,9 +21,9 @@ const NewUserProfileModal = (props) => {
     fetchFilterData();
   }, []);
 
-  console.log(props.profileInfo);
+  console.log(props);
   const fetchFilterData = async () => {
-   
+    // setisLoading(true);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
@@ -75,8 +75,23 @@ const NewUserProfileModal = (props) => {
   const [clientOptions, setclientOptions] = useState([]);
   const [countryOptions, setcountryOptions] = useState([]);
   // const [stores, setstores] = useState(props.profileInfo.stores);
-  const [stores, setstores] = useState([]);
-  const [country, setCountry] = useState('');
+  let editStoreId = [];
+ 
+  if(props.flag === 1){
+     editStoreId = props.profileInfo.stores.map((item)=>{
+      return item.id;
+        });
+  }
+ let editCountryId = [];
+ if(props.flag === 1){
+  editCountryId = props.profileInfo.countries.map((item)=>{
+    return item.id;
+      });
+ }
+
+  
+  const [stores, setstores] = useState(editStoreId);
+  const [country, setCountry] = useState(editCountryId);
 
   const nameRef = useRef("");
   const emailRef = useRef("");
@@ -89,7 +104,7 @@ const NewUserProfileModal = (props) => {
     setName(event.target.value);
   };
   const handleSelectChange = (event) => {
-   
+    console.log(event);
     let selectedStore = event;
     const selectedStoreId = selectedStore.map((item) => {
       return item.id;
@@ -97,7 +112,8 @@ const NewUserProfileModal = (props) => {
     console.log(selectedStoreId);
     setstores(selectedStoreId);
   };
-  const editProfileHandler = () => {
+  const editProfileHandler = (event) => {
+    event.preventDefault();
     const profile = {
       first_name: name,
       last_name: " ",
@@ -150,7 +166,7 @@ const NewUserProfileModal = (props) => {
     const selectedCountryId = selectedCountry.map((item) => {
       return item.id;
     });
-   
+    console.log(selectedCountryId);
     setCountry(selectedCountryId);
   };
   const addProfileHandler = async (event) => {
@@ -225,7 +241,7 @@ console.log(JSON.stringify(profile));
         </h3>
       )}
 
-      <Form >
+      <Form>
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
             Nombre:
@@ -233,7 +249,7 @@ console.log(JSON.stringify(profile));
           <input
             className="input"
             type="name"
-           // name="name"
+            name="email"
             id="exampleEmail"
             style={{ fontSize: "12px" }}
             // value={editedName}
