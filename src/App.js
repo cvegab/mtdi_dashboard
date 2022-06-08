@@ -78,7 +78,7 @@ const App = () => {
   console.log(fn);
   useEffect(() => {
     console.log("hello");
-    getUserType();
+   // getUserType();
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -109,14 +109,12 @@ const App = () => {
         if (obj.user.first_name !== undefined) {
           localStorage.setItem("first", obj.user.first_name);
           setfn(localStorage.setItem("first", obj.user.first_name));
-          // localStorage.setItem("dtm", userName);
-          // setmail(localStorage.setItem("dtm", userName));
+         
         }
         if (obj.user.last_name !== undefined) {
           localStorage.setItem("last", obj.user.last_name);
           setln(localStorage.setItem("last", obj.user.last_name));
-          // localStorage.setItem("dtm", userName);
-          // setmail(localStorage.setItem("dtm", userName));
+          
         }
         if(obj.user.email !== undefined){
           localStorage.setItem("dtm", obj.user.email);
@@ -124,6 +122,7 @@ const App = () => {
         }
         if(obj.user.profile !== undefined){
           localStorage.setItem("ut", obj.user.profile);
+          setuserType(obj.user.profile);
           // setmail(localStorage.setItem("ut", obj.user.profile));
         }
         if (obj.user.countries !== undefined){
@@ -148,7 +147,10 @@ const App = () => {
         }
       })
       .catch((error) => console.log("error", error));
-  }, []);
+  }, [userType]);
+  // if(localStorage.getItem('ut')===null){
+  //   return window.location.reload();
+  // }
   if (userName === undefined && localStorage.getItem("name") === null) {
     return (window.location.href = "https://dev.instancelatam.com");
   }
