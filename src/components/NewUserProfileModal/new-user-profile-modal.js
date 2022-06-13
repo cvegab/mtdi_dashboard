@@ -127,7 +127,7 @@ const NewUserProfileModal = (props) => {
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
-      profile: userType.current.value,
+      profile: userType,
       stores: stores,
       countries: country,
       enabled: selfServiceType,
