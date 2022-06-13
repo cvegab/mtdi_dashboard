@@ -122,6 +122,7 @@ const NewUserProfileModal = (props) => {
     setstores(selectedStoreId);
   };
   const editProfileHandler = (event) => {
+    const email=localStorage.getItem("name");
     event.preventDefault();
     const profile = {
       first_name: name,
@@ -147,7 +148,7 @@ const NewUserProfileModal = (props) => {
       body: JSON.stringify(profile),
       redirect: "follow",
     };
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${props.profileInfo.email}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${email}`;
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -189,7 +190,7 @@ const NewUserProfileModal = (props) => {
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
-      profile: userType.current.value,
+      profile: userType,
       stores: stores,
       countries: country,
       enabled: selfServiceType,
