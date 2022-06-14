@@ -52,6 +52,7 @@ import WmsModal from "components/modalComponents/wms-modal";
 import ClientModal from "components/ClientModal/client-modal";
 import CourierStatusModal from "components/courierStatusModal/courier-status-modal";
 import BallotDetailModal from "components/BallotDetailModal/BallotDetailModal";
+import { NavigateBeforeSharp } from "@material-ui/icons";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -1141,17 +1142,27 @@ const MtdiTable = (props) => {
       width: "15%",
       render: (rowData) => {
         if (rowData.courier != undefined) {
+          if(rowData.courier_logo === "No definido")
+          return (
+            <div>
+              <span style={{ whiteSpace: "nowrap" }}> &nbsp;&nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;</span> 
+                {rowData.courier}
+              </span>
+            </div>
+          );
+          if(rowData.courier_logo !== "No definido")
           return (
             <div>
               <span style={{ whiteSpace: "nowrap" }}>
-                {rowData.courier_logo !== "No aplica" && (
-                  <img
+                {rowData.courier_logo !== "No definido" && (
+                 <img 
                     style={{ paddingRight: "8px" }}
                     src={rowData.courier_logo}
                     width="40px"
                     height="32px"
-                  />
+                  /> 
                 )}
+                
                 {rowData.courier}
               </span>
             </div>
