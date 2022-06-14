@@ -1051,6 +1051,23 @@ const MtdiTable = (props) => {
       title: "Total",
       field: "precio_sin_shipping",
       width: "13%",
+      render: (rowData) => {
+      
+          let number = rowData.precio_sin_shipping;
+          let formatted = new Intl.NumberFormat("es-CL", {
+            style: "currency",
+            currency: "CLP",
+          }).format(rowData.precio_sin_shipping);
+          return (
+            <div>
+            {formatted}
+            
+              &nbsp;
+           
+            </div>
+          );
+        
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
