@@ -155,7 +155,7 @@ const NewUserProfileModal = (props) => {
       redirect: "follow",
     };
     
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${email}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/user?user=${email}`;
 
     fetch(url, requestOptions)
       .then((response) => response.text())
