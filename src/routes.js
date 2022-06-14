@@ -47,14 +47,14 @@ const routes = [
   //   layout: "/admin",
 
   // },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-chart-bar-32",
-    component: MtdiReports,
-    layout: "/admin",
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "nc-icon nc-chart-bar-32",
+  //   component: MtdiReports,
+  //   layout: "/admin",
 
-   },
+  //  },
 
    {
     path: "/customermaintainer",
