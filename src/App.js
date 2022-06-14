@@ -109,14 +109,12 @@ const App = () => {
         if (obj.user.first_name !== undefined) {
           localStorage.setItem("first", obj.user.first_name);
           setfn(localStorage.setItem("first", obj.user.first_name));
-          // localStorage.setItem("dtm", userName);
-          // setmail(localStorage.setItem("dtm", userName));
+         
         }
         if (obj.user.last_name !== undefined) {
           localStorage.setItem("last", obj.user.last_name);
           setln(localStorage.setItem("last", obj.user.last_name));
-          // localStorage.setItem("dtm", userName);
-          // setmail(localStorage.setItem("dtm", userName));
+          
         }
         if(obj.user.email !== undefined){
           localStorage.setItem("dtm", obj.user.email);
@@ -150,6 +148,7 @@ const App = () => {
       })
       .catch((error) => console.log("error", error));
   }, [userType]);
+
   if (userName === undefined && localStorage.getItem("name") === null) {
     return (window.location.href = "https://pre-production.d36thtl3fmh3ww.amplifyapp.com/login");
   }

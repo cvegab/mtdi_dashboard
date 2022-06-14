@@ -30,7 +30,7 @@ import kamRoutes from "kamRoutes";
 var ps;
 
 function Admin(props) {
-  console.log(props);
+  console.log(props.userType);
   const location = useLocation();
   const [backgroundColor, setBackgroundColor] = React.useState("black");
   const [activeColor, setActiveColor] = React.useState("info");
@@ -58,6 +58,7 @@ function Admin(props) {
   }, [location]);
   const getRoutes = (routes) => {
     console.log(props.userType);
+
     if(props.userType === '2'){
       return kamRoutes.map((prop, key) => {
         if (prop.collapse) {

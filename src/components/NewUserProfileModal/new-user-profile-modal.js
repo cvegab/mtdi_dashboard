@@ -16,10 +16,41 @@ import {
 } from "reactstrap";
 import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
+
 const NewUserProfileModal = (props) => {
+
+  const [showModal, setShowModal] = useState(false);
+  const [profileDetails, setprofileDetails] = useState([]);
+  const [errorMessage, seterrorMessage] = useState("");
+  const [name, setName] = useState(props.profileInfo.first_name);
+  const [clientOptions, setclientOptions] = useState([]);
+  const [countryOptions, setcountryOptions] = useState([]);
+  // const [stores, setstores] = useState(props.profileInfo.stores);
+  const [stores, setstores] = useState(editStoreId);
+  const [country, setCountry] = useState(editCountryId);
+  const [userType, setUserType] = useState(props.profileInfo.profile);
+  const [selfServiceType, setselfServiceType] = useState(
+    props.profileInfo.enabled
+  );
+  let editStoreId = [];
+  const nameRef = useRef("");
+  const emailRef = useRef("");
+
   useEffect(() => {
     fetchFilterData();
   }, []);
+
+
+  useEffect(() => {
+    if(userType === "1"){
+      const storeIds = clientOptions.map(store => store.id);
+      setstores(storeIds);
+    }
+    else{
+      setstores([]);
+    }
+  }, [userType]);
+
 
   console.log(props);
   const fetchFilterData = async () => {
@@ -68,15 +99,7 @@ const NewUserProfileModal = (props) => {
       .catch((error) => console.log("error", error));
   };
  
-  const [showModal, setShowModal] = useState(false);
-  const [profileDetails, setprofileDetails] = useState([]);
-  const [errorMessage, seterrorMessage] = useState("");
-  const [name, setName] = useState(props.profileInfo.first_name);
-  const [clientOptions, setclientOptions] = useState([]);
-  const [countryOptions, setcountryOptions] = useState([]);
-  // const [stores, setstores] = useState(props.profileInfo.stores);
-  let editStoreId = [];
- 
+
   if(props.flag === 1){
      editStoreId = props.profileInfo.stores.map((item)=>{
       return item.id;
@@ -89,16 +112,6 @@ const NewUserProfileModal = (props) => {
       });
  }
 
-  
-  const [stores, setstores] = useState(editStoreId);
-  const [country, setCountry] = useState(editCountryId);
-
-  const nameRef = useRef("");
-  const emailRef = useRef("");
-  const userType = useRef(1);
-  const [selfServiceType, setselfServiceType] = useState(
-    props.profileInfo.enabled
-  );
 
   const nameChangeHandler = (event) => {
     setName(event.target.value);
@@ -113,12 +126,15 @@ const NewUserProfileModal = (props) => {
     setstores(selectedStoreId);
   };
   const editProfileHandler = (event) => {
+
+    const email=localStorage.getItem("name");
+
     event.preventDefault();
     const profile = {
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
-      profile: userType.current.value,
+      profile: userType,
       stores: stores,
       countries: country,
       enabled: selfServiceType,
@@ -138,7 +154,9 @@ const NewUserProfileModal = (props) => {
       body: JSON.stringify(profile),
       redirect: "follow",
     };
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/user?user=${props.profileInfo.email}`;
+    
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/user?user=${email}`;
+
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -169,13 +187,18 @@ const NewUserProfileModal = (props) => {
     console.log(selectedCountryId);
     setCountry(selectedCountryId);
   };
+
+  const handleSelectUserTypeChange = (event) => {
+    setUserType(event.target.value);
+  }
+
   const addProfileHandler = async (event) => {
     event.preventDefault();
     const profile = {
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
-      profile: userType.current.value,
+      profile: userType,
       stores: stores,
       countries: country,
       enabled: selfServiceType,
@@ -279,8 +302,9 @@ console.log(JSON.stringify(profile));
                 class="form-select"
                 aria-label="Default select example"
                 style={{ borderRadius: "10px" }}
-                ref={userType}
-                defaultValue={props.profileInfo.profile}
+                //ref={userType}
+                defaultValue={userType}
+                onChange={handleSelectUserTypeChange}
               >
                 <option selected>Selcciona un tipo de usuario</option>
                 <option value={1}>Administrador</option>
@@ -305,6 +329,8 @@ console.log(JSON.stringify(profile));
             </FormGroup>
           </Col>
         </Row>
+        {
+          userType != "1"  && 
         <Row>
           <Col md={12}>
             <FormGroup>
@@ -312,15 +338,17 @@ console.log(JSON.stringify(profile));
                 Cliente
               </Label>
               <CheckboxDropdown
-                placeholder="Selccione un cliente"
+                placeholder="Seleccione un cliente"
                 options={clientOptions}
                 handleSelectChange={handleSelectChange}
                 // defaultValue={props.profileInfo.stores}
                 defaultValue={props.profileInfo.stores}
               ></CheckboxDropdown>
+
             </FormGroup>
           </Col>
         </Row>
+        }
 
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
