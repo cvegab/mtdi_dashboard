@@ -80,7 +80,7 @@ const App = () => {
     console.log("hello");
    // getUserType();
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -98,7 +98,7 @@ const App = () => {
       redirect: "follow",
     };
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/login",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/login",
       requestOptions
     )
       .then((response) => response.text())
@@ -148,11 +148,9 @@ const App = () => {
       })
       .catch((error) => console.log("error", error));
   }, [userType]);
-  // if(localStorage.getItem('ut')===null){
-  //   return window.location.reload();
-  // }
+
   if (userName === undefined && localStorage.getItem("name") === null) {
-    return (window.location.href = "https://dev.instancelatam.com");
+    return (window.location.href = "https://pre-production.d36thtl3fmh3ww.amplifyapp.com/login");
   }
   return (
     <BrowserRouter>
@@ -161,7 +159,7 @@ const App = () => {
         {!isAuthenticated && localStorage.getItem("name") === null && (
           <Route
             component={() => {
-              window.location.href = "https://dev.instancelatam.com/";
+              window.location.href ="https://pre-production.d36thtl3fmh3ww.amplifyapp.com/login";
               return null;
             }}
           />

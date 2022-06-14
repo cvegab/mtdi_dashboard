@@ -64,15 +64,14 @@ const routes = [
     layout: "/admin",
 
   },
-  {
-    path: "/enterprisemanage",
-    name: "Administrar Empresas",
-    icon: "nc-icon nc-vector",
-    component: EnterpriseManage,
-    layout: "/admin",
-
-   },
-
+  // {
+  //   path: "/enterprisemanage",
+  //   name: "Administrar Empresas",
+  //   icon: "nc-icon nc-vector",
+  //   component: EnterpriseManage,
+  //   layout: "/admin",
+  // }
+  //  },
   // {
   //   path: "/logysto",
   //   name: "Ingreso manual OC",

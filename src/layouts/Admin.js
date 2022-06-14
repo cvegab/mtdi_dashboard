@@ -58,7 +58,7 @@ function Admin(props) {
   }, [location]);
   const getRoutes = (routes) => {
     console.log(props.userType);
-    console.log(localStorage.getItem("ut"));
+
     if(props.userType === '2'){
       return kamRoutes.map((prop, key) => {
         if (prop.collapse) {

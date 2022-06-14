@@ -405,7 +405,7 @@ function MtdiReports() {
     // });
     setisLoading(true);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -417,7 +417,7 @@ function MtdiReports() {
       redirect: "follow",
     };
 
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -744,7 +744,7 @@ if(lista.length!==0){
     });
     console.log(newChannelList);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -756,7 +756,7 @@ if(lista.length!==0){
       redirect: "follow",
     };
 
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
 
     fetch(url, requestOptions)
@@ -1224,7 +1224,7 @@ if(lista.length!==0){
   const fetchResumenGraphDetails = () => {
     setisPieChartLoading(true);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -1236,8 +1236,8 @@ if(lista.length!==0){
       redirect: "follow",
     };
 
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/resume?channels=0&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
-    console.log(url);
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -1259,7 +1259,7 @@ if(lista.length!==0){
     console.log("hi i am fetching");
     setisLoading(true);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -1271,7 +1271,7 @@ if(lista.length!==0){
       redirect: "follow",
     };
     //2021-12-01
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/resume?channels=${channelId}&store=${storeId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}&country=${countryId}`;
     console.log(url);
     fetch(url, requestOptions)
       .then((response) => response.text())
@@ -1396,7 +1396,7 @@ if(lista.length!==0){
   const fetchFilterData = async () => {
     setisLoading(true);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -1409,7 +1409,7 @@ if(lista.length!==0){
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())

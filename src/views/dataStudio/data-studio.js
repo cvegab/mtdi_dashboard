@@ -159,7 +159,7 @@ const DataStudio = () => {
   const applyIframes = () => {
     console.log(storeId);
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -170,7 +170,7 @@ const DataStudio = () => {
       headers: myHeaders,
       redirect: "follow",
     };
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${storeId}`;
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${storeId}`;
 
     fetch(url, requestOptions)
       .then((response) => response.text())
@@ -191,7 +191,7 @@ const DataStudio = () => {
   };
   const fetchIframes = () => {
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -206,7 +206,7 @@ const DataStudio = () => {
     if (localStorage.getItem("ut") === "1") {
       console.log('HI USER')
       const ID= 2;
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${ID}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${ID}`;
     }
     if (localStorage.getItem("ut") === "2") {
       console.log("oh noo");
@@ -216,7 +216,7 @@ const DataStudio = () => {
       });
       let parseduserStoreId = b[0];
       console.log(parseduserStoreId);
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${parseduserStoreId}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${parseduserStoreId}`;
     }
     if (localStorage.getItem("ut") === "3") {
       console.log("oh noo");
@@ -226,7 +226,7 @@ const DataStudio = () => {
       });
       let parseduserStoreId = b[0];
       console.log(parseduserStoreId);
-      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store?id=${parseduserStoreId}`;
+      url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store?id=${parseduserStoreId}`;
     }
     console.log(url);
     fetch(url, requestOptions)
@@ -243,7 +243,7 @@ const DataStudio = () => {
   };
   const fetchFilterData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
+    myHeaders.append("x-api-key", "2Rr4OFKHVL98TtlOCUnuNaA2v5w01Z11aI9vdQYJ");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
@@ -256,7 +256,7 @@ const DataStudio = () => {
     };
 
     fetch(
-      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/dashboard/filtersorders",
+      "https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/dashboard/filtersorders",
       requestOptions
     )
       .then((response) => response.text())
