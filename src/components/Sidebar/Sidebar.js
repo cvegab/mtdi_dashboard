@@ -161,7 +161,7 @@ function Sidebar(props) {
     localStorage.removeItem("password");
     localStorage.removeItem("first");
     localStorage.removeItem("last");
-    window.location.replace("https://pre-production.d36thtl3fmh3ww.amplifyapp.com/login");
+    window.location.replace("http://dev.instancelatam.com/login");
     localStorage.removeItem("dtm");
     localStorage.removeItem("ut");
     // window.location.replace("https://dev.instancelatam.com/");
