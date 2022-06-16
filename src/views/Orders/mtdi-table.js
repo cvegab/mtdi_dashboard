@@ -1172,7 +1172,7 @@ const MtdiTable = (props) => {
       width: "15%",
       render: (rowData) => {
         if (rowData.courier != undefined) {
-          if(rowData.courier_logo === "No definido")
+          if(rowData.courier_logo === "No definido"||rowData.courier_logo === "No aplica")
           return (
             <div>
               <span style={{ whiteSpace: "nowrap" }}> &nbsp;&nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;</span> 
@@ -1180,11 +1180,11 @@ const MtdiTable = (props) => {
               </span>
             </div>
           );
-          if(rowData.courier_logo !== "No definido")
+          if(rowData.courier_logo !== "No definido"||rowData.courier_logo !== "No aplica")
           return (
             <div>
               <span style={{ whiteSpace: "nowrap" }}>
-                {rowData.courier_logo !== "No definido" && (
+                {rowData.courier_logo !== "No definido" && rowData.courier_logo !== "No aplica" && (
                  <img 
                     style={{ paddingRight: "8px" }}
                     src={rowData.courier_logo}
