@@ -122,7 +122,23 @@ return (
               className="textInfoCard"
               style={{ fontSize: "20px", color: "#444B54" }}
             >
-             c
+                           {(() => {
+                let number = props.dispatchCost;
+                let totalIncomeformatted = new Intl.NumberFormat(
+                  "es-CL",
+                  {
+                    style: "currency",
+                    currency: "CLP",
+                  }
+                ).format(number);
+                return (
+                  <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                    {totalIncomeformatted}
+                    &nbsp;
+                    </div>
+                    );
+              })()}
             </h5>
           </div>
         </Col>
