@@ -312,13 +312,20 @@ const NewUserProfileModal = (props) => {
           <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
             Correo Electronico:
           </Label>
-
-          <input
+{props.flag===1 &&   <input
             className="input"
             ref={emailRef}
             type="email"
             defaultValue={props.profileInfo.email}
-          />
+disabled
+          />}
+      {props.flag===0 &&   <input
+            className="input"
+            ref={emailRef}
+            type="email"
+            defaultValue={props.profileInfo.email}
+
+          />}
         </FormGroup>
         <Row>
           <Col md={6}>
