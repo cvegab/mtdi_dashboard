@@ -14,16 +14,17 @@ const NewUserProfileModal = (props) => {
 
   //States
   const [filter, setFilter] = useState([]);
+  const [profileDetails, setprofileDetails] = useState([]);
   const [name, setName] = useState(props.profileInfo.first_name);
   const [clientOptions, setclientOptions] = useState([]);
   const [countryOptions, setcountryOptions] = useState([]);
   const [stores, setstores] = useState([]);
   const [country, setCountry] = useState([]);
-  const [profileDetails, setprofileDetails] = useState([]);
   const [userType, setUserType] = useState(props.profileInfo.profile);
   const [selfServiceType, setselfServiceType] = useState(
     props.profileInfo.enabled
   );
+
   let editStoreId = [];
   let editCountryId = [];
   const emailRef = useRef("");
@@ -42,12 +43,25 @@ const NewUserProfileModal = (props) => {
           editStoreId = props.profileInfo.stores.map((item)=>{
            return item.id;
              });
-       }
-      
-        if(props.flag === 1){
+       
         editCountryId = props.profileInfo.countries.map((item)=>{
           return item.id;
             });
+
+        //Select the user's countries
+        let userCountries = [];
+        props.profileInfo.countries.forEach(element => {
+          userCountries.push(element.id);
+        });
+        setCountry(userCountries);
+
+        //Select the user's stores
+        let userStores = [];
+        props.profileInfo.stores.forEach(element => {
+          userStores.push(element.id);
+        });
+        setstores(userStores);
+
         }
         // Select the countries from the filter
         let countriesArray = filter.filter(getCountries);
@@ -58,28 +72,14 @@ const NewUserProfileModal = (props) => {
         console.log(allSelectedCountry);
         setcountryOptions(allSelectedCountry);
 
-  //Select the user's countries
-  // let userCountries = [];
-  // props.profileInfo.countries.forEach(element => {
-  //   userCountries.push(element.id);
-  // });
-  // setCountry(userCountries);
-
-  // //Select the user's stores
-  // let userStores = [];
-  // props.profileInfo.stores.forEach(element => {
-  //   userStores.push(element.id);
-  // });
-  // setstores(userStores);
-
-  //       // Set the countries options state
-  //       countriesArray.forEach((element) => {
-  //         filterCountry.push({
-  //           id: element.value, 
-  //           name: element.country
-  //         });
-  //       });
-  //       setcountryOptions(filterCountry);
+        // Set the countries options state
+       countriesArray.forEach((element) => {
+         filterCountry.push({
+           id: element.value, 
+          name: element.country
+        });
+     });
+       setcountryOptions(filterCountry);
   }, [filter]);
 
   //Effect when you change the countries selected
