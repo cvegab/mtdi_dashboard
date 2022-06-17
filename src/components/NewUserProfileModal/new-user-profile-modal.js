@@ -1,46 +1,99 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-  Table,
-  Button,
-  Container,
-  Modal,
   ModalBody,
-  ModalHeader,
   FormGroup,
-  ModalFooter,
   Form,
   Label,
   Col,
   Row,
-  Input,
 } from "reactstrap";
-import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
+import { FormCheck} from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
 
 const NewUserProfileModal = (props) => {
 
-  const [showModal, setShowModal] = useState(false);
-  const [profileDetails, setprofileDetails] = useState([]);
-  const [errorMessage, seterrorMessage] = useState("");
+  //States
+  const [filter, setFilter] = useState([]);
   const [name, setName] = useState(props.profileInfo.first_name);
   const [clientOptions, setclientOptions] = useState([]);
   const [countryOptions, setcountryOptions] = useState([]);
-  // const [stores, setstores] = useState(props.profileInfo.stores);
-  const [stores, setstores] = useState(editStoreId);
-  const [country, setCountry] = useState(editCountryId);
+  const [stores, setstores] = useState([]);
+  const [country, setCountry] = useState([]);
   const [userType, setUserType] = useState(props.profileInfo.profile);
   const [selfServiceType, setselfServiceType] = useState(
     props.profileInfo.enabled
   );
   let editStoreId = [];
-  const nameRef = useRef("");
+  let editCountryId = [];
   const emailRef = useRef("");
 
+  //Effects 
+  // Effect to get the filter options
   useEffect(() => {
     fetchFilterData();
   }, []);
 
+  //Effect when change the filter state
+  useEffect(() => {
+    let filterCountry = [];
 
+        if(props.flag === 1){
+          editStoreId = props.profileInfo.stores.map((item)=>{
+           return item.id;
+             });
+       }
+      
+        if(props.flag === 1){
+        editCountryId = props.profileInfo.countries.map((item)=>{
+          return item.id;
+            });
+        }
+        // Select the countries from the filter
+        let countriesArray = filter.filter(getCountries);
+
+  //Select the user's countries
+  let userCountries = [];
+  props.profileInfo.countries.forEach(element => {
+    userCountries.push(element.id);
+  });
+  setCountry(userCountries);
+
+  //Select the user's stores
+  let userStores = [];
+  props.profileInfo.stores.forEach(element => {
+    userStores.push(element.id);
+  });
+  setstores(userStores);
+
+        // Set the countries options state
+        countriesArray.forEach((element) => {
+          filterCountry.push({
+            id: element.value, 
+            name: element.country
+          });
+        });
+        setcountryOptions(filterCountry);
+  }, [filter]);
+
+  //Effect when you change the countries selected
+  useEffect(() => {
+    let filterStore = [];
+    let storesArray =  filter.filter(getStores);
+        // Set the stores options state when you change the countries
+        storesArray.forEach(element => {
+          element.stores.forEach(store => {
+            filterStore.push({
+            id: store.value,
+            name: store.store
+            })
+          }
+          )
+        })
+      const filterUniqueStore = [...new Map(filterStore.map((item) => [item["name"], item])).values(),];
+      setclientOptions(filterUniqueStore);
+  }, [country])
+
+  //Effect when you change the user type
   useEffect(() => {
     if(userType === "1"){
       const storeIds = clientOptions.map(store => store.id);
@@ -51,8 +104,17 @@ const NewUserProfileModal = (props) => {
     }
   }, [userType]);
 
+  //Funtions
+  // Function to get stores with country filter
+  function getStores(elemento){
+    return country.includes(elemento.value)
+  }
+  // Function to get all countries 
+  function getCountries(elemento){
+    return elemento.value !== 0
+  }
 
-  console.log(props);
+  // Function to get filter data
   const fetchFilterData = async () => {
     // setisLoading(true);
     var myHeaders = new Headers();
@@ -74,55 +136,20 @@ const NewUserProfileModal = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);
-        console.log(obj);
-        let countriesArray =  obj.filter((item) => {
-        return item.value!==0;
-        });
-        console.log(countriesArray);
-        let selectedCountry = countriesArray.map((item) => {
-          return [{ id: item.value, name: item.country }];
-        });
-        let allSelectedCountry = [].concat.apply([], selectedCountry);
-        console.log(allSelectedCountry);
-        setcountryOptions(allSelectedCountry);
-        console.log(selectedCountry);
-        let allChannelsArray = obj[4].stores.map((item) => {
-          return [{ id: item.value, name: item.store }];
-        });
-      
-        var flattened = [].concat.apply([], allChannelsArray);
-       
-        setclientOptions(flattened);
-       
+        //Put the data in the state
+        setFilter(JSON.parse(result));
       })
       .catch((error) => console.log("error", error));
   };
  
-
-  if(props.flag === 1){
-     editStoreId = props.profileInfo.stores.map((item)=>{
-      return item.id;
-        });
-  }
- let editCountryId = [];
- if(props.flag === 1){
-  editCountryId = props.profileInfo.countries.map((item)=>{
-    return item.id;
-      });
- }
-
-
   const nameChangeHandler = (event) => {
     setName(event.target.value);
   };
   const handleSelectChange = (event) => {
-    console.log(event);
     let selectedStore = event;
     const selectedStoreId = selectedStore.map((item) => {
       return item.id;
     });
-    console.log(selectedStoreId);
     setstores(selectedStoreId);
   };
   const editProfileHandler = (event) => {
@@ -139,7 +166,7 @@ const NewUserProfileModal = (props) => {
       countries: country,
       enabled: selfServiceType,
     };
-    console.log(profile);
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -160,7 +187,6 @@ const NewUserProfileModal = (props) => {
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         if (result === '"Success!"') {
           window.location.reload();
         }
@@ -184,7 +210,6 @@ const NewUserProfileModal = (props) => {
     const selectedCountryId = selectedCountry.map((item) => {
       return item.id;
     });
-    console.log(selectedCountryId);
     setCountry(selectedCountryId);
   };
 
@@ -203,10 +228,8 @@ const NewUserProfileModal = (props) => {
       countries: country,
       enabled: selfServiceType,
     };
-    console.log(profile);
     setprofileDetails(profile);
     const userEmail = localStorage.getItem("dtm");
-    console.log(userEmail);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
@@ -216,7 +239,6 @@ const NewUserProfileModal = (props) => {
     myHeaders.append("Content-Type", "text/plain");
 
     var raw = profile;
-console.log(JSON.stringify(profile));
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -230,7 +252,6 @@ console.log(JSON.stringify(profile));
     )
       .then((response) => response.text())
       .then((result) =>{
-        console.log(result);
         if (result === '"Success!"') {
           window.location.reload();
         }
