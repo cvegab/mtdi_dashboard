@@ -6,6 +6,7 @@ import {
   Label,
   Col,
   Row,
+  Spinner
 } from "reactstrap";
 import { FormCheck} from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
@@ -14,6 +15,7 @@ const NewUserProfileModal = (props) => {
 
   //States
   const [filter, setFilter] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
   const [profileDetails, setprofileDetails] = useState([]);
   const [name, setName] = useState(props.profileInfo.first_name);
   const [clientOptions, setclientOptions] = useState([]);
@@ -160,7 +162,7 @@ const NewUserProfileModal = (props) => {
     setstores(selectedStoreId);
   };
   const editProfileHandler = (event) => {
-
+    setisLoading(true);
     const email=localStorage.getItem("name");
 
     event.preventDefault();
@@ -209,6 +211,7 @@ const NewUserProfileModal = (props) => {
             "Elevation of privileges not possible, contact an administrator"
           );
         }
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -225,6 +228,7 @@ const NewUserProfileModal = (props) => {
   }
 
   const addProfileHandler = async (event) => {
+    setisLoading(true);
     event.preventDefault();
     const profile = {
       first_name: name,
@@ -262,9 +266,10 @@ const NewUserProfileModal = (props) => {
         if (result === '"Success!"') {
           window.location.reload();
         }
-       
+        setisLoading(false);
       } )
       .catch((error) => console.log("error", error));
+    
   };
 
   return (
@@ -277,7 +282,7 @@ const NewUserProfileModal = (props) => {
             textAlign: "center",
           }}
         >
-          Crear nuevo usuario
+          Crear nuevo perfil
         </h3>
       )}
       {props.flag === 1 && (
@@ -288,7 +293,7 @@ const NewUserProfileModal = (props) => {
             textAlign: "center",
           }}
         >
-          Edit User
+         Editar perfil
         </h3>
       )}
 
@@ -300,7 +305,7 @@ const NewUserProfileModal = (props) => {
           <input
             className="input"
             type="name"
-            name="email"
+            name="name"
             id="exampleEmail"
             style={{ fontSize: "12px" }}
             // value={editedName}
@@ -310,7 +315,7 @@ const NewUserProfileModal = (props) => {
         </FormGroup>
         <FormGroup>
           <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
-            Correo Electronico:
+            Correo Electrónico:
           </Label>
 
           <input
@@ -334,7 +339,7 @@ const NewUserProfileModal = (props) => {
                 defaultValue={userType}
                 onChange={handleSelectUserTypeChange}
               >
-                <option selected>Selcciona un tipo de usuario</option>
+                <option selected>Selccione tipo de usuario</option>
                 <option value={1}>Administrador</option>
                 <option value={2}>KAM</option>
                 <option value={3}>Cliente</option>
@@ -344,10 +349,10 @@ const NewUserProfileModal = (props) => {
           <Col md={6}>
             <FormGroup>
               <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
-                Pais
+                País
               </Label>
               <CheckboxDropdown
-                placeholder="Selccione un pais"
+                placeholder="Selccione un país"
                 options={countryOptions}
                 handleSelectChange={handleSelectCountryChange}
                 // defaultValue={props.profileInfo.stores}
@@ -377,7 +382,7 @@ const NewUserProfileModal = (props) => {
           </Col>
         </Row>
         }
-
+        <br/>
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
             Activado:
@@ -398,6 +403,7 @@ const NewUserProfileModal = (props) => {
         </FormGroup>
         {props.flag === 0 && (
           <div class="text-center">
+          {!isLoading && (
             <button
               id="bttnSubmit"
               type="submit"
@@ -417,12 +423,45 @@ const NewUserProfileModal = (props) => {
               }}
               onClick={addProfileHandler}
             >
-              Crear Usuario &nbsp;
+              Crear perfil &nbsp;
             </button>
+          )}
+         
+          {isLoading && (
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#51cbce",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+              }}
+              disabled
+            >
+                 <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Cargando...
+                
+            </button>
+          )}
           </div>
         )}
+
         {props.flag === 1 && (
           <div class="text-center">
+          {!isLoading && (
             <button
               id="bttnSubmit"
               type="submit"
@@ -442,8 +481,39 @@ const NewUserProfileModal = (props) => {
               }}
               onClick={editProfileHandler}
             >
-              Edit Usuario &nbsp;
+              Editar perfil &nbsp;
             </button>
+          )}
+         
+          {isLoading && (
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#51cbce",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+              }}
+              disabled
+            >
+                 <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Cargando...
+                
+            </button>
+          )}
           </div>
         )}
       </Form>
