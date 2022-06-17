@@ -503,14 +503,14 @@ const MtdiTable = (props) => {
             return parseInt(item, 10);
           });
           console.log(b);
-          let finalKamStore = [];
+          let finalKamCountry = [];
           for (let i = 0; i <= b.length - 1; i++) {
             let x = obj.filter((item) => {
               return item.value === b[i];
             });
-            finalKamStore.push(x);
+            finalKamCountry.push(x);
           }
-          var flattened = [].concat.apply([], finalKamStore);
+          var flattened = [].concat.apply([], finalKamCountry);
           console.log(flattened);
           setfilteredCountryData(flattened);
           // console.log(kamCountryArray);
@@ -523,11 +523,25 @@ const MtdiTable = (props) => {
         if (localStorage.getItem("ut") === "3") {
           let clientCountryArray = localStorage.getItem("ct");
           console.log(clientCountryArray);
-          const clientCountry = obj.filter((item) => {
-            return item.value === Number(clientCountryArray);
+          var b =  clientCountryArray.split(",").map(function (item) {
+            return parseInt(item, 10);
           });
-          console.log(clientCountry);
-          setfilteredCountryData(clientCountry);
+          console.log(b);
+          let finalClientCountry = [];
+          for (let i = 0; i <= b.length - 1; i++) {
+            let x = obj.filter((item) => {
+              return item.value === b[i];
+            });
+            finalClientCountry.push(x);
+          }
+          var flattened = [].concat.apply([], finalClientCountry);
+          console.log(flattened);
+          setfilteredCountryData(flattened);
+          // const clientCountry = obj.filter((item) => {
+          //   return item.value === Number(clientCountryArray);
+          // });
+          // console.log(clientCountry);
+          // setfilteredCountryData(clientCountry);
         }
         if(localStorage.getItem("ut")==="1"){
           setfilteredCountryData(obj);

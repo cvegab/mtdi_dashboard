@@ -264,12 +264,27 @@ const DataStudio = () => {
         var obj = JSON.parse(result);
         if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
           let kamCountryArray = localStorage.getItem("ct");
-          console.log(kamCountryArray);
-          const kamCountry = obj.filter((item) => {
-            return item.value === Number(kamCountryArray);
+           
+          var b = kamCountryArray.split(",").map(function (item) {
+            return parseInt(item, 10);
           });
-          console.log(kamCountry);
-          setfilteredCountryData(kamCountry);
+          console.log(b);
+          let finalKamCountry = [];
+          for (let i = 0; i <= b.length - 1; i++) {
+            let x = obj.filter((item) => {
+              return item.value === b[i];
+            });
+            finalKamCountry.push(x);
+          }
+          var flattened = [].concat.apply([], finalKamCountry);
+          console.log(flattened);
+          setfilteredCountryData(flattened);
+          // console.log(kamCountryArray);
+          // const kamCountry = obj.filter((item) => {
+          //   return item.value === Number(kamCountryArray);
+          // });
+          // console.log(kamCountry);
+          // setfilteredCountryData(kamCountry);
         }
         if (localStorage.getItem("ut") === "1") {
           setfilteredCountryData(obj);
