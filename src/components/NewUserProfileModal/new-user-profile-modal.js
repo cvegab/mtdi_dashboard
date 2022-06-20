@@ -452,7 +452,7 @@ const NewUserProfileModal = (props) => {
                     type="grow"
                     color="light"
                   />
-                  &nbsp; Cargando...
+                  &nbsp; Creando...
                 
             </button>
           )}
@@ -510,7 +510,7 @@ const NewUserProfileModal = (props) => {
                     type="grow"
                     color="light"
                   />
-                  &nbsp; Cargando...
+                  &nbsp; Editando...
                 
             </button>
           )}
