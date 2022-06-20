@@ -459,7 +459,7 @@ disabled
                     type="grow"
                     color="light"
                   />
-                  &nbsp; Cargando...
+                  &nbsp; Creando...
                 
             </button>
           )}
@@ -517,7 +517,7 @@ disabled
                     type="grow"
                     color="light"
                   />
-                  &nbsp; Cargando...
+                  &nbsp; Editando...
                 
             </button>
           )}
