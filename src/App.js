@@ -109,14 +109,12 @@ const App = () => {
         if (obj.user.first_name !== undefined) {
           localStorage.setItem("first", obj.user.first_name);
           setfn(localStorage.setItem("first", obj.user.first_name));
-          // localStorage.setItem("dtm", userName);
-          // setmail(localStorage.setItem("dtm", userName));
+         
         }
         if (obj.user.last_name !== undefined) {
           localStorage.setItem("last", obj.user.last_name);
           setln(localStorage.setItem("last", obj.user.last_name));
-          // localStorage.setItem("dtm", userName);
-          // setmail(localStorage.setItem("dtm", userName));
+          
         }
         if(obj.user.email !== undefined){
           localStorage.setItem("dtm", obj.user.email);
@@ -186,7 +184,6 @@ const App = () => {
                 {...props}
                 name={fn}
                 lastName={ln}
-                // userType={userType}
                 userType={localStorage.getItem("ut")}
               />
             )}

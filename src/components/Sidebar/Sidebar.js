@@ -163,10 +163,9 @@ function Sidebar(props) {
     localStorage.removeItem("last");
     localStorage.removeItem("dtm");
     localStorage.removeItem("ut");
+    localStorage.removeItem("ct");
+    localStorage.removeItem("st");
     window.location.replace("https://main.instancelatam.com/login");
- 
-   
-    // window.location.replace("https://dev.instancelatam.com/");
     // http://localhost:3000/admin/dashboard?name=sofiavatar@chambas.cl&pass=SXB8TbidQGv4Z/CuvvLWhbfFQxiHVQcb0BEZ7NTEhuQ=
   };
   return (

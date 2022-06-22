@@ -1,27 +1,129 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-  Table,
-  Button,
-  Container,
-  Modal,
   ModalBody,
-  ModalHeader,
   FormGroup,
-  ModalFooter,
   Form,
   Label,
   Col,
   Row,
-  Input,
+  Spinner
 } from "reactstrap";
-import { FormCheck, FormControl, FormLabel, FormSelect } from "react-bootstrap";
+import { FormCheck} from "react-bootstrap";
 import CheckboxDropdown from "components/CheckboxDropdown/CheckboxDropdown";
+
 const NewUserProfileModal = (props) => {
+
+  //States
+  const [filter, setFilter] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [profileDetails, setprofileDetails] = useState([]);
+  const [name, setName] = useState(props.profileInfo.first_name);
+  const [clientOptions, setclientOptions] = useState([]);
+  const [countryOptions, setcountryOptions] = useState([]);
+  const [stores, setstores] = useState([]);
+  const [country, setCountry] = useState([]);
+  const [userType, setUserType] = useState(props.profileInfo.profile);
+  const [selfServiceType, setselfServiceType] = useState(
+    props.profileInfo.enabled
+  );
+
+  let editStoreId = [];
+  let editCountryId = [];
+  const emailRef = useRef("");
+
+  //Effects 
+  // Effect to get the filter options
   useEffect(() => {
     fetchFilterData();
   }, []);
 
-  console.log(props);
+  //Effect when change the filter state
+  useEffect(() => {
+    let filterCountry = [];
+
+        if(props.flag === 1){
+          editStoreId = props.profileInfo.stores.map((item)=>{
+           return item.id;
+             });
+       
+        editCountryId = props.profileInfo.countries.map((item)=>{
+          return item.id;
+            });
+
+        //Select the user's countries
+        let userCountries = [];
+        props.profileInfo.countries.forEach(element => {
+          userCountries.push(element.id);
+        });
+        setCountry(userCountries);
+
+        //Select the user's stores
+        let userStores = [];
+        props.profileInfo.stores.forEach(element => {
+          userStores.push(element.id);
+        });
+        setstores(userStores);
+
+        }
+        // Select the countries from the filter
+        let countriesArray = filter.filter(getCountries);
+        let selectedCountry = countriesArray.map((item) => {
+          return [{ id: item.value, name: item.country }];
+        });
+        let allSelectedCountry = [].concat.apply([], selectedCountry);
+        console.log(allSelectedCountry);
+        setcountryOptions(allSelectedCountry);
+
+        // Set the countries options state
+       countriesArray.forEach((element) => {
+         filterCountry.push({
+           id: element.value, 
+          name: element.country
+        });
+     });
+       setcountryOptions(filterCountry);
+  }, [filter]);
+
+  //Effect when you change the countries selected
+  useEffect(() => {
+    let filterStore = [];
+    let storesArray =  filter.filter(getStores);
+        // Set the stores options state when you change the countries
+        storesArray.forEach(element => {
+          element.stores.forEach(store => {
+            filterStore.push({
+            id: store.value,
+            name: store.store
+            })
+          }
+          )
+        })
+      const filterUniqueStore = [...new Map(filterStore.map((item) => [item["name"], item])).values(),];
+      setclientOptions(filterUniqueStore);
+  }, [country])
+
+  //Effect when you change the user type
+  useEffect(() => {
+    if(userType === "1"){
+      const storeIds = clientOptions.map(store => store.id);
+      setstores(storeIds);
+    }
+    else{
+      setstores([]);
+    }
+  }, [userType]);
+
+  //Funtions
+  // Function to get stores with country filter
+  function getStores(elemento){
+    return country.includes(elemento.value)
+  }
+  // Function to get all countries 
+  function getCountries(elemento){
+    return elemento.value !== 0
+  }
+
+  // Function to get filter data
   const fetchFilterData = async () => {
     // setisLoading(true);
     var myHeaders = new Headers();
@@ -43,87 +145,37 @@ const NewUserProfileModal = (props) => {
     )
       .then((response) => response.text())
       .then((result) => {
-        var obj = JSON.parse(result);
-        console.log(obj);
-        let countriesArray =  obj.filter((item) => {
-        return item.value!==0;
-        });
-        console.log(countriesArray);
-        let selectedCountry = countriesArray.map((item) => {
-          return [{ id: item.value, name: item.country }];
-        });
-        let allSelectedCountry = [].concat.apply([], selectedCountry);
-        console.log(allSelectedCountry);
-        setcountryOptions(allSelectedCountry);
-        console.log(selectedCountry);
-        let allChannelsArray = obj[4].stores.map((item) => {
-          return [{ id: item.value, name: item.store }];
-        });
-      
-        var flattened = [].concat.apply([], allChannelsArray);
-       
-        setclientOptions(flattened);
-       
+        //Put the data in the state
+        setFilter(JSON.parse(result));
       })
       .catch((error) => console.log("error", error));
   };
  
-  const [showModal, setShowModal] = useState(false);
-  const [profileDetails, setprofileDetails] = useState([]);
-  const [errorMessage, seterrorMessage] = useState("");
-  const [name, setName] = useState(props.profileInfo.first_name);
-  const [clientOptions, setclientOptions] = useState([]);
-  const [countryOptions, setcountryOptions] = useState([]);
-  // const [stores, setstores] = useState(props.profileInfo.stores);
-  let editStoreId = [];
- 
-  if(props.flag === 1){
-     editStoreId = props.profileInfo.stores.map((item)=>{
-      return item.id;
-        });
-  }
- let editCountryId = [];
- if(props.flag === 1){
-  editCountryId = props.profileInfo.countries.map((item)=>{
-    return item.id;
-      });
- }
-
-  
-  const [stores, setstores] = useState(editStoreId);
-  const [country, setCountry] = useState(editCountryId);
-
-  const nameRef = useRef("");
-  const emailRef = useRef("");
-  const userType = useRef(1);
-  const [selfServiceType, setselfServiceType] = useState(
-    props.profileInfo.enabled
-  );
-
   const nameChangeHandler = (event) => {
     setName(event.target.value);
   };
   const handleSelectChange = (event) => {
-    console.log(event);
     let selectedStore = event;
     const selectedStoreId = selectedStore.map((item) => {
       return item.id;
     });
-    console.log(selectedStoreId);
     setstores(selectedStoreId);
   };
   const editProfileHandler = (event) => {
+    setisLoading(true);
+    const email=localStorage.getItem("name");
+
     event.preventDefault();
     const profile = {
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
-      profile: userType.current.value,
+      profile: userType,
       stores: stores,
       countries: country,
       enabled: selfServiceType,
     };
-    console.log(profile);
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -138,11 +190,12 @@ const NewUserProfileModal = (props) => {
       body: JSON.stringify(profile),
       redirect: "follow",
     };
-    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/user?user=${props.profileInfo.email}`;
+    
+    let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/user?user=${email}`;
+
     fetch(url, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         if (result === '"Success!"') {
           window.location.reload();
         }
@@ -158,6 +211,7 @@ const NewUserProfileModal = (props) => {
             "Elevation of privileges not possible, contact an administrator"
           );
         }
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -166,25 +220,27 @@ const NewUserProfileModal = (props) => {
     const selectedCountryId = selectedCountry.map((item) => {
       return item.id;
     });
-    console.log(selectedCountryId);
     setCountry(selectedCountryId);
   };
- 
+
+  const handleSelectUserTypeChange = (event) => {
+    setUserType(event.target.value);
+  }
+
   const addProfileHandler = async (event) => {
+    setisLoading(true);
     event.preventDefault();
     const profile = {
       first_name: name,
       last_name: " ",
       email: emailRef.current.value,
-      profile: userType.current.value,
+      profile: userType,
       stores: stores,
       countries: country,
       enabled: selfServiceType,
     };
-    console.log(profile);
     setprofileDetails(profile);
     const userEmail = localStorage.getItem("dtm");
-    console.log(userEmail);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -194,7 +250,6 @@ const NewUserProfileModal = (props) => {
     myHeaders.append("Content-Type", "text/plain");
 
     var raw = profile;
-console.log(JSON.stringify(profile));
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -208,13 +263,13 @@ console.log(JSON.stringify(profile));
     )
       .then((response) => response.text())
       .then((result) =>{
-        console.log(result);
         if (result === '"Success!"') {
           window.location.reload();
         }
-       
+        setisLoading(false);
       } )
       .catch((error) => console.log("error", error));
+    
   };
   return (
     <ModalBody>
@@ -226,7 +281,7 @@ console.log(JSON.stringify(profile));
             textAlign: "center",
           }}
         >
-          Crear nuevo usuario
+          Crear nuevo perfil
         </h3>
       )}
       {props.flag === 1 && (
@@ -237,7 +292,7 @@ console.log(JSON.stringify(profile));
             textAlign: "center",
           }}
         >
-          Edit User
+         Editar perfil
         </h3>
       )}
 
@@ -249,7 +304,7 @@ console.log(JSON.stringify(profile));
           <input
             className="input"
             type="name"
-            name="email"
+            name="name"
             id="exampleEmail"
             style={{ fontSize: "12px" }}
             // value={editedName}
@@ -259,15 +314,22 @@ console.log(JSON.stringify(profile));
         </FormGroup>
         <FormGroup>
           <Label for="exampleEmail" style={{ fontWeight: "600", size: "14px" }}>
-            Correo Electronico:
+            Correo Electrónico:
           </Label>
-
-          <input
+{props.flag===1 &&   <input
             className="input"
             ref={emailRef}
             type="email"
             defaultValue={props.profileInfo.email}
-          />
+disabled
+          />}
+      {props.flag===0 &&   <input
+            className="input"
+            ref={emailRef}
+            type="email"
+            defaultValue={props.profileInfo.email}
+
+          />}
         </FormGroup>
         <Row>
           <Col md={6}>
@@ -279,10 +341,11 @@ console.log(JSON.stringify(profile));
                 class="form-select"
                 aria-label="Default select example"
                 style={{ borderRadius: "10px" }}
-                ref={userType}
-                defaultValue={props.profileInfo.profile}
+                //ref={userType}
+                defaultValue={userType}
+                onChange={handleSelectUserTypeChange}
               >
-                <option selected>Selcciona un tipo de usuario</option>
+                <option selected>Selccione tipo de usuario</option>
                 <option value={1}>Administrador</option>
                 <option value={2}>KAM</option>
                 <option value={3}>Cliente</option>
@@ -292,10 +355,10 @@ console.log(JSON.stringify(profile));
           <Col md={6}>
             <FormGroup>
               <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
-                Pais
+                País
               </Label>
               <CheckboxDropdown
-                placeholder="Selccione un pais"
+                placeholder="Selccione un país"
                 options={countryOptions}
                 handleSelectChange={handleSelectCountryChange}
                 // defaultValue={props.profileInfo.stores}
@@ -305,6 +368,8 @@ console.log(JSON.stringify(profile));
             </FormGroup>
           </Col>
         </Row>
+        {
+          userType != "1"  && 
         <Row>
           <Col md={12}>
             <FormGroup>
@@ -312,16 +377,18 @@ console.log(JSON.stringify(profile));
                 Cliente
               </Label>
               <CheckboxDropdown
-                placeholder="Selccione un cliente"
+                placeholder="Seleccione un cliente"
                 options={clientOptions}
                 handleSelectChange={handleSelectChange}
                 // defaultValue={props.profileInfo.stores}
                 defaultValue={props.profileInfo.stores}
               ></CheckboxDropdown>
+
             </FormGroup>
           </Col>
         </Row>
-
+        }
+        <br/>
         <FormGroup>
           <Label for="Name" style={{ fontWeight: "600", size: "14px" }}>
             Activado:
@@ -342,6 +409,7 @@ console.log(JSON.stringify(profile));
         </FormGroup>
         {props.flag === 0 && (
           <div class="text-center">
+          {!isLoading && (
             <button
               id="bttnSubmit"
               type="submit"
@@ -361,12 +429,45 @@ console.log(JSON.stringify(profile));
               }}
               onClick={addProfileHandler}
             >
-              Crear Usuario &nbsp;
+              Crear perfil &nbsp;
             </button>
+          )}
+         
+          {isLoading && (
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#51cbce",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+              }}
+              disabled
+            >
+                 <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Creando...
+                
+            </button>
+          )}
           </div>
         )}
+
         {props.flag === 1 && (
           <div class="text-center">
+          {!isLoading && (
             <button
               id="bttnSubmit"
               type="submit"
@@ -386,8 +487,39 @@ console.log(JSON.stringify(profile));
               }}
               onClick={editProfileHandler}
             >
-              Edit Usuario &nbsp;
+              Editar perfil &nbsp;
             </button>
+          )}
+         
+          {isLoading && (
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#51cbce",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+              }}
+              disabled
+            >
+                 <Spinner
+                    style={{ width: "0.7rem", height: "0.7rem" }}
+                    type="grow"
+                    color="light"
+                  />
+                  &nbsp; Editando...
+                
+            </button>
+          )}
           </div>
         )}
       </Form>

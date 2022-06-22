@@ -9,6 +9,7 @@ export default class Chips extends React.Component {
     items: [],
     value: "",
     error: null,
+   
     emailState: [],
     emailError: null,
     emailSent: null,
@@ -83,25 +84,35 @@ export default class Chips extends React.Component {
   };
 
   isValid(email) {
+    let emailError = null;
     let error = null;
 
     if (this.isInList(email)) {
       error = `${email} Fue agregado correctamente`;
     }
+    if (this.isInList(email)) {
+      emailError = `${email} Fue agregado correctamente`;
+    }
 
     if (!this.isEmail(email)) {
       error = `${email} No es un correo válido`;
     }
+    if (!this.isEmail(email)) {
+      emailError = `${email} No es un correo válido`;
+    }
+    if(emailError){
+      this.setState({emailError, error: null});
+    }
 
     if (error) {
-      this.setState({ error });
+      this.setState({ error, emailError:null});
 
       return false;
     }
+    
 
     return true;
   }
-
   isInList(email) {
     return this.state.items.includes(email);
   }
@@ -668,6 +679,7 @@ export default class Chips extends React.Component {
       this.setState({
         items: [...this.state.items, this.state.value],
         value: "",
+        emailError: null
       });
     }
 
@@ -776,7 +788,7 @@ export default class Chips extends React.Component {
               ))}
 
               <input
-                className={"input " + (this.state.error && " has-error")}
+                className={"input " + (this.state.emailError && " has-error")}
                 value={this.state.value}
                 placeholder="Escribe aquí el correo y presiona la tecla 'Enter'"
                 style={{ fontSize: "12px" }}
@@ -785,7 +797,8 @@ export default class Chips extends React.Component {
                 onPaste={this.handlePaste}
               />
 
-              {this.state.error && <p className="error">{this.state.error}</p>}
+              {/* {!this.state.error && <p className="error">{this.state.error}</p>} */}
+              {!this.state.emailError && <p className="error">{this.state.emailError}</p>}
             </FormGroup>
             <div class="text-center">
               <button

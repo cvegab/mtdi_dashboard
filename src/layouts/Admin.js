@@ -76,6 +76,24 @@ function Admin(props) {
         }
       });
     }
+    if(props.userType === '3'){
+      return kamRoutes.map((prop, key) => {
+        if (prop.collapse) {
+          return getRoutes(prop.views);
+        }
+        if (prop.layout === "/admin") {
+          return (
+            <Route
+              path={prop.layout + prop.path}
+              component={prop.component}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      });
+    }
     if(props.userType === '1'){
       return routes.map((prop, key) => {
         if (prop.collapse) {
@@ -135,6 +153,7 @@ function Admin(props) {
         <AdminNavbar {...props} handleMiniClick={handleMiniClick} />
         {/* <Switch>{getRoutes(routes)}</Switch> */}
        {props.userType === '2' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
+       {props.userType === '3' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
         {props.userType === '1' &&  <Switch>{getRoutes(routes)}</Switch>}
         {
           // we don't want the Footer to be rendered on full screen maps page

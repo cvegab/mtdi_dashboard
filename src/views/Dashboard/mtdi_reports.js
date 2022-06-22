@@ -1424,11 +1424,21 @@ if(lista.length!==0){
 
         if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
           let kamCountryArray = localStorage.getItem("ct");
-          console.log(kamCountryArray);
-          const kamCountry = obj.filter((item) => {
-            return item.value === Number(kamCountryArray);
+          var c = kamCountryArray.split(",").map(function (item) {
+            return parseInt(item, 10);
           });
-          console.log(kamCountry[0].stores);
+          console.log(c);
+          let finalKamCountry = [];
+          for (let i = 0; i <= c.length - 1; i++) {
+            let x = obj.filter((item) => {
+              return item.value === c[i];
+            });
+            finalKamCountry.push(x);
+          }
+          console.log(finalKamCountry);
+          var flattenedCountry = [].concat.apply([], finalKamCountry);
+          setfilteredCountryData(flattenedCountry);
+          console.log(flattenedCountry[0].stores);
           const kamstore = localStorage.getItem("st");
           console.log(kamstore);
           var b = kamstore.split(",").map(function (item) {
@@ -1437,7 +1447,7 @@ if(lista.length!==0){
           console.log(b);
           let finalKamStore = [];
           for (let i = 0; i <= b.length - 1; i++) {
-            let x = kamCountry[0].stores.filter((item) => {
+            let x = flattenedCountry[0].stores.filter((item) => {
               return item.value === b[i];
             });
             finalKamStore.push(x);
@@ -1484,15 +1494,15 @@ console.log(resArr);
         console.log(salesChannelList);
         //setcR(salesChannelList);
         setchannels(salesChannelList);
-        if (localStorage.getItem("ut") === "2"||localStorage.getItem("ut") === "3") {
-          let kamCountryArray = localStorage.getItem("ct");
-          console.log(kamCountryArray);
-          const kamCountry = obj.filter((item) => {
-            return item.value === Number(kamCountryArray);
-          });
-          console.log(kamCountry);
-          setfilteredCountryData(kamCountry);
-        }
+        // if (localStorage.getItem("ut") === "2"||localStorage.getItem("ut") === "3") {
+        //   let kamCountryArray = localStorage.getItem("ct");
+        //   console.log(kamCountryArray);
+        //   const kamCountry = obj.filter((item) => {
+        //     return item.value === Number(kamCountryArray);
+        //   });
+        //   console.log(kamCountry);
+        //   setfilteredCountryData(kamCountry);
+        // }
         if (localStorage.getItem("ut") === "1") {
           setfilteredCountryData(obj);
         }

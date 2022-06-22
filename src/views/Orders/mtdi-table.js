@@ -52,6 +52,7 @@ import WmsModal from "components/modalComponents/wms-modal";
 import ClientModal from "components/ClientModal/client-modal";
 import CourierStatusModal from "components/courierStatusModal/courier-status-modal";
 import BallotDetailModal from "components/BallotDetailModal/BallotDetailModal";
+import { NavigateBeforeSharp } from "@material-ui/icons";
 
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
@@ -497,21 +498,50 @@ const MtdiTable = (props) => {
         console.log(obj);
         if (localStorage.getItem("ut") === "2") {
           let kamCountryArray = localStorage.getItem("ct");
-          console.log(kamCountryArray);
-          const kamCountry = obj.filter((item) => {
-            return item.value === Number(kamCountryArray);
+         
+          var b = kamCountryArray.split(",").map(function (item) {
+            return parseInt(item, 10);
           });
-          console.log(kamCountry);
-          setfilteredCountryData(kamCountry);
+          console.log(b);
+          let finalKamCountry = [];
+          for (let i = 0; i <= b.length - 1; i++) {
+            let x = obj.filter((item) => {
+              return item.value === b[i];
+            });
+            finalKamCountry.push(x);
+          }
+          var flattened = [].concat.apply([], finalKamCountry);
+          console.log(flattened);
+          setfilteredCountryData(flattened);
+          // console.log(kamCountryArray);
+          // const kamCountry = obj.filter((item) => {
+          //   return item.value === Number(kamCountryArray);
+          // });
+          // console.log(kamCountry);
+          // setfilteredCountryData(kamCountry);
         }
         if (localStorage.getItem("ut") === "3") {
           let clientCountryArray = localStorage.getItem("ct");
           console.log(clientCountryArray);
-          const clientCountry = obj.filter((item) => {
-            return item.value === Number(clientCountryArray);
+          var b =  clientCountryArray.split(",").map(function (item) {
+            return parseInt(item, 10);
           });
-          console.log(clientCountry);
-          setfilteredCountryData(clientCountry);
+          console.log(b);
+          let finalClientCountry = [];
+          for (let i = 0; i <= b.length - 1; i++) {
+            let x = obj.filter((item) => {
+              return item.value === b[i];
+            });
+            finalClientCountry.push(x);
+          }
+          var flattened = [].concat.apply([], finalClientCountry);
+          console.log(flattened);
+          setfilteredCountryData(flattened);
+          // const clientCountry = obj.filter((item) => {
+          //   return item.value === Number(clientCountryArray);
+          // });
+          // console.log(clientCountry);
+          // setfilteredCountryData(clientCountry);
         }
         if(localStorage.getItem("ut")==="1"){
           setfilteredCountryData(obj);
@@ -745,6 +775,7 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
       render: (rowData) => {
+        if (rowData.order_id !== undefined) {
         return (
           <div>
             <span
@@ -757,7 +788,9 @@ const MtdiTable = (props) => {
             </span>
           </div>
         );
+        }
       },
+    
     },
     {
       title: "Fecha de Orden",
@@ -1049,6 +1082,22 @@ const MtdiTable = (props) => {
       title: "Total",
       field: "precio_sin_shipping",
       width: "13%",
+      render: (rowData) => {
+        if (rowData.precio_sin_shipping !== undefined) {
+          let formatted = new Intl.NumberFormat("es-CL", {
+            style: "currency",
+            currency: "CLP",
+          }).format(rowData.precio_sin_shipping);
+          return (
+            <div>
+            {formatted}
+            
+              &nbsp;
+           
+            </div>
+          );
+          }
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1059,6 +1108,22 @@ const MtdiTable = (props) => {
       title: "Shipping",
       field: "valor_shipping",
       width: "13%",
+      render: (rowData) => {
+        if (rowData.valor_shipping !== undefined) {
+        let formatted = new Intl.NumberFormat("es-CL", {
+          style: "currency",
+          currency: "CLP",
+        }).format(rowData.valor_shipping);
+        return (
+          <div>
+          {formatted}
+          
+            &nbsp;
+         
+          </div>
+        );
+        }
+    },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1140,17 +1205,27 @@ const MtdiTable = (props) => {
       width: "15%",
       render: (rowData) => {
         if (rowData.courier != undefined) {
+          if(rowData.courier_logo === "No definido"||rowData.courier_logo === "No aplica")
+          return (
+            <div>
+              <span style={{ whiteSpace: "nowrap" }}> &nbsp;&nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;</span> 
+                {rowData.courier}
+              </span>
+            </div>
+          );
+          if(rowData.courier_logo !== "No definido"||rowData.courier_logo !== "No aplica")
           return (
             <div>
               <span style={{ whiteSpace: "nowrap" }}>
-                {rowData.courier_logo !== "No aplica" && (
-                  <img
+                {rowData.courier_logo !== "No definido" && rowData.courier_logo !== "No aplica" && (
+                 <img 
                     style={{ paddingRight: "8px" }}
                     src={rowData.courier_logo}
                     width="40px"
                     height="32px"
-                  />
+                  /> 
                 )}
+                
                 {rowData.courier}
               </span>
             </div>
