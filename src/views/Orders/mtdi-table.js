@@ -776,6 +776,7 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
       render: (rowData) => {
+        if (rowData.order_id !== undefined) {
         return (
           <div>
             <span
@@ -788,7 +789,9 @@ const MtdiTable = (props) => {
             </span>
           </div>
         );
+        }
       },
+    
     },
     {
       title: "Fecha de Orden",
@@ -1081,6 +1084,7 @@ const MtdiTable = (props) => {
       field: "precio_sin_shipping",
       width: "13%",
       render: (rowData) => {
+        if (rowData.precio_sin_shipping !== undefined) {
           let formatted = new Intl.NumberFormat("es-CL", {
             style: "currency",
             currency: "CLP",
@@ -1093,7 +1097,7 @@ const MtdiTable = (props) => {
            
             </div>
           );
-        
+          }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1106,6 +1110,7 @@ const MtdiTable = (props) => {
       field: "valor_shipping",
       width: "13%",
       render: (rowData) => {
+        if (rowData.valor_shipping !== undefined) {
         let formatted = new Intl.NumberFormat("es-CL", {
           style: "currency",
           currency: "CLP",
@@ -1118,7 +1123,7 @@ const MtdiTable = (props) => {
          
           </div>
         );
-      
+        }
     },
       headerStyle: {
         backgroundColor: "#1D308E",
