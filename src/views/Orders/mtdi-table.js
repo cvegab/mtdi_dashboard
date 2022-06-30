@@ -53,7 +53,7 @@ import ClientModal from "components/ClientModal/client-modal";
 import CourierStatusModal from "components/courierStatusModal/courier-status-modal";
 import BallotDetailModal from "components/BallotDetailModal/BallotDetailModal";
 import { NavigateBeforeSharp } from "@material-ui/icons";
-
+import { checkRut, prettifyRut, formatRut } from "react-rut-formatter";
 const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
@@ -1361,6 +1361,7 @@ const MtdiTable = (props) => {
 
       render: (rowData) => {
         if (rowData.comprador != undefined) {
+          let FormattedRut = prettifyRut(rowData.rut);
           return (
             // <div
 
@@ -1375,7 +1376,7 @@ const MtdiTable = (props) => {
               >
                 {rowData.comprador}
                 <br />
-                {rowData.rut}
+               {FormattedRut}
               </span>
               <span
                 style={{
