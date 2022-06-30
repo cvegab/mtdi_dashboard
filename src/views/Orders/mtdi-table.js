@@ -10,6 +10,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
 import { Select, MenuItem } from "@material-ui/core";
+import iconFilterButton from "../../assets/img/icons/Reports/iconFilters.png";
 import DatePicker, { registerLocale } from "react-datepicker";
 // import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
@@ -73,6 +74,10 @@ const tableIcons = {
 registerLocale("es", es);
 
 const MtdiTable = (props) => {
+  const [isNarrowScreen, setIsNarrowScreen] = useState(false);
+  const [isMobileSizes, setIsMobileSized] = useState(false);
+  const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
+  const [showFilter, setshowFilter] = useState(false);
   const [filtersApplied, setfiltersApplied] = useState(false);
   const [userEmailApi, setuserEmailApi] = useState('');
   const [data, setData] = useState([]);
@@ -87,7 +92,9 @@ const MtdiTable = (props) => {
   const accentColor = "#5cb7b7";
   const toggle = () => setIsTourOpen(!isTourOpen);
   const [modalBallotDetails, setModalBallotDetails] = useState(false);
+  const [modalLabels, setModalLabels] = useState(false);
   const toggle2 = () => setModalBallotDetails(!modalBallotDetails);
+  const toggle3 = () => setModalLabels(!modalLabels);
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
   const d = new Date();
@@ -555,6 +562,33 @@ const MtdiTable = (props) => {
       })
       .catch((error) => console.log("error", error));
   };
+  useEffect(() => {
+    // set initial value
+    const mediaWatcher = window.matchMedia("(max-width: 767px)");
+    setIsMobileSized(mediaWatcher.matches);
+
+    //watch for updates
+    function updateIsNarrowScreen(e) {
+      setIsNarrowScreen(e.matches);
+    }
+    mediaWatcher.addEventListener("change", updateIsNarrowScreen);
+
+    // clean up after ourselves
+    return function cleanup() {
+      mediaWatcher.removeEventListener("change", updateIsNarrowScreen);
+    };
+  });
+
+  useEffect(() => {
+    if (isMobileSizes) {
+      setfiltersClass("FiltersInMobile");
+      setshowFilter(false);
+    }
+    if (!isMobileSizes) {
+      setfiltersClass("FiltersInDesktop");
+      setshowFilter(true);
+    }
+  }, [isMobileSizes]);
 
   useEffect(() => {
     if (client !== "") {
@@ -645,6 +679,9 @@ const MtdiTable = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+  const showFiltersHandler = () => {
+    setshowFilter(!showFilter);
   };
   const wmsModalHandler = () => {
     setshowWMSModal(true);
@@ -1355,8 +1392,9 @@ const MtdiTable = (props) => {
               style={{ cursor: "pointer" }}
               title="Mostrar Etiqueta"
             >
-              {/* <a href={rowData.dte} target="_blank"> */}
-              &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} onClick={toggle2} />
+             
+              {/* &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} onClick={toggle3} /> */}
+              &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} />
             </span>
           </div>
         );
@@ -1657,6 +1695,24 @@ if (localStorage.getItem("ut") === '3') {
           <span>{localStorage.getItem("last")}</span>
         </p>
 
+        {isMobileSizes && (
+            <button
+              style={{
+                backgroundColor: "transparent",
+                color: "black",
+                width: "100%",
+                padding: "20px",
+                border: "none",
+                fontSize: "12px",
+              }}
+              onClick={showFiltersHandler}
+            >
+              <img src={iconFilterButton} width="15" />
+              &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+            </button>
+          )}
+           {showFilter && (
+      <div id={filtersClass}>
         <Col md="12">
           <div className="secondStepTour">
             <label htmlFor="select-country">
@@ -1967,6 +2023,8 @@ if (localStorage.getItem("ut") === '3') {
             </Button>
           </div>
         </Col>
+      </div>
+    )}
 
         <div className="firstStepTour">
           {/* MOBILE VERSION */}
@@ -2300,6 +2358,58 @@ if (localStorage.getItem("ut") === '3') {
           </div>
           <br />
         </Modal>
+
+      {/* Label Detail Modal  */}
+
+
+      <Modal isOpen={modalLabels} toggle={toggle3}>
+          <ModalHeader>
+            <div style={{ display: "flex", justifyContent: "end" }}>
+              <button
+                style={{
+                  background: "none",
+                  position: "relative",
+                  marginLeft: "14em",
+                  color: "black",
+                  border: "none",
+                }}
+                onClick={toggle2}
+              >
+                x
+              </button>
+            </div>
+          </ModalHeader>
+          
+          <div> Etiqueta </div>
+
+          <div class="text-center">
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#1D308E",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+                marginTop: "1em",
+              }}
+              onClick={toggle2}
+            >
+              Cerrar
+            </button>
+          </div>
+          <br />
+        </Modal>
+
+
       </div>
     </React.Fragment>
   );
