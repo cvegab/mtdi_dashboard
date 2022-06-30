@@ -473,7 +473,7 @@ const MtdiTable = (props) => {
     const userEmail=localStorage.getItem("dtm");
   
     var myHeaders = new Headers();
-    myHeaders.append("x-api-key", "develop");
+    myHeaders.append("x-api-key", "3pTvuFxcs79dzls8IFteY5JWySgfvswL9DgqUyP8");
     myHeaders.append(
       "Authorization",
       "Bearer 75b430ce008e4f5b82fa742772e531b71bb11aeb53788098ec769aeb5f58b2298c8d65fa2e4a4a04e3fbf6fb7b0401e6eada7b8782aeca5b259b38fa8b419ac6"
