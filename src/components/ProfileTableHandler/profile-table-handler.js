@@ -77,7 +77,7 @@ const ProfileTableHandler = () => {
 
     try {
       const response = await fetch(
-        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/pre-production/users?user=sofiavatar@chambas.cl`,
+        `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/users?user=sofiavatar@chambas.cl`,
         requestOptions
       );
 
