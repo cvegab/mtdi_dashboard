@@ -18,11 +18,13 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import Etiqueta from "../../assets/img/Etiqueta.png";
 import Estado from "../../assets/img/Estado.png";
 import chileExpress from "../../assets/img/chile-express.png";
 import CorreosChile from "../../assets/img/correos-chile.png";
 import CourierStatus from "../../assets/img/courierStatus.png";
 import wmsError from "../../assets/img/errorwms.png";
+import { checkRut, prettifyRut, formatRut } from "react-rut-formatter";
 const XLSX = require("xlsx");
 import {
   Button,
@@ -113,9 +115,11 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
+  const { isValid, rut, updateRut } = useRut();
   const [searchOrderId, setsearchOrderId] = useState("");
   const [userType, setuserType] = useState("");
   const [kamCountries, setkamCountries] = useState("");
+
   var stepsDesk = [];
   var a = navigator.userAgent;
   var agents = new Array(
@@ -780,7 +784,7 @@ const MtdiTable = (props) => {
           <div>
             <span
               style={{ cursor: "pointer" }}
-              title="Mostrar DTE"
+              title="Mostrar Detalle compra"
               className={classes.showPdf}
             >
               {/* <a href={rowData.dte} target="_blank"> */}
@@ -1336,15 +1340,28 @@ const MtdiTable = (props) => {
         fontSize: "12px",
       },
     },
-    // {
-    //   title: "Bultos/Etiquetas",
-    //   field: "comprador",
-    //   headerStyle: {
-    //     backgroundColor: "#1D308E",
-    //     color: "#FFF",
-    //     fontSize: "12px",
-    //   },
-    // },
+    {
+      title: "Bultos/Etiquetas",
+      field: "order_id",
+      headerStyle: {
+        backgroundColor: "#1D308E",
+        color: "#FFF",
+        fontSize: "12px",
+      },
+      render: (rowData) => {
+        return (
+          <div>
+            <span
+              style={{ cursor: "pointer" }}
+              title="Mostrar Etiqueta"
+            >
+              {/* <a href={rowData.dte} target="_blank"> */}
+              &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} onClick={toggle2} />
+            </span>
+          </div>
+        );
+        },
+    },
     // {
     //   title: "Estado courier",
     //   field: "comprador",
@@ -1360,6 +1377,7 @@ const MtdiTable = (props) => {
       width: "20%",
 
       render: (rowData) => {
+       
         if (rowData.comprador != undefined) {
           let FormattedRut = prettifyRut(rowData.rut);
           return (
@@ -1375,6 +1393,16 @@ const MtdiTable = (props) => {
                 }}
               >
                 {rowData.comprador}
+                </span>
+                <span
+                style={{
+                  width: "0%",
+                  float: "left",
+                  whiteSpace: "nowrap",
+                  fontSize: "11px",
+                  color:"#858F99"
+                }}
+              >
                 <br />
                {FormattedRut}
               </span>
