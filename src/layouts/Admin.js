@@ -144,6 +144,12 @@ function Admin(props) {
         bgColor='white'
         activeColor='white'
       />}
+        {props.userType ==='3' &&    <Sidebar
+        {...props}
+        routes={kamRoutes}
+        bgColor='white'
+        activeColor='white'
+      />}
    {/* <Sidebar
         {...props}
         routes={routes}
