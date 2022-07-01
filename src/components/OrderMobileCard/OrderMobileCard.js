@@ -34,8 +34,11 @@ import {
 import Accordion from "react-bootstrap/Accordion";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import ClientModal from "components/ClientModal/client-modal";
+import { post } from "jquery";
 
 function OrderMobileCard(props) {
+  
+
   const { data } = props;
   const { isLoading } = props;
   const [showClientModal, setshowClientModal] = React.useState(false);
@@ -87,6 +90,8 @@ function OrderMobileCard(props) {
   const searchFilter = (event) => {
     setQuery(event.target.value);
   };
+
+ 
 
   return (
     <>
@@ -399,7 +404,7 @@ function OrderMobileCard(props) {
                                       fontWeight: "bold",
                                     }}
                                   >
-                                    Tienda:
+                                    Tienda Oficial:
                                   </td>
 
                                   <td
@@ -441,7 +446,7 @@ function OrderMobileCard(props) {
                                 </tr>
 
                                 {/* TIENDA OFICIAL */}
-                                <tr>
+                                {/* <tr>
                                   <td />
                                   <td
                                     className="text-left"
@@ -462,7 +467,7 @@ function OrderMobileCard(props) {
                                     <br />
                                     <br />
                                   </td>
-                                </tr>
+                                </tr> */}
 
                                 {/* ORDEN DE COMPRA */}
                                 <tr>
@@ -592,6 +597,34 @@ function OrderMobileCard(props) {
                                     style={{ fontSize: "12px" }}
                                   >
                                     $ {post.precio_sin_shipping}
+                                  
+                                    
+                                  </td>
+                                  <td className="td-actions text-right">
+                                    <br />
+                                    <br />
+                                  </td>
+                                </tr>
+                                {/* SHIPPING */}
+                                <tr>
+                                  <td />
+                                  <td
+                                    className="text-left"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Shipping:
+                                  </td>
+
+                                  <td
+                                    className="text-left"
+                                    style={{ fontSize: "12px" }}
+                                  >
+                                    $ {post.valor_shipping}
+                                  
+                                    
                                   </td>
                                   <td className="td-actions text-right">
                                     <br />
@@ -679,7 +712,7 @@ function OrderMobileCard(props) {
                       </tr> */}
 
                                 {/* ESTADO FULFILLMENT */}
-                                <tr>
+                                {/* <tr>
                                   <td></td>
                                   <td
                                     className="text-left"
@@ -701,7 +734,7 @@ function OrderMobileCard(props) {
                                     <br />
                                     <br />
                                   </td>
-                                </tr>
+                                </tr> */}
 
                                 {/* PICKEADOR */}
                                 {/* <tr>

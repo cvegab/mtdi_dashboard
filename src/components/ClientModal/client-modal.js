@@ -2,9 +2,10 @@ import Modal from "../UI/Modal";
 import whatsApp from "../../assets/img/whatsapp.png";
 import mailButton from "../../assets/img/mailButton.png";
 import textMessage from "../../assets/img/textMessage.png";
+import { checkRut, prettifyRut, formatRut } from "react-rut-formatter";
 
 const ClientModal = (props) => {
- 
+  let FormattedRut = prettifyRut(props.purchaser.rut);
   return (
     <Modal onhideModal={props.onhideModal}>
       <p style={{ textAlign: "center" }}>Orden {props.purchaser.order_id}</p>
@@ -14,7 +15,7 @@ const ClientModal = (props) => {
       <p
         style={{ color: "#858F99", textAlign: "center", paddingBottom: "5px" }}
       >
-        {props.purchaser.rut}
+        {FormattedRut}
         <br />
         {/* <span style={{width:'30px',height:'2px',backgroundColor:'#1D308E'}}>---</span></p> */}
       </p>
