@@ -620,7 +620,7 @@ const MtdiTable = (props) => {
 
   const fetchOrderData = async () => {
     console.log(userEmailApi);
-    const userEmail=localStorage.getItem("dtm");
+    let userEmail=localStorage.getItem("dtm");
     console.log(userEmail);
     if(userEmail.includes('+')){
      
