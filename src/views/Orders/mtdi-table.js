@@ -122,7 +122,7 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
-
+const [userStore, setuserStore] = useState('');
   const [searchOrderId, setsearchOrderId] = useState("");
   const [userType, setuserType] = useState("");
   const [kamCountries, setkamCountries] = useState("");
@@ -464,16 +464,28 @@ const MtdiTable = (props) => {
    console.log(userEmail);
    setuserEmailApi(userEmail);
  }
+ const fetchUserStore = ()=>{
+  const userStore = localStorage.getItem("st");
+  console.log(userStore);
+  // setuserEmailApi(userEmail);
+}
   useEffect(() => {
     fetchUserEmail();
+    fetchUserStore();
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
     if(localStorage.getItem("ut")==='1'){
       setstoreId(0);
     }
-    if(localStorage.getItem("ut")==='2'){
-      setstoreId(1,2,3);
-    }
+    // if(localStorage.getItem("ut")==='3'){
+    //   const kamstore = localStorage.getItem("st");
+    //   console.log(kamstore);
+    //   var b = kamstore.split(",").map(function (item) {
+    //     return parseInt(item, 10);
+    //   });
+    //   console.log(b);
+    //  setstoreId(b);
+    // }
     fetchOrderData();
    
     fetchFilterData();
@@ -649,16 +661,16 @@ const MtdiTable = (props) => {
         return parseInt(item, 10);
       });
       console.log(b);
-      //let storeId=b;
+      let storeId=b;
       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
    }
    if(localStorage.getItem("ut")==='3'){
-    const Clientstore = localStorage.getItem("st");
-    console.log(Clientstore);
-    var b = Clientstore.split(",").map(function (item) {
-      return parseInt(item, 10);
-    });
-    console.log(b);
+    // const Clientstore = localStorage.getItem("st");
+    // console.log(Clientstore);
+    // var b = Clientstore.split(",").map(function (item) {
+    //   return parseInt(item, 10);
+    // });
+    // console.log(b);
     //let storeId=b;
     rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/preproduction/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
  }
