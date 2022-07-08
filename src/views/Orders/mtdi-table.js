@@ -622,6 +622,13 @@ const MtdiTable = (props) => {
     console.log(userEmailApi);
     const userEmail=localStorage.getItem("dtm");
     console.log(userEmail);
+    if(userEmail.includes('+')){
+     
+      let updatedEmail =userEmail.replace('+','%2B');
+      userEmail =  updatedEmail;
+      
+      console.log(userEmail);
+      }
     let countryValue = 3;
     setisLoading(true);
     let url = "";
