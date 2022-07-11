@@ -10,6 +10,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import RoomIcon from "@material-ui/icons/Room";
 import { Select, MenuItem } from "@material-ui/core";
+import iconFilterButton from "../../assets/img/icons/Reports/iconFilters.png";
 import DatePicker, { registerLocale } from "react-datepicker";
 // import calendarIcon from "../../assets/img/DatePickerIcon.png";
 import es from "date-fns/locale/es";
@@ -18,11 +19,13 @@ import "../../assets/css/global.css";
 import SiIcon from "../../assets/img/si.png";
 import noIcon from "../../assets/img/no.png";
 import showPdf from "../../assets/img/showPdf.png";
+import Etiqueta from "../../assets/img/Etiqueta.png";
 import Estado from "../../assets/img/Estado.png";
 import chileExpress from "../../assets/img/chile-express.png";
 import CorreosChile from "../../assets/img/correos-chile.png";
 import CourierStatus from "../../assets/img/courierStatus.png";
 import wmsError from "../../assets/img/errorwms.png";
+import { checkRut, prettifyRut, formatRut } from "react-rut-formatter";
 const XLSX = require("xlsx");
 import {
   Button,
@@ -71,6 +74,10 @@ const tableIcons = {
 registerLocale("es", es);
 
 const MtdiTable = (props) => {
+  const [isNarrowScreen, setIsNarrowScreen] = useState(false);
+  const [isMobileSizes, setIsMobileSized] = useState(false);
+  const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
+  const [showFilter, setshowFilter] = useState(false);
   const [filtersApplied, setfiltersApplied] = useState(false);
   const [userEmailApi, setuserEmailApi] = useState('');
   const [data, setData] = useState([]);
@@ -85,7 +92,9 @@ const MtdiTable = (props) => {
   const accentColor = "#5cb7b7";
   const toggle = () => setIsTourOpen(!isTourOpen);
   const [modalBallotDetails, setModalBallotDetails] = useState(false);
+  const [modalLabels, setModalLabels] = useState(false);
   const toggle2 = () => setModalBallotDetails(!modalBallotDetails);
+  const toggle3 = () => setModalLabels(!modalLabels);
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
   const d = new Date();
@@ -113,9 +122,11 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
+const [userStore, setuserStore] = useState('');
   const [searchOrderId, setsearchOrderId] = useState("");
   const [userType, setuserType] = useState("");
   const [kamCountries, setkamCountries] = useState("");
+
   var stepsDesk = [];
   var a = navigator.userAgent;
   var agents = new Array(
@@ -453,16 +464,28 @@ const MtdiTable = (props) => {
    console.log(userEmail);
    setuserEmailApi(userEmail);
  }
+ const fetchUserStore = ()=>{
+  const userStore = localStorage.getItem("st");
+  console.log(userStore);
+  // setuserEmailApi(userEmail);
+}
   useEffect(() => {
     fetchUserEmail();
+    fetchUserStore();
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
     if(localStorage.getItem("ut")==='1'){
       setstoreId(0);
     }
-    if(localStorage.getItem("ut")==='2'){
-      setstoreId(1,2,3);
-    }
+    // if(localStorage.getItem("ut")==='3'){
+    //   const kamstore = localStorage.getItem("st");
+    //   console.log(kamstore);
+    //   var b = kamstore.split(",").map(function (item) {
+    //     return parseInt(item, 10);
+    //   });
+    //   console.log(b);
+    //  setstoreId(b);
+    // }
     fetchOrderData();
    
     fetchFilterData();
@@ -551,6 +574,33 @@ const MtdiTable = (props) => {
       })
       .catch((error) => console.log("error", error));
   };
+  useEffect(() => {
+    // set initial value
+    const mediaWatcher = window.matchMedia("(max-width: 767px)");
+    setIsMobileSized(mediaWatcher.matches);
+
+    //watch for updates
+    function updateIsNarrowScreen(e) {
+      setIsNarrowScreen(e.matches);
+    }
+    mediaWatcher.addEventListener("change", updateIsNarrowScreen);
+
+    // clean up after ourselves
+    return function cleanup() {
+      mediaWatcher.removeEventListener("change", updateIsNarrowScreen);
+    };
+  });
+
+  useEffect(() => {
+    if (isMobileSizes) {
+      setfiltersClass("FiltersInMobile");
+      setshowFilter(false);
+    }
+    if (!isMobileSizes) {
+      setfiltersClass("FiltersInDesktop");
+      setshowFilter(true);
+    }
+  }, [isMobileSizes]);
 
   useEffect(() => {
     if (client !== "") {
@@ -582,8 +632,15 @@ const MtdiTable = (props) => {
 
   const fetchOrderData = async () => {
     console.log(userEmailApi);
-    const userEmail=localStorage.getItem("dtm");
+    let userEmail=localStorage.getItem("dtm");
     console.log(userEmail);
+    if(userEmail.includes('+')){
+     
+      let updatedEmail =userEmail.replace('+','%2B');
+      userEmail =  updatedEmail;
+      
+      console.log(userEmail);
+      }
     let countryValue = 3;
     setisLoading(true);
     let url = "";
@@ -615,12 +672,12 @@ const MtdiTable = (props) => {
       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
    }
    if(localStorage.getItem("ut")==='3'){
-    const Clientstore = localStorage.getItem("st");
-    console.log(Clientstore);
-    var b = Clientstore.split(",").map(function (item) {
-      return parseInt(item, 10);
-    });
-    console.log(b);
+    // const Clientstore = localStorage.getItem("st");
+    // console.log(Clientstore);
+    // var b = Clientstore.split(",").map(function (item) {
+    //   return parseInt(item, 10);
+    // });
+    // console.log(b);
     //let storeId=b;
     rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
  }
@@ -640,6 +697,9 @@ const MtdiTable = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+  const showFiltersHandler = () => {
+    setshowFilter(!showFilter);
   };
   const wmsModalHandler = () => {
     setshowWMSModal(true);
@@ -669,8 +729,17 @@ const MtdiTable = (props) => {
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
-    const userEmail=localStorage.getItem("dtm");
-    console.log(userEmailApi);
+    let userEmail=localStorage.getItem("dtm");
+  
+    if(userEmail.includes('+')){
+     
+      let updatedEmail =userEmail.replace('+','%2B');
+      userEmail =  updatedEmail;
+      
+      console.log(userEmail);
+      }
+   
+    
     let url = "";
     if (searchOrderId !== "") {
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/order?orderNo=${searchOrderId}&user=${userEmail}`;
@@ -780,7 +849,7 @@ console.log(url);
           <div>
             <span
               style={{ cursor: "pointer" }}
-              title="Mostrar DTE"
+              title="Mostrar Detalle compra"
               className={classes.showPdf}
             >
               {/* <a href={rowData.dte} target="_blank"> */}
@@ -1342,12 +1411,26 @@ console.log(url);
     },
     // {
     //   title: "Bultos/Etiquetas",
-    //   field: "comprador",
+    //   field: "order_id",
     //   headerStyle: {
     //     backgroundColor: "#1D308E",
     //     color: "#FFF",
     //     fontSize: "12px",
     //   },
+    //   render: (rowData) => {
+    //     return (
+    //       <div>
+    //         <span
+    //           style={{ cursor: "pointer" }}
+    //           title="Mostrar Etiqueta"
+    //         >
+             
+    //           {/* &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} onClick={toggle3} /> */}
+    //           &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} />
+    //         </span>
+    //       </div>
+    //     );
+    //     },
     // },
     // {
     //   title: "Estado courier",
@@ -1364,7 +1447,9 @@ console.log(url);
       width: "20%",
 
       render: (rowData) => {
+       
         if (rowData.comprador != undefined) {
+          let FormattedRut = prettifyRut(rowData.rut);
           return (
             // <div
 
@@ -1378,8 +1463,18 @@ console.log(url);
                 }}
               >
                 {rowData.comprador}
+                </span>
+                <span
+                style={{
+                  width: "0%",
+                  float: "left",
+                  whiteSpace: "nowrap",
+                  fontSize: "11px",
+                  color:"#858F99"
+                }}
+              >
                 <br />
-                {rowData.rut}
+               {FormattedRut}
               </span>
               <span
                 style={{
@@ -1632,6 +1727,24 @@ if (localStorage.getItem("ut") === '3') {
           <span>{localStorage.getItem("last")}</span>
         </p>
 
+        {isMobileSizes && (
+            <button
+              style={{
+                backgroundColor: "transparent",
+                color: "black",
+                width: "100%",
+                padding: "20px",
+                border: "none",
+                fontSize: "12px",
+              }}
+              onClick={showFiltersHandler}
+            >
+              <img src={iconFilterButton} width="15" />
+              &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+            </button>
+          )}
+           {showFilter && (
+      <div id={filtersClass}>
         <Col md="12">
           <div className="secondStepTour">
             <label htmlFor="select-country">
@@ -1942,6 +2055,8 @@ if (localStorage.getItem("ut") === '3') {
             </Button>
           </div>
         </Col>
+      </div>
+    )}
 
         <div className="firstStepTour">
           {/* MOBILE VERSION */}
@@ -2275,6 +2390,58 @@ if (localStorage.getItem("ut") === '3') {
           </div>
           <br />
         </Modal>
+
+      {/* Label Detail Modal  */}
+
+
+      <Modal isOpen={modalLabels} toggle={toggle3}>
+          <ModalHeader>
+            <div style={{ display: "flex", justifyContent: "end" }}>
+              <button
+                style={{
+                  background: "none",
+                  position: "relative",
+                  marginLeft: "14em",
+                  color: "black",
+                  border: "none",
+                }}
+                onClick={toggle2}
+              >
+                x
+              </button>
+            </div>
+          </ModalHeader>
+          
+          <div> Etiqueta </div>
+
+          <div class="text-center">
+            <button
+              id="bttnSubmit"
+              type="submit"
+              style={{
+                backgroundColor: "#1D308E",
+                textAlign: "center",
+                color: "white",
+                width: "296px",
+                height: "64px",
+                padding: "22px 81px",
+                borderRadius: "33px",
+                color: "#FFFFFF",
+                marginLeft: "1em",
+                textTransform: "none",
+                fontWeight: "bold",
+                border: "0",
+                marginTop: "1em",
+              }}
+              onClick={toggle2}
+            >
+              Cerrar
+            </button>
+          </div>
+          <br />
+        </Modal>
+
+
       </div>
     </React.Fragment>
   );

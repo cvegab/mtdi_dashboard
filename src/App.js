@@ -128,10 +128,11 @@ const App = () => {
         }
         if (obj.user.countries !== undefined){
           localStorage.setItem("ct", obj.user.countries);
-        }
-        if (obj.user.countries !== undefined){
           localStorage.setItem("st", obj.user.stores);
         }
+        // if (obj.user.countries !== undefined){
+        //   localStorage.setItem("st", obj.user.stores);
+        // }
         if (
           obj.message === "Autorizado" ||
           localStorage.getItem("name") !== null

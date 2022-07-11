@@ -23,7 +23,6 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
-
 import routes from "routes.js";
 import kamRoutes from "kamRoutes";
 
@@ -51,7 +50,6 @@ function Admin(props) {
     };
   });
   React.useEffect(() => {
-  
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainPanel.current.scrollTop = 0;
@@ -76,7 +74,7 @@ function Admin(props) {
         }
       });
     }
-    if(props.userType === '3'){
+    if (props.userType === "3") {
       return kamRoutes.map((prop, key) => {
         if (prop.collapse) {
           return getRoutes(prop.views);
@@ -94,7 +92,7 @@ function Admin(props) {
         }
       });
     }
-    if(props.userType === '1'){
+    if (props.userType === "1") {
       return routes.map((prop, key) => {
         if (prop.collapse) {
           return getRoutes(prop.views);
@@ -112,7 +110,6 @@ function Admin(props) {
         }
       });
     }
-   
   };
   const handleActiveClick = (color) => {
     setActiveColor(color);
@@ -143,7 +140,7 @@ function Admin(props) {
         bgColor='white'
         activeColor='white'
       />}
-         {props.userType ==='3' &&    <Sidebar
+        {props.userType ==='3' &&    <Sidebar
         {...props}
         routes={kamRoutes}
         bgColor='white'
@@ -158,9 +155,9 @@ function Admin(props) {
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} handleMiniClick={handleMiniClick} />
         {/* <Switch>{getRoutes(routes)}</Switch> */}
-       {props.userType === '2' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
-       {props.userType === '3' &&  <Switch>{getRoutes(kamRoutes)}</Switch>}
-        {props.userType === '1' &&  <Switch>{getRoutes(routes)}</Switch>}
+        {props.userType === "2" && <Switch>{getRoutes(kamRoutes)}</Switch>}
+        {props.userType === "3" && <Switch>{getRoutes(kamRoutes)}</Switch>}
+        {props.userType === "1" && <Switch>{getRoutes(routes)}</Switch>}
         {
           // we don't want the Footer to be rendered on full screen maps page
           props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (

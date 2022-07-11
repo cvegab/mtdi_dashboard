@@ -262,6 +262,7 @@ const DataStudio = () => {
       .then((response) => response.text())
       .then((result) => {
         var obj = JSON.parse(result);
+        console.log(obj);
         if (localStorage.getItem("ut") === "2" || localStorage.getItem("ut") === "3") {
           let kamCountryArray = localStorage.getItem("ct");
            

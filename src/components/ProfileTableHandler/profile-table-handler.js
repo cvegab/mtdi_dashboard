@@ -68,7 +68,7 @@ const ProfileTableHandler = () => {
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
       "Authorization",
-      bearerToken,
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lIjoiMjAyMi0wNy0wMVQxNjoyMDowNy43MjdaIiwidXNlciI6eyJfaWQiOiI2MWMxZjQ1MzZmNDg0MDM1YjYyNzQ4ZDciLCJDaXR5IjoiU2FudGlhZ28iLCJlbWFpbCI6InNvZmlhdmF0YXJAY2hhbWJhcy5jbCIsImZpcnN0X25hbWUiOiJTb2bDrWEiLCJsYXN0X25hbWUiOiIgIiwiY29uZmlnIjp7InNob3dUdXRvcmlhbCI6ZmFsc2V9LCJwcm9maWxlIjoxLCJwYXNzd29yZF9lbmFibGVkIjp0cnVlLCJzdG9yZXMiOlsxLDMsMiw0LDI4LDE1LDksNSwyNiw2LDI0LDI5LDgsNywxMSwxMCwxMiwyMywxNywxMywyMSwxNiwxNCwxOCwyMCwxOSwyNSwyN10sImNvdW50cmllcyI6WzEsMiwzLDRdLCJkYXRlX21vZGlmaWVkIjoiMjAyMi0wNi0xMVQwMjo0MToxNS41NDdaIiwiZW5hYmxlZCI6dHJ1ZSwibW9kaWZpZWRfYnkiOiJzb2ZpYXZhdGFyQGNoYW1iYXMuY2wifSwiaWF0IjoxNjU2NjkyNDA3fQ.y2ICkNxcxCeApEpT_vOUR8G5K3vA7wKssuN1HS-EqYU"
     );
 
     var requestOptions = {
