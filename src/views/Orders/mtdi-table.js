@@ -718,8 +718,17 @@ const MtdiTable = (props) => {
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
-    const userEmail=localStorage.getItem("dtm");
-    console.log(userEmailApi);
+    let userEmail=localStorage.getItem("dtm");
+  
+    if(userEmail.includes('+')){
+     
+      let updatedEmail =userEmail.replace('+','%2B');
+      userEmail =  updatedEmail;
+      
+      console.log(userEmail);
+      }
+   
+    
     let url = "";
     if (searchOrderId !== "") {
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/develop/store/order?orderNo=${searchOrderId}`;
