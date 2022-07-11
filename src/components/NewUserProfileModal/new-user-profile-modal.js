@@ -163,6 +163,7 @@ const NewUserProfileModal = (props) => {
   };
   const editProfileHandler = (event) => {
     let accessToken = localStorage.getItem("AccessToken");
+    console.log(accessToken);
     let bearerToken = `Bearer ${accessToken}`;
     setisLoading(true);
     const email=localStorage.getItem("name");
