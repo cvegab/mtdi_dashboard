@@ -104,8 +104,7 @@ const App = () => {
       .then((response) => response.text())
       .then((result) => {
         const obj = JSON.parse(result);
-        console.log(obj);
-      console.log(obj.access_token);
+      
       localStorage.setItem("AccessToken",obj.access_token);
      // console.log(obj.user.first_name);
         if (obj.user.first_name !== undefined) {
