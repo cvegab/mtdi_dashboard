@@ -79,7 +79,7 @@ const MtdiTable = (props) => {
   const [filtersClass, setfiltersClass] = useState("FiltersInDesktop");
   const [showFilter, setshowFilter] = useState(false);
   const [filtersApplied, setfiltersApplied] = useState(false);
-  const [userEmailApi, setuserEmailApi] = useState('');
+  const [userEmailApi, setuserEmailApi] = useState("");
   const [data, setData] = useState([]);
   const [pageCount, setpageCount] = useState(2);
   const [country, setcountry] = useState("");
@@ -122,7 +122,7 @@ const MtdiTable = (props) => {
   const [filteredOfficialStore, setfilteredOfficialStore] = useState([]);
   const [firstName, setfirstName] = useState("");
   const [urlState, seturlState] = useState("");
-const [userStore, setuserStore] = useState('');
+  const [userStore, setuserStore] = useState("");
   const [searchOrderId, setsearchOrderId] = useState("");
   const [userType, setuserType] = useState("");
   const [kamCountries, setkamCountries] = useState("");
@@ -459,22 +459,22 @@ const [userStore, setuserStore] = useState('');
       },
     ];
   }
- const fetchUserEmail = ()=>{
-   const userEmail = localStorage.getItem("dtm");
-   console.log(userEmail);
-   setuserEmailApi(userEmail);
- }
- const fetchUserStore = ()=>{
-  const userStore = localStorage.getItem("st");
-  console.log(userStore);
-  // setuserEmailApi(userEmail);
-}
+  const fetchUserEmail = () => {
+    const userEmail = localStorage.getItem("dtm");
+    console.log(userEmail);
+    setuserEmailApi(userEmail);
+  };
+  const fetchUserStore = () => {
+    const userStore = localStorage.getItem("st");
+    console.log(userStore);
+    // setuserEmailApi(userEmail);
+  };
   useEffect(() => {
     fetchUserEmail();
     fetchUserStore();
     // setfirstName(localStorage.getItem("first"));
     console.log(localStorage.getItem("ut"));
-    if(localStorage.getItem("ut")==='1'){
+    if (localStorage.getItem("ut") === "1") {
       setstoreId(0);
     }
     // if(localStorage.getItem("ut")==='3'){
@@ -487,14 +487,14 @@ const [userStore, setuserStore] = useState('');
     //  setstoreId(b);
     // }
     fetchOrderData();
-   
+
     fetchFilterData();
 
     //fetchFilterData();
   }, []);
   const fetchFilterData = async () => {
-    const userEmail=localStorage.getItem("dtm");
-  
+    const userEmail = localStorage.getItem("dtm");
+
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -514,14 +514,13 @@ const [userStore, setuserStore] = useState('');
     )
       .then((response) => response.text())
       .then((result) => {
-       
         var obj = JSON.parse(result);
 
         let countryArray = [];
         console.log(obj);
         if (localStorage.getItem("ut") === "2") {
           let kamCountryArray = localStorage.getItem("ct");
-         
+
           var b = kamCountryArray.split(",").map(function (item) {
             return parseInt(item, 10);
           });
@@ -546,7 +545,7 @@ const [userStore, setuserStore] = useState('');
         if (localStorage.getItem("ut") === "3") {
           let clientCountryArray = localStorage.getItem("ct");
           console.log(clientCountryArray);
-          var b =  clientCountryArray.split(",").map(function (item) {
+          var b = clientCountryArray.split(",").map(function (item) {
             return parseInt(item, 10);
           });
           console.log(b);
@@ -566,7 +565,7 @@ const [userStore, setuserStore] = useState('');
           // console.log(clientCountry);
           // setfilteredCountryData(clientCountry);
         }
-        if(localStorage.getItem("ut")==="1"){
+        if (localStorage.getItem("ut") === "1") {
           setfilteredCountryData(obj);
         }
         // setfilteredCountryData(obj);
@@ -632,15 +631,14 @@ const [userStore, setuserStore] = useState('');
 
   const fetchOrderData = async () => {
     console.log(userEmailApi);
-    let userEmail=localStorage.getItem("dtm");
+    let userEmail = localStorage.getItem("dtm");
     console.log(userEmail);
-    if(userEmail.includes('+')){
-     
-      let updatedEmail =userEmail.replace('+','%2B');
-      userEmail =  updatedEmail;
-      
+    if (userEmail.includes("+")) {
+      let updatedEmail = userEmail.replace("+", "%2B");
+      userEmail = updatedEmail;
+
       console.log(userEmail);
-      }
+    }
     let countryValue = 3;
     setisLoading(true);
     let url = "";
@@ -657,11 +655,11 @@ const [userStore, setuserStore] = useState('');
       redirect: "follow",
       headers: myHeaders,
     };
-    let rolesUrl='';
-    if(localStorage.getItem("ut")==='1'){
-       rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
+    let rolesUrl = "";
+    if (localStorage.getItem("ut") === "1") {
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
     }
-    if(localStorage.getItem("ut")==='2'){
+    if (localStorage.getItem("ut") === "2") {
       const kamstore = localStorage.getItem("st");
       console.log(kamstore);
       var b = kamstore.split(",").map(function (item) {
@@ -669,28 +667,25 @@ const [userStore, setuserStore] = useState('');
       });
       console.log(b);
       //let storeId=b;
-      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
-   }
-   if(localStorage.getItem("ut")==='3'){
-    // const Clientstore = localStorage.getItem("st");
-    // console.log(Clientstore);
-    // var b = Clientstore.split(",").map(function (item) {
-    //   return parseInt(item, 10);
-    // });
-    // console.log(b);
-    //let storeId=b;
-    rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`
- }
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    }
+    if (localStorage.getItem("ut") === "3") {
+      // const Clientstore = localStorage.getItem("st");
+      // console.log(Clientstore);
+      // var b = Clientstore.split(",").map(function (item) {
+      //   return parseInt(item, 10);
+      // });
+      // console.log(b);
+      //let storeId=b;
+      rolesUrl = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=100&user=${userEmail}&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
+    }
     try {
-      const response = await fetch(
-        (url = rolesUrl),
-        requestOptions
-      );
+      const response = await fetch((url = rolesUrl), requestOptions);
       if (!response.ok) {
         throw new Error();
       }
       const data = await response.json();
-     
+
       setData(data);
 
       setisLoading(false);
@@ -729,18 +724,17 @@ const [userStore, setuserStore] = useState('');
     setshowCourierModal(false);
   };
   const applyFiltersButtonhandler = async () => {
-    let userEmail=localStorage.getItem("dtm");
-  
-    if(userEmail.includes('+')){
-     
-      let updatedEmail =userEmail.replace('+','%2B');
-      userEmail =  updatedEmail;
-      
+    let userEmail = localStorage.getItem("dtm");
+
+    if (userEmail.includes("+")) {
+      let updatedEmail = userEmail.replace("+", "%2B");
+      userEmail = updatedEmail;
+
       console.log(userEmail);
-      }
-   
-    
+    }
+
     let url = "";
+    console.log(searchOrderId);
     if (searchOrderId !== "") {
       url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/order?orderNo=${searchOrderId}&user=${userEmail}`;
     } else {
@@ -749,8 +743,8 @@ const [userStore, setuserStore] = useState('');
     setisLoading(true);
     setfiltersApplied(true);
     // let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=1&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${selectedDateTo}`;
-   
-console.log(url);
+
+    console.log(url);
     var myHeaders = new Headers();
     myHeaders.append("x-api-key", "mbHqRHonVS4HrcTZPIjhd5tHYkgzgpm38pH8gPpj");
     myHeaders.append(
@@ -770,7 +764,7 @@ console.log(url);
         throw new Error();
       }
       const data = await response.json();
-      
+
       //CONDITION FOR THE FILTER BY ORDER ID
       if (data.length === 0) {
         setData([]);
@@ -790,7 +784,7 @@ console.log(url);
   };
 
   const incrementPageHandler = async () => {
-    const userEmail=localStorage.getItem("dtm");
+    const userEmail = localStorage.getItem("dtm");
     setisLoadingIncrementPage(true);
     setpageCount(pageCount + 1);
     let url = `https://32q0xdsl4b.execute-api.sa-east-1.amazonaws.com/prod/store/orders?qty=50&user=admin&channel=${channelId}&store=${storeId}&page=${pageCount}&country=${countryId}&dateFrom=${selectedDateFrom}&dateTo=${new Date()
@@ -845,21 +839,20 @@ console.log(url);
       },
       render: (rowData) => {
         if (rowData.order_id !== undefined) {
-        return (
-          <div>
-            <span
-              style={{ cursor: "pointer" }}
-              title="Mostrar Detalle compra"
-              className={classes.showPdf}
-            >
-              {/* <a href={rowData.dte} target="_blank"> */}
-              <img src={showPdf} onClick={toggle2} />
-            </span>
-          </div>
-        );
+          return (
+            <div>
+              <span
+                style={{ cursor: "pointer" }}
+                title="Mostrar Detalle compra"
+                className={classes.showPdf}
+              >
+                {/* <a href={rowData.dte} target="_blank"> */}
+                <img src={showPdf} onClick={toggle2} />
+              </span>
+            </div>
+          );
         }
       },
-    
     },
     {
       title: "Fecha de Orden",
@@ -959,7 +952,7 @@ console.log(url);
       field: "dte",
       width: "13%",
       render: (rowData) => {
-        console.log(rowData.dte)
+        console.log(rowData.dte);
         if (rowData.dte !== undefined) {
           if (rowData.dte === "") {
             return (
@@ -1159,13 +1152,11 @@ console.log(url);
           }).format(rowData.precio_sin_shipping);
           return (
             <div>
-            {formatted}
-            
+              {formatted}
               &nbsp;
-           
             </div>
           );
-          }
+        }
       },
       headerStyle: {
         backgroundColor: "#1D308E",
@@ -1179,20 +1170,18 @@ console.log(url);
       width: "13%",
       render: (rowData) => {
         if (rowData.valor_shipping !== undefined) {
-        let formatted = new Intl.NumberFormat("es-CL", {
-          style: "currency",
-          currency: "CLP",
-        }).format(rowData.valor_shipping);
-        return (
-          <div>
-          {formatted}
-          
-            &nbsp;
-         
-          </div>
-        );
+          let formatted = new Intl.NumberFormat("es-CL", {
+            style: "currency",
+            currency: "CLP",
+          }).format(rowData.valor_shipping);
+          return (
+            <div>
+              {formatted}
+              &nbsp;
+            </div>
+          );
         }
-    },
+      },
       headerStyle: {
         backgroundColor: "#1D308E",
         color: "#FFF",
@@ -1274,31 +1263,40 @@ console.log(url);
       width: "15%",
       render: (rowData) => {
         if (rowData.courier != undefined) {
-          if(rowData.courier_logo === "No definido"||rowData.courier_logo === "No aplica")
-          return (
-            <div>
-              <span style={{ whiteSpace: "nowrap" }}> &nbsp;&nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;</span> 
-                {rowData.courier}
-              </span>
-            </div>
-          );
-          if(rowData.courier_logo !== "No definido"||rowData.courier_logo !== "No aplica")
-          return (
-            <div>
-              <span style={{ whiteSpace: "nowrap" }}>
-                {rowData.courier_logo !== "No definido" && rowData.courier_logo !== "No aplica" && (
-                 <img 
-                    style={{ paddingRight: "8px" }}
-                    src={rowData.courier_logo}
-                    width="40px"
-                    height="32px"
-                  /> 
-                )}
-                
-                {rowData.courier}
-              </span>
-            </div>
-          );
+          if (
+            rowData.courier_logo === "No definido" ||
+            rowData.courier_logo === "No aplica"
+          )
+            return (
+              <div>
+                <span style={{ whiteSpace: "nowrap" }}>
+                  {" "}
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;</span>
+                  {rowData.courier}
+                </span>
+              </div>
+            );
+          if (
+            rowData.courier_logo !== "No definido" ||
+            rowData.courier_logo !== "No aplica"
+          )
+            return (
+              <div>
+                <span style={{ whiteSpace: "nowrap" }}>
+                  {rowData.courier_logo !== "No definido" &&
+                    rowData.courier_logo !== "No aplica" && (
+                      <img
+                        style={{ paddingRight: "8px" }}
+                        src={rowData.courier_logo}
+                        width="40px"
+                        height="32px"
+                      />
+                    )}
+
+                  {rowData.courier}
+                </span>
+              </div>
+            );
         }
       },
 
@@ -1424,7 +1422,7 @@ console.log(url);
     //           style={{ cursor: "pointer" }}
     //           title="Mostrar Etiqueta"
     //         >
-             
+
     //           {/* &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} onClick={toggle3} /> */}
     //           &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<img src={Etiqueta} />
     //         </span>
@@ -1447,7 +1445,6 @@ console.log(url);
       width: "20%",
 
       render: (rowData) => {
-       
         if (rowData.comprador != undefined) {
           let FormattedRut = prettifyRut(rowData.rut);
           return (
@@ -1463,18 +1460,18 @@ console.log(url);
                 }}
               >
                 {rowData.comprador}
-                </span>
-                <span
+              </span>
+              <span
                 style={{
                   width: "0%",
                   float: "left",
                   whiteSpace: "nowrap",
                   fontSize: "11px",
-                  color:"#858F99"
+                  color: "#858F99",
                 }}
               >
                 <br />
-               {FormattedRut}
+                {FormattedRut}
               </span>
               <span
                 style={{
@@ -1557,7 +1554,7 @@ console.log(url);
       }
     });
     setcountryId(val[0].value);
-    if (localStorage.getItem("ut") === '2') {
+    if (localStorage.getItem("ut") === "2") {
       const kamstore = localStorage.getItem("st");
       console.log(kamstore);
       var b = kamstore.split(",").map(function (item) {
@@ -1576,31 +1573,30 @@ console.log(url);
       setfilteredStoreData(flattened);
       console.log(finalKamStore);
     }
-if(localStorage.getItem("ut")==="1"){
-  setfilteredStoreData(val[0].stores);
-}
-if (localStorage.getItem("ut") === '3') {
-  const clientstore = localStorage.getItem("st");
-  console.log(clientstore);
-  var b = clientstore.split(",").map(function (item) {
-    return parseInt(item, 10);
-  });
-  console.log(b);
-  let finalclientStore = [];
-  for (let i = 0; i <= b.length - 1; i++) {
-    let x = val[0].stores.filter((item) => {
-      return item.value === b[i];
-    });
-    finalclientStore.push(x);
-  }
-  var flattened = [].concat.apply([], finalclientStore);
-  console.log(flattened);
-  setfilteredStoreData(flattened);
-  console.log(finalclientStore);
-}
-   
+    if (localStorage.getItem("ut") === "1") {
+      setfilteredStoreData(val[0].stores);
+    }
+    if (localStorage.getItem("ut") === "3") {
+      const clientstore = localStorage.getItem("st");
+      console.log(clientstore);
+      var b = clientstore.split(",").map(function (item) {
+        return parseInt(item, 10);
+      });
+      console.log(b);
+      let finalclientStore = [];
+      for (let i = 0; i <= b.length - 1; i++) {
+        let x = val[0].stores.filter((item) => {
+          return item.value === b[i];
+        });
+        finalclientStore.push(x);
+      }
+      var flattened = [].concat.apply([], finalclientStore);
+      console.log(flattened);
+      setfilteredStoreData(flattened);
+      console.log(finalclientStore);
+    }
   };
-  
+
   const handleStoreChange = (event) => {
     setstore(event.target.value);
     //Get storeId from filteredStoreData
@@ -1640,11 +1636,10 @@ if (localStorage.getItem("ut") === '3') {
     location.reload();
   };
   const searchOrderIdHandler = (event) => {
-  
+    console.log(event.target.value);
     setsearchOrderId(event.target.value);
   };
   const DownloadFileHandler = () => {
-   
     let binary_univers = data;
     let binaryWS = XLSX.utils.json_to_sheet(binary_univers);
     // Create a new Workbook
@@ -1728,157 +1723,157 @@ if (localStorage.getItem("ut") === '3') {
         </p>
 
         {isMobileSizes && (
-            <button
-              style={{
-                backgroundColor: "transparent",
-                color: "black",
-                width: "100%",
-                padding: "20px",
-                border: "none",
-                fontSize: "12px",
-              }}
-              onClick={showFiltersHandler}
-            >
-              <img src={iconFilterButton} width="15" />
-              &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
-            </button>
-          )}
-           {showFilter && (
-      <div id={filtersClass}>
-        <Col md="12">
-          <div className="secondStepTour">
-            <label htmlFor="select-country">
-              <h5
-                style={{
-                  color: "black",
-                  width: "30px",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                }}
-              >
-                País
-              </h5>
+          <button
+            style={{
+              backgroundColor: "transparent",
+              color: "black",
+              width: "100%",
+              padding: "20px",
+              border: "none",
+              fontSize: "12px",
+            }}
+            onClick={showFiltersHandler}
+          >
+            <img src={iconFilterButton} width="15" />
+            &nbsp;{showFilter ? "Ocultar Filtros" : "Mostrar Filtros"}
+          </button>
+        )}
+        {showFilter && (
+          <div id={filtersClass}>
+            <Col md="12">
+              <div className="secondStepTour">
+                <label htmlFor="select-country">
+                  <h5
+                    style={{
+                      color: "black",
+                      width: "30px",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "0px",
+                    }}
+                  >
+                    País
+                  </h5>
 
-              <Select
-                labelId="select-country"
-                id="select-country"
-                style={{
-                  width: "193px",
-                  height: "46px",
-                  marginLeft: "1em",
-                  backgroundColor: "white",
-                  borderRadius: "17px",
-                  marginBottom: "1em",
-                  fontSize: "10px",
-                  marginTop: "1em",
-                }}
-                value={country}
-                label="Country"
-                placeholder="&nbsp;&nbsp; Seleccione un país"
-                onChange={handleCountryChange}
-              >
-                {Array.from(new Set(filteredCountryData.map((obj) => obj))).map(
-                  (period) => {
-                    return (
-                      <MenuItem
-                        style={{
-                          width: "193px",
-                          height: "46px",
-                          backgroundColor: "white",
-                        }}
-                        value={period.country}
-                      >
-                        {period.country}
-                      </MenuItem>
-                    );
-                  }
-                )}
-              </Select>
-            </label>
-            <label htmlFor="select-tienda">
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                  marginTop: "1em",
-                }}
-              >
-                Tienda
-              </h5>
-              <Select
-                labelId="select-tienda"
-                id="select-tienda"
-                style={{
-                  width: "193px",
-                  height: "46px",
-                  marginLeft: "1em",
-                  backgroundColor: "white",
-                  borderRadius: "17px",
-                  fontSize: "10px",
-                  marginLeft: "1em",
-                  marginTop: "1em",
-                }}
-                value={store}
-                label="select-canal"
-                placeholder="&nbsp;&nbsp; Seleccione una tienda"
-                onChange={handleStoreChange}
-              >
-                {Array.from(
-                  new Set(filteredStoreData.map((obj) => obj.store))
-                ).map((period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                })}
-              </Select>
-            </label>
-            <label htmlFor="select-canal">
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "0px",
-                  marginTop: "1em",
-                }}
-              >
-                Canal De Venta
-              </h5>
+                  <Select
+                    labelId="select-country"
+                    id="select-country"
+                    style={{
+                      width: "193px",
+                      height: "46px",
+                      marginLeft: "1em",
+                      backgroundColor: "white",
+                      borderRadius: "17px",
+                      marginBottom: "1em",
+                      fontSize: "10px",
+                      marginTop: "1em",
+                    }}
+                    value={country}
+                    label="Country"
+                    placeholder="&nbsp;&nbsp; Seleccione un país"
+                    onChange={handleCountryChange}
+                  >
+                    {Array.from(
+                      new Set(filteredCountryData.map((obj) => obj))
+                    ).map((period) => {
+                      return (
+                        <MenuItem
+                          style={{
+                            width: "193px",
+                            height: "46px",
+                            backgroundColor: "white",
+                          }}
+                          value={period.country}
+                        >
+                          {period.country}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </label>
+                <label htmlFor="select-tienda">
+                  <h5
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "0px",
+                      marginTop: "1em",
+                    }}
+                  >
+                    Tienda
+                  </h5>
+                  <Select
+                    labelId="select-tienda"
+                    id="select-tienda"
+                    style={{
+                      width: "193px",
+                      height: "46px",
+                      marginLeft: "1em",
+                      backgroundColor: "white",
+                      borderRadius: "17px",
+                      fontSize: "10px",
+                      marginLeft: "1em",
+                      marginTop: "1em",
+                    }}
+                    value={store}
+                    label="select-canal"
+                    placeholder="&nbsp;&nbsp; Seleccione una tienda"
+                    onChange={handleStoreChange}
+                  >
+                    {Array.from(
+                      new Set(filteredStoreData.map((obj) => obj.store))
+                    ).map((period) => {
+                      return <MenuItem value={period}>{period}</MenuItem>;
+                    })}
+                  </Select>
+                </label>
+                <label htmlFor="select-canal">
+                  <h5
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "0px",
+                      marginTop: "1em",
+                    }}
+                  >
+                    Canal De Venta
+                  </h5>
 
-              <Select
-                labelId="select-canal"
-                id="select-canal"
-                placeholder="&nbsp;&nbsp; Seleccione un canal"
-                style={{
-                  width: "193px",
-                  height: "46px",
-                  marginLeft: "1em",
-                  backgroundColor: "white",
-                  fontSize: "10px",
-                  borderRadius: "17px",
-                  marginLeft: "1em",
-                  marginTop: "1em",
-                }}
-                value={salesChannel}
-                label="select-canal"
-                onChange={handleSalesChannelChange}
-              >
-                {Array.from(
-                  new Set(filteredChannelArray.map((obj) => obj.channel))
-                ).map((period) => {
-                  return <MenuItem value={period}>{period}</MenuItem>;
-                })}
-                {/* {filteredChannelArray.map((channelItem) => {
+                  <Select
+                    labelId="select-canal"
+                    id="select-canal"
+                    placeholder="&nbsp;&nbsp; Seleccione un canal"
+                    style={{
+                      width: "193px",
+                      height: "46px",
+                      marginLeft: "1em",
+                      backgroundColor: "white",
+                      fontSize: "10px",
+                      borderRadius: "17px",
+                      marginLeft: "1em",
+                      marginTop: "1em",
+                    }}
+                    value={salesChannel}
+                    label="select-canal"
+                    onChange={handleSalesChannelChange}
+                  >
+                    {Array.from(
+                      new Set(filteredChannelArray.map((obj) => obj.channel))
+                    ).map((period) => {
+                      return <MenuItem value={period}>{period}</MenuItem>;
+                    })}
+                    {/* {filteredChannelArray.map((channelItem) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-              </Select>
-            </label>
+                  </Select>
+                </label>
 
-            {/* <label htmlFor="select-tienda-official">
+                {/* <label htmlFor="select-tienda-official">
             <h5
               style={{
                 color: "black",
@@ -1901,162 +1896,162 @@ if (localStorage.getItem("ut") === '3') {
               label="select-tienda-official"
               onChange={handleOfficialStoreChange}
             > */}
-            {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
+                {/* {Array.from(new Set(data.map((obj) => obj.official_store))).map(
                 (period) => {
                   return <MenuItem value={period}>{period}</MenuItem>;
                 }
               )} */}
-            {/* {filteredOfficialStore.map((channelItem) => {
+                {/* {filteredOfficialStore.map((channelItem) => {
                 return <MenuItem value={channelItem}>{[channelItem]}</MenuItem>
               })} */}
-            {/* {filteredOfficialStore.forEach((channelItem,index) => {
+                {/* {filteredOfficialStore.forEach((channelItem,index) => {
                 return <MenuItem value={channelItem}>{channelItem}</MenuItem>;
               })} */}
-            {/* </Select>
+                {/* </Select>
           </label> */}
 
-            <label className="seventhStepTour">
-              <h5
-                id="fechaDesde"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Desde
-              </h5>
+                <label className="seventhStepTour">
+                  <h5
+                    id="fechaDesde"
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "6px",
+                      marginTop: "0px",
+                    }}
+                  >
+                    Fecha Desde
+                  </h5>
 
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
+                  <DatePicker
+                    id="datepickerCalendar"
+                    type="number"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    style={{ width: 200, marginLeft: "1em" }}
+                    placeholderText="dd/mm/yy"
+                    locale="es"
+                  />
+                </label>
 
-            <label className="seventhStepTour">
-              <h5
-                id="fechaHasta"
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Fecha Hasta
-              </h5>
+                <label className="seventhStepTour">
+                  <h5
+                    id="fechaHasta"
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "6px",
+                      marginTop: "0px",
+                    }}
+                  >
+                    Fecha Hasta
+                  </h5>
 
-              <DatePicker
-                id="datepickerCalendar"
-                type="number"
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                style={{ width: 200, marginLeft: "1em" }}
-                placeholderText="dd/mm/yy"
-                locale="es"
-              />
-            </label>
+                  <DatePicker
+                    id="datepickerCalendar"
+                    type="number"
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    style={{ width: 200, marginLeft: "1em" }}
+                    placeholderText="dd/mm/yy"
+                    locale="es"
+                  />
+                </label>
 
-            <label>
-              <h5
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  fontWeight: "800",
-                  marginLeft: "1em",
-                  marginBottom: "6px",
-                  marginTop: "0px",
-                }}
-              >
-                Número de orden
-              </h5>
+                <label>
+                  <h5
+                    style={{
+                      color: "black",
+                      fontSize: "12px",
+                      fontWeight: "800",
+                      marginLeft: "1em",
+                      marginBottom: "6px",
+                      marginTop: "0px",
+                    }}
+                  >
+                    Número de orden
+                  </h5>
 
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="1"
-                style={{
-                  width: "193px",
-                  height: "46px",
-                  marginLeft: "1em",
-                  backgroundColor: "white",
-                  borderRadius: "17px",
-                  fontSize: "10px",
-                  marginLeft: "1em",
-                  marginTop: "1em",
-                  border: "none",
-                  outline: "none",
-                }}
-                placeholder="&nbsp;&nbsp; Digite el número de orden"
-                onChange={searchOrderIdHandler}
-              />
-            </label>
+                  <input
+                  
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    style={{
+                      width: "193px",
+                      height: "46px",
+                      marginLeft: "1em",
+                      backgroundColor: "white",
+                      borderRadius: "17px",
+                      fontSize: "10px",
+                      marginLeft: "1em",
+                      marginTop: "1em",
+                      border: "none",
+                      outline: "none",
+                    }}
+                    placeholder="&nbsp;&nbsp; Digite el número de orden"
+                    onChange={searchOrderIdHandler}
+                  />
+                </label>
 
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                width: "120px",
-                height: "46px",
-                fontWeight: "600",
-              }}
-              className="thirdStepTour"
-              onClick={applyFiltersButtonhandler}
-            >
-              Aplicar
-            </Button>
-            {/* <input
+                <Button
+                  color="primary"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    width: "120px",
+                    height: "46px",
+                    fontWeight: "600",
+                  }}
+                  className="thirdStepTour"
+                  onClick={applyFiltersButtonhandler}
+                >
+                  Aplicar
+                </Button>
+                {/* <input
         type="file"
         name="upload"
         id="upload"
         // onChange={readUploadFile}
     /> */}
-            <Button
-              color="primary"
-              style={{
-                borderRadius: "22px",
-                color: "#FFFFFF",
-                marginLeft: "1em",
-                textTransform: "none",
-                letterSpacing: "1px",
-                // width: "120px",
-                height: "46px",
-                fontWeight: "600",
-              }}
-              className="thirdStepTour"
-              onClick={DownloadFileHandler}
-            >
-              Descargar Excel
-            </Button>
-            <Button
-              className="btn-round btn-icon fourthStepTour"
-              color="primary"
-              onClick={reloadTableHandler}
-            >
-              <i
-                className="nc-icon nc-refresh-69"
-                style={{ color: "#ffffff" }}
-              />
-            </Button>
+                <Button
+                  color="primary"
+                  style={{
+                    borderRadius: "22px",
+                    color: "#FFFFFF",
+                    marginLeft: "1em",
+                    textTransform: "none",
+                    letterSpacing: "1px",
+                    // width: "120px",
+                    height: "46px",
+                    fontWeight: "600",
+                  }}
+                  className="thirdStepTour"
+                  onClick={DownloadFileHandler}
+                >
+                  Descargar Excel
+                </Button>
+                <Button
+                  className="btn-round btn-icon fourthStepTour"
+                  color="primary"
+                  onClick={reloadTableHandler}
+                >
+                  <i
+                    className="nc-icon nc-refresh-69"
+                    style={{ color: "#ffffff" }}
+                  />
+                </Button>
+              </div>
+            </Col>
           </div>
-        </Col>
-      </div>
-    )}
+        )}
 
         <div className="firstStepTour">
           {/* MOBILE VERSION */}
@@ -2391,10 +2386,9 @@ if (localStorage.getItem("ut") === '3') {
           <br />
         </Modal>
 
-      {/* Label Detail Modal  */}
+        {/* Label Detail Modal  */}
 
-
-      <Modal isOpen={modalLabels} toggle={toggle3}>
+        <Modal isOpen={modalLabels} toggle={toggle3}>
           <ModalHeader>
             <div style={{ display: "flex", justifyContent: "end" }}>
               <button
@@ -2411,7 +2405,7 @@ if (localStorage.getItem("ut") === '3') {
               </button>
             </div>
           </ModalHeader>
-          
+
           <div> Etiqueta </div>
 
           <div class="text-center">
@@ -2440,8 +2434,6 @@ if (localStorage.getItem("ut") === '3') {
           </div>
           <br />
         </Modal>
-
-
       </div>
     </React.Fragment>
   );
